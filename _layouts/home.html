@@ -17,6 +17,17 @@ layout: archive
   {% include documents-collection.html entries=posts type=entries_layout %}
 </div>
 
+<!-- 24시간 동안 광고 안뜨기 문구 -->
+<p id="adText" style="cursor: pointer; color: blue; text-decoration: underline; text-align: center;">
+    24시간 동안 광고 안 뜨기
+</p>
+
+<!-- 광고 팝업 -->
+<div id="adPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 200px; background: white; border: 1px solid #ccc; z-index: 1000; text-align: center;">
+    <p>광고를 시청해주세요. <span id="countdown"></span>초 남음</p>
+    <button onclick="closePopup()">닫기</button>
+</div>
+
 <!-- Google AdSense 광고 코드 시작 -->
 <div class="ad-banner">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
@@ -34,3 +45,49 @@ layout: archive
 <!-- Google AdSense 광고 코드 끝 -->
 
 {% include paginator.html %}
+
+<script>
+    // 문구 클릭 시 팝업 열기
+    document.getElementById('adText').addEventListener('click', function() {
+        showPopup();
+    });
+
+    let countdownInterval;
+
+    function showPopup() {
+        const popup = document.getElementById('adPopup');
+        popup.style.display = 'block';
+
+        // 5~10초 사이의 랜덤 시간 생성
+        const displayTime = Math.floor(Math.random() * 6) + 5;
+        let remainingTime = displayTime;
+
+        // 카운트다운 표시
+        document.getElementById('countdown').innerText = remainingTime;
+
+        countdownInterval = setInterval(() => {
+            remainingTime -= 1;
+            document.getElementById('countdown').innerText = remainingTime;
+
+            if (remainingTime <= 0) {
+                closePopup();
+            }
+        }, 1000);
+    }
+
+    function closePopup() {
+        clearInterval(countdownInterval);
+        document.getElementById('adPopup').style.display = 'none';
+        localStorage.setItem('lastAdSeen', new Date().getTime());
+    }
+
+    // 24시간 동안 문구 숨김 처리
+    window.onload = function() {
+        const lastAdSeen = localStorage.getItem('lastAdSeen');
+        const now = new Date().getTime();
+
+        if (lastAdSeen && now - lastAdSeen < 24 * 60 * 60 * 1000) {
+            document.getElementById('adText').style.display = 'none';
+        }
+    }
+</script>
