@@ -64,7 +64,6 @@ layout: archive
     }
 
     function showAd() {
-        // 팝업 창 숨기고 광고 표시
         document.getElementById("adPopup").style.display = "none";
         document.getElementById("adContent").style.display = "block";
 
@@ -72,7 +71,6 @@ layout: archive
         const displayTime = Math.floor(Math.random() * 6) + 5;
         let remainingTime = displayTime;
 
-        // 광고 카운트다운
         countdownInterval = setInterval(() => {
             remainingTime -= 1;
 
