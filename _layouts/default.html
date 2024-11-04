@@ -17,7 +17,7 @@
       <p>이 사이트의 콘텐츠에 계속 액세스하려면 아래 조치를 취해 보세요.</p>
       
       <!-- 짧은 광고 보기 버튼 -->
-      <button onclick="window.location.href='/광고페이지.html'" style="margin: 10px 0; padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+      <button onclick="showAd()" style="margin: 10px 0; padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer;">
         짧은 광고 보기
       </button>
 
@@ -27,27 +27,42 @@
       </button>
     </div>
 
-    <!-- JavaScript for Popup -->
+    <!-- 광고 컨테이너 -->
+    <div id="adContainer" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: white; z-index: 1001;">
+      <div style="width: 100%; height: 100%;">
+        <!-- 광고 코드 -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+          crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block; width: 100%; height: 100%;"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="1966797795"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+      <!-- 닫기 버튼 -->
+      <button onclick="hideAd()" style="position: absolute; top: 10px; right: 10px; background-color: #555; color: white; padding: 5px 10px; border: none; cursor: pointer;">
+        닫기
+      </button>
+    </div>
+
     <script>
       function hidePopup() {
         document.getElementById("popup").style.display = "none";
       }
-    </script>
 
-    <!-- 광고 코드 -->
-    <div class="ad-banner">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-        crossorigin="anonymous"></script>
-      <ins class="adsbygoogle"
-          style="display:block"
-          data-ad-client="ca-pub-9374368296307755"
-          data-ad-slot="1966797795"
-          data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
-      <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
+      function showAd() {
+        document.getElementById("popup").style.display = "none"; // 팝업 닫기
+        document.getElementById("adContainer").style.display = "block"; // 광고 표시
+      }
+
+      function hideAd() {
+        document.getElementById("adContainer").style.display = "none"; // 광고 닫기
+      }
+    </script>
 
     <div class="initial-content">
       {{ content }}
