@@ -22,101 +22,37 @@ layout: default
   {% include sidebar.html %}
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork"{% if page.locale %} lang="{{ page.locale }}"{% endif %}>
-
-    <!-- 팝업 창 -->
-    <div id="popup" style="display: block; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); z-index: 1000; max-width: 300px; text-align: center;">
-      <p>friendwoo.com에 오신 것을 환영합니다</p>
-      <h3>더 많은 콘텐츠를 잠금 해제하세요</h3>
-      <p>이 사이트의 콘텐츠에 계속 액세스하려면 아래 버튼을 클릭하세요.</p>
-
-      <!-- 팝업 창 클릭 시 광고 활성화 버튼 -->
-      <button onclick="showAd()" style="margin: 10px 0; padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer;">
-        광고 보기
-      </button>
-
-      <!-- 닫기 버튼 -->
-      <button onclick="hidePopup()" style="padding: 5px 10px; background-color: #555; color: white; border: none; cursor: pointer;">
-        닫기
-      </button>
-    </div>
-
-    <!-- JavaScript for 팝업 및 광고 표시 -->
+    <!-- 광고 영역: 페이지 콘텐츠 상단 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+         crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="4500586087"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
     <script>
-      function hidePopup() {
-        document.getElementById("popup").style.display = "none";
-      }
-
-      function showAd() {
-        document.getElementById("popup").style.display = "none"; // 팝업 창 닫기
-        document.getElementById("adContainer").style.display = "block"; // 광고 표시
-
-        // 광고 활성화 코드
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      }
+         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+    {% if page.title %}<meta itemprop="headline" content="{{ page.title | replace: '|', '&#124;' | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
+    {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
+    {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
+@@ -52,6 +66,19 @@
+        {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
+      </section>
 
-    <!-- 페이지 내 광고 영역 -->
-    <div id="adContainer" style="display: none; margin-top: 20px;">
-      <!-- 광고 코드 -->
+      <!-- 광고 영역: 페이지 콘텐츠 하단 -->
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-              crossorigin="anonymous"></script>
+           crossorigin="anonymous"></script>
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-9374368296307755"
            data-ad-slot="4500586087"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-    </div>
-
-    <!-- 기존 페이지 콘텐츠 -->
-    <div class="page__inner-wrap">
-      {% unless page.header.overlay_color or page.header.overlay_image %}
-        <header>
-          {% if page.title -%}
-          <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="{{ page.url | absolute_url }}" itemprop="url">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</a>
-          </h1>
-          {%- endif %}
-          {% include page__meta.html %}
-        </header>
-      {% endunless %}
-
-      <section class="page__content" itemprop="text">
-        {% if page.toc %}
-          <aside class="sidebar__right {% if page.toc_sticky %}sticky{% endif %}">
-            <nav class="toc">
-              <header><h4 class="nav__title"><i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> {{ page.toc_label | default: site.data.ui-text[site.locale].toc_label | default: "On this page" }}</h4></header>
-              {% include toc.html sanitize=true html=content h_min=1 h_max=6 class="toc__menu" skip_no_ids=true %}
-            </nav>
-          </aside>
-        {% endif %}
-        {{ content }}
-        {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
-      </section>
-
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
       <footer class="page__meta">
         {% if site.data.ui-text[site.locale].meta_label %}
           <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
-        {% endif %}
-        {% include page__taxonomy.html %}
-        {% include page__date.html %}
-      </footer>
-
-      {% if page.share %}{% include social-share.html %}{% endif %}
-
-      {% include post_pagination.html %}
-    </div>
-
-    {% if jekyll.environment == 'production' and site.comments.provider and page.comments %}
-      {% include comments.html %}
-    {% endif %}
-  </article>
-
-  {% comment %}<!-- only show related on a post page when `related: true` -->{% endcomment %}
-  {% if page.id and page.related and site.related_posts.size > 0 %}
-    {% include page__related.html posts=site.related_posts %}
-  {% comment %}<!-- otherwise show recent posts if no related when `related: true` -->{% endcomment %}
-  {% elsif page.id and page.related %}
-    {% include page__related.html posts=site.posts %}
-  {% endif %}
-</div>
