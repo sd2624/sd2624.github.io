@@ -199,55 +199,7 @@ layout: default
 </div>
 
 <script>
-  // 애드블록 탐지 스크립트
-  function isAdBlockActive() {
-      return new Promise((resolve) => {
-          const testAd = document.createElement('div');
-          testAd.innerHTML = '&nbsp;';
-          testAd.className = 'adsbox';
-          testAd.style.position = 'absolute';
-          testAd.style.top = '-9999px';
-          document.body.appendChild(testAd);
-  
-          setTimeout(() => {
-              if (testAd.offsetHeight === 0) {
-                  resolve(true); // 애드블록이 활성화됨
-              } else {
-                  resolve(false); // 애드블록이 비활성화됨
-              }
-              document.body.removeChild(testAd);
-          }, 100);
-      });
-  }
-  
-  window.onload = async function() {
-      const adBlockDetected = await isAdBlockActive();
-      
-      if (adBlockDetected) {
-          alert('애드블록이 감지되었습니다. 광고를 시청하시려면 애드블록을 비활성화해주세요.');
-          document.getElementById('popup').style.display = 'block';
-          document.body.style.overflow = 'hidden'; // 스크롤 비활성화
-          
-          // 애드블록이 비활성화될 때까지 팝업 유지
-          const adCheckInterval = setInterval(async function() {
-              const adBlockDetected = await isAdBlockActive();
-              if (!adBlockDetected) {
-                  alert('애드블록이 비활성화되었습니다. 감사합니다.');
-                  document.getElementById('popup').style.display = 'none';
-                  document.body.style.overflow = ''; // 스크롤 활성화
-                  clearInterval(adCheckInterval);
-                  if (canShowPopup()) {
-                      showPopup();
-                  }
-              }
-          }, 1000);
-      } else {
-          // 애드블록이 비활성 상태일 때 팝업 표시
-          if (canShowPopup()) {
-              showPopup();
-          }
-      }
-  };
+
   
   // IP 기반 팝업 제한을 위해 로컬 스토리지 사용 (브라우저 측)
   function canShowPopup() {
