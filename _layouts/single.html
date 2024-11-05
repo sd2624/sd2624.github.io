@@ -199,39 +199,36 @@ layout: default
 </div>
 
 <script>
+// 애드블록 탐지 스크립트
+function isAdBlockActive() {
+    const adBlockTester = document.createElement('div');
+    adBlockTester.className = 'adsbox';
+    adBlockTester.style.display = 'none';
+    document.body.appendChild(adBlockTester);
+    const isBlocked = !adBlockTester.offsetHeight;
+    document.body.removeChild(adBlockTester);
+    return isBlocked;
+}
 
-  
-  // IP 기반 팝업 제한을 위해 로컬 스토리지 사용 (브라우저 측)
-  function canShowPopup() {
-      const lastShown = localStorage.getItem('popupLastShown');
-      const currentDate = new Date().toDateString();
-      if (lastShown !== currentDate) {
-          localStorage.setItem('popupLastShown', currentDate);
-          localStorage.setItem('popupCount', 1);
-          return true;
-      }
-      const count = parseInt(localStorage.getItem('popupCount'), 10);
-      if (count < 2) {
-          localStorage.setItem('popupCount', count + 1);
-          return true;
-      }
-      return false;
-  }
-  
-  // 팝업 표시
-  function showPopup() {
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById('popup').style.display = 'block';
-      document.body.style.overflow = 'hidden'; // 스크롤 비활성화
-  }
-  
-  function closeAd() {
-      document.getElementById('adContainer').style.display = 'none'; // 광고 컨테이너 숨김
-      document.body.style.overflow = ''; // 스크롤 활성화
-      alert('광고 시청이 완료되었습니다.');
-  }
-  </script>
-  
+window.onload = function() {
+    if (isAdBlockActive()) {
+        alert('애드블록이 감지되었습니다. 광고를 시청하시려면 애드블록을 비활성화해주세요.');
+        document.getElementById('popup').style.display = 'block';
+        document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+        // 애드블록이 비활성화될 때까지 팝업 유지
+        const adCheckInterval = setInterval(function() {
+            if (!isAdBlockActive()) {
+                alert('애드블록이 비활성화되었습니다. 감사합니다.');
+                document.getElementById('popup').style.display = 'none';
+                document.body.style.overflow = ''; // 스크롤 활성화
+                clearInterval(adCheckInterval);
+                showPopup(); // 팝업 표시
+            }
+        }, 1000);
+    } else {
+        showPopup();
+    }
+};
 
 // IP 기반 팝업 제한을 위해 로컬 스토리지 사용 (브라우저 측)
 function canShowPopup() {
@@ -252,9 +249,11 @@ function canShowPopup() {
 
 // 팝업 표시
 function showPopup() {
-    document.getElementById('overlay').style.display = 'block';
-    document.getElementById('popup').style.display = 'block';
-    document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+    if (canShowPopup()) {
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+        document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+    }
 }
 
 function closeAd() {
