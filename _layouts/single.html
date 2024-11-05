@@ -22,7 +22,6 @@ layout: default
   {% include sidebar.html %}
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork"{% if page.locale %} lang="{{ page.locale }}"{% endif %}>
-
     {% if page.title %}<meta itemprop="headline" content="{{ page.title | replace: '|', '&#124;' | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
     {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
     {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
@@ -53,7 +52,6 @@ layout: default
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
 
-
       <footer class="page__meta">
         {% if site.data.ui-text[site.locale].meta_label %}
           <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
@@ -63,7 +61,6 @@ layout: default
       </footer>
 
       {% if page.share %}{% include social-share.html %}{% endif %}
-
       {% include post_pagination.html %}
     </div>
 
@@ -72,11 +69,48 @@ layout: default
     {% endif %}
   </article>
 
-  {% comment %}<!-- only show related on a post page when `related: true` -->{% endcomment %}
   {% if page.id and page.related and site.related_posts.size > 0 %}
     {% include page__related.html posts=site.related_posts %}
-  {% comment %}<!-- otherwise show recent posts if no related when `related: true` -->{% endcomment %}
   {% elsif page.id and page.related %}
     {% include page__related.html posts=site.posts %}
   {% endif %}
 </div>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>광고 팝업 예제</title>
+    <style>
+        #overlay, #popup, #adContainer, #closeAdButton { /* 스타일 설정 */ }
+    </style>
+</head>
+<body>
+
+<div id="overlay" onclick="closePopup()"></div>
+<div id="popup">
+    <h2>friendwoo.com에 오신 것을 환영합니다</h2>
+    <p>더 많은 콘텐츠를 보려면 아래 버튼을 클릭해 광고를 시청하세요.</p>
+    <button onclick="showAd()">광고 보기</button>
+</div>
+<div id="adContainer">
+    <h2>광고</h2>
+    <ins class="adsbygoogle" style="display:block; margin: auto;"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="9952845435"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <button id="closeAdButton" onclick="closeAd()">닫기</button>
+</div>
+
+<script>
+    window.onload = showPopup;
+    function showPopup() { /* 팝업 표시 코드 */ }
+    function closePopup() { /* 팝업 닫기 코드 */ }
+    function showAd() { /* 광고 표시 코드 */ }
+    function closeAd() { /* 광고 닫기 코드 */ }
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+
+</body>
+</html>
