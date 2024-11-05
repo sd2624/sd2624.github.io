@@ -205,16 +205,18 @@ function isAdBlockActive() {
     adBlockTester.className = 'adsbox';
     adBlockTester.style.display = 'none';
     document.body.appendChild(adBlockTester);
-    const isBlocked = !adBlockTester.offsetHeight;
+    const isBlocked = (adBlockTester.offsetHeight === 0);
     document.body.removeChild(adBlockTester);
     return isBlocked;
 }
 
 window.onload = function() {
+    // 애드블록 상태 확인 및 팝업 표시
     if (isAdBlockActive()) {
         alert('애드블록이 감지되었습니다. 광고를 시청하시려면 애드블록을 비활성화해주세요.');
         document.getElementById('popup').style.display = 'block';
         document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+        
         // 애드블록이 비활성화될 때까지 팝업 유지
         const adCheckInterval = setInterval(function() {
             if (!isAdBlockActive()) {
@@ -222,11 +224,16 @@ window.onload = function() {
                 document.getElementById('popup').style.display = 'none';
                 document.body.style.overflow = ''; // 스크롤 활성화
                 clearInterval(adCheckInterval);
-                showPopup(); // 팝업 표시
+                if (canShowPopup()) {
+                    showPopup();
+                }
             }
         }, 1000);
     } else {
-        showPopup();
+        // 애드블록이 비활성 상태일 때 팝업 표시
+        if (canShowPopup()) {
+            showPopup();
+        }
     }
 };
 
@@ -249,11 +256,9 @@ function canShowPopup() {
 
 // 팝업 표시
 function showPopup() {
-    if (canShowPopup()) {
-        document.getElementById('overlay').style.display = 'block';
-        document.getElementById('popup').style.display = 'block';
-        document.body.style.overflow = 'hidden'; // 스크롤 비활성화
-    }
+    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('popup').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // 스크롤 비활성화
 }
 
 function closeAd() {
