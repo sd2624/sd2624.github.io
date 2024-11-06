@@ -177,12 +177,39 @@ layout: default
             background-color: #0056b3;
         }
     </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상단 고정 광고 예제</title>
+
+    <!-- Google AdSense 스크립트 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+            crossorigin="anonymous"></script>
+
+    <style>
+        .anchor-ad-top {
+            position: fixed;
+            top: 0; /* 화면 상단에 고정 */
+            left: 50%;
+            transform: translateX(-50%) scale(0.5); /* 중앙에 위치시키고 50%로 축소 */
+            transform-origin: top center; /* 축소 기준을 위쪽 중앙으로 설정 */
+            width: 728px; /* 원래 광고 너비 */
+            height: 90px; /* 원래 광고 높이 */
+            background-color: #fff;
+            z-index: 1002; /* 다른 요소 위에 표시 */
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* 하단 그림자 */
+        }
+
+        /* 축소된 광고로 인해 화면 상단에 빈 공간을 마련 */
+        body {
+            padding-top: 45px; /* 광고 높이의 절반만큼 여백 추가 */
+        }
+    </style>    
 </head>
 <body>
 <!-- 본문 상단에 고정된 앵커 광고 -->
 <div class="anchor-ad-top">
   <ins class="adsbygoogle"
-       style="display:inline-block;width:728px;height:10px"
+       style="display:inline-block;width:728px;height:90px"
        data-ad-client="ca-pub-9374368296307755"
        data-ad-slot="3603389079"></ins>
 
@@ -191,28 +218,11 @@ layout: default
   </script>
 </div>
 
-<style>
-  .anchor-ad-top {
-      position: fixed;
-      top: 0; /* 화면 상단에 고정 */
-      left: 0;
-      width: 50%;
-      height: 10px; /* 광고 높이 설정 */
-      background-color: #fff;
-      z-index: 1002; /* 다른 요소 위에 표시 */
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* 하단 그림자 */
-  }
-
-  /* 필요 시 화면 높이를 광고 높이만큼 조정 */
-  body {
-      padding-top: 10px; /* 광고 높이만큼 본문 상단 여백 추가 */
-  }
-</style>
-
-<!-- 기존의 본문 내용 -->
 <div id="main" role="main">
-    <!-- 콘텐츠 영역 -->
-</div>  
+  <!-- 콘텐츠 영역 -->
+  <h1>메인 콘텐츠 시작</h1>
+  <p>여기에 메인 콘텐츠가 표시됩니다.</p>
+</div>
 
 <div id="overlay" onclick="closePopup()"></div>
 
