@@ -49,7 +49,18 @@ layout: default
           </aside>
         {% endif %}
         {{ content }}
-        
+        <!-- 본문에 광고 삽입 -->
+        <div class="in-content-ad">
+            <ins class="adsbygoogle"
+                 style="display:block; margin: auto; text-align: center; padding: 20px 0;"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="9952845435"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
 
@@ -145,10 +156,10 @@ layout: default
             font-weight: bold;
             background: none;
             border: none;
-            display: none; /* 초기에는 닫기 버튼 숨김 */
         }
 
         #closeAdButton {
+            display: none;
             margin-top: 20px;
             padding: 10px 20px;
             border: none;
@@ -164,74 +175,6 @@ layout: default
     </style>
 </head>
 <body>
-<body>
-    <!-- 본문 상단에 고정 광고 -->
-    <div class="fixed-ad">
-        <ins class="adsbygoogle"
-             style="display:block; text-align: center; margin: auto;"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="9952845435"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
-    <style>
-        .fixed-ad {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #fff;
-            z-index: 1002; /* 충분히 높은 z-index로 설정 */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 10px 0;
-        }
-        body {
-            margin-top: 100px; /* 광고 높이만큼 본문 상단 여백 추가 */
-        }
-    </style>
-
-    <!-- 기존의 본문 내용 -->
-    <div id="main" role="main">
-        <!-- 콘텐츠 영역 -->
-    </div>
-</body>
-    <!-- 본문 상단에 고정 광고 -->
-    <div class="fixed-ad">
-      <ins class="adsbygoogle"
-           style="display:inline-block; width: 80px; height: 50px; margin: auto; text-align: center;"
-           data-ad-client="ca-pub-9374368296307755"
-           data-ad-slot="9952845435"
-           data-ad-format="auto"
-           data-full-width-responsive="false"></ins>
-      <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-  </div>
-
-  <style>
-      .fixed-ad {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          background-color: #fff;
-          z-index: 1002; /* 충분히 높은 z-index로 설정 */
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-          padding: 5px 0;
-      }
-      body {
-          margin-top: 60px; /* 광고 높이에 맞게 여백 설정 */
-      }
-  </style>
-
-  <!-- 기존의 본문 내용 -->
-  <div id="main" role="main">
-      <!-- 콘텐츠 영역 -->
-  </di
 
 <div id="overlay" onclick="closePopup()"></div>
 
@@ -242,45 +185,62 @@ layout: default
 </div>
 
 <div id="adContainer">
-  <div class="ad-header">
-      <button class="close-btn" id="closeAdButton" onclick="closeAd()">&times;</button>
-  </div>
-  <div style="position: relative; display: inline-block; width: 100%; text-align: center;">
-      <ins class="adsbygoogle"
-           style="display:block; margin: auto;"
-           data-ad-client="ca-pub-9374368296307755"
-           data-ad-slot="9952845435"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <span id="adCounter" style="position: absolute; top: 10px; right: 10px; background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 5px 10px; border-radius: 5px; z-index: 1002; font-size: 14px;">광고가 5초 후에 닫힐 수 있습니다...</span>
-  </div>
+    <div class="ad-header">
+        <span id="adCounter">광고가 5초 후에 닫힐 수 있습니다...</span>
+        <button class="close-btn" onclick="closeAd()">&times;</button>
+    </div>
+    <h2>광고</h2>
+    <ins class="adsbygoogle"
+         style="display:block; margin: auto;"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="9952845435"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
 </div>
 
 <script>
-  function showAd() {
-      closePopup(); // 팝업을 닫음
-      document.getElementById('adContainer').style.display = 'block'; // 광고 컨테이너 표시
-      document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+    window.onload = function() {
+        showPopup();
+    };
 
-      // 광고 송출 코드 실행
-      (adsbygoogle = window.adsbygoogle || []).push({});
+    function showPopup() {
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+        document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+    }
 
-      // 5초 카운터 후 닫기 버튼 활성화
-      let counter = 5;
-      let adCounter = document.getElementById('adCounter');
-      let closeButton = document.getElementById('closeAdButton');
-      closeButton.style.display = 'none'; // 초기에는 닫기 버튼 숨김
+    function closePopup() {
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('popup').style.display = 'none';
+        document.body.style.overflow = ''; // 스크롤 활성화
+    }
 
-      let countdown = setInterval(function() {
-          counter--;
-          adCounter.textContent = `광고가 ${counter}초 후에 닫힐 수 있습니다...`;
-          if (counter <= 0) {
-              clearInterval(countdown);
-              adCounter.textContent = "광고를 닫을 수 있습니다.";
-              closeButton.style.display = 'inline'; // 닫기 버튼 표시
-          }
-      }, 1000);
-  }
+    function showAd() {
+        closePopup(); // 팝업을 닫음
+        document.getElementById('adContainer').style.display = 'block'; // 광고 컨테이너 표시
+        document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+
+        // 광고 송출 코드 실행
+        (adsbygoogle = window.adsbygoogle || []).push({});
+
+        // 5초 카운터 후 닫기 버튼 활성화
+        let counter = 5;
+        let adCounter = document.getElementById('adCounter');
+        let countdown = setInterval(function() {
+            counter--;
+            adCounter.textContent = `광고가 ${counter}초 후에 닫힐 수 있습니다...`;
+            if (counter <= 0) {
+                clearInterval(countdown);
+                adCounter.textContent = "광고를 닫을 수 있습니다.";
+            }
+        }, 1000);
+    }
+
+    function closeAd() {
+        document.getElementById('adContainer').style.display = 'none'; // 광고 컨테이너 숨김
+        document.body.style.overflow = ''; // 스크롤 활성화
+        alert('광고 시청이 완료되었습니다.');
+    }
 </script>
 
 <!-- 광고 스크립트 -->
