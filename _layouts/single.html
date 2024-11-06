@@ -177,6 +177,8 @@ layout: default
             background-color: #0056b3;
         }
     </style>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>상단 및 하단 고정 광고 예제</title>
@@ -196,7 +198,7 @@ layout: default
             width: 728px;
             height: 90px;
             background-color: #fff;
-            z-index: 1002;
+            z-index: 10000; /* 높은 z-index 설정 */
             box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
         }
 
@@ -210,7 +212,7 @@ layout: default
             width: 728px;
             height: 90px;
             background-color: #fff;
-            z-index: 10000;
+            z-index: 10000; /* 높은 z-index 설정 */
             box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
         }
 
@@ -218,20 +220,28 @@ layout: default
         body {
             padding-top: 45px; /* 상단 고정 광고에 맞춘 여백 */
             padding-bottom: 45px; /* 하단 고정 광고에 맞춘 여백 */
+            margin: 0; /* 여백 문제 방지 */
         }
-    </style>       
+
+        /* 광고가 스크롤 시에도 보이게 설정 */
+        html, body {
+            height: 100%;
+            overflow-x: hidden; /* 가로 스크롤 방지 */
+        }
+    </style>
+
 </head>
 <body>
 
 <!-- 상단 고정 광고 -->
 <div class="anchor-ad-top">
-  <ins class="adsbygoogle"
-       style="display:inline-block;width:728px;height:90px"
-       data-ad-client="ca-pub-9374368296307755"
-       data-ad-slot="3603389079"></ins>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="3603389079"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 </div>
 
 <!-- 본문 콘텐츠 -->
