@@ -30,10 +30,10 @@ layout: default
     <div class="page__inner-wrap">
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
-          <!-- 제목 상단에 광고 삽입 -->
+          <!-- 제목 상단에 광고 삽입 (크기 축소) -->
           <div class="in-content-ad">
               <ins class="adsbygoogle"
-                   style="display:block; margin: auto; text-align: center; padding: 20px 0;"
+                   style="display:block; margin: auto; width: 80%; text-align: center; padding: 10px 0;"
                    data-ad-client="ca-pub-9374368296307755"
                    data-ad-slot="9952845435"
                    data-ad-format="auto"
@@ -88,6 +88,7 @@ layout: default
     {% include page__related.html posts=site.posts %}
   {% endif %}
 </div>
+
 
 
 
