@@ -213,11 +213,11 @@ layout: default
             box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
         }
 
-        /* 광고 크기에 맞춘 상단 및 하단 여백 */
+        /* 모바일에서도 고정된 광고 하단 공간을 확보 */
         body {
-            padding-top: 45px; /* 상단 고정 광고에 맞춘 여백 */
-            padding-bottom: 45px; /* 하단 고정 광고에 맞춘 여백 */
-        }
+          padding-top: 90px; /* 광고 높이만큼 본문 상단 여백 추가 */
+          margin: 0;
+      }
     </style>
       
 </head>
