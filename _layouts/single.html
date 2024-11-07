@@ -28,6 +28,17 @@ layout: default
     {% if page.last_modified_at %}<meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">{% endif %}
 
     <div class="page__inner-wrap">
+      <!-- 제목 위에 고정된 광고 -->
+      <div class="ad-container" style="text-align: center; padding-bottom: 20px;">
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:728px;height:90px"
+               data-ad-client="ca-pub-9374368296307755"
+               data-ad-slot="3603389079"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+      </div>
+
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
           {% if page.title -%}
@@ -76,6 +87,7 @@ layout: default
     {% include page__related.html posts=site.posts %}
   {% endif %}
 </div>
+
 
 
 
@@ -179,7 +191,7 @@ layout: default
             position: fixed;
             top: 0;
             left: 50%;
-            transform: translateX(-50%) scale(0.5); /* 중앙 정렬 및 50% 크기로 축소 */
+            transform: translateX(-100%) scale(0.5); /* 중앙 정렬 및 50% 크기로 축소 */
             transform-origin: top center;
             width: 728px;
             height: 90px;
@@ -192,7 +204,7 @@ layout: default
             position: fixed;
             bottom: 0;
             left: 50%;
-            transform: translateX(-50%) scale(0.5); /* 중앙 정렬 및 50% 크기로 축소 */
+            transform: translateX(-100%) scale(0.5); /* 중앙 정렬 및 50% 크기로 축소 */
             transform-origin: bottom center;
             width: 728px;
             height: 90px;
