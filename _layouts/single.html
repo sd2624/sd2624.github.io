@@ -28,6 +28,17 @@ layout: default
     {% if page.last_modified_at %}<meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">{% endif %}
 
     <div class="page__inner-wrap">
+      <!-- 제목 위에 고정된 광고 -->
+      <div class="ad-container" style="text-align: center; padding-bottom: 20px;">
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:728px;height:90px"
+               data-ad-client="ca-pub-9374368296307755"
+               data-ad-slot="3603389079"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+      </div>
+
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
           {% if page.title -%}
@@ -80,8 +91,9 @@ layout: default
 
 
 
+
 <html lang="en">
-<head>
+<>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>광고 팝업 예제</title>
@@ -165,136 +177,181 @@ layout: default
             background-color: #0056b3;
         }
     </style>
-    <div class="anchor-ad-top">
-      <ins class="adsbygoogle"
-           style="display:block; width: 100%; height: 10px; margin: auto; text-align: center;"
-           data-ad-client="ca-pub-9374368296307755"
-           data-ad-slot="9952845435"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>    
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상단 및 하단 고정 광고 예제</title>
+
+    <!-- Google AdSense 스크립트 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+            crossorigin="anonymous"></script>
+    
+    <style>
+        .anchor-ad-top {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) scale(0.5); /* 중앙 정렬 및 50% 크기로 축소 */
+            transform-origin: top center;
+            width: 728px;
+            height: 90px;
+            background-color: #fff;
+            z-index: 1002;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .anchor-ad-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scale(0.5); /* 중앙 정렬 및 50% 크기로 축소 */
+            transform-origin: bottom center;
+            width: 728px;
+            height: 90px;
+            background-color: #fff;
+            z-index: 1002;
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 광고 크기에 맞춘 상단 및 하단 여백 */
+        body {
+            padding-top: 45px; /* 상단 고정 광고에 맞춘 여백 */
+            padding-bottom: 45px; /* 하단 고정 광고에 맞춘 여백 */
+        }
+    </style>
+      
 </head>
 <body>
-<!-- 본문 상단에 고정된 앵커 광고 -->
+
+<!-- 상단 고정 광고 -->
 <div class="anchor-ad-top">
   <ins class="adsbygoogle"
-       style="display:inline-block;width:728px;height:90px"
-       data-ad-client="ca-pub-9374368296307755"
-       data-ad-slot="3603389079"></ins>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  style="display:inline-block;width:728px;height:90px"
+  data-ad-client="ca-pub-9374368296307755"
+  data-ad-slot="3603389079"></ins>
+<script>
+ (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 </div>
 
+<!-- 본문 콘텐츠 -->
 <div id="main" role="main">
-  <!-- 콘텐츠 영역 -->
   <h1>메인 콘텐츠 시작</h1>
   <p>여기에 메인 콘텐츠가 표시됩니다.</p>
-</div>  
+</div>
+
+<!-- 하단 고정 광고 -->
+<div class="anchor-ad-bottom">
+  <ins class="adsbygoogle"
+  style="display:inline-block;width:728px;height:90px"
+  data-ad-client="ca-pub-9374368296307755"
+  data-ad-slot="4202989029"></ins>
+<script>
+ (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
 
 <div id="overlay" onclick="closePopup()"></div>
 
 <div id="popup">
-    <h2>kkdamoa에 오신 것을 환영합니다</h2>
-    <p>더 많은 콘텐츠를 보려면 아래 버튼을 클릭해 광고를 시청하세요.</p>
-    <button onclick="showAd()">광고 보기</button>
+<h2>kkdamoa에 오신 것을 환영합니다</h2>
+<p>더 많은 콘텐츠를 보려면 아래 버튼을 클릭해 광고를 시청하세요.</p>
+<button onclick="showAd()">광고 보기</button>
 </div>
 
 <div id="adContainer">
-    <div class="ad-header">
-        <span id="adCounter">광고가 5초 후에 닫힐 수 있습니다...</span>
-        <button class="close-btn" onclick="closeAd()">&times;</button>
-    </div>
-    <h2>광고</h2>
-    <ins class="adsbygoogle"
-         style="display:block; margin: auto;"
-         data-ad-client="ca-pub-9374368296307755"
-         data-ad-slot="9952845435"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
+<div class="ad-header">
+   <span id="adCounter">광고가 5초 후에 닫힐 수 있습니다...</span>
+   <button class="close-btn" onclick="closeAd()">&times;</button>
+</div>
+<h2>광고</h2>
+<ins class="adsbygoogle"
+    style="display:block; margin: auto;"
+    data-ad-client="ca-pub-9374368296307755"
+    data-ad-slot="9952845435"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
 </div>
 
 <script>
-  window.onload = function() {
-      if (!shouldShowPopup()) return;
-      showPopup();
-  };
+window.onload = function() {
+ if (!shouldShowPopup()) return;
+ showPopup();
+};
 
-  function showPopup() {
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById('popup').style.display = 'block';
-      document.body.style.overflow = 'hidden'; // 스크롤 비활성화
-  }
+function showPopup() {
+ document.getElementById('overlay').style.display = 'block';
+ document.getElementById('popup').style.display = 'block';
+ document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+}
 
-  function closePopup() {
-      document.getElementById('overlay').style.display = 'none';
-      document.getElementById('popup').style.display = 'none';
-      document.body.style.overflow = ''; // 스크롤 활성화
-  }
+function closePopup() {
+ document.getElementById('overlay').style.display = 'none';
+ document.getElementById('popup').style.display = 'none';
+ document.body.style.overflow = ''; // 스크롤 활성화
+}
 
-  function showAd() {
-      closePopup(); // 팝업을 닫음
-      document.getElementById('adContainer').style.display = 'block'; // 광고 컨테이너 표시
-      document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+function showAd() {
+ closePopup(); // 팝업을 닫음
+ document.getElementById('adContainer').style.display = 'block'; // 광고 컨테이너 표시
+ document.body.style.overflow = 'hidden'; // 스크롤 비활성화
 
-      // 광고 송출 코드 실행
-      (adsbygoogle = window.adsbygoogle || []).push({});
+ // 광고 송출 코드 실행
+ (adsbygoogle = window.adsbygoogle || []).push({});
 
-      // 5초 카운터 후 닫기 버튼 활성화
-      let counter = 5;
-      let adCounter = document.getElementById('adCounter');
-      let closeButton = document.querySelector('.close-btn');
-      closeButton.style.display = 'none'; // 초기에는 닫기 버튼 숨김
+ // 5초 카운터 후 닫기 버튼 활성화
+ let counter = 5;
+ let adCounter = document.getElementById('adCounter');
+ let closeButton = document.querySelector('.close-btn');
+ closeButton.style.display = 'none'; // 초기에는 닫기 버튼 숨김
 
-      let countdown = setInterval(function() {
-          counter--;
-          adCounter.textContent = `광고가 ${counter}초 후에 닫힐 수 있습니다...`;
-          if (counter <= 0) {
-              clearInterval(countdown);
-              adCounter.textContent = "광고를 닫을 수 있습니다.";
-              closeButton.style.display = 'inline'; // 닫기 버튼 표시
-          }
-      }, 1000);
-  }
+ let countdown = setInterval(function() {
+     counter--;
+     adCounter.textContent = `광고가 ${counter}초 후에 닫힐 수 있습니다...`;
+     if (counter <= 0) {
+         clearInterval(countdown);
+         adCounter.textContent = "광고를 닫을 수 있습니다.";
+         closeButton.style.display = 'inline'; // 닫기 버튼 표시
+     }
+ }, 1000);
+}
 
-  function closeAd() {
-      document.getElementById('adContainer').style.display = 'none'; // 광고 컨테이너 숨김
-      document.body.style.overflow = ''; // 스크롤 활성화
-      alert('광고 시청이 완료되었습니다.');
+function closeAd() {
+ document.getElementById('adContainer').style.display = 'none'; // 광고 컨테이너 숨김
+ document.body.style.overflow = ''; // 스크롤 활성화
+ alert('광고 시청이 완료되었습니다.');
 
-      // 클릭 횟수 증가
-      incrementClickCount();
-  }
+ // 클릭 횟수 증가
+ incrementClickCount();
+}
 
-  function incrementClickCount() {
-      let currentDate = new Date().toISOString().split('T')[0]; // 현재 날짜 (YYYY-MM-DD)
-      let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
+function incrementClickCount() {
+ let currentDate = new Date().toISOString().split('T')[0]; // 현재 날짜 (YYYY-MM-DD)
+ let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
 
-      // 날짜가 변경되면 클릭 수를 초기화
-      if (clickData.date !== currentDate) {
-          clickData = { date: currentDate, count: 0 };
-      }
+ // 날짜가 변경되면 클릭 수를 초기화
+ if (clickData.date !== currentDate) {
+     clickData = { date: currentDate, count: 0 };
+ }
 
-      // 클릭 횟수 증가 및 저장
-      clickData.count++;
-      localStorage.setItem('clickData', JSON.stringify(clickData));
-  }
+ // 클릭 횟수 증가 및 저장
+ clickData.count++;
+ localStorage.setItem('clickData', JSON.stringify(clickData));
+}
 
-  function shouldShowPopup() {
-      let currentDate = new Date().toISOString().split('T')[0];
-      let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
+function shouldShowPopup() {
+ let currentDate = new Date().toISOString().split('T')[0];
+ let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
 
-      // 클릭 횟수가 2번 이상이면 팝업 표시하지 않음
-      return clickData.count < 2;
-  }
+ // 클릭 횟수가 2번 이상이면 팝업 표시하지 않음
+ return clickData.count < 2;
+}
 </script>
 
 
 <!-- 광고 스크립트 -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-     crossorigin="anonymous"></script>
+crossorigin="anonymous"></script>
 
 </body>
 </html>
