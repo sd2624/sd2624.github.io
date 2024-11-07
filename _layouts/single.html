@@ -23,12 +23,8 @@ layout: default
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork"{% if page.locale %} lang="{{ page.locale }}"{% endif %}>
     {% if page.title %}<meta itemprop="headline" content="{{ page.title | replace: '|', '&#124;' | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-    {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-    {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
-    {% if page.last_modified_at %}<meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">{% endif %}
-
-    <div class="page__inner-wrap">
-      <!-- 제목 위에 고정된 광고 -->
+    {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html |--fi가></fi strip_html | --}}
+      <!-- 상단 광고-->
       <div class="ad-container" style="text-align: center; padding-bottom: 20px;">
           <ins class="adsbygoogle"
                style="display:block"
@@ -92,141 +88,101 @@ layout: default
 <!-- Google AdSense 스크립트 -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
         crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="autorelaxed"
-     data-ad-client="ca-pub-9374368296307755"
-     data-ad-slot="4454543532"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
+<style>
+    /* 상단 고정 광고 */
+    .anchor-ad-top {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 90px; /* 광고 높이 */
+        background-color: #fff;
+        z-index: 10000; /* 다른 요소 위에 표시 */
+        text-align: center; /* 광고를 중앙에 위치 */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    }
 
+    /* 하단 고정 광고 */
+    .anchor-ad-bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 90px;
+        background-color: #fff;
+        z-index: 10000;
+        box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>광고 팝업 예제</title>
+    /* 상단 및 하단 고정 광고로 인한 본문 여백 추가 */
+    body {
+        padding-top: 90px; /* 상단 광고 높이만큼 여백 추가 */
+        padding-bottom: 90px; /* 하단 광고 높이만큼 여백 추가 */
+        margin: 0;
+    }
 
-    <!-- Google AdSense 스크립트 -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-            crossorigin="anonymous"></script>
-    
-    <style>
-        /* 상단 고정 광고 */
-        .anchor-ad-top {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 90px; /* 광고 높이 */
-            background-color: #fff;
-            z-index: 10000; /* 다른 요소 위에 표시 */
-            text-align: center; /* 광고를 중앙에 위치 */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
-        }
+    /* 팝업 및 오버레이 스타일 */
+    #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
 
-        /* 하단 고정 광고 */
-        .anchor-ad-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 90px;
-            background-color: #fff;
-            z-index: 10000;
-            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+    #popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 400px;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        z-index: 1000;
+        text-align: center;
+    }
 
-        /* 상단 및 하단 고정 광고로 인한 본문 여백 추가 */
-        body {
-            padding-top: 90px; /* 상단 광고 높이만큼 여백 추가 */
-            padding-bottom: 90px; /* 하단 광고 높이만큼 여백 추가 */
-            margin: 0;
-        }
+    #adContainer {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        z-index: 1001;
+        overflow: auto;
+        text-align: center;
+        padding-top: 50px;
+    }
 
-        /* 팝업 및 오버레이 스타일 */
-        #overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
+    .ad-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #f1f1f1;
+        border-bottom: 1px solid #ddd;
+    }
 
-        #popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            max-width: 400px;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            z-index: 1000;
-            text-align: center;
-        }
+    .close-btn {
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        background: none;
+        border: none;
+    }
+</style>
 
-        #adContainer {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #fff;
-            z-index: 1001;
-            overflow: auto;
-            text-align: center;
-            padding-top: 50px;
-        }
-
-        .ad-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: #f1f1f1;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .ad-header span {
-            font-size: 14px;
-        }
-
-        .close-btn {
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            background: none;
-            border: none;
-        }
-
-        #closeAdButton {
-            display: none;
-            margin-top: 20px;
-            padding: 10px 20px;
-            border: none;
-            background-color: #007BFF;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #closeAdButton:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
 <body>
 
 <!-- 상단 고정 광고 -->
