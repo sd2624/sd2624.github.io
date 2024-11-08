@@ -192,6 +192,8 @@ layout: default
     }
 </style>
 
+
+
 <body>
 
   <!-- 상단 고정 광고 -->
@@ -226,8 +228,9 @@ layout: default
   <div id="overlay" onclick="closePopup()"></div>
   <div id="popup">
       <h2>kkdamoa에 오신 것을 환영합니다</h2>
-      <p>더 많은 콘텐츠를 보려면 아래 버튼을 클릭해 광고를 시청하세요.</p>
-      <button onclick="showAd()">광고 보기</button>
+      <p>더 많은 콘텐츠를 보려면 광고를 시청하세요. 5초 후 광고 시청 후 추천 페이지로 이동합니다. 원치 않으시면 닫기 버튼을 클릭해주세요.</p>
+      <p id="popupCounter">5초 후 광고 시청이 시작됩니다...</p>
+      <button onclick="closePopup()">닫기</button>
   </div>
   <div id="adContainer">
       <div class="ad-header">
@@ -247,7 +250,7 @@ layout: default
   window.onload = function() {
       if (!shouldShowPopup()) return;
   
-      // Set a random delay between 5 to 10 seconds (5000 to 10000 milliseconds)
+      // 5초에서 10초 사이의 랜덤 딜레이 설정
       let randomDelay = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
   
       setTimeout(showPopup, randomDelay);
@@ -257,6 +260,18 @@ layout: default
       document.getElementById('overlay').style.display = 'block';
       document.getElementById('popup').style.display = 'block';
       document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+  
+      let counter = 5;
+      let popupCounter = document.getElementById('popupCounter');
+      let countdown = setInterval(function() {
+          counter--;
+          popupCounter.textContent = `${counter}초 후 광고 시청이 시작됩니다...`;
+          if (counter <= 0) {
+              clearInterval(countdown);
+              popupCounter.textContent = "광고를 시작할 준비가 되었습니다.";
+              showAd(); // 카운터 후 광고를 자동으로 표시
+          }
+      }, 1000);
   }
   
   function closePopup() {
@@ -266,7 +281,7 @@ layout: default
   }
   
   function showAd() {
-      closePopup(); // 팝업을 닫음
+      document.getElementById('popup').style.display = 'none'; // 팝업을 닫음
       document.getElementById('adContainer').style.display = 'block'; // 광고 컨테이너 표시
       document.body.style.overflow = 'hidden'; // 스크롤 비활성화
   
