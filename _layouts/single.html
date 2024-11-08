@@ -84,64 +84,6 @@ layout: default
     {% include page__related.html posts=site.posts %}
   {% endif %}
 </div>
-<script>
-// 랜덤한 타이머 설정 (30~90초)
-let randomTime = Math.floor(Math.random() * 6+ 3) * 1000;
-let countdown = 5;
-let countdownInterval;
-let redirectTimeout;
-
-function startRedirectCountdown() {
-    // 카운트다운 모달 생성
-    const modal = document.createElement('div');
-    modal.id = 'redirect-modal';
-    modal.style = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;';
-    modal.innerHTML = `
-        <div style="background: #fff; padding: 20px; border-radius: 8px; text-align: center; position: relative;">
-            <button id="close-modal" style="position: absolute; top: 5px; right: 5px; background: none; border: none; font-size: 16px; cursor: pointer;">X</button>
-            <p>곧 다른 페이지로 이동합니다...</p>
-            <p><strong>${countdown}</strong>초 후에 이동됩니다.</p>
-        </div>
-    `;
-    document.body.appendChild(modal);
-
-    // X 버튼 클릭 시 카운트다운 취소
-    document.getElementById('close-modal').onclick = function() {
-        clearInterval(countdownInterval);
-        clearTimeout(redirectTimeout);
-        modal.remove();
-    };
-
-    // 카운트다운 업데이트
-    countdownInterval = setInterval(() => {
-        countdown -= 1;
-        modal.querySelector('strong').innerText = countdown;
-        if (countdown <= 0) {
-            clearInterval(countdownInterval);
-        }
-    }, 1000);
-
-    // 5초 후 랜덤 페이지로 이동
-    redirectTimeout = setTimeout(() => {
-        window.location.href = getRandomPost();
-    }, 5000);
-}
-
-// 랜덤 포스트 URL 선택 함수
-function getRandomPost() {
-    const posts = [
-        "/_posts/first-post",
-        "/_posts/second-post",
-        "/_posts/third-post",
-        // 여기에 실제 `_posts` 경로의 포스트 URL들을 추가합니다.
-    ];
-    const randomIndex = Math.floor(Math.random() * posts.length);
-    return posts[randomIndex];
-}
-
-// 설정된 랜덤 시간 후에 카운트다운 시작
-setTimeout(startRedirectCountdown, randomTime);
-</script>
 
 <!-- Google AdSense 스크립트 -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
@@ -240,6 +182,12 @@ setTimeout(startRedirectCountdown, randomTime);
         border: none;
     }
 </style>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Redirect Page</title>
+</head>
 
 <body>
 
@@ -358,6 +306,38 @@ function shouldShowPopup() {
     return clickData.count < 2;
 }
 </script>
+
+
+    <h1>이 페이지는 잠시 후 랜덤 포스트로 이동합니다...</h1>
+
+    <!-- 다른 HTML 내용이 여기 있을 수 있습니다 -->
+
+    <!-- 랜덤 리디렉션을 위한 JavaScript 코드 -->
+    <script>
+        // 5~10초 사이의 랜덤 시간을 설정합니다.
+        const randomDelay = Math.floor(Math.random() * 5000) + 5000; // 5000ms ~ 10000ms (5초 ~ 10초)
+
+        // posts.json 파일에서 URL 목록을 가져와 랜덤 이동 설정
+        async function getRandomPost() {
+            try {
+                const response = await fetch("/posts.json");  // posts.json 파일 경로
+                const posts = await response.json();
+                const randomIndex = Math.floor(Math.random() * posts.length);
+                return posts[randomIndex];
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+                return null;
+            }
+        }
+
+        // 설정된 시간 후에 랜덤 페이지로 이동
+        setTimeout(async () => {
+            const randomPost = await getRandomPost();
+            if (randomPost) {
+                window.location.href = randomPost;
+            }
+        }, randomDelay);
+    </script>
 
 </body>
 </html>
