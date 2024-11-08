@@ -193,6 +193,7 @@ layout: default
 </style>
 
 
+
 <body>
 
   <!-- 상단 고정 광고 -->
@@ -243,7 +244,6 @@ layout: default
            data-ad-slot="9952845435"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-      <div id="redirectCounter" style="text-align:center; margin-top:10px;">7초 후 페이지를 이동합니다...</div>
   </div>
   
   <script>
@@ -287,12 +287,11 @@ layout: default
   
       (adsbygoogle = window.adsbygoogle || []).push({});
   
+      let counter = 5;
       let adCounter = document.getElementById('adCounter');
       let closeButton = document.querySelector('.close-btn');
-      closeButton.style.display = 'inline';
+      closeButton.style.display = 'none';
   
-      // 5초 광고 닫기 카운터
-      let counter = 5;
       let countdown = setInterval(function() {
           counter--;
           adCounter.textContent = `광고가 ${counter}초 후에 닫힐 수 있습니다...`;
@@ -300,18 +299,6 @@ layout: default
               clearInterval(countdown);
               adCounter.textContent = "광고를 닫을 수 있습니다.";
               closeButton.style.display = 'inline';
-  
-              // 페이지 이동 7초 카운터
-              let redirectCounter = document.getElementById('redirectCounter');
-              let redirectTime = 7;
-              let redirectCountdown = setInterval(function() {
-                  redirectTime--;
-                  redirectCounter.textContent = `${redirectTime}초 후 페이지를 이동합니다...`;
-                  if (redirectTime <= 0) {
-                      clearInterval(redirectCountdown);
-                      window.location.href = "https://example.com"; // 이동할 페이지 URL 입력
-                  }
-              }, 1000);
           }
       }, 1000);
   }
