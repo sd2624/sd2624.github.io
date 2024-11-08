@@ -138,21 +138,6 @@ layout: default
         margin: 0;
     }
 
-    /* 모바일 화면에서 광고 높이를 20px로 줄임 */
-    @media (max-width: 768px) {
-        .anchor-ad-top, .anchor-ad-bottom {
-            height: 20px;
-        }
-        .anchor-ad-top ins, .anchor-ad-bottom ins {
-            height: 20px !important; /* 광고 <ins> 태그 높이 조정 */
-            display: inline-block;
-        }
-        body {
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-    }
-
     /* 팝업 및 오버레이 스타일 */
     #overlay {
         display: none;
@@ -212,6 +197,25 @@ layout: default
         border: none;
     }
   </style>
+
+  <script>
+    // 모바일 화면일 경우 광고 높이를 20px로 조정
+    window.addEventListener('load', function() {
+        if (window.innerWidth <= 768) {
+            // 상단 광고 높이 조정
+            document.querySelector('.anchor-ad-top').style.height = '20px';
+            document.querySelector('.anchor-ad-top ins').style.height = '20px';
+            
+            // 하단 광고 높이 조정
+            document.querySelector('.anchor-ad-bottom').style.height = '20px';
+            document.querySelector('.anchor-ad-bottom ins').style.height = '20px';
+
+            // 본문 여백 조정
+            document.body.style.paddingTop = '20px';
+            document.body.style.paddingBottom = '20px';
+        }
+    });
+  </script>
 </head>
 
 
