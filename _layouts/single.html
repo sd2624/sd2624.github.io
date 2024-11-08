@@ -192,6 +192,66 @@ layout: default
     }
 </style>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kkdamoa</title>
+  <style>
+    /* 상단 및 하단 고정 광고 스타일 */
+    .anchor-ad-top, .anchor-ad-bottom {
+        position: fixed;
+        left: 0;
+        width: 100%;
+        height: 90px;
+        background-color: #fff;
+        z-index: 10000;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .anchor-ad-top { top: 0; }
+    .anchor-ad-bottom { bottom: 0; }
+    
+    /* 팝업 스타일 */
+    #popupOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #popup {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 300px;
+    }
+
+    #popup button {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* 본문 여백 */
+    body {
+        padding-top: 90px;
+        padding-bottom: 90px;
+    }
+  </style>
+</head>
 <body>
 
 <!-- 상단 고정 광고 -->
@@ -214,100 +274,50 @@ layout: default
 <!-- 하단 고정 광고 -->
 <div class="anchor-ad-bottom">
   <ins class="adsbygoogle"
-  style="display:inline-block;width:728px;height:90px"
-  data-ad-client="ca-pub-9374368296307755"
-  data-ad-slot="4202989029"></ins>
-<script>
- (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+       style="display:inline-block;width:728px;height:90px"
+       data-ad-client="ca-pub-9374368296307755"
+       data-ad-slot="4202989029"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 </div>
 
-<!-- 오버레이 및 팝업 콘텐츠 -->
-<div id="overlay" onclick="closePopup()"></div>
-<div id="popup">
+<!-- 팝업 오버레이 -->
+<div id="popupOverlay">
+  <div id="popup">
     <h2>kkdamoa에 오신 것을 환영합니다</h2>
-    <p>더 많은 콘텐츠를 보려면 아래 버튼을 클릭해 광고를 시청하세요.</p>
-    <button onclick="showAd()">광고 보기</button>
-</div>
-<div id="adContainer">
-    <div class="ad-header">
-       <span id="adCounter">광고가 5초 후에 닫힐 수 있습니다...</span>
-       <button class="close-btn" onclick="closeAd()">&times;</button>
-    </div>
-    <h2>광고</h2>
-    <ins class="adsbygoogle"
-         style="display:block; margin: auto;"
-         data-ad-client="ca-pub-9374368296307755"
-         data-ad-slot="9952845435"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
+    <p>5초 후 랜덤한 페이지로 이동합니다. 이동을 원하지 않으시면 닫기 버튼을 클릭하세요.</p>
+    <button onclick="cancelRedirect()">닫기</button>
+  </div>
 </div>
 
 <script>
-window.onload = function() {
-    if (!shouldShowPopup()) return;
-    showPopup();
-};
+  // Jekyll에서 _posts 파일 경로를 JavaScript로 전달
+  const postUrls = [
+    {% for post in site.posts %}
+      "{{ post.url }}"{% if forloop.last == false %},{% endif %}
+    {% endfor %}
+  ];
 
-function showPopup() {
-    document.getElementById('overlay').style.display = 'block';
-    document.getElementById('popup').style.display = 'block';
-    document.body.style.overflow = 'hidden'; // 스크롤 비활성화
-}
+  // 팝업을 표시하는 함수
+  function showPopup() {
+    document.getElementById('popupOverlay').style.display = 'flex';
+  }
 
-function closePopup() {
-    document.getElementById('overlay').style.display = 'none';
-    document.getElementById('popup').style.display = 'none';
-    document.body.style.overflow = ''; // 스크롤 활성화
-}
+  // 리디렉션 취소 함수
+  function cancelRedirect() {
+    clearTimeout(redirectTimeout);
+    document.getElementById('popupOverlay').style.display = 'none';
+  }
 
-function showAd() {
-    closePopup(); // 팝업을 닫음
-    document.getElementById('adContainer').style.display = 'block'; // 광고 컨테이너 표시
-    document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+  // 5~8초 후에 랜덤한 _posts 페이지로 이동 설정
+  const redirectTimeout = setTimeout(function() {
+    const randomUrl = postUrls[Math.floor(Math.random() * postUrls.length)];
+    window.location.href = randomUrl;
+  }, Math.floor(Math.random() * 3000) + 5000); // 5000ms ~ 8000ms
 
-    (adsbygoogle = window.adsbygoogle || []).push({});
-
-    let counter = 5;
-    let adCounter = document.getElementById('adCounter');
-    let closeButton = document.querySelector('.close-btn');
-    closeButton.style.display = 'none';
-
-    let countdown = setInterval(function() {
-        counter--;
-        adCounter.textContent = `광고가 ${counter}초 후에 닫힐 수 있습니다...`;
-        if (counter <= 0) {
-            clearInterval(countdown);
-            adCounter.textContent = "광고를 닫을 수 있습니다.";
-            closeButton.style.display = 'inline';
-        }
-    }, 1000);
-}
-
-function closeAd() {
-    document.getElementById('adContainer').style.display = 'none';
-    document.body.style.overflow = '';
-    alert('광고 시청이 완료되었습니다.');
-    incrementClickCount();
-}
-
-function incrementClickCount() {
-    let currentDate = new Date().toISOString().split('T')[0];
-    let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
-
-    if (clickData.date !== currentDate) {
-        clickData = { date: currentDate, count: 0 };
-    }
-
-    clickData.count++;
-    localStorage.setItem('clickData', JSON.stringify(clickData));
-}
-
-function shouldShowPopup() {
-    let currentDate = new Date().toISOString().split('T')[0];
-    let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
-    return clickData.count < 2;
-}
+  // 페이지 로드 후 팝업 표시
+  window.onload = showPopup;
 </script>
 
 </body>
