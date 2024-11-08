@@ -15,12 +15,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Identify problematic files
-        id: find_errors
+      - name: Attempt to build site
+        id: jekyll_build
         continue-on-error: true  # 오류가 발생해도 계속 진행
         run: |
-          # 빌드 과정에서 오류가 발생하는 파일을 찾기 위한 빌드 시도
           jekyll build 2>&1 | tee build_log.txt || true
+          
+      - name: Identify problematic files
+        if: failure()  # 빌드에 실패한 경우에만 실행
+        run: |
           # 오류가 발생한 파일 이름을 추출하여 problematic_files.txt에 저장
           grep -oP '_posts/[^ ]+\.md' build_log.txt | sort -u > problematic_files.txt
 
@@ -28,8 +31,8 @@ jobs:
         run: |
           echo "[" > posts.json
           for file in $(ls _posts); do
-            # 문제가 발생한 파일인지 확인
-            if ! grep -q "/_posts/$file" problematic_files.txt; then
+            # 문제가 발생한 파일인지 확인하고 제외
+            if [ ! -f problematic_files.txt ] || ! grep -q "/_posts/$file" problematic_files.txt; then
               echo "\"/_posts/$file\"," >> posts.json
             fi
           done
@@ -42,5 +45,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add posts.json
-          git commit -m "Update posts.json" || true  # 변경 사항이 없으면 오류 무시
-          git push || true  # push 단계에서 오류 무시
+          git commit -m "Update posts.json" || true
+          git push || true
