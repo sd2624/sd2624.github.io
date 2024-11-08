@@ -193,7 +193,6 @@ layout: default
 </style>
 
 
-
 <body>
 
   <!-- 상단 고정 광고 -->
@@ -238,6 +237,10 @@ layout: default
          <button class="close-btn" onclick="closeAd()">&times;</button>
       </div>
       <h2>광고</h2>
+      <div style="text-align:center; margin-bottom:10px;">
+          <span id="redirectCounter">7초 후 페이지를 이동합니다...</span>
+          <button onclick="closeAd()" style="border:none; background:none; font-size:20px; cursor:pointer;">&times;</button>
+      </div>
       <ins class="adsbygoogle"
            style="display:block; margin: auto;"
            data-ad-client="ca-pub-9374368296307755"
@@ -287,11 +290,12 @@ layout: default
   
       (adsbygoogle = window.adsbygoogle || []).push({});
   
-      let counter = 5;
       let adCounter = document.getElementById('adCounter');
       let closeButton = document.querySelector('.close-btn');
-      closeButton.style.display = 'none';
+      closeButton.style.display = 'inline';
   
+      // 5초 광고 닫기 카운터
+      let counter = 5;
       let countdown = setInterval(function() {
           counter--;
           adCounter.textContent = `광고가 ${counter}초 후에 닫힐 수 있습니다...`;
@@ -299,6 +303,18 @@ layout: default
               clearInterval(countdown);
               adCounter.textContent = "광고를 닫을 수 있습니다.";
               closeButton.style.display = 'inline';
+  
+              // 페이지 이동 7초 카운터
+              let redirectCounter = document.getElementById('redirectCounter');
+              let redirectTime = 7;
+              let redirectCountdown = setInterval(function() {
+                  redirectTime--;
+                  redirectCounter.textContent = `${redirectTime}초 후 페이지를 이동합니다...`;
+                  if (redirectTime <= 0) {
+                      clearInterval(redirectCountdown);
+                      window.location.href = "https://example.com"; // 이동할 페이지 URL 입력
+                  }
+              }, 1000);
           }
       }, 1000);
   }
