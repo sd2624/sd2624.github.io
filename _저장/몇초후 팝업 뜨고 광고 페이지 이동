@@ -192,7 +192,6 @@ layout: default
     }
 </style>
 
-
 <body>
 
   <!-- 상단 고정 광고 -->
@@ -250,6 +249,13 @@ layout: default
   </div>
   
   <script>
+  // _posts 폴더의 포스트 URL 목록을 Jekyll을 사용해 JavaScript 배열로 생성
+  const postUrls = [
+    {% for post in site.posts %}
+      "{{ post.url }}"{% if forloop.last == false %},{% endif %}
+    {% endfor %}
+  ];
+
   window.onload = function() {
       if (!shouldShowPopup()) return;
   
@@ -312,7 +318,10 @@ layout: default
                   redirectCounter.textContent = `${redirectTime}초 후 페이지를 이동합니다...`;
                   if (redirectTime <= 0) {
                       clearInterval(redirectCountdown);
-                      window.location.href = "https://example.com"; // 이동할 페이지 URL 입력
+                      
+                      // postUrls 배열에서 무작위 페이지 선택 및 이동
+                      const randomPage = postUrls[Math.floor(Math.random() * postUrls.length)];
+                      window.location.href = randomPage;
                   }
               }, 1000);
           }
@@ -347,4 +356,3 @@ layout: default
   
   </body>
   </html>
-  
