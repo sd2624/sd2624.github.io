@@ -237,7 +237,10 @@ layout: default
          <button class="close-btn" onclick="closeAd()">&times;</button>
       </div>
       <h2>광고</h2>
-      <div id="redirectCounter" style="text-align:center; margin-bottom:10px;">7초 후 페이지를 이동합니다...</div>
+      <div style="text-align:center; margin-bottom:10px;">
+          <span id="redirectCounter">7초 후 페이지를 이동합니다...</span>
+          <button onclick="closeAd()" style="border:none; background:none; font-size:20px; cursor:pointer;">&times;</button>
+      </div>
       <ins class="adsbygoogle"
            style="display:block; margin: auto;"
            data-ad-client="ca-pub-9374368296307755"
