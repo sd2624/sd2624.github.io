@@ -192,66 +192,6 @@ layout: default
     }
 </style>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>kkdamoa</title>
-  <style>
-    /* 상단 및 하단 고정 광고 스타일 */
-    .anchor-ad-top, .anchor-ad-bottom {
-        position: fixed;
-        left: 0;
-        width: 100%;
-        height: 90px;
-        background-color: #fff;
-        z-index: 10000;
-        text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .anchor-ad-top { top: 0; }
-    .anchor-ad-bottom { bottom: 0; }
-    
-    /* 팝업 스타일 */
-    #popupOverlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #popup {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-      width: 300px;
-    }
-
-    #popup button {
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    /* 본문 여백 */
-    body {
-        padding-top: 90px;
-        padding-bottom: 90px;
-    }
-  </style>
-</head>
 <body>
 
 <!-- 상단 고정 광고 -->
@@ -274,21 +214,21 @@ layout: default
 <!-- 하단 고정 광고 -->
 <div class="anchor-ad-bottom">
   <ins class="adsbygoogle"
-       style="display:inline-block;width:728px;height:90px"
-       data-ad-client="ca-pub-9374368296307755"
-       data-ad-slot="4202989029"></ins>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  style="display:inline-block;width:728px;height:90px"
+  data-ad-client="ca-pub-9374368296307755"
+  data-ad-slot="4202989029"></ins>
+<script>
+ (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 </div>
 
-<!-- 팝업 오버레이 -->
-<div id="popupOverlay">
-  <div id="popup">
+<!-- 오버레이 및 팝업 콘텐츠 -->
+<div id="overlay" onclick="closePopup()"></div>
+<div id="popup">
     <h2>kkdamoa에 오신 것을 환영합니다</h2>
-    <p>5초 후 랜덤한 페이지로 이동합니다. 이동을 원하지 않으시면 닫기 버튼을 클릭하세요.</p>
+    <p>5초 후 다른 페이지로 이동합니다. 이동을 원하지 않으면 닫기 버튼을 클릭하세요.</p>
     <button onclick="cancelRedirect()">닫기</button>
-  </div>
+</div>
 </div>
 
 <script>
@@ -319,6 +259,7 @@ layout: default
   // 페이지 로드 후 팝업 표시
   window.onload = showPopup;
 </script>
+
 
 </body>
 </html>
