@@ -215,28 +215,53 @@ layout: default
             document.body.style.paddingBottom = '90px';
         }
     });
-    // 하루에 최대 두 번만 팝업을 띄우고, 세 번째 방문 시 접속 차단
-    const MAX_VISITS = 3;
-    const currentDate = new Date().toISOString().split('T')[0];
-
-    function checkVisitLimit() {
-        let visitData = JSON.parse(localStorage.getItem('visitData')) || { date: currentDate, count: 0 };
-
-        if (visitData.date !== currentDate) {
-            visitData = { date: currentDate, count: 0 };
-        }
-
-        if (visitData.count >= MAX_VISITS) {
-            alert("접속이 차단되었습니다.");
-            document.body.innerHTML = '';  // 페이지 내용 비우기
-            return false;
-        }
-
-        visitData.count++;
-        localStorage.setItem('visitData', JSON.stringify(visitData));
-        return visitData.count === 1;
-    }
   </script>
+
+  <script>
+    // 24시간 안에 같은 IP 접속 시 팝업을 한 번 띄우고 세 번째 접속에서는 차단하는 코드
+    window.addEventListener('load', function() {
+        const currentTime = new Date().getTime();
+        const ipVisitKey = 'ipVisitData';
+        const ONE_DAY = 24 * 60 * 60 * 1000;
+
+        const clientIp = 'user-ip-address'; // 예시로 IP를 설정했습니다.
+
+        let ipVisitData = JSON.parse(localStorage.getItem(ipVisitKey)) || {};
+
+        function resetData() {
+            Object.keys(ipVisitData).forEach(ip => {
+                if (currentTime - ipVisitData[ip].lastVisit > ONE_DAY) {
+                    delete ipVisitData[ip];
+                }
+            });
+            localStorage.setItem(ipVisitKey, JSON.stringify(ipVisitData));
+        }
+
+        function handleVisit() {
+            const visitData = ipVisitData[clientIp] || { count: 0, lastVisit: 0 };
+
+            if (visitData.count === 0 || currentTime - visitData.lastVisit > ONE_DAY) {
+                visitData.count = 1;
+                alert("팝업 메시지: 첫 번째 접속입니다.");
+            } else if (visitData.count === 2) {
+                alert("이용이 차단되었습니다. 24시간 후에 다시 시도해 주세요.");
+                document.body.innerHTML = ''; // 페이지 차단
+                return;
+            } else {
+                visitData.count++;
+            }
+
+            visitData.lastVisit = currentTime;
+            ipVisitData[clientIp] = visitData;
+            localStorage.setItem(ipVisitKey, JSON.stringify(ipVisitData));
+        }
+
+        resetData();
+        handleVisit();
+    });
+  </script>
+
+  
 </head>
 <body>
 
