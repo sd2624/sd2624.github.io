@@ -248,7 +248,6 @@ window.addEventListener('load', function() {
             visitData.count = 2; // 카운트를 2로 증가
         } else if (visitData.count === 2) {
             // 세 번째 접속 시 페이지 차단
-            alert("이용이 차단되었습니다. 24시간 후에 다시 시도해 주세요.");
             document.body.innerHTML = ''; // 페이지 내용 제거
             window.location.href = "about:blank"; // 빈 페이지로 리다이렉트
             return; // 페이지 로딩을 중단
@@ -262,7 +261,6 @@ window.addEventListener('load', function() {
     resetData();
     handleVisit();
 });
-
   </script>
 </head>
 <body>
