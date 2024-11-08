@@ -12,11 +12,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Identify problematic files
+        id: find_errors
+        run: |
+          # 빌드 과정에서 오류가 발생하는 파일을 찾기 위한 빌드 시도
+          jekyll build 2>&1 | tee build_log.txt || true
+          # 오류가 발생한 파일 이름을 추출하여 problematic_files.txt에 저장
+          grep -oP '_posts/[^ ]+\.md' build_log.txt | sort -u > problematic_files.txt
+
       - name: Generate posts.json
         run: |
           echo "[" > posts.json
           for file in $(ls _posts); do
-            echo "\"/_posts/$file\"," >> posts.json
+            # 문제가 발생한 파일인지 확인
+            if ! grep -q "/_posts/$file" problematic_files.txt; then
+              echo "\"/_posts/$file\"," >> posts.json
+            fi
           done
           sed -i '$ s/,$//' posts.json  # 마지막 쉼표 제거
           echo "]" >> posts.json
