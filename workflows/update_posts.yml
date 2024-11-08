@@ -1,0 +1,30 @@
+name: Update Posts JSON
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 변경이 생길 때 실행합니다.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Generate posts.json
+        run: |
+          echo "[" > posts.json
+          for file in $(ls _posts); do
+            echo "\"/_posts/$file\"," >> posts.json
+          done
+          sed -i '$ s/,$//' posts.json  # 마지막 쉼표 제거
+          echo "]" >> posts.json
+          
+      - name: Commit posts.json
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add posts.json
+          git commit -m "Update posts.json"
+          git push
