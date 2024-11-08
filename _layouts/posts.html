@@ -30,3 +30,224 @@ layout: archive
     <a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
   </section>
 {% endfor %}
+
+
+
+<!-- Google AdSense 스크립트 -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+        crossorigin="anonymous"></script>
+
+<style>
+    /* 상단 고정 광고 */
+    .anchor-ad-top {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 90px; /* 광고 높이 */
+        background-color: #fff;
+        z-index: 10000; /* 다른 요소 위에 표시 */
+        text-align: center; /* 광고를 중앙에 위치 */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    }
+
+    /* 하단 고정 광고 */
+    .anchor-ad-bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 90px;
+        background-color: #fff;
+        z-index: 10000;
+        box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    /* 상단 및 하단 고정 광고로 인한 본문 여백 추가 */
+    body {
+        padding-top: 90px; /* 상단 광고 높이만큼 여백 추가 */
+        padding-bottom: 90px; /* 하단 광고 높이만큼 여백 추가 */
+        margin: 0;
+    }
+
+    /* 팝업 및 오버레이 스타일 */
+    #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    #popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 400px;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        z-index: 1000;
+        text-align: center;
+    }
+
+    #adContainer {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        z-index: 1001;
+        overflow: auto;
+        text-align: center;
+        padding-top: 50px;
+    }
+
+    .ad-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #f1f1f1;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .close-btn {
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        background: none;
+        border: none;
+    }
+</style>
+
+<body>
+
+<!-- 상단 고정 광고 -->
+<div class="anchor-ad-top">
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:728px;height:90px"
+       data-ad-client="ca-pub-9374368296307755"
+       data-ad-slot="3603389079"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<!-- 본문 콘텐츠 -->
+<div id="main" role="main">
+  <h1>메인 콘텐츠 시작</h1>
+  <p>여기에 메인 콘텐츠가 표시됩니다.</p>
+</div>
+
+<!-- 하단 고정 광고 -->
+<div class="anchor-ad-bottom">
+  <ins class="adsbygoogle"
+  style="display:inline-block;width:728px;height:90px"
+  data-ad-client="ca-pub-9374368296307755"
+  data-ad-slot="4202989029"></ins>
+<script>
+ (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<!-- 오버레이 및 팝업 콘텐츠 -->
+<div id="overlay" onclick="closePopup()"></div>
+<div id="popup">
+    <h2>kkdamoa에 오신 것을 환영합니다</h2>
+    <p>더 많은 콘텐츠를 보려면 아래 버튼을 클릭해 광고를 시청하세요.</p>
+    <button onclick="showAd()">광고 보기</button>
+</div>
+<div id="adContainer">
+    <div class="ad-header">
+       <span id="adCounter">광고가 5초 후에 닫힐 수 있습니다...</span>
+       <button class="close-btn" onclick="closeAd()">&times;</button>
+    </div>
+    <h2>광고</h2>
+    <ins class="adsbygoogle"
+         style="display:block; margin: auto;"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="9952845435"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+</div>
+
+<script>
+window.onload = function() {
+    if (!shouldShowPopup()) return;
+    showPopup();
+};
+
+function showPopup() {
+    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('popup').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+}
+
+function closePopup() {
+    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('popup').style.display = 'none';
+    document.body.style.overflow = ''; // 스크롤 활성화
+}
+
+function showAd() {
+    closePopup(); // 팝업을 닫음
+    document.getElementById('adContainer').style.display = 'block'; // 광고 컨테이너 표시
+    document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+
+    (adsbygoogle = window.adsbygoogle || []).push({});
+
+    let counter = 5;
+    let adCounter = document.getElementById('adCounter');
+    let closeButton = document.querySelector('.close-btn');
+    closeButton.style.display = 'none';
+
+    let countdown = setInterval(function() {
+        counter--;
+        adCounter.textContent = `광고가 ${counter}초 후에 닫힐 수 있습니다...`;
+        if (counter <= 0) {
+            clearInterval(countdown);
+            adCounter.textContent = "광고를 닫을 수 있습니다.";
+            closeButton.style.display = 'inline';
+        }
+    }, 1000);
+}
+
+function closeAd() {
+    document.getElementById('adContainer').style.display = 'none';
+    document.body.style.overflow = '';
+    alert('광고 시청이 완료되었습니다.');
+    incrementClickCount();
+}
+
+function incrementClickCount() {
+    let currentDate = new Date().toISOString().split('T')[0];
+    let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
+
+    if (clickData.date !== currentDate) {
+        clickData = { date: currentDate, count: 0 };
+    }
+
+    clickData.count++;
+    localStorage.setItem('clickData', JSON.stringify(clickData));
+}
+
+function shouldShowPopup() {
+    let currentDate = new Date().toISOString().split('T')[0];
+    let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
+    return clickData.count < 2;
+}
+</script>
+
+</body>
+</html>
