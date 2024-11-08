@@ -93,23 +93,29 @@ layout: default
   {% endif %}
 </div>
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>광고 페이지</title>
 
-<!-- Google AdSense 스크립트 -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-        crossorigin="anonymous"></script>
+  <!-- Google AdSense 스크립트 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+          crossorigin="anonymous"></script>
 
-<style>
+  <style>
     /* 상단 고정 광고 */
     .anchor-ad-top {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        height: 90px; /* 광고 높이 */
+        height: 90px; /* 기본 광고 높이 */
         background-color: #fff;
-        z-index: 10000; /* 다른 요소 위에 표시 */
-        text-align: center; /* 광고를 중앙에 위치 */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+        z-index: 10000;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     /* 하단 고정 광고 */
@@ -121,15 +127,26 @@ layout: default
         height: 90px;
         background-color: #fff;
         z-index: 10000;
-        box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
         text-align: center;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     }
 
     /* 상단 및 하단 고정 광고로 인한 본문 여백 추가 */
     body {
-        padding-top: 90px; /* 상단 광고 높이만큼 여백 추가 */
-        padding-bottom: 90px; /* 하단 광고 높이만큼 여백 추가 */
+        padding-top: 90px;
+        padding-bottom: 90px;
         margin: 0;
+    }
+
+    /* 모바일 화면에서 광고 높이를 20px로 줄임 */
+    @media (max-width: 768px) {
+        .anchor-ad-top, .anchor-ad-bottom {
+            height: 20px;
+        }
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
     }
 
     /* 팝업 및 오버레이 스타일 */
@@ -189,66 +206,6 @@ layout: default
         font-weight: bold;
         background: none;
         border: none;
-    }
-</style>
-
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>광고 페이지</title>
-  <style>
-    /* 기본 광고 스타일 */
-    .anchor-ad-top, .anchor-ad-bottom {
-      width: 728px;
-      height: 90px;
-    }
-
-    /* 모바일 화면일 때 광고 높이를 절반으로 줄임 */
-    @media (max-width: 768px) {
-      .anchor-ad-top, .anchor-ad-bottom {
-        height: 10px;
-      }
-    }
-
-    /* 오버레이 스타일 */
-    #overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      z-index: 10;
-    }
-
-    /* 팝업 스타일 */
-    #popup, #adContainer {
-      display: none;
-      background: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-      max-width: 500px;
-      margin: auto;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 20;
-    }
-
-    /* 닫기 버튼 스타일 */
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 20px;
-      cursor: pointer;
-      background: none;
-      border: none;
     }
   </style>
 </head>
