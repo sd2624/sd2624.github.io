@@ -2,18 +2,6 @@
 layout: archive
 ---
 
-    <!-- 상단 광고-->
-    <div class="ad-container" style="text-align: center; padding-bottom: 20px;">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-format="autorelaxed"
-           data-ad-client="ca-pub-9374368296307755"
-           data-ad-slot="4454543532"></ins>
-      <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-    
 {{ content }}
 
 <h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h3>
