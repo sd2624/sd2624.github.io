@@ -331,7 +331,7 @@ window.addEventListener('load', function() {
       if (!shouldShowPopup()) return;
   
       // 1분에서 2분 사이의 랜덤 딜레이 설정
-      let randomDelay = Math.floor(Math.random() * (120000 - 60000 + 1)) + 60000;
+      let randomDelay = Math.floor(Math.random() * (120000 - 12000 + 1)) + 12000;
   
       setTimeout(showPopup, randomDelay);
   };
