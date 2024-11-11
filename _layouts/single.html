@@ -238,23 +238,30 @@ window.addEventListener('load', function() {
     }
 
     function handleVisit() {
-        const visitData = ipVisitData[clientIp] || { count: 0, lastVisit: 0 };
-
-        if (visitData.count === 0 || currentTime - visitData.lastVisit > ONE_DAY) {
-            // 첫 번째 접속 시 아무 작업도 하지 않음
-            visitData.count = 1; // 카운트를 1로 설정
-        } else if (visitData.count === 1) {
-            // 두 번째 접속 시 아무 작업도 하지 않음
-            visitData.count = 2; // 카운트를 2로 증가
-          } else if (visitData.count === 2) {
-            // 세 번째 접속 시 아무 작업도 하지 않음
-            visitData.count = 3; // 카운트를 3으로 증가
-        } else if (visitData.count >= 3) {
-            // 네 번째 접속 시 페이지 차단
-            document.body.innerHTML = ''; // 페이지 내용 제거
-            window.location.href = "about:blank"; // 빈 페이지로 리다이렉트
-            return; // 페이지 로딩을 중단
-        }
+      const visitData = ipVisitData[clientIp] || { count: 0, lastVisit: 0 };
+  
+      if (visitData.count === 0 || currentTime - visitData.lastVisit > ONE_DAY) {
+          // 첫 번째 접속 시 아무 작업도 하지 않음
+          visitData.count = 1; // 카운트를 1로 설정
+      } else if (visitData.count === 1) {
+          // 두 번째 접속 시 아무 작업도 하지 않음
+          visitData.count = 2; // 카운트를 2로 증가
+      } else if (visitData.count === 2) {
+          // 세 번째 접속 시 아무 작업도 하지 않음
+          visitData.count = 3; // 카운트를 3으로 증가
+      } else if (visitData.count === 3) {
+          // 네 번째 접속 시 아무 작업도 하지 않음
+          visitData.count = 4; // 카운트를 4로 증가
+      } else if (visitData.count >= 4) {
+          // 5번째 접속 시 페이지 차단
+          document.body.innerHTML = ''; // 페이지 내용 제거
+          window.location.href = "about:blank"; // 빈 페이지로 리다이렉트
+          return; // 페이지 로딩을 중단
+      }
+  
+      // 방문 데이터 업데이트
+      ipVisitData[clientIp] = visitData;
+  }
 
         visitData.lastVisit = currentTime;
         ipVisitData[clientIp] = visitData;
