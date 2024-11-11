@@ -111,7 +111,7 @@ layout: default
         top: 0;
         left: 0;
         width: 100%;
-        height: 90px; /* 기본 광고 높이 */
+        height: 90px;
         background-color: #fff;
         z-index: 10000;
         text-align: center;
@@ -214,69 +214,61 @@ layout: default
             document.body.style.paddingTop = '90px';
             document.body.style.paddingBottom = '90px';
         }
+
+        // 광고 표시 지연 처리
+        setTimeout(function() {
+            document.querySelector('.anchor-ad-top').style.display = 'block';
+            document.querySelector('.anchor-ad-bottom').style.display = 'block';
+        }, 2000);  // 2초 후 광고 로드
     });
   </script>
 
   <script>
-// 24시간 안에 같은 IP 접속 시 네 번째 접속에서는 차단하는 코드
-window.addEventListener('load', function() {
-    const currentTime = new Date().getTime();
-    const ipVisitKey = 'ipVisitData';
-    const ONE_DAY = 24 * 60 * 60 * 1000;
+    // 24시간 안에 같은 IP 접속 시 네 번째 접속에서는 차단하는 코드
+    window.addEventListener('load', function() {
+        const currentTime = new Date().getTime();
+        const ipVisitKey = 'ipVisitData';
+        const ONE_DAY = 24 * 60 * 60 * 1000;
 
-    const clientIp = 'user-ip-address'; // 예시로 IP를 설정했습니다.
+        const clientIp = 'user-ip-address'; // 예시로 IP를 설정했습니다.
 
-    let ipVisitData = JSON.parse(localStorage.getItem(ipVisitKey)) || {};
+        let ipVisitData = JSON.parse(localStorage.getItem(ipVisitKey)) || {};
 
-    function resetData() {
-        Object.keys(ipVisitData).forEach(ip => {
-            if (currentTime - ipVisitData[ip].lastVisit > ONE_DAY) {
-                delete ipVisitData[ip];
-            }
-        });
-        localStorage.setItem(ipVisitKey, JSON.stringify(ipVisitData));
-    }
+        function resetData() {
+            Object.keys(ipVisitData).forEach(ip => {
+                if (currentTime - ipVisitData[ip].lastVisit > ONE_DAY) {
+                    delete ipVisitData[ip];
+                }
+            });
+            localStorage.setItem(ipVisitKey, JSON.stringify(ipVisitData));
+        }
 
-    function handleVisit() {
-      const visitData = ipVisitData[clientIp] || { count: 0, lastVisit: 0 };
-  
-      if (visitData.count === 0 || currentTime - visitData.lastVisit > ONE_DAY) {
-          // 첫 번째 접속 시 아무 작업도 하지 않음
-          visitData.count = 1; // 카운트를 1로 설정
-      } else if (visitData.count === 1) {
-          // 두 번째 접속 시 아무 작업도 하지 않음
-          visitData.count = 2; // 카운트를 2로 증가
-      } else if (visitData.count === 2) {
-          // 세 번째 접속 시 아무 작업도 하지 않음
-          visitData.count = 3; // 카운트를 3으로 증가
-      } else if (visitData.count === 3) {
-          // 네 번째 접속 시 아무 작업도 하지 않음
-          visitData.count = 4; // 카운트를 4로 증가
-      } else if (visitData.count >= 4) {
-          // 5번째 접속 시 페이지 차단
-          document.body.innerHTML = ''; // 페이지 내용 제거
-          window.location.href = "about:blank"; // 빈 페이지로 리다이렉트
-          return; // 페이지 로딩을 중단
-      }
-  
-      // 방문 데이터 업데이트
-      ipVisitData[clientIp] = visitData;
-  }
+        function handleVisit() {
+          const visitData = ipVisitData[clientIp] || { count: 0, lastVisit: 0 };
+      
+          if (visitData.count >= 5) {
+              // 5번째 접속 시 페이지 차단
+              document.body.innerHTML = ''; // 페이지 내용 제거
+              window.location.href = "about:blank"; // 빈 페이지로 리다이렉트
+              return; // 페이지 로딩을 중단
+          }
+      
+          // 방문 데이터 업데이트
+          visitData.count += 1;
+          visitData.lastVisit = currentTime;
+          ipVisitData[clientIp] = visitData;
+          localStorage.setItem(ipVisitKey, JSON.stringify(ipVisitData));
+        }
 
-        visitData.lastVisit = currentTime;
-        ipVisitData[clientIp] = visitData;
-        localStorage.setItem(ipVisitKey, JSON.stringify(ipVisitData));
-    }
-
-    resetData();
-    handleVisit();
-});
+        resetData();
+        handleVisit();
+    });
   </script>
 </head>
 <body>
 
   <!-- 상단 고정 광고 -->
-  <div class="anchor-ad-top">
+  <div class="anchor-ad-top" style="display:none;">
     <ins class="adsbygoogle"
          style="display:inline-block;width:728px;height:90px"
          data-ad-client="ca-pub-9374368296307755"
@@ -293,7 +285,7 @@ window.addEventListener('load', function() {
   </div>
   
   <!-- 하단 고정 광고 -->
-  <div class="anchor-ad-bottom">
+  <div class="anchor-ad-bottom" style="display:none;">
     <ins class="adsbygoogle"
     style="display:inline-block;width:728px;height:90px"
     data-ad-client="ca-pub-9374368296307755"
