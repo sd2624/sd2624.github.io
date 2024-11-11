@@ -29,17 +29,16 @@ layout: default
       <meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">
     {% endif %}
 
-    <!-- 상단 광고-->
-    <div class="ad-container" style="text-align: center; padding-bottom: 20px;">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-format="autorelaxed"
-           data-ad-client="ca-pub-9374368296307755"
-           data-ad-slot="4454543532"></ins>
-      <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
+  <!-- 상단 광고 (본문 상단에 하나만 표시) -->
+  <div class="anchor-ad-top">
+    <ins class="adsbygoogle"
+         style="display:block;width:728px;height:90px"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="4500586087"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
     {% unless page.header.overlay_color or page.header.overlay_image %}
       <header>
