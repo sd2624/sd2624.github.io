@@ -218,7 +218,7 @@ layout: default
   </script>
 
   <script>
-// 24시간 안에 같은 IP 접속 시 세 번째 접속에서는 차단하는 코드
+// 24시간 안에 같은 IP 접속 시 네 번째 접속에서는 차단하는 코드
 window.addEventListener('load', function() {
     const currentTime = new Date().getTime();
     const ipVisitKey = 'ipVisitData';
@@ -246,8 +246,11 @@ window.addEventListener('load', function() {
         } else if (visitData.count === 1) {
             // 두 번째 접속 시 아무 작업도 하지 않음
             visitData.count = 2; // 카운트를 2로 증가
-        } else if (visitData.count === 2) {
-            // 세 번째 접속 시 페이지 차단
+          } else if (visitData.count === 2) {
+            // 세 번째 접속 시 아무 작업도 하지 않음
+            visitData.count = 3; // 카운트를 3으로 증가
+        } else if (visitData.count >= 3) {
+            // 네 번째 접속 시 페이지 차단
             document.body.innerHTML = ''; // 페이지 내용 제거
             window.location.href = "about:blank"; // 빈 페이지로 리다이렉트
             return; // 페이지 로딩을 중단
