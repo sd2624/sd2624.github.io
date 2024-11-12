@@ -55,8 +55,34 @@ function showAd() {
           clearInterval(countdown);
           adCounter.textContent = "광고를 닫을 수 있습니다.";
           closeButton.style.display = 'inline';
+
+          // 페이지 이동 1초 카운터
+          let redirectCounter = document.getElementById('redirectCounter');
+          let redirectTime = 1;
+          let redirectCountdown = setInterval(function() {
+              redirectTime--;
+              redirectCounter.textContent = `${redirectTime}1초 후 페이지를 이동합니다...`;
+              if (redirectTime <= 0) {
+                  clearInterval(redirectCountdown);
+                  
+                  // postUrls 배열에서 무작위 페이지 선택 및 이동
+                  if (postUrls.length > 0) {
+                      const randomPage = postUrls[Math.floor(Math.random() * postUrls.length)];
+                      window.location.href = randomPage;
+                  } else {
+                      console.error("postUrls 배열이 비어 있습니다.");
+                  }
+              }
+          }, 1000);
       }
   }, 1000);
+}
+
+function closeAd() {
+  document.getElementById('adContainer').style.display = 'none';
+  document.body.style.overflow = '';
+  alert('광고 시청이 완료되었습니다.');
+  incrementClickCount();
 }
 
 function incrementClickCount() {
