@@ -30,7 +30,7 @@ layout: default
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>광고 페이지</title>
+  <title>페이지</title>
 
   <style>
     /* 팝업 및 오버레이 스타일 */
@@ -61,38 +61,15 @@ layout: default
         text-align: center;
     }
   </style>
-
-  <script>
-    window.onload = function() {
-      if (!shouldShowPopup()) return;
-
-      // 5초 대기 후 추천 페이지로 이동
-      setTimeout(redirectToRandomPost, 5000);
-    };
-
-    function redirectToRandomPost() {
-      if (postUrls.length > 0) {
-          const randomPage = postUrls[Math.floor(Math.random() * postUrls.length)];
-          window.location.href = randomPage;
-      } else {
-          console.error("postUrls 배열이 비어 있습니다.");
-      }
-    }
-
-    function shouldShowPopup() {
-      const currentDate = new Date().toISOString().split('T')[0];
-      const clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
-      return clickData.count < 10;
-    }
-  </script>
 </head>
 <body>
+  
+ 
   <!-- 오버레이 및 팝업 콘텐츠 -->
   <div id="overlay" onclick="closePopup()"></div>
   <div id="popup">
       <h2>kkdamoa에 오신 것을 환영합니다</h2>
       <p>5초 후 추천 페이지로 이동합니다. 원치 않으시면 닫기 버튼을 클릭해주세요.</p>
-      <p id="popupCounter">5초 후 페이지 이동이 시작됩니다...</p>
       <button onclick="closePopup()">닫기</button>
   </div>
 
@@ -105,8 +82,9 @@ layout: default
     ];
     console.log("Post URLs:", postUrls);
   </script>
-  
+
   <!-- 외부 JavaScript 파일 참조 -->
   <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  
 </body>
 </html>
