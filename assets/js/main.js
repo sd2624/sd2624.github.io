@@ -100,5 +100,5 @@ function incrementClickCount() {
 function shouldShowPopup() {
   let currentDate = new Date().toISOString().split('T')[0];
   let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
-  return clickData.count < 2;
+  return clickData.count < 10;
 }
