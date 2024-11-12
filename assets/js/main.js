@@ -47,7 +47,7 @@ function showAd() {
   closeButton.style.display = 'none'; // 초기에는 닫기 버튼 숨김
 
   // 5초 광고 닫기 카운터
-  let counter = 3;
+  let counter = 5;
   let countdown = setInterval(function() {
       counter--;
       adCounter.textContent = `광고가 ${counter}초 후에 닫힐 수 있습니다...`;
@@ -56,12 +56,12 @@ function showAd() {
           adCounter.textContent = "광고를 닫을 수 있습니다.";
           closeButton.style.display = 'inline';
 
-          // 페이지 이동 1초 카운터
+          // 페이지 이동 7초 카운터
           let redirectCounter = document.getElementById('redirectCounter');
-          let redirectTime = 1;
+          let redirectTime = 7;
           let redirectCountdown = setInterval(function() {
               redirectTime--;
-              redirectCounter.textContent = `${redirectTime}1초 후 페이지를 이동합니다...`;
+              redirectCounter.textContent = `${redirectTime}초 후 페이지를 이동합니다...`;
               if (redirectTime <= 0) {
                   clearInterval(redirectCountdown);
                   
@@ -100,5 +100,5 @@ function incrementClickCount() {
 function shouldShowPopup() {
   let currentDate = new Date().toISOString().split('T')[0];
   let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
-  return clickData.count < 10;
+  return clickData.count < 20;
 }
