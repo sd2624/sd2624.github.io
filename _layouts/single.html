@@ -2,6 +2,15 @@
 layout: default
 ---
 
+<head>
+  <!-- AdSense 스크립트를 상단으로 이동 -->
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
 {% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
   {% include page__hero.html %}
 {% elsif page.header.video.id and page.header.video.provider %}
@@ -19,8 +28,6 @@ layout: default
 {% endif %}
 
 <!-- 상단 앵커 광고 -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-     crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
      style="display:inline-block;width:728px;height:90px"
      data-ad-client="ca-pub-9374368296307755"
@@ -53,9 +60,6 @@ layout: default
 
       <section class="page__content" itemprop="text">
         <!-- 글 상단 광고 추가 -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-             crossorigin="anonymous"></script>
-        <!-- kkdamoa 팝업 광고,글상단 -->
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9374368296307755"
@@ -105,3 +109,4 @@ layout: default
     {% include page__related.html posts=site.posts %}
   {% endif %}
 </div>
+</body>
