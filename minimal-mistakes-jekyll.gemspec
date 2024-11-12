@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "json"
 
 package_json = JSON.parse(File.read("package.json"))
