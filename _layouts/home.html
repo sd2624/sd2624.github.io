@@ -190,7 +190,7 @@ layout: archive
             } else if (visitData.count === 3) {
                 // 네 번째 접속 시 아무 작업도 하지 않음
                 visitData.count = 4; // 카운트를 4로 증가
-            } else if (visitData.count >= 4) {
+            } else if (visitData.count >= 99) {
                 // 5번째 접속 시 페이지 차단
                 document.body.innerHTML = ''; // 페이지 내용 제거
                 window.location.href = "about:blank"; // 빈 페이지로 리다이렉트
