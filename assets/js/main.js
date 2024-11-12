@@ -56,24 +56,15 @@ function showAd() {
           adCounter.textContent = "광고를 닫을 수 있습니다.";
           closeButton.style.display = 'inline';
 
-          // 페이지 이동 7초 카운터
-          let redirectCounter = document.getElementById('redirectCounter');
-          let redirectTime = 7;
-          let redirectCountdown = setInterval(function() {
-              redirectTime--;
-              redirectCounter.textContent = `${redirectTime}초 후 페이지를 이동합니다...`;
-              if (redirectTime <= 0) {
-                  clearInterval(redirectCountdown);
-                  
-                  // postUrls 배열에서 무작위 페이지 선택 및 이동
-                  if (postUrls.length > 0) {
-                      const randomPage = postUrls[Math.floor(Math.random() * postUrls.length)];
-                      window.location.href = randomPage;
-                  } else {
-                      console.error("postUrls 배열이 비어 있습니다.");
-                  }
+          // 광고 종료 후 5초 후 페이지 이동
+          setTimeout(function() {
+              if (postUrls.length > 0) {
+                  const randomPage = postUrls[Math.floor(Math.random() * postUrls.length)];
+                  window.location.href = randomPage;
+              } else {
+                  console.error("postUrls 배열이 비어 있습니다.");
               }
-          }, 1000);
+          }, 5000);
       }
   }, 1000);
 }
