@@ -267,9 +267,12 @@ layout: default
 
 <!-- JavaScript 코드에서 postUrls 변수를 사용 -->
 <script>
-  const postUrls = JSON.parse('{{ post_urls | jsonify | escape }}');
-  console.log("Post URLs:", postUrls);
-</script>
+  // _posts 폴더의 포스트 URL 목록을 Jekyll을 사용해 JavaScript 배열로 생성
+  const postUrls = [
+    {% for post in site.posts %}
+      "{{ post.url }}"{% if forloop.last == false %},{% endif %}
+    {% endfor %}
+  ];
   
   <!-- 외부 JavaScript 파일 참조 -->
   <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
