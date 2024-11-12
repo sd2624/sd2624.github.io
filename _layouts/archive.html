@@ -27,7 +27,6 @@ layout: default
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  someData  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>광고 페이지</title>
@@ -262,17 +261,15 @@ layout: default
     </div>
   </div>
 
-<!-- Liquid 템플릿에서 post_urls 변수를 정의 -->
-{% assign post_urls = site.posts | map: 'url' | jsonify %}
-
-<!-- JavaScript 코드에서 postUrls 변수를 사용 -->
-<script>
-  // _posts 폴더의 포스트 URL 목록을 Jekyll을 사용해 JavaScript 배열로 생성
-  const postUrls = [
-    {% for post in site.posts %}
-      "{{ post.url }}"{% if forloop.last == false %},{% endif %}
-    {% endfor %}
-  ];
+  <!-- postUrls 변수를 정의 -->
+  <script>
+    const postUrls = [
+      {% for post in site.posts %}
+        "{{ post.url }}"{% if forloop.last == false %},{% endif %}
+      {% endfor %}
+    ];
+    console.log("Post URLs:", postUrls);
+  </script>
   
   <!-- 외부 JavaScript 파일 참조 -->
   <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
