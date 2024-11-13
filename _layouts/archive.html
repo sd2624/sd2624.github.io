@@ -34,38 +34,6 @@ layout: default
 
 
   <style>
-    /* 상단 고정 광고 */
-    .anchor-ad-top {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 90px; /* 기본 광고 높이 */
-        background-color: #fff;
-        z-index: 10000;
-        text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    /* 하단 고정 광고 */
-    .anchor-ad-bottom {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 90px;
-        background-color: #fff;
-        z-index: 10000;
-        text-align: center;
-        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    /* 상단 및 하단 고정 광고로 인한 본문 여백 추가 */
-    body {
-        padding-top: 90px;
-        padding-bottom: 90px;
-        margin: 0;
-    }
 
     /* 팝업 및 오버레이 스타일 */
     #overlay {
@@ -187,28 +155,8 @@ layout: default
 </head>
 <body>
 
-  <!-- 상단 고정 광고 -->
-  <div class="anchor-ad-top">
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:728px;height:90px"
-         data-ad-client="ca-pub-9374368296307755"
-         data-ad-slot="3603389079"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-  
 
-  <!-- 하단 고정 광고 -->
-  <div class="anchor-ad-bottom">
-    <ins class="adsbygoogle"
-    style="display:inline-block;width:728px;height:90px"
-    data-ad-client="ca-pub-9374368296307755"
-    data-ad-slot="4202989029"></ins>
-  <script>
-   (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-  </div>
+ 
   
   <!-- 오버레이 및 팝업 콘텐츠 -->
   <div id="overlay" onclick="closePopup()"></div>
