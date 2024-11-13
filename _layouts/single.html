@@ -39,34 +39,6 @@ layout: default
         </header>
       {% endunless %}
 
-      <!-- Google AdSense 스크립트 추가 -->
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-      <!-- 상단 광고 영역 - 광고 슬롯 1과 2 -->
-      <div id="top-ad-container">
-        <!-- 상단 광고 슬롯 1 -->
-        <ins class="adsbygoogle post-top-first"
-             style="display:inline-block; width:100%; max-width:336px; height:auto;"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="4202989029"
-             data-ad-format="rectangle"
-             data-full-width-responsive="true"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-
-        <!-- 상단 광고 슬롯 2 -->
-        <ins class="adsbygoogle post-top-second"
-             style="display:inline-block; width:100%; max-width:336px; height:auto;"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="3603389079"
-             data-ad-format="rectangle"
-             data-full-width-responsive="true"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
-
       <section class="page__content" itemprop="text">
         {% if page.toc %}
           <aside class="sidebar__right {% if page.toc_sticky %}sticky{% endif %}">
@@ -89,6 +61,7 @@ layout: default
       </footer>
 
       {% if page.share %}{% include social-share.html %}{% endif %}
+
       {% include post_pagination.html %}
     </div>
 
@@ -97,22 +70,11 @@ layout: default
     {% endif %}
   </article>
 
+  {% comment %}<!-- only show related on a post page when `related: true` -->{% endcomment %}
   {% if page.id and page.related and site.related_posts.size > 0 %}
     {% include page__related.html posts=site.related_posts %}
+  {% comment %}<!-- otherwise show recent posts if no related when `related: true` -->{% endcomment %}
   {% elsif page.id and page.related %}
     {% include page__related.html posts=site.posts %}
   {% endif %}
 </div>
-
-<style>
-  /* 두 개의 광고 슬롯을 나란히 배치하고 간격을 둠 */
-  #top-ad-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-  .post-top-first, .post-top-second {
-    width: 48%; /* 각 광고 슬롯의 너비를 화면의 절반으로 설정 */
-  }
-</style>

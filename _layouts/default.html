@@ -13,6 +13,49 @@
     {% include_cached skip-links.html %}
     {% include_cached masthead.html %}
 
+    <!-- 광고 컨테이너 추가 시작 -->
+    <div class="ads-container">
+      <!-- 광고1 -->
+      <div class="ad ad1">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- Ad Unit 1 -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-9374368296307755"
+               data-ad-slot="3603389079"
+               data-ad-format="auto"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+      </div>
+
+      <!-- 광고2 -->
+      <div class="ad ad2">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- Ad Unit 2 -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-9374368296307755"
+               data-ad-slot="9952845435"
+               data-ad-format="auto"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+      </div>
+    </div>
+    <!-- 광고 컨테이너 추가 끝 -->
+
+    <style>
+    .ads-container {
+        display: flex;
+        gap: 10px;
+    }
+
+    .ad {
+        width: 50%;
+    }
+    </style>
+
     <div class="initial-content">
       {{ content }}
       {% include after-content.html %}
