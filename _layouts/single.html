@@ -42,12 +42,12 @@ layout: default
       <!-- Google AdSense 스크립트 추가 -->
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
 
-      <!-- 두 개의 광고 슬롯을 나란히 배치 -->
+      <!-- 두 개의 광고 슬롯을 세로로 분리하여 배치 -->
       <div id="ads-container">
         <div class="ad-slot">
           <!-- 광고 슬롯 1 -->
           <ins class="adsbygoogle"
-               style="display:block; width: 100%; height: auto;"
+               style="display:block"
                data-ad-client="ca-pub-9374368296307755"
                data-ad-slot="4202989029"
                data-ad-format="auto"
@@ -57,7 +57,7 @@ layout: default
         <div class="ad-slot">
           <!-- 광고 슬롯 2 -->
           <ins class="adsbygoogle"
-               style="display:block; width: 100%; height: auto;"
+               style="display:block"
                data-ad-client="ca-pub-9374368296307755"
                data-ad-slot="3603389079"
                data-ad-format="auto"
@@ -104,13 +104,14 @@ layout: default
 </div>
 
 <style>
-  /* 두 개의 광고 슬롯을 가로로 배치하고, 각 슬롯의 가로 너비를 절반으로 조정 */
+  /* 두 개의 광고 슬롯을 나란히 배치하고, 충분한 여백 추가 */
   #ads-container {
     display: flex;
     justify-content: space-between;
+    gap: 20px; /* 광고 사이에 여백을 줘서 광고가 간섭받지 않도록 설정 */
     margin-bottom: 20px;
   }
   .ad-slot {
-    width: 48%; /* 각 광고 슬롯의 너비를 50%로 설정 */
+    width: 48%; /* 각 광고 슬롯의 너비를 48%로 설정 */
   }
 </style>
