@@ -13,7 +13,7 @@
     {% include_cached skip-links.html %}
     {% include_cached masthead.html %}
 
-    <!-- 광고 컨테이너 추가 시작 -->
+    <!-- 상단 광고 컨테이너 -->
     <div class="ads-container">
       <!-- 광고1 -->
       <div class="ad ad1">
@@ -43,7 +43,6 @@
           </script>
       </div>
     </div>
-    <!-- 광고 컨테이너 추가 끝 -->
 
     <style>
     .ads-container {
@@ -61,16 +60,38 @@
       {% include after-content.html %}
     </div>
 
-    {% if site.search == true %}
-      <div class="search-content">
-        {% include_cached search/search_form.html %}
-      </div>
-    {% endif %}
+    <!-- 사이드바 광고 -->
+    <aside class="sidebar-ad">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- Sidebar Ad Unit -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9374368296307755"
+           data-ad-slot="4202989029"
+           data-ad-format="auto"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </aside>
 
+    <!-- 하단 광고 -->
     <div id="footer" class="page__footer">
       <footer>
         {% include footer/custom.html %}
         {% include_cached footer.html %}
+
+        <div class="footer-ad">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- Footer Ad Unit -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-9374368296307755"
+               data-ad-slot="1724698171"
+               data-ad-format="auto"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
       </footer>
     </div>
 
