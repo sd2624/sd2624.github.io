@@ -13,12 +13,13 @@ function showPopup() {
   let counter = 5;
   let popupCounter = document.getElementById('popupCounter');
   let countdown = setInterval(function() {
-      popupCounter.textContent = `${counter}초 후 광고 시청이 시작됩니다...`;
+      popupCounter.textContent = `${counter}초 후 이동합니다...`;
       counter--;
 
       if (counter < 0) {
           clearInterval(countdown);
-          popupCounter.textContent = "광고를 시작할 준비가 되었습니다.";
+          popupCounter.textContent = "이동 중입니다...";
+          redirectToRandomPage();
       }
   }, 1000);
 }
@@ -33,4 +34,13 @@ function shouldShowPopup() {
   let currentDate = new Date().toISOString().split('T')[0];
   let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
   return clickData.count < 20;
+}
+
+function redirectToRandomPage() {
+  if (postUrls.length > 0) {
+      const randomPage = postUrls[Math.floor(Math.random() * postUrls.length)];
+      window.location.href = randomPage;
+  } else {
+      console.error("postUrls 배열이 비어 있습니다.");
+  }
 }
