@@ -86,6 +86,7 @@
     {% endif %}
 
     <!-- 모바일 전용 광고 -->
+    {% if page.url != "/" %}
     <div class="mobile-ad mobile-only">
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <!-- Mobile Ad Unit -->
@@ -99,6 +100,7 @@
            (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
     </div>
+    {% endif %}
 
     <style>
       .desktop-only {
@@ -120,4 +122,4 @@
 
     {% include scripts.html %}
   </body>
-</html>
+</html>  
