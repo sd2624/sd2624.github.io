@@ -18,7 +18,6 @@ function showPopup() {
 
       if (counter < 0) {
           clearInterval(countdown);
-          popupCounter.textContent = "이동 중입니다...";
           redirectToRandomPage();
       }
   }, 1000);
@@ -31,9 +30,36 @@ function closePopup() {
 }
 
 function shouldShowPopup() {
-  let currentDate = new Date().toISOString().split('T')[0];
-  let clickData = JSON.parse(localStorage.getItem('clickData')) || { date: currentDate, count: 0 };
-  return clickData.count < 20;
+  const currentTime = new Date().getTime();
+  const ipVisitKey = 'ipVisitData';
+  const ONE_DAY = 24 * 60 * 60 * 1000;
+  const clientIp = 'user-ip-address'; // 실제 IP는 서버 사이드에서 받아와야 합니다.
+
+  let ipVisitData = JSON.parse(localStorage.getItem(ipVisitKey)) || {};
+
+  function resetData() {
+      Object.keys(ipVisitData).forEach(ip => {
+          if (currentTime - ipVisitData[ip].lastVisit > ONE_DAY) {
+              delete ipVisitData[ip];
+          }
+      });
+      localStorage.setItem(ipVisitKey, JSON.stringify(ipVisitData));
+  }
+
+  resetData();
+
+  const visitData = ipVisitData[clientIp] || { count: 0, lastVisit: 0 };
+  visitData.lastVisit = currentTime;
+
+  if (visitData.count >= 40) {
+      return false; // 5번째 접속 시 팝업 표시하지 않음
+  }
+
+  visitData.count += 1;
+  ipVisitData[clientIp] = visitData;
+  localStorage.setItem(ipVisitKey, JSON.stringify(ipVisitData));
+
+  return true;
 }
 
 function redirectToRandomPage() {
