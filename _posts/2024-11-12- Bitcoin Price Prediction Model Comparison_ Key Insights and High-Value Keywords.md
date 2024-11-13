@@ -1,5 +1,5 @@
 ---
-title: 2025 Bitcoin Price Prediction Model Comparison: Key Insights and High-Value Keywords
+title: 2025 Bitcoin Price Prediction Model Comparison Key Insights and High-Value Keywords
 layout: single
 ---
 

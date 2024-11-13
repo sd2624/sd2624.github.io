@@ -1,5 +1,5 @@
 ---
-title: Inheritance and Estate Dispute Resolution: A Comprehensive Guide
+title: Inheritance and Estate Dispute Resolution A Comprehensive Guide
 layout: single
 ---
 
