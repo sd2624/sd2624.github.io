@@ -13,12 +13,26 @@
     {% include_cached skip-links.html %}
     {% include_cached masthead.html %}
 
-    <!-- 상단 광고 컨테이너 (데스크탑 전용) -->
+    <!-- 상단 광고 (기존 하단 광고를 상단으로 이동) -->
+    <div class="header-ad desktop-only">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- Footer Ad Unit (상단으로 이동) -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9374368296307755"
+           data-ad-slot="1724698171"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- 기존 상단 광고 컨테이너 (데스크탑 전용) -->
     <div class="ads-container desktop-only">
       <!-- 광고1 -->
       <div class="ad ad1">
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- Ad Unit 1 -->
           <ins class="adsbygoogle"
                style="display:block"
                data-ad-client="ca-pub-9374368296307755"
@@ -33,7 +47,6 @@
       <!-- 광고2 -->
       <div class="ad ad2">
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- Ad Unit 2 -->
           <ins class="adsbygoogle"
                style="display:block"
                data-ad-client="ca-pub-9374368296307755"
@@ -62,10 +75,9 @@
       {% include after-content.html %}
     </div>
 
-    <!-- 사이드바 광고 (데스크탑 전용) -->
+    <!-- 사이드바 광고 및 기타 콘텐츠 -->
     <aside class="sidebar-ad desktop-only">
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <!-- Sidebar Ad Unit -->
       <ins class="adsbygoogle"
            style="display:block; max-width: 300px; max-height: 600px;"
            data-ad-client="ca-pub-9374368296307755"
@@ -79,38 +91,15 @@
 
     <style>
     .sidebar-ad {
-      width: 300px; /* 사이드바 너비에 맞춤 */
-      max-height: 600px; /* 사이드바에 맞는 최대 높이 설정 */
-      overflow: hidden; /* 광고가 영역을 넘지 않도록 설정 */
+      width: 300px;
+      max-height: 600px;
+      overflow: hidden;
     }
     </style>
-
-    <!-- 하단 광고 (데스크탑 전용) -->
-    <div id="footer" class="page__footer desktop-only">
-      <footer>
-        {% include footer/custom.html %}
-        {% include_cached footer.html %}
-
-        <div class="footer-ad">
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- Footer Ad Unit -->
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-9374368296307755"
-               data-ad-slot="1724698171"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
-          <script>
-               (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-        </div>
-      </footer>
-    </div>
 
     <!-- 모바일 전용 광고 -->
     <div class="mobile-ad mobile-only">
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <!-- Mobile Ad Unit -->
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-9374368296307755"
@@ -123,7 +112,6 @@
     </div>
 
     <style>
-      /* 데스크탑 전용과 모바일 전용 광고를 제어하는 클래스 */
       .desktop-only {
           display: block;
       }
@@ -131,7 +119,6 @@
           display: none;
       }
 
-      /* 모바일 환경에서는 데스크탑 전용 광고 숨기기, 모바일 전용 광고 표시 */
       @media (max-width: 768px) {
           .desktop-only {
               display: none;
