@@ -45,14 +45,15 @@
     <style>
       .ads-container {
           display: flex;
+          flex-wrap: nowrap; /* 광고가 한 줄에 강제로 배치되도록 설정 */
           gap: 10px;
           justify-content: space-between;
           align-items: center;
       }
     
       .ad {
-          flex: 1; /* 모든 ad 요소가 동일한 너비를 차지하도록 설정 */
-          max-width: 48%; /* 광고의 최대 너비를 48%로 제한하여 여백 확보 */
+          flex: 1 1 48%; /* 각 광고가 최대 48%를 차지하며 여백이 유지되도록 설정 */
+          max-width: 48%; /* 광고 최대 너비를 48%로 제한 */
           box-sizing: border-box;
       }
     </style>
