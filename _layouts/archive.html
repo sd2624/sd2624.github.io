@@ -63,27 +63,5 @@ layout: default
   </style>
 
 </head>
-<body>
-  <!-- 오버레이 및 팝업 콘텐츠 -->
-  <div id="overlay" onclick="closePopup()"></div>
-  <div id="popup">
-      <h2>kkdamoa에 오신 것을 환영합니다</h2>
-      <p>5초 후 이동합니다. 원치 않으시면 닫기 버튼을 클릭해주세요.</p>
-      <p id="popupCounter">5초 후 이동합니다...</p>
-      <button onclick="closePopup()">닫기</button>
-  </div>
 
-  <!-- postUrls 변수를 정의 -->
-  <script>
-    const postUrls = [
-      {% for post in site.posts %}
-        "{{ post.url }}"{% if forloop.last == false %},{% endif %}
-      {% endfor %}
-    ];
-    console.log("Post URLs:", postUrls);
-  </script>
-
-  <!-- 외부 JavaScript 파일 참조 -->
-  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
-</body>
 </html>
