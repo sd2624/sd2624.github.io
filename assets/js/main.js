@@ -1,5 +1,3 @@
-let countdown; // 카운트다운 타이머를 전역 변수로 설정
-
 window.onload = function() {
   if (!shouldShowPopup()) return;
 
@@ -14,13 +12,13 @@ function showPopup() {
 
   let counter = 5;
   let popupCounter = document.getElementById('popupCounter');
-  countdown = setInterval(function() {
+  let countdown = setInterval(function() {
       popupCounter.textContent = `${counter}초 후 이동합니다...`;
       counter--;
 
       if (counter < 0) {
           clearInterval(countdown);
-          redirectToRandomPage(); // 카운트다운이 끝나면 랜덤 페이지로 이동
+          redirectToRandomPage();
       }
   }, 1000);
 }
@@ -29,8 +27,6 @@ function closePopup() {
   document.getElementById('overlay').style.display = 'none';
   document.getElementById('popup').style.display = 'none';
   document.body.style.overflow = '';
-
-  clearInterval(countdown); // 카운트다운 중지
 }
 
 function shouldShowPopup() {
