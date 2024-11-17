@@ -80,33 +80,56 @@ layout: default
 </div>
 
 <script>
-  // 사람처럼 스크롤 시뮬레이션
+  // 자연스러운 스크롤 시뮬레이션
   function simulateHumanScroll() {
-    const scrollSpeed = () => Math.floor(Math.random() * (30 - 10 + 1)) + 10; // 랜덤 스크롤 속도
-    const scrollPause = () => Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000; // 랜덤 중단 시간
+    let currentScroll = 0; // 현재 스크롤 위치
+    let maxScroll = document.documentElement.scrollHeight - window.innerHeight; // 페이지의 최대 스크롤 높이
+    let scrolling = true; // 스크롤 상태
+    let randomPauseThreshold = 0.1; // 랜덤으로 멈추는 확률 (10%)
 
-    let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    let scrollDirection = 1; // 스크롤 방향 (1: 아래, -1: 위)
-    let currentPosition = 0;
+    // 랜덤 속도와 시간 생성
+    const scrollSpeed = () => Math.floor(Math.random() * (30 - 10 + 1)) + 10; // 10~30px 사이 랜덤 속도
+    const pauseTime = () => Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000; // 1~2초 멈춤 시간
 
-    const scrollingInterval = setInterval(() => {
-      currentPosition += scrollDirection * scrollSpeed();
+    // 스크롤을 실행하는 함수
+    function scrollStep() {
+      if (!scrolling) return; // 스크롤 중단 상태일 경우 실행 중지
 
-      if (currentPosition >= maxScroll || currentPosition <= 0) {
-        scrollDirection *= -1; // 방향 반전
-      }
-
+      currentScroll += scrollSpeed(); // 랜덤 속도로 스크롤 증가
       window.scrollTo({
-        top: currentPosition,
+        top: currentScroll,
         behavior: 'smooth',
       });
 
-      if (Math.random() < 0.2) {
-        // 20% 확률로 중단
-        clearInterval(scrollingInterval);
-        setTimeout(simulateHumanScroll, scrollPause());
+      // 랜덤하게 스크롤 중단
+      if (Math.random() < randomPauseThreshold) {
+        scrolling = false; // 스크롤 중단
+        setTimeout(() => {
+          scrolling = true; // 일정 시간 후 다시 스크롤
+          scrollStep(); // 다시 호출
+        }, pauseTime());
+        return;
       }
-    }, 100);
+
+      // 하단에 도달하면 멈추고 일정 시간 후 다시 시작
+      if (currentScroll >= maxScroll) {
+        console.log("Reached the bottom of the page, waiting...");
+        scrolling = false;
+        setTimeout(() => {
+          currentScroll = 0; // 다시 상단으로 초기화
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(() => {
+            scrolling = true; // 다시 스크롤 시작
+            scrollStep();
+          }, pauseTime());
+        }, pauseTime());
+      } else {
+        // 계속 스크롤
+        setTimeout(scrollStep, 100);
+      }
+    }
+
+    scrollStep(); // 스크롤 시작
   }
 
   // 페이지 로드 후 스크롤 동작 시작
