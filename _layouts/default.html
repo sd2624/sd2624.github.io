@@ -10,7 +10,6 @@
     {% include_cached skip-links.html %}
     {% include_cached masthead.html %}
 
-    {% if page.url != "/" %}
     <!-- 상단 광고 컨테이너 (데스크탑 전용) -->
     <div class="ads-container desktop-only">
       <!-- 광고1 -->
@@ -69,14 +68,12 @@
         box-sizing: border-box;
     }
     </style>
-    {% endif %}
 
     <div class="initial-content">
       {{ content }}
       {% include after-content.html %}
     </div>
 
-    {% if page.url != "/" %}
     <!-- 모바일 전용 광고 -->
     <div class="mobile-ad mobile-only">
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -90,7 +87,6 @@
            (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
     </div>
-    {% endif %}
 
     <style>
       .desktop-only {
