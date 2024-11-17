@@ -62,29 +62,6 @@
       {% include after-content.html %}
     </div>
 
-    <!-- 사이드바 광고 (데스크탑 전용) -->
-    <aside class="sidebar-ad desktop-only">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <!-- Sidebar Ad Unit -->
-      <ins class="adsbygoogle"
-           style="display:block; max-width: 300px; max-height: 600px;"
-           data-ad-client="ca-pub-9374368296307755"
-           data-ad-slot="4202989029"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </aside>
-
-    <style>
-    .sidebar-ad {
-      width: 300px; /* 사이드바 너비에 맞춤 */
-      max-height: 600px; /* 사이드바에 맞는 최대 높이 설정 */
-      overflow: hidden; /* 광고가 영역을 넘지 않도록 설정 */
-    }
-    </style>
-
     <!-- 하단 광고 (데스크탑 전용) -->
     <div id="footer" class="page__footer desktop-only">
       <footer>
@@ -141,6 +118,42 @@
           }
       }
     </style>
+
+    <!-- 스크롤 시뮬레이션 스크립트 -->
+    <script>
+      function simulateHumanScroll() {
+        const scrollSpeed = () => Math.floor(Math.random() * (30 - 10 + 1)) + 10; // 랜덤 스크롤 속도
+        const scrollPause = () => Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000; // 랜덤 중단 시간
+
+        let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        let scrollDirection = 1; // 스크롤 방향 (1: 아래, -1: 위)
+        let currentPosition = 0;
+
+        const scrollingInterval = setInterval(() => {
+          currentPosition += scrollDirection * scrollSpeed();
+
+          if (currentPosition >= maxScroll || currentPosition <= 0) {
+            scrollDirection *= -1; // 방향 반전
+          }
+
+          window.scrollTo({
+            top: currentPosition,
+            behavior: 'smooth',
+          });
+
+          if (Math.random() < 0.2) {
+            // 20% 확률로 중단
+            clearInterval(scrollingInterval);
+            setTimeout(simulateHumanScroll, scrollPause());
+          }
+        }, 100);
+      }
+
+      // 페이지 로드 후 스크롤 동작 시작
+      window.onload = function () {
+        simulateHumanScroll();
+      };
+    </script>
 
     {% include scripts.html %}
   </body>
