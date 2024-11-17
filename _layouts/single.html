@@ -78,3 +78,39 @@ layout: default
     {% include page__related.html posts=site.posts %}
   {% endif %}
 </div>
+
+<script>
+  // 사람처럼 스크롤 시뮬레이션
+  function simulateHumanScroll() {
+    const scrollSpeed = () => Math.floor(Math.random() * (30 - 10 + 1)) + 10; // 랜덤 스크롤 속도
+    const scrollPause = () => Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000; // 랜덤 중단 시간
+
+    let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    let scrollDirection = 1; // 스크롤 방향 (1: 아래, -1: 위)
+    let currentPosition = 0;
+
+    const scrollingInterval = setInterval(() => {
+      currentPosition += scrollDirection * scrollSpeed();
+
+      if (currentPosition >= maxScroll || currentPosition <= 0) {
+        scrollDirection *= -1; // 방향 반전
+      }
+
+      window.scrollTo({
+        top: currentPosition,
+        behavior: 'smooth',
+      });
+
+      if (Math.random() < 0.2) {
+        // 20% 확률로 중단
+        clearInterval(scrollingInterval);
+        setTimeout(simulateHumanScroll, scrollPause());
+      }
+    }, 100);
+  }
+
+  // 페이지 로드 후 스크롤 동작 시작
+  window.onload = function () {
+    simulateHumanScroll();
+  };
+</script>
