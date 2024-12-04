@@ -1,5 +1,5 @@
 ---
-title: Timing the Stock Market: How to Choose the Right Time to Buy and Sell
+title: How to Choose the Right Time to Buy and Sell
 layout: single
 ---
 

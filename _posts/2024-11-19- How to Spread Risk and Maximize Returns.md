@@ -1,5 +1,5 @@
 ---
-title: Diversification Strategy in Stock Investing: How to Spread Risk and Maximize Returns
+title:  How to Spread Risk and Maximize Returns
 layout: single
 ---
 
@@ -72,3 +72,5 @@ The main purpose of diversification is to reduce the overall risk of an investme
 ### Conclusion
 
 Stock diversification is an essential strategy for managing risk and enhancing long-term returns. By spreading your investments across different sectors, regions, and market capitalizations, you can minimize risk and smooth out the volatility of the stock market. Whether you're an experienced investor or just starting out, diversification should be a key part of your investment strategy. Remember, the goal of diversification is not to maximize short-term gains, but to build a por
+
+{% endraw %}
