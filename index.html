@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>테스트프로</title>
+    <title>테스트프로 - 당신의 이야기를 찾아서</title>
     <meta name="description" content="사주, 운명, 미래, 심리 테스트와 다양한 재미있는 테스트, 당신의 운명을 알아보고 다양한 심리와 성격 테스트를 통해 자신을 탐구해보세요.">
     <meta name="keywords" content="무료 사주풀이, 사주 궁합 테스트, 심리테스트 모음, MBTI 성격 유형 검사, 타로 카드 운세, 연애 심리테스트, 이름으로 보는 사주, 생년월일로 보는 운세, 별자리 궁합, 직업 적성 심리테스트, 오늘의 운세, 혈액형 성격 테스트, 숫자로 보는 사주, 꿈해몽 풀이, 가족 궁합 테스트, 친구 심리테스트, 전생 테스트, 재물운 테스트, 띠별 운세, 미래 배우자 테스트">
     <meta property="og:type" content="website"> 
@@ -11,116 +11,59 @@
     <meta property="og:description" content="흥미로운 심리 테스트와 사주, 운세를 알아보는 나의 운명 이야기">
     <meta property="og:image" content="https://kkdamoa.github.io/k-test/메인.png">
     <meta property="og:url" content="https://kkdamoa.github.io/k-test/">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="naver-site-verification" content="3ddea906f4511e2e5c2374bc1bbc6f8700c898a9" />
     <meta name="google-site-verification" content="wpS7lDe_HCr6OV4p0Ky9YOfaS4cu2gDh56ey8K1leIE" />
+    
+    <!-- CSS 및 폰트 -->
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Google AdSense 스크립트 -->
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
 
-    <!-- 카카오 SDK 초기화 -->
+    <!-- 카카오 SDK -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script>
-        // 카카오 SDK 초기화 코드
-        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c'); // 카카오 JavaScript 키
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
     </script>
-
-    <!-- 코드 보호 및 난독화 방지 스크립트 -->
-    <script>
-        document.addEventListener('keydown', function (e) {
-            if (e.key === "F12") {
-                e.preventDefault();
-                alert("F12 개발자 도구는 사용하실 수 없습니다.");
-            }
-            if (
-                (e.ctrlKey && (e.key === "u" || e.key === "U")) ||
-                (e.ctrlKey && e.shiftKey && e.key === "I")
-            ) {
-                e.preventDefault();
-                alert("소스 코드는 보호되고 있습니다.");
-            }
-        });
-
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-            alert("우클릭은 비활성화되었습니다.");
-        });
-
-        (function devToolsChecker() {
-            const element = new Image();
-            Object.defineProperty(element, 'id', {
-                get: function () {
-                    alert('개발자 도구가 감지되었습니다. 사용을 멈추세요!');
-                    throw new Error('개발자 도구 사용 금지!');
-                }
-            });
-            setInterval(function () {
-                console.log(element);
-            }, 1000);
-        })();
-    </script>
-
-    <style>
-        /* 테스트 리스트 제목 스타일 */
-        .wrapper .grid .item div {
-            font-size: 18px; /* 글자 크기 */
-            font-weight: 700; /* 글자 굵기 */
-            color: #3E2723;   /* 연한 갈색 */
-            text-align: center;
-            margin-top: 10px;
-            font-family: 'Cormorant Garamond', serif;
-            line-height: 1.4;
-            transition: color 0.3s ease;
-        }
-
-        /* 마우스 오버 시 글자 색상 변경 */
-        .wrapper .grid .item:hover div {
-            color: #5D4037; /* 진한 갈색으로 변경 */
-        }
-
-        /* 전체 테스트 리스트 배경색 */
-        .wrapper.grid {
-            background-color: #F1EFE7; /* 부드러운 베이지색 */
-            padding: 20px;
-        }
-    </style>
-
 </head>
 
 <body>
-    <!-- 페이지 헤더 -->
+    <!-- 로고 -->
+    <div class="logo-container">
+        <a href="/" class="logo">Test Pro</a>
+        <div class="logo-subtitle">당신의 이야기를 찾아보세요</div>
+    </div>
+
+    <!-- 네비게이션 -->
     <header class="page-header wrapper">
-        <div style="display: flex; align-items: center; justify-content: space-between;">
-            <div style="display: flex; align-items: center;">
-                <nav>
-                    <!-- 네비게이션 메뉴 -->
-                    <ul class="main-nav" style="display: flex; align-items: center; gap: 30px;">
-                        <li><a href="심리테스트.html">심리테스트</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <!-- 카카오톡 공유 버튼 -->
-            <div style="display: flex; align-items: center;">
-                <button id="kakao-share-button" style="cursor: pointer; background: none; border: none;">
-                    <img src= alt="Kakao Share Icon" style="width: 50px; height: auto;">
-                </button>
-            </div>
-        </div>
-        
+        <nav>
+            <ul class="main-nav">
+                <li><a href="심리테스트.html">심리테스트</a></li>
+            </ul>
+        </nav>
     </header>
 
-
-    <!-- 메인 이미지 -->
-    <div style="text-align: center;">
-        <img src="" alt="이미지 메인">
+    <!-- 메인 비주얼 -->
+    <div class="main-visual">
+        <div class="main-visual-content">
+            <div class="floating-elements">
+                <div class="floating-element element-1">🔮</div>
+                <div class="floating-element element-2">✨</div>
+                <div class="floating-element element-3">🌟</div>
+                <div class="floating-element element-4">💫</div>
+            </div>
+            <div class="main-title">
+                <h1>나의 운명을 찾아서</h1>
+                <p>당신만의 특별한 이야기를 시작하세요</p>
+            </div>
+        </div>
     </div>
-    
-    <!-- Google AdSense 광고 영역 -->
-    <div style="text-align: center; margin: 20px 0;">
+
+    <!-- 상단 광고 -->
+    <div class="ad-container">
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9374368296307755"
@@ -132,48 +75,85 @@
         </script>
     </div>
 
-
-    <!-- 테스트 리스트 -->
-    <div class="wrapper grid" style="text-align: center;">
+    <!-- 테스트 그리드 -->
+    <div class="wrapper grid">
         <div class="item">
             <a href="에리어/에리어.html">
-                <img src="에리어/에리어.png" alt="검색창 성격 테스트">
-                <div>성격 유형 테스트</div>
+                <div class="item-image">
+                    <img src="에리어/에리어.png" alt="성격 유형 테스트">
+                </div>
+                <div class="item-title">성격 유형 테스트</div>
             </a>
         </div>
         <div class="item">
             <a href="연인/연인.html">
-                <img src="연인/연인.png" alt="검색창 성격 테스트">
-                <div>헤어진 연인에 대한 나에 마음은??</div>
+                <div class="item-image">
+                    <img src="연인/연인.png" alt="연인 심리 테스트">
+                </div>
+                <div class="item-title">헤어진 연인에 대한 나의 마음은??</div>
             </a>
         </div>
         <div class="item">
             <a href="색/index.html">
-                <img src="색/색체.png" alt="검색창 성격 테스트">
-                <div>색채 심리 테스트</div>
+                <div class="item-image">
+                    <img src="색/색체.png" alt="색채 심리 테스트">
+                </div>
+                <div class="item-title">색채 심리 테스트</div>
             </a>
         </div>
         <div class="item">
             <a href="동물/동물.html">
-                <img src="동물/동물.png" alt="검색창 성격 테스트">
-                <div>나의 수호 동물은??</div>
+                <div class="item-image">
+                    <img src="동물/동물.png" alt="수호 동물 테스트">
+                </div>
+                <div class="item-title">나의 수호 동물은??</div>
             </a>
         </div>
         <div class="item">
             <a href="행운/index.html">
-                <img src="행운/행운.png" alt="검색창 성격 테스트">
-                <div>오늘의 운세는??</div>
+                <div class="item-image">
+                    <img src="행운/행운.png" alt="오늘의 운세">
+                </div>
+                <div class="item-title">오늘의 운세는??</div>
             </a>
         </div>
         <div class="item">
             <a href="타로/index.html">
-                <img src="타로/타로.png" alt="검색창 성격 테스트">
-                <div>타로카드 운세 보기</div>
+                <div class="item-image">
+                    <img src="타로/타로.png" alt="타로카드 운세">
+                </div>
+                <div class="item-title">타로카드 운세 보기</div>
             </a>
         </div>
     </div>
 
-    <!-- 카카오톡 공유 기능 -->
+    <!-- 카카오톡 공유 버튼 -->
+    <div class="kakao-share-fixed" id="kakao-share-button">
+        <div class="kakao-icon"></div>
+    </div>
+
+    <!-- 하단 광고 -->
+    <div class="ad-container bottom">
+        <ins class="adsbygoogle"
+             style="display:inline-block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="1724698171"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="wrapper">
+            <p>제작/광고문의 - sd26242624@gmail.com</p>
+            <p>&copy; 2024 테스트프로. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 카카오톡 공유 스크립트 -->
     <script>
         document.getElementById('kakao-share-button').addEventListener('click', function () {
             Kakao.Link.sendDefault({
@@ -200,32 +180,19 @@
         });
     </script>
 
-    <!-- 광고 (푸터 위) - 하단 슬롯: 1724698171 -->
-    <div style="text-align: center; margin: 40px auto; min-height: 250px;">
-        <script async 
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-            crossorigin="anonymous">
-        </script>
+    <!-- 개발자 도구 방지 스크립트 -->
+    <script>
+        document.addEventListener('keydown', function (e) {
+            if (e.key === "F12" || (e.ctrlKey && (e.key === "u" || e.key === "U")) || (e.ctrlKey && e.shiftKey && e.key === "I")) {
+                e.preventDefault();
+                alert("소스 코드는 보호되고 있습니다.");
+            }
+        });
 
-        <ins class="adsbygoogle"
-             style="display:inline-block; margin:0 auto;"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="1724698171"
-             data-ad-format="auto"
-             data-full-width-responsive="true">
-        </ins>
-
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
-    <!-- 페이지 하단 -->
-    <footer>
-        <div class="wrapper" style="text-align: center; padding: 10px 0;">
-            <p>제작/광고문의 - sd26242624@gmail.com</p>
-            <p>&copy; 테스트프로. All Rights Reserved. Unauthorized use is prohibited. 모든 권리 보유. 무단 사용을 금지합니다.</p>
-        </div>
-    </footer>
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            alert("우클릭은 비활성화되었습니다.");
+        });
+    </script>
 </body>
 </html>
