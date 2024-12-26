@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('colorTestForm');
     const sections = document.querySelectorAll('.question-section');
     const nextButtons = document.querySelectorAll('.next-btn');
-    const loadingPopup = document.getElementById('loadingPopup');
-    const adContainer = document.getElementById('adContainer');
     let currentSection = 0;
 
     // 초기 섹션 활성화
@@ -62,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dominantColor = color;
             } else if (colorCounts[color] === maxCount) {
                 // 동점인 경우, 먼저 나온 색상을 우선
+                // 필요에 따라 우선순위 로직을 추가할 수 있음
             }
         }
 
@@ -111,16 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // 결과 저장 (로컬 스토리지 사용)
             localStorage.setItem('colorTestResult', color);
 
-            // 로딩 팝업과 광고 표시
-            loadingPopup.style.display = 'flex';
-            adContainer.style.display = 'block';
-
-            // 7초 후 결과 페이지로 이동
-            setTimeout(() => {
-                loadingPopup.style.display = 'none';
-                adContainer.style.display = 'none';
-                window.location.href = 'results.html';
-            }, 7000);
+            // 상세 결과 페이지로 이동
+            window.location.href = 'results.html';
         } else {
             alert('결과가 없습니다. 테스트를 먼저 완료해주세요.');
         }

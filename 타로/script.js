@@ -4,8 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectButton = document.getElementById('selectCards');
     const cardSlots = document.querySelectorAll('.card-slot');
     const shareButton = document.getElementById('shareKakao');
+    const adContainer = document.getElementById('adContainer');
+    const loadingPopup = document.getElementById('loadingPopup');
     let selectedCards = [];
     let cardOrientations = [];
+    let allCardsSelected = false;
 
     function getCardSymbol(cardName) {
         const symbols = {
@@ -51,14 +54,38 @@ document.addEventListener('DOMContentLoaded', () => {
         return symbols[cardName] || "🌟";
     }
 
+    function showLoadingAndAd() {
+        loadingPopup.style.display = 'flex';
+        adContainer.style.display = 'block';
+
+        setTimeout(() => {
+            loadingPopup.style.display = 'none';
+            adContainer.style.display = 'none';
+            alert('타로 카드 분석이 완료되었습니다!');
+            
+            // 모든 카드의 해석을 한번에 표시
+            selectedCards.forEach((card, index) => {
+                const reading = document.getElementById(`reading${index + 1}`);
+                const isUpright = cardOrientations[index];
+                displayReading(reading, card, isUpright);
+            });
+            
+            shareButton.style.display = 'inline-block';
+        }, 7000);
+    }
+
     selectButton.addEventListener('click', () => {
         // 카드 초기화
         selectedCards = [];
         cardOrientations = [];
+        allCardsSelected = false;
+        shareButton.style.display = 'none';
+        
         cardSlots.forEach(slot => {
             slot.classList.remove('flipped');
             const reading = document.getElementById(`reading${slot.id.slice(-1)}`);
             reading.style.display = 'none';
+            reading.innerHTML = '';
         });
 
         // 랜덤으로 3장의 카드 선택 및 방향 결정
@@ -72,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardFront = cardSlot.querySelector('.card-front');
             const isUpright = cardOrientations[index];
             
-            // 카드 이미지와 정보 설정
             cardFront.innerHTML = `
                 <div class="card-symbol">${getCardSymbol(card.name)}</div>
                 <h3>${card.name}</h3>
@@ -80,51 +106,49 @@ document.addEventListener('DOMContentLoaded', () => {
                      ${isUpright ? '' : 'transform: rotate(180deg)'}"></div>
             `;
 
-            // 클릭 이벤트 추가
-            cardSlot.onclick = () => revealCard(index + 1, card, isUpright);
+            cardSlot.onclick = () => revealCard(index + 1);
         });
 
-        // 선택 버튼 비활성화
         selectButton.disabled = true;
         setTimeout(() => {
             selectButton.disabled = false;
         }, 1000);
     });
 
-    function revealCard(index, card, isUpright) {
+    function revealCard(index) {
         const cardSlot = document.getElementById(`card${index}`);
-        const reading = document.getElementById(`reading${index}`);
         
         if (!cardSlot.classList.contains('flipped')) {
             cardSlot.classList.add('flipped');
             
-            // 해석 표시
-            reading.innerHTML = `
-                <h3>
-                    <span class="card-emoji">${getCardSymbol(card.name)}</span>
-                    ${card.name} (${isUpright ? '정방향' : '역방향'})
-                </h3>
-                <p><strong>키워드:</strong> ${card.keywords.join(', ')}</p>
-                <p><strong>해석:</strong> ${card.interpretation.설명}</p>
-                <div class="meaning-section">
-                    <h4>🔮 운세 해석:</h4>
-                    <p><strong>💕 사랑:</strong> ${isUpright ? card.meanings.사랑.정방향 : card.meanings.사랑.역방향}</p>
-                    <p><strong>💼 직업/목표:</strong> ${isUpright ? card.meanings.직업목표_성취_열망.정방향 : card.meanings.직업목표_성취_열망.역방향}</p>
-                    <p><strong>💰 재정:</strong> ${isUpright ? card.meanings.경제적.정방향 : card.meanings.경제적.역방향}</p>
-                    <p><strong>🏥 건강:</strong> ${isUpright ? card.meanings.건강.정방향 : card.meanings.건강.역방향}</p>
-                </div>
-                <p><strong>💫 메시지:</strong> ${isUpright ? card.interpretation.긍정적인 : card.interpretation.부정적인}</p>
-            `;
-            reading.style.display = 'block';
-        }
-
-        // 모든 카드가 공개되었는지 확인
-        if (document.querySelectorAll('.card-slot.flipped').length === 3) {
-            shareButton.style.display = 'inline-block';
+            // 모든 카드가 선택되었는지 확인
+            if (document.querySelectorAll('.card-slot.flipped').length === 3 && !allCardsSelected) {
+                allCardsSelected = true;
+                showLoadingAndAd();
+            }
         }
     }
 
-    // 카카오톡 공유하기
+    function displayReading(readingElement, card, isUpright) {
+        readingElement.innerHTML = `
+            <h3>
+                <span class="card-emoji">${getCardSymbol(card.name)}</span>
+                ${card.name} (${isUpright ? '정방향' : '역방향'})
+            </h3>
+            <p><strong>키워드:</strong> ${card.keywords.join(', ')}</p>
+            <p><strong>해석:</strong> ${card.interpretation.설명}</p>
+            <div class="meaning-section">
+                <h4>🔮 운세 해석:</h4>
+                <p><strong>💕 사랑:</strong> ${isUpright ? card.meanings.사랑.정방향 : card.meanings.사랑.역방향}</p>
+                <p><strong>💼 직업/목표:</strong> ${isUpright ? card.meanings.직업목표_성취_열망.정방향 : card.meanings.직업목표_성취_열망.역방향}</p>
+                <p><strong>💰 재정:</strong> ${isUpright ? card.meanings.경제적.정방향 : card.meanings.경제적.역방향}</p>
+                <p><strong>🏥 건강:</strong> ${isUpright ? card.meanings.건강.정방향 : card.meanings.건강.역방향}</p>
+            </div>
+            <p><strong>💫 메시지:</strong> ${isUpright ? card.interpretation.긍정적인 : card.interpretation.부정적인}</p>
+        `;
+        readingElement.style.display = 'block';
+    }
+
     shareButton.addEventListener('click', () => {
         const readings = selectedCards.map((card, index) => {
             const isUpright = cardOrientations[index];
