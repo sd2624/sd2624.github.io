@@ -1,0 +1,516 @@
+
+/* 0. 바보 */
+.card[data-card="fool"] .card-front {
+    background: linear-gradient(135deg, #87CEEB, #E0FFFF);
+}
+
+.card[data-card="fool"] .card-symbol::before {
+    content: '☆';
+    color: #FFD700;
+}
+
+.card[data-card="fool"] .card-symbol::after {
+    content: '🦋';
+    font-size: 30px;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    animation: butterflyFloat 3s ease-in-out infinite;
+}
+
+@keyframes butterflyFloat {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(5px, -5px); }
+}
+
+/* 1. 마법사 */
+.card[data-card="magician"] .card-front {
+    background: linear-gradient(135deg, #FF0000, #800000);
+}
+
+.card[data-card="magician"] .card-symbol::before {
+    content: '∞';
+    color: #FFD700;
+}
+
+.card[data-card="magician"] .card-symbol::after {
+    content: '✨';
+    position: absolute;
+    font-size: 20px;
+    animation: sparkle 1.5s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* 2. 여사제 */
+.card[data-card="highpriestess"] .card-front {
+    background: linear-gradient(135deg, #4169E1, #000080);
+}
+
+.card[data-card="highpriestess"] .card-symbol::before {
+    content: '☽';
+    color: silver;
+}
+
+.card[data-card="highpriestess"] .card-front::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 30%, rgba(255,255,255,0.1) 70%);
+    pointer-events: none;
+}
+
+/* 3. 여황제 */
+.card[data-card="empress"] .card-front {
+    background: linear-gradient(135deg, #228B22, #006400);
+}
+
+.card[data-card="empress"] .card-symbol::before {
+    content: '♀';
+    color: #FFD700;
+}
+
+.card[data-card="empress"] .card-front::after {
+    content: '🌸';
+    position: absolute;
+    font-size: 20px;
+    bottom: 20px;
+    right: 20px;
+    animation: floatFlower 3s ease-in-out infinite;
+}
+
+@keyframes floatFlower {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+}
+
+/* 4. 황제 */
+.card[data-card="emperor"] .card-front {
+    background: linear-gradient(135deg, #8B0000, #4B0082);
+}
+
+.card[data-card="emperor"] .card-symbol::before {
+    content: '♂';
+    color: #FFD700;
+}
+
+.card[data-card="emperor"] .card-front::after {
+    content: '👑';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 25px;
+}
+
+/* 5. 교황 */
+.card[data-card="hierophant"] .card-front {
+    background: linear-gradient(135deg, #4B0082, #2F4F4F);
+}
+
+.card[data-card="hierophant"] .card-symbol::before {
+    content: '✟';
+    color: #FFD700;
+}
+
+.card[data-card="hierophant"] .card-front::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    border: 2px solid rgba(255,215,0,0.3);
+    top: 10%;
+    left: 10%;
+    border-radius: 10px;
+}
+
+/* 6. 연인 */
+.card[data-card="lovers"] .card-front {
+    background: linear-gradient(135deg, #FF69B4, #FF1493);
+}
+
+.card[data-card="lovers"] .card-symbol::before {
+    content: '❤';
+    color: #FF0000;
+}
+
+.card[data-card="lovers"] .card-symbol::after {
+    content: '💘';
+    position: absolute;
+    font-size: 25px;
+    top: -20px;
+    animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+/* 7. 전차 */
+.card[data-card="chariot"] .card-front {
+    background: linear-gradient(135deg, #B8860B, #DAA520);
+}
+
+.card[data-card="chariot"] .card-symbol::before {
+    content: '⚔';
+    color: #FFD700;
+}
+
+.card[data-card="chariot"] .card-front::after {
+    content: '🛡️';
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 25px;
+    animation: shieldPulse 2s infinite;
+}
+
+@keyframes shieldPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+/* 8. 힘 */
+.card[data-card="strength"] .card-front {
+    background: linear-gradient(135deg, #FFA500, #FF4500);
+}
+
+.card[data-card="strength"] .card-symbol::before {
+    content: '🦁';
+    color: #FFD700;
+}
+
+.card[data-card="strength"] .card-front::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-radial-gradient(
+        circle at center,
+        transparent 0,
+        transparent 20px,
+        rgba(255,215,0,0.1) 20px,
+        rgba(255,215,0,0.1) 25px
+    );
+}
+
+/* 9. 은둔자 */
+.card[data-card="hermit"] .card-front {
+    background: linear-gradient(135deg, #483D8B, #191970);
+}
+
+.card[data-card="hermit"] .card-symbol::before {
+    content: '🔆';
+    color: #FFD700;
+    filter: drop-shadow(0 0 5px rgba(255,215,0,0.5));
+}
+
+.card[data-card="hermit"] .card-front::after {
+    content: '🕯️';
+    position: absolute;
+    bottom: 30px;
+    font-size: 25px;
+    animation: candleFlicker 2s infinite;
+}
+
+@keyframes candleFlicker {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(0.95); }
+}
+
+/* 10. 운명의 수레바퀴 */
+.card[data-card="wheel"] .card-front {
+    background: linear-gradient(135deg, #4682B4, #1E90FF);
+}
+
+.card[data-card="wheel"] .card-symbol::before {
+    content: '⭕';
+    color: #FFD700;
+    animation: wheelSpin 8s linear infinite;
+}
+
+@keyframes wheelSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 11. 정의 */
+.card[data-card="justice"] .card-front {
+    background: linear-gradient(135deg, #20B2AA, #008B8B);
+}
+
+.card[data-card="justice"] .card-symbol::before {
+    content: '⚖';
+    color: #FFD700;
+}
+
+.card[data-card="justice"] .card-symbol {
+    animation: balanceScale 3s ease-in-out infinite;
+}
+
+@keyframes balanceScale {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+/* 12. 매달린 사람 */
+.card[data-card="hanged"] .card-front {
+    background: linear-gradient(135deg, #6B8E23, #556B2F);
+}
+
+.card[data-card="hanged"] .card-symbol::before {
+    content: '🙃';
+    transform: rotate(180deg);
+}
+
+.card[data-card="hanged"] .card-front::after {
+    content: '🌳';
+    position: absolute;
+    top: 20px;
+    font-size: 25px;
+}
+
+/* 13. 죽음 */
+.card[data-card="death"] .card-front {
+    background: linear-gradient(135deg, #000000, #2F4F4F);
+}
+
+.card[data-card="death"] .card-symbol::before {
+    content: '💀';
+    color: #FFFFFF;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+}
+
+.card[data-card="death"] .card-front::after {
+    content: '🌹';
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 25px;
+    color: #FF0000;
+}
+
+/* 14. 절제 */
+.card[data-card="temperance"] .card-front {
+    background: linear-gradient(135deg, #40E0D0, #00CED1);
+}
+
+.card[data-card="temperance"] .card-symbol::before {
+    content: '🌊';
+}
+
+.card[data-card="temperance"] .card-front::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 45%,
+        rgba(255,255,255,0.2) 50%,
+        transparent 55%
+    );
+    animation: waterFlow 2s linear infinite;
+}
+
+@keyframes waterFlow {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+/* 15. 악마 */
+.card[data-card="devil"] .card-front {
+    background: linear-gradient(135deg, #8B0000, #000000);
+}
+
+.card[data-card="devil"] .card-symbol::before {
+    content: '😈';
+    filter: drop-shadow(0 0 10px rgba(255,0,0,0.5));
+}
+
+.card[data-card="devil"] .card-front::after {
+    content: '🔥';
+    position: absolute;
+    bottom: 20px;
+    font-size: 25px;
+    animation: fireFlicker 1s ease-in-out infinite;
+}
+
+@keyframes fireFlicker {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+/* 16. 탑 */
+.card[data-card="tower"] .card-front {
+    background: linear-gradient(135deg, #FF4500, #8B0000);
+}
+
+.card[data-card="tower"] .card-symbol::before {
+    content: '🗼';
+}
+
+.card[data-card="tower"] .card-symbol::after {
+    content: '⚡';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 25px;
+    animation: lightning 1.5s ease-in-out infinite;
+}
+
+@keyframes lightning {
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(5px); }
+}
+
+/* 17. 별 */
+.card[data-card="star"] .card-front {
+    background: linear-gradient(135deg, #4169E1, #0000CD);
+    overflow: hidden;
+}
+
+.card[data-card="star"] .card-symbol::before {
+    content: '⭐';
+    color: #FFD700;
+    animation: starTwinkle 2s ease-in-out infinite;
+}
+
+.card[data-card="star"] .card-front::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, 
+        rgba(255,255,255,0.1) 0%,
+        transparent 70%);
+    animation: starryBackground 10s linear infinite;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+@keyframes starryBackground {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 18. 달 */
+.card[data-card="moon"] .card-front {
+    background: linear-gradient(135deg, #191970, #000080);
+}
+
+.card[data-card="moon"] .card-symbol::before {
+    content: '🌙';
+    color: SILVER;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
+
+.card[data-card="moon"] .card-front::after {
+    content: '✨';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    animation: moonGlow 4s ease-in-out infinite;
+}
+
+@keyframes moonGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}
+
+/* 19. 태양 */
+.card[data-card="sun"] .card-front {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+.card[data-card="sun"] .card-symbol::before {
+    content: '☀️';
+    color: #FFD700;
+    animation: sunRays 4s linear infinite;
+}
+
+.card[data-card="sun"] .card-front::after {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle at center,
+        rgba(255,215,0,0.3) 0%,
+        transparent 70%);
+    animation: sunlight 4s ease-in-out infinite;
+}
+
+@keyframes sunRays {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes sunlight {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* 20. 심판 */
+.card[data-card="judgement"] .card-front {
+    background: linear-gradient(135deg, #B8860B, #CD853F);
+}
+
+.card[data-card="judgement"] .card-symbol::before {
+    content: '📯';
+    animation: trumpetSound 3s ease-in-out infinite;
+}
+
+.card[data-card="judgement"] .card-front::after {
+    content: '✨';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    opacity: 0;
+    animation: judgementLight 3s ease-in-out infinite;
+}
+
+@keyframes trumpetSound {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes judgementLight {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.5; }
+}
+
+/* 21. 세계 */
+.card[data-card="world"] .card-front {
+    background: linear-gradient(135deg, #32CD32, #228B22);
+}
+
+.card[data-card="world"] .card-symbol::before {
+    content: '🌍';
+    animation: worldSpin 10s linear infinite;
+}
+
+.card[data-card="world"] .card-front::after {
+    content: '✨';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    animation: worldStars 4s ease-in-out infinite;
+}

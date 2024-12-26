@@ -1,0 +1,342 @@
+/* 기본 리셋 및 폰트 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&display=swap');
+
+/* 기본 레이아웃 */
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* 헤더 스타일 */
+h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    color: #ffd700;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    letter-spacing: 0.2em;
+    position: relative;
+}
+
+h1::before,
+h1::after {
+    content: '✧';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffd700;
+    font-size: 2rem;
+}
+
+h1::before { left: -3rem; }
+h1::after { right: -3rem; }
+
+/* 설명 텍스트 */
+.instruction {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+/* 버튼 스타일 */
+button {
+    background: linear-gradient(45deg, #ffd700, #daa520);
+    color: #1a1a2e;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(218, 165, 32, 0.4);
+}
+
+button:disabled {
+    background: linear-gradient(45deg, #808080, #A9A9A9);
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 카드 컨테이너 */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem 0;
+    perspective: 1000px;
+    flex-wrap: wrap;
+}
+
+/* 카드 기본 스타일 */
+.card {
+    width: 200px;
+    height: 350px;
+    position: relative;
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.card.selected .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* 카드 앞면과 뒷면 공통 스타일 */
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 카드 뒷면 */
+.card-back {
+    background: linear-gradient(45deg, #1a1a2e, #16213e);
+    border: 8px solid #daa520;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-back::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(218, 165, 32, 0.1) 10px,
+        rgba(218, 165, 32, 0.1) 20px
+    );
+    border: 2px solid rgba(218, 165, 32, 0.3);
+    border-radius: 10px;
+}
+
+.card-back::after {
+    content: '★';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: #daa520;
+    text-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
+}
+
+/* 카드 앞면 */
+.card-front {
+    transform: rotateY(180deg);
+    border: 12px solid #daa520;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 카드 내부 요소 */
+.card-number {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    color: #daa520;
+}
+
+.card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #1a1a2e;
+    text-align: center;
+    margin-top: auto;
+    padding: 10px;
+    width: 100%;
+    background: rgba(218, 165, 32, 0.1);
+    border-top: 1px solid rgba(218, 165, 32, 0.3);
+}
+
+.card-symbol {
+    font-size: 60px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 애니메이션 */
+@keyframes shuffleCards {
+    0% { transform: translateX(0) rotate(0); }
+    25% { transform: translateX(-100px) rotate(-20deg); }
+    75% { transform: translateX(100px) rotate(20deg); }
+    100% { transform: translateX(0) rotate(0); }
+}
+
+@keyframes selectCard {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.shuffling .card {
+    animation: shuffleCards 1s ease-in-out;
+}
+
+.card.selecting {
+    animation: selectCard 0.5s ease-in-out;
+}
+
+/* 결과 섹션 */
+.reading-result {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 2rem;
+    backdrop-filter: blur(5px);
+}
+
+.interpretation-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.category {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.category h3 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+}
+
+/* 로딩 화면 */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #ffd700;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h1::before,
+    h1::after {
+        display: none;
+    }
+
+    .cards-container {
+        gap: 1rem;
+    }
+
+    .card {
+        width: 140px;
+        height: 245px;
+    }
+
+    .card-symbol {
+        font-size: 40px;
+    }
+
+    .card-title {
+        font-size: 0.8rem;
+        padding: 5px;
+    }
+
+    .interpretation-categories {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 광고 컨테이너 */
+.ad-container {
+    width: 100%;
+    max-width: 728px;
+    margin: 2rem auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem;
+    backdrop-filter: blur(5px);
+}

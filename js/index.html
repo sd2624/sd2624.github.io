@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타로카드 리딩</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- 카카오 SDK 초기화 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+    </script>
+
+    <!-- 구글 광고 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>타로카드 리딩</h1>
+
+        <!-- 구글 광고 -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-9374368296307755"
+                data-ad-slot="3201247599"
+                data-ad-format="auto"
+                data-full-width-responsive="true">
+            </ins>
+        </div>
+
+        <div class="instruction">
+            <p>과거 - 현재 - 미래를 알아보는 3장의 카드를 뽑아보세요</p>
+        </div>
+
+        <button id="shuffleBtn" class="shuffle-button">카드 섞기</button>
+
+        <div class="cards-container">
+            <div class="card" data-position="past">
+                <div class="card-inner">
+                    <div class="card-back">
+                        <div class="card-corner"></div>
+                        <div class="card-corner"></div>
+                        <div class="card-corner"></div>
+                        <div class="card-corner"></div>
+                    </div>
+                    <div class="card-front">
+                        <span class="card-number"></span>
+                        <div class="card-symbol"></div>
+                        <h3 class="card-title"></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="card" data-position="present">
+                <div class="card-inner">
+                    <div class="card-back">
+                        <div class="card-corner"></div>
+                        <div class="card-corner"></div>
+                        <div class="card-corner"></div>
+                        <div class="card-corner"></div>
+                    </div>
+                    <div class="card-front">
+                        <span class="card-number"></span>
+                        <div class="card-symbol"></div>
+                        <h3 class="card-title"></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="card" data-position="future">
+                <div class="card-inner">
+                    <div class="card-back">
+                        <div class="card-corner"></div>
+                        <div class="card-corner"></div>
+                        <div class="card-corner"></div>
+                        <div class="card-corner"></div>
+                    </div>
+                    <div class="card-front">
+                        <span class="card-number"></span>
+                        <div class="card-symbol"></div>
+                        <h3 class="card-title"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reading-result" style="display: none;">
+            <div class="overall-interpretation">
+                <h2>타로 카드 해석</h2>
+                <div class="interpretation-categories">
+                    <div class="category">
+                        <h3>과거</h3>
+                        <div id="pastReading"></div>
+                    </div>
+                    <div class="category">
+                        <h3>현재</h3>
+                        <div id="presentReading"></div>
+                    </div>
+                    <div class="category">
+                        <h3>미래</h3>
+                        <div id="futureReading"></div>
+                    </div>
+                </div>
+            </div>
+            <button id="shareKakao" class="share-button">카카오톡으로 공유하기</button>
+            <button id="resetReading" class="reset-button">다시 시작하기</button>
+        </div>
+    </div>
+
+    <!-- 로딩 화면 -->
+    <div class="loading-screen" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>카드를 섞는 중...</p>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

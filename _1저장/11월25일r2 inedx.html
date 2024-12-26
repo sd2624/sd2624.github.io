@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>나의 운명 이야기</title>
+    <meta name="description" content="사주, 운명, 미래, 심리 테스트와 다양한 재미있는 테스트, 당신의 운명을 알아보고 다양한 심리와 성격 테스트를 통해 자신을 탐구해보세요.">
+    <meta name="keywords" content="무료 사주풀이, 사주 궁합 테스트, 심리테스트 모음, MBTI 성격 유형 검사, 타로 카드 운세, 연애 심리테스트, 이름으로 보는 사주, 생년월일로 보는 운세, 별자리 궁합, 직업 적성 심리테스트, 오늘의 운세, 혈액형 성격 테스트, 숫자로 보는 사주, 꿈해몽 풀이, 가족 궁합 테스트, 친구 심리테스트, 전생 테스트, 재물운 테스트, 띠별 운세, 미래 배우자 테스트">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="나의 운명 이야기">
+    <meta property="og:description" content="흥미로운 심리 테스트와 사주, 운세를 알아보는 나의 운명 이야기">
+    <meta property="og:image" content="https://kkdamoa.github.io/k-test/메인.png">
+    <meta property="og:url" content="https://kkdamoa.github.io/k-test/">
+    <meta name="naver-site-verification" content="3ddea906f4511e2e5c2374bc1bbc6f8700c898a9" />
+    <meta name="google-site-verification" content="wpS7lDe_HCr6OV4p0Ky9YOfaS4cu2gDh56ey8K1leIE" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        // 카카오 SDK 초기화
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+    </script>
+</head>
+<body>
+    <!-- 페이지 헤더 -->
+    <header class="page-header wrapper">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html">
+                    <img class="logo" src="로고.png" alt="나의 운명 이야기" style="width: 180px; height: auto; margin-right: 30px;">
+                </a>
+                <nav>
+                    <ul class="main-nav" style="display: flex; align-items: center; gap: 30px;">
+                        <li><a href="꿈해몽.html">꿈해몽</a></li>
+                        <li><a href="사주팔자.html">사주팔자</a></li>
+                        <li><a href="심리테스트.html">심리테스트</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- 카카오톡 공유 버튼 -->
+            <button id="kakao-share-button" style="cursor: pointer; background: none; border: none;">
+                <img src="catalk.png" alt="카카오톡 공유" style="width: 50px; height: auto;">
+            </button>
+        </div>
+    </header>
+
+    <!-- 메인 이미지 -->
+    <div style="text-align: center;">
+        <img src="메인.png" alt="메인 이미지">
+    </div>
+
+    <!-- Google AdSense 광고 영역 -->
+    <div style="text-align: center; margin: 20px 0;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+
+    <!-- 테스트 리스트 -->
+    <div class="wrapper grid" style="text-align: center;">
+        <div class="item">
+            <a href="1.html">
+                <img src="1.png" alt="검색창 성격 테스트">
+            </a>
+        </div>
+        <div class="item">
+            <a href="2.html">
+                <img src="2.png" alt="2024년 나의 연관검색어">
+            </a>
+        </div>
+        <div class="item">
+            <a href="3.html">
+                <img src="3.png" alt="상황별 TF 능력고사">
+            </a>
+        </div>
+        <div class="item">
+            <a href="4.html">
+                <img src="4.png" alt="타고난 기질 성격 보고서 테스트">
+            </a>
+        </div>
+        <div class="item">
+            <a href="5.html">
+                <img src="5.png" alt="2025년 신년 운세 테스트">
+            </a>
+        </div>
+        <div class="item">
+            <a href="6.html">
+                <img src="6.png" alt="붕어빵 성격 테스트">
+            </a>
+        </div>
+    </div>
+
+
+    <!-- 카카오톡 공유 기능 -->
+    <script>
+        document.getElementById('kakao-share-button').addEventListener('click', function () {
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '나의 운명 이야기',
+                    description: '흥미로운 테스트가 가득한 나의 운명 이야기!',
+                    imageUrl: 'https://kkdamoa.github.io/k-test/메인.png',
+                    link: {
+                        mobileWebUrl: window.location.href,
+                        webUrl: window.location.href
+                    }
+                },
+                buttons: [
+                    {
+                        title: '테스트 보러 가기',
+                        link: {
+                            mobileWebUrl: window.location.href,
+                            webUrl: window.location.href
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+
+    <!-- 페이지 하단 -->
+    <footer>
+        <div class="wrapper" style="text-align: center; padding: 10px 0;">
+            <p>제작/광고문의 - sd26242624@gmail.com</p>
+            <p>&copy; 나의 운명 이야기. All Rights Reserved. Unauthorized use is prohibited.</p>
+            <!-- 방문자 카운터 -->
+            <div style="font-size: 14px;" id="visitor-counter">
+                방문자 수: 로딩 중...
+            </div>
+        </div>
+    </footer>
+
+    <!-- 방문자 카운터 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let visitCount = localStorage.getItem('visitCount') || 0;
+            visitCount = parseInt(visitCount) + 1;
+            localStorage.setItem('visitCount', visitCount);
+            document.getElementById('visitor-counter').innerText = `방문자 수: ${visitCount}`;
+        });
+    </script>
+</body>
+</html>

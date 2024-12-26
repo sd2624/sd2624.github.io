@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>에니어그램 테스트</title>
+    <link rel="stylesheet" href="에리어.css"> <!-- 외부 CSS 파일을 연결 -->
+    <style>
+        /* 팝업 스타일 */
+        .popup {
+            display: none; /* 기본적으로 팝업은 숨김 */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        /* 배경 클릭 시 팝업 닫기 */
+        .popup-overlay {
+            display: none; /* 기본적으로 배경은 숨김 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* 버튼 스타일 */
+        .open-popup-btn,
+        .confirm-popup-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .confirm-popup-btn {
+            display: none; /* 초기에는 숨김 */
+            background-color: green;
+        }
+
+        /* 카운터 스타일 */
+        .counter {
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* 결과 보기 버튼 */
+        #showResultButton {
+            display: none; /* 처음에는 숨김 */
+        }
+    </style>
+</head>
+<body>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+    crossorigin="anonymous"></script>
+    
+    <!-- 광고 삽입 -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="3201247599"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <header>
+        <h1>에니어그램 테스트</h1>
+        <p>에니어그램 테스트에 오신 것을 환영합니다.</p>
+        <button id="startTest">테스트 시작 ➔</button>
+    </header>
+
+
+    <main id="testSection" class="hidden">
+        <p>설명: 각 제안에 대해, 가장 적합한 선택지를 체크해주세요.</p>
+        
+        <!-- 진행 바 -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+
+        <!-- 질문 목록 -->
+
+        <div class="question active" data-question="1">
+            <p>나는 일상에서 규칙을 지키는 것이 매우 중요하다고 느낀다.</p>
+            <div class="radioContainer">
+                <span class="false">전혀 그렇지 않다</span>
+                <label class="labelContainer">
+                    <input name="q2" value="-2" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q2" value="-1" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q2" value="0" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q2" value="1" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q2" value="2" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <span class="true">매우 그렇다</span>
+            </div>
+        </div>
+
+
+
+
+        <!-- 결과 보기 버튼 -->
+        <button id="showResultButton">결과 보기</button>
+    </main>
+
+    <!-- 결과 섹션 -->
+    <div id="resultSection" class="hidden">
+        <h2>테스트 결과</h2>
+        <p id="resultText"></p>
+    </div>
+
+    <!-- 팝업 배경 -->
+    <div class="popup-overlay"></div>
+
+    <!-- 팝업 콘텐츠 -->
+    <div class="popup">
+        <div id="adsense-container"></div>
+        <div class="counter" id="counter">결과값 분석중입니다.</div>
+        <button class="confirm-popup-btn">확인</button>
+    </div>
+
+    <script src="에리어.js"></script>
+    <script>
+        const showResultButton = document.getElementById('showResultButton');
+        const popup = document.querySelector('.popup');
+        const popupOverlay = document.querySelector('.popup-overlay');
+        const confirmPopupBtn = document.querySelector('.confirm-popup-btn');
+        const adsenseContainer = document.querySelector('#adsense-container');
+        const counter = document.querySelector('#counter');
+        let countdown;
+
+        // 결과 보기 버튼 클릭 시 팝업 열기
+        showResultButton.addEventListener('click', () => {
+            popup.style.display = 'block'; // 팝업 표시
+            popupOverlay.style.display = 'block'; // 배경 표시
+            loadAd(); // 광고 로드
+            startCountdown(); // 카운트다운 시작
+        });
+
+        // 확인 버튼 클릭 시 팝업 닫기
+        confirmPopupBtn.addEventListener('click', () => {
+            popup.style.display = 'none'; // 팝업 숨기기
+            popupOverlay.style.display = 'none'; // 배경 숨기기
+            clearAd(); // 광고 제거
+            clearInterval(countdown); // 카운트다운 정지
+        });
+
+        // 배경 클릭 시 팝업 닫기
+        popupOverlay.addEventListener('click', () => {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+            clearAd(); // 광고 제거
+            clearInterval(countdown); // 카운트다운 정지
+        });
+
+        // 광고 로드 함수
+        function loadAd() {
+            const adScript = document.createElement('script');
+            adScript.async = true;
+            adScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755";
+            document.head.appendChild(adScript);
+
+            const adContainer = document.createElement('ins');
+            adContainer.classList.add('adsbygoogle');
+            adContainer.style.display = 'block';
+            adContainer.setAttribute('data-ad-client', 'ca-pub-9374368296307755');
+            adContainer.setAttribute('data-ad-slot', '3201247599');
+            adContainer.setAttribute('data-ad-format', 'auto');
+            adContainer.setAttribute('data-full-width-responsive', 'true');
+
+            adsenseContainer.appendChild(adContainer);
+
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+
+        // 광고 제거 함수
+        function clearAd() {
+            adsenseContainer.innerHTML = '';
+        }
+
+        // 카운트다운 함수
+        function startCountdown() {
+            let timeLeft = 7;
+            counter.textContent = `${timeLeft}초 결과값 확인중 입니다..`;
+
+            countdown = setInterval(() => {
+                timeLeft--;
+                counter.textContent = `${timeLeft}초 결과값 확인중 입니다..`;
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    counter.textContent = "카운트다운 종료";
+                    confirmPopupBtn.style.display = 'inline-block'; // 확인 버튼 표시
+                }
+            }, 1000);
+        }
+
+        // 63번 질문의 라디오 버튼 클릭 시 결과 보기 버튼 표시
+        const q63Radios = document.querySelectorAll('input[name="q63"]');
+        q63Radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                showResultButton.style.display = 'inline-block'; // 결과 보기 버튼 표시
+            });
+        });
+    </script>
+</body>
+</html>

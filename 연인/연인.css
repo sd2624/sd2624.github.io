@@ -1,0 +1,301 @@
+/* 연인.css */
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    height: 12px;
+    margin-top: 15px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0%;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    line-height: 12px;
+    font-weight: bold;
+    transition: width 0.5s ease;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+.options label {
+    display: block;
+    margin: 12px 0;
+}
+
+.radioContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.labelContainer {
+    display: inline-block;
+    position: relative;
+}
+
+.labelContainer input[type="radio"] {
+    display: none;
+}
+
+.labelContainer .checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #4caf50;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.labelContainer input[type="radio"]:checked + .checkmark {
+    background-color: #4caf50;
+}
+
+.labelContainer .checkmark::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.false, .true {
+    font-size: 12px;
+    color: #666;
+    width: 100px;
+    text-align: center;
+}
+
+.labelContainer:hover .checkmark {
+    border-color: #4caf50;
+}
+
+button {
+    margin-top: 30px;
+    padding: 12px 25px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+    .radioContainer {
+        flex-direction: row;  /* 라디오 버튼을 가로로 나열 */
+        justify-content: space-between;  /* 선택지 간 균등하게 배치 */
+        align-items: center;  /* 수평 중앙 정렬 */
+        margin-bottom: 10px;
+    }
+
+    .labelContainer .checkmark {
+        width: 18px;
+        height: 18px;
+    }
+
+    .false, .true {
+        font-size: 10px;
+        width: auto;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    #testSection {
+        max-width: 95%;  /* 모바일 화면에서 넓게 보이도록 */
+        padding: 15px;   /* 패딩을 줄여서 공간을 더 활용 */
+    }
+
+    /* 질문과 라디오 버튼 간격 조정 */
+    .question {
+        margin-bottom: 10px; /* 질문 간격 줄이기 */
+    }
+
+    .options {
+        margin-bottom: 10px;  /* 각 선택지 아래 간격 줄이기 */
+    }
+
+    .labelContainer {
+        margin-right: 10px; /* 선택지 간의 오른쪽 여백을 줄여서 맞춤 */
+    }
+}
+
+#testSection {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;  /* 텍스트 및 내용의 가운데 정렬 */
+}
+
+.result-item {
+    margin-bottom: 10px; /* 항목 간의 간격 */
+    display: flex; /* 한 줄로 정렬 */
+    justify-content: center; /* 항목을 수평으로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+}
+
+.result-type {
+    font-weight: bold;
+    margin-right: 10px; /* 각 항목 간의 간격 */
+}
+
+.result-score {
+    margin-right: 10px; /* 퍼센트와 '자세히 알아보기' 간의 간격 */
+    font-style: italic;
+}
+
+.more-info {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.more-info:hover {
+    text-decoration: underline;
+}
+
+/* 소셜 미디어 공유 버튼 스타일 */
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.share-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.share-button img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/* 팝업 스타일 */
+.popup {
+    display: none; /* 기본적으로 팝업은 숨김 */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    text-align: center;
+}
+
+.popup-overlay {
+    display: none; /* 기본적으로 배경은 숨김 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* 확인 버튼 스타일 */
+.confirm-popup-btn, .confirm-incomplete-btn {
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: not-allowed; /* 초기 상태에서는 클릭할 수 없음을 표시 */
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.confirm-popup-btn.enabled, .confirm-incomplete-btn:hover:not(:disabled) {
+    background-color: #006400;
+    cursor: pointer; /* 활성화된 상태에서는 클릭할 수 있음을 표시 */
+    transform: scale(1.05);
+}
+
+.confirm-popup-btn.enabled:hover {
+    background-color: #004d00;
+}
+
+.confirm-incomplete-btn {
+    cursor: pointer; /* 질문 완료 안내 팝업의 확인 버튼은 항상 클릭 가능 */
+}
+
+.confirm-incomplete-btn:hover {
+    background-color: #006400;
+    transform: scale(1.05);
+}
+
+/* 카운터 스타일 */
+.counter {
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* 로딩 스피너 스타일 */
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #ff4d4d;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

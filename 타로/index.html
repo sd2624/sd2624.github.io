@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타로 카드 3장 선택</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 카카오 SDK 초기화 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+    </script>
+</head>
+<body>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="3201247599"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <div class="container">
+        <h1>타로 카드 운세</h1>
+        <div class="instructions">
+            <p>마음을 가라앉히고 질문을 생각한 후, '카드 선택' 버튼을 눌러주세요.</p>
+        </div>
+        <button id="selectCards">카드 선택</button>
+        
+        <div class="cards-container">
+            <div class="card-slot" id="card1">
+                <div class="card-back">1번 카드</div>
+                <div class="card-front"></div>
+            </div>
+            <div class="card-slot" id="card2">
+                <div class="card-back">2번 카드</div>
+                <div class="card-front"></div>
+            </div>
+            <div class="card-slot" id="card3">
+                <div class="card-back">3번 카드</div>
+                <div class="card-front"></div>
+            </div>
+        </div>
+
+        <div class="reading-container">
+            <div class="reading" id="reading1"></div>
+            <div class="reading" id="reading2"></div>
+            <div class="reading" id="reading3"></div>
+        </div>
+
+        <button id="shareKakao" style="display:none;">카카오톡 공유하기</button>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

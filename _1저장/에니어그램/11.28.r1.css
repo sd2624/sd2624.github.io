@@ -1,0 +1,164 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    height: 12px;
+    margin-top: 15px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0%;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    line-height: 12px;
+    font-weight: bold;
+    transition: width 0.5s ease;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+.options label {
+    display: block;
+    margin: 12px 0;
+}
+
+.radioContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.labelContainer {
+    display: inline-block;
+    position: relative;
+}
+
+.labelContainer input[type="radio"] {
+    display: none;
+}
+
+.labelContainer .checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #4caf50;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.labelContainer input[type="radio"]:checked + .checkmark {
+    background-color: #4caf50;
+}
+
+.labelContainer .checkmark::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.false, .true {
+    font-size: 12px;
+    color: #666;
+    width: 100px;
+    text-align: center;
+}
+
+.labelContainer:hover .checkmark {
+    border-color: #4caf50;
+}
+
+button {
+    margin-top: 30px;
+    padding: 12px 25px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button:disabled {
+    background-color: #ccc;
+}
+
+@media (max-width: 600px) {
+    .radioContainer {
+        flex-direction: row;  /* 라디오 버튼을 가로로 나열 */
+        justify-content: space-between;  /* 선택지 간 균등하게 배치 */
+        align-items: center;  /* 수평 중앙 정렬 */
+        margin-bottom: 10px;
+    }
+
+    .labelContainer .checkmark {
+        width: 18px;
+        height: 18px;
+    }
+
+    .false, .true {
+        font-size: 10px;
+        width: auto;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    #testSection {
+        max-width: 95%;  /* 모바일 화면에서 넓게 보이도록 */
+        padding: 15px;   /* 패딩을 줄여서 공간을 더 활용 */
+    }
+
+    /* 질문과 라디오 버튼 간격 조정 */
+    .question {
+        margin-bottom: 10px; /* 질문 간격 줄이기 */
+    }
+
+    .options {
+        margin-bottom: 10px;  /* 각 선택지 아래 간격 줄이기 */
+    }
+
+    .labelContainer {
+        margin-right: 10px; /* 선택지 간의 오른쪽 여백을 줄여서 맞춤 */
+    }
+}
+
+#testSection {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

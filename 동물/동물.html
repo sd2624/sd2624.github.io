@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko>
+head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>나의 수호동물 찾기 테스트</title>
+   <style>
+       @keyframes fadeIn {
+           from { opacity: 0; transform: translateY(20px); }
+           to { opacity: 1; transform: translateY(0); }
+       }
+        @keyframes pulse {
+           0% { transform: scale(1); }
+           50% { transform: scale(1.05); }
+           100% { transform: scale(1); }
+       }
+        body {
+           font-family: 'Noto Sans KR', sans-serif;
+           max-width: 800px;
+           margin: 0 auto;
+           padding: 20px;
+           background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+           min-height: 100vh;
+       }
+        .section {
+           display: none;
+           background: white;
+           padding: 30px;
+           border-radius: 20px;
+           margin: 20px 0;
+           box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+           animation: fadeIn 0.5s ease-out;
+       }
+        .active {
+           display: block;
+       }
+        .option {
+           display: block;
+           width: 100%;
+           padding: 20px;
+           margin: 15px 0;
+           border: none;
+           border-radius: 12px;
+           background: linear-gradient(145deg, #f0f0f0, #ffffff);
+           box-shadow: 5px 5px 10px #d9d9d9, -5px -5px 10px #ffffff;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           font-size: 16px;
+       }
+        .option:hover {
+           transform: translateY(-2px);
+           background: linear-gradient(145deg, #e6e6e6, #ffffff);
+           box-shadow: 7px 7px 14px #d9d9d9, -7px -7px 14px #ffffff;
+       }
+        .result-image {
+           width: 250px;
+           height: 250px;
+           margin: 20px auto;
+           display: block;
+           border-radius: 50%;
+           object-fit: cover;
+           animation: pulse 2s infinite;
+       }
+        .progress-bar {
+           width: 100%;
+           height: 15px;
+           background: #ddd;
+           border-radius: 10px;
+           margin: 20px 0;
+           overflow: hidden;
+       }
+        .progress {
+           width: 0%;
+           height: 100%;
+           background: linear-gradient(90deg, #4CAF50, #45a049);
+           border-radius: 10px;
+           transition: width 0.5s ease;
+       }
+        .share-buttons {
+           display: flex;
+           justify-content: center;
+           gap: 15px;
+           margin-top: 30px;
+       }
+        .share-button {
+           padding: 12px 24px;
+           border: none;
+           border-radius: 8px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           font-weight: bold;
+       }
+        .kakao-share {
+           background: #FEE500;
+           color: #000000;
+       }
+        .kakao-share:hover {
+           background: #E6CF00;
+       }
+        h1 {
+           text-align: center;
+           color: #333;
+           font-size: 2.5em;
+           margin-bottom: 30px;
+           text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+       }
+        .result-description {
+           line-height: 1.6;
+           font-size: 1.1em;
+           color: #444;
+           padding: 20px;
+           background: #f9f9f9;
+           border-radius: 10px;
+           margin-top: 20px;
+       }
+        h3 {
+           color: #2c3e50;
+           margin-bottom: 20px;
+       }
+        .ad-section {
+           margin: 20px 0;
+           text-align: center;
+       }
+   </style>
+
+   <!-- 구글 광고 -->
+   <div class="ad-section">
+       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+        crossorigin="anonymous"></script>
+       <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+       <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+       </script>
+   </div>
+    <!-- 카카오 SDK -->
+   <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+   
+   <h1>🌟 나의 수호동물 찾기 테스트 🌟</h1>
+   <div class="progress-bar">
+       <div class="progress" id="progress"></div>
+   </div>
+    <!-- 시작 섹션 -->
+   <div class="section active" id="start">
+       <h2>당신의 운명의 수호동물을 찾아보세요!</h2>
+       <p>10개의 질문으로 알아보는 나만의 특별한 동물</p>
+       <button class="option" onclick="startTest()">테스트 시작하기 ▶</button>
+   </div>
+       <!-- 질문 섹션들 -->
+       <div class="section" id="q1">
+        <h3>1. 힘든 결정을 내려야 할 때 당신은?</h3>
+        <button class="option" onclick="nextQuestion(1, 'wisdom')">직감을 믿고 빠르게 결정한다</button>
+        <button class="option" onclick="nextQuestion(1, 'leadership')">모든 가능성을 꼼꼼히 분석한다</button>
+        <button class="option" onclick="nextQuestion(1, 'harmony')">다른 사람들의 조언을 구한다</button>
+        <button class="option" onclick="nextQuestion(1, 'freedom')">시간을 두고 천천히 고민한다</button>
+    </div>
+     <div class="section" id="q2">
+        <h3>2. 주말에 가장 하고 싶은 것은?</h3>
+        <button class="option" onclick="nextQuestion(2, 'freedom')">혼자만의 여행을 떠난다</button>
+        <button class="option" onclick="nextQuestion(2, 'harmony')">친구들과 만나 수다를 떤다</button>
+        <button class="option" onclick="nextQuestion(2, 'wisdom')">집에서 책을 읽거나 공부한다</button>
+        <button class="option" onclick="nextQuestion(2, 'power')">운동이나 활동적인 취미를 즐긴다</button>
+    </div>
+     <div class="section" id="q3">
+        <h3>3. 스트레스를 받았을 때 당신은?</h3>
+        <button class="option" onclick="nextQuestion(3, 'wisdom')">문제의 원인을 분석한다</button>
+        <button class="option" onclick="nextQuestion(3, 'harmony')">친구들과 이야기를 나눈다</button>
+        <button class="option" onclick="nextQuestion(3, 'power')">격한 운동으로 해소한다</button>
+        <button class="option" onclick="nextQuestion(3, 'freedom')">자연 속에서 휴식을 취한다</button>
+    </div>
+     <div class="section" id="q4">
+        <h3>4. 당신의 이상적인 휴가는?</h3>
+        <button class="option" onclick="nextQuestion(4, 'wisdom')">역사와 문화를 탐방하는 여행</button>
+        <button class="option" onclick="nextQuestion(4, 'freedom')">아무 계획 없이 떠나는 배낭여행</button>
+        <button class="option" onclick="nextQuestion(4, 'power')">익스트림 스포츠를 즐기는 모험</button>
+        <button class="option" onclick="nextQuestion(4, 'harmony')">친구들과 함께하는 편안한 휴양</button>
+    </div>
+     <div class="section" id="q5">
+        <h3>5. 친구들 사이에서 당신의 역할은?</h3>
+        <button class="option" onclick="nextQuestion(5, 'leadership')">모임을 주도하는 리더</button>
+        <button class="option" onclick="nextQuestion(5, 'harmony')">분위기 메이커</button>
+        <button class="option" onclick="nextQuestion(5, 'wisdom')">조언자</button>
+        <button class="option" onclick="nextQuestion(5, 'freedom')">자유로운 매력의 소유자</button>
+    </div>
+     <div class="section" id="q6">
+        <h3>6. 일할 때 당신의 스타일은?</h3>
+        <button class="option" onclick="nextQuestion(6, 'wisdom')">철저한 계획과 분석을 바탕으로 진행</button>
+        <button class="option" onclick="nextQuestion(6, 'leadership')">큰 그림을 그리고 팀을 이끌어감</button>
+        <button class="option" onclick="nextQuestion(6, 'harmony')">팀원들과의 협력을 중시</button>
+        <button class="option" onclick="nextQuestion(6, 'power')">빠르고 효율적인 실행력 중시</button>
+    </div>
+     <div class="section" id="q7">
+        <h3>7. 가장 중요하게 생각하는 가치는?</h3>
+        <button class="option" onclick="nextQuestion(7, 'freedom')">자유와 모험</button>
+        <button class="option" onclick="nextQuestion(7, 'harmony')">조화와 평화</button>
+        <button class="option" onclick="nextQuestion(7, 'wisdom')">지혜와 성장</button>
+        <button class="option" onclick="nextQuestion(7, 'leadership')">성공과 성취</button>
+    </div>
+     <div class="section" id="q8">
+        <h3>8. 어려움에 처했을 때 당신은?</h3>
+        <button class="option" onclick="nextQuestion(8, 'power')">정면으로 부딪혀 해결한다</button>
+        <button class="option" onclick="nextQuestion(8, 'wisdom')">다양한 해결책을 찾아본다</button>
+        <button class="option" onclick="nextQuestion(8, 'harmony')">주변의 도움을 받아 해결한다</button>
+        <button class="option" onclick="nextQuestion(8, 'leadership')">문제를 체계적으로 분석하고 해결한다</button>
+    </div>
+     <div class="section" id="q9">
+        <h3>9. 당신의 이상적인 미래는?</h3>
+        <button class="option" onclick="nextQuestion(9, 'freedom')">세계를 자유롭게 여행하는 삶</button>
+        <button class="option" onclick="nextQuestion(9, 'leadership')">큰 조직을 이끄는 리더의 삶</button>
+        <button class="option" onclick="nextQuestion(9, 'wisdom')">전문성을 인정받는 전문가의 삶</button>
+        <button class="option" onclick="nextQuestion(9, 'harmony')">평화롭고 안정적인 삶</button>
+    </div>
+     <div class="section" id="q10">
+        <h3>10. 다른 사람들이 보는 당신의 이미지는?</h3>
+        <button class="option" onclick="nextQuestion(10, 'wisdom')">신중하고 지혜로운 사람</button>
+        <button class="option" onclick="nextQuestion(10, 'leadership')">카리스마 있고 당당한 사람</button>
+        <button class="option" onclick="nextQuestion(10, 'harmony')">친근하고 다정한 사람</button>
+        <button class="option" onclick="nextQuestion(10, 'freedom')">자유롭고 독특한 사람</button>
+    </div>
+     <!-- 결과 섹션 -->
+    <div class="section" id="result">
+        <h2 id="resultTitle"></h2>
+        <img class="result-image" id="resultImage" src="" alt="수호동물">
+        <div class="result-description" id="resultDescription"></div>
+        
+        <div class="share-buttons">
+            <button class="share-button kakao-share" onclick="shareOnKakao()">카카오톡으로 공유하기</button>
+        </div>
+    </div>
+     <script>
+        // 카카오 SDK 초기화
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+         let score = {
+            wisdom: 0,
+            power: 0,
+            harmony: 0,
+            freedom: 0,
+            leadership: 0
+        };
+         const results = {
+            owl: {
+                title: "🦉 지혜로운 올빼미",
+                image: "https://testpro.site/k-test/동물/1.png",
+                description: "당신은 깊은 통찰력과 지혜를 가진 사람입니다. 조용히 관찰하고 신중하게 판단하며, 밤늦게까지 고민하고 연구하는 것을 즐깁니다. 당신의 조언은 많은 사람들에게 도움이 되며, 문제 해결에 있어 탁월한 능력을 보여줍니다."
+            },
+            wolf: {
+                title: "🐺 용맹한 늑대",
+                image: "https://testpro.site/k-test/동물/늑대.png",
+                description: "당신은 강인한 의지와 뛰어난 실행력을 가진 사람입니다. 목표를 향해 끊임없이 전진하며, 어려움 앞에서도 굴하지 않는 용기를 가지고 있습니다. 팀워크를 중시하면서도 독립적인 성향을 가지고 있습니다."
+            },
+            dolphin: {
+                title: "🐬 조화로운 돌고래",
+                image: "https://testpro.site/k-test/동물/돌고래.png",
+                description: "당신은 뛰어난 공감능력과 사교성을 가진 사람입니다. 다른 사람들과의 조화를 중요시하며, 주변 사람들에게 기쁨과 즐거움을 전파하는 능력이 있습니다. 긍정적인 에너지로 주변을 밝게 만듭니다."
+            },
+            eagle: {
+                title: "🦅 자유로운 독수리",
+                image: "https://testpro.site/k-test/동물/늑대.png",
+                description: "당신은 자유롭고 독립적인 영혼의 소유자입니다. 넓은 시야와 통찰력으로 세상을 바라보며, 자신만의 길을 개척하는 것을 즐깁니다. 높은 이상과 목표를 향해 끊임없이 도전하는 모험가입니다."
+            },
+            lion: {
+                title: "🦁 카리스마 있는 사자",
+                image: "https://testpro.site/k-test/동물/사자.png",
+                description: "당신은 타고난 리더십과 카리스마를 가진 사람입니다. 당당하고 용감하며, 다른 사람들을 이끄는 데 탁월한 능력을 보여줍니다. 책임감이 강하고 목표를 향해 끊임없이 전진하는 리더의 자질을 갖추고 있습니다."
+            }
+        };
+         function startTest() {
+            document.getElementById('start').classList.remove('active');
+            document.getElementById('q1').classList.add('active');
+            updateProgress(1);
+        }
+         function nextQuestion(questionNumber, trait) {
+            score[trait]++;
+            
+            const currentQuestion = document.querySelector('.section.active');
+            const nextQuestionId = questionNumber === 10 ? 'result' : 'q' + (questionNumber + 1);
+            
+            currentQuestion.classList.remove('active');
+            document.getElementById(nextQuestionId).classList.add('active');
+            
+            if (nextQuestionId === 'result') {
+                showResult();
+            } else {
+                updateProgress(questionNumber + 1);
+            }
+        }
+         function updateProgress(questionNumber) {
+            const progress = (questionNumber / 10) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+         function showResult() {
+            let maxTrait = Object.keys(score).reduce((a, b) => score[a] > score[b] ? a : b);
+            
+            let resultAnimal;
+            switch(maxTrait) {
+                case 'wisdom':
+                    resultAnimal = 'owl';
+                    break;
+                case 'power':
+                    resultAnimal = 'wolf';
+                    break;
+                case 'harmony':
+                    resultAnimal = 'dolphin';
+                    break;
+                case 'freedom':
+                    resultAnimal = 'eagle';
+                    break;
+                case 'leadership':
+                    resultAnimal = 'lion';
+                    break;
+            }
+            
+            document.getElementById('resultTitle').textContent = results[resultAnimal].title;
+            document.getElementById('resultImage').src = results[resultAnimal].image;
+            document.getElementById('resultDescription').textContent = results[resultAnimal].description;
+        }
+         function shareOnKakao() {
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '나의 수호동물 테스트 결과',
+                    description: document.getElementById('resultTitle').textContent,
+                    imageUrl: document.getElementById('resultImage').src,
+                    link: {
+                        mobileWebUrl: window.location.href,
+                        webUrl: window.location.href,
+                    },
+                },
+                buttons: [
+                    {
+                        title: '테스트 하러가기',
+                        link: {
+                            mobileWebUrl: window.location.href,
+                            webUrl: window.location.href,
+                        },
+                    }
+                ]
+            });
+        }
+    </script>

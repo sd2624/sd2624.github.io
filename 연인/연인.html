@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- 카카오 SDK 초기화 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        // 카카오 SDK 초기화 코드
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c'); // 카카오 JavaScript 키 초기화
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연인 유형 테스트</title>
+    <link rel="stylesheet" href="연인.css"> <!-- 외부 CSS 파일을 연결 -->
+</head>
+<body>
+    <!-- 광고 삽입 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+    crossorigin="anonymous"></script>
+    
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="3201247599"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <!-- 헤더 섹션 -->
+
+    html
+    코드 복사
+    <header>
+        <h1>헤어진 연인에 대한 나의 마음은?</h1>
+        <p>사랑은 우리를 행복하게도 하지만, 때로는 가슴 아픈 기억을 남기기도 합니다.</p>
+        <p>특히 헤어진 연인에 대한 기억은 마음속에 오래도록 남아 우리를 흔들곤 하죠.</p>
+        <p>이별 후의 감정은 누구나 다르게 느낄 수 있습니다.</p>
+        <p>누군가는 여전히 그리워하고, 누군가는 화가 나기도 합니다.</p>
+        <p>때로는 후회의 감정이 들기도 하고, 아무렇지 않은 척 살아가기도 하죠.</p>
+        <p>이 설문은 당신이 지금 느끼고 있는 감정을 조금 더 잘 이해할 수 있도록 도와드리기 위해 준비되었습니다.</p>
+        <p>모든 감정은 소중합니다. 그것이 어떤 모습이든, 당신만의 이야기니까요.</p>
+        <p>질문을 읽으며 천천히 자신의 마음을 들여다보세요.</p>
+        <p>이 시간이 당신에게 따뜻한 위로와 작은 깨달음이 되었으면 좋겠습니다.</p>
+        <button id="startTest">테스트 시작 ➔</button>
+    </header>
+
+    <!-- 메인 테스트 섹션 -->
+    <main id="testSection" class="hidden">
+        <p>설명: 각 질문에 대해 가장 적합한 선택지를 선택해주세요.</p>
+        
+        <!-- 진행 바 -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+
+        <!-- 질문 목록을 동적으로 생성할 컨테이너 -->
+        <div id="questionsContainer"></div>
+
+        <!-- 결과 보기 버튼 -->
+        <button id="showResultButton" disabled>결과 보기</button>
+    </main>
+
+    <!-- 결과 섹션 -->
+    <div id="resultSection" class="hidden">
+        <h2>테스트 결과</h2>
+        <p id="resultText"></p>
+        <!-- 소셜 미디어 공유 버튼이 여기 추가됩니다 -->
+    </div>
+
+    <!-- 팝업 배경 -->
+    <div class="popup-overlay"></div>
+
+    <!-- 광고 팝업 콘텐츠 -->
+    <div class="popup hidden" id="adPopup">
+        <div id="adsense-container"></div>
+        <div class="counter" id="counter">결과값 분석중입니다.</div>
+        <button class="confirm-popup-btn" disabled>확인</button>
+    </div>
+
+    <!-- 질문 완료 안내 팝업 -->
+    <div class="popup hidden" id="incompletePopup">
+        <p>질문을 완료 하세요.</p>
+        <button class="confirm-incomplete-btn">확인</button>
+    </div>
+
+    <!-- 외부 JavaScript 파일 연결 -->
+    <script src="연인.js"></script>
+</body>
+</html>

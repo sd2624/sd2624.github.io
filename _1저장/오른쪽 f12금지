@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>나의 운명 이야기</title>
+    <meta name="description" content="사주, 운명, 미래, 심리 테스트와 다양한 재미있는 테스트, 당신의 운명을 알아보고 다양한 심리와 성격 테스트를 통해 자신을 탐구해보세요.">
+    <meta name="keywords" content="무료 사주풀이, 사주 궁합 테스트, 심리테스트 모음, MBTI 성격 유형 검사, 타로 카드 운세, 연애 심리테스트, 이름으로 보는 사주, 생년월일로 보는 운세, 별자리 궁합, 직업 적성 심리테스트, 오늘의 운세, 혈액형 성격 테스트, 숫자로 보는 사주, 꿈해몽 풀이, 가족 궁합 테스트, 친구 심리테스트, 전생 테스트, 재물운 테스트, 띠별 운세, 미래 배우자 테스트">
+    <meta property="og:type" content="website"> 
+    <meta property="og:title" content="나의 운명 이야기">
+    <meta property="og:description" content="무료 사주풀이, 사주 궁합 테스트, 심리테스트 모음, MBTI 성격 유형 검사, 타로 카드 운세, 연애 심리테스트, 이름으로 보는 사주, 생년월일로 보는 운세, 별자리 궁합, 직업 적성 심리테스트, 오늘의 운세, 혈액형 성격 테스트, 숫자로 보는 사주, 꿈해몽 풀이, 가족 궁합 테스트, 친구 심리테스트, 전생 테스트, 재물운 테스트, 띠별 운세, 미래 배우자 테스트">
+    <meta property="og:image" content="https://kkdamoa.github.io/k-test/메인.png">
+    <meta property="og:url" content="https://kkdamoa.github.io/k-test/">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="naver-site-verification" content="3ddea906f4511e2e5c2374bc1bbc6f8700c898a9" />
+    <meta name="google-site-verification" content="wpS7lDe_HCr6OV4p0Ky9YOfaS4cu2gDh56ey8K1leIE" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <!-- 코드 보호 및 난독화 방지 스크립트 -->
+    <script>
+        // 키보드 이벤트로 특정 단축키를 차단합니다 (예: F12, Ctrl+U)
+        document.addEventListener('keydown', function (e) {
+            if (e.key === "F12") {
+                e.preventDefault();
+                alert("F12 개발자 도구는 사용하실 수 없습니다.");
+            }
+            if ((e.ctrlKey && (e.key === "u" || e.key === "U")) || 
+                (e.ctrlKey && e.shiftKey && e.key === "I")) {
+                e.preventDefault();
+                alert("소스 코드는 보호되고 있습니다.");
+            }
+        });
+
+        // 우클릭 차단: 마우스 오른쪽 버튼 클릭을 비활성화합니다.
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            alert("우클릭은 비활성화되었습니다.");
+        });
+
+        // 개발자 도구 감지: 개발자 도구 열림 여부를 감지합니다.
+        (function devToolsChecker() {
+            const element = new Image();
+            Object.defineProperty(element, 'id', {
+                get: function () {
+                    alert('개발자 도구가 감지되었습니다. 사용을 멈추세요!');
+                    throw new Error('개발자 도구 사용 금지!');
+                }
+            });
+            setInterval(function () {
+                console.log(element);
+            }, 1000);
+        })();
+    </script>
+</head>
+
+<body>
+    <header class="page-header wrapper">
+        <!-- 로고와 메뉴를 정렬하여 배치 -->
+        <div style="display: flex; align-items: center;">
+            <a href="index.html">
+                <!-- 로고 이미지 크기를 설정 -->
+                <img class="logo" src="로고.png" alt="나의 운명 이야기" style="width: 180px; height: auto; margin-right: 30px;">
+            </a>
+            <nav>
+                <!-- 주요 메뉴를 플렉스 박스로 정렬 -->
+                <ul class="main-nav" style="display: flex; align-items: center; gap: 30px;">
+                    <li><a href="꿈해몽.html">꿈해몽</a></li>
+                    <li><a href="사주팔자.html">사주팔자</a></li>
+                    <li><a href="심리테스트.html">심리테스트</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 이미지를 중앙 정렬 -->
+    <div style="text-align: center;">
+        <img src="메인.png" alt="이미지 메인">
+    </div>
+    
+    <!-- 광고 로드 -->
+    <div id="ads-container"></div>
+
+    <!-- 테스트 리스트 -->
+    <div class="wrapper grid" style="text-align: center;">
+        <div class="item">
+            <a href="1.html">
+                <img src="1.png" alt="검색창 성격 테스트">
+            </a>
+        </div>
+        <div class="item">
+            <a href="2.html">
+                <img src="2.png" alt="2024년 나의 연관검색어">
+            </a>
+        </div>
+        <div class="item">
+            <a href="3.html">
+                <img src="3.png" alt="상황별 TF 능력고사">
+            </a>
+        </div>
+        <div class="item">
+            <a href="4.html">
+                <img src="4.png" alt="타고난 기질 성격 보고서 테스트">
+            </a>
+        </div>
+        <div class="item">
+            <a href="5.html">
+                <img src="5.png" alt="2025년 신년 운세 테스트">
+            </a>
+        </div>
+        <div class="item">
+            <a href="6.html">
+                <img src="6.png" alt="붕어빵 성격 테스트">
+            </a>
+        </div>
+    </div>
+
+    <!-- 카카오톡 채널 버튼 -->
+    <button id="kakao-channel-icon" onclick="navigateToKakaoChannel()">
+        <img src="catalk.png" alt="Kakao Channel Icon">
+    </button>
+
+    <script>
+        // 카카오톡 채널로 이동하는 기능
+        function navigateToKakaoChannel() {
+            var kakaoChannelUrl = "https://open.kakao.com/o/slWw7n1g";
+            window.open(kakaoChannelUrl, "_blank");
+        }
+    </script>
+
+    <!-- 광고 로드 스크립트 -->
+    <script src="ads-loader.js"></script>
+
+    <footer>
+        <div class="wrapper">
+            <!-- 저작권 및 연락처 -->
+            <p>제작/광고문의 - sd26242624@gmail.com</p>
+            <p>&copy; 나의 운명 이야기. All Rights Reserved. Unauthorized use is prohibited. 모든 권리 보유. 무단 사용을 금지합니다.</p>
+        </div>
+    </footer>
+</body>
+</html>         

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 운세</title>
+    <!-- 카카오 SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <!-- 구글 애드센스 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <!-- 폰트어썸 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 타이틀 섹션 -->
+        <div class="title-section">
+            <div class="stars"></div>
+            <h1 class="main-title">✨ 오늘의 운세 ✨</h1>
+            <p class="subtitle">당신의 행운을 알아보세요</p>
+            <div class="crystal-ball">
+                <i class="fas fa-globe-asia"></i>
+            </div>
+        </div>
+
+        <!-- 중앙 광고 배너 -->
+        <div class="ad-banner-container main-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="3201247599"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true">
+            </ins>
+        </div>
+
+        <!-- 입력 폼 -->
+        <div id="userForm" class="section">
+            <form id="fortuneForm">
+                <div class="input-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" placeholder="이름을 입력하세요" required>
+                </div>
+                <div class="input-group">
+                    <label for="birthdate">생년월일 (예: 980101)</label>
+                    <input type="text" id="birthdate" maxlength="6" placeholder="생년월일 6자리" pattern="\d{6}" required>
+                </div>
+                <div class="input-group">
+                    <label for="gender">성별</label>
+                    <div class="gender-buttons">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male" class="gender-label">남성</label>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female" class="gender-label">여성</label>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn large-btn">
+                    <span class="btn-text">운세 보기</span>
+                    <i class="fas fa-star"></i>
+                </button>
+            </form>
+
+            <!-- 운세 보기 버튼 아래 광고 -->
+            <div class="ad-banner-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true">
+                </ins>
+            </div>
+        </div>
+
+        <!-- 운세 섹션 -->
+        <div id="fortuneSection" class="section hidden">
+            <h2 id="sectionTitle">오늘의 운세</h2>
+            <div id="fortuneContent" class="fortune-content"></div>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress"></div>
+            </div>
+            <button id="nextButton" class="large-btn">
+                <span class="btn-text">다음</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- 전체 운세 -->
+        <div id="fullFortune" class="section hidden">
+            <h2>오늘의 전체 운세</h2>
+            <div id="fullFortuneContent"></div>
+            <div id="biorhythm" class="biorhythm-section">
+                <h3>오늘의 바이오리듬</h3>
+                <div class="biorhythm-bars"></div>
+            </div>
+            <button id="kakaoShareButton" class="kakao-share-button large-btn">
+                <i class="fas fa-share-alt"></i>
+                카카오톡으로 공유하기
+            </button>
+        </div>
+
+        <!-- 하단 광고 배너 -->
+        <div class="ad-banner-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="3201247599"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true">
+            </ins>
+        </div>
+    </div>
+
+    <script>
+        // 카카오 SDK 초기화
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+    </script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
