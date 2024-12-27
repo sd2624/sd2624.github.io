@@ -43,9 +43,39 @@ const questions = [
 
 let currentQuestion = 0;
 let answers = [];
-// 결과 계산 로직 수정
+
+function displayQuestion() {
+    const questionDiv = document.getElementById('question');
+    const optionsDiv = document.getElementById('options');
+    
+    questionDiv.textContent = `${currentQuestion + 1}. ${questions[currentQuestion].question}`;
+    optionsDiv.innerHTML = '';
+    
+    questions[currentQuestion].options.forEach((option, index) => {
+        const button = document.createElement('div');
+        button.className = 'option';
+        button.textContent = option;
+        button.onclick = () => selectOption(index);
+        optionsDiv.appendChild(button);
+    });
+}
+
+function selectOption(index) {
+    const options = document.querySelectorAll('.option');
+    options.forEach(option => option.classList.remove('selected'));
+    options[index].classList.add('selected');
+    
+    answers[currentQuestion] = index;
+    
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        setTimeout(displayQuestion, 300);
+    } else {
+        document.getElementById('submit-btn').style.display = 'block';
+    }
+}
+
 function calculateResult(score) {
-    // 각 답변은 0-3점, 총점 0-30점
     const maxScore = 30;
     const percentage = (score / maxScore) * 100;
     
@@ -88,7 +118,6 @@ function calculateResult(score) {
     return { level, description, advice, percentage };
 }
 
-// showResult 함수 수정
 function showResult() {
     const score = answers.reduce((sum, answer) => sum + answer, 0);
     const result = calculateResult(score);
@@ -110,7 +139,28 @@ function showResult() {
     showPopup();
 }
 
-// 카카오톡 공유 버튼 이벤트 수정
+function showPopup() {
+    document.getElementById('result-popup').style.display = 'block';
+    document.getElementById('result-content').style.display = 'none';
+    let timeLeft = 7;
+    
+    const countdown = setInterval(() => {
+        timeLeft--;
+        document.getElementById('countdown').textContent = timeLeft;
+        
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            document.getElementById('ad-timer').style.display = 'none';
+            document.getElementById('result-content').style.display = 'block';
+        }
+    }, 1000);
+}
+
+document.getElementById('submit-btn').addEventListener('click', showResult);
+document.getElementById('close-popup').addEventListener('click', () => {
+    document.getElementById('result-popup').style.display = 'none';
+});
+
 document.getElementById('share-kakao').addEventListener('click', () => {
     const score = answers.reduce((sum, answer) => sum + answer, 0);
     const result = calculateResult(score);
@@ -120,7 +170,7 @@ document.getElementById('share-kakao').addEventListener('click', () => {
         content: {
             title: '스트레스 수준 테스트 결과',
             description: `나의 스트레스 레벨: ${result.level}\n${result.description}`,
-            imageUrl: window.location.origin + '/share-image.png', // 서버에 이미지를 올리거나 기본 이미지 사용
+            imageUrl: window.location.origin + '/share-image.png',
             link: {
                 mobileWebUrl: window.location.href,
                 webUrl: window.location.href,
@@ -137,3 +187,6 @@ document.getElementById('share-kakao').addEventListener('click', () => {
         ]
     });
 });
+
+// 초기 질문 표시
+displayQuestion();
