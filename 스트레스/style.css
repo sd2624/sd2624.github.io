@@ -1,0 +1,128 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.option {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: #e0e0e0;
+}
+
+.option.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#submit-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.popup-content {
+    position: relative;
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    width: 70%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#ad-timer {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#share-kakao {
+    background-color: #FEE500;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#close-popup {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+/* 기존 CSS에 추가 */
+.share-image {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background: linear-gradient(45deg, #FFE08C, #FFB6C1);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.share-image::before {
+    content: '😊';
+    font-size: 80px;
+}
+
+.stress-level {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #333;
+}
+
+.result-details {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    text-align: left;
+}
