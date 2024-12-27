@@ -229,3 +229,96 @@ h1 {
         margin: 5px 0;
     }
 }
+/* 기존 CSS 유지하고 아래 내용 추가/수정 */
+
+.result-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.result-emoji {
+    font-size: 80px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.stress-level {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+.result-details {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.result-details ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.result-details li {
+    margin: 10px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.result-details li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+#share-kakao, #restart-btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+#share-kakao {
+    background-color: #FEE500;
+    color: #000000;
+}
+
+#restart-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#share-kakao:hover {
+    background-color: #FFD700;
+    transform: translateY(-2px);
+}
+
+#restart-btn:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.ad-container {
+    margin: 20px 0;
+    min-height: 100px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}

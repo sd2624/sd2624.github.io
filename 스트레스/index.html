@@ -37,7 +37,10 @@
     <!-- 결과 팝업 -->
     <div id="result-popup" class="popup">
         <div class="popup-content">
+            <!-- 광고 타이머 -->
             <div id="ad-timer">광고 종료까지 <span id="countdown">7</span>초</div>
+            
+            <!-- 광고 영역 -->
             <div id="ad-space">
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -46,8 +49,10 @@
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
             </div>
+
+            <!-- 결과 내용 (처음에는 숨김) -->
             <div id="result-content" style="display: none;">
-                <h2>테스트 결과</h2>
+                <div id="result-emoji" class="result-emoji"></div>
                 <div id="result-text"></div>
                 <div class="button-group">
                     <button id="share-kakao">카카오톡 공유하기</button>

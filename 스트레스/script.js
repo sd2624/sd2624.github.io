@@ -44,6 +44,7 @@ const questions = [
 let currentQuestion = 0;
 let answers = [];
 
+// 질문 표시 함수
 function displayQuestion() {
     const questionDiv = document.getElementById('question');
     const optionsDiv = document.getElementById('options');
@@ -60,6 +61,7 @@ function displayQuestion() {
     });
 }
 
+// 옵션 선택 함수
 function selectOption(index) {
     const options = document.querySelectorAll('.option');
     options.forEach(option => option.classList.remove('selected'));
@@ -75,14 +77,16 @@ function selectOption(index) {
     }
 }
 
+// 결과 계산 함수
 function calculateResult(score) {
     const maxScore = 30;
     const percentage = (score / maxScore) * 100;
     
-    let level, description, advice;
+    let level, description, advice, emoji;
     
     if (percentage <= 25) {
         level = "정상";
+        emoji = "😊";
         description = "현재 당신의 스트레스 수준은 매우 건강한 상태입니다.";
         advice = [
             "현재의 생활 패턴을 잘 유지하세요",
@@ -91,6 +95,7 @@ function calculateResult(score) {
         ];
     } else if (percentage <= 50) {
         level = "경미한 스트레스";
+        emoji = "🙂";
         description = "약간의 스트레스가 있지만, 일상생활에 큰 지장은 없는 수준입니다.";
         advice = [
             "가벼운 운동으로 기분 전환을 해보세요",
@@ -99,6 +104,7 @@ function calculateResult(score) {
         ];
     } else if (percentage <= 75) {
         level = "중등도 스트레스";
+        emoji = "😟";
         description = "스트레스가 일상생활에 영향을 미치고 있습니다.";
         advice = [
             "스트레스 해소 방법을 찾아보세요",
@@ -107,6 +113,7 @@ function calculateResult(score) {
         ];
     } else {
         level = "심각한 스트레스";
+        emoji = "😰";
         description = "스트레스가 매우 높은 수준입니다. 전문가의 도움이 필요할 수 있습니다.";
         advice = [
             "전문가와 상담하는 것을 추천드립니다",
@@ -115,35 +122,27 @@ function calculateResult(score) {
         ];
     }
 
-    return { level, description, advice, percentage };
+    return { level, description, advice, percentage, emoji };
 }
 
+// 결과 표시 함수
 function showResult() {
     const score = answers.reduce((sum, answer) => sum + answer, 0);
     const result = calculateResult(score);
     
-    const resultHTML = `
-        <div class="share-image"></div>
-        <div class="stress-level">스트레스 레벨: ${result.level}</div>
-        <div class="result-details">
-            <p>${result.description}</p>
-            <p>스트레스 점수: ${result.percentage.toFixed(1)}%</p>
-            <h3>추천 사항:</h3>
-            <ul>
-                ${result.advice.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-        </div>
-    `;
-    
-    document.getElementById('result-text').innerHTML = resultHTML;
-    showPopup();
-}
-
-function showPopup() {
+    // 팝업 표시
     document.getElementById('result-popup').style.display = 'block';
     document.getElementById('result-content').style.display = 'none';
-    let timeLeft = 7;
     
+    // 광고 새로고침
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('광고 로드 실패:', e);
+    }
+
+    // 7초 타이머 시작
+    let timeLeft = 7;
     const countdown = setInterval(() => {
         timeLeft--;
         document.getElementById('countdown').textContent = timeLeft;
@@ -151,12 +150,31 @@ function showPopup() {
         if (timeLeft <= 0) {
             clearInterval(countdown);
             document.getElementById('ad-timer').style.display = 'none';
+            document.getElementById('ad-space').style.display = 'none';
+            
+            // 결과 내용 표시
+            const resultHTML = `
+                <div id="result-emoji">${result.emoji}</div>
+                <div class="stress-level">스트레스 레벨: ${result.level}</div>
+                <div class="result-details">
+                    <p>${result.description}</p>
+                    <p>스트레스 점수: ${result.percentage.toFixed(1)}%</p>
+                    <h3>추천 사항:</h3>
+                    <ul>
+                        ${result.advice.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('result-text').innerHTML = resultHTML;
             document.getElementById('result-content').style.display = 'block';
         }
     }, 1000);
 }
 
+// 이벤트 리스너 설정
 document.getElementById('submit-btn').addEventListener('click', showResult);
+
 document.getElementById('close-popup').addEventListener('click', () => {
     document.getElementById('result-popup').style.display = 'none';
 });
