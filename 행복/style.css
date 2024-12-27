@@ -1,0 +1,263 @@
+:root {
+    --primary-color: #FF69B4;
+    --secondary-color: #FFB6C1;
+    --background-color: #FFF0F5;
+    --text-color: #333;
+    --shadow-color: rgba(255, 105, 180, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* 광고 컨테이너 스타일 */
+.top-ad-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.test-container {
+    background: white;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 행복 미터 애니메이션 */
+.happiness-meter {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+    position: relative;
+}
+
+.meter-smile {
+    width: 80px;
+    height: 80px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    position: relative;
+    margin: 0 auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+.meter-smile::before,
+.meter-smile::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    top: 25px;
+}
+
+.meter-smile::before { left: 20px; }
+.meter-smile::after { right: 20px; }
+
+.meter-rays {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    animation: rotate 10s linear infinite;
+}
+
+.meter-rays::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* 타이틀 애니메이션 */
+.title-animation {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    background-clip: text;              /* 표준 속성 추가 */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleGlow 2s ease-in-out infinite;
+}
+
+/* 버튼 스타일 및 애니메이션 */
+.start-pulse {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-size: 1.2em;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.start-pulse:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+/* 답변 버튼 스타일 */
+.answer-btn {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    background: white;
+    color: var(--text-color);
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.answer-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateX(10px);
+}
+
+/* 프로그레스 바 스타일 */
+.progress-container {
+    margin-bottom: 30px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-glow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background: white;
+    filter: blur(5px);
+    animation: progressGlow 2s linear infinite;
+}
+
+/* 결과 섹션 스타일 */
+.result-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.result-emoji {
+    font-size: 4em;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+.result-description {
+    white-space: pre-line;
+    line-height: 2;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    animation: fadeIn 1s ease-out;
+}
+
+/* 애니메이션 키프레임 */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+@keyframes titleGlow {
+    0%, 100% { filter: brightness(100%); }
+    50% { filter: brightness(120%); }
+}
+
+@keyframes progressGlow {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(500%); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .test-container {
+        padding: 20px;
+    }
+    
+    .title-animation {
+        font-size: 2em;
+    }
+    
+    .start-pulse {
+        padding: 15px 30px;
+        font-size: 1em;
+    }
+}
