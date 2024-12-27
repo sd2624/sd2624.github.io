@@ -1,53 +1,91 @@
-body {
-    font-family: 'Arial', sans-serif;
+* {
     margin: 0;
-    padding: 20px;
-    background-color: #f0f0f0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
-    background-color: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #2c3e50;
+    margin: 30px 0;
+    font-size: 28px;
+}
+
+.ad-container {
+    margin: 20px 0;
+    min-height: 100px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#quiz {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#question {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2c3e50;
 }
 
 .option {
+    padding: 15px 20px;
     margin: 10px 0;
-    padding: 10px;
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    background-color: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .option:hover {
-    background-color: #e0e0e0;
+    background-color: #e9ecef;
+    transform: translateY(-2px);
 }
 
 .option.selected {
     background-color: #4CAF50;
     color: white;
+    border-color: #4CAF50;
 }
 
 #submit-btn {
     display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
+    width: 200px;
+    margin: 30px auto 0;
+    padding: 15px 30px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+#submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* 팝업 스타일 */
 .popup {
     display: none;
     position: fixed;
@@ -55,55 +93,43 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
 }
 
 .popup-content {
     position: relative;
     background-color: white;
     margin: 15% auto;
-    padding: 20px;
-    width: 70%;
-    max-width: 500px;
-    border-radius: 10px;
-    text-align: center;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 #ad-timer {
-    margin-bottom: 10px;
+    text-align: center;
     font-weight: bold;
+    margin-bottom: 15px;
+    color: #666;
 }
 
-#share-kakao {
-    background-color: #FEE500;
-    color: #000000;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;
+#ad-space {
+    margin: 20px 0;
+    min-height: 250px;
 }
 
-#close-popup {
-    background-color: #666;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;
-}
-/* 기존 CSS에 추가 */
+/* 결과 스타일 */
 .share-image {
     width: 200px;
     height: 200px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
     background: linear-gradient(45deg, #FFE08C, #FFB6C1);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
@@ -117,12 +143,89 @@ h1 {
     font-weight: bold;
     margin: 20px 0;
     color: #333;
+    text-align: center;
 }
 
 .result-details {
     margin: 15px 0;
-    padding: 10px;
+    padding: 20px;
     background-color: #f8f8f8;
-    border-radius: 8px;
+    border-radius: 10px;
     text-align: left;
+}
+
+.result-details ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.result-details li {
+    margin: 5px 0;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#share-kakao {
+    background-color: #FEE500;
+    color: #000000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#close-popup {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#share-kakao:hover {
+    background-color: #FFD700;
+}
+
+#close-popup:hover {
+    background-color: #5a6268;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    #question {
+        font-size: 18px;
+    }
+
+    .popup-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 20px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    #share-kakao, #close-popup {
+        width: 100%;
+        margin: 5px 0;
+    }
 }
