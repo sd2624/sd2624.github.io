@@ -209,6 +209,14 @@ function showAnalysisPopup() {
     document.getElementById('question-section').style.display = 'none';
     document.getElementById('analysis-popup').style.display = 'flex';
     
+    // 팝업 광고 초기화
+    try {
+        const popupAd = document.querySelector('.popup-ad');
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('팝업 광고 초기화 실패:', e);
+    }
+    
     let countdown = 7;
     const countdownElement = document.querySelector('.countdown');
     
