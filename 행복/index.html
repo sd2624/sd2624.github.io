@@ -7,20 +7,18 @@
     <link rel="stylesheet" href="style.css">
     <!-- 카카오 SDK -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <!-- 구글 애드센스 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- 상단 광고 -->
     <div class="ad-container">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
         <ins class="adsbygoogle"
             style="display:block"
             data-ad-client="ca-pub-9374368296307755"
             data-ad-slot="3201247599"
             data-ad-format="auto"
             data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </div>
 
     <div class="container">
@@ -57,7 +55,12 @@
                 <div class="result-content"></div>
                 <div class="result-buttons">
                     <button class="retry-btn" onclick="location.href='https://testpro.site'">다른 테스트 하기</button>
-                    <div class="kakao-share">결과 공유하기</div>
+                    <div class="share-btn">
+                        <div class="kakao-share">
+                            <div class="kakao-icon"></div>
+                            <span>친구에게 공유하기</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,18 +72,17 @@
             <div class="analysis-header">
                 <div class="analysis-text">결과값 분석중입니다...</div>
                 <div class="countdown">7</div>
+                <div class="loading-spinner"></div>
             </div>
-            <div class="loading-spinner"></div>
+            
             <!-- 팝업 광고 -->
-            <div class="popup-ad">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+            <div class="popup-ad-container">
                 <ins class="adsbygoogle"
-                    style="display:inline-block;width:300px;height:250px"
-                    data-ad-client="ca-pub-9374368296307755"
-                    data-ad-slot="3201247599"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
             </div>
         </div>
     </div>
