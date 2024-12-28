@@ -9,7 +9,7 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
-    <!-- 광고 영역 -->
+    <!-- 상단 광고 -->
     <div class="ad-container">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
         <ins class="adsbygoogle"
@@ -24,34 +24,33 @@
     </div>
 
     <div class="container">
+        <!-- 시작 페이지 -->
         <div class="test-container">
-            <h1 class="title">당신의 행복 지수 테스트</h1>
             <div class="start-page" id="startPage">
+                <h1>당신의 행복 지수는?</h1>
                 <div class="start-img"></div>
+                <p>나의 진정한 행복 지수를 알아보세요!</p>
                 <button class="start-btn">테스트 시작하기</button>
                 <div class="share-btn">
                     <div class="kakao-share">친구에게 공유하기</div>
                 </div>
             </div>
 
+            <!-- 질문 페이지 -->
             <div class="question-page hidden" id="questionPage">
                 <div class="progress-bar">
                     <div class="progress"></div>
                 </div>
+                <h2 class="question-number">Q. <span id="questionNum">1</span>/15</h2>
                 <h2 class="question"></h2>
                 <div class="answers"></div>
             </div>
 
-            <div class="loading-page hidden" id="loadingPage">
-                <div class="loading-text">결과 분석중...</div>
-                <div class="countdown">7</div>
-                <div class="loading-spinner"></div>
-            </div>
-
+            <!-- 결과 페이지 -->
             <div class="result-page hidden" id="resultPage">
-                <h2>당신의 행복 지수는?</h2>
-                <div class="result-content"></div>
+                <h2>당신의 행복 지수 결과</h2>
                 <div class="result-img"></div>
+                <div class="result-content"></div>
                 <button class="retry-btn" onclick="location.href='https://testpro.site'">다른 테스트 하기</button>
                 <div class="share-btn">
                     <div class="kakao-share">결과 공유하기</div>
@@ -60,18 +59,23 @@
         </div>
     </div>
 
-    <!-- 팝업 광고 -->
-    <div class="popup-ad hidden" id="popupAd">
+    <!-- 분석 팝업 -->
+    <div class="analysis-popup hidden" id="analysisPopup">
         <div class="popup-content">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
-            <ins class="adsbygoogle"
-                style="display:inline-block;width:300px;height:250px"
-                data-ad-client="ca-pub-9374368296307755"
-                data-ad-slot="3201247599"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-            <button class="close-popup">닫기</button>
+            <div class="analysis-text">결과값 분석중입니다...</div>
+            <div class="countdown">7</div>
+            <div class="loading-spinner"></div>
+            <!-- 팝업 광고 -->
+            <div class="popup-ad">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+                <ins class="adsbygoogle"
+                    style="display:inline-block;width:300px;height:250px"
+                    data-ad-client="ca-pub-9374368296307755"
+                    data-ad-slot="3201247599"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
         </div>
     </div>
 

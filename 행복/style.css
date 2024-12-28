@@ -182,3 +182,53 @@ body {
 .hidden {
     display: none;
 }
+/* ... 기존 코드 ... */
+
+.analysis-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.analysis-popup .popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.analysis-text {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.countdown {
+    font-size: 40px;
+    font-weight: bold;
+    color: #4ECDC4;
+    margin: 20px 0;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #4ECDC4;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: spin 1s linear infinite;
+}
+
+.popup-ad {
+    margin-top: 20px;
+}
