@@ -1,0 +1,347 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.test-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.8s ease;
+}
+
+/* 애니메이션 정의 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 시작 페이지 스타일 */
+#start-section {
+    text-align: center;
+}
+
+.personality-icon {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.emoji {
+    font-size: 3em;
+    animation: float 3s ease-in-out infinite;
+}
+
+.emoji:nth-child(2) { animation-delay: 0.2s; }
+.emoji:nth-child(3) { animation-delay: 0.4s; }
+.emoji:nth-child(4) { animation-delay: 0.6s; }
+
+h1 {
+    font-size: 2.5em;
+    margin: 20px 0;
+    color: #764ba2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.intro-text {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+/* 버튼 스타일 */
+.pulse-btn {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.pulse-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 질문 섹션 스타일 */
+.progress-container {
+    margin-bottom: 30px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
+}
+
+.question-counter {
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    color: #666;
+}
+
+#question-text {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* 답변 버튼 스타일 */
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.answer-btn {
+    padding: 20px;
+    font-size: 1.1em;
+    background: white;
+    border: 2px solid #764ba2;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.answer-btn:hover {
+    background: #764ba2;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(118, 75, 162, 0.2);
+}
+
+/* 결과 페이지 스타일 */
+.result-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.result-type-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.type-emoji {
+    font-size: 50px;
+}
+
+#mbti-result {
+    font-size: 3em;
+    color: #764ba2;
+    margin: 20px 0;
+    animation: fadeIn 1s ease;
+}
+
+.personality-traits {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+#traits-list {
+    list-style: none;
+    padding: 0;
+}
+
+#traits-list li {
+    margin: 10px 0;
+    padding-left: 25px;
+    position: relative;
+}
+
+#traits-list li::before {
+    content: '✨';
+    position: absolute;
+    left: 0;
+}
+
+/* 팝업 스타일 */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+.personality-loader {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.personality-loader span {
+    font-size: 2em;
+    animation: float 1s ease-in-out infinite;
+}
+
+.personality-loader span:nth-child(2) { animation-delay: 0.2s; }
+.personality-loader span:nth-child(3) { animation-delay: 0.4s; }
+.personality-loader span:nth-child(4) { animation-delay: 0.6s; }
+
+.countdown {
+    font-size: 3em;
+    font-weight: bold;
+    color: #764ba2;
+    margin: 20px 0;
+}
+
+/* 광고 컨테이너 스타일 */
+.ad-container {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.popup-ad-container {
+    margin: 20px auto 0;
+    width: 300px;
+    height: 250px;
+    overflow: hidden;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.popup-ad {
+    width: 300px !important;
+    height: 250px !important;
+    display: block !important;
+    margin: 0 auto;
+}
+
+/* 공유 버튼 컨테이너 */
+.share-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.share-btn, .retry-btn, .home-btn {
+    padding: 15px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.share-btn {
+    background: #FEE500;
+    color: #000;
+}
+
+.retry-btn {
+    background: #764ba2;
+    color: white;
+}
+
+.home-btn {
+    background: #667eea;
+    color: white;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .test-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .emoji {
+        font-size: 2.5em;
+    }
+
+    .popup-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .popup-ad-container {
+        width: 100%;
+        max-width: 300px;
+    }
+}
