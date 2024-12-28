@@ -147,7 +147,7 @@ const animalResults = {
     },
     owl: {
         title: "지혜로운 올빼미",
-        image: "1.png",
+        image: "올뺴미.png",
         description: "당신의 수호동물은 지혜롭고 통찰력 있는 올빼미입니다. 깊은 지혜와 날카로운 관찰력을 가지고 있습니다.",
         traits: [
             "깊은 지혜와 통찰력",
@@ -213,6 +213,13 @@ function showAnalysisPopup() {
     document.getElementById('question-section').style.display = 'none';
     document.getElementById('analysis-popup').style.display = 'flex';
     
+    // 팝업 광고 초기화
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('팝업 광고 초기화 실패:', e);
+    }
+    
     let countdown = 7;
     const countdownElement = document.querySelector('.countdown');
     
@@ -234,22 +241,31 @@ function calculateResult() {
 
 // 결과 표시
 function showResult() {
-    document.getElementById('analysis-popup').style.display = 'none';
-    document.getElementById('result-section').style.display = 'block';
+    try {
+        document.getElementById('analysis-popup').style.display = 'none';
+        document.getElementById('result-section').style.display = 'block';
 
-    const resultType = calculateResult();
-    const result = animalResults[resultType];
+        const resultType = calculateResult();
+        const result = animalResults[resultType];
 
-    document.getElementById('animal-image').style.backgroundImage = `url(${result.image})`;
-    document.getElementById('animal-title').textContent = result.title;
-    document.getElementById('animal-description').textContent = result.description;
-    
-    const traitsList = document.getElementById('traits-list');
-    traitsList.innerHTML = result.traits
-        .map(trait => `<li>${trait}</li>`)
-        .join('');
-    
-    document.getElementById('animal-advice').textContent = result.advice;
+        if (!result) {
+            throw new Error('결과를 찾을 수 없습니다.');
+        }
+
+        document.getElementById('animal-image').style.backgroundImage = `url(${result.image})`;
+        document.getElementById('animal-title').textContent = result.title;
+        document.getElementById('animal-description').textContent = result.description;
+        
+        const traitsList = document.getElementById('traits-list');
+        traitsList.innerHTML = result.traits
+            .map(trait => `<li>${trait}</li>`)
+            .join('');
+        
+        document.getElementById('animal-advice').textContent = result.advice;
+    } catch (error) {
+        console.error('결과 표시 중 오류 발생:', error);
+        alert('결과를 표시하는 중 문제가 발생했습니다. 다시 시도해주세요.');
+    }
 }
 
 // 카카오톡 공유
@@ -262,7 +278,7 @@ document.querySelector('.share-btn').addEventListener('click', () => {
         content: {
             title: '나의 수호동물 테스트',
             description: `당신의 수호동물은 "${result.title}" 입니다!`,
-            imageUrl: result.image,
+            imageUrl: result.image, // 이미지 경로 수정
             link: {
                 mobileWebUrl: 'https://testpro.site',
                 webUrl: 'https://testpro.site'
@@ -287,6 +303,12 @@ document.querySelector('.retry-btn').addEventListener('click', () => {
     document.getElementById('result-section').style.display = 'none';
     document.getElementById('start-section').style.display = 'block';
 });
+
+// 에러 처리
+window.onerror = function(msg, url, lineNo, columnNo, error) {
+    console.error('Error: ' + msg + '\nURL: ' + url + '\nLine: ' + lineNo + '\nColumn: ' + columnNo + '\nError object: ' + JSON.stringify(error));
+    return false;
+};
 
 // 광고 초기화
 window.onload = function() {
