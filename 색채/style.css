@@ -330,3 +330,73 @@ h1 {
         padding: 20px;
     }
 }
+/* 공유 버튼 컨테이너 */
+.share-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+    padding: 20px 0;
+}
+
+/* 공유 버튼 공통 스타일 */
+.share-btn, .retry-btn, .home-btn {
+    padding: 15px 25px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 결과 공유하기 버튼 */
+.share-btn {
+    background: #FEE500; /* 카카오톡 색상 */
+    color: #000000;
+}
+
+.share-btn:hover {
+    background: #FFD700;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(254, 229, 0, 0.3);
+}
+
+/* 다시 테스트하기 버튼 */
+.retry-btn {
+    background: linear-gradient(45deg, #FF6B6B, #fda085);
+    color: white;
+}
+
+.retry-btn:hover {
+    background: linear-gradient(45deg, #FF5252, #ff8a65);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+}
+
+/* 다른 테스트 하기 버튼 */
+.home-btn {
+    background: linear-gradient(45deg, #4ECDC4, #56CCF2);
+    color: white;
+}
+
+.home-btn:hover {
+    background: linear-gradient(45deg, #45B7AF, #4CB8DB);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.3);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .share-container {
+        padding: 15px 0;
+    }
+
+    .share-btn, .retry-btn, .home-btn {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+}
