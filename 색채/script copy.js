@@ -95,7 +95,6 @@ const questions = [
     }
 ];
 
-
 // 색채 결과 데이터
 const colorResults = {
     warm: {
@@ -178,7 +177,6 @@ const colorResults = {
     }
 };
 
-// 전역 변수
 let currentQuestion = 0;
 let colorScores = {
     warm: 0,
@@ -216,7 +214,7 @@ function showQuestion() {
         const choice = document.createElement('div');
         choice.className = 'color-choice';
         choice.style.backgroundColor = color.hex;
-        choice.setAttribute('title', color.name);
+        choice.setAttribute('title', color.name); // 툴팁으로 색상 이름 표시
         choice.onclick = () => handleAnswer(color);
         colorChoices.appendChild(choice);
     });
@@ -247,11 +245,7 @@ function showAdPopup() {
     adPopup.style.display = 'flex';
     
     // 팝업 광고 초기화
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error('팝업 광고 초기화 실패:', e);
-    }
+    initializePopupAd();
 
     let countdown = 7;
     const countdownElement = document.querySelector('.countdown');
@@ -282,21 +276,26 @@ function showResult() {
     const resultType = calculateResult();
     const result = colorResults[resultType];
 
+    // 메인 컬러 설정
     document.querySelector('.main-color').style.backgroundColor = result.recommendedColors[0].color;
     
+    // 서브 컬러 설정
     const subColors = document.querySelectorAll('.sub-color');
     subColors[0].style.backgroundColor = result.recommendedColors[1].color;
     subColors[1].style.backgroundColor = result.recommendedColors[2].color;
 
+    // 결과 텍스트 설정
     document.getElementById('color-result').textContent = result.title;
     document.getElementById('result-title').textContent = result.title;
     document.getElementById('result-description').textContent = result.description;
 
+    // 특징 리스트 설정
     const traitsList = document.getElementById('traits-list');
     traitsList.innerHTML = result.traits
         .map(trait => `<li>${trait}</li>`)
         .join('');
 
+    // 추천 색상 표시
     const recommendedColors = document.getElementById('recommended-colors');
     recommendedColors.innerHTML = result.recommendedColors
         .map(color => `
@@ -316,19 +315,19 @@ document.querySelector('.share-btn').addEventListener('click', () => {
         objectType: 'feed',
         content: {
             title: '나의 색채 심리 테스트',
-            description: `당신은 "${result.title}" 입니다!\n${result.description.split('\n')[0]}`,
-            imageUrl: 'https://testpro.site/images/color-test.jpg',
+            description: `당신은 "${result.title}" 입니다!\n${result.description.slice(0, 50)}...`,
+            imageUrl: 'YOUR_IMAGE_URL', // 실제 이미지 URL로 교체 필요
             link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href
+                mobileWebUrl: 'https://testpro.site',
+                webUrl: 'https://testpro.site'
             }
         },
         buttons: [
             {
                 title: '테스트 하기',
                 link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href
+                    mobileWebUrl: 'https://testpro.site',
+                    webUrl: 'https://testpro.site'
                 }
             }
         ]
@@ -343,6 +342,15 @@ document.querySelector('.retry-btn').addEventListener('click', () => {
     startSection.style.display = 'block';
 });
 
+// 광고 초기화 함수
+function initializePopupAd() {
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('광고 초기화 실패:', e);
+    }
+}
+
 // 페이지 로드 시 광고 초기화
 window.onload = function() {
     try {
@@ -350,10 +358,4 @@ window.onload = function() {
     } catch (e) {
         console.error('상단 광고 초기화 실패:', e);
     }
-};
-
-// 에러 처리
-window.onerror = function(msg, url, lineNo, columnNo, error) {
-    console.error('Error: ' + msg + '\nURL: ' + url + '\nLine: ' + lineNo);
-    return false;
 };
