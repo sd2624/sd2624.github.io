@@ -3,97 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>당신의 운명을 비추는 타로카드</title>
+    <title>타로 카드 3장 선택</title>
     <link rel="stylesheet" href="style.css">
-    <!-- 카카오 SDK -->
+    <!-- 카카오 SDK 초기화 -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <!-- 구글 애드센스 -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script>
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+    </script>
 </head>
 <body>
-    <!-- 상단 광고 -->
-    <div class="ad-container">
-        <ins class="adsbygoogle main-ad"
-            style="display:block"
-            data-ad-client="ca-pub-9374368296307755"
-            data-ad-slot="3201247599"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-    </div>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="3201247599"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
     <div class="container">
-        <!-- 시작 섹션 -->
-        <div id="start-section">
-            <div class="tarot-intro">
-                <span class="emoji">🔮</span>
-                <span class="emoji">🌙</span>
-                <span class="emoji">✨</span>
+        <h1>타로 카드 운세</h1>
+        <div class="instructions">
+            <p>마음을 가라앉히고 질문을 생각한 후, '카드 선택' 버튼을 눌러주세요.</p>
+        </div>
+        <button id="selectCards">카드 선택</button>
+        
+        <div class="cards-container">
+            <div class="card-slot" id="card1">
+                <div class="card-back">1번 카드</div>
+                <div class="card-front"></div>
             </div>
-            <h1>당신의 운명을 비추는<br>타로카드</h1>
-            <p class="intro-text">마음을 가라앉히고 질문을 생각한 후,<br>시작 버튼을 눌러주세요.</p>
-            <button id="start-btn" class="pulse-btn">타로 시작하기</button>
+            <div class="card-slot" id="card2">
+                <div class="card-back">2번 카드</div>
+                <div class="card-front"></div>
+            </div>
+            <div class="card-slot" id="card3">
+                <div class="card-back">3번 카드</div>
+                <div class="card-front"></div>
+            </div>
+        </div>
+        <!-- 로딩 팝업 -->
+<div id="loadingPopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; flex-direction: column;">
+    <div style="color: white; text-align: center;">
+        <h2>🔮 타로 카드 분석중...</h2>
+        <p>당신의 운세를 해석하고 있습니다.</p>
+        <div class="loading-spinner"></div>
+    </div>
+</div>
+
+<!-- 광고 컨테이너 -->
+<div id="adContainer" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: white; z-index: 1001;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="1724698171"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+
+        <div class="reading-container">
+            <div class="reading" id="reading1"></div>
+            <div class="reading" id="reading2"></div>
+            <div class="reading" id="reading3"></div>
         </div>
 
-        <!-- 카드 선택 섹션 -->
-        <div id="selection-section" style="display: none;">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress"></div>
-                </div>
-                <span class="selection-counter">0/3</span>
-            </div>
-            <h2>카드를 선택해주세요</h2>
-            <div class="cards-container">
-                <!-- 카드들은 JavaScript로 동적 생성됨 -->
-            </div>
-        </div>
-
-        <!-- 분석 팝업 -->
-        <div id="analysis-popup" class="popup">
-            <div class="popup-content">
-                <div class="analysis-header">
-                    <div class="analysis-text">타로 카드 해석중...</div>
-                    <div class="tarot-loader">
-                        <span>🔮</span>
-                        <span>🌙</span>
-                        <span>✨</span>
-                    </div>
-                    <div class="countdown">7</div>
-                </div>
-                
-                <!-- 팝업 광고 -->
-                <div class="popup-ad-container">
-                    <ins class="adsbygoogle popup-ad"
-                         style="display:inline-block"
-                         data-ad-client="ca-pub-9374368296307755"
-                         data-ad-slot="3201247599"
-                         data-ad-format="rectangle"
-                         data-full-width-responsive="false"></ins>
-                </div>
-            </div>
-        </div>
-
-        <!-- 결과 섹션 -->
-        <div id="result-section" style="display: none;">
-            <h2>당신의 타로 카드 해석</h2>
-            <div class="selected-cards">
-                <!-- 선택된 카드들이 여기에 표시됨 -->
-            </div>
-            <div class="readings-container">
-                <!-- 카드 해석이 여기에 표시됨 -->
-            </div>
-            <div class="overall-reading">
-                <h3>종합 해석</h3>
-                <p id="overall-text"></p>
-            </div>
-            <div class="share-container">
-                <button class="share-btn">결과 공유하기</button>
-                <button class="retry-btn">다시 시작하기</button>
-                <a href="https://testpro.site" class="home-btn">다른 테스트 하기</a>
-            </div>
-        </div>
+        <button id="shareKakao" style="display:none;">카카오톡 공유하기</button>
+        <a href="https://testpro.site" class="home-btn">다른 테스트 하기</a>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
