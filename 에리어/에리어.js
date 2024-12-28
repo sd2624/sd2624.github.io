@@ -139,7 +139,8 @@ function addShareButtons() {
         { id: 'twitterShare', alt: '트위터 공유', icon: '/k-test/log/트위터.png' },
         { id: 'naverLineShare', alt: '네이버 라인 공유', icon: '/k-test/log/라인.png' },
         { id: 'kakaoShare', alt: '카카오톡 공유', icon: '/k-test/log/카톡.png' }, // 카카오톡 공유 버튼 추가
-        { id: 'urlShare', alt: 'URL 복사', icon: '/k-test/log/url.png' },     
+        { id: 'urlShare', alt: 'URL 복사', icon: '/k-test/log/url.png' },    
+        <a href="https://testpro.site" class="home-btn">다른 테스트 하기</a> 
     ];
 
     const resultSection = document.getElementById('resultSection');

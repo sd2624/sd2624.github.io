@@ -299,3 +299,62 @@ button:hover:not(:disabled) {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+/* 버튼 컨테이너 스타일 */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* 홈 버튼 스타일 */
+.home-btn {
+    background: #FF6B6B;
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.home-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    background: #FF8787;
+}
+
+/* 공유 버튼과 다시하기 버튼 스타일 통일 */
+.share-btn, .retry-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.share-btn:hover, .retry-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-color);
+    background: var(--secondary-color);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .button-container {
+        gap: 10px;
+    }
+
+    .home-btn, .share-btn, .retry-btn {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+}
