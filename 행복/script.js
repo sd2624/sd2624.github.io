@@ -20,7 +20,7 @@ const questions = [
     "전반적으로 현재 삶에 만족하시나요?"
 ];
 
-// 결과 메시지 (각 항목은 줄바꿈으로 구분)
+// 결과 메시지
 const results = [
     [
         "당신의 행복 지수는 매우 높습니다! (90~100점)",
@@ -77,14 +77,10 @@ function showQuestion() {
     const questionElement = document.querySelector('.question');
     const answersElement = document.querySelector('.answers');
 
-    // 진행률 업데이트
     progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
     questionNum.textContent = currentQuestion + 1;
-    
-    // 질문 텍스트 업데이트
     questionElement.textContent = questions[currentQuestion];
 
-    // 답변 버튼 생성
     answersElement.innerHTML = `
         <button class="answer-btn" onclick="handleAnswer(5)">매우 그렇다</button>
         <button class="answer-btn" onclick="handleAnswer(4)">그렇다</button>
@@ -111,6 +107,9 @@ function showAnalysisPopup() {
     questionPage.classList.add('hidden');
     analysisPopup.classList.remove('hidden');
 
+    // 팝업 광고 초기화
+    initializePopupAd();
+
     let countdown = 7;
     const countdownElement = analysisPopup.querySelector('.countdown');
     
@@ -126,11 +125,28 @@ function showAnalysisPopup() {
     }, 1000);
 }
 
+// 팝업 광고 초기화 함수
+function initializePopupAd() {
+    const popupAd = analysisPopup.querySelector('.popup-ad');
+    if (popupAd) {
+        try {
+            // 기존 광고 제거
+            while (popupAd.firstChild) {
+                popupAd.removeChild(popupAd.firstChild);
+            }
+            
+            // 새로운 광고 삽입
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+            console.error('팝업 광고 초기화 실패:', e);
+        }
+    }
+}
+
 // 결과 표시 함수
 function showResult() {
     resultPage.classList.remove('hidden');
     
-    // 점수 계산 (최대 75점)
     const percentage = (score / (questions.length * 5)) * 100;
     let resultIndex;
     
@@ -140,7 +156,6 @@ function showResult() {
     else if (percentage >= 40) resultIndex = 3;
     else resultIndex = 4;
 
-    // 결과 표시
     const resultContent = document.querySelector('.result-content');
     resultContent.innerHTML = results[resultIndex]
         .map(line => `<p>${line}</p>`)
@@ -174,7 +189,12 @@ document.querySelectorAll('.kakao-share').forEach(button => {
     });
 });
 
-// 광고 관련 초기화
+// 페이지 로드 시 광고 초기화
 window.onload = function() {
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    // 상단 광고 초기화
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('상단 광고 초기화 실패:', e);
+    }
 };
