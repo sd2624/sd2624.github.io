@@ -1,155 +1,100 @@
-// 카카오 SDK 초기화 완료 확인
-if (!Kakao.isInitialized()) {
-    Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
-}
+// 카카오 SDK 초기화
+Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
 // 질문 목록
 const questions = [
-    "상대방이 '사랑해'라고 말해주는 것이 가장 행복하다.",
-    "함께 시간을 보내는 것이 가장 중요하다고 생각한다.",
-    "상대방의 작은 선물에도 큰 감동을 받는다.",
+    "상대방의 칭찬과 인정의 말이 나에게 큰 의미가 있다.",
+    "함께 보내는 시간이 가장 소중하다.",
+    "스킨십을 통해 사랑을 느낀다.",
     "상대방이 나를 위해 무언가를 해줄 때 사랑받는다고 느낀다.",
-    "스킨십이나 포옹을 통해 애정을 느낀다.",
-    "상대방의 칭찬이나 인정하는 말에 기쁨을 느낀다.",
-    "상대방과 함께 있는 시간 자체가 소중하다.",
-    "특별한 날 받은 선물을 오래도록 간직한다.",
-    "상대방이 집안일을 도와줄 때 사랑을 느낀다.",
-    "손을 잡거나 안아주는 것으로 위로받는다."
+    "선물을 받을 때 특별한 사랑을 느낀다.",
+    "진심 어린 감사의 말을 들을 때 행복하다.",
+    "상대방과 대화하며 시간을 보내는 것이 좋다.",
+    "손을 잡거나 안아주는 것이 좋다.",
+    "상대방이 나를 도와줄 때 사랑을 느낀다.",
+    "작은 선물이나 깜짝 이벤트를 받으면 기쁘다."
 ];
 
-// 사랑의 언어 유형
-const loveLanguages = {
+// 결과 유형
+const results = {
     words: {
-        score: 0,
         title: "인정하는 말",
-        description: 
-            "당신은 말로 표현되는 사랑을 가장 크게 느끼는 타입입니다.\n" +
-            "칭찬, 감사, 사랑을 담은 말 한 마디가 당신에게 큰 의미를 줍니다.\n" +
-            "상대방이 진심을 담아 말을 건넬 때 깊은 애정을 느낍니다.\n" +
-            "당신에게 말은 단순한 소통 이상의 감정 전달 도구입니다.\n" +
-            "상대의 따뜻한 말 한 마디가 하루를 빛나게 만듭니다.\n" +
-            "감정적인 순간에는 위로와 격려의 말이 당신에게 큰 힘이 됩니다.\n" +
-            "사랑한다는 표현은 단순한 단어가 아니라 관계의 깊이를 상징합니다.\n" +
-            "꾸준한 언어적 표현은 당신의 행복감을 지속적으로 높입니다.\n" +
-            "상대방의 말 속에서 진정성을 찾으며 관계의 가치를 느낍니다.\n" +
-            "당신에게 있어서 사랑의 표현은 진심 어린 말이 핵심입니다."
+        description: "당신은 말을 통해 사랑을 표현하고 받아들이는 타입입니다.\n칭찬과 감사의 말이 큰 의미로 다가옵니다.\n진심 어린 대화를 통해 사랑을 느낍니다.\n따뜻한 한마디가 큰 위로와 힘이 됩니다.\n표현되지 않은 사랑은 잘 느끼지 못합니다.\n말로 하는 칭찬이 당신에게는 큰 선물이 됩니다.\n상대방의 말 한마디가 마음 깊이 남습니다.\n소소한 감사의 표현도 큰 의미로 다가옵니다.\n진심 어린 대화로 관계가 깊어집니다.\n사랑은 표현될 때 더 강하게 느껴집니다."
     },
     time: {
-        score: 0,
         title: "함께하는 시간",
-        description: 
-            "당신은 상대방과 함께 보내는 시간을 통해 사랑을 가장 크게 느끼는 타입입니다.\n" +
-            "온전히 집중된 시간은 당신에게 큰 위안과 기쁨을 줍니다.\n" +
-            "함께 있는 동안의 모든 순간이 특별하게 느껴집니다.\n" +
-            "사랑은 시간이라는 선물로 표현된다고 믿습니다.\n" +
-            "단순히 같은 공간에 있는 것만으로도 안정을 찾습니다.\n" +
-            "계획된 데이트보다 자연스러운 동행에서 더 큰 행복을 느낍니다.\n" +
-            "상대방이 당신에게 시간을 내어줄 때 깊은 애정을 느낍니다.\n" +
-            "함께하는 시간은 당신에게 추억을 만드는 가장 큰 기회입니다.\n" +
-            "바쁜 일상 속에서도 나를 위한 시간을 내주는 상대에게 감사함을 느낍니다.\n" +
-            "당신에게 있어서 사랑은 함께 나누는 시간이 핵심입니다."
-    },
-    gifts: {
-        score: 0,
-        title: "선물",
-        description: 
-            "당신은 선물을 통해 사랑을 가장 크게 느끼는 타입입니다.\n" +
-            "선물의 크기나 값어치보다 그 안에 담긴 진심을 소중히 여깁니다.\n" +
-            "상대방이 당신을 생각하며 준비한 작은 선물에 깊은 감동을 느낍니다.\n" +
-            "특별한 날이 아니더라도 선물 속에 담긴 배려를 높이 평가합니다.\n" +
-            "물질적 가치를 넘어선 마음의 표현으로 선물을 받아들입니다.\n" +
-            "선물은 관계의 애정을 확인하고 기념하는 특별한 도구로 여깁니다.\n" +
-            "작은 손편지나 직접 만든 선물이 특히 큰 감동을 줍니다.\n" +
-            "선물은 당신에게 사랑과 기억을 상징하는 중요한 요소입니다.\n" +
-            "상대가 당신을 위해 고민하고 준비한 노력이 고스란히 전해집니다.\n" +
-            "당신에게 있어서 선물은 진심이 담긴 사랑의 표현입니다."
-    },
-    service: {
-        score: 0,
-        title: "봉사",
-        description: 
-            "당신은 상대방의 행동과 도움을 통해 사랑을 가장 크게 느끼는 타입입니다.\n" +
-            "작은 배려나 도움의 행동이 당신에게 큰 감동을 줍니다.\n" +
-            "상대가 나를 위해 시간을 내어주는 모습에서 사랑을 느낍니다.\n" +
-            "특별히 요청하지 않아도 자발적으로 도와주는 행동이 소중합니다.\n" +
-            "상대의 노력과 헌신이 관계에 깊이를 더한다고 생각합니다.\n" +
-            "상대가 가사나 일을 돕는 행동에서 진정성을 느낍니다.\n" +
-            "봉사는 당신에게 사랑과 신뢰를 표현하는 중요한 방식입니다.\n" +
-            "일상 속에서 서로를 돕는 모습이 당신의 애정을 강화합니다.\n" +
-            "작은 행동 하나에도 큰 사랑과 배려를 느낄 수 있습니다.\n" +
-            "당신에게 있어서 봉사는 진심 어린 사랑의 실천입니다."
+        description: "당신은 함께 보내는 시간을 통해 사랑을 느끼는 타입입니다.\n상대방과의 특별한 순간들이 큰 의미를 가집니다.\n같이 보낸 시간이 사랑을 확인시켜줍니다.\n의미 있는 대화와 활동이 관계를 더욱 깊게 만듭니다.\n일상 속 작은 순간도 함께하면 특별해집니다.\n시간을 내어주는 것이 최고의 사랑 표현입니다.\n함께 있는 시간이 길수록 안정감을 느낍니다.\n소중한 사람과의 시간은 가장 큰 행복입니다.\n혼자가 아닌 함께하는 활동에 더 큰 만족감을 느낍니다.\n시간을 공유할 때 사랑이 더욱 확실해집니다."
     },
     touch: {
-        score: 0,
         title: "스킨십",
-        description: 
-            "당신은 신체 접촉을 통해 사랑을 가장 크게 느끼는 타입입니다.\n" +
-            "포옹이나 손을 잡는 작은 행동이 당신에게 큰 위로를 줍니다.\n" +
-            "상대방의 신체 접촉에서 안정감과 사랑을 느낍니다.\n" +
-            "특별한 말보다 따뜻한 포옹이 더 큰 의미로 다가옵니다.\n" +
-            "스킨십은 당신에게 관계의 친밀감을 상징하는 요소입니다.\n" +
-            "긴장된 순간에 상대방의 손길이 마음의 안정을 가져옵니다.\n" +
-            "스킨십은 단순한 접촉이 아니라 마음의 교감이라고 생각합니다.\n" +
-            "서로의 온기를 느끼며 사랑의 깊이를 체감합니다.\n" +
-            "스킨십을 통해 상대방의 진심과 애정을 확인할 수 있습니다.\n" +
-            "당신에게 있어서 스킨십은 가장 직접적인 사랑의 표현입니다."
+        description: "당신은 신체적 접촉을 통해 사랑을 표현하고 받아들이는 타입입니다.\n포옹이나 손잡기가 따뜻한 위로로 다가옵니다.\n작은 터치 하나도 큰 의미를 가집니다.\n스킨십은 당신에게 사랑을 확인하는 방법입니다.\n상대방의 가까움에서 사랑을 느낍니다.\n따뜻한 포옹은 하루의 피로를 잊게 합니다.\n스킨십이 없는 관계에서는 사랑을 느끼기 어렵습니다.\n가벼운 터치가 관계를 더 가깝게 만듭니다.\n사랑은 말보다는 행동으로 느껴질 때가 많습니다.\n상대방의 손길에서 큰 안도감을 얻습니다."
+    },
+    service: {
+        title: "봉사와 도움",
+        description: "당신은 실질적인 도움과 배려를 통해 사랑을 느끼는 타입입니다.\n상대방의 작은 배려가 큰 의미로 다가옵니다.\n실질적인 도움에서 진심을 느낍니다.\n작은 행동 하나하나가 큰 사랑으로 느껴집니다.\n사소한 배려가 당신에게는 큰 감동을 줍니다.\n상대방의 헌신이 관계를 깊게 만듭니다.\n도움을 주고받는 것이 사랑의 표현입니다.\n작은 행동에도 진심이 담겼다고 느낍니다.\n일상에서의 작은 배려가 큰 기쁨이 됩니다.\n상대방의 노력이 사랑으로 다가옵니다."
+    },
+    gifts: {
+        title: "선물",
+        description: "당신은 선물을 통해 사랑을 표현하고 받아들이는 타입입니다.\n작은 선물에도 큰 감동을 받습니다.\n깜짝 이벤트가 특별한 의미를 가집니다.\n선물은 사랑을 확인하는 중요한 방법입니다.\n준비된 선물에서 상대방의 진심을 느낍니다.\n작은 정성이 큰 기쁨을 줍니다.\n소소한 선물에도 큰 행복을 느낍니다.\n사랑은 행동으로 표현될 때 더 확실해집니다.\n특별한 날의 선물이 관계를 더 가깝게 만듭니다.\n선물은 당신에게 소중한 사랑의 표현입니다."
     }
 };
 
 let currentQuestion = 0;
+let scores = {
+    words: 0,
+    time: 0,
+    touch: 0,
+    service: 0,
+    gifts: 0
+};
 
-// DOM 로드 완료 후 실행
-document.addEventListener('DOMContentLoaded', function() {
-    initializeTest();
+// DOM 요소
+const startSection = document.getElementById('start-section');
+const questionSection = document.getElementById('question-section');
+const resultSection = document.getElementById('result-section');
+const adPopup = document.getElementById('ad-popup');
+
+// 시작 버튼 이벤트
+document.getElementById('start-btn').addEventListener('click', () => {
+    startSection.style.display = 'none';
+    questionSection.style.display = 'block';
+    showQuestion();
 });
 
-// 테스트 초기화
-function initializeTest() {
-    document.getElementById('start-btn').addEventListener('click', startTest);
-    document.querySelectorAll('.answer-btn').forEach((btn, index) => {
-        btn.addEventListener('click', () => handleAnswer(5 - index));
-    });
-}
-
-// 테스트 시작
-function startTest() {
-    document.getElementById('start-section').style.display = 'none';
-    document.getElementById('question-section').style.display = 'block';
-    showQuestion();
-}
-
-// 질문 표시
+// 질문 표시 함수
 function showQuestion() {
-    document.getElementById('question-text').textContent = questions[currentQuestion];
-    document.querySelector('.question-counter').textContent = `${currentQuestion + 1}/10`;
-    updateProgressBar();
+    const progressBar = document.querySelector('.progress');
+    const questionCounter = document.querySelector('.question-counter');
+    const questionText = document.getElementById('question-text');
+
+    progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+    questionCounter.textContent = `${currentQuestion + 1}/${questions.length}`;
+    questionText.textContent = questions[currentQuestion];
 }
 
-// 진행바 업데이트
-function updateProgressBar() {
-    const progress = ((currentQuestion + 1) / questions.length) * 100;
-    document.querySelector('.progress').style.width = `${progress}%`;
-}
-
-// 답변 처리
-function handleAnswer(score) {
-    const types = ['words', 'time', 'gifts', 'service', 'touch'];
-    const questionType = types[currentQuestion % 5];
-    loveLanguages[questionType].score += score;
-
-    if (currentQuestion < questions.length - 1) {
+// 답변 버튼 이벤트
+document.querySelectorAll('.answer-btn').forEach((button, index) => {
+    button.addEventListener('click', () => {
+        const score = 5 - index; // 5,4,3,2,1 점수 부여
+        const types = ['words', 'time', 'touch', 'service', 'gifts'];
+        scores[types[currentQuestion % 5]] += score;
+        
         currentQuestion++;
-        showQuestion();
-    } else {
-        showAdPopup();
-    }
-}
+        if (currentQuestion < questions.length) {
+            showQuestion();
+        } else {
+            showAdPopup();
+        }
+    });
+});
 
-// 광고 팝업 표시
+// 광고 팝업 표시 함수
 function showAdPopup() {
-    const popup = document.getElementById('ad-popup');
-    popup.style.display = 'block';
+    adPopup.style.display = 'flex';
     
+    // 팝업 광고 초기화
+    initializePopupAd();
+
     let countdown = 7;
     const countdownElement = document.querySelector('.countdown');
     
@@ -159,104 +104,143 @@ function showAdPopup() {
         
         if (countdown <= 0) {
             clearInterval(timer);
-            popup.style.display = 'none';
+            adPopup.style.display = 'none';
             showResult();
         }
     }, 1000);
-    
-    // 구글 광고 표시
-    (adsbygoogle = window.adsbygoogle || []).push({});
 }
 
-// 결과 표시
-function showResult() {
-    document.getElementById('question-section').style.display = 'none';
-    document.getElementById('result-section').style.display = 'block';
-
-    // 최고 점수 찾기
-    let maxScore = 0;
-    let primaryLanguage = '';
-    
-    for (let type in loveLanguages) {
-        if (loveLanguages[type].score > maxScore) {
-            maxScore = loveLanguages[type].score;
-            primaryLanguage = type;
+// 팝업 광고 초기화 함수
+function initializePopupAd() {
+    const popupAd = document.querySelector('.popup-ad');
+    if (popupAd) {
+        try {
+            // 기존 광고 제거
+            while (popupAd.firstChild) {
+                popupAd.removeChild(popupAd.firstChild);
+            }
+            
+            // 새로운 광고 삽입
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+            console.error('팝업 광고 초기화 실패:', e);
         }
     }
-
-    // 결과 표시
-    const result = loveLanguages[primaryLanguage];
-    document.getElementById('result-title').textContent = result.title;
-    document.getElementById('result-description').textContent = result.description;
-
-    // 결과 차트 표시 (선택사항)
-    createResultChart();
 }
 
-// 결과 차트 생성
-function createResultChart() {
-    const ctx = document.getElementById('resultChart').getContext('2d');
-    const data = {
-        labels: ['인정하는 말', '함께하는 시간', '선물', '봉사', '스킨십'],
-        datasets: [{
-            data: [
-                loveLanguages.words.score,
-                loveLanguages.time.score,
-                loveLanguages.gifts.score,
-                loveLanguages.service.score,
-                loveLanguages.touch.score
-            ],
-            backgroundColor: [
-                '#FF6B6B',
-                '#4ECDC4',
-                '#45B7D1',
-                '#96CEB4',
-                '#FFEEAD'
-            ]
-        }]
+// 결과 표시 함수
+function showResult() {
+    questionSection.style.display = 'none';
+    resultSection.style.display = 'block';
+
+    // 최고 점수 유형 찾기
+    let maxType = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+
+    // 결과 표시
+    document.getElementById('result-title').textContent = results[maxType].title;
+    document.getElementById('result-description').textContent = results[maxType].description;
+
+    // 차트 데이터 준비
+    const labels = {
+        words: "인정하는 말",
+        time: "함께하는 시간",
+        touch: "스킨십",
+        service: "봉사와 도움",
+        gifts: "선물"
     };
 
+    // 기존 차트 제거 (있다면)
+    const chartContainer = document.querySelector('.chart-container');
+    chartContainer.innerHTML = '<canvas id="resultChart"></canvas>';
+
+    // 새 차트 생성
+    const ctx = document.getElementById('resultChart').getContext('2d');
     new Chart(ctx, {
-        type: 'doughnut',
-        data: data,
+        type: 'radar',
+        data: {
+            labels: Object.values(labels),
+            datasets: [{
+                label: '사랑의 언어 점수',
+                data: Object.keys(labels).map(key => scores[key]),
+                backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                borderColor: 'rgba(255, 107, 107, 1)',
+                borderWidth: 2,
+                pointBackgroundColor: 'rgba(255, 107, 107, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(255, 107, 107, 1)'
+            }]
+        },
         options: {
+            scales: {
+                r: {
+                    angleLines: {
+                        color: 'rgba(0, 0, 0, 0.1)'
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)'
+                    },
+                    pointLabels: {
+                        color: '#666',
+                        font: {
+                            size: 12,
+                            family: "'Noto Sans KR', sans-serif"
+                        }
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 10
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
             responsive: true,
             maintainAspectRatio: false
         }
     });
 }
 
-// 테스트 다시하기
-document.querySelector('.retry-btn').addEventListener('click', () => {
-    currentQuestion = 0;
-    for (let type in loveLanguages) {
-        loveLanguages[type].score = 0;
-    }
-    document.getElementById('result-section').style.display = 'none';
-    document.getElementById('start-section').style.display = 'block';
-});
-
-// 결과 공유하기
+// 공유하기 버튼
 document.querySelector('.share-btn').addEventListener('click', () => {
     Kakao.Link.sendDefault({
         objectType: 'feed',
         content: {
             title: '나의 사랑의 언어 테스트',
-            description: '당신의 사랑의 언어를 알아보세요!',
-            imageUrl: 'YOUR_IMAGE_URL',
+            description: '당신의 사랑을 표현하는 방식을 알아보세요!',
+            imageUrl: 'YOUR_IMAGE_URL', // 실제 이미지 URL로 교체 필요
             link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href
+                mobileWebUrl: 'https://testpro.site',
+                webUrl: 'https://testpro.site'
             }
         },
         buttons: [
             {
-                title: '테스트 하러가기',
+                title: '테스트 하기',
                 link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href
+                    mobileWebUrl: 'https://testpro.site',
+                    webUrl: 'https://testpro.site'
                 }
             }
         ]
     });
 });
+
+// 다시하기 버튼
+document.querySelector('.retry-btn').addEventListener('click', () => {
+    currentQuestion = 0;
+    scores = {words: 0, time: 0, touch: 0, service: 0, gifts: 0};
+    resultSection.style.display = 'none';
+    startSection.style.display = 'block';
+});
+
+// 페이지 로드 시 광고 초기화
+window.onload = function() {
+    // 상단 광고 초기화
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('상단 광고 초기화 실패:', e);
+    }
+};
