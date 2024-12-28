@@ -1,154 +1,96 @@
-// 카카오 SDK 초기화 확인
-if (!Kakao.isInitialized()) {
-    Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
-}
+// 카카오 SDK 초기화
+Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
 // 질문 목록
 const questions = [
-    "매일 아침 기분 좋게 일어나는 편이다.",
-    "작은 일에도 감사함을 느낀다.",
-    "주변 사람들과 좋은 관계를 유지하고 있다.",
-    "나의 현재 생활에 만족한다.",
-    "미래에 대해 긍정적으로 생각한다.",
-    "취미나 관심사를 즐기며 보내는 시간이 있다.",
-    "스트레스를 잘 관리하는 편이다.",
-    "나만의 목표를 향해 나아가고 있다.",
-    "다른 사람들을 도울 때 기쁨을 느낀다.",
-    "실패해도 다시 일어설 수 있는 힘이 있다.",
-    "나의 감정을 잘 표현하는 편이다.",
-    "삶에서 의미있는 일을 하고 있다고 느낀다.",
-    "가족이나 친구들과 충분한 시간을 보낸다.",
-    "나의 건강을 잘 관리하고 있다.",
-    "전반적으로 행복한 삶을 살고 있다고 생각한다."
+    "하루에 웃는 횟수가 몇 번 정도인가요?",
+    "일주일에 운동을 몇 번 하시나요?",
+    "하루 평균 수면 시간은 어떻게 되나요?",
+    "가족이나 친구와 대화하는 시간이 충분한가요?",
+    "자신의 현재 직업에 만족하시나요?",
+    "취미 생활을 즐기는 시간이 있나요?",
+    "스트레스 해소법이 있나요?",
+    "일과 삶의 균형이 잘 잡혀있다고 생각하시나요?",
+    "하루 중 여유로운 시간을 가지고 계신가요?",
+    "주변 사람들과의 관계는 원만한가요?",
+    "자신의 미래에 대해 긍정적으로 생각하시나요?",
+    "최근 새로운 것을 배우거나 도전해본 적이 있나요?",
+    "하루 식사는 규칙적으로 하시나요?",
+    "자신만의 목표가 있나요?",
+    "전반적으로 현재 삶에 만족하시나요?"
 ];
 
-// 행복 유형 결과
-const happinessTypes = {
-    high: {
-        minScore: 56,
-        maxScore: 75,
-        title: "최상의 행복 지수",
-        description: [
-            "당신은 매우 높은 수준의 행복감을 느끼고 있습니다!",
-            "긍정적인 마인드로 삶을 대하고 있어요.",
-            "주변 사람들에게도 좋은 에너지를 전파하고 있습니다.",
-            "감사하는 마음이 습관화되어 있네요.",
-            "스트레스 관리 능력이 뛰어납니다.",
-            "자신의 목표를 향해 꾸준히 나아가고 있어요.",
-            "건강한 대인관계를 유지하고 있습니다.",
-            "삶의 의미를 잘 찾아가고 있어요.",
-            "현재에 만족하면서도 성장을 추구하고 있습니다.",
-            "앞으로도 이런 행복한 상태를 잘 유지하실 수 있을 거예요!"
-        ]
-    },
-    medium: {
-        minScore: 36,
-        maxScore: 55,
-        title: "안정적인 행복 지수",
-        description: [
-            "당신은 적절한 수준의 행복감을 유지하고 있습니다.",
-            "대체로 긍정적인 시각을 가지고 있어요.",
-            "때로는 힘들지만 잘 극복해내고 있습니다.",
-            "자신만의 페이스로 삶을 살아가고 있어요.",
-            "주변 사람들과 좋은 관계를 맺고 있습니다.",
-            "미래에 대한 희망을 가지고 있어요.",
-            "자신의 감정을 잘 알아차리고 있습니다.",
-            "성장할 수 있는 여지가 많이 남아있어요.",
-            "조금 더 자신을 사랑하면 좋을 것 같습니다.",
-            "작은 행복부터 천천히 찾아가보세요."
-        ]
-    },
-    low: {
-        minScore: 15,
-        maxScore: 35,
-        title: "행복 충전이 필요한 시기",
-        description: [
-            "현재 당신은 행복감이 다소 부족한 상태입니다.",
-            "일시적인 어려움을 겪고 있을 수 있어요.",
-            "너무 자신을 몰아세우지 마세요.",
-            "작은 것부터 감사함을 찾아보세요.",
-            "도움이 필요하다면 주변에 이야기해보세요.",
-            "혼자만의 시간도 중요하답니다.",
-            "취미 생활을 시작해보는 건 어떨까요?",
-            "규칙적인 생활이 도움이 될 수 있어요.",
-            "전문가의 상담을 받아보는 것도 좋습니다.",
-            "이 시기도 곧 지나갈 거예요. 힘내세요!"
-        ]
-    }
-};
+// 결과 메시지
+const results = [
+    "당신의 행복 지수는 매우 높습니다!\n삶의 균형이 잘 잡혀있고 긍정적인 마인드를 가지고 계시네요.",
+    "행복한 삶을 살고 계시지만, 더 높은 행복을 위한 작은 변화가 필요해요.\n소소한 취미생활을 시작해보는 건 어떨까요?",
+    "평범한 일상 속에서 행복을 찾고 계시네요.\n작은 것에 감사하는 마음을 가지면 더 행복해질 수 있어요.",
+    "행복 지수가 조금 낮습니다.\n자신을 위한 시간을 더 가져보세요.\n취미생활이나 운동으로 스트레스를 해소해보세요.",
+    "지금은 힘들 수 있지만, 변화의 시작점에 서 있습니다.\n작은 목표부터 하나씩 이뤄나가보세요."
+];
 
 let currentQuestion = 0;
-let totalScore = 0;
+let score = 0;
 
-// DOM 로드 완료 후 실행
-document.addEventListener('DOMContentLoaded', function() {
-    initializeTest();
-    (adsbygoogle = window.adsbygoogle || []).push({});
+// 페이지 요소들
+const startPage = document.getElementById('startPage');
+const questionPage = document.getElementById('questionPage');
+const loadingPage = document.getElementById('loadingPage');
+const resultPage = document.getElementById('resultPage');
+const popupAd = document.getElementById('popupAd');
+
+// 시작 버튼 이벤트
+document.querySelector('.start-btn').addEventListener('click', () => {
+    startPage.classList.add('hidden');
+    questionPage.classList.remove('hidden');
+    showQuestion();
 });
 
-// 테스트 초기화
-function initializeTest() {
-    document.getElementById('start-btn').addEventListener('click', startTest);
-    document.querySelectorAll('.answer-btn').forEach(btn => {
-        btn.addEventListener('click', handleAnswer);
-    });
-}
-
-// 테스트 시작
-function startTest() {
-    document.getElementById('start-section').style.display = 'none';
-    document.getElementById('question-section').style.display = 'block';
-    showQuestion();
-}
-
-// 질문 표시
+// 질문 표시 함수
 function showQuestion() {
-    const questionText = document.getElementById('question-text');
-    questionText.style.opacity = '0';
-    
-    setTimeout(() => {
-        questionText.textContent = questions[currentQuestion];
-        questionText.style.opacity = '1';
-    }, 300);
+    const progressBar = document.querySelector('.progress');
+    progressBar.style.width = `${(currentQuestion / questions.length) * 100}%`;
 
-    document.querySelector('.question-counter').textContent = `${currentQuestion + 1}/15`;
-    updateProgressBar();
+    const questionEl = document.querySelector('.question');
+    questionEl.textContent = questions[currentQuestion];
+
+    const answersEl = document.querySelector('.answers');
+    answersEl.innerHTML = `
+        <button class="answer-btn" onclick="handleAnswer(5)">매우 그렇다</button>
+        <button class="answer-btn" onclick="handleAnswer(4)">그렇다</button>
+        <button class="answer-btn" onclick="handleAnswer(3)">보통이다</button>
+        <button class="answer-btn" onclick="handleAnswer(2)">아니다</button>
+        <button class="answer-btn" onclick="handleAnswer(1)">전혀 아니다</button>
+    `;
 }
 
-// 진행바 업데이트
-function updateProgressBar() {
-    const progress = ((currentQuestion + 1) / questions.length) * 100;
-    document.querySelector('.progress').style.width = `${progress}%`;
-}
+// 답변 처리 함수
+function handleAnswer(value) {
+    score += value;
+    currentQuestion++;
 
-// 답변 처리
-function handleAnswer(e) {
-    const score = parseInt(e.target.dataset.score);
-    totalScore += score;
-
-    if (currentQuestion < questions.length - 1) {
-        currentQuestion++;
+    if (currentQuestion < questions.length) {
         showQuestion();
     } else {
-        showAdPopup();
+        showLoading();
     }
 }
 
-// 광고 팝업 표시
-function showAdPopup() {
-    const popup = document.getElementById('ad-popup');
-    popup.style.display = 'block';
-    
+// 로딩 화면 표시
+function showLoading() {
+    questionPage.classList.add('hidden');
+    loadingPage.classList.remove('hidden');
+    popupAd.classList.remove('hidden');
+
     let countdown = 7;
-    const countdownElement = document.querySelector('.countdown');
+    const countdownEl = document.querySelector('.countdown');
     
     const timer = setInterval(() => {
         countdown--;
-        countdownElement.textContent = countdown;
+        countdownEl.textContent = countdown;
         
         if (countdown <= 0) {
             clearInterval(timer);
-            popup.style.display = 'none';
             showResult();
         }
     }, 1000);
@@ -156,51 +98,46 @@ function showAdPopup() {
 
 // 결과 표시
 function showResult() {
-    document.getElementById('question-section').style.display = 'none';
-    document.getElementById('result-section').style.display = 'block';
+    loadingPage.classList.add('hidden');
+    resultPage.classList.remove('hidden');
+    popupAd.classList.add('hidden');
 
-    let resultType;
-    if (totalScore >= 56) {
-        resultType = happinessTypes.high;
-    } else if (totalScore >= 36) {
-        resultType = happinessTypes.medium;
-    } else {
-        resultType = happinessTypes.low;
-    }
-
-    document.getElementById('result-title').textContent = resultType.title;
-    document.getElementById('result-description').textContent = resultType.description.join('\n');
+    const resultIndex = Math.floor(score / (questions.length * 5) * results.length);
+    const resultContent = document.querySelector('.result-content');
+    resultContent.innerHTML = results[Math.min(resultIndex, results.length - 1)]
+        .split('\n')
+        .map(line => `<p>${line}</p>`)
+        .join('');
 }
 
-// 테스트 다시하기
-document.querySelector('.retry-btn').addEventListener('click', () => {
-    currentQuestion = 0;
-    totalScore = 0;
-    document.getElementById('result-section').style.display = 'none';
-    document.getElementById('start-section').style.display = 'block';
+// 팝업 닫기 버튼
+document.querySelector('.close-popup').addEventListener('click', () => {
+    popupAd.classList.add('hidden');
 });
 
-// 결과 공유하기
-document.querySelector('.share-btn').addEventListener('click', () => {
-    Kakao.Link.sendDefault({
-        objectType: 'feed',
-        content: {
-            title: '나의 행복 지수 테스트',
-            description: '당신의 현재 행복도는 얼마일까요?',
-            imageUrl: 'YOUR_IMAGE_URL',
-            link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href
-            }
-        },
-        buttons: [
-            {
-                title: '테스트 하러가기',
+// 카카오톡 공유하기
+document.querySelectorAll('.kakao-share').forEach(button => {
+    button.addEventListener('click', () => {
+        Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: '행복 지수 테스트',
+                description: '나의 행복 지수는 얼마일까?',
+                imageUrl: 'YOUR_IMAGE_URL',
                 link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href
+                    mobileWebUrl: 'https://testpro.site',
+                    webUrl: 'https://testpro.site'
                 }
-            }
-        ]
+            },
+            buttons: [
+                {
+                    title: '테스트 하기',
+                    link: {
+                        mobileWebUrl: 'https://testpro.site',
+                        webUrl: 'https://testpro.site'
+                    }
+                }
+            ]
+        });
     });
 });

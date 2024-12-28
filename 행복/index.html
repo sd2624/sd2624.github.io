@@ -3,112 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 행복 지수 테스트</title>
-    
+    <title>행복 지수 테스트</title>
+    <link rel="stylesheet" href="style.css">
     <!-- 카카오 SDK -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script>
-        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
-    </script>
-    
-    <!-- 구글 광고 -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
-    
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 상단 광고 -->
-    <div class="top-ad-container">
+    <!-- 광고 영역 -->
+    <div class="ad-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
         <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="3201247599"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
+            style="display:block"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
         <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
 
     <div class="container">
         <div class="test-container">
-            <!-- 시작 섹션 -->
-            <div id="start-section">
-                <div class="happiness-meter">
-                    <div class="meter-smile"></div>
-                    <div class="meter-rays"></div>
-                </div>
-                <h1 class="title-animation">나의 행복 지수 테스트</h1>
-                <p class="subtitle-fade">당신의 현재 행복도를 측정해보세요!</p>
-                <button id="start-btn" class="start-pulse">
-                    테스트 시작하기
-                    <span class="btn-sparkle"></span>
-                </button>
-            </div>
-
-            <!-- 질문 섹션 -->
-            <div id="question-section" style="display: none;">
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress">
-                            <div class="progress-glow"></div>
-                        </div>
-                    </div>
-                    <span class="question-counter">1/15</span>
-                </div>
-                <h2 id="question-text" class="question-fade"></h2>
-                <div class="answers">
-                    <button class="answer-btn ripple" data-score="5">매우 그렇다</button>
-                    <button class="answer-btn ripple" data-score="4">그렇다</button>
-                    <button class="answer-btn ripple" data-score="3">보통이다</button>
-                    <button class="answer-btn ripple" data-score="2">아니다</button>
-                    <button class="answer-btn ripple" data-score="1">전혀 아니다</button>
+            <h1 class="title">당신의 행복 지수 테스트</h1>
+            <div class="start-page" id="startPage">
+                <div class="start-img"></div>
+                <button class="start-btn">테스트 시작하기</button>
+                <div class="share-btn">
+                    <div class="kakao-share">친구에게 공유하기</div>
                 </div>
             </div>
 
-            <!-- 결과 섹션 -->
-            <div id="result-section" style="display: none;">
-                <div class="result-header">
-                    <div class="result-emoji"></div>
-                    <h2 class="result-title-animation">당신의 행복 지수는?</h2>
+            <div class="question-page hidden" id="questionPage">
+                <div class="progress-bar">
+                    <div class="progress"></div>
                 </div>
-                <div class="result-content">
-                    <h3 id="result-title" class="result-fade"></h3>
-                    <div id="result-description" class="result-description slide-up"></div>
-                </div>
-                <div class="button-container">
-                    <button class="share-btn gradient-effect">결과 공유하기</button>
-                    <button class="retry-btn gradient-effect">다시 테스트하기</button>
-                    <a href="https://testpro.site" class="home-btn floating-effect">다른 테스트 하기</a>
+                <h2 class="question"></h2>
+                <div class="answers"></div>
+            </div>
+
+            <div class="loading-page hidden" id="loadingPage">
+                <div class="loading-text">결과 분석중...</div>
+                <div class="countdown">7</div>
+                <div class="loading-spinner"></div>
+            </div>
+
+            <div class="result-page hidden" id="resultPage">
+                <h2>당신의 행복 지수는?</h2>
+                <div class="result-content"></div>
+                <div class="result-img"></div>
+                <button class="retry-btn" onclick="location.href='https://testpro.site'">다른 테스트 하기</button>
+                <div class="share-btn">
+                    <div class="kakao-share">결과 공유하기</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 광고 팝업 -->
-    <div id="ad-popup" class="popup">
+    <!-- 팝업 광고 -->
+    <div class="popup-ad hidden" id="popupAd">
         <div class="popup-content">
-            <div class="loading-text">결과 분석 중...</div>
-            <div class="countdown-container">
-                <div class="countdown">7</div>
-                <div class="countdown-ring"></div>
-            </div>
-            <div class="loading-animation">
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-            </div>
-            <div class="ad-container">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="3201247599"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                style="display:inline-block;width:300px;height:250px"
+                data-ad-client="ca-pub-9374368296307755"
+                data-ad-slot="3201247599"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            <button class="close-popup">닫기</button>
         </div>
     </div>
 
