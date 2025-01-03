@@ -33,10 +33,10 @@ class BandAutoPost:
             
             # 로그인 정보 입력
             self.driver.execute_script(
-                f"document.getElementsByName('id')[0].value='{os.environ['0815alstj']}'"
+                f"document.getElementsByName('id')[0].value='{os.environ['NAVER_ID']}'"
             )
             self.driver.execute_script(
-                f"document.getElementsByName('pw')[0].value='{os.environ['qweqwe89+']}'"
+                f"document.getElementsByName('pw')[0].value='{os.environ['NAVER_PW']}'"
             )
             
             # 로그인 버튼 클릭
