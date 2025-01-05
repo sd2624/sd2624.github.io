@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <!-- Event snippet for 페이지 조회 conversion page -->
-<script>
-    gtag('event', 'conversion', {'send_to': 'AW-11438616604/1mSHCLiKx_4YEJzgrc4q'});
-  </script>
+    <!-- Event snippet for Page View conversion page -->
+    <script>
+        gtag('event', 'conversion', {'send_to': 'AW-11438616604/1mSHCLiKx_4YEJzgrc4q'});
+    </script>
   
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11438616604">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11438616604"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'AW-11438616604');
-</script>
+        gtag('config', 'AW-11438616604');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 감정 상태 테스트</title>
+    <title>My Emotional State Test</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
@@ -26,10 +25,10 @@
 <body>
     <div class="container">
         <div class="test-container">
-            <h1>나의 감정 상태 테스트</h1>
+            <h1>My Emotional State Test</h1>
             <div id="start-section">
                 <div class="emotion-icon"></div>
-                <button id="start-btn">테스트 시작하기</button>
+                <button id="start-btn">Start Test</button>
             </div>
             
             <div id="question-section" style="display: none;">
@@ -38,25 +37,25 @@
                 </div>
                 <h2 id="question-text"></h2>
                 <div class="answers">
-                    <button class="answer-btn" data-score="1">전혀 아니다</button>
-                    <button class="answer-btn" data-score="2">아니다</button>
-                    <button class="answer-btn" data-score="3">보통이다</button>
-                    <button class="answer-btn" data-score="4">그렇다</button>
-                    <button class="answer-btn" data-score="5">매우 그렇다</button>
+                    <button class="answer-btn" data-score="1">Not at all</button>
+                    <button class="answer-btn" data-score="2">No</button>
+                    <button class="answer-btn" data-score="3">Neutral</button>
+                    <button class="answer-btn" data-score="4">Yes</button>
+                    <button class="answer-btn" data-score="5">Definitely</button>
                 </div>
             </div>
 
             <div id="result-section" style="display: none;">
-                <h2>당신의 감정 상태는...</h2>
+                <h2>Your Emotional State is...</h2>
                 <div class="result-content">
                     <div class="result-icon"></div>
                     <h3 id="result-title"></h3>
                     <p id="result-description"></p>
                 </div>
                 <div class="share-buttons">
-                    <button id="kakao-share-btn" class="share-btn kakao">카카오톡 공유하기</button>
-                    <button id="retry-btn" class="share-btn retry">다시 테스트하기</button>
-                    <a href="https://testpro.site" class="home-btn">다른 테스트 하기</a>
+                    <button id="kakao-share-btn" class="share-btn kakao">Share on KakaoTalk</button>
+                    <button id="retry-btn" class="share-btn retry">Retry Test</button>
+                    <a href="https://testpro.site" class="home-btn">Try Another Test</a>
                 </div>
             </div>
         </div>
@@ -64,10 +63,10 @@
 
     <div id="ad-popup" class="popup">
         <div class="popup-content">
-            <div id="ad-timer">결과값 분석중 입니다 </div>
+            <div id="ad-timer">Analyzing results</div>
             <div class="countdown">7</div>
             <div class="ad-container">
-                <!-- 구글 광고 -->
+                <!-- Google Ad -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-9374368296307755"
