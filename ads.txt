@@ -1,3 +1,4 @@
 google.com, pub-9374368296307755, DIRECT, f08c47fec0942fa0
 ezoic.ai, 2611fbae8fbd1bdeccd92fcaa98aa462, DIRECT
 ezoic.co.uk, 2611fbae8fbd1bdeccd92fcaa98aa462, DIRECT
+ezoic.com, 123456, DIRECT, 01abcd23efgh45ij67kl89mn
