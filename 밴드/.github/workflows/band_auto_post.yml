@@ -1,0 +1,64 @@
+name: Band Auto Posting
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 매시간 실행
+  workflow_dispatch:      # 수동 실행 가능
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        
+    - name: Install Chrome and jq
+      run: |
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+        sudo apt-get update
+        sudo apt-get install google-chrome-stable jq
+        
+    - name: Install dependencies
+      run: |
+        cd 밴드
+        pip install -r requirements.txt
+        
+    - name: Create config file
+      env:
+        EMAIL: ${{ secrets.BAND_EMAIL }}
+        PASSWORD: ${{ secrets.BAND_PASSWORD }}
+        TIME: ${{ secrets.POST_TIME }}
+        INTERVAL: ${{ secrets.INTERVAL_HOURS }}
+        URL: ${{ secrets.POST_URL }}
+        TITLE: ${{ secrets.POST_TITLE }}
+      run: |
+        cd 밴드
+        jq -n \
+          --arg email "$EMAIL" \
+          --arg password "$PASSWORD" \
+          --arg post_time "$TIME" \
+          --argjson interval_hours "$INTERVAL" \
+          --arg post_url "$URL" \
+          --arg title "$TITLE" \
+          '{
+            "email": $email,
+            "password": $password,
+            "post_time": $post_time,
+            "interval_hours": $interval_hours,
+            "post_url": $post_url,
+            "title": $title,
+            "bands": []
+          }' > config.json
+        
+    - name: Run band poster
+      run: |
+        cd 밴드
+        python run_band_poster.py

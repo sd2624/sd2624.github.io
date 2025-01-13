@@ -1,0 +1,12 @@
+{
+    "email": "s07102624@gmail.com",
+    "password": "Aqweqwe89+",
+    "post_url": "https://news.naver.com",
+    "interval_hours": 24,
+    "bands": [
+        {
+            "name": "첫번째 밴드",
+            "url": "https://band.us/band/your_first_band_id"
+        }
+    ]
+}

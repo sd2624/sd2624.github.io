@@ -1,0 +1,18 @@
+{
+    "email": "qqqq07102624@gmail.com",
+    "password": "Aqweqwe89+",
+    "post_url": "https://testpro.site/행복",
+    "title": "https://testpro.site/행복",
+    "post_time": "19:40",
+    "interval_hours": 12,
+    "bands": [
+        {
+            "name": "첫번째 밴드",
+            "url": "https://band.us/band/your_first_band_id"
+        },
+        {
+            "name": "두번째 밴드",
+            "url": "https://band.us/band/your_second_band_id"
+        }
+    ]
+}
