@@ -91,9 +91,8 @@ def setup_folders():
 def save_article(title, content, images, base_path, prev_post=None, next_post=None):
     """HTML 파일로 게시물 저장"""
     try:
-        # 제목 처리
-        processed_title = process_title(title)
-        safe_title = clean_filename(processed_title)
+        # 제목 처리를 저장할 때도 동일하게 유지
+        safe_title = clean_filename(title)
         filename = os.path.join(base_path, f'{safe_title}.html')
         
         # 네비게이션 링크 설정 - 파일명 처리 수정
@@ -126,14 +125,14 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     
     <!-- 네이버 밴드 썸네일 비활성화 -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{processed_title}">
+    <meta property="og:title" content="{title}">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta property="og:url" content="">
     <meta name="twitter:card" content="none">
     <link rel="image_src" href="">
     
-    <title>{processed_title}</title>
+    <title>{title}</title>
     
     <!-- 검색엔진 노출 제한 -->
     <meta name="googlebot" content="noindex,nofollow">
@@ -262,7 +261,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
             
             <article class="post">
                 <header class="entry-header">
-                    <h1 class="entry-title">{processed_title}</h1>
+                    <h1 class="entry-title">{title}</h1>
                     <div class="entry-meta">
                         <span class="posted-on">
                             <time class="entry-date published">{datetime.now().strftime('%Y년 %m월 %d일')}</time>
@@ -561,24 +560,29 @@ def scrape_category():
                     if not title_elem:
                         continue
                     
-                    title = title_elem.get_text(strip=True)
-                    link = title_elem.get('href')
+                    original_title = title_elem.get_text(strip=True)
+                    link = title_elem.get('href')  # href 속성 가져오기
+                    if not link:  # link가 없는 경우 건너뛰기
+                        logging.error(f"Link not found for: {original_title}")
+                        continue
+                    
+                    # 처리된 제목 생성
+                    processed_title = process_title(original_title)
                     
                     # 제목의 해시값을 사용하여 일관된 접두어/접미어 선택
-                    prefix_index = hash(title) % len(CLICK_PREFIXES)
-                    suffix_index = hash(title + "suffix") % len(INTEREST_SUFFIXES)
-                    processed_title = process_title(title, prefix_index, suffix_index)
+                    prefix_index = hash(original_title) % len(CLICK_PREFIXES)
+                    suffix_index = hash(original_title + "suffix") % len(INTEREST_SUFFIXES)
                     safe_filename = clean_filename(processed_title) + '.html'
                     
                     # 중복 게시물 검사 - processed_title 사용
                     if os.path.exists(os.path.join(base_path, safe_filename)):
-                        logging.info(f"Skipping duplicate post: {title}")
+                        logging.info(f"Skipping duplicate post: {original_title}")
                         continue
                     
                     # 게시물 정보를 딕셔너리에 저장
                     current_post = {
-                        'title': title,
-                        'processed_title': processed_title,
+                        'title': processed_title,  # 처리된 제목 저장
+                        'original_title': original_title,  # 원본 제목도 저장
                         'filename': safe_filename,
                         'prefix_index': prefix_index,
                         'suffix_index': suffix_index,
@@ -593,7 +597,7 @@ def scrape_category():
                     
                     content = article_soup.select_one('.entry-content')
                     if not content:
-                        logging.error(f"Content not found for: {title}")
+                        logging.error(f"Content not found for: {original_title}")
                         continue
 
                     # 이미지 처리 - WebP 변환 추가
@@ -617,7 +621,7 @@ def scrape_category():
                                 
                                 # WebP로 저장 (품질 85%)
                                 img_data.save(img_path, 'WEBP', quality=85)
-                                images_html += f'<img src="images/{webp_name}" alt="{title}" loading="lazy">\n'
+                                images_html += f'<img src="images/{webp_name}" alt="{original_title}" loading="lazy">\n'
                                 logging.info(f"Image saved as WebP: {webp_name}")
                             except Exception as e:
                                 logging.error(f"Failed to process image: {str(e)}")
