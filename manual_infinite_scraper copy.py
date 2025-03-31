@@ -641,13 +641,10 @@ def scrape_category():
                             next_post = posts_info[-2]
                     
                     # 현재 게시물 저장
-                    current_post['content'] = content
-                    current_post['images'] = images_html
-                    
                     saved_file = save_article(
                         current_post['title'],
-                        current_post['content'],
-                        current_post['images'],
+                        content,
+                        images_html,
                         base_path,
                         prev_post,  # 이전 게시물
                         next_post   # 다음 게시물
@@ -658,8 +655,8 @@ def scrape_category():
                         if prev_post:
                             save_article(
                                 prev_post['title'],
-                                prev_post['content'],
-                                prev_post['images'],
+                                content if 'content' in prev_post else None,
+                                prev_post.get('images', ''),
                                 base_path,
                                 posts_info[-2] if len(posts_info) > 1 else None,  # 이전 글의 이전 글
                                 current_post  # 현재 게시물을 다음 글로 설정
