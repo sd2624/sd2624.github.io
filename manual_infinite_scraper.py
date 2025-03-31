@@ -395,13 +395,13 @@ def create_humor_page(posts_info, base_path, page_number=1):
     
     pagination_html += '</div>'
 
-    # 게시물 목록 HTML 생성 시 저장된 실제 파일명 사용
+    # 게시물 목록 HTML 생성 시 처리된 제목과 파일명 사용
     posts_html = '<ul style="list-style: none; padding: 0;">'
     for post in current_posts:
         posts_html += f'''
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
             <a href="./{post['filename']}" style="text-decoration: none; color: #333; display: block;">
-                <h2 style="margin: 0; font-size: 18px;">{post['original_title']}</h2>
+                <h2 style="margin: 0; font-size: 18px;">{post['title']}</h2>
             </a>
         </li>'''
     posts_html += '</ul>'
@@ -577,7 +577,7 @@ def scrape_category():
                     if not content:
                         continue
 
-                    # 처리된 제목 생성
+                    # 처리된 제목 생성 - 파일명과 표시 제목 동일하게
                     processed_title = f"긴급-{process_title(original_title)}-모음집"
                     safe_filename = clean_filename(processed_title) + '.html'
                     
@@ -616,7 +616,7 @@ def scrape_category():
 
                     # 현재 게시물 정보 저장
                     current_post = {
-                        'title': processed_title,
+                        'title': processed_title,  # 처리된 전체 제목
                         'original_title': original_title,
                         'filename': safe_filename,
                         'content': content,
