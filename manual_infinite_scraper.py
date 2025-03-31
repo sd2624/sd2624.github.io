@@ -535,9 +535,6 @@ def scrape_category():
     base_path, image_path = setup_folders()
     posts_info = []
     
-    # 초기 유머 페이지 생성
-    initialize_humor_page(base_path)
-    
     try:
         scraper = get_scraper()
         page = 1
@@ -557,122 +554,109 @@ def scrape_category():
                 
             for article in articles:
                 try:
+                    # 게시물의 링크를 먼저 가져옴
                     title_elem = article.select_one('.entry-title a')
                     if not title_elem:
                         continue
-                    
-                    title = title_elem.get_text(strip=True)
+                        
                     link = title_elem.get('href')
+                    if not link:
+                        continue
                     
-                    # 제목의 해시값을 사용하여 일관된 접두어/접미어 선택
-                    prefix_index = hash(title) % len(CLICK_PREFIXES)
-                    suffix_index = hash(title + "suffix") % len(INTEREST_SUFFIXES)
-                    processed_title = process_title(title, prefix_index, suffix_index)
+                    # 상세 페이지에서 실제 내용 가져오기
+                    article_response = scraper.get(link)
+                    article_soup = BeautifulSoup(article_response.text, 'html.parser')
+                    
+                    # 상세 페이지에서 제목과 내용 가져오기
+                    article_title = article_soup.select_one('.entry-title')
+                    content = article_soup.select_one('.entry-content')
+                    
+                    if not article_title or not content:
+                        logging.error(f"Content or title not found for: {link}")
+                        continue
+                        
+                    title = article_title.get_text(strip=True)
+                    
+                    # 처리된 제목 생성
+                    processed_title = f"긴급-{process_title(title)}-모음집"
                     safe_filename = clean_filename(processed_title) + '.html'
                     
-                    # 중복 게시물 검사 - processed_title 사용
+                    # 중복 검사
                     if os.path.exists(os.path.join(base_path, safe_filename)):
                         logging.info(f"Skipping duplicate post: {title}")
                         continue
                     
-                    # 게시물 정보를 딕셔너리에 저장
-                    current_post = {
-                        'title': title,
-                        'processed_title': processed_title,
-                        'filename': safe_filename,
-                        'prefix_index': prefix_index,
-                        'suffix_index': suffix_index,
-                        'content': None,
-                        'images': None,
-                        'page_number': (len(posts_info) // 10) + 1  # 페이지 번호 추가
-                    }
-                    
-                    # 게시물 상세 페이지 스크래핑
-                    article_response = scraper.get(link)
-                    article_soup = BeautifulSoup(article_response.text, 'html.parser')
-                    
-                    content = article_soup.select_one('.entry-content')
-                    if not content:
-                        logging.error(f"Content not found for: {title}")
-                        continue
-
-                    # 이미지 처리 - WebP 변환 추가
+                    # 이미지 처리
                     images_html = ""
                     for img in content.find_all('img'):
                         if img.get('src'):
-                            img_name = clean_filename(os.path.basename(img['src']))
-                            webp_name = f"{os.path.splitext(img_name)[0]}.webp"
-                            img_path = os.path.join(image_path, webp_name)
-                            
                             try:
-                                # 이미지 다운로드
-                                img_response = scraper.get(img['src'])
+                                img_url = img['src']
+                                if not img_url.startswith('http'):
+                                    img_url = 'https://humorworld.net' + img_url
+                                    
+                                img_name = clean_filename(os.path.basename(img_url))
+                                webp_name = f"{os.path.splitext(img_name)[0]}.webp"
+                                img_path = os.path.join(image_path, webp_name)
+                                
+                                # 이미지 다운로드 및 변환
+                                img_response = scraper.get(img_url)
                                 img_data = Image.open(io.BytesIO(img_response.content))
                                 
-                                # RGBA 이미지를 RGB로 변환
                                 if img_data.mode in ('RGBA', 'LA'):
                                     background = Image.new('RGB', img_data.size, (255, 255, 255))
                                     background.paste(img_data, mask=img_data.split()[-1])
                                     img_data = background
                                 
-                                # WebP로 저장 (품질 85%)
                                 img_data.save(img_path, 'WEBP', quality=85)
                                 images_html += f'<img src="images/{webp_name}" alt="{title}" loading="lazy">\n'
-                                logging.info(f"Image saved as WebP: {webp_name}")
                             except Exception as e:
                                 logging.error(f"Failed to process image: {str(e)}")
+                                continue
 
+                    # 현재 게시물 정보 저장
+                    current_post = {
+                        'title': processed_title,
+                        'original_title': title,
+                        'filename': safe_filename,
+                        'content': content,
+                        'images': images_html
+                    }
+                    
                     # 이전/다음 게시물 설정
-                    prev_post = None
+                    prev_post = posts_info[-1] if posts_info else None
                     next_post = None
                     
-                    # 현재 게시물의 페이지 번호와 인덱스 계산
-                    current_page = (len(posts_info)) // 10 + 1
-                    current_index = (len(posts_info)) % 10
-                    
-                    # 첫 페이지 첫 글이 아닌 경우 이전 글 설정
-                    if len(posts_info) > 0:
-                        prev_post = posts_info[-1]
-                    
-                    # 다음 게시물 설정
-                    if len(posts_info) > 1:
-                        # 페이지의 마지막 글이 아닌 경우
-                        if current_index < 9:
-                            next_post = posts_info[-2]
-                    
-                    # 현재 게시물 저장
+                    # 게시물 저장
                     saved_file = save_article(
-                        current_post['title'],
+                        processed_title,
                         content,
                         images_html,
                         base_path,
-                        prev_post,  # 이전 게시물
-                        next_post   # 다음 게시물
+                        prev_post,
+                        next_post
                     )
                     
                     if saved_file:
-                        # 이전 게시물이 있는 경우 해당 게시물의 다음 글로 현재 게시물 설정
                         if prev_post:
                             save_article(
                                 prev_post['title'],
-                                content if 'content' in prev_post else None,
+                                prev_post['content'],
                                 prev_post.get('images', ''),
                                 base_path,
-                                posts_info[-2] if len(posts_info) > 1 else None,  # 이전 글의 이전 글
-                                current_post  # 현재 게시물을 다음 글로 설정
+                                posts_info[-2] if len(posts_info) > 1 else None,
+                                current_post
                             )
-                        
                         posts_info.append(current_post)
-
+                    
                     time.sleep(random.uniform(2, 4))
                     
                 except Exception as e:
                     logging.error(f'Error processing article: {str(e)}')
                     continue
             
-            # 페이지 단위로 유머 페이지 업데이트
+            # 페이지 업데이트
             update_humor_pages(posts_info, base_path)
-            
             page += 1
             time.sleep(random.uniform(3, 5))
             
