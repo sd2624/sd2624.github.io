@@ -91,20 +91,21 @@ def setup_folders():
 def save_article(title, content, images, base_path, prev_post=None, next_post=None):
     """HTML 파일로 게시물 저장"""
     try:
-        # 제목 처리를 저장할 때도 동일하게 유지
-        safe_title = clean_filename(title)
+        # 파일명 생성 시 원본 제목 사용
+        processed_title = process_title(title)
+        safe_title = clean_filename(processed_title)
         filename = os.path.join(base_path, f'{safe_title}.html')
         
         # 네비게이션 링크 설정 - 파일명 처리 수정
         nav_links = []
-        if prev_post and 'filename' in prev_post:
-            nav_links.append(f'<a href="./{prev_post["filename"]}" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">◀ 이전 글</a>')
+        if prev_post and 'original_title' in prev_post:
+            nav_links.append(f'<a href="./{prev_post["filename"]}" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">◀ {prev_post["original_title"]}</a>')
         
         # 홈 링크를 humor_1.html로 변경
         nav_links.append('<a href="./humor_1.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; background-color: #f0f0f0; transition: background-color 0.3s;">홈</a>')
         
-        if next_post and 'filename' in next_post:
-            nav_links.append(f'<a href="./{next_post["filename"]}" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">다음 글 ▶</a>')
+        if next_post and 'original_title' in next_post:
+            nav_links.append(f'<a href="./{next_post["filename"]}" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">{next_post["original_title"]} ▶</a>')
         
         nav_html = '\n'.join(nav_links)
 
@@ -395,13 +396,13 @@ def create_humor_page(posts_info, base_path, page_number=1):
     
     pagination_html += '</div>'
 
-    # 게시물 목록 HTML 생성 수정
+    # 게시물 목록 HTML 생성 시 원본 제목 사용
     posts_html = '<ul style="list-style: none; padding: 0;">'
     for post in current_posts:
         posts_html += f'''
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
             <a href="./{post['filename']}" style="text-decoration: none; color: #333; display: block;">
-                <h2 style="margin: 0; font-size: 18px;">{post['title']}</h2>
+                <h2 style="margin: 0; font-size: 18px;">{post['original_title']}</h2>
             </a>
         </li>'''
     posts_html += '</ul>'
