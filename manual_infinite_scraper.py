@@ -395,7 +395,7 @@ def create_humor_page(posts_info, base_path, page_number=1):
     
     pagination_html += '</div>'
 
-    # 게시물 목록 HTML 생성 시 원본 제목 사용
+    # 게시물 목록 HTML 생성 시 저장된 실제 파일명 사용
     posts_html = '<ul style="list-style: none; padding: 0;">'
     for post in current_posts:
         posts_html += f'''
@@ -578,7 +578,7 @@ def scrape_category():
                         continue
 
                     # 처리된 제목 생성
-                    processed_title = process_title(original_title)
+                    processed_title = f"긴급-{process_title(original_title)}-모음집"
                     safe_filename = clean_filename(processed_title) + '.html'
                     
                     # 중복 검사
