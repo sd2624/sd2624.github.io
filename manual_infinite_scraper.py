@@ -79,7 +79,7 @@ def get_scraper():
 
 def setup_folders():
     """필요한 폴더 구조 생성"""
-    base_path = os.path.join('s07102624.github.io', '2025')
+    base_path = os.path.join('2025')
     image_path = os.path.join(base_path, 'images')
     
     # 폴더 생성
