@@ -90,12 +90,12 @@ def setup_folders():
     return base_path, image_path
 
 def process_image_for_preview(img_data):
-    """이미지를 1200x600 크기로 처리"""
+    """이미지를 1000x500 크기로 처리"""
     try:
         # 원본 이미지 크기
         original_width, original_height = img_data.size
         
-        # 목표 비율 계산 (1200:600 = 2:1)
+        # 목표 비율 계산 (1000:500 = 2:1)
         target_ratio = 2.0
         
         # 새 크기 계산
@@ -120,8 +120,8 @@ def process_image_for_preview(img_data):
             
         # 이미지 크롭
         img_data = img_data.crop((left, top, right, bottom))
-        # 최종 크기로 리사이즈
-        return img_data.resize((1200, 600), Image.Resampling.LANCZOS)
+        # 최종 크기로 리사이즈 - 1000x500으로 변경
+        return img_data.resize((1000, 500), Image.Resampling.LANCZOS)
     except Exception as e:
         logging.error(f"이미지 처리 실패: {str(e)}")
         return None
@@ -158,7 +158,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                             
                             # 첫 번째 이미지 HTML과 URL 설정
                             first_image_url = f"https://testpro.site/kkk/images/{preview_name}"
-                            first_image_html = f'<div class="first-image" style="margin-bottom: 20px;"><img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1200px; height:auto;"></div>'
+                            first_image_html = f'<div class="first-image" style="margin-bottom: 20px;"><img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;"></div>'
                             
                             # 원본 이미지들 HTML 구성
                             content_images_html = images
@@ -172,8 +172,8 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <meta property="og:title" content="{processed_title}">
     <meta property="og:description" content="{processed_title}">
     <meta property="og:image" content="{first_image_url}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image:width" content="1000">
+    <meta property="og:image:height" content="500">
     <meta property="og:url" content="https://sd2624.github.io/kkk/{os.path.basename(filename)}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="{first_image_url}">
