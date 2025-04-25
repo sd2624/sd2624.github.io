@@ -98,29 +98,30 @@ def process_image_for_preview(img_data):
         # 목표 비율 계산 (1200:600 = 2:1)
         target_ratio = 2.0
         
-        # 현재 이미지 비율
-        current_ratio = original_width / original_height
-        
         # 새 크기 계산
-        if current_ratio > target_ratio:
+        if original_width / original_height > target_ratio:
             # 이미지가 더 넓은 경우
-            new_height = 600
-            new_width = int(600 * current_ratio)
+            new_width = int(original_height * target_ratio)
+            new_height = original_height
+            # 중앙 크롭 위치 계산
+            left = (original_width - new_width) // 2
+            top = 0
+            right = left + new_width
+            bottom = original_height
         else:
-            # 이미지가 더 좁은 경우
-            new_width = 1200
-            new_height = int(1200 / current_ratio)
+            # 이미지가 더 높은 경우
+            new_width = original_width
+            new_height = int(original_width / target_ratio)
+            # 중앙 크롭 위치 계산
+            left = 0
+            top = (original_height - new_height) // 2
+            right = original_width
+            bottom = top + new_height
             
-        # 이미지 리사이즈
-        img_data = img_data.resize((new_width, new_height), Image.Resampling.LANCZOS)
-        
-        # 중앙 부분 추출
-        left = (new_width - 1200) // 2
-        top = (new_height - 600) // 2
-        right = left + 1200
-        bottom = top + 600
-        
-        return img_data.crop((left, top, right, bottom))
+        # 이미지 크롭
+        img_data = img_data.crop((left, top, right, bottom))
+        # 최종 크기로 리사이즈
+        return img_data.resize((1200, 600), Image.Resampling.LANCZOS)
     except Exception as e:
         logging.error(f"이미지 처리 실패: {str(e)}")
         return None
@@ -134,29 +135,35 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         filename = os.path.join(base_path, f'{safe_title}.html')
         
         # 첫 번째 이미지 URL 추출 및 도메인 추가
+        first_image_html = ""
+        content_images_html = ""
         first_image_url = ""
-        preview_image_url = ""
+
         if isinstance(images, str) and "images/" in images:
-            # HTML 문자열에서 첫 번째 이미지 경로 추출
+            # 첫 번째 이미지 경로 추출
             img_match = re.search(r'src="(images/[^"]+)"', images)
             if img_match:
                 relative_path = img_match.group(1)
                 img_path = os.path.join(base_path, relative_path)
                 
-                # 원본 이미지를 열어서 미리보기 이미지 생성
                 try:
                     with Image.open(img_path) as img:
+                        # 첫 번째 이미지 처리
                         preview_img = process_image_for_preview(img)
                         if preview_img:
-                            # 미리보기 이미지 저장
+                            # 첫 번째 이미지 저장
                             preview_name = f"preview_{os.path.basename(relative_path)}"
                             preview_path = os.path.join(base_path, 'images', preview_name)
                             preview_img.save(preview_path, 'WEBP', quality=85)
-                            preview_image_url = f"https://sd2624.github.io/kkk/images/{preview_name}"
-                            first_image_url = preview_image_url
+                            
+                            # 첫 번째 이미지 HTML과 URL 설정
+                            first_image_url = f"https://testpro.site/kkk/images/{preview_name}"
+                            first_image_html = f'<div class="first-image" style="margin-bottom: 20px;"><img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1200px; height:auto;"></div>'
+                            
+                            # 원본 이미지들 HTML 구성
+                            content_images_html = images
                 except Exception as e:
-                    logging.error(f"미리보기 이미지 생성 실패: {str(e)}")
-                    first_image_url = f"https://sd2624.github.io/kkk/{relative_path}"
+                    logging.error(f"첫 이미지 처리 실패: {str(e)}")
 
         # og 메타태그 수정 - 더 자세한 메타데이터 제공 (og_image_tag 변수 제거)
         og_tags = f"""
@@ -164,13 +171,13 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <meta property="og:site_name" content="유머 게시판">
     <meta property="og:title" content="{processed_title}">
     <meta property="og:description" content="{processed_title}">
-    <meta property="og:image" content="{preview_image_url if preview_image_url else first_image_url}">
+    <meta property="og:image" content="{first_image_url}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://sd2624.github.io/kkk/{os.path.basename(filename)}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="{preview_image_url if preview_image_url else first_image_url}">
-    <link rel="image_src" href="{preview_image_url if preview_image_url else first_image_url}">"""
+    <meta name="twitter:image" content="{first_image_url}">
+    <link rel="image_src" href="{first_image_url}">"""
 
         # 네비게이션 링크 설정 - 파일명 처리 수정
         nav_links = []
@@ -339,9 +346,10 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                         </span>
                     </div>
                 </header>
+                {first_image_html}
                 <div class="entry-content">
                     {content_html}
-                    {images}
+                    {content_images_html}
                 </div>
                 <footer class="entry-footer">
                     <nav class="navigation post-navigation">
