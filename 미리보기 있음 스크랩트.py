@@ -80,7 +80,7 @@ def get_scraper():
 def setup_folders():
     """필요한 폴더 구조 생성"""
     # GitHub Pages 폴더 경로로 변경
-    base_path = os.path.join('sd2624.github.io', 'kkk')
+    base_path = os.path.join('sd2624.github.io', 'aaa')
     image_path = os.path.join(base_path, 'images')
     
     # 폴더 생성
@@ -90,20 +90,21 @@ def setup_folders():
     return base_path, image_path
 
 def process_image_for_preview(img_data):
-    """이미지를 900x450 크기로 처리"""
+    """이미지를 소셜미디어 미리보기에 최적화된 크기로 처리"""
     try:
+        # 권장되는 og:image 크기인 1200x630으로 변경
+        target_width = 1200
+        target_height = 630
+        target_ratio = target_width / target_height
+
         # 원본 이미지 크기
         original_width, original_height = img_data.size
+        original_ratio = original_width / original_height
         
-        # 목표 비율 계산 (900:450 = 2:1)
-        target_ratio = 2.0
-        
-        # 새 크기 계산
-        if original_width / original_height > target_ratio:
+        if original_ratio > target_ratio:
             # 이미지가 더 넓은 경우
             new_width = int(original_height * target_ratio)
             new_height = original_height
-            # 중앙 크롭 위치 계산
             left = (original_width - new_width) // 2
             top = 0
             right = left + new_width
@@ -112,16 +113,14 @@ def process_image_for_preview(img_data):
             # 이미지가 더 높은 경우
             new_width = original_width
             new_height = int(original_width / target_ratio)
-            # 중앙 크롭 위치 계산
             left = 0
             top = (original_height - new_height) // 2
             right = original_width
             bottom = top + new_height
             
-        # 이미지 크롭
+        # 이미지 크롭 후 리사이즈
         img_data = img_data.crop((left, top, right, bottom))
-        # 최종 크기로 리사이즈 - 900x450으로 변경
-        return img_data.resize((900, 450), Image.Resampling.LANCZOS)
+        return img_data.resize((target_width, target_height), Image.Resampling.LANCZOS)
     except Exception as e:
         logging.error(f"이미지 처리 실패: {str(e)}")
         return None
@@ -157,25 +156,28 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                             preview_img.save(preview_path, 'WEBP', quality=85)
                             
                             # 첫 번째 이미지 HTML과 URL 설정
-                            first_image_url = f"https://testpro.site/kkk/images/{preview_name}"
-                            first_image_html = f'<div class="first-image" style="margin-bottom: 20px;"><img src="{first_image_url}" alt="{title}" style="width:100%; max-width:900px; height:auto;"></div>'
+                            first_image_url = f"https://testpro.site/aaa/images/{preview_name}"
+                            first_image_html = f'<div class="first-image" style="margin-bottom: 20px;"><img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;"></div>'
                             
                             # 원본 이미지들 HTML 구성
                             content_images_html = images
                 except Exception as e:
                     logging.error(f"첫 이미지 처리 실패: {str(e)}")
 
-        # og 메타태그 수정 - 더 자세한 메타데이터 제공 (og_image_tag 변수 제거)
+        # og 메타태그 수정 - Facebook 권장사항 준수
         og_tags = f"""
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="유머 게시판">
     <meta property="og:title" content="{processed_title}">
     <meta property="og:description" content="{processed_title}">
     <meta property="og:image" content="{first_image_url}">
-    <meta property="og:image:width" content="900">
-    <meta property="og:image:height" content="450">
-    <meta property="og:url" content="https://sd2624.github.io/kkk/{os.path.basename(filename)}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/webp">
+    <meta property="og:url" content="https://testpro.site/aaa/{os.path.basename(filename)}">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{processed_title}">
+    <meta name="twitter:description" content="{processed_title}">
     <meta name="twitter:image" content="{first_image_url}">
     <link rel="image_src" href="{first_image_url}">"""
 
@@ -197,9 +199,9 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
             content_html = str(content)
             content_html = content_html.replace('src="/', 'src="https://humorworld.net/')
             # 상대 경로 이미지 URL을 전체 URL로 변환
-            content_html = re.sub(r'src="images/', 'src="https://testpro.site/kkk/images/', content_html)
+            content_html = re.sub(r'src="images/', 'src="https://testpro.site/aaa/images/', content_html)
             # 이미지 HTML도 절대 경로로 변환
-            images = images.replace('src="images/', 'src="https://sd2624.github.io/kkk/images/')
+            images = images.replace('src="images/', 'src="https://sd2624.github.io/aaa/images/')
         else:
             content_html = f"<p>{content}</p>"
 
@@ -221,7 +223,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <link rel='stylesheet' id='wp-block-library-css' href='https://humorworld.net/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
     <link rel='stylesheet' id='classic-theme-styles-css' href='https://humorworld.net/wp-includes/css/classic-themes.min.css' type='text/css' media='all' />
     <link rel='stylesheet' id='blogberg-style-css' href='https://humorworld.net/wp-content/themes/blogberg/style.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,450,600,700,700i|Rubik:300,400,400i,450,700,700i' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,700i|Rubik:300,400,400i,500,700,700i' type='text/css' media='all' />
     <link rel='stylesheet' id='bootstrap-css' href='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
@@ -392,7 +394,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         background: #fff;
         box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
         padding: 10px 0;
-        z-index: 900;
+        z-index: 1000;
     ">
         <div class="container">
             <div class="nav-links" style="
@@ -527,7 +529,7 @@ def create_humor_page(posts_info, base_path, page_number=1):
         background: #fff;
         box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
         padding: 10px 0;
-        z-index: 900;
+        z-index: 1000;
     ">
         <div class="container">
             <div class="nav-links" style="
