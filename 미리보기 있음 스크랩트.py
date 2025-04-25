@@ -80,7 +80,7 @@ def get_scraper():
 def setup_folders():
     """필요한 폴더 구조 생성"""
     # GitHub Pages 폴더 경로로 변경
-    base_path = os.path.join('sd2624.github.io', 'aaa')
+    base_path = os.path.join('sd2624.github.io', 'bbb')
     image_path = os.path.join(base_path, 'images')
     
     # 폴더 생성
@@ -150,17 +150,21 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                         # 첫 번째 이미지 처리
                         preview_img = process_image_for_preview(img)
                         if preview_img:
-                            # 첫 번째 이미지 저장
+                            # 첫 번째 이미지를 JPG로 저장
                             preview_name = f"preview_{os.path.basename(relative_path)}"
+                            preview_name = preview_name.rsplit('.', 1)[0] + '.jpg'
                             preview_path = os.path.join(base_path, 'images', preview_name)
-                            preview_img.save(preview_path, 'WEBP', quality=85)
+                            preview_img.convert('RGB').save(preview_path, 'JPEG', quality=85)
                             
                             # 첫 번째 이미지 HTML과 URL 설정
-                            first_image_url = f"https://testpro.site/aaa/images/{preview_name}"
-                            first_image_html = f'<div class="first-image" style="margin-bottom: 20px;"><img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;"></div>'
+                            first_image_url = f"https://testpro.site/bbb/images/{preview_name}"
+                            first_image_html = f'<img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;">'
+
+                            # og 태그용 이미지 설정도 jpg로
+                            og_image_url = first_image_url
                             
-                            # 원본 이미지들 HTML 구성
-                            content_images_html = images
+                            # 원본 이미지들 HTML 구성 (첫 번째 이미지 제외)
+                            content_images_html = re.sub(r'<img[^>]+src="[^"]+"[^>]*>', '', images, count=1)
                 except Exception as e:
                     logging.error(f"첫 이미지 처리 실패: {str(e)}")
 
@@ -174,7 +178,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/webp">
-    <meta property="og:url" content="https://testpro.site/aaa/{os.path.basename(filename)}">
+    <meta property="og:url" content="https://testpro.site/bbb/{os.path.basename(filename)}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{processed_title}">
     <meta name="twitter:description" content="{processed_title}">
@@ -199,9 +203,9 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
             content_html = str(content)
             content_html = content_html.replace('src="/', 'src="https://humorworld.net/')
             # 상대 경로 이미지 URL을 전체 URL로 변환
-            content_html = re.sub(r'src="images/', 'src="https://testpro.site/aaa/images/', content_html)
+            content_html = re.sub(r'src="images/', 'src="https://testpro.site/bbb/images/', content_html)
             # 이미지 HTML도 절대 경로로 변환
-            images = images.replace('src="images/', 'src="https://sd2624.github.io/aaa/images/')
+            images = images.replace('src="images/', 'src="https://sd2624.github.io/bbb/images/')
         else:
             content_html = f"<p>{content}</p>"
 
@@ -340,6 +344,10 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
             </div>
             
             <article class="post">
+                <!-- 첫 번째 이미지를 제목 위에 배치 -->
+                <div class="first-image" style="margin-bottom: 20px;">
+                    {first_image_html}
+                </div>
                 <header class="entry-header">
                     <h1 class="entry-title">{processed_title}</h1>
                     <div class="entry-meta">
@@ -348,7 +356,6 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                         </span>
                     </div>
                 </header>
-                {first_image_html}
                 <div class="entry-content">
                     {content_html}
                     {content_images_html}
