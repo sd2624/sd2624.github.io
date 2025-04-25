@@ -79,7 +79,8 @@ def get_scraper():
 
 def setup_folders():
     """필요한 폴더 구조 생성"""
-    base_path = os.path.join('2025')
+    # GitHub Pages 폴더 경로로 변경
+    base_path = os.path.join('sd2624.github.io', 'news')
     image_path = os.path.join(base_path, 'images')
     
     # 폴더 생성
@@ -96,18 +97,18 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         safe_title = clean_filename(processed_title)
         filename = os.path.join(base_path, f'{safe_title}.html')
         
-        # 첫 번째 이미지 URL 추출
+        # 첫 번째 이미지 URL 추출 및 도메인 추가
         first_image_url = ""
         if isinstance(images, str) and "images/" in images:
             # HTML 문자열에서 첫 번째 이미지 경로 추출
             img_match = re.search(r'src="(images/[^"]+)"', images)
             if img_match:
-                first_image_url = img_match.group(1)
-                # 상대 경로를 절대 경로로 변환
-                first_image_url = os.path.join(base_path, first_image_url)
+                relative_path = img_match.group(1)
+                # 전체 URL을 GitHub Pages URL로 변경
+                first_image_url = f"https://sd2624.github.io/news/{relative_path}"
                 first_image_url = first_image_url.replace('\\', '/')
         
-        # og:image 메타 태그 설정
+        # og:image 메타 태그 설정 - 전체 URL 사용
         og_image_tag = f'<meta property="og:image" content="{first_image_url}">' if first_image_url else '<meta property="og:image" content="">'
 
         # 네비게이션 링크 설정 - 파일명 처리 수정
@@ -126,8 +127,9 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         # content가 BeautifulSoup 객체인 경우 HTML 추출
         if isinstance(content, BeautifulSoup):
             content_html = str(content)
-            # 원본 HTML 구조 유지를 위해 태그 보존
             content_html = content_html.replace('src="/', 'src="https://humorworld.net/')
+            # 상대 경로 이미지 URL을 전체 URL로 변환
+            content_html = re.sub(r'src="images/', 'src="https://testpro.site/news/images/', content_html)
         else:
             content_html = f"<p>{content}</p>"
 
