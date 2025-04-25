@@ -5,6 +5,7 @@ import random
 import logging
 import os
 from datetime import datetime
+from urllib.parse import quote
 try:
     from bs4 import BeautifulSoup
     import cloudscraper
@@ -79,15 +80,56 @@ def get_scraper():
 
 def setup_folders():
     """필요한 폴더 구조 생성"""
-    # GitHub Pages 폴더 경로로 변경
-    base_path = os.path.join('sd2624.github.io', '2025')
+    base_path = os.path.join('sd2624.github.io', 'news')
     image_path = os.path.join(base_path, 'images')
+    preview_path = os.path.join(base_path, 'previews')  # 미리보기 이미지 폴더 추가
     
     # 폴더 생성
     os.makedirs(base_path, exist_ok=True)
     os.makedirs(image_path, exist_ok=True)
+    os.makedirs(preview_path, exist_ok=True)  # 미리보기 폴더 생성
     
-    return base_path, image_path
+    return base_path, image_path, preview_path
+
+def process_image_for_preview(img_data, output_path):
+    """이미지를 1200x630 크기로 처리하여 저장"""
+    try:
+        # 원본 이미지 크기
+        original_width, original_height = img_data.size
+        
+        # 목표 비율 계산 (1200:630 = 1.904761904761905)
+        target_ratio = 1200 / 630
+        
+        # 현재 이미지 비율
+        current_ratio = original_width / original_height
+        
+        # 새 크기 계산
+        if current_ratio > target_ratio:
+            # 이미지가 더 넓은 경우
+            new_height = 630
+            new_width = int(630 * current_ratio)
+        else:
+            # 이미지가 더 좁은 경우
+            new_width = 1200
+            new_height = int(1200 / current_ratio)
+            
+        # 이미지 리사이즈
+        img_data = img_data.resize((new_width, new_height), Image.Resampling.LANCZOS)
+        
+        # 중앙 부분 추출
+        left = (new_width - 1200) // 2
+        top = (new_height - 630) // 2
+        right = left + 1200
+        bottom = top + 630
+        
+        img_data = img_data.crop((left, top, right, bottom))
+        
+        # WebP 형식으로 저장
+        img_data.save(output_path, 'WEBP', quality=90)
+        return True
+    except Exception as e:
+        logging.error(f"미리보기 이미지 처리 실패: {str(e)}")
+        return False
 
 def save_article(title, content, images, base_path, prev_post=None, next_post=None):
     """HTML 파일로 게시물 저장"""
@@ -99,28 +141,48 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         
         # 첫 번째 이미지 URL 추출 및 도메인 추가
         first_image_url = ""
+        preview_image_url = ""
         if isinstance(images, str) and "images/" in images:
             # HTML 문자열에서 첫 번째 이미지 경로 추출
             img_match = re.search(r'src="(images/[^"]+)"', images)
             if img_match:
                 relative_path = img_match.group(1)
-                # 전체 URL을 GitHub Pages URL로 변경
-                first_image_url = f"https://sd2624.github.io/2025/{relative_path}"
-                first_image_url = first_image_url.replace('\\', '/')
+                base_name = os.path.splitext(os.path.basename(relative_path))[0]
+                preview_name = f"preview_{base_name}.webp"
+                
+                # 원본 이미지 경로
+                img_path = os.path.join(base_path, relative_path)
+                # 미리보기 이미지 경로
+                preview_path = os.path.join(base_path, 'previews', preview_name)
+                
+                # 원본 이미지를 미리보기 크기로 변환
+                try:
+                    with Image.open(img_path) as img:
+                        if process_image_for_preview(img, preview_path):
+                            preview_image_url = f"https://sd2624.github.io/news/previews/{preview_name}"
+                            first_image_url = preview_image_url
+                except Exception as e:
+                    logging.error(f"미리보기 이미지 생성 실패: {str(e)}")
+                    first_image_url = f"https://sd2624.github.io/news/{relative_path}"
         
-        # og 메타태그 수정 - 더 자세한 메타데이터 제공 (og_image_tag 변수 제거)
+        # URL 인코딩
+        encoded_title = quote(processed_title)
+        encoded_url = quote(f"https://sd2624.github.io/news/{os.path.basename(filename)}")
+        encoded_image_url = quote(first_image_url)
+        
+        # og 메타태그 수정 - 퍼센트 인코딩 적용
         og_tags = f"""
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="유머 게시판">
-    <meta property="og:title" content="{processed_title}">
-    <meta property="og:description" content="{processed_title}">
-    <meta property="og:image" content="{first_image_url}">
+    <meta property="og:site_name" content="%EC%9C%A0%EB%A8%B8%20%EA%B2%8C%EC%8B%9C%ED%8C%90">
+    <meta property="og:title" content="{encoded_title}">
+    <meta property="og:description" content="{encoded_title}">
+    <meta property="og:image" content="{encoded_image_url}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://sd2624.github.io/2025/{os.path.basename(filename)}">
+    <meta property="og:url" content="{encoded_url}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="{first_image_url}">
-    <link rel="image_src" href="{first_image_url}">"""
+    <meta name="twitter:image" content="{encoded_image_url}">
+    <link rel="image_src" href="{encoded_image_url}">"""
 
         # 네비게이션 링크 설정 - 파일명 처리 수정
         nav_links = []
@@ -140,9 +202,9 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
             content_html = str(content)
             content_html = content_html.replace('src="/', 'src="https://humorworld.net/')
             # 상대 경로 이미지 URL을 전체 URL로 변환
-            content_html = re.sub(r'src="images/', 'src="https://testpro.site/2025/images/', content_html)
+            content_html = re.sub(r'src="images/', 'src="https://testpro.site/news/images/', content_html)
             # 이미지 HTML도 절대 경로로 변환
-            images = images.replace('src="images/', 'src="https://sd2624.github.io/2025/images/')
+            images = images.replace('src="images/', 'src="https://sd2624.github.io/news/images/')
         else:
             content_html = f"<p>{content}</p>"
 
@@ -552,7 +614,7 @@ def initialize_humor_page(base_path):
 
 def scrape_category():
     """게시물 스크래핑 함수"""
-    base_path, image_path = setup_folders()
+    base_path, image_path, preview_path = setup_folders()
     posts_info = []
     
     # 초기 유머 페이지 생성
