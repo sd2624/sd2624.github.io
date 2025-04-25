@@ -80,7 +80,7 @@ def get_scraper():
 def setup_folders():
     """필요한 폴더 구조 생성"""
     # GitHub Pages 폴더 경로로 변경
-    base_path = os.path.join('sd2624.github.io', 'news')
+    base_path = os.path.join('sd2624.github.io', '2025')
     image_path = os.path.join(base_path, 'images')
     
     # 폴더 생성
@@ -105,11 +105,22 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
             if img_match:
                 relative_path = img_match.group(1)
                 # 전체 URL을 GitHub Pages URL로 변경
-                first_image_url = f"https://sd2624.github.io/news/{relative_path}"
+                first_image_url = f"https://sd2624.github.io/2025/{relative_path}"
                 first_image_url = first_image_url.replace('\\', '/')
         
-        # og:image 메타 태그 설정 - 전체 URL 사용
-        og_image_tag = f'<meta property="og:image" content="{first_image_url}">' if first_image_url else '<meta property="og:image" content="">'
+        # og 메타태그 수정 - 더 자세한 메타데이터 제공 (og_image_tag 변수 제거)
+        og_tags = f"""
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="유머 게시판">
+    <meta property="og:title" content="{processed_title}">
+    <meta property="og:description" content="{processed_title}">
+    <meta property="og:image" content="{first_image_url}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://sd2624.github.io/2025/{os.path.basename(filename)}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{first_image_url}">
+    <link rel="image_src" href="{first_image_url}">"""
 
         # 네비게이션 링크 설정 - 파일명 처리 수정
         nav_links = []
@@ -129,25 +140,18 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
             content_html = str(content)
             content_html = content_html.replace('src="/', 'src="https://humorworld.net/')
             # 상대 경로 이미지 URL을 전체 URL로 변환
-            content_html = re.sub(r'src="images/', 'src="https://testpro.site/news/images/', content_html)
+            content_html = re.sub(r'src="images/', 'src="https://testpro.site/2025/images/', content_html)
+            # 이미지 HTML도 절대 경로로 변환
+            images = images.replace('src="images/', 'src="https://sd2624.github.io/2025/images/')
         else:
             content_html = f"<p>{content}</p>"
 
         html_content = f"""<!DOCTYPE html>
-<html lang="ko-KR" class="js">
+<html lang="ko-KR" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex, nofollow">
-    
-    <!-- 네이버 밴드 썸네일 설정 -->
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="{processed_title}">
-    <meta property="og:description" content="{processed_title}">
-    {og_image_tag}
-    <meta property="og:url" content="">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="image_src" href="{first_image_url if first_image_url else ''}">
+    {og_tags}
     
     <title>{processed_title}</title>
     
