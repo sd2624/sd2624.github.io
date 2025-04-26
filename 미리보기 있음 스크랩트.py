@@ -138,36 +138,34 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         content_images_html = ""
         first_image_url = ""
 
-        if isinstance(images, str) and "images/" in images:
-            # 첫 번째 이미지 경로 추출
-            img_match = re.search(r'src="(images/[^"]+)"', images)
-            if (img_match):
-                relative_path = img_match.group(1)
-                img_path = os.path.join(base_path, relative_path)
-                
-                try:
-                    with Image.open(img_path) as img:
-                        # 첫 번째 이미지 처리
-                        preview_img = process_image_for_preview(img)
-                        if (preview_img):
-                            # 임의의 파일명 생성 (현재 시간 + 랜덤 문자열)
-                            random_name = f"{int(time.time())}_{os.urandom(4).hex()}.jpg"
-                            jpg_path = os.path.join(base_path, 'images', random_name)
-                            
-                            # JPG로 변환하여 저장
-                            preview_img.convert('RGB').save(jpg_path, 'JPEG', quality=85)
-                            
-                            # 첫 번째 이미지 HTML과 URL 설정 (JPG 사용)
-                            first_image_url = f"https://testpro.site/bbb/images/{random_name}"
-                            first_image_html = f'<img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;">'
-
-                            # og 태그용 이미지 설정도 jpg로
-                            og_image_url = first_image_url
-                            
-                            # 원본 이미지들 HTML 구성 (첫 번째 이미지 제외)
-                            content_images_html = re.sub(r'<img[^>]+src="[^"]+"[^>]*>', '', images, count=1)
-                except Exception as e:
-                    logging.error(f"첫 이미지 처리 실패: {str(e)}")
+        if isinstance(images, str):
+            # 첫 번째 이미지가 이미 JPG인 경우를 확인
+            first_image = re.search(r'<img src="images/([^"]+\.jpg)"', images)
+            if first_image:
+                # 이미 JPG인 경우 해당 이미지 사용
+                jpg_name = first_image.group(1)
+                first_image_url = f"https://testpro.site/bbb/images/{jpg_name}"
+                first_image_html = f'<img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;">'
+                content_images_html = re.sub(r'<img[^>]+src="[^"]+"[^>]*>', '', images, count=1)
+            else:
+                # 웹피 이미지를 JPG로 변환해야 하는 경우
+                img_match = re.search(r'src="(images/[^"]+)"', images)
+                if img_match:
+                    relative_path = img_match.group(1)
+                    img_path = os.path.join(base_path, relative_path)
+                    
+                    try:
+                        with Image.open(img_path) as img:
+                            preview_img = process_image_for_preview(img)
+                            if preview_img:
+                                random_name = f"{int(time.time())}_{os.urandom(4).hex()}.jpg"
+                                jpg_path = os.path.join(base_path, 'images', random_name)
+                                preview_img.convert('RGB').save(jpg_path, 'JPEG', quality=85)
+                                first_image_url = f"https://testpro.site/bbb/images/{random_name}"
+                                first_image_html = f'<img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;">'
+                                content_images_html = re.sub(r'<img[^>]+src="[^"]+"[^>]*>', '', images, count=1)
+                    except Exception as e:
+                        logging.error(f"첫 이미지 처리 실패: {str(e)}")
 
         # og 메타태그 수정 - Facebook 권장사항 준수
         og_tags = f"""
