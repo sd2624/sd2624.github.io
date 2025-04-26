@@ -150,13 +150,15 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                         # 첫 번째 이미지 처리
                         preview_img = process_image_for_preview(img)
                         if preview_img:
-                            # 첫 번째 이미지를 JPG로 변환하여 저장
-                            jpg_name = os.path.basename(relative_path).rsplit('.', 1)[0] + '.jpg'
-                            jpg_path = os.path.join(base_path, 'images', jpg_name)
+                            # 임의의 파일명 생성 (현재 시간 + 랜덤 문자열)
+                            random_name = f"{int(time.time())}_{os.urandom(4).hex()}.jpg"
+                            jpg_path = os.path.join(base_path, 'images', random_name)
+                            
+                            # JPG로 변환하여 저장
                             preview_img.convert('RGB').save(jpg_path, 'JPEG', quality=85)
                             
                             # 첫 번째 이미지 HTML과 URL 설정 (JPG 사용)
-                            first_image_url = f"https://testpro.site/bbb/images/{jpg_name}"
+                            first_image_url = f"https://testpro.site/bbb/images/{random_name}"
                             first_image_html = f'<img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;">'
 
                             # og 태그용 이미지 설정도 jpg로
