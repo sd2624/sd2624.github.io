@@ -686,7 +686,7 @@ def scrape_category():
 
                     # 이미지 처리
                     images_html = ""
-                    first_image_processed = False  # 첫 번째 이미지 처리 여부 확인
+                    first_image_processed = False
                     
                     for img in content.find_all('img'):
                         if img.get('src'):
@@ -701,38 +701,36 @@ def scrape_category():
                                     img_response = scraper.get(img['src'])
                                     img_data = Image.open(io.BytesIO(img_response.content))
                                     
+                                    # RGBA 이미지를 RGB로 변환
                                     if img_data.mode in ('RGBA', 'LA'):
                                         background = Image.new('RGB', img_data.size, (255, 255, 255))
                                         background.paste(img_data, mask=img_data.split()[-1])
                                         img_data = background
                                     
+                                    # 첫 번째 이미지 리사이즈
                                     preview_img = process_image_for_preview(img_data)
                                     if preview_img:
                                         preview_img.convert('RGB').save(img_path, 'JPEG', quality=85)
                                         images_html += f'<img src="images/{jpg_name}" alt="{title}" loading="lazy">\n'
+                                        first_image_processed = True
                                         logging.info(f"First image saved as JPG: {jpg_name}")
                                 except Exception as e:
                                     logging.error(f"Failed to process first image: {str(e)}")
-                                
-                                first_image_processed = True
                                 continue
                             
-                            # 나머지 이미지는 WebP로 처리
+                            # 나머지 이미지들은 WebP로 처리
                             webp_name = f"{os.path.splitext(img_name)[0]}.webp"
                             img_path = os.path.join(image_path, webp_name)
                             
                             try:
-                                # 이미지 다운로드
                                 img_response = scraper.get(img['src'])
                                 img_data = Image.open(io.BytesIO(img_response.content))
                                 
-                                # RGBA 이미지를 RGB로 변환
                                 if img_data.mode in ('RGBA', 'LA'):
                                     background = Image.new('RGB', img_data.size, (255, 255, 255))
                                     background.paste(img_data, mask=img_data.split()[-1])
                                     img_data = background
                                 
-                                # WebP로 저장 (품질 85%)
                                 img_data.save(img_path, 'WEBP', quality=85)
                                 images_html += f'<img src="images/{webp_name}" alt="{title}" loading="lazy">\n'
                                 logging.info(f"Image saved as WebP: {webp_name}")
