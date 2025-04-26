@@ -682,41 +682,37 @@ def scrape_category():
                         logging.error(f"Content not found for: {title}")
                         continue
 
-                    # 이미지 처리 - 모든 이미지를 JPG로 처리
-                    images_html = []  # 리스트로 변경하여 순서 유지
+                    # 이미지 처리 - 첫 번째 이미지만 JPG로 저장
+                    first_image_url = None
+                    images_html = ""
                     
-                    for img in content.find_all('img'):
-                        if img.get('src'):
-                            img_name = clean_filename(os.path.basename(img['src']))
-                            jpg_name = f"{int(time.time())}_{os.urandom(4).hex()}.jpg"
-                            img_path = os.path.join(image_path, jpg_name)
+                    # 첫 번째 이미지 찾기
+                    first_img = content.find('img')
+                    if first_img and first_img.get('src'):
+                        try:
+                            img_response = scraper.get(first_img['src'])
+                            img_data = Image.open(io.BytesIO(img_response.content))
                             
-                            try:
-                                img_response = scraper.get(img['src'])
-                                img_data = Image.open(io.BytesIO(img_response.content))
-                                
-                                if img_data.mode in ('RGBA', 'LA'):
-                                    background = Image.new('RGB', img_data.size, (255, 255, 255))
-                                    background.paste(img_data, mask=img_data.split()[-1])
-                                    img_data = background
-                                
-                                # 첫 번째 이미지는 미리보기 크기로 조정
-                                if not images_html:  # 첫 번째 이미지
-                                    preview_img = process_image_for_preview(img_data)
-                                    if preview_img:
-                                        preview_img.convert('RGB').save(img_path, 'JPEG', quality=85)
-                                else:  # 나머지 이미지
-                                    img_data.convert('RGB').save(img_path, 'JPEG', quality=85)
-                                
-                                images_html.append(f'<img src="images/{jpg_name}" alt="{title}" loading="lazy">\n')
-                                if not images_html:
-                                    logging.info(f"First image saved as JPG: {jpg_name}")
-                                
-                            except Exception as e:
-                                logging.error(f"Failed to process image: {str(e)}")
+                            if img_data.mode in ('RGBA', 'LA'):
+                                background = Image.new('RGB', img_data.size, (255, 255, 255))
+                                background.paste(img_data, mask=img_data.split()[-1])
+                                img_data = background
+                            
+                            # 첫 번째 이미지 저장
+                            jpg_name = f"{int(time.time())}_{os.urandom(4).hex()}.jpg"
+                            jpg_path = os.path.join(image_path, jpg_name)
+                            preview_img = process_image_for_preview(img_data)
+                            if preview_img:
+                                preview_img.convert('RGB').save(jpg_path, 'JPEG', quality=85)
+                                first_image_url = f"https://testpro.site/bbb/images/{jpg_name}"
+                                images_html = f'<img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;">'
+                                logging.info(f"First image saved as JPG: {jpg_name}")
+                        except Exception as e:
+                            logging.error(f"Failed to process first image: {str(e)}")
                     
-                    # 이미지 HTML 문자열로 변환
-                    current_post['images'] = ''.join(images_html)
+                    # 현재 게시물 저장
+                    current_post['content'] = content
+                    current_post['images'] = images_html
 
                     # 이전/다음 게시물 설정
                     prev_post = None
@@ -735,10 +731,6 @@ def scrape_category():
                         # 페이지의 마지막 글이 아닌 경우
                         if current_index < 9:
                             next_post = posts_info[-2]
-                    
-                    # 현재 게시물 저장
-                    current_post['content'] = content
-                    current_post['images'] = images_html
                     
                     saved_file = save_article(
                         current_post['title'],
