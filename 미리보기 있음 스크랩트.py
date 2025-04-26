@@ -141,7 +141,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         if isinstance(images, str) and "images/" in images:
             # 첫 번째 이미지 경로 추출
             img_match = re.search(r'src="(images/[^"]+)"', images)
-            if img_match:
+            if (img_match):
                 relative_path = img_match.group(1)
                 img_path = os.path.join(base_path, relative_path)
                 
@@ -684,41 +684,40 @@ def scrape_category():
                         logging.error(f"Content not found for: {title}")
                         continue
 
-                    # 이미지 처리
-                    images_html = ""
-                    first_image_processed = False
+                    # 이미지 처리 - 첫 번째 이미지는 JPG로, 나머지는 WebP로
+                    images_html = []  # 리스트로 변경하여 순서 유지
+                    first_jpg_name = None
                     
+                    # 먼저 첫 번째 이미지만 JPG로 처리
                     for img in content.find_all('img'):
+                        if img.get('src') and not first_jpg_name:
+                            img_name = clean_filename(os.path.basename(img['src']))
+                            jpg_name = f"{int(time.time())}_{os.urandom(4).hex()}.jpg"
+                            img_path = os.path.join(image_path, jpg_name)
+                            
+                            try:
+                                img_response = scraper.get(img['src'])
+                                img_data = Image.open(io.BytesIO(img_response.content))
+                                
+                                if img_data.mode in ('RGBA', 'LA'):
+                                    background = Image.new('RGB', img_data.size, (255, 255, 255))
+                                    background.paste(img_data, mask=img_data.split()[-1])
+                                    img_data = background
+                                
+                                preview_img = process_image_for_preview(img_data)
+                                if preview_img:
+                                    preview_img.convert('RGB').save(img_path, 'JPEG', quality=85)
+                                    images_html.append(f'<img src="images/{jpg_name}" alt="{title}" loading="lazy">\n')
+                                    first_jpg_name = jpg_name
+                                    logging.info(f"First image saved as JPG: {jpg_name}")
+                                break  # 첫 번째 이미지 처리 후 종료
+                            except Exception as e:
+                                logging.error(f"Failed to process first image: {str(e)}")
+                    
+                    # 나머지 이미지들은 WebP로 처리
+                    for img in content.find_all('img')[1:]:  # 첫 번째 이미지 제외
                         if img.get('src'):
                             img_name = clean_filename(os.path.basename(img['src']))
-                            
-                            # 첫 번째 이미지는 JPG로 처리
-                            if not first_image_processed:
-                                jpg_name = f"{int(time.time())}_{os.urandom(4).hex()}.jpg"
-                                img_path = os.path.join(image_path, jpg_name)
-                                
-                                try:
-                                    img_response = scraper.get(img['src'])
-                                    img_data = Image.open(io.BytesIO(img_response.content))
-                                    
-                                    # RGBA 이미지를 RGB로 변환
-                                    if img_data.mode in ('RGBA', 'LA'):
-                                        background = Image.new('RGB', img_data.size, (255, 255, 255))
-                                        background.paste(img_data, mask=img_data.split()[-1])
-                                        img_data = background
-                                    
-                                    # 첫 번째 이미지 리사이즈
-                                    preview_img = process_image_for_preview(img_data)
-                                    if preview_img:
-                                        preview_img.convert('RGB').save(img_path, 'JPEG', quality=85)
-                                        images_html += f'<img src="images/{jpg_name}" alt="{title}" loading="lazy">\n'
-                                        first_image_processed = True
-                                        logging.info(f"First image saved as JPG: {jpg_name}")
-                                except Exception as e:
-                                    logging.error(f"Failed to process first image: {str(e)}")
-                                continue
-                            
-                            # 나머지 이미지들은 WebP로 처리
                             webp_name = f"{os.path.splitext(img_name)[0]}.webp"
                             img_path = os.path.join(image_path, webp_name)
                             
@@ -732,10 +731,13 @@ def scrape_category():
                                     img_data = background
                                 
                                 img_data.save(img_path, 'WEBP', quality=85)
-                                images_html += f'<img src="images/{webp_name}" alt="{title}" loading="lazy">\n'
+                                images_html.append(f'<img src="images/{webp_name}" alt="{title}" loading="lazy">\n')
                                 logging.info(f"Image saved as WebP: {webp_name}")
                             except Exception as e:
                                 logging.error(f"Failed to process image: {str(e)}")
+                    
+                    # 이미지 HTML 문자열로 변환
+                    current_post['images'] = ''.join(images_html)
 
                     # 이전/다음 게시물 설정
                     prev_post = None
