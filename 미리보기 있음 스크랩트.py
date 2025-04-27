@@ -97,7 +97,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
 <html lang="ko-KR" class="js">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{title}</title>
     
     <!-- 원본 스타일시트 -->
@@ -110,75 +110,128 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
     
     <style type="text/css">
-        /* 기본 스타일 */
-        body {{
-            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-            line-height: 1.8;
-            color: #333333;
-            background-color: #f8f9fa;
+        * {{
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
+            box-sizing: border-box;
         }}
         
-        /* 컨테이너 레이아웃 */
+        body {{
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }}
+        
         .container {{
             width: 100%;
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            flex: 1;
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 30px;
+            flex-direction: column;
+            align-items: center;
         }}
         
-        /* 메인 콘텐츠 영역 */
         .content-area {{
-            width: 800px;
+            width: 100%;
+            max-width: 100%;
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 30px;
+            padding: 20px;
             margin: 0 auto;
+            box-sizing: border-box;
         }}
         
-        /* 사이드바 제거하고 메인 컨텐츠 중앙 정렬 */
-        .widget-area {{
-            display: none;
+        .entry-content img {{
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
         }}
         
-        /* 광고 컨테이너 중앙 정렬 */
-        .ad-container {{
+        .entry-title {{
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            word-break: keep-all;
+        }}
+        
+        .bottom-navigation {{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
             width: 100%;
-            max-width: 728px;
-            margin: 20px auto;
-            text-align: center;
+            z-index: 1000;
         }}
         
-        /* 반응형 디자인 */
+        .nav-links {{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }}
+        
         @media (max-width: 768px) {{
             .container {{
                 padding: 10px;
             }}
             
             .content-area {{
-                width: 100%;
                 padding: 15px;
+                border-radius: 0;
+            }}
+            
+            .entry-title {{
+                font-size: 1.3rem;
+            }}
+            
+            .entry-content {{
+                font-size: 1rem;
+            }}
+            
+            .nav-links {{
+                padding: 0 10px;
+                font-size: 0.9rem;
             }}
         }}
-
-        /* 하단 네비게이션 중앙 정렬 */
-        .bottom-navigation .container {{
-            padding: 0;
-            margin: 0 auto;
-        }}
         
-        .nav-links {{
-            justify-content: center;
-            gap: 20px;
+        @media (max-width: 375px) {{
+            .container {{
+                padding: 5px;
+            }}
+            
+            .content-area {{
+                padding: 10px;
+            }}
+            
+            .entry-title {{
+                font-size: 1.2rem;
+            }}
+            
+            .entry-content {{
+                font-size: 0.95rem;
+            }}
+            
+            .nav-links {{
+                padding: 0 5px;
+                font-size: 0.85rem;
+            }}
         }}
     </style>
 </head>

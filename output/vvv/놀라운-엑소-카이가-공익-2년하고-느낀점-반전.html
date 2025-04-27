@@ -2,8 +2,8 @@
 <html lang="ko-KR" class="js">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>[강추] 엑소 카이가 공익 2년하고 느낀점 (현장)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>[놀라운] 엑소 카이가 공익 2년하고 느낀점 (반전)</title>
     
     <!-- 원본 스타일시트 -->
     <link rel='stylesheet' id='wp-block-library-css' href='https://humorworld.net/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
@@ -15,75 +15,128 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
     
     <style type="text/css">
-        /* 기본 스타일 */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-            line-height: 1.8;
-            color: #333333;
-            background-color: #f8f9fa;
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
+            box-sizing: border-box;
         }
         
-        /* 컨테이너 레이아웃 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
         .container {
             width: 100%;
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            flex: 1;
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 30px;
+            flex-direction: column;
+            align-items: center;
         }
         
-        /* 메인 콘텐츠 영역 */
         .content-area {
-            width: 800px;
+            width: 100%;
+            max-width: 100%;
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 30px;
+            padding: 20px;
             margin: 0 auto;
+            box-sizing: border-box;
         }
         
-        /* 사이드바 제거하고 메인 컨텐츠 중앙 정렬 */
-        .widget-area {
-            display: none;
+        .entry-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
         }
         
-        /* 광고 컨테이너 중앙 정렬 */
-        .ad-container {
+        .entry-title {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            word-break: keep-all;
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
             width: 100%;
-            max-width: 728px;
-            margin: 20px auto;
-            text-align: center;
+            z-index: 1000;
         }
         
-        /* 반응형 디자인 */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
             }
             
             .content-area {
-                width: 100%;
                 padding: 15px;
+                border-radius: 0;
+            }
+            
+            .entry-title {
+                font-size: 1.3rem;
+            }
+            
+            .entry-content {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                padding: 0 10px;
+                font-size: 0.9rem;
             }
         }
-
-        /* 하단 네비게이션 중앙 정렬 */
-        .bottom-navigation .container {
-            padding: 0;
-            margin: 0 auto;
-        }
         
-        .nav-links {
-            justify-content: center;
-            gap: 20px;
+        @media (max-width: 375px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .content-area {
+                padding: 10px;
+            }
+            
+            .entry-title {
+                font-size: 1.2rem;
+            }
+            
+            .entry-content {
+                font-size: 0.95rem;
+            }
+            
+            .nav-links {
+                padding: 0 5px;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
@@ -103,7 +156,7 @@
             
             <article class="post">
                 <header class="entry-header">
-                    <h1 class="entry-title">[강추] 엑소 카이가 공익 2년하고 느낀점 (현장)</h1>
+                    <h1 class="entry-title">[놀라운] 엑소 카이가 공익 2년하고 느낀점 (반전)</h1>
                     <div class="entry-meta">
                         <span class="posted-on">
                             <time class="entry-date published">2025년 04월 27일</time>
@@ -216,8 +269,8 @@
                 <footer class="entry-footer">
                     <nav class="navigation post-navigation">
                         <div class="nav-links">
-                            <div class="nav-previous"><a href="극한-도로-한복판에서-사진-찍는-청사포-민폐-커플-레전드-꿀잼.html">도로 한복판에서 사진 찍는 청사포 민폐 커플 레전드</a></div>
-                            <div class="nav-next"><a href="극한-3년동안-남친에게-정규직이라-거짓말한-블라인드녀-현실.html">3년동안 남친에게 정규직이라 거짓말한 블라인드녀</a></div>
+                            <div class="nav-previous"><a href="알고보니-도로-한복판에서-사진-찍는-청사포-민폐-커플-레전드-꿀팁.html">도로 한복판에서 사진 찍는 청사포 민폐 커플 레전드</a></div>
+                            <div class="nav-next"><a href="실화-3년동안-남친에게-정규직이라-거짓말한-블라인드녀-순간.html">3년동안 남친에게 정규직이라 거짓말한 블라인드녀</a></div>
                         </div>
                     </nav>
                 </footer>
@@ -265,9 +318,9 @@
                 margin: 0 auto;
                 padding: 0 20px;
             ">
-                <a href="https://testpro.site/output/vvv/극한-도로-한복판에서-사진-찍는-청사포-민폐-커플-레전드-꿀잼.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">◀ 이전 글</a>
+                <a href="https://testpro.site/output/vvv/알고보니-도로-한복판에서-사진-찍는-청사포-민폐-커플-레전드-꿀팁.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">◀ 이전 글</a>
 <a href="https://testpro.site/output/vvv/humor_1.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; background-color: #f0f0f0; transition: background-color 0.3s;">홈</a>
-<a href="https://testpro.site/output/vvv/극한-3년동안-남친에게-정규직이라-거짓말한-블라인드녀-현실.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">다음 글 ▶</a>
+<a href="https://testpro.site/output/vvv/실화-3년동안-남친에게-정규직이라-거짓말한-블라인드녀-순간.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">다음 글 ▶</a>
             </div>
         </div>
     </nav>
