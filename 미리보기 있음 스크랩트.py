@@ -97,7 +97,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
 <html lang="ko-KR" class="js">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{title}</title>
     
     <!-- 원본 스타일시트 -->
@@ -110,128 +110,75 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
     
     <style type="text/css">
-        * {{
+        /* 기본 스타일 */
+        body {{
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            line-height: 1.8;
+            color: #333333;
+            background-color: #f8f9fa;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }}
-        
-        body {{
-            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
-            line-height: 1.6;
-            background-color: #f8f9fa;
-            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            overflow-x: hidden;
-            position: relative;
+            justify-content: center;
+            min-height: 100vh;
         }}
         
+        /* 컨테이너 레이아웃 */
         .container {{
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 15px;
-            flex: 1;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
         }}
         
+        /* 메인 콘텐츠 영역 */
         .content-area {{
-            width: 100%;
-            max-width: 100%;
+            width: 800px;
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 20px;
+            padding: 30px;
             margin: 0 auto;
-            box-sizing: border-box;
         }}
         
-        .entry-content img {{
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 1rem auto;
+        /* 사이드바 제거하고 메인 컨텐츠 중앙 정렬 */
+        .widget-area {{
+            display: none;
         }}
         
-        .entry-title {{
-            font-size: 1.5rem;
-            line-height: 1.4;
-            margin: 1rem 0;
-            word-break: keep-all;
-        }}
-        
-        .bottom-navigation {{
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #fff;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-            padding: 10px 0;
+        /* 광고 컨테이너 중앙 정렬 */
+        .ad-container {{
             width: 100%;
-            z-index: 1000;
+            max-width: 728px;
+            margin: 20px auto;
+            text-align: center;
         }}
         
-        .nav-links {{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            padding: 0 15px;
-            margin: 0 auto;
-            max-width: 600px;
-        }}
-        
+        /* 반응형 디자인 */
         @media (max-width: 768px) {{
             .container {{
                 padding: 10px;
             }}
             
             .content-area {{
+                width: 100%;
                 padding: 15px;
-                border-radius: 0;
-            }}
-            
-            .entry-title {{
-                font-size: 1.3rem;
-            }}
-            
-            .entry-content {{
-                font-size: 1rem;
-            }}
-            
-            .nav-links {{
-                padding: 0 10px;
-                font-size: 0.9rem;
             }}
         }}
+
+        /* 하단 네비게이션 중앙 정렬 */
+        .bottom-navigation .container {{
+            padding: 0;
+            margin: 0 auto;
+        }}
         
-        @media (max-width: 375px) {{
-            .container {{
-                padding: 5px;
-            }}
-            
-            .content-area {{
-                padding: 10px;
-            }}
-            
-            .entry-title {{
-                font-size: 1.2rem;
-            }}
-            
-            .entry-content {{
-                font-size: 0.95rem;
-            }}
-            
-            .nav-links {{
-                padding: 0 5px;
-                font-size: 0.85rem;
-            }}
+        .nav-links {{
+            justify-content: center;
+            gap: 20px;
         }}
     </style>
 </head>
@@ -390,7 +337,7 @@ def create_humor_page(posts_info, base_path, page_number=1):
     
     nav_html = '\n'.join(nav_links)
     
-    # 페이지네이션 HTML 수정
+    #페이지네이션 HTML 수정
     pagination_html = '<div class="pagination" style="margin-top: 20px; text-align: center;">'
     
     # 이전 페이지 링크
@@ -428,7 +375,6 @@ def create_humor_page(posts_info, base_path, page_number=1):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유머 게시판 - 페이지 {page_number}</title>
     <style>
-        /* 기본 스타일 */
         body {{
             font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
             line-height: 1.6;
@@ -437,20 +383,17 @@ def create_humor_page(posts_info, base_path, page_number=1):
             background-color: #f8f9fa;
         }}
         .container {{
-            width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            padding: 15px;
+            padding: 20px;
             box-sizing: border-box;
         }}
         h1 {{
             text-align: center;
             margin: 20px 0;
-            font-size: 24px;
             color: #333;
+            font-size: 24px;
         }}
-        
-        /* 게시물 목록 스타일 */
         .posts-list {{
             list-style: none;
             padding: 0;
@@ -458,15 +401,14 @@ def create_humor_page(posts_info, base_path, page_number=1):
         }}
         .post-item {{
             background: #fff;
-            margin: 15px 0;
-            padding: 20px;
+            margin: 10px 0;
+            padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }}
         .post-item:hover {{
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }}
         .post-link {{
             text-decoration: none;
@@ -474,53 +416,37 @@ def create_humor_page(posts_info, base_path, page_number=1):
             display: block;
         }}
         .post-title {{
-            font-size: 18px;
             margin: 0;
-            line-height: 1.4;
+            font-size: 16px;
+            font-weight: 500;
         }}
-        
-        /* 페이지네이션 스타일 */
         .pagination {{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin: 30px 0;
-            flex-wrap: wrap;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
         }}
         .pagination a, .pagination span {{
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 36px;
-            height: 36px;
-            padding: 0 12px;
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 0 4px;
             border-radius: 4px;
             background: #fff;
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: all 0.2s ease;
-        }}
-        .pagination a:hover {{
-            background: #f0f0f0;
-            transform: translateY(-1px);
+            text-decoration: none;
+            color: #333;
         }}
         .pagination span.current {{
             background: #333;
             color: #fff;
         }}
-        
-        /* 하단 네비게이션 */
         .bottom-navigation {{
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             background: #fff;
-            padding: 10px 0;
             box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
             z-index: 1000;
         }}
         .nav-links {{
@@ -529,15 +455,15 @@ def create_humor_page(posts_info, base_path, page_number=1):
             align-items: center;
             max-width: 600px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }}
         .nav-button {{
-            padding: 8px 16px;
+            padding: 8px 15px;
             border-radius: 4px;
-            background: #fff;
-            color: #333;
             text-decoration: none;
-            transition: all 0.2s ease;
+            color: #333;
+            background: #fff;
+            transition: background-color 0.3s;
         }}
         .nav-button:hover {{
             background: #f0f0f0;
@@ -553,41 +479,39 @@ def create_humor_page(posts_info, base_path, page_number=1):
                 margin: 15px 0;
             }}
             .post-item {{
-                padding: 15px;
-                margin: 10px 0;
+                padding: 12px;
             }}
             .post-title {{
-                font-size: 16px;
+                font-size: 14px;
             }}
             .pagination a, .pagination span {{
-                min-width: 32px;
-                height: 32px;
-                padding: 0 8px;
+                padding: 6px 10px;
                 font-size: 14px;
             }}
             .nav-button {{
                 padding: 6px 12px;
                 font-size: 14px;
             }}
+            .nav-links {{
+                padding: 0 10px;
+            }}
+            .bottom-navigation {{
+                padding: 8px 0;
+            }}
         }}
-        
-        /* 작은 모바일 화면 */
+
+        /* 작은 모바일 화면 최적화 */
         @media (max-width: 375px) {{
             .container {{
                 padding: 8px;
             }}
             .post-item {{
-                padding: 12px;
-                margin: 8px 0;
-            }}
-            .post-title {{
-                font-size: 14px;
+                padding: 10px;
             }}
             .pagination a, .pagination span {{
-                min-width: 28px;
-                height: 28px;
-                padding: 0 6px;
+                padding: 5px 8px;
                 font-size: 13px;
+                margin: 0 2px;
             }}
             .nav-button {{
                 padding: 5px 10px;
