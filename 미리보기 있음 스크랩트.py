@@ -326,42 +326,45 @@ def create_humor_page(posts_info, base_path, page_number=1):
     end_idx = min(start_idx + posts_per_page, total_posts)
     current_posts = posts_info[start_idx:end_idx]
     
-    # 네비게이션 링크 생성
+    # 네비게이션 링크 추가 - 미리보기 없음 버전과 동일하게 수정
     nav_links = []
-    
-    # 처음 페이지로 이동
-    nav_links.append(f'<a href="./humor_1.html">처음</a>')
-    
-    # 이전 페이지
     if page_number > 1:
-        nav_links.append(f'<a href="./humor_{page_number-1}.html">이전</a>')
+        nav_links.append(f'<a href="./humor_{page_number-1}.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">◀ 이전</a>')
     
-    # 페이지 번호 표시
-    for i in range(max(1, page_number-2), min(total_pages+1, page_number+3)):
-        if i == page_number:
-            nav_links.append(f'<span class="current-page">{i}</span>')
-        else:
-            nav_links.append(f'<a href="./humor_{i}.html">{i}</a>')
+    nav_links.append(f'<span style="color: #333; padding: 8px 15px;">페이지 {page_number}</span>')
     
-    # 다음 페이지
     if page_number < total_pages:
-        nav_links.append(f'<a href="./humor_{page_number+1}.html">다음</a>')
-    
-    # 마지막 페이지로 이동
-    nav_links.append(f'<a href="./humor_{total_pages}.html">마지막</a>')
+        nav_links.append(f'<a href="./humor_{page_number+1}.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">다음 ▶</a>')
     
     nav_html = '\n'.join(nav_links)
     
+    # 페이지네이션 HTML 수정
+    pagination_html = '<div class="pagination" style="margin-top: 20px; text-align: center;">'
+    
+    # 이전 페이지 링크
+    if page_number > 1:
+        pagination_html += f'<a href="./humor_{page_number-1}.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">◀</a>'
+    
+    # 페이지 번호
+    for i in range(1, total_pages + 1):
+        if i == page_number:
+            pagination_html += f'<span style="margin: 0 5px; padding: 5px 10px; background-color: #f0f0f0; border-radius: 3px;">{i}</span>'
+        else:
+            pagination_html += f'<a href="./humor_{i}.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">{i}</a>'
+    
+    # 다음 페이지 링크
+    if page_number < total_pages:
+        pagination_html += f'<a href="./humor_{page_number+1}.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">▶</a>'
+    
+    pagination_html += '</div>'
+
     # 게시물 목록 HTML 생성
-    posts_html = '<ul class="posts-list">'
+    posts_html = '<ul style="list-style: none; padding: 0;">'
     for post in current_posts:
-        # 이미 처리된 제목 사용
-        title = post['processed_title']
         posts_html += f'''
-        <li>
-            <a href="./{post['filename']}" class="post-link">
-                <h2>{title}</h2>
-                <time datetime="{datetime.now().isoformat()}">{datetime.now().strftime('%Y년 %m월 %d일')}</time>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./{post['filename']}" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">{post['title']}</h2>
             </a>
         </li>'''
     posts_html += '</ul>'
@@ -373,37 +376,22 @@ def create_humor_page(posts_info, base_path, page_number=1):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유머 게시판 - 페이지 {page_number}</title>
     <style>
-        .posts-list {{
-            list-style: none;
-            padding: 0;
+        body {{
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
         }}
-        .posts-list li {{
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        .container {{
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
         }}
-        .navigation {{
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-        }}
-        .current-page {{
-            background: #333;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 3px;
-        }}
-        a {{
-            text-decoration: none;
+        h1 {{
+            text-align: center;
+            margin-bottom: 30px;
             color: #333;
-            padding: 5px 10px;
-        }}
-        a:hover {{
-            background: #f0f0f0;
-            border-radius: 3px;
         }}
     </style>
 </head>
@@ -411,15 +399,40 @@ def create_humor_page(posts_info, base_path, page_number=1):
     <div class="container">
         <h1>유머 게시판</h1>
         {posts_html}
-        <nav class="navigation">
-            {nav_html}
-        </nav>
+        {pagination_html}
     </div>
+    
+    <!-- 하단 네비게이션 바 추가 -->
+    <nav class="bottom-navigation" style="
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        padding: 10px 0;
+        z-index: 1000;
+    ">
+        <div class="container">
+            <div class="nav-links" style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 0 20px;
+            ">
+                {nav_html}
+            </div>
+        </div>
+    </nav>
+    
+    <div style="height: 60px;"><!-- 하단 네비게이션 바 공간 확보 --></div>
 </body>
 </html>"""
 
-    filename = os.path.join(base_path, f'humor_{page_number}.html')
-    with open(filename, 'w', encoding='utf-8') as f:
+    filename = f'humor_{page_number}.html'
+    with open(os.path.join(base_path, filename), 'w', encoding='utf-8') as f:
         f.write(html_content)
 
 def scrape_category():
