@@ -42,7 +42,7 @@ def get_scraper():
 
 def setup_folders():
     """필요한 폴더 구조 생성"""
-    base_path = os.path.join('s07102624.github.io', 'output', 'vvv')
+    base_path = os.path.join('sd2624.github.io', 'output', 'vvv')
     image_path = os.path.join(base_path, 'images')
     
     # 폴더 생성
@@ -313,21 +313,25 @@ def create_humor_page(posts_info, base_path, page_number=1):
     # 네비게이션 링크 생성
     nav_links = []
     
-    # 처음/이전 페이지
+    # 처음 페이지로 이동
     nav_links.append(f'<a href="./humor_1.html">처음</a>')
+    
+    # 이전 페이지
     if page_number > 1:
         nav_links.append(f'<a href="./humor_{page_number-1}.html">이전</a>')
     
-    # 페이지 번호 (현재 페이지 기준 +-2)
+    # 페이지 번호 표시 (현재 페이지 ±2)
     for i in range(max(1, page_number-2), min(total_pages+1, page_number+3)):
         if i == page_number:
-            nav_links.append(f'<strong>{i}</strong>')
+            nav_links.append(f'<span class="current-page">{i}</span>')
         else:
             nav_links.append(f'<a href="./humor_{i}.html">{i}</a>')
     
-    # 다음/마지막 페이지
+    # 다음 페이지
     if page_number < total_pages:
         nav_links.append(f'<a href="./humor_{page_number+1}.html">다음</a>')
+    
+    # 마지막 페이지로 이동
     nav_links.append(f'<a href="./humor_{total_pages}.html">마지막</a>')
     
     nav_html = '\n'.join(nav_links)
@@ -344,7 +348,7 @@ def create_humor_page(posts_info, base_path, page_number=1):
         </li>'''
     posts_html += '</ul>'
 
-    # 페이지 HTML 생성
+    # HTML 템플릿
     html_content = f"""<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -352,8 +356,18 @@ def create_humor_page(posts_info, base_path, page_number=1):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유머 게시판 - 페이지 {page_number}</title>
     <style>
-        /* ...existing style code... */
-        .pagination {{
+        .posts-list {{
+            list-style: none;
+            padding: 0;
+        }}
+        .posts-list li {{
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }}
+        .navigation {{
             display: flex;
             justify-content: center;
             gap: 10px;
@@ -365,13 +379,22 @@ def create_humor_page(posts_info, base_path, page_number=1):
             padding: 5px 10px;
             border-radius: 3px;
         }}
+        a {{
+            text-decoration: none;
+            color: #333;
+            padding: 5px 10px;
+        }}
+        a:hover {{
+            background: #f0f0f0;
+            border-radius: 3px;
+        }}
     </style>
 </head>
 <body>
     <div class="container">
         <h1>유머 게시판</h1>
         {posts_html}
-        <nav class="pagination">
+        <nav class="navigation">
             {nav_html}
         </nav>
     </div>
@@ -385,15 +408,18 @@ def create_humor_page(posts_info, base_path, page_number=1):
 def scrape_category():
     """게시물 스크래핑 함수"""
     base_path, image_path = setup_folders()
-    posts_info = []  # 모든 게시물 정보를 저장할 리스트
+    posts_info = []
     post_count = 0
-    base_url = 'https://humorworld.net/category/humorstorage/'
+    
+    # humor_1.html 초기 생성
+    create_humor_page(posts_info, base_path, 1)
     
     try:
         scraper = get_scraper()
         page = 1
         
         while True:
+            base_url = 'https://humorworld.net/category/humorstorage/'
             url = f'{base_url}page/{page}/' if page > 1 else base_url
             logging.info(f"Scraping page {page}: {url}")
             
@@ -486,8 +512,16 @@ def scrape_category():
                         post_count += 1
                     
                     if post_count % 10 == 0:
+                        page_number = post_count // 10
+                        create_humor_page(posts_info, base_path, page_number)
+                        
+                        # 사용자 확인
                         choice = input(f"\n{post_count}개의 게시물을 스크래핑했습니다. 계속하시겠습니까? (y/n): ")
                         if choice.lower() != 'y':
+                            # 마지막 페이지 생성 확인
+                            if post_count % 10 != 0:
+                                last_page = (post_count + 9) // 10
+                                create_humor_page(posts_info, base_path, last_page)
                             return
                     
                     time.sleep(random.uniform(2, 4))
@@ -501,6 +535,11 @@ def scrape_category():
             
     except Exception as e:
         logging.error(f'Error occurred: {str(e)}')
+    finally:
+        # 마지막 페이지 생성
+        if post_count > 0 and post_count % 10 != 0:
+            last_page = (post_count + 9) // 10
+            create_humor_page(posts_info, base_path, last_page)
 
 if __name__ == '__main__':
     print('Starting to scrape humorworld.net category...')
