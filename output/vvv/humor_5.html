@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유머 게시판 - 페이지 5</title>
+    <style>
+        /* 기본 스타일 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 24px;
+            color: #333;
+        }
+        
+        /* 게시물 목록 스타일 */
+        .posts-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .post-item {
+            background: #fff;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .post-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .post-link {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        .post-title {
+            font-size: 18px;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        /* 페이지네이션 스타일 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .pagination a, .pagination span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 12px;
+            border-radius: 4px;
+            background: #fff;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+        .pagination a:hover {
+            background: #f0f0f0;
+            transform: translateY(-1px);
+        }
+        .pagination span.current {
+            background: #333;
+            color: #fff;
+        }
+        
+        /* 하단 네비게이션 */
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .nav-button {
+            padding: 8px 16px;
+            border-radius: 4px;
+            background: #fff;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .nav-button:hover {
+            background: #f0f0f0;
+        }
+        
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 20px;
+                margin: 15px 0;
+            }
+            .post-item {
+                padding: 15px;
+                margin: 10px 0;
+            }
+            .post-title {
+                font-size: 16px;
+            }
+            .pagination a, .pagination span {
+                min-width: 32px;
+                height: 32px;
+                padding: 0 8px;
+                font-size: 14px;
+            }
+            .nav-button {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+        }
+        
+        /* 작은 모바일 화면 */
+        @media (max-width: 375px) {
+            .container {
+                padding: 8px;
+            }
+            .post-item {
+                padding: 12px;
+                margin: 8px 0;
+            }
+            .post-title {
+                font-size: 14px;
+            }
+            .pagination a, .pagination span {
+                min-width: 28px;
+                height: 28px;
+                padding: 0 6px;
+                font-size: 13px;
+            }
+            .nav-button {
+                padding: 5px 10px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>유머 게시판</h1>
+        <ul style="list-style: none; padding: 0;">
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./현실-한-남자-버튜버가-이세돌-소속-버튜버와-배그하다가-사과문을-쓴-이유-노하우.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">한 남자 버튜버가 이세돌 소속 버튜버와 배그하다가 사과문을 쓴 이유</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./궁금-김새론-전남친이-말하는-김새론이-죽은-진짜-이유-후기.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">김새론 전남친이 말하는 김새론이 죽은 진짜 이유</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./실화-편집자-구인글-올렸다가-억까-당하고-해명글-올린-랄로-총정리.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">편집자 구인글 올렸다가 억까 당하고 해명글 올린 랄로</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./절대-뉴진스-민지를-정말-사랑했던-한-버니즈의-글-대참사-리뷰.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">뉴진스 민지를 정말 사랑했던 한 버니즈의 글 대참사</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./전설의-파묘-레전드-찍었다는-백종원-백스비어-영상-심쿵.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">파묘 레전드 찍었다는 백종원 백스비어 영상</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./대유행-외모-컴플렉스가-있다며-응원해달라는-사람에게-응원하면-생기는-일-정리.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">외모 컴플렉스가 있다며 응원해달라는 사람에게 응원하면 생기는 일</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./충격적-현재-최여진-결혼-발표에-할리우드냐고-놀라는-이유-정보.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">현재 최여진 결혼 발표에 할리우드냐고 놀라는 이유</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./극한-박명수가-마이바흐를-팔고-테슬라를-타는-이유-노하우.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">박명수가 마이바흐를 팔고 테슬라를 타는 이유</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./극한-어느-유부녀가-남편-먹일-밥-짓다-지은-시-대참사-핵심.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">어느 유부녀가 남편 먹일 밥 짓다 지은 시 대참사</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./전격-주문-취소했더니-야구방망이-들고-매장으로-찾아온-손님-레시피.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">주문 취소했더니 야구방망이 들고 매장으로 찾아온 손님</h2>
+            </a>
+        </li></ul>
+        <div class="pagination" style="margin-top: 20px; text-align: center;"><a href="./humor_4.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">◀</a><a href="./humor_1.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">1</a><a href="./humor_2.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">2</a><a href="./humor_3.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">3</a><a href="./humor_4.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">4</a><span style="margin: 0 5px; padding: 5px 10px; background-color: #f0f0f0; border-radius: 3px;">5</span></div>
+    </div>
+    
+    <!-- 하단 네비게이션 바 추가 -->
+    <nav class="bottom-navigation" style="
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        padding: 10px 0;
+        z-index: 1000;
+    ">
+        <div class="container">
+            <div class="nav-links" style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 0 20px;
+            ">
+                <a href="./humor_4.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">◀ 이전</a>
+<span style="color: #333; padding: 8px 15px;">페이지 5</span>
+            </div>
+        </div>
+    </nav>
+    
+    <div style="height: 60px;"><!-- 하단 네비게이션 바 공간 확보 --></div>
+</body>
+</html>
