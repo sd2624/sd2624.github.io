@@ -9,12 +9,10 @@ try:
     from bs4 import BeautifulSoup
     import cloudscraper
     from fake_useragent import UserAgent
-    from PIL import Image
-    import io
 except ImportError as e:
     print(f"필요한 패키지가 설치되지 않았습니다: {str(e)}")
     print("다음 명령어로 필요한 패키지를 설치하세요:")
-    print("pip install beautifulsoup4 cloudscraper fake-useragent pillow")
+    print("pip install beautifulsoup4 cloudscraper fake-useragent")
     sys.exit(1)
 
 # 로깅 설정
