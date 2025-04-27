@@ -72,18 +72,16 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         safe_title = clean_filename(title)
         filename = os.path.join(base_path, f'{safe_title}.html')
         
-        # 네비게이션 링크 설정 - 파일명 처리 수정
+        # 네비게이션 링크 설정 수정
         nav_links = []
-        if prev_post and 'title' in prev_post:
-            prev_filename = f"{clean_filename(prev_post['title'])}.html"
-            nav_links.append(f'<a href="./{prev_filename}" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">◀ 이전 글</a>')
+        if prev_post and 'filename' in prev_post:
+            nav_links.append(f'<a href="https://testpro.site/output/vvv/{prev_post["filename"]}" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">◀ 이전 글</a>')
         
-        # 홈 링크를 humor_1.html로 변경
-        nav_links.append('<a href="./humor_1.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; background-color: #f0f0f0; transition: background-color 0.3s;">홈</a>')
+        # 홈 링크를 전체 URL로 변경
+        nav_links.append('<a href="https://testpro.site/output/vvv/humor_1.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; background-color: #f0f0f0; transition: background-color 0.3s;">홈</a>')
         
-        if next_post and 'title' in next_post:
-            next_filename = f"{clean_filename(next_post['title'])}.html"
-            nav_links.append(f'<a href="./{next_filename}" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">다음 글 ▶</a>')
+        if next_post and 'filename' in next_post:
+            nav_links.append(f'<a href="https://testpro.site/output/vvv/{next_post["filename"]}" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">다음 글 ▶</a>')
         
         nav_html = '\n'.join(nav_links)
 
@@ -508,6 +506,7 @@ def scrape_category():
                     
                     # 이전/다음 게시물 정보 설정
                     prev_post = posts_info[-1] if posts_info else None
+                    next_post = posts_info[-2] if len(posts_info) > 1 else None
                     
                     # 게시물 저장
                     saved_file = save_article(
@@ -516,7 +515,7 @@ def scrape_category():
                         images_html,
                         base_path,
                         prev_post,
-                        None  # 다음 게시물은 아직 알 수 없음
+                        next_post
                     )
                     
                     # 게시물 정보 저장
