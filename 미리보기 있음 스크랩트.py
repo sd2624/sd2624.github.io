@@ -375,22 +375,171 @@ def create_humor_page(posts_info, base_path, page_number=1):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유머 게시판 - 페이지 {page_number}</title>
     <style>
+        /* 기본 스타일 */
         body {{
             font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f8f9fa;
         }}
         .container {{
+            width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
+            box-sizing: border-box;
         }}
         h1 {{
             text-align: center;
-            margin-bottom: 30px;
+            margin: 20px 0;
+            font-size: 24px;
             color: #333;
+        }}
+        
+        /* 게시물 목록 스타일 */
+        .posts-list {{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }}
+        .post-item {{
+            background: #fff;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }}
+        .post-item:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }}
+        .post-link {{
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }}
+        .post-title {{
+            font-size: 18px;
+            margin: 0;
+            line-height: 1.4;
+        }}
+        
+        /* 페이지네이션 스타일 */
+        .pagination {{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }}
+        .pagination a, .pagination span {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 12px;
+            border-radius: 4px;
+            background: #fff;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }}
+        .pagination a:hover {{
+            background: #f0f0f0;
+            transform: translateY(-1px);
+        }}
+        .pagination span.current {{
+            background: #333;
+            color: #fff;
+        }}
+        
+        /* 하단 네비게이션 */
+        .bottom-navigation {{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }}
+        .nav-links {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }}
+        .nav-button {{
+            padding: 8px 16px;
+            border-radius: 4px;
+            background: #fff;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }}
+        .nav-button:hover {{
+            background: #f0f0f0;
+        }}
+        
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {{
+            .container {{
+                padding: 10px;
+            }}
+            h1 {{
+                font-size: 20px;
+                margin: 15px 0;
+            }}
+            .post-item {{
+                padding: 15px;
+                margin: 10px 0;
+            }}
+            .post-title {{
+                font-size: 16px;
+            }}
+            .pagination a, .pagination span {{
+                min-width: 32px;
+                height: 32px;
+                padding: 0 8px;
+                font-size: 14px;
+            }}
+            .nav-button {{
+                padding: 6px 12px;
+                font-size: 14px;
+            }}
+        }}
+        
+        /* 작은 모바일 화면 */
+        @media (max-width: 375px) {{
+            .container {{
+                padding: 8px;
+            }}
+            .post-item {{
+                padding: 12px;
+                margin: 8px 0;
+            }}
+            .post-title {{
+                font-size: 14px;
+            }}
+            .pagination a, .pagination span {{
+                min-width: 28px;
+                height: 28px;
+                padding: 0 6px;
+                font-size: 13px;
+            }}
+            .nav-button {{
+                padding: 5px 10px;
+                font-size: 13px;
+            }}
         }}
     </style>
 </head>
