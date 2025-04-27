@@ -345,7 +345,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
             <article class="post">
                 <!-- 첫 번째 이미지를 제목 위에 배치 -->
                 <div class="first-image" style="margin-bottom: 20px;">
-                    {first_image_html}
+                    {images}  <!-- 첫 번째 이미지만 표시 -->
                 </div>
                 <header class="entry-header">
                     <h1 class="entry-title">{processed_title}</h1>
@@ -704,15 +704,19 @@ def scrape_category():
                             preview_img = process_image_for_preview(img_data)
                             if preview_img:
                                 preview_img.convert('RGB').save(jpg_path, 'JPEG', quality=85)
-                                first_image_url = f"https://testpro.site/bbb/images/{jpg_name}"
+                                first_image_url = f"https://sd2624.github.io/bbb/images/{jpg_name}"  # URL 경로 수정
                                 images_html = f'<img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;">'
                                 logging.info(f"First image saved as JPG: {jpg_name}")
+                                
+                                # 첫 번째 이미지 제거 (content에서)
+                                first_img.decompose()
                         except Exception as e:
                             logging.error(f"Failed to process first image: {str(e)}")
                     
-                    # 현재 게시물 저장
+                    # 현재 게시물 저장 - first_image_html과 content를 분리
                     current_post['content'] = content
-                    current_post['images'] = images_html
+                    current_post['first_image'] = images_html
+                    current_post['images'] = ""  # 나머지 이미지는 저장하지 않음
 
                     # 이전/다음 게시물 설정
                     prev_post = None
@@ -735,7 +739,7 @@ def scrape_category():
                     saved_file = save_article(
                         current_post['title'],
                         current_post['content'],
-                        current_post['images'],
+                        current_post['first_image'],
                         base_path,
                         prev_post,  # 이전 게시물
                         next_post   # 다음 게시물
@@ -747,7 +751,7 @@ def scrape_category():
                             save_article(
                                 prev_post['title'],
                                 prev_post['content'],
-                                prev_post['images'],
+                                prev_post['first_image'],
                                 base_path,
                                 posts_info[-2] if len(posts_info) > 1 else None,  # 이전 글의 이전 글
                                 current_post  # 현재 게시물을 다음 글로 설정
