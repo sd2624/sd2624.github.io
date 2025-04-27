@@ -232,6 +232,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                 font-size: 0.9em;
             }}
         }}
+        
 
         /* 하단 네비게이션 중앙 정렬 */
         .bottom-navigation .container {{
@@ -244,6 +245,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
             justify-content: center;
             gap: 20px;
         }}
+        
     </style>
 </head>
 <body>
