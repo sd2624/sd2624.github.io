@@ -16,10 +16,28 @@ except ImportError as e:
     sys.exit(1)
 
 # 로깅 설정
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s',
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler('scraping.log', encoding='utf-8')
+    ]
+)
 
 def clean_filename(text):
-    return re.sub(r'[\\/*?:"<>|]', "", text)
+    """파일명으로 사용할 수 있게 문자열 정리"""
+    # URL에서 사용 가능한 문자만 허용
+    # 1. 공백을 하이픈으로 변경
+    text = text.replace(' ', '-')
+    # 2. 대괄호 제거
+    text = text.replace('[', '').replace(']', '')
+    # 3. 알파벳, 숫자, 하이픈만 허용
+    text = re.sub(r'[^a-zA-Z0-9가-힣\-]', '', text)
+    # 4. 연속된 하이픈을 하나로
+    text = re.sub(r'-+', '-', text)
+    # 5. 앞뒤 하이픈 제거
+    return text.strip('-')
 
 def get_scraper():
     """클라우드플레어 우회 스크래퍼 생성"""
@@ -43,17 +61,14 @@ def get_scraper():
 def setup_folders():
     """필요한 폴더 구조 생성"""
     base_path = os.path.join('sd2624.github.io', 'output', 'vvv')
-    image_path = os.path.join(base_path, 'images')
-    
-    # 폴더 생성
+    # image_path 제거
     os.makedirs(base_path, exist_ok=True)
-    os.makedirs(image_path, exist_ok=True)
-    
-    return base_path, image_path
+    return base_path, None  # None 반환하여 이미지 경로 사용 안함
 
 def save_article(title, content, images, base_path, prev_post=None, next_post=None):
     """HTML 파일로 게시물 저장"""
     try:
+        # 이미 처리된 제목을 그대로 사용
         safe_title = clean_filename(title)
         filename = os.path.join(base_path, f'{safe_title}.html')
         
@@ -74,7 +89,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         # content가 BeautifulSoup 객체인 경우 HTML 추출
         if isinstance(content, BeautifulSoup):
             content_html = str(content)
-            # 원본 HTML 구조 유지를 위해 태그 보존
+            # 이미지 URL을 직접 사용하도록 수정
             content_html = content_html.replace('src="/', 'src="https://humorworld.net/')
         else:
             content_html = f"<p>{content}</p>"
@@ -270,7 +285,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         return None
 
 def is_duplicate_post(title, base_path):
-    """게시물 제목 중복 검사"""
+    """게시물 제목 중복 검사 (원본 제목 사용)"""
     safe_title = clean_filename(title)
     return os.path.exists(os.path.join(base_path, f'{safe_title}.html'))
 
@@ -289,15 +304,16 @@ INTEREST_SUFFIXES = [
     "꿀잼", "분석", "해설", "후기", "리뷰", "정리", "모음", "꿀팁", "레시피", "노하우"
 ]
 
-def process_title(title, prefix_index=None, suffix_index=None):
-    """제목에 일관된 접두어와 접미어 추가"""
-    if prefix_index is None:
-        prefix_index = hash(title) % len(CLICK_PREFIXES)
-    if suffix_index is None:
-        suffix_index = hash(title + "suffix") % len(INTEREST_SUFFIXES)
-        
+def process_title(title):
+    """제목에 접두어와 접미어 한 번씩만 추가"""
+    # 제목을 기반으로 일관된 인덱스 생성
+    prefix_index = hash(title) % len(CLICK_PREFIXES)
+    suffix_index = hash(title + "suffix") % len(INTEREST_SUFFIXES)
+    
     prefix = CLICK_PREFIXES[prefix_index]
     suffix = INTEREST_SUFFIXES[suffix_index]
+    
+    # 접두어와 접미어를 한 번씩만 추가
     return f"[{prefix}] {title} ({suffix})"
 
 def create_humor_page(posts_info, base_path, page_number=1):
@@ -320,7 +336,7 @@ def create_humor_page(posts_info, base_path, page_number=1):
     if page_number > 1:
         nav_links.append(f'<a href="./humor_{page_number-1}.html">이전</a>')
     
-    # 페이지 번호 표시 (현재 페이지 ±2)
+    # 페이지 번호 표시
     for i in range(max(1, page_number-2), min(total_pages+1, page_number+3)):
         if i == page_number:
             nav_links.append(f'<span class="current-page">{i}</span>')
@@ -339,16 +355,17 @@ def create_humor_page(posts_info, base_path, page_number=1):
     # 게시물 목록 HTML 생성
     posts_html = '<ul class="posts-list">'
     for post in current_posts:
+        # 이미 처리된 제목 사용
+        title = post['processed_title']
         posts_html += f'''
         <li>
-            <a href="./{post['filename']}">
-                <h2>{post['processed_title']}</h2>
-                <time>{datetime.now().strftime('%Y년 %m월 %d일')}</time>
+            <a href="./{post['filename']}" class="post-link">
+                <h2>{title}</h2>
+                <time datetime="{datetime.now().isoformat()}">{datetime.now().strftime('%Y년 %m월 %d일')}</time>
             </a>
         </li>'''
     posts_html += '</ul>'
 
-    # HTML 템플릿
     html_content = f"""<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -407,7 +424,7 @@ def create_humor_page(posts_info, base_path, page_number=1):
 
 def scrape_category():
     """게시물 스크래핑 함수"""
-    base_path, image_path = setup_folders()
+    base_path, _ = setup_folders()  # 이미지 경로 무시
     posts_info = []
     post_count = 0
     
@@ -437,46 +454,42 @@ def scrape_category():
                     if not title_elem:
                         continue
                     
-                    title = title_elem.get_text(strip=True)
-                    link = title_elem.get('href')
+                    original_title = title_elem.get_text(strip=True)
                     
-                    # 중복 게시물 검사
-                    if is_duplicate_post(title, base_path):
-                        logging.info(f"Skipping duplicate post: {title}")
+                    # 중복 검사는 원본 제목으로
+                    if is_duplicate_post(original_title, base_path):
+                        logging.info(f"Skipping duplicate post: {original_title}")
                         continue
                     
                     # 게시물 상세 페이지 스크래핑
+                    link = title_elem.get('href')
                     article_response = scraper.get(link)
                     article_soup = BeautifulSoup(article_response.text, 'html.parser')
                     
                     content = article_soup.select_one('.entry-content')
                     if not content:
-                        logging.error(f"Content not found for: {title}")
+                        logging.error(f"Content not found for: {original_title}")
                         continue
 
-                    # 이미지 처리
+                    # 이미지 처리 부분 수정 - 이미지 다운로드 대신 URL 직접 사용
                     images_html = ""
                     for img in content.find_all('img'):
                         if img.get('src'):
-                            img_name = clean_filename(os.path.basename(img['src']))
-                            img_path = os.path.join(image_path, img_name)
-                            
-                            try:
-                                img_response = scraper.get(img['src'])
-                                with open(img_path, 'wb') as f:
-                                    f.write(img_response.content)
-                                images_html += f'<img src="images/{img_name}" alt="{title}">\n'
-                                logging.info(f"Image saved: {img_name}")
-                            except Exception as e:
-                                logging.error(f"Failed to download image: {str(e)}")
+                            img_url = img['src']
+                            if not img_url.startswith('http'):
+                                img_url = f"https://humorworld.net{img_url}"
+                            images_html += f'<img src="{img_url}" alt="{original_title}" loading="lazy">\n'
 
-                    # 현재 게시물 정보 저장 - 구조 수정
+                    # 현재 게시물 정보 저장
+                    processed_title = process_title(original_title)
+                    safe_filename = clean_filename(processed_title) + '.html'
+                    
                     current_post = {
-                        'title': title,
+                        'title': original_title,  # 원본 제목 저장
+                        'processed_title': processed_title,  # 처리된 제목 저장
                         'content': content,
                         'images': images_html,
-                        'filename': f'{clean_filename(title)}.html',  # filename 추가
-                        'processed_title': process_title(title)  # processed_title 추가
+                        'filename': safe_filename
                     }
                     
                     # 이전/다음 게시물 정보 설정
@@ -484,7 +497,7 @@ def scrape_category():
                     
                     # 게시물 저장
                     saved_file = save_article(
-                        title,
+                        processed_title,  # 처리된 제목 전달
                         content,  # BeautifulSoup 객체 그대로 전달
                         images_html,
                         base_path,
@@ -499,7 +512,7 @@ def scrape_category():
                         # 이전 게시물 업데이트
                         if prev_post:
                             save_article(
-                                prev_post['title'],
+                                prev_post['processed_title'],
                                 prev_post['content'],
                                 prev_post['images'],
                                 base_path,
@@ -508,7 +521,7 @@ def scrape_category():
                             )
                     
                     if saved_file:
-                        logging.info(f"Article saved: {title}")
+                        logging.info(f"Article saved: {original_title}")
                         post_count += 1
                     
                     if post_count % 10 == 0:
