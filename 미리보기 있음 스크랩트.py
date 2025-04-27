@@ -93,6 +93,36 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         else:
             content_html = f"<p>{content}</p>"
 
+        # 광고 스크립트를 별도 변수로 분리
+        ad_script = '''
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        '''
+        
+        # 팝업 스크립트를 별도 변수로 분리
+        popup_script = '''
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const popup = document.getElementById('welcome-popup');
+                const timerElement = document.querySelector('.popup-timer');
+                let timeLeft = 7;
+                
+                popup.style.display = 'flex';
+                
+                const timer = setInterval(() => {
+                    timeLeft--;
+                    timerElement.textContent = timeLeft;
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        popup.style.display = 'none';
+                    }
+                }, 1000);
+            });
+        </script>
+        '''
+
         html_content = f"""<!DOCTYPE html>
 <html lang="ko-KR" class="js">
 <head>
@@ -233,6 +263,76 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                 font-size: 0.85rem;
             }}
         }}
+
+        /* 팝업 스타일 */
+        .popup-overlay {{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }}
+        
+        .popup-container {{
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }}
+        
+        .popup-content {{
+            text-align: center;
+        }}
+        
+        .popup-title {{
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }}
+        
+        .popup-timer {{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6c5ce7;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }}
+        
+        .popup-ad {{
+            margin: 20px 0;
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }}
+        
+        @media (max-width: 768px) {{
+            .popup-container {{
+                width: 95%;
+                margin: 10px;
+                padding: 15px;
+            }}
+            
+            .popup-title {{
+                font-size: 20px;
+                margin-bottom: 15px;
+            }}
+        }}
     </style>
 </head>
 <body>
@@ -246,7 +346,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                      data-ad-slot="8384240134"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
-                <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
+                {ad_script}
             </div>
             
             <article class="post">
@@ -280,7 +380,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                      data-ad-slot="8384240134"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
-                <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
+                {ad_script}
             </div>
         </main>
     </div>
@@ -291,7 +391,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
              style="display:inline-block;width:300px;height:250px"
              data-ad-client="ca-pub-9374368296307755"
              data-ad-slot="8384240134"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
+        <script>(adsbygoogle = window.adsbygoogle || []).push();</script>
     </div>
     
     <!-- 하단 네비게이션 바 추가 -->
@@ -321,6 +421,28 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     
     <div style="height: 60px;"><!-- 하단 네비게이션 바 공간 확보 --></div>
     
+    <!-- 웰컴 팝업 -->
+    <div class="popup-overlay" id="welcome-popup">
+        <div class="popup-container">
+            <div class="popup-timer">7</div>
+            <div class="popup-content">
+                <h2 class="popup-title">환영합니다</h2>
+                <div class="popup-ad">
+                    <!-- 구글 애드센스 광고 -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="8384240134"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    {ad_script}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {popup_script}
+
     <!-- 원본 사이트 스크립트 -->
     <script src='https://humorworld.net/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
     <script src='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
