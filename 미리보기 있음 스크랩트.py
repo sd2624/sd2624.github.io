@@ -100,25 +100,46 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         </script>
         '''
         
-        # 팝업 스크립트를 별도 변수로 분리
+        # 팝업 스크립트를 수정하여 쿠키 체크 추가
         popup_script = '''
         <script>
+            function setCookie(name, value, days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                const expires = "expires=" + date.toUTCString();
+                document.cookie = name + "=" + value + ";" + expires + ";path=/";
+            }
+
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+                return null;
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
                 const popup = document.getElementById('welcome-popup');
                 const timerElement = document.querySelector('.popup-timer');
                 let timeLeft = 7;
                 
-                popup.style.display = 'flex';
+                // 오늘 날짜의 쿠키가 없을 때만 팝업 표시
+                const today = new Date().toDateString();
+                const lastShown = getCookie('popup_last_shown');
                 
-                const timer = setInterval(() => {
-                    timeLeft--;
-                    timerElement.textContent = timeLeft;
+                if (lastShown !== today) {
+                    popup.style.display = 'flex';
+                    setCookie('popup_last_shown', today, 1);
                     
-                    if (timeLeft <= 0) {
-                        clearInterval(timer);
-                        popup.style.display = 'none';
-                    }
-                }, 1000);
+                    const timer = setInterval(() => {
+                        timeLeft--;
+                        timerElement.textContent = timeLeft;
+                        
+                        if (timeLeft <= 0) {
+                            clearInterval(timer);
+                            popup.style.display = 'none';
+                        }
+                    }, 1000);
+                }
             });
         </script>
         '''
