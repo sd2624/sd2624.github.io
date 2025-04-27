@@ -78,7 +78,8 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
             prev_filename = f"{clean_filename(prev_post['title'])}.html"
             nav_links.append(f'<a href="./{prev_filename}" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">◀ 이전 글</a>')
         
-        nav_links.append('<a href="https://kk.testpro.site/" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; background-color: #f0f0f0; transition: background-color 0.3s;">홈</a>')
+        # 홈 링크를 humor_1.html로 변경
+        nav_links.append('<a href="./humor_1.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; background-color: #f0f0f0; transition: background-color 0.3s;">홈</a>')
         
         if next_post and 'title' in next_post:
             next_filename = f"{clean_filename(next_post['title'])}.html"
