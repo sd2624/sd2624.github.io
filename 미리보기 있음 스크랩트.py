@@ -79,8 +79,7 @@ def get_scraper():
 
 def setup_folders():
     """필요한 폴더 구조 생성"""
-    # GitHub Pages 폴더 경로로 변경
-    base_path = os.path.join('sd2624.github.io', 'bbb')
+    base_path = os.path.join('s07102624.github.io', 'output', 'news')
     image_path = os.path.join(base_path, 'images')
     
     # 폴더 생성
@@ -88,42 +87,6 @@ def setup_folders():
     os.makedirs(image_path, exist_ok=True)
     
     return base_path, image_path
-
-def process_image_for_preview(img_data):
-    """이미지를 소셜미디어 미리보기에 최적화된 크기로 처리"""
-    try:
-        # 권장되는 og:image 크기인 1200x630으로 변경
-        target_width = 1200
-        target_height = 630
-        target_ratio = target_width / target_height
-
-        # 원본 이미지 크기
-        original_width, original_height = img_data.size
-        original_ratio = original_width / original_height
-        
-        if original_ratio > target_ratio:
-            # 이미지가 더 넓은 경우
-            new_width = int(original_height * target_ratio)
-            new_height = original_height
-            left = (original_width - new_width) // 2
-            top = 0
-            right = left + new_width
-            bottom = original_height
-        else:
-            # 이미지가 더 높은 경우
-            new_width = original_width
-            new_height = int(original_width / target_ratio)
-            left = 0
-            top = (original_height - new_height) // 2
-            right = original_width
-            bottom = top + new_height
-            
-        # 이미지 크롭 후 리사이즈
-        img_data = img_data.crop((left, top, right, bottom))
-        return img_data.resize((target_width, target_height), Image.Resampling.LANCZOS)
-    except Exception as e:
-        logging.error(f"이미지 처리 실패: {str(e)}")
-        return None
 
 def save_article(title, content, images, base_path, prev_post=None, next_post=None):
     """HTML 파일로 게시물 저장"""
@@ -133,57 +96,6 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         safe_title = clean_filename(processed_title)
         filename = os.path.join(base_path, f'{safe_title}.html')
         
-        # 첫 번째 이미지 URL 추출 및 도메인 추가
-        first_image_html = ""
-        content_images_html = ""
-        first_image_url = ""
-
-        if isinstance(images, str):
-            # 첫 번째 이미지가 이미 JPG인 경우를 확인
-            first_image = re.search(r'<img src="images/([^"]+\.jpg)"', images)
-            if first_image:
-                # 이미 JPG인 경우 해당 이미지 사용
-                jpg_name = first_image.group(1)
-                first_image_url = f"https://testpro.site/bbb/images/{jpg_name}"
-                first_image_html = f'<img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;">'
-                content_images_html = re.sub(r'<img[^>]+src="[^"]+"[^>]*>', '', images, count=1)
-            else:
-                # 웹피 이미지를 JPG로 변환해야 하는 경우
-                img_match = re.search(r'src="(images/[^"]+)"', images)
-                if img_match:
-                    relative_path = img_match.group(1)
-                    img_path = os.path.join(base_path, relative_path)
-                    
-                    try:
-                        with Image.open(img_path) as img:
-                            preview_img = process_image_for_preview(img)
-                            if preview_img:
-                                random_name = f"{int(time.time())}_{os.urandom(4).hex()}.jpg"
-                                jpg_path = os.path.join(base_path, 'images', random_name)
-                                preview_img.convert('RGB').save(jpg_path, 'JPEG', quality=85)
-                                first_image_url = f"https://testpro.site/bbb/images/{random_name}"
-                                first_image_html = f'<img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;">'
-                                content_images_html = re.sub(r'<img[^>]+src="[^"]+"[^>]*>', '', images, count=1)
-                    except Exception as e:
-                        logging.error(f"첫 이미지 처리 실패: {str(e)}")
-
-        # og 메타태그 수정 - Facebook 권장사항 준수
-        og_tags = f"""
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="유머 게시판">
-    <meta property="og:title" content="{processed_title}">
-    <meta property="og:description" content="{processed_title}">
-    <meta property="og:image" content="{first_image_url}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:url" content="https://testpro.site/bbb/{os.path.basename(filename)}">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{processed_title}">
-    <meta name="twitter:description" content="{processed_title}">
-    <meta name="twitter:image" content="{first_image_url}">
-    <link rel="image_src" href="{first_image_url}">"""
-
         # 네비게이션 링크 설정 - 파일명 처리 수정
         nav_links = []
         if prev_post and 'filename' in prev_post:
@@ -200,20 +112,36 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         # content가 BeautifulSoup 객체인 경우 HTML 추출
         if isinstance(content, BeautifulSoup):
             content_html = str(content)
+            # 원본 HTML 구조 유지를 위해 태그 보존
             content_html = content_html.replace('src="/', 'src="https://humorworld.net/')
-            # 상대 경로 이미지 URL을 전체 URL로 변환
-            content_html = re.sub(r'src="images/', 'src="https://testpro.site/bbb/images/', content_html)
-            # 이미지 HTML도 절대 경로로 변환
-            images = images.replace('src="images/', 'src="https://sd2624.github.io/bbb/images/')
         else:
             content_html = f"<p>{content}</p>"
 
+        # 첫 번째 이미지 URL 추출
+        preview_image = ""
+        if isinstance(content, BeautifulSoup):
+            first_img = content.find('img')
+            if first_img and first_img.get('src'):
+                img_src = first_img['src']
+                if img_src.startswith('/'):
+                    img_src = f"https://humorworld.net{img_src}"
+                preview_image = img_src
+
         html_content = f"""<!DOCTYPE html>
-<html lang="ko-KR" prefix="og: https://ogp.me/ns#">
+<html lang="ko-KR" class="js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {og_tags}
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- 네이버 밴드 썸네일 설정 -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{processed_title}">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="{preview_image}">
+    <meta property="og:url" content="">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="image_src" href="{preview_image}">
     
     <title>{processed_title}</title>
     
@@ -343,10 +271,6 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
             </div>
             
             <article class="post">
-                <!-- 첫 번째 이미지를 제목 위에 배치 -->
-                <div class="first-image" style="margin-bottom: 20px;">
-                    {images}  <!-- 첫 번째 이미지만 표시 -->
-                </div>
                 <header class="entry-header">
                     <h1 class="entry-title">{processed_title}</h1>
                     <div class="entry-meta">
@@ -357,7 +281,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                 </header>
                 <div class="entry-content">
                     {content_html}
-                    {content_images_html}
+                    {images}
                 </div>
                 <footer class="entry-footer">
                     <nav class="navigation post-navigation">
@@ -682,41 +606,21 @@ def scrape_category():
                         logging.error(f"Content not found for: {title}")
                         continue
 
-                    # 이미지 처리 - 첫 번째 이미지만 JPG로 저장
-                    first_image_url = None
+                    # 이미지 처리 부분 수정
                     images_html = ""
-                    
-                    # 첫 번째 이미지 찾기
-                    first_img = content.find('img')
-                    if first_img and first_img.get('src'):
-                        try:
-                            img_response = scraper.get(first_img['src'])
-                            img_data = Image.open(io.BytesIO(img_response.content))
+                    for img in content.find_all('img'):
+                        if img.get('src'):
+                            img_name = clean_filename(os.path.basename(img['src']))
+                            img_path = os.path.join(image_path, img_name)
                             
-                            if img_data.mode in ('RGBA', 'LA'):
-                                background = Image.new('RGB', img_data.size, (255, 255, 255))
-                                background.paste(img_data, mask=img_data.split()[-1])
-                                img_data = background
-                            
-                            # 첫 번째 이미지 저장
-                            jpg_name = f"{int(time.time())}_{os.urandom(4).hex()}.jpg"
-                            jpg_path = os.path.join(image_path, jpg_name)
-                            preview_img = process_image_for_preview(img_data)
-                            if preview_img:
-                                preview_img.convert('RGB').save(jpg_path, 'JPEG', quality=85)
-                                first_image_url = f"https://sd2624.github.io/bbb/images/{jpg_name}"  # URL 경로 수정
-                                images_html = f'<img src="{first_image_url}" alt="{title}" style="width:100%; max-width:1000px; height:auto;">'
-                                logging.info(f"First image saved as JPG: {jpg_name}")
-                                
-                                # 첫 번째 이미지 제거 (content에서)
-                                first_img.decompose()
-                        except Exception as e:
-                            logging.error(f"Failed to process first image: {str(e)}")
-                    
-                    # 현재 게시물 저장 - first_image_html과 content를 분리
-                    current_post['content'] = content
-                    current_post['first_image'] = images_html
-                    current_post['images'] = ""  # 나머지 이미지는 저장하지 않음
+                            try:
+                                img_response = scraper.get(img['src'])
+                                with open(img_path, 'wb') as f:
+                                    f.write(img_response.content)
+                                images_html += f'<img src="images/{img_name}" alt="{title}">\n'
+                                logging.info(f"Image saved: {img_name}")
+                            except Exception as e:
+                                logging.error(f"Failed to download image: {str(e)}")
 
                     # 이전/다음 게시물 설정
                     prev_post = None
@@ -736,10 +640,11 @@ def scrape_category():
                         if current_index < 9:
                             next_post = posts_info[-2]
                     
+                    # 현재 게시물 저장
                     saved_file = save_article(
                         current_post['title'],
-                        current_post['content'],
-                        current_post['first_image'],
+                        content,
+                        images_html,
                         base_path,
                         prev_post,  # 이전 게시물
                         next_post   # 다음 게시물
@@ -750,8 +655,8 @@ def scrape_category():
                         if prev_post:
                             save_article(
                                 prev_post['title'],
-                                prev_post['content'],
-                                prev_post['first_image'],
+                                content if 'content' in prev_post else None,
+                                prev_post.get('images', ''),
                                 base_path,
                                 posts_info[-2] if len(posts_info) > 1 else None,  # 이전 글의 이전 글
                                 current_post  # 현재 게시물을 다음 글로 설정
