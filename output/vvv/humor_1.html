@@ -5,171 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유머 게시판 - 페이지 1</title>
     <style>
-        /* 기본 스타일 */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             background-color: #f8f9fa;
         }
         .container {
-            width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            padding: 15px;
-            box-sizing: border-box;
+            padding: 20px;
         }
         h1 {
             text-align: center;
-            margin: 20px 0;
-            font-size: 24px;
+            margin-bottom: 30px;
             color: #333;
-        }
-        
-        /* 게시물 목록 스타일 */
-        .posts-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .post-item {
-            background: #fff;
-            margin: 15px 0;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        .post-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .post-link {
-            text-decoration: none;
-            color: #333;
-            display: block;
-        }
-        .post-title {
-            font-size: 18px;
-            margin: 0;
-            line-height: 1.4;
-        }
-        
-        /* 페이지네이션 스타일 */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-        .pagination a, .pagination span {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 36px;
-            height: 36px;
-            padding: 0 12px;
-            border-radius: 4px;
-            background: #fff;
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: all 0.2s ease;
-        }
-        .pagination a:hover {
-            background: #f0f0f0;
-            transform: translateY(-1px);
-        }
-        .pagination span.current {
-            background: #333;
-            color: #fff;
-        }
-        
-        /* 하단 네비게이션 */
-        .bottom-navigation {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #fff;
-            padding: 10px 0;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-        .nav-links {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        .nav-button {
-            padding: 8px 16px;
-            border-radius: 4px;
-            background: #fff;
-            color: #333;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .nav-button:hover {
-            background: #f0f0f0;
-        }
-        
-        /* 모바일 최적화 */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            h1 {
-                font-size: 20px;
-                margin: 15px 0;
-            }
-            .post-item {
-                padding: 15px;
-                margin: 10px 0;
-            }
-            .post-title {
-                font-size: 16px;
-            }
-            .pagination a, .pagination span {
-                min-width: 32px;
-                height: 32px;
-                padding: 0 8px;
-                font-size: 14px;
-            }
-            .nav-button {
-                padding: 6px 12px;
-                font-size: 14px;
-            }
-        }
-        
-        /* 작은 모바일 화면 */
-        @media (max-width: 375px) {
-            .container {
-                padding: 8px;
-            }
-            .post-item {
-                padding: 12px;
-                margin: 8px 0;
-            }
-            .post-title {
-                font-size: 14px;
-            }
-            .pagination a, .pagination span {
-                min-width: 28px;
-                height: 28px;
-                padding: 0 6px;
-                font-size: 13px;
-            }
-            .nav-button {
-                padding: 5px 10px;
-                font-size: 13px;
-            }
         }
     </style>
 </head>
@@ -178,56 +29,56 @@
         <h1>유머 게시판</h1>
         <ul style="list-style: none; padding: 0;">
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <a href="./상상초월-남편이-결혼-전-연애하던-시절-소개팅한-걸-알게된-아내-이야기.html" style="text-decoration: none; color: #333; display: block;">
+            <a href="./완벽-남편이-결혼-전-연애하던-시절-소개팅한-걸-알게된-아내-기록.html" style="text-decoration: none; color: #333; display: block;">
                 <h2 style="margin: 0; font-size: 18px;">남편이 결혼 전 연애하던 시절 소개팅한 걸 알게된 아내</h2>
             </a>
         </li>
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <a href="./최강-호감인지-착각인지-알려줘jpg-궁금증.html" style="text-decoration: none; color: #333; display: block;">
+            <a href="./충격-호감인지-착각인지-알려줘.jpg-레전드.html" style="text-decoration: none; color: #333; display: block;">
                 <h2 style="margin: 0; font-size: 18px;">호감인지 착각인지 알려줘.jpg</h2>
             </a>
         </li>
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <a href="./결국-분양-보냈더니-8km-거리를-돌아온-강아지-사실.html" style="text-decoration: none; color: #333; display: block;">
+            <a href="./공감-분양-보냈더니-8km-거리를-돌아온-강아지-레시피.html" style="text-decoration: none; color: #333; display: block;">
                 <h2 style="margin: 0; font-size: 18px;">분양 보냈더니 8km 거리를 돌아온 강아지</h2>
             </a>
         </li>
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <a href="./현실-아내에게-핸드폰-공기계-빌려줬다가-뭔가를-들켜버린-남편-대참사-진실.html" style="text-decoration: none; color: #333; display: block;">
+            <a href="./최강-아내에게-핸드폰-공기계-빌려줬다가-뭔가를-들켜버린-남편-대참사-후기.html" style="text-decoration: none; color: #333; display: block;">
                 <h2 style="margin: 0; font-size: 18px;">아내에게 핸드폰 공기계 빌려줬다가 ‘뭔가’를 들켜버린 남편 대참사</h2>
             </a>
         </li>
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <a href="./강추-배민-리뷰-1점-받은-사장의-대처-모음집.html" style="text-decoration: none; color: #333; display: block;">
+            <a href="./충격-배민-리뷰-1점-받은-사장의-대처-근황.html" style="text-decoration: none; color: #333; display: block;">
                 <h2 style="margin: 0; font-size: 18px;">배민 리뷰 1점 받은 사장의 대처</h2>
             </a>
         </li>
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <a href="./완전-도로-한복판에서-사진-찍는-청사포-민폐-커플-레전드-레전드.html" style="text-decoration: none; color: #333; display: block;">
+            <a href="./공감-도로-한복판에서-사진-찍는-청사포-민폐-커플-레전드-현장.html" style="text-decoration: none; color: #333; display: block;">
                 <h2 style="margin: 0; font-size: 18px;">도로 한복판에서 사진 찍는 청사포 민폐 커플 레전드</h2>
             </a>
         </li>
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <a href="./극한-엑소-카이가-공익-2년하고-느낀점-궁금증.html" style="text-decoration: none; color: #333; display: block;">
+            <a href="./대유행-엑소-카이가-공익-2년하고-느낀점-꿀잼.html" style="text-decoration: none; color: #333; display: block;">
                 <h2 style="margin: 0; font-size: 18px;">엑소 카이가 공익 2년하고 느낀점</h2>
             </a>
         </li>
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <a href="./완전-3년동안-남친에게-정규직이라-거짓말한-블라인드녀-후기.html" style="text-decoration: none; color: #333; display: block;">
+            <a href="./논란-3년동안-남친에게-정규직이라-거짓말한-블라인드녀-노하우.html" style="text-decoration: none; color: #333; display: block;">
                 <h2 style="margin: 0; font-size: 18px;">3년동안 남친에게 정규직이라 거짓말한 블라인드녀</h2>
             </a>
         </li>
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <a href="./완전-160cm-키작남이-말하는-현실-진실.html" style="text-decoration: none; color: #333; display: block;">
+            <a href="./전격-160cm-키작남이-말하는-현실-요약.html" style="text-decoration: none; color: #333; display: block;">
                 <h2 style="margin: 0; font-size: 18px;">160cm 키작남이 말하는 현실</h2>
             </a>
         </li>
         <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <a href="./절대-비트코인으로-결혼-자금을-날린-남편과의-결혼을-고민하는-여자-기적.html" style="text-decoration: none; color: #333; display: block;">
+            <a href="./강추-비트코인으로-결혼-자금을-날린-남편과의-결혼을-고민하는-여자-이야기.html" style="text-decoration: none; color: #333; display: block;">
                 <h2 style="margin: 0; font-size: 18px;">비트코인으로 결혼 자금을 날린 남편과의 결혼을 고민하는 여자</h2>
             </a>
         </li></ul>
-        <div class="pagination" style="margin-top: 20px; text-align: center;"><span style="margin: 0 5px; padding: 5px 10px; background-color: #f0f0f0; border-radius: 3px;">1</span></div>
+        <div class="pagination" style="margin-top: 20px; text-align: center;"><span style="margin: 0 5px; padding: 5px 10px; background-color: #f0f0f0; border-radius: 3px;">1</span><a href="./humor_2.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">2</a><a href="./humor_3.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">3</a><a href="./humor_4.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">4</a><a href="./humor_5.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">5</a><a href="./humor_6.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">6</a><a href="./humor_7.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">7</a><a href="./humor_8.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">8</a><a href="./humor_9.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">9</a><a href="./humor_10.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">10</a><a href="./humor_11.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">11</a><a href="./humor_12.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">12</a><a href="./humor_13.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">13</a><a href="./humor_2.html" style="margin: 0 5px; padding: 5px 10px; text-decoration: none; color: #333;">▶</a></div>
     </div>
     
     <!-- 하단 네비게이션 바 추가 -->
@@ -251,6 +102,7 @@
                 padding: 0 20px;
             ">
                 <span style="color: #333; padding: 8px 15px;">페이지 1</span>
+<a href="./humor_2.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">다음 ▶</a>
             </div>
         </div>
     </nav>
