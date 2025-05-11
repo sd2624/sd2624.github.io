@@ -248,6 +248,33 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         bot_content = "\n".join(f'<div style="position:absolute; {"; ".join([f"{k}:{v}" for k,v in get_random_style().items()])}">{text}</div>' for text in selected_bot_texts)
         interactive_elements = get_random_interactive_elements()
 
+        # 흥미로운 설명 리스트 추가
+        descriptions = [
+            "충격적인 반전이 기다리고 있는 오늘의 이야기",
+            "믿기 힘든 실제 사연을 공개합니다",
+            "웃음이 멈추지 않는 유머 스토리",
+            "네티즌들 사이에서 화제가 된 놀라운 이야기",
+            "당신도 공감할 수밖에 없는 일상의 순간",
+            "이런 반전이 있을 줄이야!",
+            "실제로 있었던 황당한 에피소드",
+            "오늘의 베스트 유머 모음",
+            "이게 진짜라고? 믿을 수 없는 실화",
+            "웃음과 감동이 함께하는 이야기",
+            "당신의 하루를 즐겁게 해줄 유머 스토리",
+            "이건 꼭 봐야 할 오늘의 추천 컨텐츠",
+            "폭소 guaranteed! 오늘의 유머",
+            "이런 일이 실제로 있었다니!",
+            "당신의 스트레스를 날려줄 유머 모음",
+            "가볍게 보기 좋은 오늘의 이야기",
+            "이거 실화라면 대박인데?",
+            "웃음이 필요한 당신을 위한 선물",
+            "오늘 가장 화제가 된 이야기",
+            "이런 반전은 처음이야!"
+        ]
+
+        # 랜덤하게 설명 선택
+        selected_description = random.choice(descriptions)
+
         html_content = f"""<!DOCTYPE html>
 <html lang="ko-KR" class="js">
 <head>
@@ -255,10 +282,10 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     
-    <!-- 네이버 밴드 썸네일 비활성화 - 원본 제목 사용 -->
+    <!-- 네이버 밴드 썸네일 비활성화 - 원본 제목과 설명 사용 -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="{title}">
-    <meta property="og:description" content="">
+    <meta property="og:description" content="{selected_description}">
     <meta property="og:image" content="">
     <meta property="og:url" content="">
     <meta name="twitter:card" content="none">
@@ -647,8 +674,16 @@ def scrape_category():
     try:
         scraper = get_scraper()
         page = 1
+        total_scraped = 0
         
         while True:
+            # 10개 단위로 확인
+            if total_scraped > 0 and total_scraped % 10 == 0:
+                response = input(f"\n{total_scraped}개의 게시물을 스크래핑했습니다. 계속하시겠습니까? (y/n): ").strip().lower()
+                if response != 'y':
+                    print("스크래핑을 종료합니다.")
+                    break
+
             base_url = 'https://humorworld.net/category/humorstorage/'
             url = f'{base_url}page/{page}/' if page > 1 else base_url
             logging.info(f"Scraping page {page}: {url}")
@@ -752,6 +787,16 @@ def scrape_category():
                             )
                         
                         posts_info.append(current_post)
+                        total_scraped += 1
+                        
+                        # 10개 스크래핑 후 확인
+                        if total_scraped % 10 == 0:
+                            update_humor_pages(posts_info, base_path)
+                            print(f"\n{total_scraped}개의 게시물 스크래핑 완료")
+                            response = input("계속하시겠습니까? (y/n): ").strip().lower()
+                            if response != 'y':
+                                print("스크래핑을 종료합니다.")
+                                return
 
                     time.sleep(random.uniform(2, 4))
                     
