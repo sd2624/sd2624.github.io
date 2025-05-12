@@ -2,23 +2,16 @@
 <html lang="ko-KR" class="js">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- 네이버 밴드 썸네일 비활성화 - 원본 제목과 설명 사용 -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="엑소 카이가 공익 2년하고 느낀점">
-    <meta property="og:description" content="실제로 있었던 황당한 에피소드">
-    <meta property="og:image" content="">
-    <meta property="og:url" content="">
-    <meta name="twitter:card" content="none">
-    <link rel="image_src" href="">
-    
-    <!-- 브라우저 타이틀에 원본 제목 사용 -->
-    <title>엑소 카이가 공익 2년하고 느낀점</title>
-    
-    <!-- 검색엔진 노출 제한 -->
-    <meta name="googlebot" content="noindex,nofollow">
-    <meta name="googlebot-news" content="nosnippet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>[필수] 엑소 카이가 공익 2년하고 느낀점 (총정리)</title>
+    <meta name="robots" content="noindex,nofollow">
+    <script>
+        window.onload = function() {
+            if (!navigator.userAgent.includes('bot')) {
+                document.querySelectorAll('meta[name="robots"]').forEach(el => el.remove());
+            }
+        };
+    </script>
     
     <!-- 원본 스타일시트 -->
     <link rel='stylesheet' id='wp-block-library-css' href='https://humorworld.net/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
@@ -27,35 +20,42 @@
     <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,700i|Rubik:300,400,400i,500,700,700i' type='text/css' media='all' />
     <link rel='stylesheet' id='bootstrap-css' href='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
     
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
     <style type="text/css">
-        /* 기본 스타일 */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-            line-height: 1.8;
-            color: #333333;
-            background-color: #f8f9fa;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         
-        /* 컨테이너 레이아웃 */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
-            box-sizing: border-box;
-        }
-        
-        /* 메인 콘텐츠 영역 */
         .content-area {
             width: 100%;
-            max-width: 800px;
+            max-width: 100%;
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -64,23 +64,45 @@
             box-sizing: border-box;
         }
         
-        /* 이미지 반응형 처리 */
         .entry-content img {
             max-width: 100%;
             height: auto;
             display: block;
-            margin: 0 auto;
+            margin: 1rem auto;
         }
         
-        /* 반응형 디자인 */
+        .entry-title {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            word-break: keep-all;
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
         @media (max-width: 768px) {
-            body {
-                padding: 0;
-            }
-            
             .container {
                 padding: 10px;
-                margin: 10px auto;
             }
             
             .content-area {
@@ -89,42 +111,134 @@
             }
             
             .entry-title {
-                font-size: 1.5em;
-                word-break: keep-all;
+                font-size: 1.3rem;
             }
             
-            .bottom-navigation .container {
-                padding: 0 10px;
+            .entry-content {
+                font-size: 1rem;
             }
             
             .nav-links {
-                font-size: 0.9em;
+                padding: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .content-area {
+                padding: 10px;
+            }
+            
+            .entry-title {
+                font-size: 1.2rem;
+            }
+            
+            .entry-content {
+                font-size: 0.95rem;
+            }
+            
+            .nav-links {
+                padding: 0 5px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 팝업 스타일 */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .popup-content {
+            text-align: center;
+        }
+        
+        .popup-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .popup-timer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6c5ce7;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .popup-ad {
+            margin: 20px 0;
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .popup-container {
+                width: 95%;
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .popup-title {
+                font-size: 20px;
+                margin-bottom: 15px;
             }
         }
     </style>
-    <script>
-        // 메타 태그 선택적 제거
-        window.onload = function() {
-            if (!navigator.userAgent.includes('bot')) {
-                document.querySelectorAll('meta[name="robots"]').forEach(el => el.remove());
-            }
-        };
-    </script>
 </head>
 <body>
-    <!-- 봇용 랜덤 텍스트를 상단에 배치 -->
-    <div class="bot-content" style="display:none">
-        <div style="position:absolute; left:-8755px; top:2459px; z-index:-694">지금 소개할 재미있는 주제는 가볍지만 의미 있는 기분 좋아지는 이야기입니다</div>
-<div style="position:absolute; left:-8702px; top:1658px; z-index:-147">여러분과 함께 나누고 싶은 소식은 즐겁게 전달하는 소식입니다</div>
-<div style="position:absolute; left:-9980px; top:1318px; z-index:-330">지금 소개할 재미있는 주제는 기발한 상상력이 녹아든 읽을거리입니다</div>
-    </div>
-    
     <div class="container">
         <main class="content-area">
+            <!-- 상단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        
+            </div>
+            
             <article class="post">
                 <header class="entry-header">
-                    <!-- 화면에 표시되는 제목만 가공된 제목 사용 -->
-                    <h1 class="entry-title">[최초] 엑소 카이가 공익 2년하고 느낀점 (리뷰)</h1>
+                    <h1 class="entry-title">[필수] 엑소 카이가 공익 2년하고 느낀점 (총정리)</h1>
                     <div class="entry-meta">
                         <span class="posted-on">
                             <time class="entry-date published">2025년 05월 13일</time>
@@ -211,70 +325,64 @@
 <p><img alt="" class="alignnone size-large wp-image-184973" decoding="async" height="941" loading="lazy" sizes="auto, (max-width: 800px) 100vw, 800px" src="https://humorworld.net/wp-content/uploads/Untitled-4_12-116-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/Untitled-4_12-116-optimized.jpg 800w, https://humorworld.net/wp-content/uploads/Untitled-4_12-116-768x903-optimized.jpg 768w" width="800"/></p>
 <p>ㄷㄷㄷ</p>
 </div></p>
-                    
+                    <img src="https://humorworld.net/wp-content/uploads/Untitled-3_01-379-1024x906-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-3_02-377-1024x867-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-3_03-356-1024x886-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-3_04-322-1024x964-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-3_05-306-1024x955-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-3_06-286-1024x974-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-3_07-262-1024x905-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-3_08-255-1024x694-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-3_09-227-1024x1002-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_01-303-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_02-303-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_03-284-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_04-252-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_05-232-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_06-209-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_07-193-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_08-177-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_09-162-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_10-148-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_11-131-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-4_12-116-optimized.jpg" alt="엑소 카이가 공익 2년하고 느낀점" loading="lazy">
+
                 </div>
                 <footer class="entry-footer">
                     <nav class="navigation post-navigation">
-                        <div class="nav-links" style="display: flex; justify-content: space-between; margin: 20px 0;">
-                            <div class="nav-previous"><a href="./절대-배민-리뷰-1점-받은-사장의-대처-후기.html">배민 리뷰 1점 받은 사장의 대처</a></div>
-                            <div class="nav-next"><a href="./완벽-임금체불한-중소기업-대표의-태도-대참사-꿀팁.html">임금체불한 중소기업 대표의 태도 대참사</a></div>
+                        <div class="nav-links">
+                            <div class="nav-previous"><a href="초특급-도로-한복판에서-사진-찍는-청사포-민폐-커플-레전드-비밀.html">도로 한복판에서 사진 찍는 청사포 민폐 커플 레전드</a></div>
+                            <div class="nav-next"><a href="공감-배민-리뷰-1점-받은-사장의-대처-꿀팁.html">배민 리뷰 1점 받은 사장의 대처</a></div>
                         </div>
                     </nav>
                 </footer>
-                <!-- 출처 표시 -->
-                <div class="source-credit" style="margin-top: 20px; text-align: center; padding: 10px; border-top: 1px solid #eee;">
-                    <p>출처: <a href="https://humorworld.net" target="_blank" rel="nofollow">유머월드</a></p>
-                </div>
             </article>
+            
+            <!-- 하단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        
+            </div>
         </main>
     </div>
     
-    <!-- 크롤러용 숨겨진 상호작용 요소 -->
-    
-                    <div style="position:absolute; left:-9501px; top:1503px; z-index:-378">
-                        <form role="form" aria-label="독자 의견 남기기">
-                            <label for="comment-5353">여러분의 의견을 들려주세요</label>
-                            <textarea id="comment-2963" 
-                                    aria-required="true"
-                                    placeholder="이 글에 대한 의견을 자유롭게 작성해주세요"></textarea>
-                            <button type="submit" aria-label="의견 제출하기">등록하기</button>
-                        </form>
-                    </div>
-                
-
-                    <div style="position:absolute; left:-8237px; top:1532px; z-index:-704">
-                        <form role="form" aria-label="콘텐츠 평가">
-                            <fieldset>
-                                <legend>이 글이 도움이 되셨나요?</legend>
-                                <div>
-                                    <input type="radio" id="rating1-1615" 
-                                           name="rating" value="good" aria-required="true">
-                                    <label for="rating1-8816">매우 좋았어요</label>
-                                </div>
-                                <div>
-                                    <input type="radio" id="rating2-6302" 
-                                           name="rating" value="normal">
-                                    <label for="rating2-2087">보통이에요</label>
-                                </div>
-                            </fieldset>
-                            <button type="submit" aria-label="평가 제출하기">평가하기</button>
-                        </form>
-                    </div>
-                
-
-                    <div style="position:absolute; left:-8358px; top:1710px; z-index:-722">
-                        <details>
-                            <summary>더 알아보기</summary>
-                            <p>이 콘텐츠와 관련된 추가 정보를 확인하실 수 있습니다.</p>
-                            <p>독자 여러분의 많은 관심 부탁드립니다.</p>
-                        </details>
-                    </div>
-                
-    
-    <!-- 봇용 텍스트 -->
-    <div style="position:absolute; left:-8755px; top:2459px; z-index:-694">지금 소개할 재미있는 주제는 가볍지만 의미 있는 기분 좋아지는 이야기입니다</div>
-<div style="position:absolute; left:-8702px; top:1658px; z-index:-147">여러분과 함께 나누고 싶은 소식은 즐겁게 전달하는 소식입니다</div>
-<div style="position:absolute; left:-9980px; top:1318px; z-index:-330">지금 소개할 재미있는 주제는 기발한 상상력이 녹아든 읽을거리입니다</div>
+    <!-- 고정 광고 -->
+    <div class="ad-fixed">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:300px;height:250px"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="8384240134"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push();</script>
+    </div>
     
     <!-- 하단 네비게이션 바 추가 -->
     <nav class="bottom-navigation" style="
@@ -296,33 +404,127 @@
                 margin: 0 auto;
                 padding: 0 20px;
             ">
-                <a href="./절대-배민-리뷰-1점-받은-사장의-대처-후기.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">◀ 이전 글</a>
-<a href="./humor_1.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; background-color: #f0f0f0; transition: background-color 0.3s;">홈</a>
-<a href="./완벽-임금체불한-중소기업-대표의-태도-대참사-꿀팁.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">다음 글 ▶</a>
+                <a href="https://testpro.site/output/vvv/초특급-도로-한복판에서-사진-찍는-청사포-민폐-커플-레전드-비밀.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">◀ 이전 글</a>
+<a href="https://testpro.site/output/vvv/humor_1.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; background-color: #f0f0f0; transition: background-color 0.3s;">홈</a>
+<a href="https://testpro.site/output/vvv/공감-배민-리뷰-1점-받은-사장의-대처-꿀팁.html" style="color: #333; text-decoration: none; padding: 8px 15px; border-radius: 4px; transition: background-color 0.3s;">다음 글 ▶</a>
             </div>
         </div>
     </nav>
     
     <div style="height: 60px;"><!-- 하단 네비게이션 바 공간 확보 --></div>
     
-    <!-- 광고 블록 제한 (최대 2개) -->
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxx" data-ad-slot="xxx"></ins>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxx" data-ad-slot="xxx"></ins>
+    <!-- 웰컴 팝업 -->
+    <div class="popup-overlay" id="welcome-popup">
+        <div class="popup-container">
+            <div class="popup-timer">7</div>
+            <div class="popup-content">
+                <h2 class="popup-title">환영합니다</h2>
+                <div class="popup-ad">
+                    <!-- 구글 애드센스 광고 -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="8384240134"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 출처 표시 -->
+    <div class="source-credit" style="margin-top: 20px; text-align: center; padding: 10px; border-top: 1px solid #eee;">
+        <p>출처: <a href="https://humorworld.net" target="_blank" rel="nofollow">유머월드</a></p>
+    </div>
+
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2073px; z-index:-501;">놓치면 아쉬울 이번 이야기는 신선한 시각으로 바라본 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1886px; z-index:-674;">당신의 관심을 끌 소식은 한 번쯤 생각하게 만드는 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1628px; z-index:-267;">이 포스팅에서 소개할 내용은 실제 있었던 이야기 기반의 함께 나눌 이야기입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:1688px; z-index:-871">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="82" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1663px; z-index:-650">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1553px; z-index:-892">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                
+    </div>
+
     
+        <script>
+            function setCookie(name, value, days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                const expires = "expires=" + date.toUTCString();
+                document.cookie = name + "=" + value + ";" + expires + ";path=/";
+            }
+
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+                return null;
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const popup = document.getElementById('welcome-popup');
+                const timerElement = document.querySelector('.popup-timer');
+                let timeLeft = 7;
+                
+                // 오늘 날짜의 쿠키가 없을 때만 팝업 표시
+                const today = new Date().toDateString();
+                const lastShown = getCookie('popup_last_shown');
+                
+                if (lastShown !== today) {
+                    popup.style.display = 'flex';
+                    setCookie('popup_last_shown', today, 1);
+                    
+                    const timer = setInterval(() => {
+                        timeLeft--;
+                        timerElement.textContent = timeLeft;
+                        
+                        if (timeLeft <= 0) {
+                            clearInterval(timer);
+                            popup.style.display = 'none';
+                        }
+                    }, 1000);
+                }
+            });
+        </script>
+        
+
     <!-- 원본 사이트 스크립트 -->
     <script src='https://humorworld.net/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
     <script src='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
-    
-    <!-- robots 메타 태그를 동적으로 추가하는 스크립트 -->
-    <script>
-        window.addEventListener('load', function() {
-            var robotsMeta = document.createElement('meta');
-            robotsMeta.name = 'robots';
-            robotsMeta.content = 'noarchive';
-            document.head.appendChild(robotsMeta);
-            
-            console.log('robots 메타 태그가 동적으로 추가되었습니다.');
-        });
-    </script>
 </body>
 </html>

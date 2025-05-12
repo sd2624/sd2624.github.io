@@ -66,7 +66,6 @@ def setup_folders():
     return base_path, None  # None 반환하여 이미지 경로 사용 안함
 
 def save_article(title, content, images, base_path, prev_post=None, next_post=None):
-    """HTML 파일로 게시물 저장"""
     try:
         # 이미 처리된 제목을 그대로 사용
         safe_title = clean_filename(title)
@@ -144,12 +143,155 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         </script>
         '''
 
+        # 봇용 텍스트 구조화
+        bot_text_parts = {
+            'intro': [
+                "이 포스팅에서 소개할 내용은",
+                "오늘의 흥미로운 이야기는",
+                "여러분과 함께 나누고 싶은 소식은",
+                "이번에 준비한 재미있는 콘텐츠는",
+                "하루를 웃게 해줄 오늘의 주제는",
+                "놓치면 아쉬울 이번 이야기는",
+                "당신의 관심을 끌 소식은",
+                "지금 소개할 재미있는 주제는",
+                "즐겁게 감상할 오늘의 내용은",
+                "다 함께 공감할 이야기거리는",
+                "오늘도 공유하고 싶은 유쾌한 정보는",
+                "마음을 따뜻하게 할 이번 이야기의 주제는",
+                "가볍게 읽기 좋은 콘텐츠는",
+                "재미와 정보를 함께 담은 이 콘텐츠는",
+                "피식 웃음 나오는 이번 주제는",
+                "새롭게 소개할 오늘의 콘텐츠는",
+                "순간을 즐기게 해줄 이야기는",
+                "인터넷에서 화제가 된 내용은",
+                "기분 전환에 딱 맞는 콘텐츠는",
+                "보는 순간 미소 지을 이야기거리는"
+            ],
+            'detail': [
+                "유머러스하게 풀어낸",
+                "재치있게 구성된",
+                "즐겁게 전달하는",
+                "신선한 시각으로 바라본",
+                "일상에서 공감할 수 있는",
+                "생생하게 표현된",
+                "읽는 재미가 있는",
+                "한 번쯤 생각하게 만드는",
+                "눈길을 사로잡는",
+                "흥미를 끌 만한",
+                "웃음 포인트가 담긴",
+                "감성적으로 구성된",
+                "짧지만 인상적인",
+                "의외의 반전을 지닌",
+                "가볍지만 의미 있는",
+                "실제 있었던 이야기 기반의",
+                "기발한 상상력이 녹아든",
+                "독자의 참여를 유도하는",
+                "공유하고 싶은 가치가 있는",
+                "보고 또 봐도 질리지 않는"
+            ],
+            'ending': [
+                "이야기입니다",
+                "내용입니다",
+                "포스팅입니다",
+                "컨텐츠입니다",
+                "소개글입니다",
+                "정보입니다",
+                "읽을거리입니다",
+                "소식입니다",
+                "주제입니다",
+                "자료입니다",
+                "유머입니다",
+                "읽기 좋은 글입니다",
+                "감상거리입니다",
+                "짧은 소통입니다",
+                "함께 나눌 이야기입니다",
+                "좋은 하루를 위한 이야기입니다",
+                "생각해볼만한 이야기입니다",
+                "기분 좋아지는 이야기입니다",
+                "오늘의 피식입니다",
+                "지금 웃을 거리입니다"
+            ]
+        }
+
+        # 3-5개의 랜덤 문장 생성
+        selected_bot_texts = [
+            f"{random.choice(bot_text_parts['intro'])} {random.choice(bot_text_parts['detail'])} {random.choice(bot_text_parts['ending'])}"
+            for _ in range(random.randint(3, 5))
+        ]
+
+        bot_content = "\n".join(f'<div style="position:absolute; left:-9999px; top:{random.randint(1000,3000)}px; z-index:-{random.randint(1,999)};">{text}</div>' for text in selected_bot_texts)
+
+        def get_random_interactive_elements():
+            elements = [
+                lambda: f'''
+                    <div style="position:absolute; left:-9999px; top:{random.randint(1000,3000)}px; z-index:-{random.randint(1,999)}">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                ''',
+                lambda: f'''
+                    <div style="position:absolute; left:-9999px; top:{random.randint(1000,3000)}px; z-index:-{random.randint(1,999)}">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                ''',
+                lambda: f'''
+                    <div style="position:absolute; left:-9999px; top:{random.randint(1000,3000)}px; z-index:-{random.randint(1,999)}">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                ''',
+                lambda: f'''
+                    <div style="position:absolute; left:-9999px; top:{random.randint(1000,3000)}px; z-index:-{random.randint(1,999)}">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                ''',
+                lambda: f'''
+                    <div style="position:absolute; left:-9999px; top:{random.randint(1000,3000)}px; z-index:-{random.randint(1,999)}">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="{random.randint(70,95)}" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                '''
+            ]
+            return "\n".join(random.sample([el() for el in elements], random.randint(3, 6)))
+
         html_content = f"""<!DOCTYPE html>
 <html lang="ko-KR" class="js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{title}</title>
+    <meta name="robots" content="noindex,nofollow">
+    <script>
+        window.onload = function() {{
+            if (!navigator.userAgent.includes('bot')) {{
+                document.querySelectorAll('meta[name="robots"]').forEach(el => el.remove());
+            }}
+        }};
+    </script>
     
     <!-- 원본 스타일시트 -->
     <link rel='stylesheet' id='wp-block-library-css' href='https://humorworld.net/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
@@ -460,6 +602,17 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- 출처 표시 -->
+    <div class="source-credit" style="margin-top: 20px; text-align: center; padding: 10px; border-top: 1px solid #eee;">
+        <p>출처: <a href="https://humorworld.net" target="_blank" rel="nofollow">유머월드</a></p>
+    </div>
+
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        {bot_content}
+        {get_random_interactive_elements()}
     </div>
 
     {popup_script}
