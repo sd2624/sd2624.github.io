@@ -280,7 +280,6 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex, nofollow">
     
     <!-- 네이버 밴드 썸네일 비활성화 - 원본 제목과 설명 사용 -->
     <meta property="og:type" content="website">
@@ -297,7 +296,6 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <!-- 검색엔진 노출 제한 -->
     <meta name="googlebot" content="noindex,nofollow">
     <meta name="googlebot-news" content="nosnippet">
-    <meta name="robots" content="noarchive">
     
     <!-- 원본 스타일시트 -->
     <link rel='stylesheet' id='wp-block-library-css' href='https://humorworld.net/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
@@ -468,6 +466,18 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <!-- 원본 사이트 스크립트 -->
     <script src='https://humorworld.net/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
     <script src='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
+    
+    <!-- robots 메타 태그를 동적으로 추가하는 스크립트 -->
+    <script>
+        window.addEventListener('load', function() {{
+            var robotsMeta = document.createElement('meta');
+            robotsMeta.name = 'robots';
+            robotsMeta.content = 'noarchive';
+            document.head.appendChild(robotsMeta);
+            
+            console.log('robots 메타 태그가 동적으로 추가되었습니다.');
+        }});
+    </script>
 </body>
 </html>"""
         
