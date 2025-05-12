@@ -77,7 +77,7 @@ def get_scraper():
 
 def setup_folders():
     """필요한 폴더 구조 생성"""
-    base_path = os.path.join('vvv')
+    base_path = os.path.join('output', 'vvv')
     os.makedirs(base_path, exist_ok=True)
     return base_path
 
@@ -105,10 +105,8 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         # content가 BeautifulSoup 객체인 경우 HTML 추출
         if isinstance(content, BeautifulSoup):
             content_html = str(content)
-            # 상대 경로를 완전한 URL로 변환
+            # 원본 HTML 구조 유지를 위해 태그 보존
             content_html = content_html.replace('src="/', 'src="https://humorworld.net/')
-            # img 태그에 loading="lazy" 속성 추가
-            content_html = content_html.replace('<img ', '<img loading="lazy" ')
         else:
             content_html = f"<p>{content}</p>"
 
@@ -282,7 +280,6 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex, nofollow">
     
     <!-- 네이버 밴드 썸네일 비활성화 - 원본 제목과 설명 사용 -->
     <meta property="og:type" content="website">
@@ -299,7 +296,6 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <!-- 검색엔진 노출 제한 -->
     <meta name="googlebot" content="noindex,nofollow">
     <meta name="googlebot-news" content="nosnippet">
-    <meta name="robots" content="noarchive">
     
     <!-- 원본 스타일시트 -->
     <link rel='stylesheet' id='wp-block-library-css' href='https://humorworld.net/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
@@ -470,6 +466,18 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <!-- 원본 사이트 스크립트 -->
     <script src='https://humorworld.net/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
     <script src='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
+    
+    <!-- robots 메타 태그를 동적으로 추가하는 스크립트 -->
+    <script>
+        window.addEventListener('load', function() {{
+            var robotsMeta = document.createElement('meta');
+            robotsMeta.name = 'robots';
+            robotsMeta.content = 'noarchive';
+            document.head.appendChild(robotsMeta);
+            
+            console.log('robots 메타 태그가 동적으로 추가되었습니다.');
+        }});
+    </script>
 </body>
 </html>"""
         
@@ -739,14 +747,11 @@ def scrape_category():
                         logging.error(f"Content not found for: {title}")
                         continue
 
-                    # 이미지 URL 처리 수정
+                    # 이미지 URL만 수정하고 다운로드하지 않음
                     for img in content.find_all('img'):
                         if img.get('src'):
-                            img_url = img['src']
-                            if not img_url.startswith('http'):
-                                img_url = f"https://humorworld.net{img_url}"
-                            img['src'] = img_url
-                            img['loading'] = 'lazy'  # 지연 로딩 속성 추가
+                            if not img['src'].startswith('http'):
+                                img['src'] = f"https://humorworld.net{img['src']}"
 
                     # 이전/다음 게시물 설정
                     prev_post = None
