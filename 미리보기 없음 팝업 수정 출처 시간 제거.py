@@ -464,10 +464,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     
     <div style="height: 60px;"><!-- 하단 네비게이션 바 공간 확보 --></div>
     
-    <!-- 광고 블록 제한 (최대 2개) -->
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxx" data-ad-slot="xxx"></ins>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxx" data-ad-slot="xxx"></ins>
-    
+
     <!-- 원본 사이트 스크립트 -->
     <script src='https://humorworld.net/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
     <script src='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
