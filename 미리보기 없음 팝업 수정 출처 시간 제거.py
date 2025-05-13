@@ -77,7 +77,7 @@ def get_scraper():
 
 def setup_folders():
     """필요한 폴더 구조 생성"""
-    base_path = os.path.join('v')
+    base_path = os.path.join('w')
     
     os.makedirs(base_path, exist_ok=True)
     return base_path
@@ -308,7 +308,9 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <link rel='stylesheet' id='blogberg-style-css' href='https://humorworld.net/wp-content/themes/blogberg/style.css' type='text/css' media='all' />
     <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,700i|Rubik:300,400,400i,500,700,700i' type='text/css' media='all' />
     <link rel='stylesheet' id='bootstrap-css' href='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
-    
+  
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+  
     <style type="text/css">
         /* 기본 스타일 */
         body {{
@@ -398,7 +400,19 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <div class="bot-content" style="display:none">
         {bot_content}
     </div>
-    
+        <div class="container">
+        <main class="content-area">
+            <!-- 상단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
+            </div>
+            
     <div class="container">
         <main class="content-area">
             <article class="post">
@@ -428,6 +442,17 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
 
                 </div>
             </article>
+                        <!-- 하단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
+            </div>
+            
         </main>
     </div>
     
@@ -436,6 +461,14 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     
     <!-- 봇용 텍스트 -->
     {bot_content}
+        <!-- 고정 광고 -->
+    <div class="ad-fixed">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:300px;height:250px"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="8384240134"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
+    </div>
     
     <!-- 하단 네비게이션 바 추가 -->
     <nav class="bottom-navigation" style="
