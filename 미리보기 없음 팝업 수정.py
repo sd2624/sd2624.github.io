@@ -77,7 +77,8 @@ def get_scraper():
 
 def setup_folders():
     """필요한 폴더 구조 생성"""
-    base_path = os.path.join('vvv')
+    base_path = os.path.join('v')
+    
     os.makedirs(base_path, exist_ok=True)
     return base_path
 
@@ -406,7 +407,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                     <h1 class="entry-title">{processed_title}</h1>
                     <div class="entry-meta">
                         <span class="posted-on">
-                            <time class="entry-date published">{datetime.now().strftime('%Y년 %m월 %d일')}</time>
+                       
                         </span>
                     </div>
                 </header>
@@ -424,7 +425,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                 </footer>
                 <!-- 출처 표시 -->
                 <div class="source-credit" style="margin-top: 20px; text-align: center; padding: 10px; border-top: 1px solid #eee;">
-                    <p>출처: <a href="https://humorworld.net" target="_blank" rel="nofollow">유머월드</a></p>
+
                 </div>
             </article>
         </main>
