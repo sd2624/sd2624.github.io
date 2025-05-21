@@ -867,15 +867,40 @@ def scrape_category():
                     if not content:
                         logging.error(f"Content not found for: {original_title}")
                         continue
+                    
+                    # 펍코드(광고) 관련 요소 제거
+                    ad_selectors = [
+                        'div[id*="pub"]', 
+                        'div[class*="pub"]',
+                        'ins.adsbygoogle',
+                        'script[src*="pagead"]',
+                        'script[src*="adsbygoogle"]',
+                        'div[class*="ad-"]',
+                        'div[id*="ad-"]',
+                        '[data-ad-client]',
+                        '[data-ad-slot]',
+                        'iframe[src*="doubleclick"]',
+                        'div[class*="advertisement"]'
+                    ]
+                    
+                    for selector in ad_selectors:
+                        for element in content.select(selector):
+                            element.decompose()
 
-                    # 이미지 처리 부분 수정 - 이미지 다운로드 대신 URL 직접 사용
+                    # 광고 관련 텍스트 제거
+                    for element in content.find_all(text=True):
+                        if any(ad_text in str(element).lower() for ad_text in ['광고', 'sponsored', 'advertisement', 'pub-']):
+                            element.decompose()
+                    
+                    # 이미지 처리 - 광고 이미지 제외
                     images_html = ""
+                    ad_keywords = ['ad', 'ads', 'advertisement', 'banner', 'sponsor', 'pub-', '광고']
                     for img in content.find_all('img'):
-                        if img.get('src'):
-                            img_url = img['src']
-                            if not img_url.startswith('http'):
-                                img_url = f"https://humorworld.net{img_url}"
-                            images_html += f'<img src="{img_url}" alt="{original_title}" loading="lazy">\n'
+                        src = img.get('src', '')
+                        if src and not any(keyword in src.lower() for keyword in ad_keywords):
+                            if not src.startswith('http'):
+                                src = f"https://humorworld.net{src}"
+                            images_html += f'<img src="{src}" alt="{original_title}" loading="lazy">\n'
 
                     # 현재 게시물 정보 저장
                     processed_title = process_title(original_title)
