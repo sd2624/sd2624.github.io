@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ko-KR" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[긴급] 통신비 미환급금 숨겨진 내 돈 찾는 방법 소멸되기전에 신청하기 (해설)</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script>
+        // AdSense 초기화 함수
+        function initAds() {
+            try {
+                if (typeof adsbygoogle !== 'undefined') {
+                    adsbygoogle.push({
+                        google_ad_client: "ca-pub-9374368296307755",
+                        enable_page_level_ads: true
+                    });
+                    
+                    // 개별 광고 슬롯 초기화
+                    const adElements = document.querySelectorAll('.adsbygoogle');
+                    adElements.forEach(ad => {
+                        try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        } catch(e) {
+                            console.log('Ad slot initialization error:', e);
+                        }
+                    });
+                } else {
+                    // AdSense가 로드되지 않은 경우 재시도
+                    setTimeout(initAds, 1000);
+                }
+            } catch(e) {
+                console.log('AdSense initialization error:', e);
+            }
+        }
+
+        // 페이지 로드 완료 후 광고 초기화
+        window.addEventListener('load', function() {
+            setTimeout(initAds, 100);
+        });
+    </script>
+
+    
+    <!-- 원본 스타일시트 -->
+    <link rel='stylesheet' id='wp-block-library-css' href='https://amg.friendwoo.com//wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='classic-theme-styles-css' href='https://amg.friendwoo.com//wp-includes/css/classic-themes.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-style-css' href='https://amg.friendwoo.com//wp-content/themes/blogberg/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,700i|Rubik:300,400,400i,500,700,700i' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-css' href='https://amg.friendwoo.com//wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
+    
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content-area {
+            width: 100%;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        
+        .entry-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+        }
+        
+        .entry-title {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            word-break: keep-all;
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content-area {
+                padding: 15px;
+                border-radius: 0;
+            }
+            
+            .entry-title {
+                font-size: 1.3rem;
+            }
+            
+            .entry-content {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                padding: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .content-area {
+                padding: 10px;
+            }
+            
+            .entry-title {
+                font-size: 1.2rem;
+            }
+            
+            .entry-content {
+                font-size: 0.95rem;
+            }
+            
+            .nav-links {
+                padding: 0 5px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 팝업 스타일 */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .popup-content {
+            text-align: center;
+        }
+        
+        .popup-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .popup-timer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6c5ce7;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .popup-ad {
+            margin: 20px 0;
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .popup-container {
+                width: 95%;
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .popup-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:1705px; z-index:-768;">순간을 즐기게 해줄 이야기는 보고 또 봐도 질리지 않는 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2660px; z-index:-960;">당신의 관심을 끌 소식은 생생하게 표현된 감상거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1496px; z-index:-56;">기분 전환에 딱 맞는 콘텐츠는 실제 있었던 이야기 기반의 읽기 좋은 글입니다</div>
+<div style="position:absolute; left:-9999px; top:1659px; z-index:-508;">하루를 웃게 해줄 오늘의 주제는 독자의 참여를 유도하는 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:2230px; z-index:-279;">놓치면 아쉬울 이번 이야기는 보고 또 봐도 질리지 않는 내용입니다</div>
+<div style="position:absolute; left:-9999px; top:2059px; z-index:-46;">새롭게 소개할 오늘의 콘텐츠는 짧지만 인상적인 좋은 하루를 위한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1598px; z-index:-235;">당신의 관심을 끌 소식은 흥미를 끌 만한 컨텐츠입니다</div>
+<div style="position:absolute; left:-9999px; top:1256px; z-index:-367;">피식 웃음 나오는 이번 주제는 한 번쯤 생각하게 만드는 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1056px; z-index:-713;">마음을 따뜻하게 할 이번 이야기의 주제는 생생하게 표현된 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:2928px; z-index:-776;">재미와 정보를 함께 담은 이 콘텐츠는 재치있게 구성된 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1775px; z-index:-486;">여러분과 함께 나누고 싶은 소식은 보고 또 봐도 질리지 않는 내용입니다</div>
+<div style="position:absolute; left:-9999px; top:1026px; z-index:-713;">하루를 웃게 해줄 오늘의 주제는 감성적으로 구성된 감상거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1311px; z-index:-727;">가볍게 읽기 좋은 콘텐츠는 독자의 참여를 유도하는 소식입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:2756px; z-index:-445">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2353px; z-index:-446">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1161px; z-index:-467">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="86" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1655px; z-index:-997">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1947px; z-index:-79">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1504px; z-index:-742">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:1333px; z-index:-153">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
+                
+
+                    <div style="position:absolute; left:-9999px; top:1442px; z-index:-27">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+    </div>
+
+    <div class="container">
+        <main class="content-area">
+            <!-- 상단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <article class="post">
+                <header class="entry-header">
+                    <h1 class="entry-title">[긴급] 통신비 미환급금 숨겨진 내 돈 찾는 방법 소멸되기전에 신청하기 (해설)</h1>
+                    <div class="entry-meta">
+                        <span class="posted-on">
+   
+                        </span>
+                    </div>
+                </header>
+                <div class="entry-content">
+                    <p><div class="entry-content" itemprop="text">
+<div><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6734812057818952"></script>
+<!-- 새워프 상단 -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6734812057818952" data-ad-format="auto" data-ad-slot="1401700324" data-full-width-responsive="true" style="display:block"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<p>통신비 미환급금 조회는 SKT, KT, 유플러스의 핸드폰 통신 요금 및 인터넷, 케이블 요금 등에서 과납이 발생한 경우 본인 인증 후 환급해주는 제도입니다. 아래표에서 본인이 거주하는 지역을 클릭하시면 지역별 통신비 환급금 조회 방법 및 신청 을 바로 하실수 있습니다.</p>
+<table>
+<tbody>
+<tr>
+<td class="has-text-align-center" data-align="center"><strong><a data-id="https://www.seoul.go.kr/main/index.jsp" data-type="URL" href="https://www.seoul.go.kr/main/index.jsp" rel="noopener">서울</a></strong></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.busan.go.kr/open/index.jsp" rel="noopener"><strong>부산</strong></a></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.daejeon.go.kr/intro_main.jsp" rel="noopener"><strong>대전</strong></a></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.daegu.go.kr/intro.jsp" rel="noopener"><strong>대구</strong></a></td>
+</tr>
+<tr>
+<td class="has-text-align-center" data-align="center"><a href="https://www.gp.go.kr/corona_new.jsp" rel="noopener"><strong>경기</strong></a></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.ulsan.go.kr/u/emergency_main.jsp" rel="noopener"><strong>울산</strong></a></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.changwon.go.kr/" rel="noopener"><strong>경남</strong></a></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.gumi.go.kr/" rel="noopener"><strong>경북</strong></a></td>
+</tr>
+<tr>
+<td class="has-text-align-center" data-align="center"><a href="https://www.jeonju.go.kr/" rel="noopener"><strong>전북</strong></a></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.gangjin.go.kr/COVID_intro.html" rel="noopener"><strong>전남</strong></a></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.incheon.go.kr/intro/index.html" rel="noopener"><strong>인천</strong></a></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.gyeryong.go.kr/" rel="noopener"><strong>충북</strong></a></td>
+</tr>
+<tr>
+<td class="has-text-align-center" data-align="center"><a href="https://www.gyeryong.go.kr/" rel="noopener"><strong>충남</strong></a></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.gn.go.kr/" rel="noopener"><strong>강원</strong></a></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.incheon.go.kr/intro/index.html" rel="noopener"><strong>인천</strong></a></td>
+<td class="has-text-align-center" data-align="center"><a href="https://www.jeju.go.kr/corona19.jsp" rel="noopener"><strong>제주도</strong></a></td>
+<td class="has-text-align-center" data-align="center"> </td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<!-- /wp:post-content -->
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"width":100,"className":"is-style-outline","style":{"border":{"radius":"100px"},"color":{"background":"#fbff00","text":"#ff0000"},"elements":{"link":{"color":{"text":"#ff0000"}}}}} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline"><a class="wp-block-button__link has-text-color has-background has-link-color wp-element-button" href="https://www.smartchoice.or.kr/" rel="noopener" style="border-radius: 100px; color: #ff0000; background-color: #fbff00;"><strong>통신비 환급 신청 바로가기</strong></a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+<!-- wp:paragraph {"style":{"color":{"background":"#ff6060"}}} -->
+<p class="has-background" style="background-color: #ff6060;"><strong>▼▼▼▼계속해서 스크롤을 내리시면 방법에 대해 자세한 설명을 보실 수 있습니다▼▼▼▼</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">통신비(인터넷, 핸드폰 요금) 환급 대상</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>통신비 미환급금은 요금 이중납부, 장비 미반환, 주소나 전화번호 변경으로 인해 통지받지 못한 경우 등에서 발생한 과오납금입니다. 해지 이후 고객 정보 변경이나 환불 계좌 정보가 없어 반환하지 못한 금액을 통신사가 보관하고 있습니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"lightbox":{"enabled":false},"id":2258,"width":"820px","height":"auto","sizeSlug":"full","linkDestination":"custom"} -->
+<figure class="wp-block-image size-full is-resized"><a href="https://www.smartchoice.or.kr/" rel="noopener"><img alt="" class="wp-image-2258" decoding="async" fetchpriority="high" height="468" sizes="(max-width: 750px) 100vw, 750px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-28.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-28.png 750w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-28-300x187.png 300w" style="width: 820px; height: auto;" width="750"/></a></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>일반적으로 자신이 미환급금이 있는지 파악하기 어렵기 때문에, 조회를 통해 확인하는 것이 가장 현명한 방법이며, 미환급금이 확인되면 명의자의 은행 계좌로 환급받을 수 있습니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>다음은 통신사별로 통신비 과오납금 환급 신청이 가능한 유형입니다</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>KT: 유무선 통합 요금</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>SKT: 무선 요금 (휴대폰)</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>LGU+: 유무선 통합 요금</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>SK브로드밴드: 유선 요금 (인터넷)</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph {"style":{"color":{"background":"#ff6e6e"}}} -->
+<p class="has-background" style="background-color: #ff6e6e;"><strong>▼▼▼▼계속해서 스크롤을 내리시면 방법에 대해 자세한 설명을 보실 수 있습니다▼▼▼▼</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">통신비 환급금 조회 및 신청 방법</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>통신비 환급금 조회 방법은 각 통신사의 공식 홈페이지에서 본인 인증 후 조회할 수 있습니다. 최소 2년에 한 번씩 조회해 보시길 추천드리며, 5년이 경과한 환급액은 자동 소멸됩니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"align":"center","style":{"color":{"background":"#fff280"}}} -->
+<p class="has-text-align-center has-background" style="background-color: #fff280;"><strong>▼ 통신비 환급금 신청방법 바로가기 ▼</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> </p>
+<!-- /wp:paragraph -->
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"width":100,"className":"is-style-outline","style":{"border":{"radius":"100px"},"color":{"background":"#fbff00","text":"#ff0000"},"elements":{"link":{"color":{"text":"#ff0000"}}}}} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline"><a class="wp-block-button__link has-text-color has-background has-link-color wp-element-button" href="https://amg.friendwoo.com/2257/" style="border-radius: 100px; color: #ff0000; background-color: #fbff00;"><strong>통신비 환급방법 모바일 바로가기</strong></a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+<!-- wp:paragraph -->
+<p> </p>
+<!-- /wp:paragraph -->
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"width":100,"className":"is-style-outline","style":{"border":{"radius":"100px"},"color":{"background":"#fbff00","text":"#ff0000"},"elements":{"link":{"color":{"text":"#ff0000"}}}}} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline"><a class="wp-block-button__link has-text-color has-background has-link-color wp-element-button" href="https://amg.friendwoo.com/2257/" style="border-radius: 100px; color: #ff0000; background-color: #fbff00;"><strong>통신비 환급방법 PC 바로가기</strong></a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+<!-- wp:paragraph -->
+<p> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"style":{"color":{"background":"#ff7676"}}} -->
+<p class="has-background" style="background-color: #ff7676;"><strong>▼▼▼▼계속해서 스크롤을 내리시면 방법에 대해 자세한 설명을 보실 수 있습니다▼▼▼▼</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">세금 환급금 조회 신청 바로가기</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>간단한 본인인증 절차 진행 후 각 항목인 환급액, 지방세 환급, 주민세 환급, 부가세 환급을 조회해 볼 수 있습니다. 혹시라도 궁금하신 분들은 아래에서 한번 쯤 조회해보시길 추천드립니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"backgroundColor":"base-2"} -->
+<p class="has-base-2-background-color has-background"><strong><a href="https://amg.friendwoo.com/2239/">📌 자동차 보험 견적 비교 사이트 바로가기</a></strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"backgroundColor":"base"} -->
+<p class="has-base-background-color has-background"><strong><a href="https://amg.friendwoo.com/2246/">📌 건강보험료 환급받기</a></strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"backgroundColor":"base-2"} -->
+<p class="has-base-2-background-color has-background"><strong><a href="https://sportsdamoa.com/654" rel="noopener">📌 5년이상 자동차 탔다면? 자동차 환급금 신청하기</a></strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"backgroundColor":"base"} -->
+<p class="has-base-background-color has-background"><strong><a href="https://amg.friendwoo.com/2213/">📌 통합카드포인트 현금 전환방법</a></strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">통신비 환급금 조회 및 신청 방법(컴퓨터)</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>일단 통신비 환급금도 개인정보에 접근하는 것이라 스마트초이스에서 본인인증을 거친 후 조회할 수 있습니다. 사실 조회할 때 특별히 어려운 것은 없기 때문에, 이 과정만 잘 시행하시면 됩니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>📢 5년 이내 환급하지 안으면 자동으로 소멸된다고 합니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li><a href="https://www.smartchoice.or.kr/" rel="noopener"><strong>스마트초이스 공식 홈페이지</strong></a> 👆 접속</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>상단의 환급/혜택 선택</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>통신 미환급액 조회 선택</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>사용자 본인인증 절차 후 조회</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>스마트초이스 사이트에서 본인인증 후 통신비(전화요금,핸드폰,인터넷) 환급금 조회 및 환급까지 받을 수 있습니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">통신요금 환급금 조회하는 방법</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>1. 스마트초이스 공식 홈페이지 접속합니다</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>스마트초이스 홈페이지는 오래전부터 운영되오던 통신비 환급금 사이트이며, 해당 사이트에서 본인인증 과정을 거쳐 환급금 조회와 신청이 가능합니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"textColor":"base-2","gradient":"luminous-vivid-orange-to-vivid-red","width":100,"style":{"border":{"radius":"100px"},"elements":{"link":{"color":{"text":"var:preset|color|base-2"}}}}} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link has-base-2-color has-luminous-vivid-orange-to-vivid-red-gradient-background has-text-color has-background has-link-color wp-element-button" href="https://www.smartchoice.or.kr/" rel="noopener" style="border-radius: 100px;"><strong>스마트초이스 홈페이지 바로가기 👆</strong></a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+<!-- wp:image {"id":2259,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2259" decoding="async" height="426" sizes="(max-width: 801px) 100vw, 801px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-29.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-29.png 801w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-29-300x160.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-29-768x408.png 768w" width="801"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>2. 상단의 환급/혜택 선택합니다</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>홈페이지에 접속했다면 상단의 환급금 혜택 메뉴를 선택합니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":2260,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2260" decoding="async" height="423" sizes="(max-width: 797px) 100vw, 797px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-30.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-30.png 797w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-30-300x159.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-30-768x408.png 768w" width="797"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>3. 통신 미환급액 조회 선택합니다</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>환급/혜택 메뉴 하위엔 통신 미환급금 조회 항목이 있습니다. 해당 항목을 선택합니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":2261,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2261" decoding="async" height="370" loading="lazy" sizes="auto, (max-width: 800px) 100vw, 800px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-31.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-31.png 800w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-31-300x139.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-31-768x355.png 768w" width="800"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>4. 사용자 본인인증 절차 후 조회합니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>사용자 개인정보 입력 후 조회할 통신사를 선택합니다. 보통 전체선택을 하시면 KT인터넷, 핸드폰 요금, SKT 핸드폰 통신비, LG유선 무선 요금, SK브로드밴드 인터넷 요금에 대해 확인할 수 있습니다.<br/>참고 SK브래드밴드는 SK인터넷 이라고 생각하시면 됩니다. 약관까지 전부 동의하셨다면 결과를 바로 조회해볼 수 있습니다.</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":2262,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2262" decoding="async" height="889" loading="lazy" sizes="auto, (max-width: 776px) 100vw, 776px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-32.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-32.png 776w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-32-262x300.png 262w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-32-768x880.png 768w" width="776"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p> </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">핸드폰 통신요금 미환급금 조회 시간</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>통신비 미환금액 조회는 일요일, 공휴일을 제외한 09:00 ~ 20:00까지 가능합니다.</p>
+<!-- /wp:paragraph --><!-- CONTENT END 1 -->
+</div></p>
+                    <img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-28.png" alt="통신비 미환급금 숨겨진 내 돈 찾는 방법 소멸되기전에 신청하기" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-29.png" alt="통신비 미환급금 숨겨진 내 돈 찾는 방법 소멸되기전에 신청하기" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-30.png" alt="통신비 미환급금 숨겨진 내 돈 찾는 방법 소멸되기전에 신청하기" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-31.png" alt="통신비 미환급금 숨겨진 내 돈 찾는 방법 소멸되기전에 신청하기" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-32.png" alt="통신비 미환급금 숨겨진 내 돈 찾는 방법 소멸되기전에 신청하기" loading="lazy">
+
+                </div>
+                <footer class="entry-footer">
+                    <nav class="navigation post-navigation">
+                        <div class="nav-links">
+                            <div class="nav-previous"><a href="역대급-전국민-대상-비대면-주민등록-사실조사-안하면-과태료-50만원-방문-없이-간편하게-신청하기-꿀잼.html">전국민 대상 비대면 주민등록 사실조사 안하면 과태료 50만원 방문 없이 간편하게 신청하기</a></div>
+                            <div class="nav-next"><a href="공감-거주자-우선주차-신청방법-및-홈페이지-바로가기-심쿵.html">거주자 우선주차 신청방법 및 홈페이지 바로가기</a></div>
+                        </div>
+                    </nav>
+                </footer>
+            </article>
+            
+            <!-- 하단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </main>
+    </div>
+
+    <!-- 팝업 -->
+    <div class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-content">
+                <div class="popup-timer">5</div>
+                <h2 class="popup-title">관련 콘텐츠</h2>
+                <!-- 팝업 광고 -->
+                <div class="ad-container">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="8384240134"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:1705px; z-index:-768;">순간을 즐기게 해줄 이야기는 보고 또 봐도 질리지 않는 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2660px; z-index:-960;">당신의 관심을 끌 소식은 생생하게 표현된 감상거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1496px; z-index:-56;">기분 전환에 딱 맞는 콘텐츠는 실제 있었던 이야기 기반의 읽기 좋은 글입니다</div>
+<div style="position:absolute; left:-9999px; top:1659px; z-index:-508;">하루를 웃게 해줄 오늘의 주제는 독자의 참여를 유도하는 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:2230px; z-index:-279;">놓치면 아쉬울 이번 이야기는 보고 또 봐도 질리지 않는 내용입니다</div>
+<div style="position:absolute; left:-9999px; top:2059px; z-index:-46;">새롭게 소개할 오늘의 콘텐츠는 짧지만 인상적인 좋은 하루를 위한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1598px; z-index:-235;">당신의 관심을 끌 소식은 흥미를 끌 만한 컨텐츠입니다</div>
+<div style="position:absolute; left:-9999px; top:1256px; z-index:-367;">피식 웃음 나오는 이번 주제는 한 번쯤 생각하게 만드는 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1056px; z-index:-713;">마음을 따뜻하게 할 이번 이야기의 주제는 생생하게 표현된 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:2928px; z-index:-776;">재미와 정보를 함께 담은 이 콘텐츠는 재치있게 구성된 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1775px; z-index:-486;">여러분과 함께 나누고 싶은 소식은 보고 또 봐도 질리지 않는 내용입니다</div>
+<div style="position:absolute; left:-9999px; top:1026px; z-index:-713;">하루를 웃게 해줄 오늘의 주제는 감성적으로 구성된 감상거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1311px; z-index:-727;">가볍게 읽기 좋은 콘텐츠는 독자의 참여를 유도하는 소식입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:1148px; z-index:-43">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2500px; z-index:-483">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2729px; z-index:-169">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1178px; z-index:-754">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1467px; z-index:-492">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:2565px; z-index:-575">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
+                
+    </div>
+
+    <!-- 원본 사이트 스크립트 -->
+    <script src='https://amg.friendwoo.com//wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
+    <script src='https://amg.friendwoo.com//wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
+</body>
+</html>

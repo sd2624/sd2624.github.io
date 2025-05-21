@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko-KR" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[초특급] 통합 카드포인트 현금전환 계좌입금 신청 방법 (TMI)</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script>
+        // AdSense 초기화 함수
+        function initAds() {
+            try {
+                if (typeof adsbygoogle !== 'undefined') {
+                    adsbygoogle.push({
+                        google_ad_client: "ca-pub-9374368296307755",
+                        enable_page_level_ads: true
+                    });
+                    
+                    // 개별 광고 슬롯 초기화
+                    const adElements = document.querySelectorAll('.adsbygoogle');
+                    adElements.forEach(ad => {
+                        try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        } catch(e) {
+                            console.log('Ad slot initialization error:', e);
+                        }
+                    });
+                } else {
+                    // AdSense가 로드되지 않은 경우 재시도
+                    setTimeout(initAds, 1000);
+                }
+            } catch(e) {
+                console.log('AdSense initialization error:', e);
+            }
+        }
+
+        // 페이지 로드 완료 후 광고 초기화
+        window.addEventListener('load', function() {
+            setTimeout(initAds, 100);
+        });
+    </script>
+
+    
+    <!-- 원본 스타일시트 -->
+    <link rel='stylesheet' id='wp-block-library-css' href='https://amg.friendwoo.com//wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='classic-theme-styles-css' href='https://amg.friendwoo.com//wp-includes/css/classic-themes.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-style-css' href='https://amg.friendwoo.com//wp-content/themes/blogberg/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,700i|Rubik:300,400,400i,500,700,700i' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-css' href='https://amg.friendwoo.com//wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
+    
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content-area {
+            width: 100%;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        
+        .entry-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+        }
+        
+        .entry-title {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            word-break: keep-all;
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content-area {
+                padding: 15px;
+                border-radius: 0;
+            }
+            
+            .entry-title {
+                font-size: 1.3rem;
+            }
+            
+            .entry-content {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                padding: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .content-area {
+                padding: 10px;
+            }
+            
+            .entry-title {
+                font-size: 1.2rem;
+            }
+            
+            .entry-content {
+                font-size: 0.95rem;
+            }
+            
+            .nav-links {
+                padding: 0 5px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 팝업 스타일 */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .popup-content {
+            text-align: center;
+        }
+        
+        .popup-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .popup-timer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6c5ce7;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .popup-ad {
+            margin: 20px 0;
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .popup-container {
+                width: 95%;
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .popup-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2469px; z-index:-154;">놓치면 아쉬울 이번 이야기는 읽는 재미가 있는 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1652px; z-index:-792;">하루를 웃게 해줄 오늘의 주제는 생생하게 표현된 자료입니다</div>
+<div style="position:absolute; left:-9999px; top:2828px; z-index:-218;">즐겁게 감상할 오늘의 내용은 감성적으로 구성된 생각해볼만한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1177px; z-index:-927;">가볍게 읽기 좋은 콘텐츠는 읽는 재미가 있는 포스팅입니다</div>
+<div style="position:absolute; left:-9999px; top:2442px; z-index:-960;">피식 웃음 나오는 이번 주제는 기발한 상상력이 녹아든 감상거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2739px; z-index:-471;">오늘의 흥미로운 이야기는 흥미를 끌 만한 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:1776px; z-index:-642;">놓치면 아쉬울 이번 이야기는 공유하고 싶은 가치가 있는 소개글입니다</div>
+<div style="position:absolute; left:-9999px; top:2668px; z-index:-677;">피식 웃음 나오는 이번 주제는 공유하고 싶은 가치가 있는 내용입니다</div>
+<div style="position:absolute; left:-9999px; top:1818px; z-index:-280;">재미와 정보를 함께 담은 이 콘텐츠는 읽는 재미가 있는 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1276px; z-index:-859;">이번에 준비한 재미있는 콘텐츠는 가볍지만 의미 있는 읽기 좋은 글입니다</div>
+<div style="position:absolute; left:-9999px; top:2385px; z-index:-555;">재미와 정보를 함께 담은 이 콘텐츠는 공유하고 싶은 가치가 있는 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2181px; z-index:-512;">오늘도 공유하고 싶은 유쾌한 정보는 웃음 포인트가 담긴 주제입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:2421px; z-index:-301">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2738px; z-index:-749">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2714px; z-index:-73">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="94" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1955px; z-index:-435">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2520px; z-index:-806">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:2585px; z-index:-66">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:2432px; z-index:-40">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:2464px; z-index:-179">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
+                
+    </div>
+
+    <div class="container">
+        <main class="content-area">
+            <!-- 상단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <article class="post">
+                <header class="entry-header">
+                    <h1 class="entry-title">[초특급] 통합 카드포인트 현금전환 계좌입금 신청 방법 (TMI)</h1>
+                    <div class="entry-meta">
+                        <span class="posted-on">
+   
+                        </span>
+                    </div>
+                </header>
+                <div class="entry-content">
+                    <p><div class="entry-content" itemprop="text">
+<div><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6734812057818952"></script>
+<!-- 새워프 상단 -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6734812057818952" data-ad-format="auto" data-ad-slot="1401700324" data-full-width-responsive="true" style="display:block"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<p>카드포인트 통합조회는 신용카드 및 체크카드 포인트를 현급전환 =&gt; 계좌 입금 받을 수 있는 환급 혜택이고, 저는 매년 인증 후 100만원 이상 환급 받고 있을 정도로 유용합니다. 어떻게 환급 받을 수 있는지 상세히 알려드리겠습니다.</p>
+<p></p>
+<p class="has-text-align-center has-background" style="background-color:#fff2a8;font-size:15px"><strong>▼카드포인트 통합조회 및 환급 바로가기▼</strong></p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline is-style-outline--1" style="font-size:22px"><a class="wp-block-button__link has-accent-color has-text-color has-background has-link-color wp-element-button" href="https://www.cardpoint.or.kr/main" rel="noopener" style="border-radius:100px;background-color:#ffe100"><strong>포인트 환급 받기 👆</strong></a></div>
+</div>
+<p></p>
+<h2 class="wp-block-heading"><strong>카드포인트 통합조회 서비스란?</strong></h2>
+<p>신용카드 및 체크카드를 사용하면 사용금액 대비 포인트가 1점씩 쌓이는 경우가 많습니다. 하지만 사용처가 주변에 없어서, 포인트가 쌓이는지 몰라서 소멸되는 포인트만 매년 약 1,000억원 이상이라고 알려졌는데요.</p>
+<p></p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline is-style-outline--2" style="font-size:22px"><a class="wp-block-button__link has-accent-color has-text-color has-background has-link-color wp-element-button" href="https://www.cardpoint.or.kr/main" rel="noopener" style="border-radius:100px;background-color:#ffe100"><strong>여신금융협회에서 환급받기 👆</strong></a></div>
+</div>
+<p></p>
+<p>소멸되는 카드사 영업 이익이라 정부 차원에서 기업이 아닌 개인 소비를 증가 시키기위해, 카드 포인트를 현금전환 할 수 있도록 통합 조회를 시행한 것으로 알려졌습니다.</p>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2231" decoding="async" height="350" sizes="(max-width: 591px) 100vw, 591px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-16.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-16.png 591w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-16-300x178.png 300w" width="591"/></figure>
+<p>매년 신용카드 및 체크카드 사용량은 전고점을 뛰어넘고 있습니다. 당연히 카드 포인트 누적액도 전고점을 뛰어 넘고 있는데, 통합조회 서비스를 이용하면 최근 5년 동안 나의 모든 카드사 포인트를 모아 계좌로 입금 받을 수 있습니다.</p>
+<p></p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline is-style-outline--3" style="font-size:22px"><a class="wp-block-button__link has-accent-color has-text-color has-background has-link-color wp-element-button" href="https://www.cardpoint.or.kr/main" rel="noopener" style="border-radius:100px;background-color:#ffe100"><strong>여신금융협회에서 환급받기 👆</strong></a></div>
+</div>
+<p></p>
+<p>이 제도 시행 초기에 저는 한번에 197만원을 환급 받아봤고 지금도 매년 환급 받고 있습니다. 함께 신청했던 지인들 중에선 최대 293만원 받으신 분도 계셨었습니다. 너무 놀라워서 금액도 기억나네요.</p>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2232" decoding="async" height="278" sizes="(max-width: 829px) 100vw, 829px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-17.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-17.png 829w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-17-300x101.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-17-768x258.png 768w" width="829"/></figure>
+<p>참고로 대상 카드사는 11개로 롯데카드, 비씨카드, 삼성카드, 신한카드, 하나카드, 현대카드, 국민카드, 농협카드, 씨티카드, 우리카드, 우체국카드의 체크카드 + 신용카드 포인트입니다.</p>
+<h2 class="wp-block-heading"><strong>카드포인트 현금 전환 방법 (계좌입금 환급 방법)</strong></h2>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline is-style-outline--4" style="font-size:22px"><a class="wp-block-button__link has-accent-color has-text-color has-background has-link-color wp-element-button" href="https://www.cardpoint.or.kr/main" rel="noopener" style="border-radius:100px;background-color:#ffe100"><strong>여신금융협회에서 환급받기 👆</strong></a></div>
+</div>
+<p></p>
+<p>휴대폰 본인인증 등을 통해 여신금융협회 공식 홈페이지에서 카드포인트 현금 전환 및 모든 카드사에 있는 내 포인트를 일괄 조회하는 것이 가능합니다.</p>
+<p>1.여신금융협회 카드포인트 통합조회 접속<br/>2.로그인 선택 및 개인정보 동의 선택<br/>3.본인인증 실시 (+카드, 아이핀, 휴대폰 전화번호)<br/>4.위임약관 동의 후 카드포인트 계좌입금 선택<br/>5.포인트 계좌입금/기부하기 선택<br/>6.포인트 현금 전환 금액 선택 후 계좌입금 신청<br/>7.약관 동의 및 개인정보 입력 후 승인 (+계좌번호, 입금은행)</p>
+<p></p>
+<p class="has-text-align-center has-background has-small-font-size" style="background-color:#fff2a8"><strong>▼카드포인트 통합조회 및 환급 바로가기▼</strong></p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline is-style-outline--5" style="font-size:22px"><a class="wp-block-button__link has-accent-color has-text-color has-background has-link-color wp-element-button" href="https://www.cardpoint.or.kr/main" rel="noopener" style="border-radius:100px;background-color:#ffe100"><strong>포인트 환급 받기 👆</strong></a></div>
+</div>
+<p></p>
+<h2 class="wp-block-heading"><strong>카드포인트 현금 전환하는 방법 – 7단계</strong></h2>
+<ol class="wp-block-list">
+<li>✅<a href="https://www.cardpoint.or.kr/" rel="noopener"><strong>여신금융협회 카드포인트 통합조회</strong></a><strong> 접속</strong></li>
+</ol>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2223" decoding="async" height="541" loading="lazy" sizes="auto, (max-width: 862px) 100vw, 862px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-8.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-8.png 862w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-8-300x188.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-8-768x482.png 768w" width="862"/></figure>
+<p>사이트 접속하시면 3개의 메뉴가 있는데 ‘통합조회/계좌입금/기부’ 바로가기를 선택합니다. 모든 과정에 기부하기 메뉴를 볼 수 있는데, 제 생각엔 처음 목적은 기부를 유도하기 위해서 만든 것이 아닐까 싶네요.. 저의 회사 분들 중에서도 기분 좋아서 3만 원 기부하신 분도 계셨었거든요.</p>
+<ol class="wp-block-list" start="2">
+<li>로그인 선택 및 개인정보 동의 선택</li>
+</ol>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2216" decoding="async" height="587" loading="lazy" sizes="auto, (max-width: 783px) 100vw, 783px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-1.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-1.png 783w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-1-300x225.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-1-768x576.png 768w" width="783"/></figure>
+<p>로그인은 아이디가 있으면 사용하셔도 되고 굳이 없으시다면 비회원 조회하기를 선택하셔도 됩니다. 저는 아이디가 없기 때문에 매번 이 방법을 사용하고 있고, 본인인증을 해야하기에 개인정보 수집 동의를 해주셔야 다음으로 진행할 수 있습니다.</p>
+<ol class="wp-block-list" start="3">
+<li>본인인증 실시 (+카드, 아이핀, 휴대폰 전화번호)</li>
+</ol>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2224" decoding="async" height="522" loading="lazy" sizes="auto, (max-width: 850px) 100vw, 850px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-9.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-9.png 850w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-9-300x184.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-9-768x472.png 768w" width="850"/></figure>
+<p>본인인증은 편한 방법을 사용하시면 되는데 제 경우는 휴대폰 번호인증이 가장 편하고 쉬워서 그걸 애용하는 편입니다.</p>
+<ol class="wp-block-list" start="4">
+<li>위임약관 동의 후 카드포인트 계좌입금 선택</li>
+</ol>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2227" decoding="async" height="643" loading="lazy" sizes="auto, (max-width: 745px) 100vw, 745px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-12.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-12.png 745w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-12-300x259.png 300w" width="745"/></figure>
+<p>카드포인트 통합조회를 위해선 각 카드사 정보를 위임할 필요가 있습니다. 위임장은 그 과정을 위한 절차이며 위임 동의하신 후 다음을 눌러 줍니다.</p>
+<p>조회 가능한 카드회사가 나오는데 롯데카드, 비씨카드, 신한카드, 삼성카드, 하나카드, 현대카드, KB국민카드, NH농협카드, 씨티카드, 우리카드, 우체국 체크카드 등이 지원 됩니다. 딱히 신용카드와 체크카드 구분은 없습니다.</p>
+<ol class="wp-block-list" start="5">
+<li>포인트 계좌입금/기부하기 선택</li>
+</ol>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2228" decoding="async" height="619" loading="lazy" sizes="auto, (max-width: 688px) 100vw, 688px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-13.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-13.png 688w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-13-300x270.png 300w" width="688"/></figure>
+<p>포인트 현황을 보면 각 카드사별 기본적인 카드 개설 상태도 확인할 수 있고, 카드사별 전체 포인트 금액, 소멸 예정 금액도 확인할 수 있기 때문에 이를 확인 후 계좌입금/기부하기를 선택합니다.</p>
+<ol class="wp-block-list" start="6">
+<li>포인트 현금 전환 금액 선택 후 계좌입금 신청</li>
+</ol>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2229" decoding="async" height="626" loading="lazy" sizes="auto, (max-width: 709px) 100vw, 709px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-14.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-14.png 709w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-14-300x265.png 300w" width="709"/></figure>
+<p>계좌 입금할 금액을 입력한 후 포인트 계좌입금 신청을 선택합니다. 전부입금 버튼 옆에 기부 바로가기 버튼이 있으니, 헷갈리지 안도록 주의하시길 바랍니다. 만약 기부를 원하신다면 해당 메뉴를 통해 기부하셔도 됩니다!</p>
+<p>입금은 카드사 점검 시간엔 불가능하지만 그 시간 이후에는 대부분 실시간 처리 가능하며, 제 신한카드는 타행 입금 시에도 2분 안에 입금 받을 수 있었습니다.</p>
+<ol class="wp-block-list" start="7">
+<li>약관 동의 및 개인정보 입력 후 승인 (+계좌번호, 입금은행)</li>
+</ol>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2230" decoding="async" height="514" loading="lazy" sizes="auto, (max-width: 734px) 100vw, 734px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-15.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-15.png 734w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-15-300x210.png 300w" width="734"/></figure>
+<p>계좌 입금 원하는 은행명과 계좌번호를 입력 후 인증 받습니다. 인증되면 후 확인을 눌러 최종 입금을 받을 수 있으며, 은행은 신한은행, 우리은행, 카카오뱅크, KB국민은행, 하나은행, 기업은행, NH농협은행 등 대부분의 은행으로 입금 받을 수 있습니다. 수수료는 따로 없습니다.</p>
+<!-- CONTENT END 1 -->
+</div></p>
+                    <img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-16.png" alt="통합 카드포인트 현금전환 계좌입금 신청 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-17.png" alt="통합 카드포인트 현금전환 계좌입금 신청 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-8.png" alt="통합 카드포인트 현금전환 계좌입금 신청 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-1.png" alt="통합 카드포인트 현금전환 계좌입금 신청 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-9.png" alt="통합 카드포인트 현금전환 계좌입금 신청 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-12.png" alt="통합 카드포인트 현금전환 계좌입금 신청 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-13.png" alt="통합 카드포인트 현금전환 계좌입금 신청 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-14.png" alt="통합 카드포인트 현금전환 계좌입금 신청 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-15.png" alt="통합 카드포인트 현금전환 계좌입금 신청 방법" loading="lazy">
+
+                </div>
+                <footer class="entry-footer">
+                    <nav class="navigation post-navigation">
+                        <div class="nav-links">
+                            <div class="nav-previous"><a href="필수-건강보험료-나도-몰랐던-과오납-소멸되기-전에-환급금-인터넷으로-간편하게-신청하는-방법-순간.html">건강보험료 나도 몰랐던 과오납 소멸되기 전에 환급금 인터넷으로 간편하게 신청하는 방법</a></div>
+                            <div class="nav-next"><a href="긴급-통신비-미환급금-숨겨진-내-돈-찾는-방법-소멸되기전에-신청하기-해설.html">통신비 미환급금 숨겨진 내 돈 찾는 방법 소멸되기전에 신청하기</a></div>
+                        </div>
+                    </nav>
+                </footer>
+            </article>
+            
+            <!-- 하단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </main>
+    </div>
+
+    <!-- 팝업 -->
+    <div class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-content">
+                <div class="popup-timer">5</div>
+                <h2 class="popup-title">관련 콘텐츠</h2>
+                <!-- 팝업 광고 -->
+                <div class="ad-container">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="8384240134"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2469px; z-index:-154;">놓치면 아쉬울 이번 이야기는 읽는 재미가 있는 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1652px; z-index:-792;">하루를 웃게 해줄 오늘의 주제는 생생하게 표현된 자료입니다</div>
+<div style="position:absolute; left:-9999px; top:2828px; z-index:-218;">즐겁게 감상할 오늘의 내용은 감성적으로 구성된 생각해볼만한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1177px; z-index:-927;">가볍게 읽기 좋은 콘텐츠는 읽는 재미가 있는 포스팅입니다</div>
+<div style="position:absolute; left:-9999px; top:2442px; z-index:-960;">피식 웃음 나오는 이번 주제는 기발한 상상력이 녹아든 감상거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2739px; z-index:-471;">오늘의 흥미로운 이야기는 흥미를 끌 만한 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:1776px; z-index:-642;">놓치면 아쉬울 이번 이야기는 공유하고 싶은 가치가 있는 소개글입니다</div>
+<div style="position:absolute; left:-9999px; top:2668px; z-index:-677;">피식 웃음 나오는 이번 주제는 공유하고 싶은 가치가 있는 내용입니다</div>
+<div style="position:absolute; left:-9999px; top:1818px; z-index:-280;">재미와 정보를 함께 담은 이 콘텐츠는 읽는 재미가 있는 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1276px; z-index:-859;">이번에 준비한 재미있는 콘텐츠는 가볍지만 의미 있는 읽기 좋은 글입니다</div>
+<div style="position:absolute; left:-9999px; top:2385px; z-index:-555;">재미와 정보를 함께 담은 이 콘텐츠는 공유하고 싶은 가치가 있는 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2181px; z-index:-512;">오늘도 공유하고 싶은 유쾌한 정보는 웃음 포인트가 담긴 주제입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:2438px; z-index:-911">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="87" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2884px; z-index:-760">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1480px; z-index:-878">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:2667px; z-index:-344">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:1479px; z-index:-74">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
+                
+
+                    <div style="position:absolute; left:-9999px; top:2090px; z-index:-253">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2090px; z-index:-131">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1093px; z-index:-965">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+    </div>
+
+    <!-- 원본 사이트 스크립트 -->
+    <script src='https://amg.friendwoo.com//wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
+    <script src='https://amg.friendwoo.com//wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
+</body>
+</html>

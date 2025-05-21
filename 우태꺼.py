@@ -53,14 +53,14 @@ def get_scraper():
         'User-Agent': ua.random,
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Referer': 'https://amg.friendwoo.com/',
+        'Referer': 'https://www.humorworld.net/',
         'DNT': '1',
     })
     return scraper
 
 def setup_folders():
     """필요한 폴더 구조 생성"""
-    base_path = os.path.join('qqq')
+    base_path = os.path.join('www')
     # image_path 제거
     os.makedirs(base_path, exist_ok=True)
     return base_path, None  # None 반환하여 이미지 경로 사용 안함
@@ -87,7 +87,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         # content가 BeautifulSoup 객체인 경우 HTML 추출
         if isinstance(content, BeautifulSoup):
             content_html = str(content)
-            content_html = content_html.replace('src="/', 'src="https://humorworld.net/')
+            content_html = content_html.replace('src="/', 'src="https://amg.friendwoo.com//')
             
             # Remove all AdSense related elements
             soup = BeautifulSoup(content_html, 'html.parser')
@@ -326,11 +326,11 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
 
     
     <!-- 원본 스타일시트 -->
-    <link rel='stylesheet' id='wp-block-library-css' href='https://humorworld.net/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='classic-theme-styles-css' href='https://humorworld.net/wp-includes/css/classic-themes.min.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='blogberg-style-css' href='https://humorworld.net/wp-content/themes/blogberg/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='wp-block-library-css' href='https://amg.friendwoo.com//wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='classic-theme-styles-css' href='https://amg.friendwoo.com//wp-includes/css/classic-themes.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-style-css' href='https://amg.friendwoo.com//wp-content/themes/blogberg/style.css' type='text/css' media='all' />
     <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,700i|Rubik:300,400,400i,500,700,700i' type='text/css' media='all' />
-    <link rel='stylesheet' id='bootstrap-css' href='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-css' href='https://amg.friendwoo.com//wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
     
     <style type="text/css">
         * {{
@@ -608,8 +608,8 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     </div>
 
     <!-- 원본 사이트 스크립트 -->
-    <script src='https://humorworld.net/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
-    <script src='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
+    <script src='https://amg.friendwoo.com//wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
+    <script src='https://amg.friendwoo.com//wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
 </body>
 </html>"""
         
@@ -923,13 +923,10 @@ def create_humor_page(posts_info, base_path, page_number=1):
         f.write(html_content)
 
 def scrape_category():
-    """게시물 스크래핑 함수"""
-    base_path, _ = setup_folders()  # 이미지 경로 무시
+    """이미지가 있는 게시물만 스크래핑"""
+    base_path, _ = setup_folders()
     posts_info = []
     post_count = 0
-    
-    # humor_1.html 초기 생성
-    create_humor_page(posts_info, base_path, 1)
     
     try:
         scraper = get_scraper()
@@ -955,13 +952,6 @@ def scrape_category():
                         if not title_elem:
                             continue
                         
-                        original_title = title_elem.get_text(strip=True)
-                        
-                        # 중복 검사는 원본 제목으로
-                        if is_duplicate_post(original_title, base_path):
-                            logging.info(f"Skipping duplicate post: {original_title}")
-                            continue
-                        
                         # 게시물 상세 페이지 스크래핑
                         link = title_elem.get('href')
                         article_response = scraper.get(link)
@@ -969,17 +959,31 @@ def scrape_category():
                         
                         content = article_soup.select_one('.entry-content')
                         if not content:
-                            logging.error(f"Content not found for: {original_title}")
                             continue
 
+                        # 이미지 태그 확인
+                        images = content.find_all('img')
+                        if not images:  # 이미지가 없으면 건너뛰기
+                            logging.info("Skipping post without images")
+                            continue
+
+                        original_title = title_elem.get_text(strip=True)
+                        
+                        # 여기서부터는 이미지가 있는 게시물만 처리
+                        if is_duplicate_post(original_title, base_path):
+                            logging.info(f"Skipping duplicate post: {original_title}")
+                            continue
+
+                        # 이미지 HTML 생성
                         images_html = ""
-                        for img in content.find_all('img'):
-                            if (img.get('src')):
+                        for img in images:
+                            if img.get('src'):
                                 img_url = img['src']
                                 if not img_url.startswith('http'):
-                                    img_url = f"https://humorworld.net{img_url}"
+                                    img_url = f"https://amg.friendwoo.com/{img_url}"
                                 images_html += f'<img src="{img_url}" alt="{original_title}" loading="lazy">\n'
 
+                        # 나머지 처리 코드는 동일...
                         # 현재 게시물 정보 저장
                         processed_title = process_title(original_title)
                         safe_filename = clean_filename(processed_title) + '.html'

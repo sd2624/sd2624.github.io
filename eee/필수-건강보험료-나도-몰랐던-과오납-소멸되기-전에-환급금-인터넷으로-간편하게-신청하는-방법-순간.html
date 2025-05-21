@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko-KR" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[필수] 건강보험료 나도 몰랐던 과오납 소멸되기 전에 환급금 인터넷으로 간편하게 신청하는 방법 (순간)</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script>
+        // AdSense 초기화 함수
+        function initAds() {
+            try {
+                if (typeof adsbygoogle !== 'undefined') {
+                    adsbygoogle.push({
+                        google_ad_client: "ca-pub-9374368296307755",
+                        enable_page_level_ads: true
+                    });
+                    
+                    // 개별 광고 슬롯 초기화
+                    const adElements = document.querySelectorAll('.adsbygoogle');
+                    adElements.forEach(ad => {
+                        try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        } catch(e) {
+                            console.log('Ad slot initialization error:', e);
+                        }
+                    });
+                } else {
+                    // AdSense가 로드되지 않은 경우 재시도
+                    setTimeout(initAds, 1000);
+                }
+            } catch(e) {
+                console.log('AdSense initialization error:', e);
+            }
+        }
+
+        // 페이지 로드 완료 후 광고 초기화
+        window.addEventListener('load', function() {
+            setTimeout(initAds, 100);
+        });
+    </script>
+
+    
+    <!-- 원본 스타일시트 -->
+    <link rel='stylesheet' id='wp-block-library-css' href='https://amg.friendwoo.com//wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='classic-theme-styles-css' href='https://amg.friendwoo.com//wp-includes/css/classic-themes.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-style-css' href='https://amg.friendwoo.com//wp-content/themes/blogberg/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,700i|Rubik:300,400,400i,500,700,700i' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-css' href='https://amg.friendwoo.com//wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
+    
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content-area {
+            width: 100%;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        
+        .entry-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+        }
+        
+        .entry-title {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            word-break: keep-all;
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content-area {
+                padding: 15px;
+                border-radius: 0;
+            }
+            
+            .entry-title {
+                font-size: 1.3rem;
+            }
+            
+            .entry-content {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                padding: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .content-area {
+                padding: 10px;
+            }
+            
+            .entry-title {
+                font-size: 1.2rem;
+            }
+            
+            .entry-content {
+                font-size: 0.95rem;
+            }
+            
+            .nav-links {
+                padding: 0 5px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 팝업 스타일 */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .popup-content {
+            text-align: center;
+        }
+        
+        .popup-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .popup-timer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6c5ce7;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .popup-ad {
+            margin: 20px 0;
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .popup-container {
+                width: 95%;
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .popup-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2956px; z-index:-155;">재미와 정보를 함께 담은 이 콘텐츠는 한 번쯤 생각하게 만드는 자료입니다</div>
+<div style="position:absolute; left:-9999px; top:2537px; z-index:-694;">보는 순간 미소 지을 이야기거리는 의외의 반전을 지닌 내용입니다</div>
+<div style="position:absolute; left:-9999px; top:2408px; z-index:-705;">여러분과 함께 나누고 싶은 소식은 웃음 포인트가 담긴 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:1689px; z-index:-631;">놓치면 아쉬울 이번 이야기는 눈길을 사로잡는 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2861px; z-index:-137;">순간을 즐기게 해줄 이야기는 실제 있었던 이야기 기반의 소개글입니다</div>
+<div style="position:absolute; left:-9999px; top:1004px; z-index:-989;">지금 소개할 재미있는 주제는 실제 있었던 이야기 기반의 감상거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2197px; z-index:-464;">즐겁게 감상할 오늘의 내용은 생생하게 표현된 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1748px; z-index:-817;">이 포스팅에서 소개할 내용은 가볍지만 의미 있는 주제입니다</div>
+<div style="position:absolute; left:-9999px; top:1416px; z-index:-413;">놓치면 아쉬울 이번 이야기는 읽는 재미가 있는 유머입니다</div>
+<div style="position:absolute; left:-9999px; top:2363px; z-index:-693;">오늘도 공유하고 싶은 유쾌한 정보는 의외의 반전을 지닌 유머입니다</div>
+<div style="position:absolute; left:-9999px; top:2109px; z-index:-373;">지금 소개할 재미있는 주제는 일상에서 공감할 수 있는 생각해볼만한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1052px; z-index:-684;">가볍게 읽기 좋은 콘텐츠는 감성적으로 구성된 함께 나눌 이야기입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:2348px; z-index:-226">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2459px; z-index:-835">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2286px; z-index:-160">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+    </div>
+
+    <div class="container">
+        <main class="content-area">
+            <!-- 상단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <article class="post">
+                <header class="entry-header">
+                    <h1 class="entry-title">[필수] 건강보험료 나도 몰랐던 과오납 소멸되기 전에 환급금 인터넷으로 간편하게 신청하는 방법 (순간)</h1>
+                    <div class="entry-meta">
+                        <span class="posted-on">
+   
+                        </span>
+                    </div>
+                </header>
+                <div class="entry-content">
+                    <p><div class="entry-content" itemprop="text">
+<div><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6734812057818952"></script>
+<!-- 새워프 상단 -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6734812057818952" data-ad-format="auto" data-ad-slot="1401700324" data-full-width-responsive="true" style="display:block"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<p>의료보험료 납부하시거나 피부양자라면 대상이될 수 있어요. 누구나 무료로 확인해볼 수 있는 국민건강보험료 환급금 조회 및 신청 방법을 대상자를 포함해 상세히 아래에서 알려드리겠습니다.</p>
+<p></p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline is-style-outline--1"><a class="wp-block-button__link has-text-color has-background has-link-color wp-element-button" href="https://www.nhis.or.kr/" rel="noopener" style="border-radius:100px;color:#ff0000;background-color:#fffc00"><strong>건강보험료 환급금 조회 및 신청하기</strong></a></div>
+</div>
+<p></p>
+<h2 class="wp-block-heading">건강보험료 환급 대상자 (건보료 환급 소급지급 기간)</h2>
+<p>직장가입자, 지역가입자, 피부양자 모두가 대상이며, 이 서비스는 과오납금 및 본인부담금 상한액을 초과한 금액까지 한번에 돌려받을 수 있습니다. 한마디로 전국민 대상입니다.</p>
+<figure class="wp-block-image size-full is-resized"><a href="https://www.nhis.or.kr/" rel="noopener"><img alt="" class="wp-image-2255" decoding="async" height="487" sizes="(max-width: 769px) 100vw, 769px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-27.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-27.png 769w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-27-300x190.png 300w" style="width:820px;height:auto" width="769"/></a></figure>
+<p>건강보험료 환급 대상은 국민건강보험에 가입한 모든 사람들 즉 “건보료 환급금은 전국민 대상“, 즉 직장인, 사업자, 주부 등을 포함합니다. 환급금이 발생하는 경우는 두 가지가 있는데요.</p>
+<ul class="wp-block-list">
+<li>전년도 대비 당해년도 소득이 감소한 경우에 환급 대상이 됩니다.</li>
+<li>본인부담상한액은 연간 자기 소득에 정해진 최대 의료비를 초과 사용한 경우, 초과 금액을 환급해주는 제도로 주변에서 가장 많이 받는 건보료 환급금입니다.</li>
+</ul>
+<p class="has-base-background-color has-background"><strong>▼▼▼ 아래 함께 보면 좋은 글 ▼▼▼</strong></p>
+<p class="has-base-2-background-color has-background"><strong><a href="https://amg.friendwoo.com/2239/">📌 자동차 보험 견적 비교 사이트 바로가기</a></strong></p>
+<p class="has-base-background-color has-background"><strong><a href="https://amg.friendwoo.com/2246/">📌 통신비 과오납 환급금 받기</a></strong></p>
+<p class="has-base-2-background-color has-background"><strong><a href="https://sportsdamoa.com/654" rel="noopener">📌 5년이상 자동차 탔다면? 자동차 환급금 신청하기</a></strong></p>
+<p class="has-base-background-color has-background"><strong><a href="https://amg.friendwoo.com/2213/">📌 통합카드포인트 현금 전환방법</a></strong></p>
+<p class="has-background" style="background-color:#ff5858"><strong>접속 방법을 아신다면 바로 접속해서 확인하시고, 모르시면 ▼아래▼ 6번 내용까지 꼭 확인 바랍니다! </strong></p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline is-style-outline--2"><a class="wp-block-button__link has-text-color has-background has-link-color wp-element-button" href="https://www.nhis.or.kr/" rel="noopener" style="border-radius:100px;color:#ff0000;background-color:#fffc00"><strong>환급신청 공식 홈페이지</strong> 👆</a></div>
+</div>
+<p></p>
+<p>23년 기준으로는 환급 대상자는 약 186만 6,370명으로 총 2조3,000억원의 환급이 이루어졌지만, 5년 내에 미환급해 갈 경우 환급금이 사라지니 1년에 한번씩 꼭 조회해볼 필요가 있습니다.</p>
+<h2 class="wp-block-heading">국민건강보험료 환급금 조회 및 신청 방법</h2>
+<p>국민 건강보험료 환급금은 휴대폰 본인인증을 통해 누구나 손쉽게 조회할 수 있으며, 이를 통해 매년 약 186만명이 약 132만원 정도의 건보료 환급을 받았다고 생각해볼 수 있습니다. 5년 넘은 환급금은 자동 소멸되니 꼭 1년에 한번씩 조회해볼 필요가 있습니다.</p>
+<p>📌 환급신청 <a href="https://www.nhis.or.kr/" rel="noopener"><strong>공식 홈페이지</strong></a>👆 접속합니다.<br/>1. 상단 미원여기요에서 개인민원을 선택<br/>2. 환급금(지원금)조회 신청 메뉴에서 신청을 선택<br/>3. 본인인증을 해야합니다. 휴대폰 본인인증을 추천<br/>4. 환급 내역을 확인<br/>5. 국민 건강보험료 환급금 신청내역 조회</p>
+<p class="has-background" style="background-color:#ff8383"><strong>접속 방법을 아신다면 바로 접속해서 확인하시고, 모르시면 ▼아래▼ 6번 내용까지 꼭 확인 바랍니다! </strong></p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline is-style-outline--3"><a class="wp-block-button__link has-text-color has-background has-link-color wp-element-button" href="https://www.nhis.or.kr/" rel="noopener" style="border-radius:100px;color:#ff0000;background-color:#fffc00"><strong>&gt;보험금 환급 신청하기</strong> 👆</a></div>
+</div>
+<p></p>
+<h2 class="wp-block-heading">건강보험료 환급금 조회하는 방법 </h2>
+<ol class="wp-block-list">
+<li><strong>환급신청 공식 홈페이지 접속.</strong><br/>앞서 말씀드렸지만 개인정보에 접근하다보니 휴대폰 본인인증 또는 인증서 로그인 방식을 사용합니다. 먼저 국민건강보험공단(의료보험공단) 공식 홈페이지에 접속하신 후 순차적인 과정을 거쳐 조회해야 합니다.</li>
+</ol>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2247" decoding="async" height="389" sizes="(max-width: 798px) 100vw, 798px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-20.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-20.png 798w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-20-300x146.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-20-768x374.png 768w" width="798"/></figure>
+<p><strong>2. 상단 민원여기요에서 개인민원 선택</strong><br/>왼쪽 상단을 보시면 미원여기요 메뉴가 보이시죠? 이 메뉴로 이동하신 후 개인민원 항목으로 이동합니다.</p>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2248" decoding="async" height="386" loading="lazy" sizes="auto, (max-width: 795px) 100vw, 795px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-21.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-21.png 795w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-21-300x146.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-21-768x373.png 768w" width="795"/></figure>
+<p><strong>3. 환급금(지원금)조회 신청 메뉴에서 신청을 선택.</strong><br/>지원금 조회/신청 메뉴를 선택합니다.</p>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2249" decoding="async" height="458" loading="lazy" sizes="auto, (max-width: 793px) 100vw, 793px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-22.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-22.png 793w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-22-300x173.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-22-768x444.png 768w" width="793"/></figure>
+<p><strong>4. 본인인증을 해야합니다.(휴대폰 본인인증 추천</strong>)<br/>본인인증은 공동인증서, 금융인증서, 휴대폰 본인인증을 통해 할 수 있습니다. 제 경우는 휴대폰 인증만 사용하고, PC방화벽 보안 프로그램, 키보드보안 프로그램은 설치 안해도 이용 가능하니 필요하다면 설치합니다. (저는 컴퓨터 느려저서 안합니다)</p>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2250" decoding="async" height="481" loading="lazy" sizes="auto, (max-width: 798px) 100vw, 798px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-23.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-23.png 798w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-23-300x181.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-23-768x463.png 768w" width="798"/></figure>
+<p></p>
+<p><strong>5. 환급 내역을 확인합니다.</strong><br/>환급 내역을 확인할 수 있습니다. 지금 없더라도 1년 후 생길 수 있으니 1년에 한번 정도 해주시길 추천드립니다. 책정 금액이 나왔다면 아래의 신청하기를 이용하시면 됩니다</p>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2251" decoding="async" height="455" loading="lazy" sizes="auto, (max-width: 796px) 100vw, 796px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-24.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-24.png 796w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-24-300x171.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-24-768x439.png 768w" width="796"/></figure>
+<p><strong>6. 국민 건강보험료 환급금 신청내역 조회합니다.</strong><br/>이미 신청해서 받은 경우 신청내역을 통해 확인할 수도 있습니다. 저는 이 내용을 이사하기 전 집으로 온 우편을 통해 받았었는데, 큰 금액이 아니라 잊고 있었지만 주변엔 이런식으로 받으신 분들이 많더군요. 몇 백 이상 받으신 분도 계시니 확인해보시길 바랍니다.</p>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-2252" decoding="async" height="409" loading="lazy" sizes="auto, (max-width: 798px) 100vw, 798px" src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-25.png" srcset="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-25.png 798w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-25-300x154.png 300w, https://amg.friendwoo.com/wp-content/uploads/2024/08/image-25-768x394.png 768w" width="798"/></figure>
+<!-- CONTENT END 1 -->
+</div></p>
+                    <img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-27.png" alt="건강보험료 나도 몰랐던 과오납 소멸되기 전에 환급금 인터넷으로 간편하게 신청하는 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-20.png" alt="건강보험료 나도 몰랐던 과오납 소멸되기 전에 환급금 인터넷으로 간편하게 신청하는 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-21.png" alt="건강보험료 나도 몰랐던 과오납 소멸되기 전에 환급금 인터넷으로 간편하게 신청하는 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-22.png" alt="건강보험료 나도 몰랐던 과오납 소멸되기 전에 환급금 인터넷으로 간편하게 신청하는 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-23.png" alt="건강보험료 나도 몰랐던 과오납 소멸되기 전에 환급금 인터넷으로 간편하게 신청하는 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-24.png" alt="건강보험료 나도 몰랐던 과오납 소멸되기 전에 환급금 인터넷으로 간편하게 신청하는 방법" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2024/08/image-25.png" alt="건강보험료 나도 몰랐던 과오납 소멸되기 전에 환급금 인터넷으로 간편하게 신청하는 방법" loading="lazy">
+
+                </div>
+                <footer class="entry-footer">
+                    <nav class="navigation post-navigation">
+                        <div class="nav-links">
+                            <div class="nav-previous"><a href="긴급-통신비-미환급금-숨겨진-내-돈-찾는-방법-소멸되기전에-신청하기-해설.html">통신비 미환급금 숨겨진 내 돈 찾는 방법 소멸되기전에 신청하기</a></div>
+                            <div class="nav-next"><a href="역대급-전국민-대상-비대면-주민등록-사실조사-안하면-과태료-50만원-방문-없이-간편하게-신청하기-꿀잼.html">전국민 대상 비대면 주민등록 사실조사 안하면 과태료 50만원 방문 없이 간편하게 신청하기</a></div>
+                        </div>
+                    </nav>
+                </footer>
+            </article>
+            
+            <!-- 하단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </main>
+    </div>
+
+    <!-- 팝업 -->
+    <div class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-content">
+                <div class="popup-timer">5</div>
+                <h2 class="popup-title">관련 콘텐츠</h2>
+                <!-- 팝업 광고 -->
+                <div class="ad-container">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="8384240134"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2956px; z-index:-155;">재미와 정보를 함께 담은 이 콘텐츠는 한 번쯤 생각하게 만드는 자료입니다</div>
+<div style="position:absolute; left:-9999px; top:2537px; z-index:-694;">보는 순간 미소 지을 이야기거리는 의외의 반전을 지닌 내용입니다</div>
+<div style="position:absolute; left:-9999px; top:2408px; z-index:-705;">여러분과 함께 나누고 싶은 소식은 웃음 포인트가 담긴 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:1689px; z-index:-631;">놓치면 아쉬울 이번 이야기는 눈길을 사로잡는 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2861px; z-index:-137;">순간을 즐기게 해줄 이야기는 실제 있었던 이야기 기반의 소개글입니다</div>
+<div style="position:absolute; left:-9999px; top:1004px; z-index:-989;">지금 소개할 재미있는 주제는 실제 있었던 이야기 기반의 감상거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2197px; z-index:-464;">즐겁게 감상할 오늘의 내용은 생생하게 표현된 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1748px; z-index:-817;">이 포스팅에서 소개할 내용은 가볍지만 의미 있는 주제입니다</div>
+<div style="position:absolute; left:-9999px; top:1416px; z-index:-413;">놓치면 아쉬울 이번 이야기는 읽는 재미가 있는 유머입니다</div>
+<div style="position:absolute; left:-9999px; top:2363px; z-index:-693;">오늘도 공유하고 싶은 유쾌한 정보는 의외의 반전을 지닌 유머입니다</div>
+<div style="position:absolute; left:-9999px; top:2109px; z-index:-373;">지금 소개할 재미있는 주제는 일상에서 공감할 수 있는 생각해볼만한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1052px; z-index:-684;">가볍게 읽기 좋은 콘텐츠는 감성적으로 구성된 함께 나눌 이야기입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:1814px; z-index:-245">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:2839px; z-index:-921">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1483px; z-index:-641">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:2311px; z-index:-639">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
+                
+
+                    <div style="position:absolute; left:-9999px; top:1184px; z-index:-423">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1275px; z-index:-937">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                
+    </div>
+
+    <!-- 원본 사이트 스크립트 -->
+    <script src='https://amg.friendwoo.com//wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
+    <script src='https://amg.friendwoo.com//wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
+</body>
+</html>

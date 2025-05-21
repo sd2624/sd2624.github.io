@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ko-KR" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[충격적인] 본인부담상한액 초과금 지급신청 방법 총정리 2023 (자동으로 돌려받을수 있는게 아닙니다) (이야기)</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script>
+        // AdSense 초기화 함수
+        function initAds() {
+            try {
+                if (typeof adsbygoogle !== 'undefined') {
+                    adsbygoogle.push({
+                        google_ad_client: "ca-pub-9374368296307755",
+                        enable_page_level_ads: true
+                    });
+                    
+                    // 개별 광고 슬롯 초기화
+                    const adElements = document.querySelectorAll('.adsbygoogle');
+                    adElements.forEach(ad => {
+                        try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        } catch(e) {
+                            console.log('Ad slot initialization error:', e);
+                        }
+                    });
+                } else {
+                    // AdSense가 로드되지 않은 경우 재시도
+                    setTimeout(initAds, 1000);
+                }
+            } catch(e) {
+                console.log('AdSense initialization error:', e);
+            }
+        }
+
+        // 페이지 로드 완료 후 광고 초기화
+        window.addEventListener('load', function() {
+            setTimeout(initAds, 100);
+        });
+    </script>
+
+    
+    <!-- 원본 스타일시트 -->
+    <link rel='stylesheet' id='wp-block-library-css' href='https://amg.friendwoo.com//wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='classic-theme-styles-css' href='https://amg.friendwoo.com//wp-includes/css/classic-themes.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-style-css' href='https://amg.friendwoo.com//wp-content/themes/blogberg/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,700i|Rubik:300,400,400i,500,700,700i' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-css' href='https://amg.friendwoo.com//wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
+    
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content-area {
+            width: 100%;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        
+        .entry-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+        }
+        
+        .entry-title {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            word-break: keep-all;
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content-area {
+                padding: 15px;
+                border-radius: 0;
+            }
+            
+            .entry-title {
+                font-size: 1.3rem;
+            }
+            
+            .entry-content {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                padding: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .content-area {
+                padding: 10px;
+            }
+            
+            .entry-title {
+                font-size: 1.2rem;
+            }
+            
+            .entry-content {
+                font-size: 0.95rem;
+            }
+            
+            .nav-links {
+                padding: 0 5px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 팝업 스타일 */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .popup-content {
+            text-align: center;
+        }
+        
+        .popup-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .popup-timer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6c5ce7;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .popup-ad {
+            margin: 20px 0;
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .popup-container {
+                width: 95%;
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .popup-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2386px; z-index:-512;">여러분과 함께 나누고 싶은 소식은 의외의 반전을 지닌 컨텐츠입니다</div>
+<div style="position:absolute; left:-9999px; top:1463px; z-index:-101;">이 포스팅에서 소개할 내용은 즐겁게 전달하는 정보입니다</div>
+<div style="position:absolute; left:-9999px; top:2578px; z-index:-85;">가볍게 읽기 좋은 콘텐츠는 유머러스하게 풀어낸 컨텐츠입니다</div>
+<div style="position:absolute; left:-9999px; top:2095px; z-index:-19;">마음을 따뜻하게 할 이번 이야기의 주제는 생생하게 표현된 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2356px; z-index:-145;">가볍게 읽기 좋은 콘텐츠는 즐겁게 전달하는 정보입니다</div>
+<div style="position:absolute; left:-9999px; top:2691px; z-index:-899;">오늘도 공유하고 싶은 유쾌한 정보는 생생하게 표현된 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2891px; z-index:-133;">오늘도 공유하고 싶은 유쾌한 정보는 의외의 반전을 지닌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1611px; z-index:-341;">가볍게 읽기 좋은 콘텐츠는 유머러스하게 풀어낸 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2911px; z-index:-959;">지금 소개할 재미있는 주제는 흥미를 끌 만한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1508px; z-index:-349;">놓치면 아쉬울 이번 이야기는 의외의 반전을 지닌 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:2143px; z-index:-324;">보는 순간 미소 지을 이야기거리는 실제 있었던 이야기 기반의 컨텐츠입니다</div>
+<div style="position:absolute; left:-9999px; top:1727px; z-index:-210;">재미와 정보를 함께 담은 이 콘텐츠는 의외의 반전을 지닌 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2023px; z-index:-495;">당신의 관심을 끌 소식은 눈길을 사로잡는 생각해볼만한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2958px; z-index:-195;">재미와 정보를 함께 담은 이 콘텐츠는 독자의 참여를 유도하는 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1032px; z-index:-47;">인터넷에서 화제가 된 내용은 의외의 반전을 지닌 포스팅입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:2430px; z-index:-715">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2947px; z-index:-25">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1703px; z-index:-930">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1704px; z-index:-325">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:1002px; z-index:-145">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
+                
+
+                    <div style="position:absolute; left:-9999px; top:2635px; z-index:-952">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2740px; z-index:-452">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2901px; z-index:-676">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="82" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                
+    </div>
+
+    <div class="container">
+        <main class="content-area">
+            <!-- 상단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <article class="post">
+                <header class="entry-header">
+                    <h1 class="entry-title">[충격적인] 본인부담상한액 초과금 지급신청 방법 총정리 2023 (자동으로 돌려받을수 있는게 아닙니다) (이야기)</h1>
+                    <div class="entry-meta">
+                        <span class="posted-on">
+   
+                        </span>
+                    </div>
+                </header>
+                <div class="entry-content">
+                    <p><div class="entry-content" itemprop="text">
+<div><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6734812057818952"></script>
+<!-- 새워프 상단 -->
+<ins class="adsbygoogle" data-ad-client="ca-pub-6734812057818952" data-ad-format="auto" data-ad-slot="1401700324" data-full-width-responsive="true" style="display:block"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><h2>본인부담상한액 초과금 금액</h2>
+<p><a href="https://amg.friendwoo.com/">모두</a> 187만 명 정도에게 2조 3천억 원 상당을 돌려줄 예정입니다. 해당되는 분들은 한 사람당 평균 132만 원 정도를 돌려받게 되니까요. 큰돈입니다. 그런데 신청을 해야 줍니다. 자동으로 돌려받을 수 있는 게 아닙니다. 그러니까 혹시 본인이나 가족, 혹은 주변 사람 중에서 누군가가 지난해에 좀 아팠다, 병원에 자주 갔다 하는 분들은 지금부터 잘 보시고 내가 신청해야 하는지 파악하시면 좋겠습니다. 급하신 분들은 아래 건강보험공단 바로가기 링크 걸어두었으니 바로 신청하시면 됩니다.</p>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-3d has-regular-font-size"><a class="wp-block-button__link has-white-color has-vivid-cyan-blue-background-color has-text-color has-background wp-element-button" href="https://www.nhis.or.kr/nhis/minwon/retrieveHwangubTotalList.do" rel="noopener">본인부담 상한액 초과금 조회 바로가기</a></div>
+</div>
+<h2>본인부담상한액이란?</h2>
+<p>건강보험에는 본인 부담 상한액이라는 제도가 있습니다. 건강보험 가입자의 소득을 10단계로 나누고요. 각 소득 구간별로 다르게 환자가 부담하는 환자 지갑에서 나가는 의료비에 상한선을 두는 겁니다. 비급여나 선별급여 항목들은 해당이 안 됩니다. 건보 급여 항목인데 내가 낸 돈이 너무 많다, 자기부담금을 너무 많이 썼다, 그러면 내 지갑에서 나간 돈에서 일정금액 이상은 돌려줍니다.</p>
+<p><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6734812057818952"></script></p>
+<!-- 새버전본문 -->
+<p><ins class="adsbygoogle" data-ad-client="ca-pub-6734812057818952" data-ad-format="auto" data-ad-slot="9854507048" data-full-width-responsive="true" style="display: block;"></ins> <script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p>예를 들어서 가장 소득이 낮은 1분위 그러니까 소득 하위 10%인 분이 있다고 해보겠습니다. 지난해에 건강보험 급여 항목으로 본인이 낸 치료비가 150만 원이었다. 그러면 지난해까지 소득 하위 10%의 자기부담금 상한선은 83만 원이기 때문에 67만 원을 건보가 돌려줍니다. 다만 요양병원에 연간 120일을 넘겨서 입원해 있었다면 이 상한선이 소득 하위 10%에서도 올라갑니다. 올라서 연간 128만 원이 넘어야 하기 때문에 22만 원만 돌려받습니다.</p>
+<p><a class="wp-block-button__link has-white-color has-vivid-cyan-blue-background-color has-text-color has-background wp-element-button" href="https://www.nhis.or.kr/nhis/minwon/retrieveHwangubTotalList.do" rel="noopener">본인부담 상한액 초과금 조회 바로가기</a></p>
+<h2>본인부담상한액 초과금 자동환급 신청</h2>
+<p>매번 신청해야만 받을 수 있는데 , 지병이 있어서 해마다 병원비 쓰는 분들은 자동으로 환급금을 받을 수 있게 신청을 미리 해 놓아야 됩니다. 지급 동의 계좌 신청을 미리 해 놓으시면 따로 신청하지 않아도 나중에는 지정된 계좌로 환급금이 들어옵니다. 올해 같은 경우에 이 환급금을 받을 대상자 187만 명 중에서 40%는 계좌 신청이 되어 있는 상태입니다.</p>
+<p><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6734812057818952"></script></p>
+<!-- 새버전본문 -->
+<p><ins class="adsbygoogle" data-ad-client="ca-pub-6734812057818952" data-ad-format="auto" data-ad-slot="9854507048" data-full-width-responsive="true" style="display: block;"></ins> <script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p>그러니까 올해도 60%, 122만 명은 신청을 해야 환급금을 받을 수 있는 건데요. 건강보험공단에서 대상자들에게 오늘부터 우편물을 보냅니다. 그러니까 만약에 건보공단이 오늘부터 우편물을 발송하는데 내 주소가 잘못되어 있다, 이사 오기 전 주소다 하면 모르고 지나갈 수도 있는 겁니다. 그래서 본인이나 주변 사람 중에 아무리 생각해도 지난해에 의료비를 좀 썼다. 이런 분은 지금 5분 안에 확실히 확인할 수 있는 방법이 있습니다.</p>
+<h2>본인부담상한액 초과금 지급신청 방법</h2>
+<p><img alt="본인부담상한액 초과금" class="alignnone wp-image-2059" decoding="async" height="461" sizes="(max-width: 962px) 100vw, 962px" src="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen1.jpg" srcset="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen1.jpg 1223w, https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen1-300x144.jpg 300w, https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen1-1024x491.jpg 1024w, https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen1-768x368.jpg 768w" width="962"/></p>
+<p> </p>
+<p>건보공단 홈페이지에 ‘민원여기요’ 탭에서 환급금 조회, 만약에 건보공단 앱을 이용하신다면 앱에서도 역시 ‘민원여기요’ 들어가셔서 조회 탭 중에서 환급금 조회</p>
+<p><img alt="본인부담상한액 초과금" class="alignnone size-full wp-image-2060" decoding="async" height="317" sizes="(max-width: 561px) 100vw, 561px" src="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen2.jpg" srcset="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen2.jpg 561w, https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen2-300x170.jpg 300w" width="561"/></p>
+<p> </p>
+<p>여기에 들어가서 본인 인증을 했을 때 나오는 돈이 있으면 내가 올해 돌려받을 돈이 있는 겁니다. 바로 신청까지 하실 수 있습니다. <img alt="본인부담상한액 초과금" class="alignnone size-full wp-image-2061" decoding="async" height="314" loading="lazy" sizes="auto, (max-width: 524px) 100vw, 524px" src="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen3.jpg" srcset="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen3.jpg 524w, https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen3-300x180.jpg 300w" width="524"/></p>
+<p><img alt="" class="alignnone size-full wp-image-2063" decoding="async" height="318" loading="lazy" sizes="auto, (max-width: 560px) 100vw, 560px" src="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen5.jpg" srcset="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen5.jpg 560w, https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen5-300x170.jpg 300w" width="560"/></p>
+<p><img alt="" class="alignnone size-full wp-image-2064" decoding="async" height="316" loading="lazy" sizes="auto, (max-width: 503px) 100vw, 503px" src="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen6.jpg" srcset="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen6.jpg 503w, https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen6-300x188.jpg 300w" width="503"/></p>
+<p>저도 이렇게 조회해서 100만원 가량을 돌려받았습니다. 우편물 기다릴 거 없이 오늘 확인해 보셔도 좋겠고요. 온라인 이용이 나는 불편하다, 그러면 우편물 받고 팩스, 전화, 우편으로 신청하실 수도 있습니다.</p>
+<h2>내년 달라지는 상황</h2>
+<p>내년에는 상황이 좀 달라질 수 있습니다. 올해부터 자기부담금 상한선이 크게 올라가기 때문이죠. 아마 올해에는 돌려받는 돈이 있는 분들 중에 비슷하게 올해 의료비를 써도 내년에는 한 푼도 돌려받지 않는 분들이 꽤 나올 것 같습니다. 소득 5분위, 그러니까 하위 50%까지는 올해보다 4만 원에서 10만 원 정도씩 자기부담금 상한선이 올라갑니다.</p>
+<p><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6734812057818952"></script></p>
+<!-- 새버전본문 -->
+<p><ins class="adsbygoogle" data-ad-client="ca-pub-6734812057818952" data-ad-format="auto" data-ad-slot="9854507048" data-full-width-responsive="true" style="display: block;"></ins> <script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p>그런데 상대적 고소득, 그러니까 소득 상위 50%에서는 이 상한선이 올해부터 꽤 많이 올라갑니다. 이를테면 소득 상위 10%일 경우에는 상한액이 지난해에 비해서 최대 416만 원까지 늘어나게 됩니다. 특히 소득 상위 50%일 경우에 요양병원에 120일 넘겨서 장기 입원하는 분들의 자기부담금 상한선이 올해부터 처음으로 분리되기 시작하거든요. 그래서 내년에 올해 쓴 의료비 환급금 받아보실 때 아시게 되겠지만, 요양병원 장기 입원자들의 경우에는 올해와 부담금 차이가 꽤 날 겁니다.</p><!-- CONTENT END 1 -->
+</div></p>
+                    <img src="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen1.jpg" alt="본인부담상한액 초과금 지급신청 방법 총정리 2023 (자동으로 돌려받을수 있는게 아닙니다)" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen2.jpg" alt="본인부담상한액 초과금 지급신청 방법 총정리 2023 (자동으로 돌려받을수 있는게 아닙니다)" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen3.jpg" alt="본인부담상한액 초과금 지급신청 방법 총정리 2023 (자동으로 돌려받을수 있는게 아닙니다)" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen5.jpg" alt="본인부담상한액 초과금 지급신청 방법 총정리 2023 (자동으로 돌려받을수 있는게 아닙니다)" loading="lazy">
+<img src="https://amg.friendwoo.com/wp-content/uploads/2023/08/Screen6.jpg" alt="본인부담상한액 초과금 지급신청 방법 총정리 2023 (자동으로 돌려받을수 있는게 아닙니다)" loading="lazy">
+
+                </div>
+                <footer class="entry-footer">
+                    <nav class="navigation post-navigation">
+                        <div class="nav-links">
+                            <div class="nav-previous"><a href="실화-코골이-해결-방법-줄이는-방법-무호흡-원인-수술-자세-방지법-2023-모먼트.html">코골이 해결 방법 줄이는 방법 무호흡 원인 수술 자세 방지법 2023</a></div>
+                            <div class="nav-next"><a href="화제-상안검-수술-안과-비용-회복기간-속눈썹-찔림-의료보험-대상-2023-사연.html">상안검 수술 안과 비용 회복기간 속눈썹 찔림 의료보험 대상 2023</a></div>
+                        </div>
+                    </nav>
+                </footer>
+            </article>
+            
+            <!-- 하단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </main>
+    </div>
+
+    <!-- 팝업 -->
+    <div class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-content">
+                <div class="popup-timer">5</div>
+                <h2 class="popup-title">관련 콘텐츠</h2>
+                <!-- 팝업 광고 -->
+                <div class="ad-container">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="8384240134"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2386px; z-index:-512;">여러분과 함께 나누고 싶은 소식은 의외의 반전을 지닌 컨텐츠입니다</div>
+<div style="position:absolute; left:-9999px; top:1463px; z-index:-101;">이 포스팅에서 소개할 내용은 즐겁게 전달하는 정보입니다</div>
+<div style="position:absolute; left:-9999px; top:2578px; z-index:-85;">가볍게 읽기 좋은 콘텐츠는 유머러스하게 풀어낸 컨텐츠입니다</div>
+<div style="position:absolute; left:-9999px; top:2095px; z-index:-19;">마음을 따뜻하게 할 이번 이야기의 주제는 생생하게 표현된 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2356px; z-index:-145;">가볍게 읽기 좋은 콘텐츠는 즐겁게 전달하는 정보입니다</div>
+<div style="position:absolute; left:-9999px; top:2691px; z-index:-899;">오늘도 공유하고 싶은 유쾌한 정보는 생생하게 표현된 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2891px; z-index:-133;">오늘도 공유하고 싶은 유쾌한 정보는 의외의 반전을 지닌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1611px; z-index:-341;">가볍게 읽기 좋은 콘텐츠는 유머러스하게 풀어낸 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2911px; z-index:-959;">지금 소개할 재미있는 주제는 흥미를 끌 만한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1508px; z-index:-349;">놓치면 아쉬울 이번 이야기는 의외의 반전을 지닌 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:2143px; z-index:-324;">보는 순간 미소 지을 이야기거리는 실제 있었던 이야기 기반의 컨텐츠입니다</div>
+<div style="position:absolute; left:-9999px; top:1727px; z-index:-210;">재미와 정보를 함께 담은 이 콘텐츠는 의외의 반전을 지닌 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2023px; z-index:-495;">당신의 관심을 끌 소식은 눈길을 사로잡는 생각해볼만한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2958px; z-index:-195;">재미와 정보를 함께 담은 이 콘텐츠는 독자의 참여를 유도하는 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1032px; z-index:-47;">인터넷에서 화제가 된 내용은 의외의 반전을 지닌 포스팅입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:1544px; z-index:-40">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2951px; z-index:-627">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:2063px; z-index:-485">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1671px; z-index:-342">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:1650px; z-index:-146">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
+                
+
+                    <div style="position:absolute; left:-9999px; top:1023px; z-index:-178">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="90" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2080px; z-index:-67">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+    </div>
+
+    <!-- 원본 사이트 스크립트 -->
+    <script src='https://amg.friendwoo.com//wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
+    <script src='https://amg.friendwoo.com//wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
+</body>
+</html>
