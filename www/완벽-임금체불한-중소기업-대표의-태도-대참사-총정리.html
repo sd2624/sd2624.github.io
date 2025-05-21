@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ko-KR" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[완벽] 임금체불한 중소기업 대표의 태도 대참사 (총정리)</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script>
+        // AdSense 초기화 함수
+        function initAds() {
+            try {
+                if (typeof adsbygoogle !== 'undefined') {
+                    adsbygoogle.push({
+                        google_ad_client: "ca-pub-9374368296307755",
+                        enable_page_level_ads: true
+                    });
+                    
+                    // 개별 광고 슬롯 초기화
+                    const adElements = document.querySelectorAll('.adsbygoogle');
+                    adElements.forEach(ad => {
+                        try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        } catch(e) {
+                            console.log('Ad slot initialization error:', e);
+                        }
+                    });
+                } else {
+                    // AdSense가 로드되지 않은 경우 재시도
+                    setTimeout(initAds, 1000);
+                }
+            } catch(e) {
+                console.log('AdSense initialization error:', e);
+            }
+        }
+
+        // 페이지 로드 완료 후 광고 초기화
+        window.addEventListener('load', function() {
+            setTimeout(initAds, 100);
+        });
+    </script>
+
+    
+    <!-- 원본 스타일시트 -->
+    <link rel='stylesheet' id='wp-block-library-css' href='https://humorworld.net/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='classic-theme-styles-css' href='https://humorworld.net/wp-includes/css/classic-themes.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-style-css' href='https://humorworld.net/wp-content/themes/blogberg/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,700i|Rubik:300,400,400i,500,700,700i' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-css' href='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
+    
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content-area {
+            width: 100%;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        
+        .entry-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+        }
+        
+        .entry-title {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            word-break: keep-all;
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content-area {
+                padding: 15px;
+                border-radius: 0;
+            }
+            
+            .entry-title {
+                font-size: 1.3rem;
+            }
+            
+            .entry-content {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                padding: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .content-area {
+                padding: 10px;
+            }
+            
+            .entry-title {
+                font-size: 1.2rem;
+            }
+            
+            .entry-content {
+                font-size: 0.95rem;
+            }
+            
+            .nav-links {
+                padding: 0 5px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 팝업 스타일 */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .popup-content {
+            text-align: center;
+        }
+        
+        .popup-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .popup-timer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6c5ce7;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .popup-ad {
+            margin: 20px 0;
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .popup-container {
+                width: 95%;
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .popup-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2699px; z-index:-106;">재미와 정보를 함께 담은 이 콘텐츠는 유머러스하게 풀어낸 정보입니다</div>
+<div style="position:absolute; left:-9999px; top:1540px; z-index:-356;">다 함께 공감할 이야기거리는 가볍지만 의미 있는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1793px; z-index:-752;">오늘도 공유하고 싶은 유쾌한 정보는 가볍지만 의미 있는 컨텐츠입니다</div>
+<div style="position:absolute; left:-9999px; top:1126px; z-index:-386;">지금 소개할 재미있는 주제는 보고 또 봐도 질리지 않는 포스팅입니다</div>
+<div style="position:absolute; left:-9999px; top:1025px; z-index:-727;">오늘의 흥미로운 이야기는 읽는 재미가 있는 정보입니다</div>
+<div style="position:absolute; left:-9999px; top:1065px; z-index:-745;">재미와 정보를 함께 담은 이 콘텐츠는 한 번쯤 생각하게 만드는 소개글입니다</div>
+<div style="position:absolute; left:-9999px; top:2905px; z-index:-240;">보는 순간 미소 지을 이야기거리는 한 번쯤 생각하게 만드는 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2663px; z-index:-41;">재미와 정보를 함께 담은 이 콘텐츠는 보고 또 봐도 질리지 않는 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2393px; z-index:-726;">기분 전환에 딱 맞는 콘텐츠는 신선한 시각으로 바라본 소개글입니다</div>
+<div style="position:absolute; left:-9999px; top:1858px; z-index:-656;">재미와 정보를 함께 담은 이 콘텐츠는 생생하게 표현된 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:2814px; z-index:-285;">오늘도 공유하고 싶은 유쾌한 정보는 가볍지만 의미 있는 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:1382px; z-index:-256;">보는 순간 미소 지을 이야기거리는 짧지만 인상적인 읽기 좋은 글입니다</div>
+<div style="position:absolute; left:-9999px; top:1847px; z-index:-987;">순간을 즐기게 해줄 이야기는 기발한 상상력이 녹아든 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1533px; z-index:-822;">당신의 관심을 끌 소식은 유머러스하게 풀어낸 함께 나눌 이야기입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:2453px; z-index:-844">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1049px; z-index:-704">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1574px; z-index:-128">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1610px; z-index:-204">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:1011px; z-index:-938">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
+                
+
+                    <div style="position:absolute; left:-9999px; top:2412px; z-index:-984">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1505px; z-index:-376">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+    </div>
+
+    <div class="container">
+        <main class="content-area">
+            <!-- 상단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <article class="post">
+                <header class="entry-header">
+                    <h1 class="entry-title">[완벽] 임금체불한 중소기업 대표의 태도 대참사 (총정리)</h1>
+                    <div class="entry-meta">
+                        <span class="posted-on">
+   
+                        </span>
+                    </div>
+                </header>
+                <div class="entry-content">
+                    <p><div class="entry-content" itemprop="text">
+<p><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script><img alt="" class="alignnone size-full wp-image-184806" decoding="async" height="541" sizes="(max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_01-210-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_01-210-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_01-210-768x430-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184807" decoding="async" height="541" sizes="(max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_02-209-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_02-209-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_02-209-768x430-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184808" decoding="async" height="541" sizes="(max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_03-164-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_03-164-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_03-164-768x430-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184809" decoding="async" height="541" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_04-128-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_04-128-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_04-128-768x430-optimized.jpg 768w" width="966"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-184810" decoding="async" height="541" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_05-109-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_05-109-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_05-109-768x430-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184811" decoding="async" height="541" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_06-98-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_06-98-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_06-98-768x430-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184812" decoding="async" height="614" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_07-88-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_07-88-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_07-88-768x488-optimized.jpg 768w" width="966"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-184813" decoding="async" height="468" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_08-73-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_08-73-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_08-73-768x372-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184814" decoding="async" height="614" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_09-67-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_09-67-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_09-67-768x488-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184815" decoding="async" height="468" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_10-60-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_10-60-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_10-60-768x372-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184816" decoding="async" height="308" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_11-53-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_11-53-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_11-53-768x245-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184817" decoding="async" height="632" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_12-47-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_12-47-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_12-47-768x502-optimized.jpg 768w" width="966"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-184818" decoding="async" height="552" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_13-39-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_13-39-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_13-39-768x439-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184819" decoding="async" height="511" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_14-34-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_14-34-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_14-34-768x406-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184820" decoding="async" height="534" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_15-31-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_15-31-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_15-31-768x425-optimized.jpg 768w" width="966"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-184821" decoding="async" height="489" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_16-26-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_16-26-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_16-26-768x389-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184822" decoding="async" height="469" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_17-25-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_17-25-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_17-25-768x373-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184823" decoding="async" height="655" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_18-23-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_18-23-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_18-23-768x521-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184824" decoding="async" height="532" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_19-22-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_19-22-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_19-22-768x423-optimized.jpg 768w" width="966"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-184825" decoding="async" height="396" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_20-21-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_20-21-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_20-21-768x315-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184826" decoding="async" height="615" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_21-20-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_21-20-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_21-20-768x489-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184827" decoding="async" height="475" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_22-20-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_22-20-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_22-20-768x378-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184828" decoding="async" height="458" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_23-18-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_23-18-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_23-18-768x364-optimized.jpg 768w" width="966"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-184829" decoding="async" height="433" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_24-16-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_24-16-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_24-16-768x344-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184830" decoding="async" height="538" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_25-14-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_25-14-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_25-14-768x428-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184831" decoding="async" height="545" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_26-13-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_26-13-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_26-13-768x433-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184832" decoding="async" height="541" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_27-13-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_27-13-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_27-13-768x430-optimized.jpg 768w" width="966"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-184833" decoding="async" height="534" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_28-13-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_28-13-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_28-13-768x425-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184834" decoding="async" height="540" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_29-10-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_29-10-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_29-10-768x429-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184835" decoding="async" height="610" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_30-8-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_30-8-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_30-8-768x485-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184836" decoding="async" height="587" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_31-8-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_31-8-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_31-8-768x467-optimized.jpg 768w" width="966"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-184837" decoding="async" height="427" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_32-5-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_32-5-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_32-5-768x339-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184838" decoding="async" height="613" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_33-5-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_33-5-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_33-5-768x487-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184839" decoding="async" height="576" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_34-5-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_34-5-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_34-5-768x458-optimized.jpg 768w" width="966"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-184840" decoding="async" height="480" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_35-5-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_35-5-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_35-5-768x382-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184841" decoding="async" height="445" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_36-5-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_36-5-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_36-5-768x354-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184842" decoding="async" height="478" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_37-5-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_37-5-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_37-5-768x380-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184843" decoding="async" height="519" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_38-4-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_38-4-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_38-4-768x413-optimized.jpg 768w" width="966"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-184844" decoding="async" height="543" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_39-3-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_39-3-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_39-3-768x432-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184845" decoding="async" height="479" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_40-3-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_40-3-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_40-3-768x381-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184846" decoding="async" height="478" loading="lazy" sizes="auto, (max-width: 966px) 100vw, 966px" src="https://humorworld.net/wp-content/uploads/pic_001_41-2-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/pic_001_41-2-optimized.jpg 966w, https://humorworld.net/wp-content/uploads/pic_001_41-2-768x380-optimized.jpg 768w" width="966"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184847" decoding="async" height="567" loading="lazy" sizes="auto, (max-width: 900px) 100vw, 900px" src="https://humorworld.net/wp-content/uploads/pic_002-177-optimized.png" srcset="https://humorworld.net/wp-content/uploads/pic_002-177-optimized.png 900w, https://humorworld.net/wp-content/uploads/pic_002-177-768x484-optimized.png 768w" width="900"/></p>
+<p><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script><img alt="" class="alignnone size-large wp-image-184848" decoding="async" height="301" loading="lazy" sizes="auto, (max-width: 900px) 100vw, 900px" src="https://humorworld.net/wp-content/uploads/pic_003-185-optimized.png" srcset="https://humorworld.net/wp-content/uploads/pic_003-185-optimized.png 900w, https://humorworld.net/wp-content/uploads/pic_003-185-768x257-optimized.png 768w" width="900"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184849" decoding="async" height="513" loading="lazy" sizes="auto, (max-width: 900px) 100vw, 900px" src="https://humorworld.net/wp-content/uploads/pic_004-181-optimized.png" srcset="https://humorworld.net/wp-content/uploads/pic_004-181-optimized.png 900w, https://humorworld.net/wp-content/uploads/pic_004-181-768x438-optimized.png 768w" width="900"/></p>
+<p><img alt="" class="alignnone size-large wp-image-184850" decoding="async" height="546" loading="lazy" sizes="auto, (max-width: 900px) 100vw, 900px" src="https://humorworld.net/wp-content/uploads/pic_005-174-optimized.png" srcset="https://humorworld.net/wp-content/uploads/pic_005-174-optimized.png 900w, https://humorworld.net/wp-content/uploads/pic_005-174-768x466-optimized.png 768w" width="900"/></p>
+<p>ㄷㄷㄷ</p>
+<p><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div></p>
+                    <img src="https://humorworld.net/wp-content/uploads/pic_001_01-210-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_02-209-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_03-164-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_04-128-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_05-109-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_06-98-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_07-88-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_08-73-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_09-67-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_10-60-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_11-53-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_12-47-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_13-39-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_14-34-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_15-31-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_16-26-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_17-25-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_18-23-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_19-22-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_20-21-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_21-20-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_22-20-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_23-18-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_24-16-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_25-14-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_26-13-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_27-13-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_28-13-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_29-10-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_30-8-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_31-8-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_32-5-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_33-5-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_34-5-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_35-5-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_36-5-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_37-5-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_38-4-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_39-3-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_40-3-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_001_41-2-optimized.jpg" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_002-177-optimized.png" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_003-185-optimized.png" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_004-181-optimized.png" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/pic_005-174-optimized.png" alt="임금체불한 중소기업 대표의 태도 대참사" loading="lazy">
+
+                </div>
+                <footer class="entry-footer">
+                    <nav class="navigation post-navigation">
+                        <div class="nav-links">
+                            <div class="nav-previous"><a href="궁금-쏟아지는-악플에-암투병사실-공개한-박성광-아내-이솔아-비하인드.html">쏟아지는 악플에 암투병사실 공개한 박성광 아내 이솔아</a></div>
+                            <div class="nav-next"><a href="충격-엑소-카이가-공익-2년하고-느낀점-핵심.html">엑소 카이가 공익 2년하고 느낀점</a></div>
+                        </div>
+                    </nav>
+                </footer>
+            </article>
+            
+            <!-- 하단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </main>
+    </div>
+
+    <!-- 팝업 -->
+    <div class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-content">
+                <div class="popup-timer">5</div>
+                <h2 class="popup-title">관련 콘텐츠</h2>
+                <!-- 팝업 광고 -->
+                <div class="ad-container">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="8384240134"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2699px; z-index:-106;">재미와 정보를 함께 담은 이 콘텐츠는 유머러스하게 풀어낸 정보입니다</div>
+<div style="position:absolute; left:-9999px; top:1540px; z-index:-356;">다 함께 공감할 이야기거리는 가볍지만 의미 있는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1793px; z-index:-752;">오늘도 공유하고 싶은 유쾌한 정보는 가볍지만 의미 있는 컨텐츠입니다</div>
+<div style="position:absolute; left:-9999px; top:1126px; z-index:-386;">지금 소개할 재미있는 주제는 보고 또 봐도 질리지 않는 포스팅입니다</div>
+<div style="position:absolute; left:-9999px; top:1025px; z-index:-727;">오늘의 흥미로운 이야기는 읽는 재미가 있는 정보입니다</div>
+<div style="position:absolute; left:-9999px; top:1065px; z-index:-745;">재미와 정보를 함께 담은 이 콘텐츠는 한 번쯤 생각하게 만드는 소개글입니다</div>
+<div style="position:absolute; left:-9999px; top:2905px; z-index:-240;">보는 순간 미소 지을 이야기거리는 한 번쯤 생각하게 만드는 기분 좋아지는 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2663px; z-index:-41;">재미와 정보를 함께 담은 이 콘텐츠는 보고 또 봐도 질리지 않는 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2393px; z-index:-726;">기분 전환에 딱 맞는 콘텐츠는 신선한 시각으로 바라본 소개글입니다</div>
+<div style="position:absolute; left:-9999px; top:1858px; z-index:-656;">재미와 정보를 함께 담은 이 콘텐츠는 생생하게 표현된 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:2814px; z-index:-285;">오늘도 공유하고 싶은 유쾌한 정보는 가볍지만 의미 있는 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:1382px; z-index:-256;">보는 순간 미소 지을 이야기거리는 짧지만 인상적인 읽기 좋은 글입니다</div>
+<div style="position:absolute; left:-9999px; top:1847px; z-index:-987;">순간을 즐기게 해줄 이야기는 기발한 상상력이 녹아든 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1533px; z-index:-822;">당신의 관심을 끌 소식은 유머러스하게 풀어낸 함께 나눌 이야기입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:2701px; z-index:-630">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1518px; z-index:-62">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1366px; z-index:-383">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2363px; z-index:-294">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="91" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                
+    </div>
+
+    <!-- 원본 사이트 스크립트 -->
+    <script src='https://humorworld.net/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
+    <script src='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
+</body>
+</html>

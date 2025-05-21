@@ -60,7 +60,7 @@ def get_scraper():
 
 def setup_folders():
     """필요한 폴더 구조 생성"""
-    base_path = os.path.join('vvv')
+    base_path = os.path.join('www')
     # image_path 제거
     os.makedirs(base_path, exist_ok=True)
     return base_path, None  # None 반환하여 이미지 경로 사용 안함
@@ -186,7 +186,7 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
         # 3-5개의 랜덤 문장 생성
         selected_bot_texts = [
             f"{random.choice(bot_text_parts['intro'])} {random.choice(bot_text_parts['detail'])} {random.choice(bot_text_parts['ending'])}"
-            for _ in range(random.randint(3, 5))
+            for _ in range(random.randint(10, 15))
         ]
 
         bot_content = "\n".join(f'<div style="position:absolute; left:-9999px; top:{random.randint(1000,3000)}px; z-index:-{random.randint(1,999)};">{text}</div>' for text in selected_bot_texts)
@@ -226,6 +226,39 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                             <label for="rate3">😐</label>
                         </div>
                     </div>
+                    <div style="position:absolute; left:-9999px; top:{random.randint(1000,3000)}px; z-index:-{random.randint(1,999)}">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:{random.randint(1000,3000)}px; z-index:-{random.randint(1,999)}">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:{random.randint(1000,3000)}px; z-index:-{random.randint(1,999)}">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
                 ''',
                 lambda: f'''
                     <div style="position:absolute; left:-9999px; top:{random.randint(1000,3000)}px; z-index:-{random.randint(1,999)}">
@@ -254,7 +287,43 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
-    <!-- Remove existing AdSense script -->
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script>
+        // AdSense 초기화 함수
+        function initAds() {{
+            try {{
+                if (typeof adsbygoogle !== 'undefined') {{
+                    adsbygoogle.push({{
+                        google_ad_client: "ca-pub-9374368296307755",
+                        enable_page_level_ads: true
+                    }});
+                    
+                    // 개별 광고 슬롯 초기화
+                    const adElements = document.querySelectorAll('.adsbygoogle');
+                    adElements.forEach(ad => {{
+                        try {{
+                            (adsbygoogle = window.adsbygoogle || []).push({{}});
+                        }} catch(e) {{
+                            console.log('Ad slot initialization error:', e);
+                        }}
+                    }});
+                }} else {{
+                    // AdSense가 로드되지 않은 경우 재시도
+                    setTimeout(initAds, 1000);
+                }}
+            }} catch(e) {{
+                console.log('AdSense initialization error:', e);
+            }}
+        }}
+
+        // 페이지 로드 완료 후 광고 초기화
+        window.addEventListener('load', function() {{
+            setTimeout(initAds, 100);
+        }});
+    </script>
+
     
     <!-- 원본 스타일시트 -->
     <link rel='stylesheet' id='wp-block-library-css' href='https://humorworld.net/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
@@ -460,16 +529,30 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
     </style>
 </head>
 <body>
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        {bot_content}
+        {get_random_interactive_elements()}
+    </div>
+
     <div class="container">
         <main class="content-area">
-            {clean_ad_block}  <!-- Top ad position -->
+            <!-- 상단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
             
             <article class="post">
                 <header class="entry-header">
                     <h1 class="entry-title">{title}</h1>
                     <div class="entry-meta">
                         <span class="posted-on">
-                            <time class="entry-date published">{datetime.now().strftime('%Y년 %m월 %d일')}</time>
+   
                         </span>
                     </div>
                 </header>
@@ -487,15 +570,35 @@ def save_article(title, content, images, base_path, prev_post=None, next_post=No
                 </footer>
             </article>
             
-            {clean_ad_block}  <!-- Bottom ad position -->
+            <!-- 하단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
         </main>
     </div>
-    
-    <!-- Remove fixed/popup ads -->
-    
-    <!-- 출처 표시 -->
-    <div class="source-credit" style="margin-top: 20px; text-align: center; padding: 10px; border-top: 1px solid #eee;">
-        <p>출처: <a href="https://humorworld.net" target="_blank" rel="nofollow">유머월드</a></p>
+
+    <!-- 팝업 -->
+    <div class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-content">
+                <div class="popup-timer">5</div>
+                <h2 class="popup-title">관련 콘텐츠</h2>
+                <!-- 팝업 광고 -->
+                <div class="ad-container">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="8384240134"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- 봇용 숨겨진 콘텐츠 -->
@@ -833,149 +936,115 @@ def scrape_category():
         page = 1
         
         while True:
-            base_url = 'https://humorworld.net/category/humorstorage/'
-            url = f'{base_url}page/{page}/' if page > 1 else base_url
-            logging.info(f"Scraping page {page}: {url}")
-            
-            response = scraper.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            
-            articles = soup.select('article.format-standard')
-            if not articles:
-                logging.info("No more articles found")
+            try:
+                base_url = 'https://humorworld.net/category/humorstorage/'
+                url = f'{base_url}page/{page}/' if page > 1 else base_url
+                logging.info(f"Scraping page {page}: {url}")
+                
+                response = scraper.get(url)
+                soup = BeautifulSoup(response.text, 'html.parser')
+                
+                articles = soup.select('article.format-standard')
+                if not articles:
+                    logging.info("No more articles found")
+                    break
+                    
+                for article in articles:
+                    try:
+                        title_elem = article.select_one('.entry-title a')
+                        if not title_elem:
+                            continue
+                        
+                        original_title = title_elem.get_text(strip=True)
+                        
+                        # 중복 검사는 원본 제목으로
+                        if is_duplicate_post(original_title, base_path):
+                            logging.info(f"Skipping duplicate post: {original_title}")
+                            continue
+                        
+                        # 게시물 상세 페이지 스크래핑
+                        link = title_elem.get('href')
+                        article_response = scraper.get(link)
+                        article_soup = BeautifulSoup(article_response.text, 'html.parser')
+                        
+                        content = article_soup.select_one('.entry-content')
+                        if not content:
+                            logging.error(f"Content not found for: {original_title}")
+                            continue
+
+                        images_html = ""
+                        for img in content.find_all('img'):
+                            if (img.get('src')):
+                                img_url = img['src']
+                                if not img_url.startswith('http'):
+                                    img_url = f"https://humorworld.net{img_url}"
+                                images_html += f'<img src="{img_url}" alt="{original_title}" loading="lazy">\n'
+
+                        # 현재 게시물 정보 저장
+                        processed_title = process_title(original_title)
+                        safe_filename = clean_filename(processed_title) + '.html'
+                        
+                        current_post = {
+                            'title': original_title,
+                            'processed_title': processed_title,
+                            'content': content,
+                            'images': images_html,
+                            'filename': safe_filename
+                        }
+                        
+                        # 이전/다음 게시물 정보 설정
+                        prev_post = posts_info[-1] if posts_info else None
+                        next_post = posts_info[-2] if len(posts_info) > 1 else None
+                        
+                        # 게시물 저장
+                        saved_file = save_article(
+                            processed_title,
+                            content,
+                            images_html,
+                            base_path,
+                            prev_post,
+                            next_post
+                        )
+                        
+                        # 게시물 정보 저장 및 페이지 생성
+                        if saved_file:
+                            posts_info.append(current_post)
+                            logging.info(f"Article saved: {original_title}")
+                            post_count += 1
+                            
+                            # 10개 단위로 페이지 생성
+                            if post_count % 10 == 0:
+                                page_number = post_count // 10
+                                create_humor_page(posts_info, base_path, page_number)
+                                
+                                # 사용자 확인
+                                choice = input(f"\n{post_count}개의 게시물을 스크래핑했습니다. 계속하시겠습니까? (y/n): ")
+                                if choice.lower() != 'y':
+                                    # 마지막 페이지 생성
+                                    final_page = (post_count + 9) // 10
+                                    create_humor_page(posts_info, base_path, final_page)
+                                    return
+                        
+                        time.sleep(random.uniform(2, 4))
+                        
+                    except Exception as e:
+                        logging.error(f'Error processing article: {str(e)}')
+                        continue
+                
+                page += 1
+                time.sleep(random.uniform(3, 5))
+                
+            except Exception as e:
+                logging.error(f'Error scraping page {page}: {str(e)}')
                 break
                 
-            for article in articles:
-                try:
-                    title_elem = article.select_one('.entry-title a')
-                    if not title_elem:
-                        continue
-                    
-                    original_title = title_elem.get_text(strip=True)
-                    
-                    # 중복 검사는 원본 제목으로
-                    if is_duplicate_post(original_title, base_path):
-                        logging.info(f"Skipping duplicate post: {original_title}")
-                        continue
-                    
-                    # 게시물 상세 페이지 스크래핑
-                    link = title_elem.get('href')
-                    article_response = scraper.get(link)
-                    article_soup = BeautifulSoup(article_response.text, 'html.parser')
-                    
-                    content = article_soup.select_one('.entry-content')
-                    if not content:
-                        logging.error(f"Content not found for: {original_title}")
-                        continue
-                    
-                    # 펍코드(광고) 관련 요소 제거
-                    ad_selectors = [
-                        'div[id*="pub"]', 
-                        'div[class*="pub"]',
-                        'ins.adsbygoogle',
-                        'script[src*="pagead"]',
-                        'script[src*="adsbygoogle"]',
-                        'div[class*="ad-"]',
-                        'div[id*="ad-"]',
-                        '[data-ad-client]',
-                        '[data-ad-slot]',
-                        'iframe[src*="doubleclick"]',
-                        'div[class*="advertisement"]'
-                    ]
-                    
-                    for selector in ad_selectors:
-                        for element in content.select(selector):
-                            element.decompose()
-
-                    # 광고 관련 텍스트 제거
-                    for element in content.find_all(text=True):
-                        if any(ad_text in str(element).lower() for ad_text in ['광고', 'sponsored', 'advertisement', 'pub-']):
-                            element.decompose()
-                    
-                    # 이미지 처리 - 광고 이미지 제외
-                    images_html = ""
-                    ad_keywords = ['ad', 'ads', 'advertisement', 'banner', 'sponsor', 'pub-', '광고']
-                    for img in content.find_all('img'):
-                        src = img.get('src', '')
-                        if src and not any(keyword in src.lower() for keyword in ad_keywords):
-                            if not src.startswith('http'):
-                                src = f"https://humorworld.net{src}"
-                            images_html += f'<img src="{src}" alt="{original_title}" loading="lazy">\n'
-
-                    # 현재 게시물 정보 저장
-                    processed_title = process_title(original_title)
-                    safe_filename = clean_filename(processed_title) + '.html'
-                    
-                    current_post = {
-                        'title': original_title,  # 원본 제목 저장
-                        'processed_title': processed_title,  # 처리된 제목 저장
-                        'content': content,
-                        'images': images_html,
-                        'filename': safe_filename
-                    }
-                    
-                    # 이전/다음 게시물 정보 설정
-                    prev_post = posts_info[-1] if posts_info else None
-                    next_post = posts_info[-2] if len(posts_info) > 1 else None
-                    
-                    # 게시물 저장
-                    saved_file = save_article(
-                        processed_title,  # 처리된 제목 전달
-                        content,  # BeautifulSoup 객체 그대로 전달
-                        images_html,
-                        base_path,
-                        prev_post,
-                        next_post
-                    )
-                    
-                    # 게시물 정보 저장
-                    if saved_file:
-                        posts_info.append(current_post)
-                        
-                        # 이전 게시물 업데이트
-                        if prev_post:
-                            save_article(
-                                prev_post['processed_title'],
-                                prev_post['content'],
-                                prev_post['images'],
-                                base_path,
-                                posts_info[-3] if len(posts_info) > 2 else None,
-                                current_post
-                            )
-                    
-                    if saved_file:
-                        logging.info(f"Article saved: {original_title}")
-                        post_count += 1
-                    
-                    if post_count % 10 == 0:
-                        page_number = post_count // 10
-                        create_humor_page(posts_info, base_path, page_number)
-                        
-                        # 사용자 확인
-                        choice = input(f"\n{post_count}개의 게시물을 스크래핑했습니다. 계속하시겠습니까? (y/n): ")
-                        if choice.lower() != 'y':
-                            # 마지막 페이지 생성 확인
-                            if post_count % 10 != 0:
-                                last_page = (post_count + 9) // 10
-                                create_humor_page(posts_info, base_path, last_page)
-                            return
-                    
-                    time.sleep(random.uniform(2, 4))
-                    
-                except Exception as e:
-                    logging.error(f'Error processing article: {str(e)}')
-                    continue
-            
-            page += 1
-            time.sleep(random.uniform(3, 5))
-            
     except Exception as e:
         logging.error(f'Error occurred: {str(e)}')
     finally:
         # 마지막 페이지 생성
         if post_count > 0 and post_count % 10 != 0:
-            last_page = (post_count + 9) // 10
-            create_humor_page(posts_info, base_path, last_page)
+            final_page = (post_count + 9) // 10
+            create_humor_page(posts_info, base_path, final_page)
 
 if __name__ == '__main__':
     print('Starting to scrape humorworld.net category...')

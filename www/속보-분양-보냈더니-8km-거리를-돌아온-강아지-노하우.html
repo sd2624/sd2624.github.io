@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ko-KR" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[속보] 분양 보냈더니 8km 거리를 돌아온 강아지 (노하우)</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script>
+        // AdSense 초기화 함수
+        function initAds() {
+            try {
+                if (typeof adsbygoogle !== 'undefined') {
+                    adsbygoogle.push({
+                        google_ad_client: "ca-pub-9374368296307755",
+                        enable_page_level_ads: true
+                    });
+                    
+                    // 개별 광고 슬롯 초기화
+                    const adElements = document.querySelectorAll('.adsbygoogle');
+                    adElements.forEach(ad => {
+                        try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        } catch(e) {
+                            console.log('Ad slot initialization error:', e);
+                        }
+                    });
+                } else {
+                    // AdSense가 로드되지 않은 경우 재시도
+                    setTimeout(initAds, 1000);
+                }
+            } catch(e) {
+                console.log('AdSense initialization error:', e);
+            }
+        }
+
+        // 페이지 로드 완료 후 광고 초기화
+        window.addEventListener('load', function() {
+            setTimeout(initAds, 100);
+        });
+    </script>
+
+    
+    <!-- 원본 스타일시트 -->
+    <link rel='stylesheet' id='wp-block-library-css' href='https://humorworld.net/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='classic-theme-styles-css' href='https://humorworld.net/wp-includes/css/classic-themes.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-style-css' href='https://humorworld.net/wp-content/themes/blogberg/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,700i|Rubik:300,400,400i,500,700,700i' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-css' href='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
+    
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content-area {
+            width: 100%;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        
+        .entry-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+        }
+        
+        .entry-title {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            word-break: keep-all;
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content-area {
+                padding: 15px;
+                border-radius: 0;
+            }
+            
+            .entry-title {
+                font-size: 1.3rem;
+            }
+            
+            .entry-content {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                padding: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .content-area {
+                padding: 10px;
+            }
+            
+            .entry-title {
+                font-size: 1.2rem;
+            }
+            
+            .entry-content {
+                font-size: 0.95rem;
+            }
+            
+            .nav-links {
+                padding: 0 5px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 팝업 스타일 */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .popup-content {
+            text-align: center;
+        }
+        
+        .popup-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .popup-timer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6c5ce7;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .popup-ad {
+            margin: 20px 0;
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .popup-container {
+                width: 95%;
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .popup-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2455px; z-index:-893;">이 포스팅에서 소개할 내용은 유머러스하게 풀어낸 좋은 하루를 위한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2784px; z-index:-262;">놓치면 아쉬울 이번 이야기는 즐겁게 전달하는 주제입니다</div>
+<div style="position:absolute; left:-9999px; top:2258px; z-index:-69;">기분 전환에 딱 맞는 콘텐츠는 기발한 상상력이 녹아든 포스팅입니다</div>
+<div style="position:absolute; left:-9999px; top:1554px; z-index:-813;">가볍게 읽기 좋은 콘텐츠는 웃음 포인트가 담긴 생각해볼만한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2817px; z-index:-918;">순간을 즐기게 해줄 이야기는 일상에서 공감할 수 있는 좋은 하루를 위한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1241px; z-index:-636;">이번에 준비한 재미있는 콘텐츠는 실제 있었던 이야기 기반의 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2219px; z-index:-627;">순간을 즐기게 해줄 이야기는 기발한 상상력이 녹아든 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2898px; z-index:-499;">이번에 준비한 재미있는 콘텐츠는 생생하게 표현된 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1638px; z-index:-199;">새롭게 소개할 오늘의 콘텐츠는 재치있게 구성된 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1428px; z-index:-783;">오늘도 공유하고 싶은 유쾌한 정보는 재치있게 구성된 소개글입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:2242px; z-index:-701">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="73" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2714px; z-index:-656">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1088px; z-index:-67">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1326px; z-index:-259">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:2548px; z-index:-686">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:2347px; z-index:-622">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:1069px; z-index:-70">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
+                
+
+                    <div style="position:absolute; left:-9999px; top:1891px; z-index:-343">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                
+    </div>
+
+    <div class="container">
+        <main class="content-area">
+            <!-- 상단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <article class="post">
+                <header class="entry-header">
+                    <h1 class="entry-title">[속보] 분양 보냈더니 8km 거리를 돌아온 강아지 (노하우)</h1>
+                    <div class="entry-meta">
+                        <span class="posted-on">
+   
+                        </span>
+                    </div>
+                </header>
+                <div class="entry-content">
+                    <p><div class="entry-content" itemprop="text">
+<p><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-full wp-image-185033" decoding="async" height="1010" sizes="(max-width: 853px) 100vw, 853px" src="https://humorworld.net/wp-content/uploads/Untitled-15_01-72-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/Untitled-15_01-72-optimized.jpg 853w, https://humorworld.net/wp-content/uploads/Untitled-15_01-72-768x909-optimized.jpg 768w" width="853"/></p>
+<p><img alt="" class="alignnone size-large wp-image-185034" decoding="async" height="528" sizes="(max-width: 853px) 100vw, 853px" src="https://humorworld.net/wp-content/uploads/Untitled-15_02-71-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/Untitled-15_02-71-optimized.jpg 853w, https://humorworld.net/wp-content/uploads/Untitled-15_02-71-768x475-optimized.jpg 768w" width="853"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-185035" decoding="async" height="596" sizes="(max-width: 853px) 100vw, 853px" src="https://humorworld.net/wp-content/uploads/Untitled-15_03-71-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/Untitled-15_03-71-optimized.jpg 853w, https://humorworld.net/wp-content/uploads/Untitled-15_03-71-768x537-optimized.jpg 768w" width="853"/></p>
+<p><img alt="" class="alignnone size-large wp-image-185036" decoding="async" height="369" loading="lazy" sizes="auto, (max-width: 853px) 100vw, 853px" src="https://humorworld.net/wp-content/uploads/Untitled-15_04-60-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/Untitled-15_04-60-optimized.jpg 853w, https://humorworld.net/wp-content/uploads/Untitled-15_04-60-768x332-optimized.jpg 768w" width="853"/></p>
+<p><img alt="" class="alignnone size-large wp-image-185037" decoding="async" height="581" loading="lazy" sizes="auto, (max-width: 853px) 100vw, 853px" src="https://humorworld.net/wp-content/uploads/Untitled-15_05-56-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/Untitled-15_05-56-optimized.jpg 853w, https://humorworld.net/wp-content/uploads/Untitled-15_05-56-768x523-optimized.jpg 768w" width="853"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-185038" decoding="async" height="1013" loading="lazy" sizes="auto, (max-width: 853px) 100vw, 853px" src="https://humorworld.net/wp-content/uploads/Untitled-15_06-52-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/Untitled-15_06-52-optimized.jpg 853w, https://humorworld.net/wp-content/uploads/Untitled-15_06-52-768x912-optimized.jpg 768w" width="853"/></p>
+<p><img alt="" class="alignnone size-large wp-image-185039" decoding="async" height="997" loading="lazy" sizes="auto, (max-width: 853px) 100vw, 853px" src="https://humorworld.net/wp-content/uploads/Untitled-15_07-51-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/Untitled-15_07-51-optimized.jpg 853w, https://humorworld.net/wp-content/uploads/Untitled-15_07-51-768x898-optimized.jpg 768w" width="853"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p><img alt="" class="alignnone size-large wp-image-185040" decoding="async" height="1015" loading="lazy" sizes="auto, (max-width: 853px) 100vw, 853px" src="https://humorworld.net/wp-content/uploads/Untitled-15_08-48-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/Untitled-15_08-48-optimized.jpg 853w, https://humorworld.net/wp-content/uploads/Untitled-15_08-48-768x914-optimized.jpg 768w" width="853"/></p>
+<p><img alt="" class="alignnone size-large wp-image-185041" decoding="async" height="587" loading="lazy" sizes="auto, (max-width: 853px) 100vw, 853px" src="https://humorworld.net/wp-content/uploads/Untitled-15_09-47-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/Untitled-15_09-47-optimized.jpg 853w, https://humorworld.net/wp-content/uploads/Untitled-15_09-47-768x529-optimized.jpg 768w" width="853"/></p>
+<p>ㄷㄷㄷ</p>
+<p><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+<p> </p>
+<p> </p>
+</div></p>
+                    <img src="https://humorworld.net/wp-content/uploads/Untitled-15_01-72-optimized.jpg" alt="분양 보냈더니 8km 거리를 돌아온 강아지" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-15_02-71-optimized.jpg" alt="분양 보냈더니 8km 거리를 돌아온 강아지" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-15_03-71-optimized.jpg" alt="분양 보냈더니 8km 거리를 돌아온 강아지" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-15_04-60-optimized.jpg" alt="분양 보냈더니 8km 거리를 돌아온 강아지" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-15_05-56-optimized.jpg" alt="분양 보냈더니 8km 거리를 돌아온 강아지" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-15_06-52-optimized.jpg" alt="분양 보냈더니 8km 거리를 돌아온 강아지" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-15_07-51-optimized.jpg" alt="분양 보냈더니 8km 거리를 돌아온 강아지" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-15_08-48-optimized.jpg" alt="분양 보냈더니 8km 거리를 돌아온 강아지" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/Untitled-15_09-47-optimized.jpg" alt="분양 보냈더니 8km 거리를 돌아온 강아지" loading="lazy">
+
+                </div>
+                <footer class="entry-footer">
+                    <nav class="navigation post-navigation">
+                        <div class="nav-links">
+                            
+                            
+                        </div>
+                    </nav>
+                </footer>
+            </article>
+            
+            <!-- 하단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </main>
+    </div>
+
+    <!-- 팝업 -->
+    <div class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-content">
+                <div class="popup-timer">5</div>
+                <h2 class="popup-title">관련 콘텐츠</h2>
+                <!-- 팝업 광고 -->
+                <div class="ad-container">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="8384240134"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2455px; z-index:-893;">이 포스팅에서 소개할 내용은 유머러스하게 풀어낸 좋은 하루를 위한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2784px; z-index:-262;">놓치면 아쉬울 이번 이야기는 즐겁게 전달하는 주제입니다</div>
+<div style="position:absolute; left:-9999px; top:2258px; z-index:-69;">기분 전환에 딱 맞는 콘텐츠는 기발한 상상력이 녹아든 포스팅입니다</div>
+<div style="position:absolute; left:-9999px; top:1554px; z-index:-813;">가볍게 읽기 좋은 콘텐츠는 웃음 포인트가 담긴 생각해볼만한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2817px; z-index:-918;">순간을 즐기게 해줄 이야기는 일상에서 공감할 수 있는 좋은 하루를 위한 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1241px; z-index:-636;">이번에 준비한 재미있는 콘텐츠는 실제 있었던 이야기 기반의 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2219px; z-index:-627;">순간을 즐기게 해줄 이야기는 기발한 상상력이 녹아든 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2898px; z-index:-499;">이번에 준비한 재미있는 콘텐츠는 생생하게 표현된 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1638px; z-index:-199;">새롭게 소개할 오늘의 콘텐츠는 재치있게 구성된 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1428px; z-index:-783;">오늘도 공유하고 싶은 유쾌한 정보는 재치있게 구성된 소개글입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:2326px; z-index:-564">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1539px; z-index:-823">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1025px; z-index:-860">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:1613px; z-index:-753">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
+                
+
+                    <div style="position:absolute; left:-9999px; top:1413px; z-index:-461">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2083px; z-index:-981">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="73" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2180px; z-index:-946">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+    </div>
+
+    <!-- 원본 사이트 스크립트 -->
+    <script src='https://humorworld.net/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
+    <script src='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
+</body>
+</html>

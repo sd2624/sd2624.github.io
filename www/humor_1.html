@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유머 게시판 - 페이지 1</title>
+    <style>
+        /* 기본 스타일 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 24px;
+            color: #333;
+        }
+        
+        /* 게시물 목록 스타일 */
+        .posts-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .post-item {
+            background: #fff;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .post-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .post-link {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        .post-title {
+            font-size: 18px;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        /* 페이지네이션 스타일 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .pagination a, .pagination span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 12px;
+            border-radius: 4px;
+            background: #fff;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+        .pagination a:hover {
+            background: #f0f0f0;
+            transform: translateY(-1px);
+        }
+        .pagination span.current {
+            background: #333;
+            color: #fff;
+        }
+        
+        /* 하단 네비게이션 */
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .nav-button {
+            padding: 8px 16px;
+            border-radius: 4px;
+            background: #fff;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .nav-button:hover {
+            background: #f0f0f0;
+        }
+        
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 20px;
+                margin: 15px 0;
+            }
+            .post-item {
+                padding: 15px;
+                margin: 10px 0;
+            }
+            .post-title {
+                font-size: 16px;
+            }
+            .pagination a, .pagination span {
+                min-width: 32px;
+                height: 32px;
+                padding: 0 8px;
+                font-size: 14px;
+            }
+            .nav-button {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+        }
+        
+        /* 작은 모바일 화면 */
+        @media (max-width: 375px) {
+            .container {
+                padding: 8px;
+            }
+            .post-item {
+                padding: 12px;
+                margin: 8px 0;
+            }
+            .post-title {
+                font-size: 14px;
+            }
+            .pagination a, .pagination span {
+                min-width: 28px;
+                height: 28px;
+                padding: 0 6px;
+                font-size: 13px;
+            }
+            .nav-button {
+                padding: 5px 10px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>유머 게시판</h1>
+        <ul style="list-style: none; padding: 0;">
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./속보-분양-보냈더니-8km-거리를-돌아온-강아지-노하우.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">분양 보냈더니 8km 거리를 돌아온 강아지</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./충격-엑소-카이가-공익-2년하고-느낀점-핵심.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">엑소 카이가 공익 2년하고 느낀점</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./궁금-쏟아지는-악플에-암투병사실-공개한-박성광-아내-이솔아-비하인드.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">쏟아지는 악플에 암투병사실 공개한 박성광 아내 이솔아</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./완벽-임금체불한-중소기업-대표의-태도-대참사-총정리.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">임금체불한 중소기업 대표의 태도 대참사</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./논란-아빠랑-비교돼서-남친과-헤어진-판녀-현장.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">아빠랑 비교돼서 남친과 헤어진 판녀</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./전설의-오버워치-핵쟁이가-4시간만-쓰고-핵을-버린-이유-모먼트.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">오버워치 핵쟁이가 4시간만 쓰고 핵을 버린 이유</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./화제의-장르소설갤-난리나게한-어느-웹소설-작가가-연재를-중단한-이유-해설.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">장르소설갤 난리나게한 어느 웹소설 작가가 연재를 중단한 이유</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./강추-사육장-잠근-채-산불-대피하는-바람에-개-700마리를-죽게한-개농장-주인의-무시무시한-한마디-모음집.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">사육장 잠근 채 산불 대피하는 바람에 개 700마리를 죽게한 개농장 주인의 무시무시한 한마디</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./최초-PC로-망해놓고-관객-탓하는-디즈니에-대한-한국인의-일침-모음집.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">PC로 망해놓고 관객 탓하는 디즈니에 대한 한국인의 일침</h2>
+            </a>
+        </li>
+        <li style="margin: 15px 0; padding: 15px; background-color: #fff; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <a href="./대유행-챗GPT로-실사화가-된-유명-짤들-진실.html" style="text-decoration: none; color: #333; display: block;">
+                <h2 style="margin: 0; font-size: 18px;">챗GPT로 실사화가 된 유명 짤들</h2>
+            </a>
+        </li></ul>
+        <div class="pagination" style="margin-top: 20px; text-align: center;"><span style="margin: 0 5px; padding: 5px 10px; background-color: #f0f0f0; border-radius: 3px;">1</span></div>
+    </div>
+    
+    <!-- 하단 네비게이션 바 추가 -->
+    <nav class="bottom-navigation" style="
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        padding: 10px 0;
+        z-index: 1000;
+    ">
+        <div class="container">
+            <div class="nav-links" style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 0 20px;
+            ">
+                <span style="color: #333; padding: 8px 15px;">페이지 1</span>
+            </div>
+        </div>
+    </nav>
+    
+    <div style="height: 60px;"><!-- 하단 네비게이션 바 공간 확보 --></div>
+</body>
+</html>

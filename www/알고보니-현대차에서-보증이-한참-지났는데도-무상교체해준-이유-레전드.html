@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ko-KR" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[알고보니] 현대차에서 보증이 한참 지났는데도 무상교체해준 이유 (레전드)</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script>
+        // AdSense 초기화 함수
+        function initAds() {
+            try {
+                if (typeof adsbygoogle !== 'undefined') {
+                    adsbygoogle.push({
+                        google_ad_client: "ca-pub-9374368296307755",
+                        enable_page_level_ads: true
+                    });
+                    
+                    // 개별 광고 슬롯 초기화
+                    const adElements = document.querySelectorAll('.adsbygoogle');
+                    adElements.forEach(ad => {
+                        try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        } catch(e) {
+                            console.log('Ad slot initialization error:', e);
+                        }
+                    });
+                } else {
+                    // AdSense가 로드되지 않은 경우 재시도
+                    setTimeout(initAds, 1000);
+                }
+            } catch(e) {
+                console.log('AdSense initialization error:', e);
+            }
+        }
+
+        // 페이지 로드 완료 후 광고 초기화
+        window.addEventListener('load', function() {
+            setTimeout(initAds, 100);
+        });
+    </script>
+
+    
+    <!-- 원본 스타일시트 -->
+    <link rel='stylesheet' id='wp-block-library-css' href='https://humorworld.net/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='classic-theme-styles-css' href='https://humorworld.net/wp-includes/css/classic-themes.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-style-css' href='https://humorworld.net/wp-content/themes/blogberg/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='blogberg-google-fonts-css' href='https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,700i|Rubik:300,400,400i,500,700,700i' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-css' href='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
+    
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .content-area {
+            width: 100%;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        
+        .entry-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+        }
+        
+        .entry-title {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            word-break: keep-all;
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content-area {
+                padding: 15px;
+                border-radius: 0;
+            }
+            
+            .entry-title {
+                font-size: 1.3rem;
+            }
+            
+            .entry-content {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                padding: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .content-area {
+                padding: 10px;
+            }
+            
+            .entry-title {
+                font-size: 1.2rem;
+            }
+            
+            .entry-content {
+                font-size: 0.95rem;
+            }
+            
+            .nav-links {
+                padding: 0 5px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 팝업 스타일 */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .popup-content {
+            text-align: center;
+        }
+        
+        .popup-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .popup-timer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6c5ce7;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .popup-ad {
+            margin: 20px 0;
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .popup-container {
+                width: 95%;
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .popup-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2738px; z-index:-685;">즐겁게 감상할 오늘의 내용은 유머러스하게 풀어낸 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1277px; z-index:-792;">당신의 관심을 끌 소식은 생생하게 표현된 자료입니다</div>
+<div style="position:absolute; left:-9999px; top:1630px; z-index:-535;">여러분과 함께 나누고 싶은 소식은 실제 있었던 이야기 기반의 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1700px; z-index:-450;">가볍게 읽기 좋은 콘텐츠는 의외의 반전을 지닌 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:1971px; z-index:-942;">이번에 준비한 재미있는 콘텐츠는 읽는 재미가 있는 정보입니다</div>
+<div style="position:absolute; left:-9999px; top:2772px; z-index:-252;">순간을 즐기게 해줄 이야기는 일상에서 공감할 수 있는 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1185px; z-index:-993;">이 포스팅에서 소개할 내용은 감성적으로 구성된 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:1709px; z-index:-984;">재미와 정보를 함께 담은 이 콘텐츠는 읽는 재미가 있는 자료입니다</div>
+<div style="position:absolute; left:-9999px; top:1922px; z-index:-502;">이 포스팅에서 소개할 내용은 흥미를 끌 만한 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2273px; z-index:-498;">가볍게 읽기 좋은 콘텐츠는 감성적으로 구성된 감상거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1681px; z-index:-14;">즐겁게 감상할 오늘의 내용은 한 번쯤 생각하게 만드는 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2185px; z-index:-712;">오늘도 공유하고 싶은 유쾌한 정보는 유머러스하게 풀어낸 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2149px; z-index:-774;">피식 웃음 나오는 이번 주제는 일상에서 공감할 수 있는 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2396px; z-index:-401;">즐겁게 감상할 오늘의 내용은 일상에서 공감할 수 있는 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2973px; z-index:-419;">오늘의 흥미로운 이야기는 공유하고 싶은 가치가 있는 지금 웃을 거리입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:2967px; z-index:-278">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2556px; z-index:-495">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1866px; z-index:-676">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1767px; z-index:-97">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="82" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                
+    </div>
+
+    <div class="container">
+        <main class="content-area">
+            <!-- 상단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <article class="post">
+                <header class="entry-header">
+                    <h1 class="entry-title">[알고보니] 현대차에서 보증이 한참 지났는데도 무상교체해준 이유 (레전드)</h1>
+                    <div class="entry-meta">
+                        <span class="posted-on">
+   
+                        </span>
+                    </div>
+                </header>
+                <div class="entry-content">
+                    <p><div class="entry-content" itemprop="text">
+<p><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script><img alt="" class="alignnone size-full wp-image-183483" decoding="async" height="720" sizes="(max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-1-724-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-1-724-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-1-724-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-1-724-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183484" decoding="async" height="720" sizes="(max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-2-723-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-2-723-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-2-723-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-2-723-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183485" decoding="async" height="720" sizes="(max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-3-711-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-3-711-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-3-711-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-3-711-768x432-optimized.jpg 768w" width="1280"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> <img alt="" class="alignnone size-full wp-image-183486" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-4-694-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-4-694-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-4-694-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-4-694-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183487" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-5-686-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-5-686-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-5-686-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-5-686-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183488" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-6-671-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-6-671-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-6-671-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-6-671-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183489" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-7-653-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-7-653-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-7-653-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-7-653-768x432-optimized.jpg 768w" width="1280"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> <img alt="" class="alignnone size-full wp-image-183490" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-8-631-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-8-631-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-8-631-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-8-631-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183491" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-9-607-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-9-607-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-9-607-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-9-607-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183492" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-10-582-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-10-582-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-10-582-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-10-582-768x432-optimized.jpg 768w" width="1280"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> <img alt="" class="alignnone size-full wp-image-183493" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-11-563-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-11-563-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-11-563-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-11-563-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183494" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-12-541-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-12-541-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-12-541-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-12-541-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183495" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-13-524-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-13-524-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-13-524-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-13-524-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183496" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-14-501-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-14-501-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-14-501-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-14-501-768x432-optimized.jpg 768w" width="1280"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> <img alt="" class="alignnone size-full wp-image-183497" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-15-462-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-15-462-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-15-462-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-15-462-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183498" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-16-438-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-16-438-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-16-438-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-16-438-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183499" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-17-414-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-17-414-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-17-414-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-17-414-768x432-optimized.jpg 768w" width="1280"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> <img alt="" class="alignnone size-full wp-image-183500" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-18-389-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-18-389-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-18-389-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-18-389-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183501" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-19-364-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-19-364-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-19-364-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-19-364-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183502" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-20-340-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-20-340-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-20-340-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-20-340-768x432-optimized.jpg 768w" width="1280"/> <img alt="" class="alignnone size-full wp-image-183503" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-21-315-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-21-315-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-21-315-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-21-315-768x432-optimized.jpg 768w" width="1280"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> <img alt="" class="alignnone size-full wp-image-183504" decoding="async" height="720" loading="lazy" sizes="auto, (max-width: 1280px) 100vw, 1280px" src="https://humorworld.net/wp-content/uploads/1-22-304-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/1-22-304-optimized.jpg 1280w, https://humorworld.net/wp-content/uploads/1-22-304-1024x576-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/1-22-304-768x432-optimized.jpg 768w" width="1280"/><img alt="" class="alignnone size-full wp-image-183505" decoding="async" height="971" loading="lazy" sizes="auto, (max-width: 1080px) 100vw, 1080px" src="https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656-optimized.jpg 1080w, https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656-1024x921-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656-768x690-optimized.jpg 768w" width="1080"/> <img alt="" class="alignnone size-full wp-image-183506" decoding="async" height="838" loading="lazy" sizes="auto, (max-width: 1080px) 100vw, 1080px" src="https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656_01-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656_01-optimized.jpg 1080w, https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656_01-1024x795-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656_01-768x596-optimized.jpg 768w" width="1080"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2357166746514522"></script><br/>
+<!-- 2024 --><br/>
+<ins class="adsbygoogle" data-ad-client="ca-pub-2357166746514522" data-ad-format="auto" data-ad-slot="3201493071" data-full-width-responsive="true" style="display: block;"></ins><br/>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> <img alt="" class="alignnone size-full wp-image-183507" decoding="async" height="762" loading="lazy" sizes="auto, (max-width: 1080px) 100vw, 1080px" src="https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656_02-optimized.jpg" srcset="https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656_02-optimized.jpg 1080w, https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656_02-1024x722-optimized.jpg 1024w, https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656_02-768x542-optimized.jpg 768w" width="1080"/></p>
+<p>???</p>
+<p> </p>
+</div></p>
+                    <img src="https://humorworld.net/wp-content/uploads/1-1-724-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-2-723-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-3-711-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-4-694-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-5-686-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-6-671-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-7-653-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-8-631-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-9-607-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-10-582-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-11-563-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-12-541-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-13-524-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-14-501-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-15-462-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-16-438-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-17-414-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-18-389-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-19-364-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-20-340-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-21-315-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/1-22-304-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656_01-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+<img src="https://humorworld.net/wp-content/uploads/KakaoTalk_20250318_214127656_02-optimized.jpg" alt="현대차에서 보증이 한참 지났는데도 무상교체해준 이유" loading="lazy">
+
+                </div>
+                <footer class="entry-footer">
+                    <nav class="navigation post-navigation">
+                        <div class="nav-links">
+                            <div class="nav-previous"><a href="초특급-신발을-너무-싸게-팔았으니-사용중이면-돈-보내라는-판매자-비결.html">신발을 너무 싸게 팔았으니 사용중이면 돈 보내라는 판매자</a></div>
+                            <div class="nav-next"><a href="충격적인-충격-폭로-사실-결혼도-하고-임신도-했었다는-김새론-해설.html">충격 폭로… 사실 결혼도 하고 임신도 했었다는 김새론</a></div>
+                        </div>
+                    </nav>
+                </footer>
+            </article>
+            
+            <!-- 하단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240134"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </main>
+    </div>
+
+    <!-- 팝업 -->
+    <div class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-content">
+                <div class="popup-timer">5</div>
+                <h2 class="popup-title">관련 콘텐츠</h2>
+                <!-- 팝업 광고 -->
+                <div class="ad-container">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="8384240134"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 봇용 숨겨진 콘텐츠 -->
+    <div class="hidden-content" aria-hidden="true">
+        <div style="position:absolute; left:-9999px; top:2738px; z-index:-685;">즐겁게 감상할 오늘의 내용은 유머러스하게 풀어낸 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1277px; z-index:-792;">당신의 관심을 끌 소식은 생생하게 표현된 자료입니다</div>
+<div style="position:absolute; left:-9999px; top:1630px; z-index:-535;">여러분과 함께 나누고 싶은 소식은 실제 있었던 이야기 기반의 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:1700px; z-index:-450;">가볍게 읽기 좋은 콘텐츠는 의외의 반전을 지닌 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:1971px; z-index:-942;">이번에 준비한 재미있는 콘텐츠는 읽는 재미가 있는 정보입니다</div>
+<div style="position:absolute; left:-9999px; top:2772px; z-index:-252;">순간을 즐기게 해줄 이야기는 일상에서 공감할 수 있는 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1185px; z-index:-993;">이 포스팅에서 소개할 내용은 감성적으로 구성된 오늘의 피식입니다</div>
+<div style="position:absolute; left:-9999px; top:1709px; z-index:-984;">재미와 정보를 함께 담은 이 콘텐츠는 읽는 재미가 있는 자료입니다</div>
+<div style="position:absolute; left:-9999px; top:1922px; z-index:-502;">이 포스팅에서 소개할 내용은 흥미를 끌 만한 지금 웃을 거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2273px; z-index:-498;">가볍게 읽기 좋은 콘텐츠는 감성적으로 구성된 감상거리입니다</div>
+<div style="position:absolute; left:-9999px; top:1681px; z-index:-14;">즐겁게 감상할 오늘의 내용은 한 번쯤 생각하게 만드는 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2185px; z-index:-712;">오늘도 공유하고 싶은 유쾌한 정보는 유머러스하게 풀어낸 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2149px; z-index:-774;">피식 웃음 나오는 이번 주제는 일상에서 공감할 수 있는 함께 나눌 이야기입니다</div>
+<div style="position:absolute; left:-9999px; top:2396px; z-index:-401;">즐겁게 감상할 오늘의 내용은 일상에서 공감할 수 있는 읽을거리입니다</div>
+<div style="position:absolute; left:-9999px; top:2973px; z-index:-419;">오늘의 흥미로운 이야기는 공유하고 싶은 가치가 있는 지금 웃을 거리입니다</div>
+        
+                    <div style="position:absolute; left:-9999px; top:2027px; z-index:-152">
+                        <select aria-label="카테고리 선택">
+                            <option>유머</option>
+                            <option>일상</option>
+                            <option>이슈</option>
+                        </select>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2308px; z-index:-350">
+                        <div class="progress-wrap">
+                            <h4>읽은 사람들의 반응</h4>
+                            <progress value="80" max="100"></progress>
+                            <span>긍정적</span>
+                        </div>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:1922px; z-index:-174">
+                        <form role="form" aria-label="독자 의견">
+                            <h4>이 글 어떠셨나요?</h4>
+                            <textarea placeholder="여러분의 소중한 의견을 남겨주세요" style="width:300px;height:100px"></textarea>
+                            <button type="submit" style="margin-top:10px">의견 남기기</button>
+                        </form>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2286px; z-index:-683">
+                        <details>
+                            <summary>관련 태그</summary>
+                            <ul>
+                                <li>유머</li>
+                                <li>웃음</li>
+                                <li>일상</li>
+                            </ul>
+                        </details>
+                    </div>
+                
+
+                    <div style="position:absolute; left:-9999px; top:2126px; z-index:-777">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">😄</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">😊</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">😐</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:1527px; z-index:-11">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">좋음</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨</label>
+                        </div>
+                    </div>
+                    <div style="position:absolute; left:-9999px; top:2249px; z-index:-205">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">그럭저럭이다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">나쁨저럭이다</label>
+                        </div>
+                    </div>      
+                    <div style="position:absolute; left:-9999px; top:1996px; z-index:-79">
+                        <div class="rating">
+                            <h4>평가해주세요</h4>
+                            <input type="radio" name="rate" id="rate1">
+                            <label for="rate1">밥이 맛이 맛있었다</label>
+                            <input type="radio" name="rate" id="rate2">
+                            <label for="rate2">라면은 중간저럭이다</label>
+                            <input type="radio" name="rate" id="rate3">
+                            <label for="rate3">피자는 나쁨저럭이다</label>
+                        </div>
+                    </div>               
+                
+    </div>
+
+    <!-- 원본 사이트 스크립트 -->
+    <script src='https://humorworld.net/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
+    <script src='https://humorworld.net/wp-content/themes/blogberg/assets/vendors/bootstrap/js/bootstrap.min.js' id='bootstrap-js'></script>
+</body>
+</html>
