@@ -15,7 +15,6 @@ const questions = [
     "차량 등록증을 보유하고 계신가요?"
 ];
 
-// 결과 메시지
 const results = [
     [
         "환급 가능성이 매우 높습니다! (90~100점)",
@@ -88,7 +87,7 @@ const questionPage = document.getElementById('questionPage');
 const resultPage = document.getElementById('resultPage');
 const analysisPopup = document.getElementById('analysisPopup');
 
-// 시작 버튼 이벤트
+// 시작 버튼 클릭
 document.querySelector('.start-btn').addEventListener('click', () => {
     startPage.classList.add('hidden');
     questionPage.classList.remove('hidden');
@@ -106,14 +105,13 @@ function showQuestion() {
     questionNum.textContent = currentQuestion + 1;
     questionElement.textContent = questions[currentQuestion];
 
-    // 자동차 테스트는 예/아니오 답변만 있음
     answersElement.innerHTML = `
         <button class="answer-btn" onclick="handleAnswer(5)">예</button>
         <button class="answer-btn" onclick="handleAnswer(1)">아니오</button>
     `;
 }
 
-// 답변 처리 함수 수정
+// 답변 처리 함수
 function handleAnswer(value) {
     score += value;
     currentQuestion++;
@@ -121,34 +119,24 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion();
     } else {
-        questionPage.classList.add('hidden');
-        showAnalysisPopup();  // 마지막 질문 후에만 분석 팝업 표시
+        showAnalysisPopup();
     }
 }
 
-// 분석 팝업 표시 함수 수정
+// 분석 팝업 표시 함수
 function showAnalysisPopup() {
+    questionPage.classList.add('hidden'); // ✅ 반드시 질문 페이지 숨기기
     analysisPopup.classList.remove('hidden');
 
-    // 광고 요소 초기화
-    const popupAd = analysisPopup.querySelector('.popup-ad');
-    try {
-        while (popupAd.firstChild) {
-            popupAd.removeChild(popupAd.firstChild);
-        }
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error('팝업 광고 초기화 실패:', e);
-    }
+    initializePopupAd(); // ✅ 광고 초기화
 
-    // 7초 카운터 시작
     let countdown = 7;
     const countdownElement = analysisPopup.querySelector('.countdown');
-    
+
     const timer = setInterval(() => {
         countdown--;
         countdownElement.textContent = countdown;
-        
+
         if (countdown <= 0) {
             clearInterval(timer);
             analysisPopup.classList.add('hidden');
@@ -157,13 +145,28 @@ function showAnalysisPopup() {
     }, 1000);
 }
 
+// 광고 초기화 함수
+function initializePopupAd() {
+    const popupAd = analysisPopup.querySelector('.popup-ad');
+    if (popupAd) {
+        try {
+            while (popupAd.firstChild) {
+                popupAd.removeChild(popupAd.firstChild);
+            }
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+            console.error('팝업 광고 초기화 실패:', e);
+        }
+    }
+}
+
 // 결과 표시 함수
 function showResult() {
     resultPage.classList.remove('hidden');
-    
+
     const percentage = (score / (questions.length * 5)) * 100;
     let resultIndex;
-    
+
     if (percentage >= 90) resultIndex = 0;
     else if (percentage >= 75) resultIndex = 1;
     else if (percentage >= 60) resultIndex = 2;
@@ -176,7 +179,7 @@ function showResult() {
         .join('');
 }
 
-// 카카오톡 공유하기
+// 카카오톡 공유
 document.querySelectorAll('.kakao-share').forEach(button => {
     button.addEventListener('click', () => {
         Kakao.Link.sendDefault({
@@ -203,8 +206,8 @@ document.querySelectorAll('.kakao-share').forEach(button => {
     });
 });
 
-// 페이지 로드 시 광고 초기화
-window.onload = function() {
+// 페이지 로드시 광고 초기화
+window.onload = function () {
     try {
         (adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
