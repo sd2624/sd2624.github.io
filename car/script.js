@@ -106,6 +106,7 @@ function showQuestion() {
     questionNum.textContent = currentQuestion + 1;
     questionElement.textContent = questions[currentQuestion];
 
+    // 자동차 테스트는 예/아니오 답변만 있음
     answersElement.innerHTML = `
         <button class="answer-btn" onclick="handleAnswer(5)">예</button>
         <button class="answer-btn" onclick="handleAnswer(1)">아니오</button>
@@ -120,7 +121,7 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion();
     } else {
-        showAnalysisPopup();
+        showAnalysisPopup(); // 마지막 질문 후 분석 팝업 표시
     }
 }
 
@@ -129,9 +130,18 @@ function showAnalysisPopup() {
     questionPage.classList.add('hidden');
     analysisPopup.classList.remove('hidden');
 
-    // 팝업 광고 초기화
-    initializePopupAd();
+    // 팝업 광고 초기화 (새로 추가)
+    const popupAd = analysisPopup.querySelector('.popup-ad');
+    try {
+        while (popupAd.firstChild) {
+            popupAd.removeChild(popupAd.firstChild);
+        }
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('팝업 광고 초기화 실패:', e);
+    }
 
+    // 7초 카운트다운 후 결과 표시
     let countdown = 7;
     const countdownElement = analysisPopup.querySelector('.countdown');
     
@@ -152,12 +162,9 @@ function initializePopupAd() {
     const popupAd = analysisPopup.querySelector('.popup-ad');
     if (popupAd) {
         try {
-            // 기존 광고 제거
             while (popupAd.firstChild) {
                 popupAd.removeChild(popupAd.firstChild);
             }
-            
-            // 새로운 광고 삽입
             (adsbygoogle = window.adsbygoogle || []).push({});
         } catch (e) {
             console.error('팝업 광고 초기화 실패:', e);
@@ -202,8 +209,8 @@ document.querySelectorAll('.kakao-share').forEach(button => {
                 {
                     title: '테스트 하기',
                     link: {
-                        mobileWebUrl: 'https://testpro.site',
-                        webUrl: 'https://testpro.site'
+                        mobileWebUrl: 'https://testpro.site/자동차',
+                        webUrl: 'https://testpro.site/자동차'
                     }
                 }
             ]
@@ -213,7 +220,6 @@ document.querySelectorAll('.kakao-share').forEach(button => {
 
 // 페이지 로드 시 광고 초기화
 window.onload = function() {
-    // 상단 광고 초기화
     try {
         (adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
