@@ -1,0 +1,337 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #e3e3e3 0%, #b7d0e7 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.test-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 광고 컨테이너 스타일 */
+.ad-container {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* 애니메이션 정의 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes moveStripes {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 0; }
+}
+
+/* 시작 페이지 스타일 */
+.start-page {
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+.main-title {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+/* 시작 페이지의 이미지 수정 */
+.start-img {
+    width: 200px;
+    height: 200px;
+    margin: 30px auto;
+    background: linear-gradient(45deg, #4b6cb7, #182848);  /* 자동차 테마에 맞는 색상 */
+    border-radius: 50%;
+    position: relative;
+    animation: pulse 2s infinite;
+    overflow: hidden;
+}
+
+.start-img::before {
+    content: '💰';  /* 지원금 테마에 맞는 이모지로 변경 */
+    position: absolute;
+    font-size: 80px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sub-title {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+/* 버튼 스타일 */
+.start-btn, .retry-btn {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background: linear-gradient(45deg, #4b6cb7, #182848);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.start-btn:hover, .retry-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 카카오 공유 버튼 스타일 */
+.kakao-share {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: #FEE500;
+    color: #000000;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 15px;
+}
+
+.kakao-share:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.kakao-icon {
+    width: 24px;
+    height: 24px;
+    background: #000000;
+    position: relative;
+    border-radius: 5px;
+}
+
+.kakao-icon::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #000000;
+}
+
+/* 질문 페이지 스타일 */
+.question-page {
+    animation: fadeIn 0.5s ease;
+}
+
+.progress-container {
+    margin-bottom: 30px;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(45deg, #2ecc71, #27ae60);  /* 지원금 테마에 맞는 녹색 계열로 변경 */
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.question-counter {
+    text-align: right;
+    margin-top: 10px;
+    color: #666;
+}
+
+.question {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+/* 답변 버튼 스타일 수정 (예/아니오 버튼) */
+.answer-btn {
+    width: 100%;
+    padding: 20px;
+    margin: 10px 0;
+    background: white;
+    border: 2px solid #4b6cb7;
+    border-radius: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.answer-btn:hover {
+    background: #4b6cb7;
+    color: white;
+}
+
+/* 분석 팝업 스타일 */
+.analysis-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+}
+
+.analysis-text {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.countdown {
+    font-size: 3em;
+    font-weight: bold;
+    color: #4b6cb7;
+    margin: 20px 0;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #4b6cb7;
+    border-right: 5px solid #182848;
+    border-bottom: 5px solid #4b6cb7;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: spin 1s linear infinite;
+}
+
+/* 팝업 광고 컨테이너 스타일 */
+.popup-ad-container {
+    margin: 20px auto 0;
+    width: 300px;
+    height: 250px;
+    overflow: hidden;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.popup-ad {
+    width: 300px !important;
+    height: 250px !important;
+    display: block !important;
+    margin: 0 auto;
+}
+
+/* 결과 페이지 스타일 */
+.result-page {
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+/* 결과 페이지 이미지 */
+.result-img {
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+    background: linear-gradient(45deg, #4b6cb7, #182848);
+    border-radius: 50%;
+    position: relative;
+}
+
+.result-img::before {
+    content: '💰';  /* 환급 테마에 맞는 이모지 */
+    position: absolute;
+    font-size: 60px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 유틸리티 클래스 */
+.hidden {
+    display: none;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .test-container {
+        padding: 20px;
+    }
+
+    .main-title {
+        font-size: 2em;
+    }
+
+    .question {
+        font-size: 1.2em;
+    }
+
+    .result-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .popup-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .popup-ad-container {
+        width: 100%;
+        max-width: 300px;
+    }
+}
