@@ -113,7 +113,7 @@ function showQuestion() {
     `;
 }
 
-// 답변 처리 함수
+// 답변 처리 함수 수정
 function handleAnswer(value) {
     score += value;
     currentQuestion++;
@@ -121,16 +121,16 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion();
     } else {
-        showAnalysisPopup(); // 마지막 질문 후 분석 팝업 표시
+        questionPage.classList.add('hidden');
+        showAnalysisPopup();  // 마지막 질문 후에만 분석 팝업 표시
     }
 }
 
-// 분석 팝업 표시 함수
+// 분석 팝업 표시 함수 수정
 function showAnalysisPopup() {
-    questionPage.classList.add('hidden');
     analysisPopup.classList.remove('hidden');
 
-    // 팝업 광고 초기화 (새로 추가)
+    // 광고 요소 초기화
     const popupAd = analysisPopup.querySelector('.popup-ad');
     try {
         while (popupAd.firstChild) {
@@ -141,7 +141,7 @@ function showAnalysisPopup() {
         console.error('팝업 광고 초기화 실패:', e);
     }
 
-    // 7초 카운트다운 후 결과 표시
+    // 7초 카운터 시작
     let countdown = 7;
     const countdownElement = analysisPopup.querySelector('.countdown');
     
@@ -155,21 +155,6 @@ function showAnalysisPopup() {
             showResult();
         }
     }, 1000);
-}
-
-// 팝업 광고 초기화 함수
-function initializePopupAd() {
-    const popupAd = analysisPopup.querySelector('.popup-ad');
-    if (popupAd) {
-        try {
-            while (popupAd.firstChild) {
-                popupAd.removeChild(popupAd.firstChild);
-            }
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-            console.error('팝업 광고 초기화 실패:', e);
-        }
-    }
 }
 
 // 결과 표시 함수
