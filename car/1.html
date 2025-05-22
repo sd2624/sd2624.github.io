@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="자동차 수리비 20% 환급받는 사람들">
+    <meta property="og:description" content="당신은 자동차 수리비 환급 대상자일까요?">
+    <meta property="og:image" content="https://testpro.site/자동차/images/car.png">
+    <meta property="og:url" content="https://testpro.site/자동차">
+    <title>자동차 수리비 환급 자격 테스트</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="ad-container">
+        <ins class="adsbygoogle main-ad"
+            style="display:block"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="container">
+        <div class="test-container">
+            <div class="start-page" id="startPage">
+                <h1 class="main-title">자동차 수리비 20% 환급받는 사람들, 비결은 이것</h1>
+                <div class="start-img"></div>
+                <p class="sub-title">당신은 자동차 수리비 환급 대상자일까요? 간단한 테스트로 확인해보세요! 자동차 수리비 지원금을 받을 수 있는 자격 요건을 확인하고, 관련 링크도 함께 제공해드립니다.</p>
+                <button class="start-btn">테스트 시작하기</button>
+                <div class="share-btn">
+                    <div class="kakao-share">
+                        <div class="kakao-icon"></div>
+                        <span>친구에게 공유하기</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 질문 페이지 -->
+            <div class="question-page hidden" id="questionPage">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="question-counter">
+                        <span id="questionNum">1</span>/15
+                    </div>
+                </div>
+                <h2 class="question"></h2>
+                <div class="answers"></div>
+            </div>
+
+            <!-- 결과 페이지 -->
+            <div class="result-page hidden" id="resultPage">
+                <h2 class="result-title">자동차 수리비 환급 자격 결과</h2>
+                <div class="result-img"></div>
+                <div class="result-content"></div>
+                <div class="result-buttons">
+                    <button class="retry-btn" onclick="location.href='https://testpro.site'">다른 테스트 하기</button>
+                    <div class="kakao-share">
+                        <div class="kakao-icon"></div>
+                        <span>결과 공유하기</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 분석 팝업 -->
+    <div class="analysis-popup hidden" id="analysisPopup">
+        <div class="popup-content">
+            <div class="analysis-header">
+                <div class="analysis-text">결과값 분석중입니다...</div>
+                <div class="countdown">7</div>
+                <div class="loading-spinner"></div>
+            </div>
+            
+            <!-- 팝업 광고 -->
+            <div class="popup-ad-container">
+                <ins class="adsbygoogle popup-ad"
+                     style="display:inline-block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="false"></ins>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
