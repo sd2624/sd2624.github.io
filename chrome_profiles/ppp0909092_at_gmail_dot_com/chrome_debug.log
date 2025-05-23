@@ -1,0 +1,22 @@
+[27064:11056:0523/090443.955:INFO:components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc:202] No machine level policy manager exists.
+[27064:11056:0523/090456.484:WARNING:components\download\internal\background_service\controller_impl.cc:1187] Background download complete, client: 6, completion type: 0, file size:265059
+[27064:11056:0523/090456.497:WARNING:components\download\internal\background_service\controller_impl.cc:1187] Background download complete, client: 6, completion type: 0, file size:5156
+[27064:11056:0523/090457.032:WARNING:components\download\internal\background_service\controller_impl.cc:1187] Background download complete, client: 6, completion type: 0, file size:45157
+[27064:11056:0523/090457.626:WARNING:components\download\internal\background_service\controller_impl.cc:1187] Background download complete, client: 6, completion type: 0, file size:2200227
+[27064:11056:0523/090458.127:WARNING:components\download\internal\background_service\controller_impl.cc:1187] Background download complete, client: 6, completion type: 0, file size:2747169
+[27064:11056:0523/090458.280:WARNING:components\download\internal\background_service\controller_impl.cc:1187] Background download complete, client: 6, completion type: 0, file size:4680
+[27064:11056:0523/090458.714:WARNING:components\download\internal\background_service\controller_impl.cc:1187] Background download complete, client: 6, completion type: 0, file size:118577
+[27064:11056:0523/090503.288:INFO:CONSOLE:0] "[DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o", source: https://auth.band.us/email_login/password?login_type= (0)
+[27064:11056:0523/090553.972:INFO:CONSOLE:319] "true", source: https://auth.band.us/b/validation/email?next_url=https%3A%2F%2Fband.us (319)
+[27064:11056:0523/090706.505:WARNING:components\autofill\content\browser\content_autofill_driver.cc:218] Skipped Autofill message for inactive frame
+[27064:11056:0523/090706.671:WARNING:components\autofill\content\browser\content_autofill_driver.cc:218] Skipped Autofill message for inactive frame
+[27064:11056:0523/090802.321:WARNING:components\autofill\content\browser\content_autofill_driver.cc:218] Skipped Autofill message for inactive frame
+[27064:11056:0523/090802.753:WARNING:components\autofill\content\browser\content_autofill_driver.cc:218] Skipped Autofill message for inactive frame
+[27064:11056:0523/090802.771:WARNING:components\autofill\content\browser\content_autofill_driver.cc:218] Skipped Autofill message for inactive frame
+[27064:11056:0523/093817.235:WARNING:components\autofill\content\browser\content_autofill_driver.cc:218] Skipped Autofill message for inactive frame
+[27064:11056:0523/093817.974:WARNING:components\autofill\content\browser\content_autofill_driver.cc:218] Skipped Autofill message for inactive frame
+[27064:11056:0523/093817.992:WARNING:components\autofill\content\browser\content_autofill_driver.cc:218] Skipped Autofill message for inactive frame
+[27064:11056:0523/100734.003:INFO:CONSOLE:2] "sendNeloLog:  [object Object]", source: https://ssl.pstatic.net/cmstatic/webclient/band-web/script/20250521101329/boot.bundle.js?_=20250521101329 (2)
+[27064:11056:0523/100734.004:INFO:CONSOLE:2] "sendNeloLog:  [object Object]", source: https://ssl.pstatic.net/cmstatic/webclient/band-web/script/20250521101329/boot.bundle.js?_=20250521101329 (2)
+[27064:11056:0523/102649.957:INFO:CONSOLE:0] "[DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o", source: https://auth.band.us/email_login/password?login_type= (0)
+[27064:11056:0523/102736.897:INFO:CONSOLE:0] "<meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">", source: https://www.band.us/home (0)
