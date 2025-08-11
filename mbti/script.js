@@ -1,447 +1,574 @@
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
-// MBTI 질문 목록
-const questions = [
-    {
-        text: "주말에 나는?",
-        choices: [
-            { text: "친구들과 만나서 수다 떨기👥", type: "E" },
-            { text: "집에서 혼자만의 시간 보내기🏠", type: "I" }
-        ]
-    },
-    {
-        text: "새로운 정보를 받아들일 때",
-        choices: [
-            { text: "오감을 통해 직접 경험하며 배운다👀", type: "S" },
-            { text: "상상력과 직관으로 이해한다💭", type: "N" }
-        ]
-    },
-    {
-        text: "결정을 내릴 때 주로",
-        choices: [
-            { text: "논리적으로 분석하여 결정한다🤔", type: "T" },
-            { text: "감정과 가치관을 중요시한다💝", type: "F" }
-        ]
-    },
-    {
-        text: "일상생활에서 나는",
-        choices: [
-            { text: "계획을 세우고 그대로 실천한다📝", type: "J" },
-            { text: "상황에 따라 유연하게 대처한다🌊", type: "P" }
-        ]
-    },
-    {
-        text: "모임에서 나는?",
-        choices: [
-            { text: "여러 사람과 두루두루 이야기한다🗣️", type: "E" },
-            { text: "한두 명과 깊은 대화를 나눈다🤝", type: "I" }
-        ]
-    },
-    {
-        text: "문제를 해결할 때",
-        choices: [
-            { text: "과거의 경험을 토대로 해결한다📚", type: "S" },
-            { text: "새로운 방법을 찾아 시도한다💡", type: "N" }
-        ]
-    },
-    {
-        text: "갈등 상황에서 나는",
-        choices: [
-            { text: "객관적 사실을 바탕으로 판단한다⚖️", type: "T" },
-            { text: "서로의 감정을 고려하여 해결한다❤️", type: "F" }
-        ]
-    },
-    {
-        text: "여행을 갈 때 나는",
-        choices: [
-            { text: "세세한 일정을 미리 계획한다✈️", type: "J" },
-            { text: "즉흥적으로 움직이는게 좋다🎲", type: "P" }
-        ]
-    },
-    {
-        text: "에너지를 얻는 방법은?",
-        choices: [
-            { text: "다른 사람들과 어울리기🎉", type: "E" },
-            { text: "혼자만의 시간 가지기🌙", type: "I" }
-        ]
-    },
-    {
-        text: "관심을 갖는 것은?",
-        choices: [
-            { text: "현재의 실제적인 일들👨‍💼", type: "S" },
-            { text: "미래의 가능성과 아이디어🚀", type: "N" }
-        ]
-    },
-    {
-        text: "선택할 때 중요한 것은?",
-        choices: [
-            { text: "합리성과 효율성📊", type: "T" },
-            { text: "조화와 인간관계🤝", type: "F" }
-        ]
-    },
-    {
-        text: "일상생활 스타일은?",
-        choices: [
-            { text: "체계적이고 계획적으로📋", type: "J" },
-            { text: "자유롭고 융통성있게🎨", type: "P" }
-        ]
-    }
-];
-
-// MBTI 결과 데이터
-const mbtiResults = {
-    "ISTJ": {
-        emoji: "👨‍💼",
-        title: "청렴결백한 논리주의자",
-        description: "신중하고 철저하며 규칙을 중요시하는 당신! 책임감이 강하고 현실적인 성격으로 주변으로부터 신뢰를 받습니다.",
-        traits: [
-            "체계적이고 논리적인 사고방식",
-            "높은 책임감과 성실성",
-            "규칙과 전통을 중요시함",
-            "신중하고 철저한 성격"
-        ],
-        famous: "이순재, 김병현"
-    },
-    "ISFJ": {
-        emoji: "🤲",
-        title: "용감한 수호자",
-        description: "친절하고 배려심이 깊으며, 타인의 감정을 잘 이해하는 성격입니다. 가족이나 친구에게 헌신적인 성향을 보입니다.",
-        traits: [
-            "배려심 깊고 따뜻한 성격",
-            "책임감 있고 신뢰할 수 있는 사람",
-            "자기보다 남을 우선시하는 성향",
-            "안정적인 환경을 선호"
-        ],
-        famous: "아이유, 한지민"
-    },
-    "INFJ": {
-        emoji: "🧘‍♀️",
-        title: "선의의 옹호자",
-        description: "자기 자신과 타인의 감정을 깊이 이해하는 당신! 창의적이고 통찰력이 뛰어나며, 진정성을 중요시합니다.",
-        traits: [
-            "높은 직관력과 통찰력",
-            "개인적인 의미와 가치를 중요시",
-            "타인을 돕고 싶은 마음이 큼",
-            "창의적이고 독창적인 아이디어"
-        ],
-        famous: "박보영, 송혜교"
-    },
-    "INTJ": {
-        emoji: "🧠",
-        title: "용의주도한 전략가",
-        description: "철저하고 계획적인 성격으로 목표를 달성하는 데 집중하는 당신! 매우 독립적이고 분석적인 사고를 중요시합니다.",
-        traits: [
-            "목표 지향적이고 전략적인 사고",
-            "독립적이고 논리적인 성격",
-            "효율성과 결과를 중요시",
-            "혼자 일하는 것을 선호"
-        ],
-        famous: "이재용, 송중기"
-    },
-    "ISTP": {
-        emoji: "🔧",
-        title: "만능 재주꾼",
-        description: "논리적이고 실용적인 성격으로 문제 해결에 능숙한 당신! 급변하는 상황에서도 침착하게 대처하는 능력이 뛰어납니다.",
-        traits: [
-            "실용적이고 능동적인 사고",
-            "문제 해결 능력이 뛰어남",
-            "위기 상황에서도 침착함",
-            "독립적이고 자유로운 성향"
-        ],
-        famous: "지드래곤, 김우빈"
-    },
-    "ISFP": {
-        emoji: "🎨",
-        title: "호기심 많은 예술가",
-        description: "자유롭고 창의적인 성격으로, 예술적인 취미와 활동을 선호합니다. 감정을 중요시하고, 현실보다는 꿈을 추구하는 경향이 있습니다.",
-        traits: [
-            "자유롭고 창의적인 성향",
-            "미적 감각과 예술적인 능력",
-            "감정을 소중히 여김",
-            "조용하고 내성적"
-        ],
-        famous: "수지, 김태리"
-    },
-    "INFP": {
-        emoji: "💭",
-        title: "열정적인 중재자",
-        description: "자신의 가치와 원칙을 매우 중요시하는 당신! 이상주의적이며 타인의 감정을 잘 이해하고, 진심 어린 대화를 선호합니다.",
-        traits: [
-            "이상주의적이고 꿈이 큼",
-            "타인의 감정에 민감하고 공감 능력이 뛰어남",
-            "자신의 가치관에 충실",
-            "조용하고 내성적"
-        ],
-        famous: "김연아, 정해인"
-    },
-    "INTP": {
-        emoji: "🔬",
-        title: "논리적인 사색가",
-        description: "새로운 아이디어와 이론에 대해 깊이 생각하는 성격입니다. 논리적이고 분석적인 사고를 중요시하며 독창적인 아이디어를 선호합니다.",
-        traits: [
-            "논리적이고 분석적인 사고",
-            "새로운 아이디어와 개념에 대해 관심",
-            "자유로운 사고와 창의력",
-            "내성적이고 독립적인 성격"
-        ],
-        famous: "유재석, 도경수"
-    },
-    "ESTP": {
-        emoji: "⚡",
-        title: "모험을 즐기는 사업가",
-        description: "활동적이고 현실적인 성격으로, 새로운 경험을 추구하는 당신! 유연하고 재빠른 판단을 내리며, 변화를 두려워하지 않습니다.",
-        traits: [
-            "즉흥적이고 도전적인 성향",
-            "변화와 새로운 경험을 추구",
-            "재빠르고 유연한 사고",
-            "위험을 감수하고 모험을 즐김"
-        ],
-        famous: "이병헌, 송지효"
-    },
-    "ESFP": {
-        emoji: "🎉",
-        title: "자유로운 영혼의 연예인",
-        description: "사교적이고 활발한 성격으로, 주변 사람들과 함께 즐기는 것을 좋아하는 당신! 긍정적이고 유머 감각이 뛰어나며, 다른 사람들을 즐겁게 만듭니다.",
-        traits: [
-            "사교적이고 활동적인 성향",
-            "즐거운 분위기를 만드는 능력",
-            "즉흥적이고 자유로운 성격",
-            "타인과의 교류를 중요시"
-        ],
-        famous: "정해인, 김소현"
-    },
-    "ENFP": {
-        emoji: "🌟",
-        title: "재기발랄한 활동가",
-        description: "창의적이고 열정적인 성격으로, 다양한 아이디어와 가능성을 추구하는 당신! 타인의 감정을 잘 이해하고, 새로운 경험을 중요시합니다.",
-        traits: [
-            "창의적이고 열정적인 성향",
-            "타인의 감정을 잘 이해하고 공감",
-            "새로운 가능성에 대해 탐구",
-            "유연하고 자유로운 사고"
-        ],
-        famous: "유인나, 박서준"
-    },
-    "ENTP": {
-        emoji: "🔥",
-        title: "뜨거운 논쟁을 즐기는 변론가",
-        description: "논리적이고 창의적인 사고를 가진 당신! 새로운 아이디어를 제시하고 토론을 즐기며, 변화를 이끄는 능력이 뛰어납니다.",
-        traits: [
-            "창의적이고 혁신적인 아이디어",
-            "논리적이고 독립적인 사고",
-            "지적 호기심이 강함",
-            "도전적이고 논쟁을 즐김"
-        ],
-        famous: "이성경, 김우빈"
-    },
-    "ESTJ": {
-        emoji: "💼",
-        title: "엄격한 관리자",
-        description: "체계적이고 규칙을 중시하는 당신! 효율적인 시스템과 조직을 선호하며, 결과와 성과를 중요시합니다.",
-        traits: [
-            "체계적이고 조직적인 성향",
-            "효율성을 중시하며 목표를 향해 나아감",
-            "규칙과 질서를 중요시",
-            "책임감이 강하고 관리 능력 뛰어남"
-        ],
-        famous: "박진영, 김태우"
-    },
-    "ESFJ": {
-        emoji: "💖",
-        title: "사교적인 외교관",
-        description: "다른 사람과의 관계를 중요시하는 당신! 타인을 돕고 배려하는 성격으로, 친근하고 사교적인 모습을 보입니다.",
-        traits: [
-            "타인을 돕고 배려하는 성향",
-            "사교적이고 사람을 잘 이해함",
-            "조화롭고 안정적인 관계를 중시",
-            "규칙과 전통을 중요시"
-        ],
-        famous: "전지현, 김희선"
-    },
-    "ENFJ": {
-        emoji: "🌸",
-        title: "정의로운 사회운동가",
-        description: "타인과의 관계에서 큰 가치를 두며, 사람들에게 영감을 주는 성격입니다. 타인을 돕고 이끄는 능력이 뛰어나며, 진정성을 중요시합니다.",
-        traits: [
-            "타인을 이끄는 능력",
-            "진정성 있고 공감 능력이 뛰어남",
-            "사회적 책임감을 중요시",
-            "사람들에게 영감을 주는 리더십"
-        ],
-        famous: "이민호, 전지현"
-    },
-    "ENTJ": {
-        emoji: "👑",
-        title: "대담한 통솔자",
-        description: "강력한 리더십을 발휘하며, 목표를 향해 대담하게 나아가는 성격입니다. 높은 분석력과 전략적 사고로 주변을 이끌어갑니다.",
-        traits: [
-            "리더십과 전략적 사고 능력",
-            "목표 지향적이고 대담한 성격",
-            "효율성 및 성과 지향적",
-            "강력한 결정력과 의사소통 능력"
-        ],
-        famous: "김재중, 송중기"
-    }
-};
-
-
+// 전역 변수
 let currentQuestion = 0;
-let mbtiScore = {
-    E: 0, I: 0,
-    S: 0, N: 0,
-    T: 0, F: 0,
-    J: 0, P: 0
-};
+let mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+let currentLanguage = 'ko';
 
-// DOM 요소
-const startSection = document.getElementById('start-section');
-const questionSection = document.getElementById('question-section');
-const resultSection = document.getElementById('result-section');
-const adPopup = document.getElementById('ad-popup');
+// 언어 변경 함수
+async function changeLanguage() {
+    const selectedLang = document.getElementById('language-select').value;
+    console.log('언어 변경 시작:', selectedLang);
+    currentLanguage = selectedLang;
+    
+    try {
+        await loadLanguageData();
+        console.log('언어 변경 완료:', currentLanguage);
+        console.log('현재 translations 객체:', window.translations);
+    } catch (error) {
+        console.error('언어 변경 실패:', error);
+    }
+}
 
-// 시작 버튼 이벤트
-document.getElementById('start-btn').addEventListener('click', () => {
-    startSection.style.display = 'none';
-    questionSection.style.display = 'block';
-    showQuestion();
-});
-
-// 질문 표시 함수
-function showQuestion() {
-    const progressBar = document.querySelector('.progress');
-    const questionCounter = document.querySelector('.question-counter');
-    const questionText = document.getElementById('question-text');
-    const answerButtons = document.querySelectorAll('.answer-btn');
-
-    progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
-    questionCounter.textContent = `${currentQuestion + 1}/${questions.length}`;
-    questionText.textContent = questions[currentQuestion].text;
-
-    questions[currentQuestion].choices.forEach((choice, index) => {
-        answerButtons[index].textContent = choice.text;
-        answerButtons[index].onclick = () => handleAnswer(choice.type);
+// 언어 데이터 로드
+function loadLanguageData() {
+    console.log('언어 데이터 로드 시작:', currentLanguage);
+    return new Promise((resolve, reject) => {
+        // 기존 언어 스크립트 제거
+        const existingScripts = document.querySelectorAll('script[data-language]');
+        console.log('기존 스크립트 제거 개수:', existingScripts.length);
+        existingScripts.forEach(script => script.remove());
+        
+        let scriptsLoaded = 0;
+        const totalScripts = 3;
+        
+        function onScriptLoad(scriptType) {
+            scriptsLoaded++;
+            console.log(`${scriptType} 로드 완료 (${scriptsLoaded}/${totalScripts})`);
+            if (scriptsLoaded === totalScripts) {
+                console.log('모든 언어 스크립트 로드 완료, UI 업데이트 시작');
+                updateLanguageElements();
+                
+                // 현재 질문 섹션이 보이고 있다면 질문도 업데이트
+                if (document.getElementById('question-section').style.display !== 'none') {
+                    showQuestion();
+                }
+                
+                resolve();
+            }
+        }
+        
+        function onScriptError(error, scriptType) {
+            console.error(`${scriptType} 로드 오류:`, error);
+            // 기본 한국어로 폴백
+            if (currentLanguage !== 'ko') {
+                currentLanguage = 'ko';
+                loadLanguageData().then(resolve).catch(reject);
+            } else {
+                reject(error);
+            }
+        }
+        
+        // 번역 스크립트 로드
+        const translationsScript = document.createElement('script');
+        translationsScript.src = `./languages/translations_${currentLanguage}.js`;
+        translationsScript.setAttribute('data-language', 'translations');
+        translationsScript.onload = () => onScriptLoad('translations');
+        translationsScript.onerror = (error) => onScriptError(error, 'translations');
+        document.head.appendChild(translationsScript);
+        console.log('번역 스크립트 로드 시작:', translationsScript.src);
+        
+        // 질문 스크립트 로드
+        const questionsScript = document.createElement('script');
+        questionsScript.src = `./languages/questions_${currentLanguage}.js`;
+        questionsScript.setAttribute('data-language', 'questions');
+        questionsScript.onload = () => onScriptLoad('questions');
+        questionsScript.onerror = (error) => onScriptError(error, 'questions');
+        document.head.appendChild(questionsScript);
+        console.log('질문 스크립트 로드 시작:', questionsScript.src);
+        
+        // 결과 스크립트 로드
+        const resultsScript = document.createElement('script');
+        resultsScript.src = `./languages/results_${currentLanguage}.js`;
+        resultsScript.setAttribute('data-language', 'results');
+        resultsScript.onload = () => onScriptLoad('results');
+        resultsScript.onerror = (error) => onScriptError(error, 'results');
+        document.head.appendChild(resultsScript);
+        console.log('결과 스크립트 로드 시작:', resultsScript.src);
     });
 }
 
-// 답변 처리 함수
-function handleAnswer(type) {
-    mbtiScore[type]++;
-    currentQuestion++;
+// 언어별 요소 업데이트
+function updateLanguageElements() {
+    console.log('updateLanguageElements 호출됨');
+    console.log('window.translations:', window.translations);
+    
+    if (!window.translations) {
+        console.error('translations 객체가 로드되지 않음!');
+        return;
+    }
+    
+    const texts = window.translations;
+    
+    // 안전하게 요소가 존재하는지 확인 후 업데이트
+    const elements = [
+        { id: 'main-title', prop: 'innerHTML', value: texts.mainTitle },
+        { id: 'hero-title', prop: 'textContent', value: texts.heroTitle },
+        { id: 'hero-desc-1', prop: 'textContent', value: texts.heroDesc1 },
+        { id: 'hero-desc-2', prop: 'textContent', value: texts.heroDesc2 },
+        { id: 'hero-desc-3', prop: 'textContent', value: texts.heroDesc3 },
+        { id: 'hero-desc-4', prop: 'textContent', value: texts.heroDesc4 },
+        { id: 'hero-desc-5', prop: 'textContent', value: texts.heroDesc5 },
+        { id: 'hero-desc-6', prop: 'textContent', value: texts.heroDesc6 },
+        { id: 'hero-desc-7', prop: 'textContent', value: texts.heroDesc7 },
+        { id: 'intro-text', prop: 'innerHTML', value: texts.introText },
+        { id: 'analysts-title', prop: 'textContent', value: texts.analystsTitle },
+        { id: 'diplomats-title', prop: 'textContent', value: texts.diplomatsTitle },
+        { id: 'sentinels-title', prop: 'textContent', value: texts.sentinelsTitle },
+        { id: 'explorers-title', prop: 'textContent', value: texts.explorersTitle },
+        { id: 'start-btn', prop: 'textContent', value: texts.startBtn },
+        { id: 'analysis-text', prop: 'textContent', value: texts.analysisText },
+        // 결과 페이지 요소들 추가
+        { id: 'result-label', prop: 'textContent', value: texts.resultLabel || '당신의 MBTI는' },
+        { id: 'result-section-title', prop: 'textContent', value: texts.resultSectionTitle || '당신의 성격 유형' },
+        { id: 'traits-title', prop: 'textContent', value: texts.traitsTitle || '성격 특징' },
+        { id: 'strengths-title', prop: 'textContent', value: texts.strengthsTitle || '강점' },
+        { id: 'weaknesses-title', prop: 'textContent', value: texts.weaknessesTitle || '약점' },
+        { id: 'compatible-title', prop: 'textContent', value: texts.compatibleTitle || '잘 맞는 유형' },
+        { id: 'famous-title', prop: 'textContent', value: texts.famousTitle || '같은 유형의 유명인' },
+        { id: 'compatibility-title', prop: 'textContent', value: texts.compatibilityTitle || '궁합' },
+        { id: 'famous-people-title', prop: 'textContent', value: texts.famousPeopleTitle || '유명인' },
+        { id: 'share-btn', prop: 'textContent', value: texts.shareBtn || '결과 공유하기' },
+        { id: 'retry-btn', prop: 'textContent', value: texts.retryBtn || '다시 테스트하기' },
+        { id: 'home-btn', prop: 'textContent', value: texts.homeBtn || '다른 테스트 하기' },
+        { id: 'restart-btn', prop: 'textContent', value: texts.restartBtn || '다시 하기' }
+    ];
 
-    if (currentQuestion < questions.length) {
+    elements.forEach(element => {
+        const el = document.getElementById(element.id);
+        if (el) {
+            el[element.prop] = element.value;
+        }
+    });
+    
+    // 결과 페이지가 현재 표시되고 있다면 결과 내용도 업데이트
+    const resultSection = document.getElementById('result-section');
+    if (resultSection && resultSection.style.display === 'block' && window.mbtiResults) {
+        console.log('결과 페이지가 표시중이므로 결과 내용 업데이트');
+        updateResultContent();
+    }
+}
+
+// 결과 내용 업데이트 함수
+function updateResultContent() {
+    if (!window.mbtiResults) return;
+    
+    // 현재 MBTI 결과 재계산
+    const mbtiType = 
+        (mbtiScores.E > mbtiScores.I ? 'E' : 'I') +
+        (mbtiScores.S > mbtiScores.N ? 'S' : 'N') +
+        (mbtiScores.T > mbtiScores.F ? 'T' : 'F') +
+        (mbtiScores.J > mbtiScores.P ? 'J' : 'P');
+    
+    const resultData = window.mbtiResults[mbtiType];
+    
+    if (resultData) {
+        // 결과 제목과 설명 업데이트
+        const resultTitle = document.getElementById('result-title');
+        const resultDescription = document.getElementById('result-description');
+        
+        if (resultTitle) resultTitle.textContent = resultData.title;
+        if (resultDescription) resultDescription.textContent = resultData.description;
+        
+        // 강점/약점, 궁합, 유명인 정보도 다시 업데이트
+        displayStrengthsWeaknesses(resultData);
+        displayCompatibility(resultData);
+        displayFamousPeople(resultData);
+        
+        console.log('결과 내용 업데이트 완료:', mbtiType, resultData.title);
+    }
+}
+
+// 테스트 시작
+function startTest() {
+    document.getElementById('start-section').style.display = 'none';
+    document.getElementById('question-section').style.display = 'block';
+    currentQuestion = 0;
+    mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+    showQuestion();
+}
+
+// 질문 표시
+function showQuestion() {
+    if (!window.questions) return;
+    
+    const question = window.questions[currentQuestion];
+    
+    document.getElementById('question-text').textContent = question.text;
+    document.getElementById('question-counter').textContent = `${currentQuestion + 1}/16`;
+    
+    const answerButtons = document.querySelectorAll('.answer-btn');
+    answerButtons[0].textContent = question.choices[0].text;
+    answerButtons[1].textContent = question.choices[1].text;
+    
+    // 버튼에 onclick 이벤트 직접 할당
+    answerButtons[0].onclick = () => selectAnswer('A');
+    answerButtons[1].onclick = () => selectAnswer('B');
+    
+    // 진행률 업데이트
+    const progress = ((currentQuestion) / 16) * 100;
+    document.querySelector('.progress').style.width = progress + '%';
+}
+
+// 답변 선택
+function selectAnswer(choice) {
+    if (!window.questions) return;
+    
+    const question = window.questions[currentQuestion];
+    const selectedChoice = choice === 'A' ? question.choices[0] : question.choices[1];
+    
+    mbtiScores[selectedChoice.type]++;
+    
+    currentQuestion++;
+    
+    if (currentQuestion < 16) {
         showQuestion();
     } else {
-        showAdPopup();
+        // 분석 팝업 먼저 표시
+        showAnalysisPopup(async () => {
+            // 분석 완료 후 결과 표시
+            await showLoadingAndResult();
+        });
     }
 }
 
-// 광고 팝업 표시 함수
-function showAdPopup() {
-    questionSection.style.display = 'none';
-    adPopup.style.display = 'flex';
+// 분석 팝업 함수
+function showAnalysisPopup(callback) {
+    const analysisOverlay = document.createElement('div');
+    analysisOverlay.className = 'analysis-overlay';
+    analysisOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 10000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `;
     
-    // 팝업 광고 초기화
-    initializePopupAd();
-
-    let countdown = 7;
-    const countdownElement = document.querySelector('.countdown');
+    const analysisPopup = document.createElement('div');
+    analysisPopup.className = 'analysis-popup';
+    analysisPopup.style.cssText = `
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    `;
     
-    const timer = setInterval(() => {
-        countdown--;
-        countdownElement.textContent = countdown;
+    // 현재 언어의 분석중 텍스트 가져오기
+    const analysisText = (window.translations && window.translations.analysisText) 
+        ? window.translations.analysisText 
+        : "MBTI 분석중...";
         
-        if (countdown <= 0) {
-            clearInterval(timer);
-            adPopup.style.display = 'none';
-            showResult();
-        }
-    }, 1000);
-}
-
-// 팝업 광고 초기화 함수
-function initializePopupAd() {
-    const popupAd = document.querySelector('.popup-ad');
-    if (popupAd) {
-        try {
-            while (popupAd.firstChild) {
-                popupAd.removeChild(popupAd.firstChild);
-            }
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-            console.error('팝업 광고 초기화 실패:', e);
-        }
-    }
-}
-
-// MBTI 결과 계산 함수
-function calculateMBTI() {
-    return (
-        (mbtiScore.E > mbtiScore.I ? 'E' : 'I') +
-        (mbtiScore.S > mbtiScore.N ? 'S' : 'N') +
-        (mbtiScore.T > mbtiScore.F ? 'T' : 'F') +
-        (mbtiScore.J > mbtiScore.P ? 'J' : 'P')
-    );
-}
-
-// 결과 표시 함수
-function showResult() {
-    resultSection.style.display = 'block';
-    const mbtiType = calculateMBTI();
-    const result = mbtiResults[mbtiType];
-
-    document.querySelector('.type-emoji').textContent = result.emoji;
-    document.getElementById('mbti-result').textContent = mbtiType;
-    document.getElementById('result-title').textContent = result.title;
-    document.getElementById('result-description').textContent = result.description;
-
-    const traitsList = document.getElementById('traits-list');
-    traitsList.innerHTML = result.traits
-        .map(trait => `<li>${trait}</li>`)
-        .join('');
-
-    document.getElementById('famous-list').textContent = result.famous;
-}
-
-// 공유하기 버튼
-document.querySelector('.share-btn').addEventListener('click', () => {
-    const mbtiType = calculateMBTI();
-    Kakao.Link.sendDefault({
-        objectType: 'feed',
-        content: {
-            title: '3분만에 보는 MBTI 테스트',
-            description: `나의 MBTI는 ${mbtiType}입니다!`,
-            imageUrl: 'YOUR_IMAGE_URL', // 실제 이미지 URL로 교체 필요
-            link: {
-                mobileWebUrl: 'https://testpro.site',
-                webUrl: 'https://testpro.site'
-            }
-        },
-        buttons: [
-            {
-                title: '테스트 하기',
-                link: {
-                    mobileWebUrl: 'https://testpro.site',
-                    webUrl: 'https://testpro.site'
-                }
-            }
-        ]
-    });
-});
-
-// 다시하기 버튼
-document.querySelector('.retry-btn').addEventListener('click', () => {
-    currentQuestion = 0;
-    mbtiScore = {E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0};
-    resultSection.style.display = 'none';
-    startSection.style.display = 'block';
-});
-
-// 페이지 로드 시 광고 초기화
-window.onload = function() {
+    const waitText = (window.translations && window.translations.waitText) 
+        ? window.translations.waitText 
+        : "잠시만 기다려주세요...";
+    
+    analysisPopup.innerHTML = `
+        <div class="analysis-header" style="margin-bottom: 20px;">
+            <div class="analysis-icon" style="font-size: 3em; margin-bottom: 10px;">🧠</div>
+            <h2 style="margin: 0; font-size: 1.6em; font-weight: bold; color: #333;">${analysisText}</h2>
+        </div>
+        <div class="analysis-content" style="margin: 20px 0;">
+            <div class="loading-spinner" style="
+                width: 40px;
+                height: 40px;
+                border: 3px solid rgba(102, 126, 234, 0.3);
+                border-top: 3px solid #667eea;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                margin: 0 auto 15px;
+            "></div>
+            <p style="font-size: 1em; color: #666; margin: 0 0 20px;">${waitText}</p>
+            
+            <!-- 광고 영역 -->
+            <div class="ad-content" style="margin: 20px 0; min-height: 200px; border: 1px solid #eee; border-radius: 8px; padding: 10px;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+        <div class="progress-bar" style="
+            width: 100%;
+            height: 8px;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 20px;
+        ">
+            <div class="progress-fill" style="
+                height: 100%;
+                background: linear-gradient(90deg, #667eea, #764ba2);
+                width: 0%;
+                border-radius: 4px;
+                transition: width 0.1s ease;
+            "></div>
+        </div>
+    `;
+    
+    analysisOverlay.appendChild(analysisPopup);
+    document.body.appendChild(analysisOverlay);
+    
+    // 애드센스 광고 로드
     try {
         (adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
-        console.error('상단 광고 초기화 실패:', e);
+        console.log('AdSense loading error:', e);
     }
-};
+    
+    // 7초 동안 진행률 표시
+    let progress = 0;
+    const progressFill = analysisPopup.querySelector('.progress-fill');
+    
+    const timer = setInterval(() => {
+        progress += 100 / 70; // 7초 동안 100%까지
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(timer);
+            console.log('Analysis popup completed, calling callback...');
+            setTimeout(() => {
+                analysisOverlay.remove();
+                if (callback) {
+                    console.log('Executing callback function...');
+                    callback();
+                } else {
+                    console.log('No callback function provided!');
+                }
+            }, 300); // 잠깐 대기 후 콜백 실행
+        }
+        progressFill.style.width = progress + '%';
+    }, 100); // 0.1초마다 업데이트
+}
+
+// 로딩 및 결과 표시
+async function showLoadingAndResult() {
+    console.log('showLoadingAndResult called');
+    document.getElementById('question-section').style.display = 'none';
+    
+    // 바로 결과 표시
+    console.log('About to show result...');
+    await showResult();
+}
+
+// 결과 표시
+async function showResult() {
+    console.log('showResult called');
+    console.log('현재 언어:', currentLanguage);
+    console.log('window.mbtiResults:', window.mbtiResults);
+    console.log('window.translations:', window.translations);
+    
+    // 결과 표시 전에 현재 언어의 데이터가 올바르게 로드되었는지 확인
+    try {
+        await loadLanguageData();
+        console.log('결과 표시를 위한 언어 데이터 재로드 완료');
+    } catch (error) {
+        console.error('언어 데이터 로드 실패:', error);
+    }
+    
+    if (!window.mbtiResults) {
+        console.error('mbtiResults not loaded!');
+        return;
+    }
+    
+    document.getElementById('result-section').style.display = 'block';
+    
+    // MBTI 계산
+    const mbtiType = 
+        (mbtiScores.E > mbtiScores.I ? 'E' : 'I') +
+        (mbtiScores.S > mbtiScores.N ? 'S' : 'N') +
+        (mbtiScores.T > mbtiScores.F ? 'T' : 'F') +
+        (mbtiScores.J > mbtiScores.P ? 'J' : 'P');
+    
+    const resultData = window.mbtiResults[mbtiType];
+    
+    // 결과 표시
+    document.getElementById('mbti-result').textContent = mbtiType;
+    document.getElementById('result-title').textContent = resultData.title;
+    document.getElementById('result-description').textContent = resultData.description;
+    
+    // 언어별 UI 요소 업데이트 (위에서 이미 loadLanguageData()를 호출했으므로 updateLanguageElements가 이미 실행됨)
+    // updateLanguageElements()는 loadLanguageData() 내부에서 이미 호출됨
+    
+    // 성격 특징 바 차트
+    displayTraitBars(mbtiType);
+    
+    // 강점/약점 리스트
+    displayStrengthsWeaknesses(resultData);
+    
+    // 궁합 정보
+    displayCompatibility(resultData);
+    
+    // 유명인 정보
+    displayFamousPeople(resultData);
+    
+    // 이모지 표시
+    displayEmoji(mbtiType);
+}
+
+// 성격 특징 바 차트 표시
+function displayTraitBars(mbtiType) {
+    const traitBarsContainer = document.getElementById('trait-bars');
+    if (!traitBarsContainer) return;
+    
+    traitBarsContainer.innerHTML = '';
+    
+    const traits = [
+        { name: 'E ←→ I', leftScore: mbtiScores.E, rightScore: mbtiScores.I, leftLabel: 'E', rightLabel: 'I' },
+        { name: 'S ←→ N', leftScore: mbtiScores.S, rightScore: mbtiScores.N, leftLabel: 'S', rightLabel: 'N' },
+        { name: 'T ←→ F', leftScore: mbtiScores.T, rightScore: mbtiScores.F, leftLabel: 'T', rightLabel: 'F' },
+        { name: 'J ←→ P', leftScore: mbtiScores.J, rightScore: mbtiScores.P, leftLabel: 'J', rightLabel: 'P' }
+    ];
+    
+    traits.forEach(trait => {
+        const total = trait.leftScore + trait.rightScore;
+        const leftPercentage = total > 0 ? (trait.leftScore / total) * 100 : 50;
+        const rightPercentage = total > 0 ? (trait.rightScore / total) * 100 : 50;
+        
+        const traitBar = document.createElement('div');
+        traitBar.className = 'trait-bar';
+        traitBar.innerHTML = `
+            <div class="trait-labels">
+                <span class="trait-left">${trait.leftLabel} (${trait.leftScore})</span>
+                <span class="trait-name">${trait.name}</span>
+                <span class="trait-right">${trait.rightLabel} (${trait.rightScore})</span>
+            </div>
+            <div class="trait-progress">
+                <div class="trait-progress-left" style="width: ${leftPercentage}%"></div>
+                <div class="trait-progress-right" style="width: ${rightPercentage}%"></div>
+            </div>
+        `;
+        traitBarsContainer.appendChild(traitBar);
+    });
+}
+
+// 강점/약점 표시
+function displayStrengthsWeaknesses(resultData) {
+    const strengthsList = document.getElementById('strengths-list');
+    const weaknessesList = document.getElementById('weaknesses-list');
+    
+    if (strengthsList && resultData.strengths) {
+        strengthsList.innerHTML = resultData.strengths.map(strength => `<li>${strength}</li>`).join('');
+    }
+    
+    if (weaknessesList && resultData.weaknesses) {
+        weaknessesList.innerHTML = resultData.weaknesses.map(weakness => `<li>${weakness}</li>`).join('');
+    }
+}
+
+// 궁합 정보 표시
+function displayCompatibility(resultData) {
+    const compatibleContainer = document.getElementById('compatible-list');
+    
+    if (compatibleContainer && resultData.compatible) {
+        compatibleContainer.innerHTML = resultData.compatible.map(type => 
+            `<span class="type-badge">${type}</span>`
+        ).join('');
+    }
+}
+
+// 유명인 정보 표시
+function displayFamousPeople(resultData) {
+    const famousContainer = document.getElementById('famous-list');
+    
+    if (famousContainer && resultData.famous) {
+        famousContainer.textContent = resultData.famous;
+    }
+}
+
+// 이모지 표시 함수
+function displayEmoji(mbtiType) {
+    const typeEmojis = {
+        'INTJ': '🏗️', 'INTP': '🧠', 'ENTJ': '👑', 'ENTP': '💡',
+        'INFJ': '🦄', 'INFP': '🌸', 'ENFJ': '⭐', 'ENFP': '🌈',
+        'ISTJ': '🛡️', 'ISFJ': '🤱', 'ESTJ': '📊', 'ESFJ': '🤗',
+        'ISTP': '🔧', 'ISFP': '🎨', 'ESTP': '🎯', 'ESFP': '🎪'
+    };
+    
+    const emojiElement = document.getElementById('type-emoji');
+    if (emojiElement) {
+        emojiElement.textContent = typeEmojis[mbtiType] || '🌟';
+    }
+}
+
+// 결과 공유하기
+function shareResult() {
+    const mbtiType = document.getElementById('mbti-result').textContent;
+    const resultTitle = document.getElementById('result-title').textContent;
+    
+    if (typeof Kakao !== 'undefined' && Kakao.Link) {
+        Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: `나의 MBTI는 ${mbtiType}!`,
+                description: `${resultTitle} - 16가지 성격 유형 테스트 결과`,
+                imageUrl: window.location.origin + '/mbti/images/mbti-share.jpg',
+                link: {
+                    mobileWebUrl: window.location.href,
+                    webUrl: window.location.href
+                }
+            },
+            buttons: [{
+                title: 'MBTI 테스트 하러가기',
+                link: {
+                    mobileWebUrl: window.location.href,
+                    webUrl: window.location.href
+                }
+            }]
+        });
+    } else {
+        // 카카오톡이 없는 경우 일반 공유
+        if (navigator.share) {
+            navigator.share({
+                title: `나의 MBTI는 ${mbtiType}!`,
+                text: `${resultTitle} - 16가지 성격 유형 테스트`,
+                url: window.location.href
+            });
+        } else {
+            // 클립보드에 복사
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('링크가 클립보드에 복사되었습니다!');
+            });
+        }
+    }
+}
+
+// 다시 테스트하기
+function retryTest() {
+    document.getElementById('result-section').style.display = 'none';
+    document.getElementById('start-section').style.display = 'block';
+    currentQuestion = 0;
+    mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+}
+
+// 홈으로 가기
+function goHome() {
+    window.location.href = '../index.html';
+}
+
+// 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', async function() {
+    // 애드센스 광고 초기화
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.log('AdSense initialization error:', e);
+    }
+    
+    // 기본 언어 데이터 로드
+    try {
+        await loadLanguageData();
+        console.log('초기 언어 로드 완료:', currentLanguage);
+    } catch (error) {
+        console.error('초기 언어 로드 실패:', error);
+    }
+});

@@ -12,6 +12,30 @@ body {
     color: #333;
 }
 
+/* 언어 선택기 */
+.language-selector {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.language-selector select {
+    padding: 8px 12px;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.language-selector select:hover {
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -25,6 +49,66 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.8s ease;
 }
+
+/* MBTI 유형 미리보기 */
+.mbti-types-preview {
+    margin: 30px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.type-category {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.type-category h3 {
+    margin-bottom: 10px;
+    color: #495057;
+    font-size: 16px;
+}
+
+.types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.type-badge {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.type-badge:hover {
+    transform: scale(1.1);
+}
+
+/* 특정 유형별 색상 */
+.type-badge.architect { background: linear-gradient(45deg, #6c63ff, #5a52d5); }
+.type-badge.thinker { background: linear-gradient(45deg, #4ecdc4, #44a08d); }
+.type-badge.commander { background: linear-gradient(45deg, #ff6b6b, #ee5a52); }
+.type-badge.debater { background: linear-gradient(45deg, #feca57, #ff9ff3); }
+.type-badge.advocate { background: linear-gradient(45deg, #54a0ff, #2e86de); }
+.type-badge.mediator { background: linear-gradient(45deg, #5f27cd, #341f97); }
+.type-badge.protagonist { background: linear-gradient(45deg, #00d2d3, #54a0ff); }
+.type-badge.campaigner { background: linear-gradient(45deg, #ff9ff3, #f368e0); }
+.type-badge.logistician { background: linear-gradient(45deg, #3d5a80, #293241); }
+.type-badge.defender { background: linear-gradient(45deg, #e07a5f, #f2cc8f); }
+.type-badge.executive { background: linear-gradient(45deg, #264653, #2a9d8f); }
+.type-badge.consul { background: linear-gradient(45deg, #e9c46a, #f4a261); }
+.type-badge.virtuoso { background: linear-gradient(45deg, #e76f51, #f4a261); }
+.type-badge.adventurer { background: linear-gradient(45deg, #f72585, #7209b7); }
+.type-badge.entrepreneur { background: linear-gradient(45deg, #fb8500, #ffb703); }
+.type-badge.entertainer { background: linear-gradient(45deg, #f77f00, #fcbf49); }
 
 /* 애니메이션 정의 */
 @keyframes fadeIn {
@@ -52,6 +136,42 @@ body {
 /* 시작 페이지 스타일 */
 #start-section {
     text-align: center;
+}
+
+/* 히어로 섹션 스타일 */
+.hero-section {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    line-height: 1.3;
+}
+
+.hero-description {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hero-description p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    color: #34495e;
+}
+
+.hero-description p:last-child {
+    margin-bottom: 0;
+    font-weight: bold;
+    color: #8e44ad;
 }
 
 .personality-icon {
@@ -317,6 +437,146 @@ h1 {
     color: white;
 }
 
+/* 결과 상세 정보 */
+.result-details {
+    margin-top: 30px;
+}
+
+.personality-traits {
+    margin-bottom: 25px;
+}
+
+.trait-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.trait-bar {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.trait-label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: center;
+    color: #495057;
+}
+
+.trait-progress {
+    display: flex;
+    height: 20px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.trait-left {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    transition: width 1s ease;
+}
+
+.trait-right {
+    background: linear-gradient(45deg, #f093fb, #f5576c);
+    transition: width 1s ease;
+}
+
+.trait-percentage {
+    text-align: center;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.strengths-weaknesses {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.strengths, .weaknesses {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.strengths h4 {
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.weaknesses h4 {
+    color: #dc3545;
+    margin-bottom: 10px;
+}
+
+.strengths ul, .weaknesses ul {
+    list-style: none;
+    padding: 0;
+}
+
+.strengths li, .weaknesses li {
+    padding: 5px 0;
+    position: relative;
+    padding-left: 20px;
+}
+
+.strengths li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #28a745;
+    font-weight: bold;
+}
+
+.weaknesses li::before {
+    content: "⚠";
+    position: absolute;
+    left: 0;
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.compatible-types {
+    margin-bottom: 25px;
+}
+
+.compatible-types h4 {
+    margin-bottom: 15px;
+    color: #495057;
+}
+
+.compatible-type {
+    display: inline-block;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.famous-people {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.famous-people h4 {
+    margin-bottom: 10px;
+    color: #495057;
+}
+
+.famous-people p {
+    color: #6c757d;
+    line-height: 1.6;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .container {
@@ -343,5 +603,21 @@ h1 {
     .popup-ad-container {
         width: 100%;
         max-width: 300px;
+    }
+
+    .mbti-types-preview {
+        grid-template-columns: 1fr;
+    }
+
+    .strengths-weaknesses {
+        grid-template-columns: 1fr;
+    }
+
+    .language-selector {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-bottom: 20px;
+        text-align: center;
     }
 }
