@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자발적 퇴사 실업급여 수급 가능성 테스트 | 정당한 사유 확인하기</title>
+    
+    <!-- SEO 메타 태그 -->
+    <meta name="description" content="자발적 퇴사 후에도 실업급여를 받을 수 있는 정당한 사유를 확인해보세요. 개인별 상황 분석과 수급 조건, 신청 방법까지 상세 안내!">
+    <meta name="keywords" content="실업급여, 자발적퇴사, 정당한사유, 실업급여조건, 고용보험, 워크넷, 퇴사사유, 실업급여신청">
+    <meta name="author" content="테스트프로">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph 메타 태그 -->
+    <meta property="og:title" content="자발적 퇴사 실업급여 수급 가능성 테스트">
+    <meta property="og:description" content="내 퇴사 사유가 실업급여 수급 대상인지 확인해보세요. 정당한 사유 판단과 신청 절차 안내!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sd2624.github.io/실업급여/">
+    <meta property="og:image" content="https://sd2624.github.io/실업급여/실업급여.svg">
+    <meta property="og:site_name" content="테스트프로">
+    <meta property="og:locale" content="ko_KR">
+    
+    <!-- Twitter Card 메타 태그 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="자발적 퇴사 실업급여 수급 가능성 테스트">
+    <meta name="twitter:description" content="내 퇴사 사유가 실업급여 수급 대상인지 확인해보세요.">
+    <meta name="twitter:image" content="https://sd2624.github.io/실업급여/실업급여.svg">
+    
+    <!-- 구조화 데이터 (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "자발적 퇴사 실업급여 수급 가능성 테스트",
+        "description": "자발적 퇴사 시 실업급여 수급 조건과 정당한 사유를 확인하는 테스트",
+        "url": "https://sd2624.github.io/실업급여/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "테스트프로"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="canonical" href="https://sd2624.github.io/실업급여/">
+    
+    <!-- 카카오 SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 상단 광고 -->
+    <div class="ad-container top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="1724698171"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="container">
+        <!-- 시작 페이지 -->
+        <div id="startPage" class="page">
+            <div class="header">
+                <div class="icon-container">
+                    <div class="icon">💼</div>
+                    <div class="icon">📋</div>
+                    <div class="icon">💰</div>
+                </div>
+                <h1 class="title">자발적 퇴사 실업급여 수급 가능성</h1>
+                <p class="subtitle">내 퇴사 사유가 실업급여 대상인지 확인해보세요!</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🔍</span>
+                        <span class="feature-text">정당한 사유 분석</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📋</span>
+                        <span class="feature-text">수급 조건 확인</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💡</span>
+                        <span class="feature-text">신청 방법 안내</span>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-card">
+                        <span class="info-icon">⚖️</span>
+                        <div class="info-content">
+                            <div class="info-title">정확한 판단</div>
+                            <div class="info-desc">고용노동부 기준 정당한 사유 분석</div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-icon">📊</span>
+                        <div class="info-content">
+                            <div class="info-title">맞춤 안내</div>
+                            <div class="info-desc">개인 상황별 수급 가능성 진단</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="start-btn" onclick="startTest()">
+                    <span class="btn-text">무료 진단 시작하기</span>
+                    <span class="btn-icon">🚀</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 질문 페이지 -->
+        <div id="questionPage" class="page hidden">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="currentQuestion">1</span> / <span id="totalQuestions">6</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-title" id="questionTitle"></h2>
+                <p class="question-description" id="questionDescription"></p>
+                <div class="answers-container" id="answersContainer"></div>
+            </div>
+        </div>
+
+        <!-- 분석 모달 -->
+        <div id="analysisModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="analysis-header">
+                    <h2>🔍 수급 자격 분석 중...</h2>
+                    <p>고용보험법에 따른 정당한 사유 여부를 분석하고 있습니다</p>
+                </div>
+
+                <div class="analysis-steps">
+                    <div class="step-item">
+                        <div class="step-icon">💼</div>
+                        <div class="step-text">퇴사 사유 분석</div>
+                        <div class="step-check">⏳</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon">📋</div>
+                        <div class="step-text">수급 조건 확인</div>
+                        <div class="step-check">⏳</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon">⚖️</div>
+                        <div class="step-text">법적 근거 검토</div>
+                        <div class="step-check">⏳</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon">✨</div>
+                        <div class="step-text">결과 도출</div>
+                        <div class="step-check">⏳</div>
+                    </div>
+                </div>
+
+                <div class="timer-container">
+                    <div class="timer-circle">
+                        <span class="timer-display">6</span>
+                    </div>
+                </div>
+
+                <!-- 팝업 광고 -->
+                <div class="popup-ad-space">
+                    <ins class="adsbygoogle popup-ad"
+                         style="display:inline-block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="3201247599"
+                         data-ad-format="rectangle"
+                         data-full-width-responsive="false"></ins>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 페이지 -->
+        <div id="resultPage" class="page hidden">
+            <div class="result-header">
+                <div class="result-icon" id="resultIcon">💼</div>
+                <h2 class="result-title" id="resultTitle"></h2>
+                <p class="result-subtitle" id="resultSubtitle"></p>
+            </div>
+
+            <div class="result-content">
+                <div class="eligibility-analysis"></div>
+                <div class="required-documents"></div>
+                <div class="application-process"></div>
+                <div class="additional-tips"></div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="detail-btn" onclick="showDetailedGuide()">상세 가이드 보기</button>
+                <button class="share-btn" onclick="shareKakao()">카톡 공유하기</button>
+                <button class="other-test-btn" onclick="window.location.href='../index.html'">다른 테스트 하기</button>
+                <button class="restart-btn" onclick="restartTest()">다시 하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세 가이드 모달 -->
+    <div id="guideModal" class="modal hidden">
+        <div class="modal-content guide-modal">
+            <div class="modal-header">
+                <h2>💼 실업급여 완전 가이드</h2>
+                <span class="close-btn" onclick="closeGuideModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="guide-section">
+                    <h3>⚖️ 자발적 퇴사 정당한 사유</h3>
+                    <div class="reason-list">
+                        <div class="reason-item">
+                            <h4>🏥 건강상 이유</h4>
+                            <p>• 본인 질병, 부상으로 계속 근무 불가<br>
+                               • 가족 질병, 부상으로 간병 필요<br>
+                               • 임신, 출산, 육아로 인한 퇴사</p>
+                        </div>
+                        <div class="reason-item">
+                            <h4>🚫 근로조건 위반</h4>
+                            <p>• 임금 체불 (평균임금 1개월분 이상)<br>
+                               • 근로계약서와 다른 근로조건<br>
+                               • 최저임금 미달 지급</p>
+                        </div>
+                        <div class="reason-item">
+                            <h4>🔄 사업장 변화</h4>
+                            <p>• 사업장 이전으로 통근 곤란<br>
+                               • 직장 내 괴롭힘, 성희롱<br>
+                               • 정년 단축, 희망퇴직</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="guide-section">
+                    <h3>📋 필요 서류</h3>
+                    <div class="document-checklist">
+                        <label><input type="checkbox"> 퇴사 관련 증빙서류</label>
+                        <label><input type="checkbox"> 급여명세서</label>
+                        <label><input type="checkbox"> 근로계약서</label>
+                        <label><input type="checkbox"> 의료진단서 (해당 시)</label>
+                        <label><input type="checkbox"> 체불임금 확인서 (해당 시)</label>
+                        <label><input type="checkbox"> 신분증</label>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>📞 신청 절차</h3>
+                    <ol>
+                        <li><strong>퇴사 후 1년 내</strong> 신청 (중요!)</li>
+                        <li><strong>고용센터 방문</strong> 또는 온라인 신청</li>
+                        <li><strong>심사 과정</strong> (2-4주 소요)</li>
+                        <li><strong>수급 결정</strong> 통지</li>
+                        <li><strong>구직 활동</strong> 및 급여 수급</li>
+                    </ol>
+                </div>
+
+                <div class="guide-section">
+                    <h3>💡 주의사항</h3>
+                    <ul>
+                        <li>단순 이직 희망은 정당한 사유 아님</li>
+                        <li>증빙서류 미비 시 수급 불가</li>
+                        <li>허위 신고 시 벌금 부과</li>
+                        <li>구직 활동 의무 불이행 시 급여 중단</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h3>🔗 관련 기관</h3>
+                    <div class="useful-links">
+                        <a href="https://www.work.go.kr/" target="_blank">워크넷 (온라인 신청)</a>
+                        <a href="https://www.ei.go.kr/" target="_blank">고용보험 홈페이지</a>
+                        <a href="https://www.moel.go.kr/" target="_blank">고용노동부</a>
+                        <a href="https://www.hrd.go.kr/" target="_blank">HRD-Net</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 광고 초기화
+        if (typeof adsbygoogle !== 'undefined') {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    </script>
+</body>
+</html>

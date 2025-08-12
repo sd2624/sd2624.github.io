@@ -1,0 +1,83 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="background" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3c72;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a5298;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#f8f9fa;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffb300;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- 배경 -->
+  <rect width="400" height="300" fill="url(#background)"/>
+  
+  <!-- 배경 패턴 -->
+  <circle cx="50" cy="50" r="3" fill="white" opacity="0.1"/>
+  <circle cx="150" cy="80" r="2" fill="white" opacity="0.15"/>
+  <circle cx="320" cy="60" r="4" fill="white" opacity="0.08"/>
+  <circle cx="380" cy="120" r="2.5" fill="white" opacity="0.12"/>
+  <circle cx="80" cy="180" r="2" fill="white" opacity="0.1"/>
+  <circle cx="350" cy="220" r="3" fill="white" opacity="0.15"/>
+  
+  <!-- 메인 카드 -->
+  <rect x="40" y="40" width="320" height="220" rx="20" fill="url(#cardGradient)" filter="url(#shadow)"/>
+  
+  <!-- 상단 금색 바 -->
+  <rect x="40" y="40" width="320" height="8" rx="20" fill="url(#goldGradient)"/>
+  
+  <!-- 제목 영역 -->
+  <text x="200" y="80" font-family="'Malgun Gothic', sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#1e3c72">실업급여 수급자격</text>
+  <text x="200" y="105" font-family="'Malgun Gothic', sans-serif" font-size="16" text-anchor="middle" fill="#2a5298">자발적 퇴사도 받을 수 있을까?</text>
+  
+  <!-- 중앙 아이콘 - 법률/서류 모티브 -->
+  <g transform="translate(170, 120)">
+    <!-- 서류 스택 -->
+    <rect x="15" y="5" width="30" height="40" rx="3" fill="#e3f2fd" stroke="#1976d2" stroke-width="1"/>
+    <rect x="10" y="10" width="30" height="40" rx="3" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="1"/>
+    <rect x="5" y="15" width="30" height="40" rx="3" fill="#fff3e0" stroke="#f57c00" stroke-width="1"/>
+    
+    <!-- 메인 서류 -->
+    <rect x="0" y="20" width="30" height="40" rx="3" fill="white" stroke="#2a5298" stroke-width="2"/>
+    
+    <!-- 서류 내용 선 -->
+    <line x1="5" y1="28" x2="25" y2="28" stroke="#1e3c72" stroke-width="1"/>
+    <line x1="5" y1="33" x2="20" y2="33" stroke="#1e3c72" stroke-width="1"/>
+    <line x1="5" y1="38" x2="25" y2="38" stroke="#1e3c72" stroke-width="1"/>
+    <line x1="5" y1="43" x2="18" y2="43" stroke="#1e3c72" stroke-width="1"/>
+    
+    <!-- 체크마크 -->
+    <circle cx="22" cy="30" r="6" fill="#4caf50"/>
+    <path d="M19,30 L21,32 L25,28" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <!-- 돈 기호 -->
+    <circle cx="-15" cy="35" r="8" fill="url(#goldGradient)"/>
+    <text x="-15" y="40" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">₩</text>
+    
+    <!-- 법조문 아이콘 -->
+    <circle cx="45" cy="35" r="8" fill="#1976d2"/>
+    <rect x="41" y="31" width="8" height="8" rx="1" fill="white"/>
+    <line x1="43" y1="33" x2="47" y2="33" stroke="#1976d2" stroke-width="0.5"/>
+    <line x1="43" y1="35" x2="47" y2="35" stroke="#1976d2" stroke-width="0.5"/>
+    <line x1="43" y1="37" x2="46" y2="37" stroke="#1976d2" stroke-width="0.5"/>
+  </g>
+  
+  <!-- 하단 정보 -->
+  <text x="200" y="195" font-family="'Malgun Gothic', sans-serif" font-size="14" text-anchor="middle" fill="#1e3c72" font-weight="bold">✓ 정당한 사유 판단</text>
+  <text x="200" y="215" font-family="'Malgun Gothic', sans-serif" font-size="14" text-anchor="middle" fill="#1e3c72" font-weight="bold">✓ 필요서류 안내</text>
+  <text x="200" y="235" font-family="'Malgun Gothic', sans-serif" font-size="14" text-anchor="middle" fill="#1e3c72" font-weight="bold">✓ 신청절차 가이드</text>
+  
+  <!-- 코너 장식 -->
+  <circle cx="60" cy="60" r="2" fill="url(#goldGradient)" opacity="0.8"/>
+  <circle cx="340" cy="60" r="2" fill="url(#goldGradient)" opacity="0.8"/>
+  <circle cx="60" cy="240" r="2" fill="url(#goldGradient)" opacity="0.8"/>
+  <circle cx="340" cy="240" r="2" fill="url(#goldGradient)" opacity="0.8"/>
+</svg>

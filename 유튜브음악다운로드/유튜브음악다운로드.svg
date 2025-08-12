@@ -1,0 +1,134 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 배경 그라데이션 -->
+  <defs>
+    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#FFE66D;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#4ECDC4;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#45B7D1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#96CEB4;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="musicGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9500;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFD23F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B6B;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE66D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD23F;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+  </defs>
+  
+  <!-- 배경 -->
+  <rect width="400" height="300" fill="url(#backgroundGradient)" rx="15"/>
+  
+  <!-- 장식용 음표들 (배경) -->
+  <g opacity="0.1">
+    <circle cx="60" cy="40" r="8" fill="#fff"/>
+    <path d="M60 48 L60 68" stroke="#fff" stroke-width="2"/>
+    <path d="M60 48 L75 45" stroke="#fff" stroke-width="2"/>
+    
+    <circle cx="340" cy="60" r="6" fill="#fff"/>
+    <path d="M340 66 L340 80" stroke="#fff" stroke-width="1.5"/>
+    
+    <circle cx="350" cy="220" r="7" fill="#fff"/>
+    <path d="M350 227 L350 245" stroke="#fff" stroke-width="2"/>
+    <path d="M350 227 L365 224" stroke="#fff" stroke-width="2"/>
+  </g>
+  
+  <!-- 메인 아이콘 영역 -->
+  <g transform="translate(200,150)">
+    <!-- 중앙 다운로드 아이콘 배경 -->
+    <circle cx="0" cy="0" r="45" fill="url(#musicGradient)" filter="url(#shadow)"/>
+    <circle cx="0" cy="0" r="38" fill="rgba(255,255,255,0.9)" filter="url(#glow)"/>
+    
+    <!-- 유튜브 로고 스타일 -->
+    <rect x="-25" y="-15" width="50" height="30" rx="5" fill="#FF0000"/>
+    <polygon points="-8,-8 -8,8 8,0" fill="white"/>
+    
+    <!-- 다운로드 화살표 -->
+    <g transform="translate(0,25)">
+      <path d="M-15 0 L0 15 L15 0" stroke="#FF9500" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M0 -15 L0 12" stroke="#FF9500" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </g>
+  
+  <!-- 좌측 음표와 웨이브 -->
+  <g transform="translate(80,150)">
+    <!-- 음표 -->
+    <circle cx="0" cy="0" r="12" fill="url(#iconGradient)" filter="url(#shadow)"/>
+    <path d="M12 0 L12 40" stroke="url(#iconGradient)" stroke-width="3"/>
+    <path d="M12 0 L35 -8" stroke="url(#iconGradient)" stroke-width="3"/>
+    
+    <!-- 음파 -->
+    <path d="M-40 -15 Q-25 -15 -25 0 Q-25 15 -40 15" stroke="#FFD23F" stroke-width="2" fill="none" opacity="0.8"/>
+    <path d="M-50 -25 Q-30 -25 -30 0 Q-30 25 -50 25" stroke="#FFE66D" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M-60 -35 Q-35 -35 -35 0 Q-35 35 -60 35" stroke="#FFF" stroke-width="2" fill="none" opacity="0.4"/>
+  </g>
+  
+  <!-- 우측 모바일과 PC 아이콘 -->
+  <g transform="translate(320,150)">
+    <!-- 스마트폰 -->
+    <rect x="-8" y="-20" width="16" height="28" rx="3" fill="url(#iconGradient)" filter="url(#shadow)"/>
+    <rect x="-6" y="-16" width="12" height="16" fill="white" opacity="0.9"/>
+    <circle cx="0" cy="4" r="2" fill="white" opacity="0.9"/>
+    
+    <!-- PC 모니터 -->
+    <g transform="translate(20,-10)">
+      <rect x="-12" y="-8" width="24" height="16" rx="2" fill="url(#iconGradient)" filter="url(#shadow)"/>
+      <rect x="-10" y="-6" width="20" height="10" fill="white" opacity="0.9"/>
+      <rect x="-3" y="8" width="6" height="4" fill="url(#iconGradient)"/>
+      <rect x="-8" y="12" width="16" height="2" rx="1" fill="url(#iconGradient)"/>
+    </g>
+  </g>
+  
+  <!-- 제목 텍스트 -->
+  <text x="200" y="50" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold" filter="url(#shadow)">
+    유튜브 음악 다운로드
+  </text>
+  <text x="200" y="75" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="Arial, sans-serif" font-size="14" font-weight="500">
+    나에게 맞는 최적의 방법 찾기
+  </text>
+  
+  <!-- 하단 설명 -->
+  <text x="200" y="245" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" opacity="0.9">
+    • 기기별 맞춤 추천 • 안전한 사이트 가이드 • 단계별 설명
+  </text>
+  <text x="200" y="265" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Arial, sans-serif" font-size="11">
+    6가지 질문으로 당신만의 다운로드 가이드를 만나보세요!
+  </text>
+  
+  <!-- 장식용 별들 -->
+  <g fill="rgba(255,255,255,0.6)">
+    <polygon points="50,100 52,106 58,106 53,110 55,116 50,112 45,116 47,110 42,106 48,106" />
+    <polygon points="360,120 361,124 365,124 362,126 363,130 360,128 357,130 358,126 355,124 359,124" />
+    <polygon points="30,200 31,203 34,203 32,205 33,208 30,206 27,208 28,205 26,203 29,203" />
+  </g>
+  
+  <!-- 움직이는 음표 애니메이션을 위한 요소들 -->
+  <g opacity="0.7">
+    <animateTransform attributeName="transform" type="translate" values="0,0; 10,5; 0,0" dur="3s" repeatCount="indefinite"/>
+    <circle cx="150" cy="80" r="4" fill="#FFD23F"/>
+    <path d="M154 80 L154 92" stroke="#FFD23F" stroke-width="1.5"/>
+  </g>
+  
+  <g opacity="0.5">
+    <animateTransform attributeName="transform" type="translate" values="0,0; -8,3; 0,0" dur="4s" repeatCount="indefinite"/>
+    <circle cx="250" cy="220" r="3" fill="#FFE66D"/>
+    <path d="M253 220 L253 230" stroke="#FFE66D" stroke-width="1"/>
+  </g>
+</svg>
