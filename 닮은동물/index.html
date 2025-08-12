@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>닮은 동물 찾기 - AI가 분석하는 나의 동물상</title>
+    
+    <!-- SEO 메타 태그 -->
+    <meta name="description" content="얼굴 사진으로 AI가 분석하는 닮은 동물! 고양이상, 강아지상, 토끼상 등 동물별 성격 특징과 매력 포인트까지 알려드립니다">
+    <meta name="keywords" content="닮은동물, 동물상, 고양이상, 강아지상, 토끼상, 여우상, 곰상, 얼굴분석, AI동물상, 동물테스트, 성격분석, 동물캐릭터">
+    <meta name="author" content="테스트프로">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph 메타 태그 -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="닮은 동물 찾기 - AI가 분석하는 나의 동물상">
+    <meta property="og:description" content="얼굴 사진으로 닮은 동물을 찾아보세요! 동물별 성격 특징과 매력 포인트까지 알려드립니다">
+    <meta property="og:image" content="https://sd2624.github.io/닮은동물/닮은동물.svg">
+    <meta property="og:url" content="https://sd2624.github.io/닮은동물/">
+    <meta property="og:site_name" content="테스트프로">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="닮은 동물 찾기 - AI가 분석하는 나의 동물상">
+    <meta name="twitter:description" content="얼굴 사진으로 닮은 동물을 찾고 성격 특징까지 알아보세요">
+    <meta name="twitter:image" content="https://sd2624.github.io/닮은동물/닮은동물.svg">
+    
+    <!-- 구조화된 데이터 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "닮은 동물 찾기 테스트",
+        "description": "사진 업로드로 닮은 동물을 분석하여 성격 특징과 매력 포인트를 알려주는 AI 테스트",
+        "url": "https://sd2624.github.io/닮은동물/",
+        "mainEntity": {
+            "@type": "Quiz",
+            "name": "닮은 동물 AI 분석",
+            "description": "얼굴 특징 분석을 통한 동물상 진단과 성격 분석",
+            "educationalLevel": "general",
+            "typicalAgeRange": "10-99"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "테스트프로"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <!-- 카카오 SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 상단 광고 -->
+    <div class="ad-container top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="7854042305"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🐾 닮은 동물 찾기</h1>
+            <p class="subtitle">AI가 분석하는 나의 동물상</p>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main class="main-container">
+        <div class="container">
+            <!-- 소개 섹션 -->
+            <section class="intro-section">
+                <div class="intro-content">
+                    <h2>🔍 나는 어떤 동물을 닮았을까?</h2>
+                    <p>얼굴 특징을 분석하여 당신과 가장 닮은 동물을 찾아드리고<br>
+                    그 동물의 성격 특징까지 알려드립니다</p>
+                    
+                    <div class="animal-gallery">
+                        <div class="animal-preview cat">
+                            <div class="animal-emoji">🐱</div>
+                            <span>고양이상</span>
+                        </div>
+                        <div class="animal-preview dog">
+                            <div class="animal-emoji">🐶</div>
+                            <span>강아지상</span>
+                        </div>
+                        <div class="animal-preview rabbit">
+                            <div class="animal-emoji">🐰</div>
+                            <span>토끼상</span>
+                        </div>
+                        <div class="animal-preview fox">
+                            <div class="animal-emoji">🦊</div>
+                            <span>여우상</span>
+                        </div>
+                        <div class="animal-preview bear">
+                            <div class="animal-emoji">🐻</div>
+                            <span>곰상</span>
+                        </div>
+                        <div class="animal-preview hamster">
+                            <div class="animal-emoji">🐹</div>
+                            <span>햄스터상</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 사진 업로드 섹션 -->
+            <section class="upload-section" id="uploadSection">
+                <div class="upload-container">
+                    <h3>📸 얼굴 사진을 업로드해주세요</h3>
+                    <p class="upload-guide">정면을 바라본 선명한 얼굴 사진일수록 정확한 동물상 분석이 가능합니다</p>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-placeholder" id="uploadPlaceholder">
+                            <div class="upload-icon">🐾</div>
+                            <div class="upload-text">
+                                <p><strong>사진을 드래그하거나 클릭하여 업로드</strong></p>
+                                <p class="upload-subtext">JPG, PNG 파일 (최대 10MB)</p>
+                            </div>
+                        </div>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                        <div class="uploaded-image" id="uploadedImage" style="display: none;">
+                            <img id="previewImage" src="" alt="업로드된 이미지">
+                            <button class="remove-image" id="removeImage">✕</button>
+                        </div>
+                    </div>
+                    
+                    <div class="upload-tips">
+                        <h4>🎯 정확한 분석을 위한 팁</h4>
+                        <ul>
+                            <li>정면을 바라본 자연스러운 표정</li>
+                            <li>밝은 곳에서 촬영한 선명한 사진</li>
+                            <li>머리카락이 얼굴을 가리지 않도록</li>
+                            <li>안경이나 마스크는 착용하지 않은 상태</li>
+                            <li>과도한 표정보다는 자연스러운 모습</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="analyze-btn" id="analyzeBtn" disabled>
+                        🔍 동물상 분석 시작하기
+                    </button>
+                </div>
+            </section>
+
+            <!-- 분석 중 섹션 -->
+            <section class="analyzing-section" id="analyzingSection" style="display: none;">
+                <div class="analyzing-container">
+                    <div class="analyzing-animation">
+                        <div class="animal-scanner">
+                            <div class="rotating-animals">
+                                <div class="animal-icon">🐱</div>
+                                <div class="animal-icon">🐶</div>
+                                <div class="animal-icon">🐰</div>
+                                <div class="animal-icon">🦊</div>
+                                <div class="animal-icon">🐻</div>
+                                <div class="animal-icon">🐹</div>
+                            </div>
+                            <div class="scan-face">👤</div>
+                        </div>
+                    </div>
+                    <h3>🔍 AI가 동물상을 분석중입니다...</h3>
+                    <div class="analyzing-steps">
+                        <div class="step active" data-step="1">얼굴 윤곽 분석중</div>
+                        <div class="step" data-step="2">눈 모양 측정중</div>
+                        <div class="step" data-step="3">코와 입 분석중</div>
+                        <div class="step" data-step="4">전체적인 인상 파악중</div>
+                        <div class="step" data-step="5">동물상 매칭 완료</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 결과 섹션 -->
+            <section class="result-section" id="resultSection" style="display: none;">
+                <div class="result-container">
+                    <h2>🎭 당신의 동물상 분석 결과</h2>
+                    
+                    <!-- 메인 결과 -->
+                    <div class="result-card main-result">
+                        <div class="animal-result">
+                            <div class="animal-emoji-large" id="animalEmoji">🐱</div>
+                            <h3 id="animalName">고양이상</h3>
+                            <div class="similarity-score">
+                                <span>유사도: </span>
+                                <span id="similarityScore">87%</span>
+                            </div>
+                            <p class="animal-description" id="animalDescription">
+                                신비롭고 우아한 매력을 가진 고양이상입니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 상세 분석 -->
+                    <div class="detailed-analysis">
+                        <div class="analysis-grid">
+                            <!-- 얼굴 특징 -->
+                            <div class="feature-card">
+                                <h4>👤 주요 얼굴 특징</h4>
+                                <div class="features-list" id="faceFeatures">
+                                    <!-- 동적으로 생성 -->
+                                </div>
+                            </div>
+
+                            <!-- 성격 특징 -->
+                            <div class="feature-card">
+                                <h4>🎭 성격 특징</h4>
+                                <div class="personality-traits" id="personalityTraits">
+                                    <!-- 동적으로 생성 -->
+                                </div>
+                            </div>
+
+                            <!-- 매력 포인트 -->
+                            <div class="feature-card">
+                                <h4>✨ 매력 포인트</h4>
+                                <div class="charm-points" id="charmPoints">
+                                    <!-- 동적으로 생성 -->
+                                </div>
+                            </div>
+
+                            <!-- 추천 스타일 -->
+                            <div class="feature-card">
+                                <h4>💄 추천 스타일</h4>
+                                <div class="style-recommendations" id="styleRecommendations">
+                                    <!-- 동적으로 생성 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 동물 캐릭터 소개 -->
+                    <div class="character-section">
+                        <h3>🎨 나만의 동물 캐릭터</h3>
+                        <div class="character-card">
+                            <div class="character-visual">
+                                <div class="character-emoji" id="characterEmoji">🐱</div>
+                                <div class="character-accessories" id="characterAccessories">
+                                    <!-- 동적으로 생성 -->
+                                </div>
+                            </div>
+                            <div class="character-info">
+                                <h4 id="characterName">우아한 고양이</h4>
+                                <p id="characterStory">언제나 우아하고 신비로운 매력을 발산하는 당신은...</p>
+                                <div class="character-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">귀여움</span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill" id="cutenessScore" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">카리스마</span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill" id="charismaScore" style="width: 75%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">친근함</span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill" id="friendlinessScore" style="width: 65%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 다른 동물들과의 궁합 -->
+                    <div class="compatibility-section">
+                        <h3>💕 다른 동물상과의 궁합</h3>
+                        <div class="compatibility-grid" id="compatibilityGrid">
+                            <!-- 동적으로 생성 -->
+                        </div>
+                    </div>
+
+                    <!-- 추천 아이템 -->
+                    <div class="recommendations-section">
+                        <h3>🛍️ 당신에게 어울리는 아이템</h3>
+                        <div class="recommendation-categories">
+                            <div class="category-card">
+                                <h4>👕 패션 스타일</h4>
+                                <div class="recommendation-items" id="fashionItems">
+                                    <!-- 동적으로 생성 -->
+                                </div>
+                            </div>
+                            <div class="category-card">
+                                <h4>💄 메이크업</h4>
+                                <div class="recommendation-items" id="makeupItems">
+                                    <!-- 동적으로 생성 -->
+                                </div>
+                            </div>
+                            <div class="category-card">
+                                <h4>💎 액세서리</h4>
+                                <div class="recommendation-items" id="accessoryItems">
+                                    <!-- 동적으로 생성 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 다시 하기 버튼 -->
+            <div class="retry-section" id="retrySection" style="display: none;">
+                <button class="retry-btn" onclick="resetTest()">
+                    🔄 다른 사진으로 다시 분석하기
+                </button>
+            </div>
+
+            <!-- 공유 섹션 -->
+            <div class="share-section" id="shareSection" style="display: none;">
+                <h3>📢 결과 공유하기</h3>
+                <div class="share-buttons">
+                    <button class="share-btn kakao" onclick="shareKakao()">
+                        카카오톡 공유
+                    </button>
+                    <button class="share-btn url" onclick="copyUrl()">
+                        URL 복사
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 중간 광고 -->
+    <div class="ad-container middle">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="8901234567"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- 하단 광고 -->
+    <div class="ad-container bottom">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="9012345678"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 테스트프로. 모든 권리 보유.</p>
+            <p class="disclaimer">본 동물상 분석은 재미를 위한 것으로 실제 외모와는 차이가 있을 수 있습니다.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

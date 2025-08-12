@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #ffecd2 75%, #fcb69f 100%);">
+  <!-- 배경 원 -->
+  <circle cx="150" cy="150" r="140" fill="rgba(255,255,255,0.9)" stroke="rgba(102,126,234,0.3)" stroke-width="2"/>
+  
+  <!-- 동물들 배치 -->
+  <!-- 고양이 -->
+  <g transform="translate(80, 80)">
+    <circle cx="0" cy="0" r="25" fill="rgba(255,255,255,0.8)" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="0" y="8" text-anchor="middle" font-size="28" dominant-baseline="central">🐱</text>
+  </g>
+  
+  <!-- 강아지 -->
+  <g transform="translate(220, 80)">
+    <circle cx="0" cy="0" r="25" fill="rgba(255,255,255,0.8)" stroke="#ffa726" stroke-width="2"/>
+    <text x="0" y="8" text-anchor="middle" font-size="28" dominant-baseline="central">🐶</text>
+  </g>
+  
+  <!-- 토끼 -->
+  <g transform="translate(80, 220)">
+    <circle cx="0" cy="0" r="25" fill="rgba(255,255,255,0.8)" stroke="#66bb6a" stroke-width="2"/>
+    <text x="0" y="8" text-anchor="middle" font-size="28" dominant-baseline="central">🐰</text>
+  </g>
+  
+  <!-- 여우 -->
+  <g transform="translate(220, 220)">
+    <circle cx="0" cy="0" r="25" fill="rgba(255,255,255,0.8)" stroke="#ff7043" stroke-width="2"/>
+    <text x="0" y="8" text-anchor="middle" font-size="28" dominant-baseline="central">🦊</text>
+  </g>
+  
+  <!-- 곰 -->
+  <g transform="translate(150, 70)">
+    <circle cx="0" cy="0" r="22" fill="rgba(255,255,255,0.8)" stroke="#8d6e63" stroke-width="2"/>
+    <text x="0" y="6" text-anchor="middle" font-size="24" dominant-baseline="central">🐻</text>
+  </g>
+  
+  <!-- 햄스터 -->
+  <g transform="translate(150, 230)">
+    <circle cx="0" cy="0" r="22" fill="rgba(255,255,255,0.8)" stroke="#ffb74d" stroke-width="2"/>
+    <text x="0" y="6" text-anchor="middle" font-size="24" dominant-baseline="central">🐹</text>
+  </g>
+  
+  <!-- 중앙 카메라 아이콘 -->
+  <g transform="translate(150, 150)">
+    <circle cx="0" cy="0" r="35" fill="rgba(255,255,255,0.95)" stroke="rgba(102,126,234,0.5)" stroke-width="3"/>
+    <rect x="-20" y="-12" width="40" height="24" rx="4" fill="rgba(102,126,234,0.8)"/>
+    <rect x="-8" y="-18" width="16" height="6" rx="2" fill="rgba(102,126,234,0.6)"/>
+    <circle cx="0" cy="0" r="12" fill="none" stroke="white" stroke-width="2"/>
+    <circle cx="0" cy="0" r="8" fill="none" stroke="white" stroke-width="1.5"/>
+    <circle cx="12" cy="-8" r="2" fill="rgba(255,255,255,0.8)"/>
+  </g>
+  
+  <!-- 연결선들 -->
+  <g opacity="0.3">
+    <line x1="150" y1="150" x2="80" y2="80" stroke="rgba(102,126,234,0.4)" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="150" y1="150" x2="220" y2="80" stroke="rgba(102,126,234,0.4)" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="150" y1="150" x2="80" y2="220" stroke="rgba(102,126,234,0.4)" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="150" y1="150" x2="220" y2="220" stroke="rgba(102,126,234,0.4)" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="150" y1="150" x2="150" y2="70" stroke="rgba(102,126,234,0.4)" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="150" y1="150" x2="150" y2="230" stroke="rgba(102,126,234,0.4)" stroke-width="1" stroke-dasharray="3,3"/>
+  </g>
+  
+  <!-- 타이틀 -->
+  <text x="150" y="35" text-anchor="middle" font-family="'Noto Sans KR', sans-serif" font-size="18" font-weight="bold" fill="rgba(102,126,234,0.8)">닮은 동물 찾기</text>
+  
+  <!-- 장식 요소들 -->
+  <g opacity="0.6">
+    <circle cx="50" cy="50" r="3" fill="rgba(102,126,234,0.4)"/>
+    <circle cx="250" cy="50" r="3" fill="rgba(118,75,162,0.4)"/>
+    <circle cx="50" cy="250" r="3" fill="rgba(255,228,210,0.6)"/>
+    <circle cx="250" cy="250" r="3" fill="rgba(252,182,159,0.6)"/>
+  </g>
+  
+  <!-- 반짝이는 효과 -->
+  <g opacity="0.7">
+    <path d="M70 120 L75 125 L70 130 L65 125 Z" fill="rgba(255,255,255,0.8)"/>
+    <path d="M230 120 L235 125 L230 130 L225 125 Z" fill="rgba(255,255,255,0.8)"/>
+    <path d="M70 180 L75 185 L70 190 L65 185 Z" fill="rgba(255,255,255,0.8)"/>
+    <path d="M230 180 L235 185 L230 190 L225 185 Z" fill="rgba(255,255,255,0.8)"/>
+  </g>
+</svg>

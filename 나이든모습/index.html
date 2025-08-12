@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나이든 모습 예측 - AI가 보여주는 미래의 나</title>
+    
+    <!-- SEO 메타 태그 -->
+    <meta name="description" content="AI 기술로 현재 사진에서 나이든 모습을 예측해보세요. 10년, 20년, 30년 후의 모습을 미리 확인할 수 있습니다.">
+    <meta name="keywords" content="나이든 모습, 얼굴 나이 예측, AI 얼굴 분석, 미래 모습, 얼굴 변화, 나이 시뮬레이션, 노화 예측">
+    <meta name="author" content="AI 얼굴 분석 연구소">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sd2624.github.io/나이든모습/">
+    <meta property="og:title" content="나이든 모습 예측 - AI가 보여주는 미래의 나">
+    <meta property="og:description" content="AI 기술로 현재 사진에서 나이든 모습을 예측해보세요. 10년, 20년, 30년 후의 모습을 미리 확인할 수 있습니다.">
+    <meta property="og:image" content="https://sd2624.github.io/나이든모습/preview.svg">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="300">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sd2624.github.io/나이든모습/">
+    <meta property="twitter:title" content="나이든 모습 예측 - AI가 보여주는 미래의 나">
+    <meta property="twitter:description" content="AI 기술로 현재 사진에서 나이든 모습을 예측해보세요. 10년, 20년, 30년 후의 모습을 미리 확인할 수 있습니다.">
+    <meta property="twitter:image" content="https://sd2624.github.io/나이든모습/preview.svg">
+    
+    <!-- JSON-LD 구조화된 데이터 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "나이든 모습 예측",
+        "description": "AI 기술로 현재 사진에서 나이든 모습을 예측해보세요. 10년, 20년, 30년 후의 모습을 미리 확인할 수 있습니다.",
+        "url": "https://sd2624.github.io/나이든모습/",
+        "applicationCategory": "Entertainment",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "author": {
+            "@type": "Organization",
+            "name": "AI 얼굴 분석 연구소"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+        }
+    }
+    </script>
+    
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/svg+xml" href="preview.svg">
+    <link rel="alternate icon" href="../favicon.ico">
+    
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- 스타일시트 -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- 카카오 SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
+    <script>
+        if (typeof Kakao !== 'undefined') {
+            Kakao.init('a8dac451077d8e7bea4e9fda1c22fded');
+        }
+    </script>
+</head>
+<body>
+    <!-- 상단 광고 -->
+    <div class="ad-container top">
+        <ins class="adsbygoogle"
+             style="display:inline-block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="1724698171"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🔮 나이든 모습 예측</h1>
+            <p class="subtitle">AI가 보여주는 미래의 나</p>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main class="main-container">
+        <div class="container">
+            <!-- 소개 섹션 -->
+            <section class="intro-section">
+                <div class="intro-content">
+                    <h2>🕰️ 시간을 앞서가는 미래 예측</h2>
+                    <p>
+                        최첨단 AI 기술로 현재의 얼굴에서 미래의 모습을 예측해보세요.<br>
+                        10년, 20년, 30년 후의 변화된 모습을 미리 만나볼 수 있습니다.
+                    </p>
+                    
+                    <!-- 나이별 미리보기 -->
+                    <div class="age-gallery">
+                        <div class="age-preview" data-age="current">
+                            <div class="age-emoji">👤</div>
+                            <span>현재</span>
+                        </div>
+                        <div class="age-preview" data-age="10years">
+                            <div class="age-emoji">👩</div>
+                            <span>+10년</span>
+                        </div>
+                        <div class="age-preview" data-age="20years">
+                            <div class="age-emoji">👩‍🦳</div>
+                            <span>+20년</span>
+                        </div>
+                        <div class="age-preview" data-age="30years">
+                            <div class="age-emoji">👵</div>
+                            <span>+30년</span>
+                        </div>
+                        <div class="age-preview" data-age="50years">
+                            <div class="age-emoji">🧓</div>
+                            <span>+50년</span>
+                        </div>
+                        <div class="age-preview" data-age="senior">
+                            <div class="age-emoji">👴</div>
+                            <span>황혼기</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 업로드 섹션 -->
+            <section class="upload-section">
+                <div class="upload-container">
+                    <h3>📸 사진 업로드</h3>
+                    <p class="upload-guide">
+                        정면을 바라보는 얼굴 사진을 업로드해주세요
+                    </p>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-placeholder">
+                            <div class="upload-icon">🔮</div>
+                            <div class="upload-text">
+                                <p><strong>이곳을 클릭하거나 파일을 드래그해주세요</strong></p>
+                                <p class="upload-subtext">JPG, PNG, GIF 파일 (최대 10MB)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    
+                    <div class="upload-tips">
+                        <h4>📋 더 정확한 예측을 위한 팁</h4>
+                        <ul>
+                            <li>정면을 바라보는 사진을 사용해주세요</li>
+                            <li>밝고 선명한 사진일수록 정확합니다</li>
+                            <li>얼굴이 가려지지 않은 사진을 선택해주세요</li>
+                            <li>자연스러운 표정의 사진이 좋습니다</li>
+                            <li>고화질 사진을 권장합니다</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="analyze-btn" id="analyzeBtn" disabled>
+                        🔮 미래 모습 예측하기
+                    </button>
+                </div>
+            </section>
+
+            <!-- 분석 중 섹션 -->
+            <section class="analyzing-section" style="display: none;">
+                <div class="analyzing-animation">
+                    <div class="time-portal">
+                        <div class="portal-ring ring-1"></div>
+                        <div class="portal-ring ring-2"></div>
+                        <div class="portal-ring ring-3"></div>
+                        <div class="time-traveler">🧳</div>
+                    </div>
+                </div>
+                
+                <h3>🔮 미래로의 여행이 시작됩니다...</h3>
+                
+                <div class="analyzing-steps">
+                    <div class="step">얼굴 특징을 정밀 분석하고 있습니다...</div>
+                    <div class="step">노화 패턴을 계산하고 있습니다...</div>
+                    <div class="step">시간의 흐름을 시뮬레이션하는 중...</div>
+                    <div class="step">미래의 모습을 그려내고 있습니다...</div>
+                    <div class="step">최종 결과를 완성하는 중...</div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </section>
+
+            <!-- 결과 섹션 -->
+            <section class="result-section" style="display: none;">
+                <!-- 동적으로 생성될 결과 내용 -->
+            </section>
+        </div>
+    </main>
+
+    <!-- 중간 광고 -->
+    <div class="ad-container middle">
+        <ins class="adsbygoogle"
+             style="display:inline-block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="1724698171"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 AI 얼굴 분석 연구소. 모든 권리 보유.</p>
+            <p class="disclaimer">
+                본 서비스는 엔터테인먼트 목적으로 제공되며, 실제 미래 모습과 다를 수 있습니다.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <!-- 메인 스크립트 -->
+    <script src="script.js"></script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XMYK8STXRX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XMYK8STXRX');
+    </script>
+</body>
+</html>

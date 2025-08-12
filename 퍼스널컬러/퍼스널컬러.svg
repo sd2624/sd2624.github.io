@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" style="background: linear-gradient(135deg, #ffd89b 0%, #19547b 25%, #667eea 50%, #f093fb 75%, #f5576c 100%);">
+  <!-- 배경 원 -->
+  <circle cx="150" cy="150" r="140" fill="rgba(255,255,255,0.95)" stroke="rgba(102,126,234,0.3)" stroke-width="2"/>
+  
+  <!-- 계절별 컬러 팔레트 -->
+  <!-- 봄 (Spring) -->
+  <g transform="translate(75, 75)">
+    <circle cx="0" cy="0" r="30" fill="rgba(255,182,193,0.8)" stroke="#ff6b9d" stroke-width="2"/>
+    <text x="0" y="-35" text-anchor="middle" font-family="'Noto Sans KR', sans-serif" font-size="12" font-weight="bold" fill="#333">봄</text>
+    <circle cx="-10" cy="-10" r="5" fill="#ffb6c1"/>
+    <circle cx="10" cy="-10" r="5" fill="#98fb98"/>
+    <circle cx="-10" cy="10" r="5" fill="#ffe4b5"/>
+    <circle cx="10" cy="10" r="5" fill="#f0e68c"/>
+    <text x="0" y="4" text-anchor="middle" font-size="18" dominant-baseline="central">🌸</text>
+  </g>
+  
+  <!-- 여름 (Summer) -->
+  <g transform="translate(225, 75)">
+    <circle cx="0" cy="0" r="30" fill="rgba(173,216,230,0.8)" stroke="#667eea" stroke-width="2"/>
+    <text x="0" y="-35" text-anchor="middle" font-family="'Noto Sans KR', sans-serif" font-size="12" font-weight="bold" fill="#333">여름</text>
+    <circle cx="-10" cy="-10" r="5" fill="#b0c4de"/>
+    <circle cx="10" cy="-10" r="5" fill="#d8bfd8"/>
+    <circle cx="-10" cy="10" r="5" fill="#b0e0e6"/>
+    <circle cx="10" cy="10" r="5" fill="#e6e6fa"/>
+    <text x="0" y="4" text-anchor="middle" font-size="18" dominant-baseline="central">🌊</text>
+  </g>
+  
+  <!-- 가을 (Autumn) -->
+  <g transform="translate(75, 225)">
+    <circle cx="0" cy="0" r="30" fill="rgba(210,180,140,0.8)" stroke="#d2691e" stroke-width="2"/>
+    <text x="0" y="-35" text-anchor="middle" font-family="'Noto Sans KR', sans-serif" font-size="12" font-weight="bold" fill="#333">가을</text>
+    <circle cx="-10" cy="-10" r="5" fill="#daa520"/>
+    <circle cx="10" cy="-10" r="5" fill="#cd853f"/>
+    <circle cx="-10" cy="10" r="5" fill="#d2691e"/>
+    <circle cx="10" cy="10" r="5" fill="#8b4513"/>
+    <text x="0" y="4" text-anchor="middle" font-size="18" dominant-baseline="central">🍂</text>
+  </g>
+  
+  <!-- 겨울 (Winter) -->
+  <g transform="translate(225, 225)">
+    <circle cx="0" cy="0" r="30" fill="rgba(220,220,220,0.8)" stroke="#4169e1" stroke-width="2"/>
+    <text x="0" y="-35" text-anchor="middle" font-family="'Noto Sans KR', sans-serif" font-size="12" font-weight="bold" fill="#333">겨울</text>
+    <circle cx="-10" cy="-10" r="5" fill="#000000"/>
+    <circle cx="10" cy="-10" r="5" fill="#ffffff"/>
+    <circle cx="-10" cy="10" r="5" fill="#4169e1"/>
+    <circle cx="10" cy="10" r="5" fill="#dc143c"/>
+    <text x="0" y="4" text-anchor="middle" font-size="18" dominant-baseline="central">❄️</text>
+  </g>
+  
+  <!-- 중앙 카메라 아이콘 -->
+  <g transform="translate(150, 150)">
+    <circle cx="0" cy="0" r="35" fill="rgba(255,255,255,0.95)" stroke="rgba(102,126,234,0.5)" stroke-width="3"/>
+    <rect x="-20" y="-12" width="40" height="24" rx="4" fill="rgba(102,126,234,0.8)"/>
+    <rect x="-8" y="-18" width="16" height="6" rx="2" fill="rgba(102,126,234,0.6)"/>
+    <circle cx="0" cy="0" r="12" fill="none" stroke="white" stroke-width="2"/>
+    <circle cx="0" cy="0" r="8" fill="none" stroke="white" stroke-width="1.5"/>
+    <circle cx="12" cy="-8" r="2" fill="rgba(255,255,255,0.8)"/>
+  </g>
+  
+  <!-- 연결선들 -->
+  <g opacity="0.4">
+    <line x1="150" y1="150" x2="75" y2="75" stroke="rgba(255,182,193,0.6)" stroke-width="2"/>
+    <line x1="150" y1="150" x2="225" y2="75" stroke="rgba(173,216,230,0.6)" stroke-width="2"/>
+    <line x1="150" y1="150" x2="75" y2="225" stroke="rgba(210,180,140,0.6)" stroke-width="2"/>
+    <line x1="150" y1="150" x2="225" y2="225" stroke="rgba(220,220,220,0.6)" stroke-width="2"/>
+  </g>
+  
+  <!-- 컬러 스펙트럼 장식 -->
+  <g opacity="0.7">
+    <circle cx="30" cy="150" r="8" fill="#ff6b9d"/>
+    <circle cx="270" cy="150" r="8" fill="#667eea"/>
+    <circle cx="150" cy="30" r="8" fill="#f093fb"/>
+    <circle cx="150" cy="270" r="8" fill="#ffd89b"/>
+  </g>
+  
+  <!-- 타이틀 -->
+  <text x="150" y="35" text-anchor="middle" font-family="'Noto Sans KR', sans-serif" font-size="16" font-weight="bold" fill="rgba(102,126,234,0.8)">퍼스널 컬러 진단</text>
+  
+  <!-- 팔레트 아이콘들 -->
+  <g opacity="0.6">
+    <circle cx="60" cy="60" r="3" fill="#ffb6c1"/>
+    <circle cx="240" cy="60" r="3" fill="#b0c4de"/>
+    <circle cx="60" cy="240" r="3" fill="#daa520"/>
+    <circle cx="240" cy="240" r="3" fill="#4169e1"/>
+  </g>
+  
+  <!-- 웜쿨톤 표시 -->
+  <g transform="translate(60, 150)">
+    <text x="0" y="0" text-anchor="middle" font-family="'Noto Sans KR', sans-serif" font-size="12" font-weight="500" fill="rgba(255,107,157,0.8)" transform="rotate(-90)">웜톤</text>
+  </g>
+  <g transform="translate(240, 150)">
+    <text x="0" y="0" text-anchor="middle" font-family="'Noto Sans KR', sans-serif" font-size="12" font-weight="500" fill="rgba(102,126,234,0.8)" transform="rotate(90)">쿨톤</text>
+  </g>
+  
+  <!-- 반짝이는 효과 -->
+  <g opacity="0.8">
+    <path d="M100 100 L105 105 L100 110 L95 105 Z" fill="rgba(255,255,255,0.9)"/>
+    <path d="M200 100 L205 105 L200 110 L195 105 Z" fill="rgba(255,255,255,0.9)"/>
+    <path d="M100 200 L105 205 L100 210 L95 205 Z" fill="rgba(255,255,255,0.9)"/>
+    <path d="M200 200 L205 205 L200 210 L195 205 Z" fill="rgba(255,255,255,0.9)"/>
+  </g>
+</svg>
