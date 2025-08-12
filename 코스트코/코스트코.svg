@@ -1,0 +1,64 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc2626;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f1f5f9;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- 배경 원 -->
+  <circle cx="100" cy="100" r="95" fill="url(#bgGradient)" filter="url(#shadow)"/>
+  
+  <!-- 장바구니 몸체 -->
+  <rect x="60" y="75" width="80" height="55" rx="8" ry="8" fill="url(#cartGradient)" stroke="#dc2626" stroke-width="2"/>
+  
+  <!-- 장바구니 바퀴 -->
+  <circle cx="75" cy="145" r="8" fill="#dc2626"/>
+  <circle cx="125" cy="145" r="8" fill="#dc2626"/>
+  
+  <!-- 장바구니 손잡이 -->
+  <path d="M 70 75 Q 70 65 80 65 Q 90 65 90 75" stroke="#dc2626" stroke-width="3" fill="none"/>
+  
+  <!-- 코스트코 로고 스타일 C -->
+  <path d="M 85 90 Q 75 90 75 100 Q 75 110 85 110 Q 95 110 95 105" stroke="#dc2626" stroke-width="4" fill="none" stroke-linecap="round"/>
+  
+  <!-- 상품들 (장바구니 안) -->
+  <rect x="67" y="82" width="12" height="18" rx="2" fill="#dc2626" opacity="0.8"/>
+  <rect x="82" y="85" width="10" height="15" rx="2" fill="#b91c1c" opacity="0.8"/>
+  <rect x="95" y="83" width="14" height="17" rx="2" fill="#dc2626" opacity="0.8"/>
+  <rect x="112" y="81" width="11" height="19" rx="2" fill="#b91c1c" opacity="0.8"/>
+  <rect x="126" y="84" width="9" height="16" rx="2" fill="#dc2626" opacity="0.8"/>
+  
+  <!-- 별표 효과 (할인/특가 표시) -->
+  <g transform="translate(160,40) scale(0.6)">
+    <path d="M 0,-20 L 6,-6 L 20,-6 L 10,2 L 16,16 L 0,8 L -16,16 L -10,2 L -20,-6 L -6,-6 Z" fill="#fbbf24" stroke="#f59e0b" stroke-width="1"/>
+    <text x="0" y="3" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#dc2626">%</text>
+  </g>
+  
+  <!-- 작은 별표들 -->
+  <circle cx="45" cy="60" r="2" fill="#fbbf24" opacity="0.8"/>
+  <circle cx="155" cy="160" r="2" fill="#fbbf24" opacity="0.8"/>
+  <circle cx="35" cy="140" r="1.5" fill="#fbbf24" opacity="0.6"/>
+  
+  <!-- 멤버십 카드 아이콘 -->
+  <g transform="translate(130,120) scale(0.8)">
+    <rect x="0" y="0" width="30" height="18" rx="3" fill="#ffffff" stroke="#dc2626" stroke-width="1"/>
+    <rect x="2" y="2" width="26" height="4" fill="#dc2626" opacity="0.3"/>
+    <rect x="2" y="8" width="12" height="2" fill="#dc2626" opacity="0.6"/>
+    <rect x="2" y="12" width="8" height="2" fill="#dc2626" opacity="0.6"/>
+  </g>
+  
+  <!-- 텍스트: COSTCO -->
+  <text x="100" y="175" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#ffffff">COSTCO</text>
+  
+  <!-- 장식적 원들 -->
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.3"/>
+  <circle cx="100" cy="100" r="78" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+</svg>
