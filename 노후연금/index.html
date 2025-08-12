@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노후 연금 종류 자격 나이 총정리 - 기초연금 노령연금 완벽 가이드</title>
+    <meta name="description" content="기초연금, 노령연금, 국민연금 등 내가 받을 수 있는 노후 연금 종류와 자격 조건을 한번에 확인하세요">
+    
+    <!-- Kakao SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 시작 페이지 -->
+    <div id="startPage" class="page">
+        <div class="container">
+            <!-- 상단 광고 -->
+            <div class="ad-section">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="1724698171"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+
+            <div class="content">
+                <div class="header-section">
+                    <div class="pension-badge">
+                        <span class="badge-icon">💰</span>
+                        <span class="badge-text">연금 완전 정복</span>
+                    </div>
+                    
+                    <h1 class="main-title">
+                        노후 연금 종류<br>
+                        <span class="highlight-text">자격 나이 총정리</span>
+                    </h1>
+                    
+                    <p class="subtitle">
+                        기초연금부터 노령연금까지<br>
+                        <strong>내가 받을 수 있는 모든 연금</strong>을 확인하세요
+                    </p>
+                </div>
+
+                <div class="pension-preview">
+                    <div class="pension-card">
+                        <div class="card-icon">👴</div>
+                        <h3>기초연금</h3>
+                        <p>65세 이상, 소득하위 70%</p>
+                        <div class="amount">월 최대 33만원</div>
+                    </div>
+                    
+                    <div class="pension-card">
+                        <div class="card-icon">🏛️</div>
+                        <h3>국민연금</h3>
+                        <p>10년 이상 가입, 연령별 지급</p>
+                        <div class="amount">월 평균 58만원</div>
+                    </div>
+                    
+                    <div class="pension-card">
+                        <div class="card-icon">🏢</div>
+                        <h3>퇴직연금</h3>
+                        <p>퇴직급여제도 가입자</p>
+                        <div class="amount">연 평균 2,400만원</div>
+                    </div>
+                </div>
+
+                <div class="info-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">12종</div>
+                        <div class="stat-label">연금 종류</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">65세</div>
+                        <div class="stat-label">기본 지급 나이</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">70%</div>
+                        <div class="stat-label">기초연금 대상</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10년</div>
+                        <div class="stat-label">최소 가입 기간</div>
+                    </div>
+                </div>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span>내 조건에 맞는 연금 종류 확인</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📅</span>
+                        <span>연령별 수급 자격 조건 안내</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💎</span>
+                        <span>예상 수급액 및 신청 방법</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📋</span>
+                        <span>누락 연금 종류 발견 및 안내</span>
+                    </div>
+                </div>
+
+                <button class="start-btn" onclick="startTest()">
+                    <span class="btn-icon">🔍</span>
+                    내가 받을 수 있는 연금 확인하기
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 질문 페이지 -->
+    <div id="questionPage" class="page hidden">
+        <div class="container">
+            <div class="progress-section">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">
+                    <span class="current-num">1</span>
+                    <span class="total-num">/ 8</span>
+                </div>
+            </div>
+
+            <div class="question-content">
+                <h2 class="question-title"></h2>
+                <p class="question-desc"></p>
+                
+                <div class="answers-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 분석 모달 -->
+    <div id="analysisModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📊 연금 자격 분석 중...</h3>
+                <p>내 조건에 맞는 연금 종류를 확인하고 있습니다</p>
+            </div>
+            
+            <div class="analysis-steps">
+                <div class="step-item">
+                    <div class="step-icon">👤</div>
+                    <div class="step-text">개인 정보 분석</div>
+                    <div class="step-check"></div>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">📅</div>
+                    <div class="step-text">연령 자격 확인</div>
+                    <div class="step-check"></div>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">💰</div>
+                    <div class="step-text">소득 수준 평가</div>
+                    <div class="step-check"></div>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">🎯</div>
+                    <div class="step-text">맞춤 연금 선별</div>
+                    <div class="step-check"></div>
+                </div>
+            </div>
+            
+            <div class="timer-section">
+                <div class="timer-circle">
+                    <span class="timer-display">5</span>
+                </div>
+                <p>잠시만 기다려주세요...</p>
+            </div>
+            
+            <!-- 팝업 광고 -->
+            <div class="popup-ad">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3562356189"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+    </div>
+
+    <!-- 결과 페이지 -->
+    <div id="resultPage" class="page hidden">
+        <div class="container">
+            <div class="result-header">
+                <div class="result-icon"></div>
+                <h2 class="result-title"></h2>
+                <p class="result-summary"></p>
+            </div>
+            
+            <div class="result-content">
+                <div class="eligible-pensions"></div>
+                <div class="pension-details"></div>
+                <div class="application-guide"></div>
+                <div class="additional-tips"></div>
+            </div>
+            
+            <div class="action-section">
+                <button class="detail-btn" onclick="window.open('https://direct.samsung.co.kr', '_blank')">연금 신청 가이드</button>
+                <button class="other-test-btn" onclick="window.location.href='../index.html'">다른 테스트 하기</button>
+                <button class="share-btn" onclick="shareKakao()">카카오톡 공유</button>
+                <button class="restart-btn" onclick="restartTest()">다시 하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <!-- 광고 초기화 -->
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>

@@ -661,7 +661,7 @@ body::before {
     gap: 15px;
 }
 
-.primary-action, .share-button, .retry-button {
+.primary-action, .other-test-btn, .share-button, .retry-button {
     padding: 16px 30px;
     border: none;
     border-radius: 25px;
@@ -679,6 +679,11 @@ body::before {
     color: white;
 }
 
+.other-test-btn {
+    background: linear-gradient(45deg, var(--earth-brown), var(--warning-orange));
+    color: white;
+}
+
 .share-button {
     background: #FEE500;
     color: #3C1E1E;
@@ -690,7 +695,7 @@ body::before {
     border: 2px solid rgba(122, 176, 105, 0.3);
 }
 
-.primary-action:hover, .share-button:hover, .retry-button:hover {
+.primary-action:hover, .other-test-btn:hover, .share-button:hover, .retry-button:hover {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 8px 25px var(--shadow-green);
 }

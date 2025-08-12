@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background: linear-gradient(135deg, #faf8f3 0%, #d4af37 50%, #1e3a8a 100%);">
+  <!-- 배경 패턴 -->
+  <defs>
+    <pattern id="pensionPattern" patternUnits="userSpaceOnUse" width="30" height="30">
+      <circle cx="15" cy="15" r="1.5" fill="#1e3a8a" opacity="0.1"/>
+    </pattern>
+    
+    <!-- 그라데이션 정의 -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fffef9;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#faf8f3;stop-opacity:0.95" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 배경 패턴 적용 -->
+  <rect width="400" height="300" fill="url(#pensionPattern)"/>
+  
+  <!-- 메인 카드 -->
+  <rect x="25" y="35" width="350" height="230" rx="20" ry="20" fill="url(#cardBg)" stroke="#d4af37" stroke-width="2"/>
+  
+  <!-- 헤더 영역 -->
+  <rect x="35" y="45" width="330" height="55" rx="15" ry="15" fill="url(#goldGradient)"/>
+  
+  <!-- 제목 텍스트 -->
+  <text x="200" y="68" text-anchor="middle" font-family="serif" font-size="18" font-weight="bold" fill="white">노후 연금 종류</text>
+  <text x="200" y="88" text-anchor="middle" font-family="serif" font-size="14" fill="white" opacity="0.9">자격 나이 총정리</text>
+  
+  <!-- 연금 아이콘들 -->
+  <!-- 기초연금 -->
+  <g transform="translate(50, 120)">
+    <rect x="0" y="0" width="60" height="40" rx="8" ry="8" fill="url(#blueGradient)"/>
+    <text x="30" y="15" text-anchor="middle" font-family="serif" font-size="8" fill="white" font-weight="bold">기초연금</text>
+    <text x="30" y="28" text-anchor="middle" font-family="serif" font-size="7" fill="white">65세+</text>
+    <text x="30" y="36" text-anchor="middle" font-family="serif" font-size="6" fill="white">33만원</text>
+  </g>
+  
+  <!-- 국민연금 -->
+  <g transform="translate(120, 120)">
+    <rect x="0" y="0" width="60" height="40" rx="8" ry="8" fill="url(#goldGradient)"/>
+    <text x="30" y="15" text-anchor="middle" font-family="serif" font-size="8" fill="white" font-weight="bold">국민연금</text>
+    <text x="30" y="28" text-anchor="middle" font-family="serif" font-size="7" fill="white">62-65세</text>
+    <text x="30" y="36" text-anchor="middle" font-family="serif" font-size="6" fill="white">58만원</text>
+  </g>
+  
+  <!-- 퇴직연금 -->
+  <g transform="translate(190, 120)">
+    <rect x="0" y="0" width="60" height="40" rx="8" ry="8" fill="#3b82f6"/>
+    <text x="30" y="15" text-anchor="middle" font-family="serif" font-size="8" fill="white" font-weight="bold">퇴직연금</text>
+    <text x="30" y="28" text-anchor="middle" font-family="serif" font-size="7" fill="white">55세+</text>
+    <text x="30" y="36" text-anchor="middle" font-family="serif" font-size="6" fill="white">2400만원</text>
+  </g>
+  
+  <!-- 개인연금 -->
+  <g transform="translate(260, 120)">
+    <rect x="0" y="0" width="60" height="40" rx="8" ry="8" fill="#10b981"/>
+    <text x="30" y="15" text-anchor="middle" font-family="serif" font-size="8" fill="white" font-weight="bold">개인연금</text>
+    <text x="30" y="28" text-anchor="middle" font-family="serif" font-size="7" fill="white">55세+</text>
+    <text x="30" y="36" text-anchor="middle" font-family="serif" font-size="6" fill="white">세제혜택</text>
+  </g>
+  
+  <!-- 중앙 아이콘 -->
+  <g transform="translate(175, 175)">
+    <!-- 계산기/분석 아이콘 -->
+    <rect x="0" y="0" width="50" height="35" rx="5" ry="5" fill="url(#goldGradient)"/>
+    <rect x="5" y="5" width="40" height="12" rx="2" ry="2" fill="white"/>
+    <!-- 버튼들 -->
+    <circle cx="12" cy="25" r="3" fill="white" opacity="0.8"/>
+    <circle cx="25" cy="25" r="3" fill="white" opacity="0.8"/>
+    <circle cx="38" cy="25" r="3" fill="white" opacity="0.8"/>
+    <!-- 화면 텍스트 -->
+    <text x="25" y="14" text-anchor="middle" font-family="monospace" font-size="6" fill="#1e3a8a">분석중</text>
+  </g>
+  
+  <!-- 하단 정보 영역 -->
+  <rect x="35" y="220" width="330" height="35" rx="12" ry="12" fill="rgba(255, 255, 255, 0.8)"/>
+  
+  <!-- 특징 포인트들 -->
+  <g transform="translate(50, 230)">
+    <circle cx="0" cy="8" r="2" fill="#d4af37"/>
+    <text x="8" y="11" font-family="serif" font-size="9" fill="#1e3a8a">12종 연금 확인</text>
+    
+    <circle cx="90" cy="8" r="2" fill="#3b82f6"/>
+    <text x="98" y="11" font-family="serif" font-size="9" fill="#1e3a8a">자격조건 안내</text>
+    
+    <circle cx="180" cy="8" r="2" fill="#10b981"/>
+    <text x="188" y="11" font-family="serif" font-size="9" fill="#1e3a8a">신청방법 제공</text>
+    
+    <circle cx="270" cy="8" r="2" fill="#ef4444"/>
+    <text x="278" y="11" font-family="serif" font-size="9" fill="#1e3a8a">최적화 전략</text>
+  </g>
+  
+  <!-- 하단 추가 정보 -->
+  <g transform="translate(50, 245)">
+    <text x="0" y="8" font-family="serif" font-size="8" fill="#4b5563">✓ 연령별 맞춤 분석</text>
+    <text x="120" y="8" font-family="serif" font-size="8" fill="#4b5563">✓ 소득수준별 자격확인</text>
+    <text x="250" y="8" font-family="serif" font-size="8" fill="#4b5563">✓ 예상수급액 계산</text>
+  </g>
+  
+  <!-- 장식 요소들 -->
+  <circle cx="60" cy="60" r="1.5" fill="#d4af37" opacity="0.6"/>
+  <circle cx="340" cy="70" r="1.5" fill="#3b82f6" opacity="0.6"/>
+  <circle cx="70" cy="280" r="1.5" fill="#10b981" opacity="0.6"/>
+  <circle cx="330" cy="270" r="1.5" fill="#d4af37" opacity="0.6"/>
+  
+  <!-- 연금 연결선 -->
+  <path d="M 110 140 Q 150 120 190 140" stroke="#d4af37" stroke-width="1" fill="none" opacity="0.3" stroke-dasharray="2,2"/>
+  <path d="M 180 140 Q 220 120 260 140" stroke="#3b82f6" stroke-width="1" fill="none" opacity="0.3" stroke-dasharray="2,2"/>
+  
+  <!-- 코너 장식 -->
+  <g transform="translate(25, 35)">
+    <path d="M 0 15 Q 0 0 15 0" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+  </g>
+  <g transform="translate(360, 35)">
+    <path d="M 0 0 Q 15 0 15 15" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+  </g>
+  <g transform="translate(25, 250)">
+    <path d="M 15 15 Q 0 15 0 0" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+  </g>
+  <g transform="translate(360, 250)">
+    <path d="M 0 0 Q 0 15 -15 15" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+  </g>
+</svg>

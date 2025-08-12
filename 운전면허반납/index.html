@@ -133,13 +133,17 @@
                 </div>
 
                 <div class="action-buttons">
-                    <button class="primary-btn" onclick="location.href='https://testpro.site'">
+                    <button class="primary-btn" onclick="window.open('https://direct.samsung.co.kr', '_blank')">
+                        상세 정보 보기
+                    </button>
+                    <button class="other-test-btn" onclick="window.location.href='../index.html'">
                         다른 테스트 하기
                     </button>
-                    <div class="kakao-share">
+                    <button class="kakao-share" onclick="shareKakao()">
                         <div class="kakao-icon">💬</div>
                         <span>결과 공유하기</span>
-                    </div>
+                    </button>
+                    <button class="restart-btn" onclick="restartTest()">다시 하기</button>
                 </div>
             </div>
         </div>
