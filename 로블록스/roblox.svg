@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 로블록스 로고 배경 -->
+  <rect width="200" height="200" fill="url(#gradient1)"/>
+  
+  <!-- 그라데이션 정의 -->
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b4d8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0077b6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#023e8a;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.7" />
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- 로블록스 블록 몸체 -->
+  <g transform="translate(50,40)">
+    <!-- 메인 블록 -->
+    <rect x="30" y="40" width="40" height="60" rx="8" ry="8" 
+          fill="url(#gradient2)" stroke="#ffffff" stroke-width="2" filter="url(#glow)"/>
+    
+    <!-- 머리 -->
+    <circle cx="50" cy="25" r="18" fill="url(#gradient2)" stroke="#ffffff" stroke-width="2"/>
+    
+    <!-- 팔들 -->
+    <rect x="10" y="50" width="15" height="35" rx="7" ry="7" 
+          fill="url(#gradient2)" stroke="#ffffff" stroke-width="2"/>
+    <rect x="75" y="50" width="15" height="35" rx="7" ry="7" 
+          fill="url(#gradient2)" stroke="#ffffff" stroke-width="2"/>
+    
+    <!-- 다리들 -->
+    <rect x="35" y="105" width="12" height="30" rx="6" ry="6" 
+          fill="url(#gradient2)" stroke="#ffffff" stroke-width="2"/>
+    <rect x="53" y="105" width="12" height="30" rx="6" ry="6" 
+          fill="url(#gradient2)" stroke="#ffffff" stroke-width="2"/>
+  </g>
+  
+  <!-- 로벅스 심볼들 -->
+  <g fill="#fff" opacity="0.8">
+    <!-- R$ 심볼 1 -->
+    <g transform="translate(20,20) scale(0.8)">
+      <text x="0" y="15" font-family="Arial, sans-serif" font-size="18" font-weight="bold">R$</text>
+    </g>
+    
+    <!-- R$ 심볼 2 -->
+    <g transform="translate(160,30) scale(0.6)">
+      <text x="0" y="15" font-family="Arial, sans-serif" font-size="18" font-weight="bold">R$</text>
+    </g>
+    
+    <!-- R$ 심볼 3 -->
+    <g transform="translate(30,160) scale(0.7)">
+      <text x="0" y="15" font-family="Arial, sans-serif" font-size="18" font-weight="bold">R$</text>
+    </g>
+    
+    <!-- R$ 심볼 4 -->
+    <g transform="translate(150,150) scale(0.5)">
+      <text x="0" y="15" font-family="Arial, sans-serif" font-size="18" font-weight="bold">R$</text>
+    </g>
+  </g>
+  
+  <!-- 프로모션 코드 박스 -->
+  <g transform="translate(120,90)">
+    <rect x="0" y="0" width="70" height="25" rx="5" ry="5" 
+          fill="rgba(255,255,255,0.9)" stroke="#00b4d8" stroke-width="2"/>
+    <text x="35" y="17" text-anchor="middle" font-family="Arial, sans-serif" 
+          font-size="10" font-weight="bold" fill="#00b4d8">PROMO</text>
+  </g>
+  
+  <!-- 반짝이는 별들 -->
+  <g fill="#fff" opacity="0.9">
+    <g transform="translate(25,50)">
+      <polygon points="0,-8 2,-2 8,-2 3,2 5,8 0,4 -5,8 -3,2 -8,-2 -2,-2" transform="scale(0.5)"/>
+    </g>
+    <g transform="translate(175,70)">
+      <polygon points="0,-8 2,-2 8,-2 3,2 5,8 0,4 -5,8 -3,2 -8,-2 -2,-2" transform="scale(0.3)"/>
+    </g>
+    <g transform="translate(170,120)">
+      <polygon points="0,-8 2,-2 8,-2 3,2 5,8 0,4 -5,8 -3,2 -8,-2 -2,-2" transform="scale(0.4)"/>
+    </g>
+    <g transform="translate(15,120)">
+      <polygon points="0,-8 2,-2 8,-2 3,2 5,8 0,4 -5,8 -3,2 -8,-2 -2,-2" transform="scale(0.3)"/>
+    </g>
+  </g>
+  
+  <!-- 애니메이션 효과 -->
+  <style>
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    .twinkle {
+      animation: twinkle 2s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+  
+  <!-- 애니메이션 적용 -->
+  <g class="float-animation" transform="translate(50,40)">
+    <circle cx="50" cy="25" r="2" fill="#fff" opacity="0" class="twinkle"/>
+  </g>
+  
+  <!-- 무료 배지 -->
+  <g transform="translate(10,10)">
+    <circle r="20" fill="#00b4d8"/>
+    <text y="6" text-anchor="middle" fill="white" font-size="10" font-weight="bold">FREE</text>
+  </g>
+</svg>
