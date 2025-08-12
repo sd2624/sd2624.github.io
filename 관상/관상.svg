@@ -1,0 +1,232 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 배경 그라데이션 -->
+  <defs>
+    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#667eea;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="faceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffeaa7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fab1a0;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="mysticalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a29bfe;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6c5ce7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a29bfe;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="crystalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#74b9ff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0984e3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#74b9ff;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+    
+    <filter id="softShadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.2)"/>
+    </filter>
+  </defs>
+  
+  <!-- 배경 -->
+  <rect width="400" height="300" fill="url(#backgroundGradient)" rx="15"/>
+  
+  <!-- 배경 장식 요소들 -->
+  <g opacity="0.1">
+    <!-- 별자리 패턴 -->
+    <circle cx="60" cy="50" r="2" fill="white"/>
+    <circle cx="80" cy="40" r="1.5" fill="white"/>
+    <circle cx="100" cy="60" r="2.5" fill="white"/>
+    <path d="M60,50 L80,40 L100,60" stroke="white" stroke-width="1"/>
+    
+    <circle cx="320" cy="70" r="2" fill="white"/>
+    <circle cx="340" cy="50" r="1.5" fill="white"/>
+    <circle cx="360" cy="80" r="2.5" fill="white"/>
+    <path d="M320,70 L340,50 L360,80" stroke="white" stroke-width="1"/>
+    
+    <!-- 신비로운 심볼들 -->
+    <path d="M50,250 C55,245 65,245 70,250 C65,255 55,255 50,250" fill="white"/>
+    <circle cx="60" cy="250" r="3" fill="none" stroke="white" stroke-width="1"/>
+    
+    <path d="M330,220 C335,215 345,215 350,220 C345,225 335,225 330,220" fill="white"/>
+    <circle cx="340" cy="220" r="3" fill="none" stroke="white" stroke-width="1"/>
+  </g>
+  
+  <!-- 메인 얼굴 -->
+  <g transform="translate(200,150)">
+    <!-- 얼굴 윤곽 -->
+    <ellipse cx="0" cy="0" rx="60" ry="70" fill="url(#faceGradient)" filter="url(#shadow)"/>
+    
+    <!-- 머리카락 -->
+    <path d="M-50,-60 Q0,-80 50,-60 Q40,-70 20,-75 Q0,-78 -20,-75 Q-40,-70 -50,-60" fill="#8b4513"/>
+    
+    <!-- 눈썹 -->
+    <path d="M-25,-15 Q-15,-20 -5,-15" stroke="#654321" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M5,-15 Q15,-20 25,-15" stroke="#654321" stroke-width="3" fill="none" stroke-linecap="round"/>
+    
+    <!-- 눈 -->
+    <ellipse cx="-18" cy="-5" rx="8" ry="6" fill="white"/>
+    <ellipse cx="18" cy="-5" rx="8" ry="6" fill="white"/>
+    <circle cx="-18" cy="-5" r="4" fill="#333"/>
+    <circle cx="18" cy="-5" r="4" fill="#333"/>
+    <circle cx="-16" cy="-7" r="1.5" fill="white"/>
+    <circle cx="20" cy="-7" r="1.5" fill="white"/>
+    
+    <!-- 코 -->
+    <path d="M0,5 Q-2,12 0,18 Q2,12 0,5" fill="none" stroke="#d4a574" stroke-width="2"/>
+    <ellipse cx="-3" cy="16" rx="2" ry="1.5" fill="#d4a574"/>
+    <ellipse cx="3" cy="16" rx="2" ry="1.5" fill="#d4a574"/>
+    
+    <!-- 입 -->
+    <path d="M-12,35 Q0,42 12,35" stroke="#d63031" stroke-width="3" fill="none" stroke-linecap="round"/>
+    
+    <!-- 볼 홍조 -->
+    <ellipse cx="-35" cy="15" rx="8" ry="5" fill="#ff7675" opacity="0.3"/>
+    <ellipse cx="35" cy="15" rx="8" ry="5" fill="#ff7675" opacity="0.3"/>
+  </g>
+  
+  <!-- 좌측 수정구 -->
+  <g transform="translate(100,120)">
+    <circle cx="0" cy="0" r="25" fill="url(#crystalGradient)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="20" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="0" cy="0" r="15" fill="rgba(255,255,255,0.2)"/>
+    <circle cx="-8" cy="-8" r="3" fill="rgba(255,255,255,0.8)"/>
+    
+    <!-- 수정구 받침대 -->
+    <ellipse cx="0" cy="25" rx="20" ry="8" fill="url(#mysticalGradient)"/>
+    <ellipse cx="0" cy="30" rx="25" ry="5" fill="url(#mysticalGradient)" opacity="0.6"/>
+  </g>
+  
+  <!-- 우측 타로카드 -->
+  <g transform="translate(320,130)">
+    <!-- 카드들 -->
+    <rect x="-15" y="-20" width="25" height="35" rx="3" fill="url(#mysticalGradient)" filter="url(#softShadow)"/>
+    <rect x="-12" y="-17" width="23" height="33" rx="2" fill="white"/>
+    <rect x="-10" y="-15" width="19" height="10" fill="url(#mysticalGradient)" opacity="0.8"/>
+    
+    <!-- 별 심볼 -->
+    <polygon points="0,-5 2,0 7,0 3,3 5,8 0,5 -5,8 -3,3 -7,0 -2,0" fill="#ffd700"/>
+    
+    <rect x="-12" y="-25" width="25" height="35" rx="3" fill="url(#mysticalGradient)" filter="url(#softShadow)" opacity="0.7"/>
+    <rect x="-9" y="-30" width="25" height="35" rx="3" fill="url(#mysticalGradient)" filter="url(#softShadow)" opacity="0.5"/>
+  </g>
+  
+  <!-- 하단 관상 특징 아이콘들 -->
+  <g transform="translate(200,240)">
+    <!-- 얼굴형 -->
+    <g transform="translate(-90,0)">
+      <circle cx="0" cy="0" r="15" fill="rgba(255,255,255,0.9)" filter="url(#softShadow)"/>
+      <path d="M-8,-8 Q0,-12 8,-8 Q10,0 8,8 Q0,12 -8,8 Q-10,0 -8,-8" fill="url(#faceGradient)" opacity="0.8"/>
+      <text x="0" y="20" text-anchor="middle" fill="white" font-family="Arial" font-size="8" font-weight="600">얼굴형</text>
+    </g>
+    
+    <!-- 눈 -->
+    <g transform="translate(-30,0)">
+      <circle cx="0" cy="0" r="15" fill="rgba(255,255,255,0.9)" filter="url(#softShadow)"/>
+      <ellipse cx="-4" cy="0" rx="3" ry="2" fill="#333"/>
+      <ellipse cx="4" cy="0" rx="3" ry="2" fill="#333"/>
+      <circle cx="-3" cy="-1" r="0.8" fill="white"/>
+      <circle cx="5" cy="-1" r="0.8" fill="white"/>
+      <text x="0" y="20" text-anchor="middle" fill="white" font-family="Arial" font-size="8" font-weight="600">눈</text>
+    </g>
+    
+    <!-- 코 -->
+    <g transform="translate(30,0)">
+      <circle cx="0" cy="0" r="15" fill="rgba(255,255,255,0.9)" filter="url(#softShadow)"/>
+      <path d="M0,-5 Q-1,0 0,5 Q1,0 0,-5" fill="none" stroke="#d4a574" stroke-width="2"/>
+      <ellipse cx="-2" cy="3" rx="1" ry="0.8" fill="#d4a574"/>
+      <ellipse cx="2" cy="3" rx="1" ry="0.8" fill="#d4a574"/>
+      <text x="0" y="20" text-anchor="middle" fill="white" font-family="Arial" font-size="8" font-weight="600">코</text>
+    </g>
+    
+    <!-- 입 -->
+    <g transform="translate(90,0)">
+      <circle cx="0" cy="0" r="15" fill="rgba(255,255,255,0.9)" filter="url(#softShadow)"/>
+      <path d="M-6,0 Q0,3 6,0" stroke="#d63031" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="0" y="20" text-anchor="middle" fill="white" font-family="Arial" font-size="8" font-weight="600">입</text>
+    </g>
+  </g>
+  
+  <!-- 중앙 제목 -->
+  <text x="200" y="40" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold" filter="url(#glow)">
+    AI 관상 분석
+  </text>
+  <text x="200" y="60" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="Arial, sans-serif" font-size="14" font-weight="500">
+    사진으로 보는 당신의 운세와 성격
+  </text>
+  
+  <!-- 신비로운 효과들 -->
+  <g opacity="0.6">
+    <!-- 부유하는 별들 -->
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0,0; 0,-10; 0,0" dur="3s" repeatCount="indefinite"/>
+      <polygon points="50,100 52,105 57,105 53,108 55,113 50,110 45,113 47,108 43,105 48,105" fill="#ffd700"/>
+    </g>
+    
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0,0; 0,8; 0,0" dur="4s" repeatCount="indefinite"/>
+      <polygon points="350,180 351,183 354,183 352,185 353,188 350,186 347,188 348,185 346,183 349,183" fill="#ffd700"/>
+    </g>
+    
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0,0; 0,-6; 0,0" dur="5s" repeatCount="indefinite"/>
+      <polygon points="80,200 81,202 83,202 82,203 82,205 80,204 78,205 78,203 77,202 79,202" fill="#ffd700"/>
+    </g>
+  </g>
+  
+  <!-- 중앙 업로드 아이콘 힌트 -->
+  <g transform="translate(200,90)" opacity="0.7">
+    <rect x="-20" y="-10" width="40" height="25" rx="5" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+    <text x="0" y="2" text-anchor="middle" fill="white" font-family="Arial" font-size="16">📸</text>
+    <text x="0" y="15" text-anchor="middle" fill="white" font-family="Arial" font-size="7">사진 업로드</text>
+  </g>
+  
+  <!-- 운세 점수 미리보기 -->
+  <g transform="translate(50,40)">
+    <rect x="0" y="0" width="60" height="30" rx="15" fill="rgba(255,255,255,0.2)"/>
+    <text x="30" y="12" text-anchor="middle" fill="white" font-family="Arial" font-size="8" font-weight="600">운세점수</text>
+    <text x="30" y="22" text-anchor="middle" fill="#ffd700" font-family="Arial" font-size="10">★★★★☆</text>
+  </g>
+  
+  <g transform="translate(290,40)">
+    <rect x="0" y="0" width="60" height="30" rx="15" fill="rgba(255,255,255,0.2)"/>
+    <text x="30" y="12" text-anchor="middle" fill="white" font-family="Arial" font-size="8" font-weight="600">관상해석</text>
+    <text x="30" y="22" text-anchor="middle" fill="white" font-family="Arial" font-size="8">복스러운 관상</text>
+  </g>
+  
+  <!-- 하단 정보 -->
+  <text x="200" y="285" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Arial, sans-serif" font-size="11">
+    사진 한 장으로 알아보는 나의 관상과 운세
+  </text>
+  
+  <!-- 테두리 장식 -->
+  <g stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none">
+    <path d="M15 15 L25 15 L25 25"/>
+    <path d="M385 15 L375 15 L375 25"/>
+    <path d="M15 285 L25 285 L25 275"/>
+    <path d="M385 285 L375 285 L375 275"/>
+  </g>
+  
+  <!-- 신비로운 빛 효과 -->
+  <g opacity="0.4">
+    <circle cx="200" cy="150" r="80" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="5,5">
+      <animateTransform attributeName="transform" type="rotate" values="0 200 150; 360 200 150" dur="20s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="150" r="100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3,7">
+      <animateTransform attributeName="transform" type="rotate" values="360 200 150; 0 200 150" dur="30s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

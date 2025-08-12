@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 관상 분석 - 얼굴 사진으로 보는 운세와 성격</title>
+    
+    <!-- SEO 메타 태그 -->
+    <meta name="description" content="사진 한 장으로 AI가 분석하는 관상 테스트! 얼굴형, 눈, 코, 입 모양을 분석하여 성격과 운세를 알려드립니다. 무료 관상 보기">
+    <meta name="keywords" content="관상, 관상보기, 얼굴관상, AI관상, 관상테스트, 얼굴분석, 운세, 성격분석, 사주, 얼굴형, 관상학">
+    <meta name="author" content="테스트프로">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph 메타 태그 -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AI 관상 분석 - 얼굴 사진으로 보는 운세와 성격">
+    <meta property="og:description" content="사진 한 장으로 AI가 분석하는 관상 테스트! 얼굴형, 눈, 코, 입을 분석하여 성격과 운세를 알려드립니다">
+    <meta property="og:image" content="https://sd2624.github.io/관상/관상.svg">
+    <meta property="og:url" content="https://sd2624.github.io/관상/">
+    <meta property="og:site_name" content="테스트프로">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI 관상 분석 - 얼굴 사진으로 보는 운세와 성격">
+    <meta name="twitter:description" content="사진 한 장으로 AI가 분석하는 관상 테스트! 성격과 운세를 알아보세요">
+    <meta name="twitter:image" content="https://sd2624.github.io/관상/관상.svg">
+    
+    <!-- 구조화된 데이터 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "AI 관상 분석 테스트",
+        "description": "사진 업로드로 관상을 분석하여 성격과 운세를 알려주는 AI 관상 테스트",
+        "url": "https://sd2624.github.io/관상/",
+        "mainEntity": {
+            "@type": "Quiz",
+            "name": "AI 관상 분석",
+            "description": "얼굴 사진을 분석하여 관상학적 해석을 제공",
+            "educationalLevel": "general",
+            "typicalAgeRange": "18-99"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "테스트프로"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <!-- 카카오 SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 상단 광고 -->
+    <div class="ad-container top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="7854042305"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🔮 AI 관상 분석</h1>
+            <p class="subtitle">얼굴 사진으로 보는 당신의 운세와 성격</p>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main class="main-container">
+        <div class="container">
+            <!-- 소개 섹션 -->
+            <section class="intro-section">
+                <div class="intro-content">
+                    <h2>📸 사진 한 장으로 알아보는 나의 관상</h2>
+                    <p>전통 관상학을 바탕으로 한 AI 분석으로<br>
+                    당신의 얼굴에 숨겨진 성격과 운세를 알려드립니다</p>
+                    
+                    <div class="features">
+                        <div class="feature-item">
+                            <span class="feature-icon">👁️</span>
+                            <span>눈 모양 분석</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">👃</span>
+                            <span>코 형태 해석</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">👄</span>
+                            <span>입술 모양 분석</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔮</span>
+                            <span>종합 운세 예측</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 사진 업로드 섹션 -->
+            <section class="upload-section" id="uploadSection">
+                <div class="upload-container">
+                    <h3>📷 얼굴 사진을 업로드해주세요</h3>
+                    <p class="upload-guide">정면을 바라본 선명한 얼굴 사진일수록 정확한 분석이 가능합니다</p>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-placeholder" id="uploadPlaceholder">
+                            <div class="upload-icon">📸</div>
+                            <div class="upload-text">
+                                <p><strong>사진을 드래그하거나 클릭하여 업로드</strong></p>
+                                <p class="upload-subtext">JPG, PNG 파일 (최대 10MB)</p>
+                            </div>
+                        </div>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                        <div class="uploaded-image" id="uploadedImage" style="display: none;">
+                            <img id="previewImage" src="" alt="업로드된 이미지">
+                            <button class="remove-image" id="removeImage">✕</button>
+                        </div>
+                    </div>
+                    
+                    <div class="upload-tips">
+                        <h4>📋 더 정확한 분석을 위한 팁</h4>
+                        <ul>
+                            <li>밝은 곳에서 촬영한 선명한 사진</li>
+                            <li>정면을 바라본 자연스러운 표정</li>
+                            <li>머리카락이 얼굴을 가리지 않도록</li>
+                            <li>안경이나 마스크 착용하지 않은 상태</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="analyze-btn" id="analyzeBtn" disabled>
+                        🔮 관상 분석 시작하기
+                    </button>
+                </div>
+            </section>
+
+            <!-- 분석 중 섹션 -->
+            <section class="analyzing-section" id="analyzingSection" style="display: none;">
+                <div class="analyzing-container">
+                    <div class="analyzing-animation">
+                        <div class="scanning-box">
+                            <div class="scan-line"></div>
+                        </div>
+                        <div class="analyzing-face">👤</div>
+                    </div>
+                    <h3>🔍 AI가 관상을 분석중입니다...</h3>
+                    <div class="analyzing-steps">
+                        <div class="step active" data-step="1">얼굴형 분석중</div>
+                        <div class="step" data-step="2">눈 모양 분석중</div>
+                        <div class="step" data-step="3">코 형태 분석중</div>
+                        <div class="step" data-step="4">입술 모양 분석중</div>
+                        <div class="step" data-step="5">종합 관상 해석중</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 결과 섹션 -->
+            <section class="result-section" id="resultSection" style="display: none;">
+                <div class="result-container">
+                    <h2>🎭 당신의 관상 분석 결과</h2>
+                    
+                    <!-- 종합 관상 -->
+                    <div class="result-card main-result">
+                        <h3>✨ 종합 관상</h3>
+                        <div class="face-type">
+                            <span class="face-type-name" id="faceTypeName">복스러운 관상</span>
+                            <span class="face-type-score" id="faceTypeScore">★★★★☆</span>
+                        </div>
+                        <p class="face-description" id="faceDescription">
+                            전체적으로 균형 잡힌 얼굴형으로 온화하고 복스러운 인상을 주는 관상입니다.
+                        </p>
+                    </div>
+
+                    <!-- 상세 분석 -->
+                    <div class="detailed-analysis">
+                        <div class="analysis-grid">
+                            <!-- 얼굴형 -->
+                            <div class="result-card">
+                                <h4>👤 얼굴형</h4>
+                                <div class="feature-analysis">
+                                    <span class="feature-name" id="faceShapeName">계란형</span>
+                                    <p class="feature-meaning" id="faceShapeMeaning">
+                                        균형감과 조화로움을 의미하며, 원만한 인간관계를 유지하는 성격
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 눈 -->
+                            <div class="result-card">
+                                <h4>👁️ 눈</h4>
+                                <div class="feature-analysis">
+                                    <span class="feature-name" id="eyeShapeName">아몬드형</span>
+                                    <p class="feature-meaning" id="eyeShapeMeaning">
+                                        지적이고 세심한 성격을 나타내며, 통찰력이 뛰어남
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 코 -->
+                            <div class="result-card">
+                                <h4>👃 코</h4>
+                                <div class="feature-analysis">
+                                    <span class="feature-name" id="noseShapeName">직선형</span>
+                                    <p class="feature-meaning" id="noseShapeMeaning">
+                                        정직하고 성실한 성격으로 재물운이 좋음을 의미
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 입 -->
+                            <div class="result-card">
+                                <h4>👄 입</h4>
+                                <div class="feature-analysis">
+                                    <span class="feature-name" id="mouthShapeName">적당한 크기</span>
+                                    <p class="feature-meaning" id="mouthShapeMeaning">
+                                        소통 능력이 뛰어나고 사교적인 성격을 나타냄
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 운세 예측 -->
+                    <div class="fortune-section">
+                        <h3>🔮 운세 예측</h3>
+                        <div class="fortune-grid">
+                            <div class="fortune-card">
+                                <h4>💰 재물운</h4>
+                                <div class="fortune-score" id="wealthScore">★★★★☆</div>
+                                <p id="wealthFortune">꾸준한 노력으로 안정적인 재물을 축적할 수 있는 관상입니다.</p>
+                            </div>
+                            <div class="fortune-card">
+                                <h4>💕 애정운</h4>
+                                <div class="fortune-score" id="loveScore">★★★★★</div>
+                                <p id="loveFortune">따뜻한 인상으로 좋은 인연을 만날 수 있는 관상입니다.</p>
+                            </div>
+                            <div class="fortune-card">
+                                <h4>🚀 사업운</h4>
+                                <div class="fortune-score" id="businessScore">★★★☆☆</div>
+                                <p id="businessFortune">신중하고 계획적인 접근으로 성공할 수 있는 관상입니다.</p>
+                            </div>
+                            <div class="fortune-card">
+                                <h4>🎯 건강운</h4>
+                                <div class="fortune-score" id="healthScore">★★★★☆</div>
+                                <p id="healthFortune">전체적으로 건강한 관상이나 스트레스 관리가 중요합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 조언 섹션 -->
+                    <div class="advice-section">
+                        <h3>💡 관상학적 조언</h3>
+                        <div class="advice-content" id="adviceContent">
+                            <p>당신의 관상은 전체적으로 균형이 잘 잡혀 있어 안정적인 인생을 살아갈 수 있는 좋은 관상입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 다시 하기 버튼 -->
+            <div class="retry-section" id="retrySection" style="display: none;">
+                <button class="retry-btn" onclick="resetTest()">
+                    🔄 다른 사진으로 다시 분석하기
+                </button>
+            </div>
+
+            <!-- 공유 섹션 -->
+            <div class="share-section" id="shareSection" style="display: none;">
+                <h3>📢 결과 공유하기</h3>
+                <div class="share-buttons">
+                    <button class="share-btn kakao" onclick="shareKakao()">
+                        카카오톡 공유
+                    </button>
+                    <button class="share-btn url" onclick="copyUrl()">
+                        URL 복사
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 중간 광고 -->
+    <div class="ad-container middle">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="8901234567"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- 하단 광고 -->
+    <div class="ad-container bottom">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="9012345678"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 테스트프로. 모든 권리 보유.</p>
+            <p class="disclaimer">본 관상 분석은 재미를 위한 것으로 실제 운세와는 차이가 있을 수 있습니다.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
