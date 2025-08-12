@@ -531,9 +531,20 @@ document.addEventListener('DOMContentLoaded', function() {
         startBtn.addEventListener('click', startTest);
     }
     
-    detailBtns.forEach(btn => {
+    detailBtns.forEach((btn, index) => {
         btn.addEventListener('click', () => {
-            window.open('https://direct.samsung.co.kr', '_blank');
+            // 운전자보험 가입 사이트들
+            const insuranceLinks = [
+                'https://direct.samsung.co.kr/product/car.html',  // 삼성화재 운전자보험
+                'https://www.hi.co.kr/product/car/',             // 현대해상 운전자보험
+                'https://direct.dbgeneral.co.kr/car/',           // DB손해보험 운전자보험
+                'https://www.meritzfire.com/product/car/',       // 메리츠화재 운전자보험
+                'https://direct.kbinsure.co.kr/car/'             // KB손해보험 운전자보험
+            ];
+            
+            // 순서대로 다른 보험사 링크로 이동
+            const linkIndex = index % insuranceLinks.length;
+            window.open(insuranceLinks[linkIndex], '_blank');
         });
     });
     

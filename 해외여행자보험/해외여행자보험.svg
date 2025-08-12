@@ -1,0 +1,115 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a4d68"/>
+      <stop offset="100%" style="stop-color:#1e5f74"/>
+    </linearGradient>
+    <linearGradient id="worldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a9eff"/>
+      <stop offset="100%" style="stop-color:#0084ff"/>
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b35"/>
+      <stop offset="100%" style="stop-color:#ff8f65"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- 배경 -->
+  <rect width="400" height="300" fill="url(#bgGradient)"/>
+  
+  <!-- 글로벌 패턴 -->
+  <g opacity="0.1">
+    <path d="M0,60 Q100,40 200,60 T400,60" stroke="#4a9eff" stroke-width="2" fill="none"/>
+    <path d="M0,120 Q100,100 200,120 T400,120" stroke="#4a9eff" stroke-width="2" fill="none"/>
+    <path d="M0,180 Q100,160 200,180 T400,180" stroke="#4a9eff" stroke-width="2" fill="none"/>
+    <path d="M0,240 Q100,220 200,240 T400,240" stroke="#4a9eff" stroke-width="2" fill="none"/>
+  </g>
+  
+  <!-- 글로벌 아이콘들 -->
+  <g opacity="0.15">
+    <circle cx="50" cy="50" r="3" fill="#4a9eff"/>
+    <circle cx="350" cy="80" r="2.5" fill="#4a9eff"/>
+    <circle cx="80" cy="220" r="2" fill="#4a9eff"/>
+    <circle cx="320" cy="250" r="3.5" fill="#4a9eff"/>
+  </g>
+  
+  <!-- 중앙 지구본 -->
+  <circle cx="200" cy="150" r="65" fill="url(#worldGradient)" opacity="0.9" filter="url(#glow)"/>
+  
+  <!-- 지구본 대륙 표시 -->
+  <g fill="#ffffff" opacity="0.3">
+    <!-- 아시아 -->
+    <ellipse cx="210" cy="140" rx="18" ry="12" transform="rotate(15 210 140)"/>
+    <!-- 유럽/아프리카 -->
+    <ellipse cx="190" cy="150" rx="12" ry="20" transform="rotate(-10 190 150)"/>
+    <!-- 아메리카 -->
+    <ellipse cx="175" cy="145" rx="8" ry="25" transform="rotate(-25 175 145)"/>
+  </g>
+  
+  <!-- 보험 실드 아이콘 중앙 -->
+  <g transform="translate(185, 135)">
+    <path d="M15,0 L25,5 L25,20 Q25,25 15,30 Q5,25 5,20 L5,5 Z" 
+          fill="url(#iconGradient)" filter="url(#glow)"/>
+    <path d="M15,8 L21,12 L18,18 L12,15 L9,21 L15,24 L21,21 L18,15 L24,12 Z" 
+          fill="#ffffff" opacity="0.9"/>
+    <text x="15" y="18" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">+</text>
+  </g>
+  
+  <!-- 위치 핀들 -->
+  <g fill="url(#iconGradient)" opacity="0.8">
+    <!-- 아시아 핀 -->
+    <circle cx="240" cy="120" r="4"/>
+    <path d="M240,115 L240,125 L245,120 Z" fill="url(#iconGradient)"/>
+    
+    <!-- 유럽 핀 -->
+    <circle cx="160" cy="130" r="4"/>
+    <path d="M160,125 L160,135 L165,130 Z" fill="url(#iconGradient)"/>
+    
+    <!-- 미국 핀 -->
+    <circle cx="140" cy="140" r="4"/>
+    <path d="M140,135 L140,145 L145,140 Z" fill="url(#iconGradient)"/>
+  </g>
+  
+  <!-- 연결선들 -->
+  <g stroke="#4a9eff" stroke-width="2" opacity="0.6" fill="none">
+    <path d="M200,150 L240,120" stroke-dasharray="3,2"/>
+    <path d="M200,150 L160,130" stroke-dasharray="3,2"/>
+    <path d="M200,150 L140,140" stroke-dasharray="3,2"/>
+  </g>
+  
+  <!-- 제목 텍스트 -->
+  <text x="200" y="40" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="bold">
+    해외여행자보험
+  </text>
+  <text x="200" y="260" text-anchor="middle" fill="#4a9eff" font-size="14" font-weight="600">
+    가입 가능성 진단
+  </text>
+  
+  <!-- 하단 체크 아이콘들 -->
+  <g transform="translate(120, 270)">
+    <circle cx="0" cy="0" r="8" fill="#4a9eff" opacity="0.8"/>
+    <path d="M-3,-1 L0,2 L4,-2" stroke="#ffffff" stroke-width="2" fill="none"/>
+  </g>
+  <g transform="translate(160, 270)">
+    <circle cx="0" cy="0" r="8" fill="#4a9eff" opacity="0.8"/>
+    <path d="M-3,-1 L0,2 L4,-2" stroke="#ffffff" stroke-width="2" fill="none"/>
+  </g>
+  <g transform="translate(240, 270)">
+    <circle cx="0" cy="0" r="8" fill="#4a9eff" opacity="0.8"/>
+    <path d="M-3,-1 L0,2 L4,-2" stroke="#ffffff" stroke-width="2" fill="none"/>
+  </g>
+  <g transform="translate(280, 270)">
+    <circle cx="0" cy="0" r="8" fill="#4a9eff" opacity="0.8"/>
+    <path d="M-3,-1 L0,2 L4,-2" stroke="#ffffff" stroke-width="2" fill="none"/>
+  </g>
+  
+  <!-- 테두리 장식 -->
+  <rect x="2" y="2" width="396" height="296" fill="none" stroke="#4a9eff" stroke-width="2" opacity="0.3" rx="8"/>
+</svg>

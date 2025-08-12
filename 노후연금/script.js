@@ -594,9 +594,20 @@ document.addEventListener('DOMContentLoaded', function() {
         startBtn.addEventListener('click', startTest);
     }
     
-    detailBtns.forEach(btn => {
+    detailBtns.forEach((btn, index) => {
         btn.addEventListener('click', () => {
-            window.open('https://direct.samsung.co.kr', '_blank');
+            // 연금 관련 정보 사이트들
+            const pensionLinks = [
+                'https://www.4insure.or.kr/',                    // 국민연금공단
+                'https://www.nps.or.kr/',                       // 국민연금 공식사이트
+                'https://www.bokjiro.go.kr/',                   // 복지로 (기초연금)
+                'https://www.welfaretime.go.kr/',               // 복지타임즈
+                'https://pension.samsung.com/'                   // 삼성생명 연금보험
+            ];
+            
+            // 순서대로 다른 연금 관련 사이트로 이동
+            const linkIndex = index % pensionLinks.length;
+            window.open(pensionLinks[linkIndex], '_blank');
         });
     });
     
