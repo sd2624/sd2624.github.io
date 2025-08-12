@@ -217,6 +217,8 @@ const analysisPopup = document.getElementById('analysisPopup');
 
 // 시작 함수
 function startTest() {
+    console.log('startTest function called');
+    
     currentQuestionIndex = 0;
     userResponses = [];
     analysisResult = {};
@@ -224,11 +226,16 @@ function startTest() {
     const startPage = document.getElementById('startPage');
     const questionPage = document.getElementById('questionPage');
     
+    console.log('Start page element:', !!startPage);
+    console.log('Question page element:', !!questionPage);
+    
     if (startPage) {
         startPage.classList.add('hidden');
+        console.log('Start page hidden');
     }
     if (questionPage) {
         questionPage.classList.remove('hidden');
+        console.log('Question page shown');
     }
     showQuestion();
 }
@@ -508,6 +515,8 @@ function shareKakao() {
 
 // 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded');
+    
     // 광고 초기화
     if (typeof adsbygoogle !== 'undefined') {
         (adsbygoogle = window.adsbygoogle || []).push({});
@@ -518,8 +527,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const actionBtns = document.querySelectorAll('.action-btn');
     const kakaoShares = document.querySelectorAll('.kakao-share');
     
+    console.log('Start button found:', !!startBtn);
+    
     if (startBtn) {
-        startBtn.addEventListener('click', startTest);
+        console.log('Adding click listener to start button');
+        startBtn.addEventListener('click', function(e) {
+            console.log('Start button clicked');
+            e.preventDefault();
+            startTest();
+        });
     }
     
     actionBtns.forEach(btn => {
@@ -560,6 +576,11 @@ document.addEventListener('keydown', function(e) {
         }
     }
 });
+
+// 전역 함수로 노출
+window.startTest = startTest;
+window.restartTest = restartTest;
+window.shareKakao = shareKakao;
 
 // 화면 크기 변경 대응
 window.addEventListener('resize', function() {

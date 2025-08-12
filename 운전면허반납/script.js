@@ -552,3 +552,8 @@ window.addEventListener('load', function() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
+
+// 전역 함수로 노출
+window.startTest = startTest;
+window.restartTest = restartTest;
+window.shareKakao = shareKakao;

@@ -475,3 +475,7 @@ document.addEventListener('dragstart', function(e) {
     e.preventDefault();
     return false;
 });
+
+// 전역 함수로 노출
+window.startTest = startTest;
+window.shareKakao = shareKakao;
