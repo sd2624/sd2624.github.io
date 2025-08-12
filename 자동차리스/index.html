@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자동차 리스 장단점 - 다들 모르고 있는 숨겨진 사실</title>
+    <meta name="description" content="자동차 리스의 숨겨진 장단점과 대부분이 모르는 중요한 사실들을 확인하세요">
+    
+    <!-- Kakao SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 시작 페이지 -->
+    <div id="startPage" class="page">
+        <div class="container">
+            <!-- 상단 광고 -->
+            <div class="ad-section">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="1724698171"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+
+            <div class="content">
+                <div class="header-wrapper">
+                    <div class="warning-badge">
+                        <span class="warning-icon">⚠️</span>
+                        <span class="warning-text">대부분이 모르는 사실</span>
+                    </div>
+                    
+                    <h1 class="main-title">
+                        자동차 리스<br>
+                        <span class="highlight">숨겨진 장단점</span>
+                    </h1>
+                    
+                    <p class="subtitle">
+                        딜러들이 말해주지 않는<br>
+                        <strong>리스의 진실</strong>을 알아보세요
+                    </p>
+                </div>
+
+                <div class="facts-preview">
+                    <div class="fact-card">
+                        <div class="fact-icon">💸</div>
+                        <div class="fact-text">
+                            <h3>숨겨진 비용</h3>
+                            <p>계약서에 없는 추가 비용들</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-card">
+                        <div class="fact-icon">📄</div>
+                        <div class="fact-text">
+                            <h3>계약 조건</h3>
+                            <p>중도 해지시 놀라운 위약금</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-card">
+                        <div class="fact-icon">🚗</div>
+                        <div class="fact-text">
+                            <h3>차량 관리</h3>
+                            <p>과도한 원상복구 비용</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-intro">
+                    <div class="quiz-header">
+                        <h2>나에게 리스가 유리할까?</h2>
+                        <p>8가지 질문으로 정확한 분석</p>
+                    </div>
+                    
+                    <div class="quiz-details">
+                        <div class="detail">
+                            <span class="detail-icon">⏱️</span>
+                            <span>3분 소요</span>
+                        </div>
+                        <div class="detail">
+                            <span class="detail-icon">📊</span>
+                            <span>맞춤 분석</span>
+                        </div>
+                        <div class="detail">
+                            <span class="detail-icon">💡</span>
+                            <span>숨겨진 팁 제공</span>
+                        </div>
+                    </div>
+                    
+                    <button class="start-button" onclick="startTest()">
+                        <span class="button-text">숨겨진 사실 확인하기</span>
+                        <span class="button-arrow">→</span>
+                    </button>
+                </div>
+
+                <div class="warning-notice">
+                    <div class="notice-header">
+                        <span class="notice-icon">🚨</span>
+                        <span class="notice-title">리스 계약 전 필수 확인사항</span>
+                    </div>
+                    <ul class="notice-list">
+                        <li>• 월 주행거리 제한과 초과 시 비용</li>
+                        <li>• 중도 해지 위약금 계산 방법</li>
+                        <li>• 차량 반납 시 원상복구 기준</li>
+                        <li>• 보험료 및 세금 부담 주체</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 질문 페이지 -->
+    <div id="questionPage" class="page hidden">
+        <div class="container">
+            <div class="question-header">
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span class="current-step">1</span>
+                        <span class="total-steps">/ 8</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                
+                <h2 class="question-text"></h2>
+            </div>
+            
+            <div class="options-container"></div>
+            
+            <div class="question-hint"></div>
+        </div>
+    </div>
+
+    <!-- 분석 모달 -->
+    <div id="analysisModal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="analysis-animation">
+                <div class="car-icon">🚗</div>
+                <div class="loading-text">리스 조건 분석 중...</div>
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+            </div>
+            
+            <div class="analysis-steps">
+                <div class="step">
+                    <span class="step-icon">💰</span>
+                    <span class="step-text">비용 분석</span>
+                    <span class="step-status">완료</span>
+                </div>
+                <div class="step">
+                    <span class="step-icon">📋</span>
+                    <span class="step-text">계약 조건 검토</span>
+                    <span class="step-status">진행중</span>
+                </div>
+                <div class="step">
+                    <span class="step-icon">⚖️</span>
+                    <span class="step-text">장단점 비교</span>
+                    <span class="step-status">대기</span>
+                </div>
+                <div class="step">
+                    <span class="step-icon">🎯</span>
+                    <span class="step-text">맞춤 추천</span>
+                    <span class="step-status">대기</span>
+                </div>
+            </div>
+            
+            <div class="countdown">
+                <div class="countdown-text">결과 확인까지</div>
+                <div class="countdown-number">5</div>
+            </div>
+
+            <!-- 팝업 광고 -->
+            <div class="popup-ad">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="1724698171"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+    </div>
+
+    <!-- 결과 페이지 -->
+    <div id="resultPage" class="page hidden">
+        <div class="container">
+            <div class="result-header">
+                <div class="result-badge"></div>
+                <h2 class="result-title"></h2>
+                <p class="result-subtitle"></p>
+            </div>
+            
+            <div class="result-content">
+                <div class="analysis-summary"></div>
+                <div class="hidden-facts"></div>
+                <div class="recommendations"></div>
+            </div>
+            
+            <div class="action-section">
+                <button class="primary-action" onclick="window.open('https://direct.samsung.co.kr', '_blank')">상세 가이드 보기</button>
+                <button class="share-button" onclick="shareKakao()">카카오톡 공유</button>
+                <button class="retry-button" onclick="restartTest()">다시 하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <!-- 광고 초기화 -->
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>

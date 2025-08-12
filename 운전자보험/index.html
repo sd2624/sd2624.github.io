@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>운전자보험 적정보험료 평균 - 내 조건 맞춤 분석</title>
+    <meta name="description" content="운전자보험 적정보험료를 내 조건에 맞게 분석하고 시장 평균 대비 적정 가격을 확인하세요">
+    
+    <!-- Kakao SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 시작 페이지 -->
+    <div id="startPage" class="page">
+        <div class="container">
+            <!-- 상단 광고 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="1724698171"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+
+            <div class="content">
+                <div class="header-section">
+                    <div class="year-badge">
+                        <span class="badge-text">최신 업데이트</span>
+                        <span class="update-indicator">●</span>
+                    </div>
+                    
+                    <h1 class="main-title">
+                        <span class="title-emphasis">운전자보험</span><br>
+                        적정보험료 평균
+                    </h1>
+                    
+                    <p class="subtitle">
+                        내 조건에 맞는 <strong>적정 보험료</strong>를<br>
+                        평균과 비교해서 확인하세요
+                    </p>
+                </div>
+
+                <div class="stats-display">
+                    <div class="stat-card premium">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <div class="stat-value">월 2.5만원</div>
+                            <div class="stat-label">평균 보험료</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card coverage">
+                        <div class="stat-icon">🛡️</div>
+                        <div class="stat-info">
+                            <div class="stat-value">3억원</div>
+                            <div class="stat-label">권장 보장금액</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card saving">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <div class="stat-value">최대 40%</div>
+                            <div class="stat-label">절약 가능</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <h3>개인 맞춤 분석</h3>
+                        <p>연령, 경력, 차종별 정확한 적정 보험료 계산</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">📈</div>
+                        <h3>시장 평균 비교</h3>
+                        <p>전국 평균 대비 내 보험료가 적정한지 분석</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">💡</div>
+                        <h3>절약 방법 제시</h3>
+                        <p>보험료 절약을 위한 실질적인 방법 안내</p>
+                    </div>
+                </div>
+
+                <div class="test-section">
+                    <div class="test-header">
+                        <h2>내 적정보험료 확인하기</h2>
+                        <p>9가지 질문으로 정확한 보험료 분석</p>
+                    </div>
+                    
+                    <div class="test-features">
+                        <div class="feature">
+                            <span class="feature-icon">⏱️</span>
+                            <span>3분 완성</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🔒</span>
+                            <span>개인정보 안전</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">✅</span>
+                            <span>무료 분석</span>
+                        </div>
+                    </div>
+                    
+                    <button class="start-btn" onclick="startTest()">
+                        <span class="btn-text">적정보험료 확인하기</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+
+                <div class="info-notice">
+                    <div class="notice-header">
+                        <span class="notice-icon">📋</span>
+                        <span class="notice-title">운전자보험 필수 확인사항</span>
+                    </div>
+                    <ul class="notice-list">
+                        <li>• <strong>자차보험과 별도:</strong> 운전자 본인의 상해를 보장하는 보험</li>
+                        <li>• <strong>의료비 보장:</strong> 교통사고 시 치료비, 휴업손해 등 보상</li>
+                        <li>• <strong>법적 보호:</strong> 교통사고 처리지원금, 변호사 비용 등 지원</li>
+                        <li>• <strong>생활 안정:</strong> 사고 후 일상복귀까지 경제적 지원</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 질문 페이지 -->
+    <div id="questionPage" class="page hidden">
+        <div class="container">
+            <div class="question-container">
+                <div class="progress-area">
+                    <div class="progress-label">
+                        <span class="current-num">1</span>
+                        <span class="total-num">/ 9</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                
+                <h2 class="question-title"></h2>
+                <p class="question-desc"></p>
+            </div>
+            
+            <div class="answers-grid"></div>
+        </div>
+    </div>
+
+    <!-- 분석 모달 -->
+    <div id="analysisModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-box">
+            <div class="analysis-visual">
+                <div class="calc-icon">🧮</div>
+                <div class="loading-text">보험료 계산 중...</div>
+                <div class="progress-ring">
+                    <div class="ring-fill"></div>
+                </div>
+            </div>
+            
+            <div class="calc-steps">
+                <div class="calc-step active">
+                    <span class="step-dot">●</span>
+                    <span class="step-label">기본 정보 분석</span>
+                    <span class="step-check">✓</span>
+                </div>
+                <div class="calc-step">
+                    <span class="step-dot">●</span>
+                    <span class="step-label">위험도 평가</span>
+                    <span class="step-check">○</span>
+                </div>
+                <div class="calc-step">
+                    <span class="step-dot">●</span>
+                    <span class="step-label">시장 평균 비교</span>
+                    <span class="step-check">○</span>
+                </div>
+                <div class="calc-step">
+                    <span class="step-dot">●</span>
+                    <span class="step-label">맞춤 보험료 산출</span>
+                    <span class="step-check">○</span>
+                </div>
+            </div>
+            
+            <div class="timer-section">
+                <div class="timer-text">결과 확인까지</div>
+                <div class="timer-display">6</div>
+            </div>
+
+            <!-- 팝업 광고 -->
+            <div class="modal-ad">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="1724698171"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+    </div>
+
+    <!-- 결과 페이지 -->
+    <div id="resultPage" class="page hidden">
+        <div class="container">
+            <div class="result-header">
+                <div class="result-icon"></div>
+                <h2 class="result-title"></h2>
+                <p class="result-summary"></p>
+            </div>
+            
+            <div class="result-body">
+                <div class="premium-analysis"></div>
+                <div class="market-comparison"></div>
+                <div class="saving-tips"></div>
+            </div>
+            
+            <div class="action-area">
+                <button class="detail-btn" onclick="window.open('https://direct.samsung.co.kr', '_blank')">상세 보험료 비교</button>
+                <button class="share-btn" onclick="shareKakao()">카카오톡 공유</button>
+                <button class="restart-btn" onclick="restartTest()">다시 하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <!-- 광고 초기화 -->
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>

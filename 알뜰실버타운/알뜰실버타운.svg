@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);">
+  <!-- 배경 그리드 패턴 -->
+  <defs>
+    <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="200" fill="url(#grid)"/>
+  
+  <!-- 백그라운드 건물들 -->
+  <g fill="rgba(255,255,255,0.1)">
+    <rect x="30" y="140" width="25" height="50" rx="2"/>
+    <rect x="70" y="130" width="30" height="60" rx="2"/>
+    <rect x="320" y="135" width="28" height="55" rx="2"/>
+    <rect x="360" y="125" width="22" height="65" rx="2"/>
+  </g>
+  
+  <!-- 메인 고령자복지주택 건물 -->
+  <g>
+    <!-- 건물 본체 (더 모던한 스타일) -->
+    <rect x="150" y="70" width="100" height="120" rx="5" fill="#ffffff" opacity="0.95"/>
+    
+    <!-- 건물 상단부 -->
+    <rect x="155" y="65" width="90" height="15" rx="3" fill="#e74c3c"/>
+    
+    <!-- 층별 창문 (미니멀 스타일) -->
+    <g fill="#2c3e50">
+      <!-- 1층 -->
+      <rect x="165" y="85" width="8" height="12" rx="1"/>
+      <rect x="180" y="85" width="8" height="12" rx="1"/>
+      <rect x="195" y="85" width="8" height="12" rx="1"/>
+      <rect x="210" y="85" width="8" height="12" rx="1"/>
+      <rect x="225" y="85" width="8" height="12" rx="1"/>
+      
+      <!-- 2층 -->
+      <rect x="165" y="105" width="8" height="12" rx="1"/>
+      <rect x="180" y="105" width="8" height="12" rx="1"/>
+      <rect x="195" y="105" width="8" height="12" rx="1"/>
+      <rect x="210" y="105" width="8" height="12" rx="1"/>
+      <rect x="225" y="105" width="8" height="12" rx="1"/>
+      
+      <!-- 3층 -->
+      <rect x="165" y="125" width="8" height="12" rx="1"/>
+      <rect x="180" y="125" width="8" height="12" rx="1"/>
+      <rect x="195" y="125" width="8" height="12" rx="1"/>
+      <rect x="210" y="125" width="8" height="12" rx="1"/>
+      <rect x="225" y="125" width="8" height="12" rx="1"/>
+      
+      <!-- 4층 -->
+      <rect x="165" y="145" width="8" height="12" rx="1"/>
+      <rect x="180" y="145" width="8" height="12" rx="1"/>
+      <rect x="195" y="145" width="8" height="12" rx="1"/>
+      <rect x="210" y="145" width="8" height="12" rx="1"/>
+      <rect x="225" y="145" width="8" height="12" rx="1"/>
+    </g>
+    
+    <!-- 메인 입구 -->
+    <rect x="190" y="165" width="20" height="25" rx="2" fill="#e74c3c"/>
+    <circle cx="205" cy="177" r="1" fill="#ffffff"/>
+    
+    <!-- 입구 위 표지판 -->
+    <rect x="175" y="155" width="50" height="8" rx="1" fill="#34495e"/>
+    <text x="200" y="161" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#ffffff">고령자복지주택</text>
+  </g>
+  
+  <!-- 장식적 요소들 -->
+  <g>
+    <!-- 나무들 (미니멀 스타일) -->
+    <circle cx="100" cy="170" r="6" fill="#27ae60" opacity="0.8"/>
+    <rect x="97" y="170" width="6" height="12" fill="#8B4513" opacity="0.8"/>
+    
+    <circle cx="300" cy="165" r="8" fill="#27ae60" opacity="0.8"/>
+    <rect x="296" y="165" width="8" height="18" fill="#8B4513" opacity="0.8"/>
+    
+    <!-- 길 표시 -->
+    <rect x="0" y="185" width="400" height="15" fill="rgba(255,255,255,0.1)"/>
+    <rect x="50" y="187" width="300" height="2" fill="rgba(255,255,255,0.3)"/>
+    <rect x="50" y="195" width="300" height="2" fill="rgba(255,255,255,0.3)"/>
+  </g>
+  
+  <!-- 아이콘들 -->
+  <g fill="rgba(255,255,255,0.8)">
+    <!-- 의료 아이콘 -->
+    <circle cx="120" cy="60" r="8" fill="rgba(231, 76, 60, 0.2)"/>
+    <text x="120" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="10">🏥</text>
+    
+    <!-- 복지 아이콘 -->
+    <circle cx="280" cy="60" r="8" fill="rgba(52, 152, 219, 0.2)"/>
+    <text x="280" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="10">🤝</text>
+    
+    <!-- 할인 아이콘 -->
+    <circle cx="200" cy="45" r="10" fill="rgba(39, 174, 96, 0.2)"/>
+    <text x="200" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="12">💰</text>
+  </g>
+  
+  <!-- 텍스트 -->
+  <text x="200" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff">
+    알뜰실버타운
+  </text>
+  <text x="200" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">
+    고령자복지주택 신청
+  </text>
+  
+  <!-- 하단 정보 아이콘들 -->
+  <g fill="rgba(255,255,255,0.6)" font-family="Arial, sans-serif" font-size="8">
+    <circle cx="50" cy="195" r="1.5" fill="#e74c3c"/>
+    <text x="60" y="198">자격 확인</text>
+    
+    <circle cx="120" cy="195" r="1.5" fill="#f39c12"/>
+    <text x="130" y="198">임대료 할인</text>
+    
+    <circle cx="200" cy="195" r="1.5" fill="#27ae60"/>
+    <text x="210" y="198">정부 지원</text>
+    
+    <circle cx="280" cy="195" r="1.5" fill="#3498db"/>
+    <text x="290" y="198">의료 연계</text>
+    
+    <circle cx="350" cy="195" r="1.5" fill="#9b59b6"/>
+    <text x="360" y="198">신청 안내</text>
+  </g>
+  
+  <!-- 미세한 광택 효과 -->
+  <rect x="150" y="70" width="100" height="40" rx="5" fill="url(#shine)" opacity="0.1"/>
+  <defs>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+</svg>

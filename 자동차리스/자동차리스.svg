@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" style="background: linear-gradient(135deg, #f4f3ee 0%, #e8f5e8 100%);">
+  <!-- 자연스러운 배경 패턴 -->
+  <defs>
+    <pattern id="leaves" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+      <circle cx="25" cy="25" r="2" fill="rgba(122, 176, 105, 0.1)"/>
+      <ellipse cx="15" cy="15" rx="3" ry="1.5" fill="rgba(139, 90, 60, 0.05)" transform="rotate(45 15 15)"/>
+      <ellipse cx="35" cy="35" rx="2" ry="1" fill="rgba(255, 107, 53, 0.03)" transform="rotate(-30 35 35)"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="200" fill="url(#leaves)"/>
+  
+  <!-- 도로와 배경 -->
+  <rect x="0" y="160" width="400" height="40" fill="rgba(45, 80, 22, 0.1)"/>
+  <rect x="0" y="165" width="400" height="4" fill="rgba(255, 255, 255, 0.8)"/>
+  <rect x="0" y="175" width="400" height="2" fill="rgba(122, 176, 105, 0.6)"/>
+  
+  <!-- 중앙선 -->
+  <g fill="rgba(255, 255, 255, 0.9)">
+    <rect x="50" y="178" width="20" height="2"/>
+    <rect x="90" y="178" width="20" height="2"/>
+    <rect x="130" y="178" width="20" height="2"/>
+    <rect x="170" y="178" width="20" height="2"/>
+    <rect x="210" y="178" width="20" height="2"/>
+    <rect x="250" y="178" width="20" height="2"/>
+    <rect x="290" y="178" width="20" height="2"/>
+    <rect x="330" y="178" width="20" height="2"/>
+  </g>
+  
+  <!-- 메인 자동차 (현대적 스타일) -->
+  <g>
+    <!-- 차체 -->
+    <ellipse cx="200" cy="140" rx="45" ry="12" fill="#4a7c26"/>
+    <rect x="160" y="128" width="80" height="20" rx="10" fill="#4a7c26"/>
+    
+    <!-- 앞유리 -->
+    <path d="M 170 128 Q 180 120 220 120 Q 230 128 230 128 L 210 138 L 190 138 Z" fill="rgba(135, 206, 235, 0.8)"/>
+    
+    <!-- 옆유리 -->
+    <rect x="175" y="130" width="15" height="8" rx="2" fill="rgba(135, 206, 235, 0.6)"/>
+    <rect x="210" y="130" width="15" height="8" rx="2" fill="rgba(135, 206, 235, 0.6)"/>
+    
+    <!-- 바퀴 -->
+    <circle cx="175" cy="148" r="8" fill="#2d3436"/>
+    <circle cx="175" cy="148" r="5" fill="#74b9ff"/>
+    <circle cx="225" cy="148" r="8" fill="#2d3436"/>
+    <circle cx="225" cy="148" r="5" fill="#74b9ff"/>
+    
+    <!-- 헤드라이트 -->
+    <ellipse cx="155" cy="135" rx="4" ry="6" fill="#fdcb6e"/>
+    <ellipse cx="245" cy="135" rx="4" ry="6" fill="#fdcb6e"/>
+    
+    <!-- 번호판 영역 -->
+    <rect x="185" y="145" width="30" height="6" rx="1" fill="#ffffff"/>
+    <text x="200" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#2d3436">LEASE</text>
+  </g>
+  
+  <!-- 비교 자동차 (구매용 - 작게) -->
+  <g transform="translate(50, 30) scale(0.6)">
+    <ellipse cx="100" cy="140" rx="35" ry="10" fill="#636e72"/>
+    <rect x="70" y="130" width="60" height="16" rx="8" fill="#636e72"/>
+    <path d="M 78 130 Q 85 125 115 125 Q 122 130 122 130 L 108 135 L 92 135 Z" fill="rgba(135, 206, 235, 0.6)"/>
+    <circle cx="85" cy="148" r="6" fill="#2d3436"/>
+    <circle cx="115" cy="148" r="6" fill="#2d3436"/>
+    <text x="100" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#636e72">구매</text>
+  </g>
+  
+  <!-- 리스 관련 아이콘들 -->
+  <g fill="rgba(45, 80, 22, 0.8)">
+    <!-- 돈 아이콘 -->
+    <circle cx="80" cy="60" r="12" fill="rgba(255, 107, 53, 0.2)"/>
+    <text x="80" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="12">💰</text>
+    <text x="80" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a7c26">월납부</text>
+    
+    <!-- 계약서 아이콘 -->
+    <circle cx="320" cy="60" r="12" fill="rgba(122, 176, 105, 0.2)"/>
+    <text x="320" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="12">📋</text>
+    <text x="320" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4a7c26">계약조건</text>
+    
+    <!-- 경고 아이콘 -->
+    <circle cx="200" cy="45" r="15" fill="rgba(255, 107, 53, 0.3)"/>
+    <text x="200" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="16">⚠️</text>
+    <text x="200" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#ff6b35">숨겨진사실</text>
+  </g>
+  
+  <!-- 장단점 표시 -->
+  <g font-family="Arial, sans-serif" font-size="9" fill="#4a7c26">
+    <!-- 장점 -->
+    <rect x="20" y="100" width="80" height="50" rx="8" fill="rgba(122, 176, 105, 0.1)" stroke="rgba(122, 176, 105, 0.3)" stroke-width="1"/>
+    <text x="60" y="110" text-anchor="middle" font-weight="bold" fill="#4a7c26">장점</text>
+    <text x="25" y="120" font-size="7" fill="#2d5016">• 낮은 초기비용</text>
+    <text x="25" y="128" font-size="7" fill="#2d5016">• 최신 모델</text>
+    <text x="25" y="136" font-size="7" fill="#2d5016">• 정비 걱정 없음</text>
+    <text x="25" y="144" font-size="7" fill="#2d5016">• 세금 혜택</text>
+    
+    <!-- 단점 -->
+    <rect x="300" y="100" width="80" height="50" rx="8" fill="rgba(255, 107, 53, 0.1)" stroke="rgba(255, 107, 53, 0.3)" stroke-width="1"/>
+    <text x="340" y="110" text-anchor="middle" font-weight="bold" fill="#ff6b35">단점</text>
+    <text x="305" y="120" font-size="7" fill="#8b5a3c">• 총비용 높음</text>
+    <text x="305" y="128" font-size="7" fill="#8b5a3c">• 주행거리 제한</text>
+    <text x="305" y="136" font-size="7" fill="#8b5a3c">• 중도해지 위약금</text>
+    <text x="305" y="144" font-size="7" fill="#8b5a3c">• 원상복구 비용</text>
+  </g>
+  
+  <!-- 메인 타이틀 -->
+  <text x="200" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2d5016">
+    자동차 리스 장단점
+  </text>
+  <text x="200" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#636e72">
+    다들 모르고 있는 숨겨진 사실
+  </text>
+  
+  <!-- 하단 정보 포인트 -->
+  <g font-family="Arial, sans-serif" font-size="8" fill="rgba(45, 80, 22, 0.7)">
+    <circle cx="60" cy="190" r="2" fill="#ff6b35"/>
+    <text x="70" y="193">숨겨진 비용</text>
+    
+    <circle cx="140" cy="190" r="2" fill="#4a7c26"/>
+    <text x="150" y="193">계약 함정</text>
+    
+    <circle cx="220" cy="190" r="2" fill="#ff8c42"/>
+    <text x="230" y="193">원상복구</text>
+    
+    <circle cx="300" cy="190" r="2" fill="#7fb069"/>
+    <text x="310" y="193">맞춤 분석</text>
+  </g>
+  
+  <!-- 움직이는 효과를 위한 배경 요소들 -->
+  <g opacity="0.3">
+    <ellipse cx="120" cy="25" rx="15" ry="8" fill="rgba(122, 176, 105, 0.2)" transform="rotate(15 120 25)"/>
+    <ellipse cx="280" cy="30" rx="12" ry="6" fill="rgba(255, 107, 53, 0.15)" transform="rotate(-20 280 30)"/>
+    <ellipse cx="350" cy="20" rx="10" ry="5" fill="rgba(139, 90, 60, 0.1)" transform="rotate(30 350 20)"/>
+  </g>
+  
+  <!-- 미세한 그라데이션 오버레이 -->
+  <defs>
+    <linearGradient id="overlay" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(122, 176, 105, 0.02)"/>
+      <stop offset="50%" style="stop-color:rgba(255, 107, 53, 0.01)"/>
+      <stop offset="100%" style="stop-color:rgba(139, 90, 60, 0.02)"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" fill="url(#overlay)"/>
+</svg>

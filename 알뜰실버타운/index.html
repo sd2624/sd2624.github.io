@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>알뜰실버타운 고령자복지주택 신청 자격 확인</title>
+    <meta name="description" content="2025년 고령자복지주택 신청 자격을 확인하고 알뜰실버타운 정보를 안내받아보세요">
+    
+    <!-- Kakao SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 시작 페이지 -->
+    <div id="startPage" class="page">
+        <div class="container">
+            <!-- 상단 광고 -->
+            <div class="ad-banner">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="1724698171"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+
+            <div class="content">
+                <div class="header-section">
+                    <div class="title-badge">
+                        <span class="year-label">2025년</span>
+                        <span class="new-label">신규</span>
+                    </div>
+                    <h1 class="main-title">
+                        <span class="highlight-text">알뜰실버타운</span><br>
+                        고령자복지주택 신청
+                    </h1>
+                    <p class="subtitle">
+                        내 조건에 맞는 고령자복지주택 신청 자격을<br>
+                        <strong>무료로 확인</strong>해보세요
+                    </p>
+                </div>
+
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="card-icon">🏠</div>
+                        <div class="card-content">
+                            <h3>임대료 50% 할인</h3>
+                            <p>시세 대비 저렴한 비용</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">💰</div>
+                        <div class="card-content">
+                            <h3>보증금 지원</h3>
+                            <p>정부 지원으로 부담 완화</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">🏥</div>
+                        <div class="card-content">
+                            <h3>의료·복지 연계</h3>
+                            <p>건강관리 서비스 제공</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-info">
+                    <div class="test-details">
+                        <div class="detail-item">
+                            <span class="detail-icon">📋</span>
+                            <span>소요시간: 2분</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">✅</span>
+                            <span>질문수: 7개</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">🎯</span>
+                            <span>맞춤 추천</span>
+                        </div>
+                    </div>
+                    
+                    <button class="start-button" onclick="startTest()">
+                        <span class="button-text">신청 자격 확인하기</span>
+                        <span class="button-icon">→</span>
+                    </button>
+                </div>
+
+                <div class="notice-section">
+                    <div class="notice-title">📢 주요 혜택</div>
+                    <ul class="notice-list">
+                        <li>• 시세 대비 30~50% 저렴한 임대료</li>
+                        <li>• 보증금 무이자 대출 지원 가능</li>
+                        <li>• 생활 편의시설 및 의료 서비스 연계</li>
+                        <li>• 안전한 주거환경과 커뮤니티 프로그램</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 질문 페이지 -->
+    <div id="questionPage" class="page hidden">
+        <div class="container">
+            <div class="question-header">
+                <div class="progress-section">
+                    <div class="progress-text">
+                        <span class="current-q">1</span> / <span class="total-q">7</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+                
+                <h2 class="question-title"></h2>
+            </div>
+            
+            <div class="question-options"></div>
+        </div>
+    </div>
+
+    <!-- 분석 모달 -->
+    <div id="analysisModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="analysis-header">
+                <h3>신청 자격 분석 중...</h3>
+                <div class="loading-animation">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+            
+            <div class="analysis-steps">
+                <div class="step active">✓ 연령 조건 확인</div>
+                <div class="step">✓ 소득 기준 검토</div>
+                <div class="step">✓ 거주 요건 분석</div>
+                <div class="step">✓ 맞춤 주택 검색</div>
+            </div>
+            
+            <div class="countdown-section">
+                <p>잠시만 기다려주세요</p>
+                <div class="countdown-timer">6</div>
+            </div>
+
+            <!-- 팝업 광고 -->
+            <div class="popup-ad">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="1724698171"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+    </div>
+
+    <!-- 결과 페이지 -->
+    <div id="resultPage" class="page hidden">
+        <div class="container">
+            <div class="result-header">
+                <div class="result-badge"></div>
+                <h2 class="result-title"></h2>
+                <p class="result-subtitle"></p>
+            </div>
+            
+            <div class="result-content">
+                <div class="eligibility-summary"></div>
+                <div class="recommended-housing"></div>
+                <div class="application-guide"></div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="primary-btn" onclick="window.open('https://direct.samsung.co.kr', '_blank')">상세 정보 보기</button>
+                <button class="kakao-share" onclick="shareKakao()">카카오톡 공유</button>
+                <button class="restart-btn" onclick="restartTest()">다시 하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <!-- 광고 초기화 -->
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
