@@ -162,7 +162,7 @@
                 </div>
 
                 <div class="action-buttons">
-                    <button class="primary-btn" onclick="window.open('https://direct.samsung.co.kr', '_blank')">
+                    <button class="primary-btn" onclick="showDetailedGuide()">
                         상세 정보 보기
                     </button>
                     <button class="other-test-btn" onclick="window.location.href='../index.html'">
@@ -207,6 +207,71 @@
                      data-ad-slot="3201247599"
                      data-ad-format="rectangle"
                      data-full-width-responsive="false"></ins>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세 가이드 모달 -->
+    <div id="guideModal" class="modal hidden">
+        <div class="modal-content guide-modal">
+            <div class="modal-header">
+                <h2>🚗 운전면허 자진반납 완전 가이드</h2>
+                <span class="close-btn" onclick="closeGuideModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="guide-section">
+                    <h3>📋 신청 절차</h3>
+                    <ol>
+                        <li><strong>경찰서 방문</strong> - 가까운 경찰서 민원실</li>
+                        <li><strong>신청서 작성</strong> - 운전면허 자진반납 신청서</li>
+                        <li><strong>서류 제출</strong> - 운전면허증, 신분증</li>
+                        <li><strong>반납증 발급</strong> - 운전면허 반납증명서 수령</li>
+                    </ol>
+                </div>
+                
+                <div class="guide-section">
+                    <h3>💰 지원 혜택 상세</h3>
+                    <div class="benefit-details">
+                        <div class="benefit-item">
+                            <h4>🚌 교통비 지원</h4>
+                            <p>월 최대 10만원, 연간 120만원까지</p>
+                            <small>지역에 따라 차이 있음</small>
+                        </div>
+                        <div class="benefit-item">
+                            <h4>🏥 의료비 할인</h4>
+                            <p>지정 병원 진료비 10-30% 할인</p>
+                            <small>지자체별 협약 병원</small>
+                        </div>
+                        <div class="benefit-item">
+                            <h4>🎭 문화시설 할인</h4>
+                            <p>영화관, 박물관, 미술관 할인</p>
+                            <small>평균 20-50% 할인</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>📞 문의처</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <strong>도로교통공단</strong>
+                            <p>1577-1120</p>
+                        </div>
+                        <div class="contact-item">
+                            <strong>경찰청 민원콜센터</strong>
+                            <p>182</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>🔗 유용한 링크</h3>
+                    <div class="useful-links">
+                        <a href="https://www.koroad.or.kr/" target="_blank">도로교통공단</a>
+                        <a href="https://www.police.go.kr/" target="_blank">경찰청</a>
+                        <a href="https://www.safedriving.or.kr/" target="_blank">교통안전공단</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

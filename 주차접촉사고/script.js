@@ -615,3 +615,63 @@ window.addEventListener('load', function() {
 window.startTest = startTest;
 window.restartTest = restartTest;
 window.shareKakao = shareKakao;
+window.showDetailedMethod = showDetailedMethod;
+window.closeDetailModal = closeDetailModal;
+
+// 상세 처리 방법 모달 표시
+function showDetailedMethod() {
+    const detailModal = document.getElementById('detailModal');
+    if (detailModal) {
+        detailModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        
+        // 체크리스트 이벤트 리스너 추가
+        const checkboxes = detailModal.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    this.parentElement.style.backgroundColor = 'var(--success-color)';
+                    this.parentElement.style.color = 'white';
+                } else {
+                    this.parentElement.style.backgroundColor = '';
+                    this.parentElement.style.color = '';
+                }
+            });
+        });
+    }
+}
+
+// 상세 처리 방법 모달 닫기
+function closeDetailModal() {
+    const detailModal = document.getElementById('detailModal');
+    if (detailModal) {
+        detailModal.classList.add('hidden');
+        document.body.style.overflow = '';
+        
+        // 체크박스 초기화
+        const checkboxes = detailModal.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+            checkbox.parentElement.style.backgroundColor = '';
+            checkbox.parentElement.style.color = '';
+        });
+    }
+}
+
+// 모달 바깥 클릭 시 닫기
+document.addEventListener('click', function(e) {
+    const detailModal = document.getElementById('detailModal');
+    if (detailModal && e.target === detailModal) {
+        closeDetailModal();
+    }
+});
+
+// ESC 키로 상세 모달 닫기
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const detailModal = document.getElementById('detailModal');
+        if (detailModal && !detailModal.classList.contains('hidden')) {
+            closeDetailModal();
+        }
+    }
+});

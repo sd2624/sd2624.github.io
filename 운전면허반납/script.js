@@ -557,3 +557,41 @@ window.addEventListener('load', function() {
 window.startTest = startTest;
 window.restartTest = restartTest;
 window.shareKakao = shareKakao;
+window.showDetailedGuide = showDetailedGuide;
+window.closeGuideModal = closeGuideModal;
+
+// 상세 가이드 모달 표시
+function showDetailedGuide() {
+    const guideModal = document.getElementById('guideModal');
+    if (guideModal) {
+        guideModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// 상세 가이드 모달 닫기
+function closeGuideModal() {
+    const guideModal = document.getElementById('guideModal');
+    if (guideModal) {
+        guideModal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+}
+
+// 모달 바깥 클릭 시 닫기
+document.addEventListener('click', function(e) {
+    const guideModal = document.getElementById('guideModal');
+    if (guideModal && e.target === guideModal) {
+        closeGuideModal();
+    }
+});
+
+// ESC 키로 가이드 모달 닫기
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const guideModal = document.getElementById('guideModal');
+        if (guideModal && !guideModal.classList.contains('hidden')) {
+            closeGuideModal();
+        }
+    }
+});

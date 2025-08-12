@@ -197,10 +197,73 @@
             </div>
 
             <div class="action-buttons">
-                <button class="detail-btn">자세한 처리 방법</button>
+                <button class="detail-btn" onclick="showDetailedMethod()">자세한 처리 방법</button>
                 <button class="share-btn" onclick="shareKakao()">카톡 공유하기</button>
-                <button class="other-test-btn">다른 테스트 하기</button>
+                <button class="other-test-btn" onclick="window.location.href='../index.html'">다른 테스트 하기</button>
                 <button class="restart-btn" onclick="restartTest()">다시 하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세 처리 방법 모달 -->
+    <div id="detailModal" class="modal hidden">
+        <div class="modal-content detail-modal">
+            <div class="modal-header">
+                <h2>📋 상세 처리 방법 가이드</h2>
+                <span class="close-btn" onclick="closeDetailModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="detail-section">
+                    <h3>🚨 즉시 해야 할 일</h3>
+                    <ul>
+                        <li>안전한 곳으로 차량 이동 (가능한 경우)</li>
+                        <li>비상등 켜고 안전삼각대 설치</li>
+                        <li>상대방과 연락처 교환</li>
+                        <li>사고 현장 사진 촬영 (여러 각도)</li>
+                        <li>목격자 연락처 확보</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>📞 신고 및 연락 순서</h3>
+                    <ol>
+                        <li><strong>112 신고</strong> (인명피해 있는 경우)</li>
+                        <li><strong>보험회사 접수</strong> (24시간 내)</li>
+                        <li><strong>상대방 보험회사 확인</strong></li>
+                        <li><strong>렌터카 서비스 신청</strong> (필요시)</li>
+                    </ol>
+                </div>
+
+                <div class="detail-section">
+                    <h3>📋 필요 서류 체크리스트</h3>
+                    <div class="checklist">
+                        <label><input type="checkbox"> 운전면허증</label>
+                        <label><input type="checkbox"> 자동차등록증</label>
+                        <label><input type="checkbox"> 보험증권</label>
+                        <label><input type="checkbox"> 사고 현장 사진</label>
+                        <label><input type="checkbox"> 상대방 연락처</label>
+                        <label><input type="checkbox"> 목격자 진술서 (있는 경우)</label>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>💰 보험료 할증 최소화 팁</h3>
+                    <ul>
+                        <li>경미한 사고는 합의 고려</li>
+                        <li>블랙박스 영상 적극 활용</li>
+                        <li>과실비율 협상 시 증거자료 준비</li>
+                        <li>보험회사 담당자와 충분한 상담</li>
+                    </ul>
+                </div>
+
+                <div class="detail-section">
+                    <h3>🔗 유용한 링크</h3>
+                    <div class="useful-links">
+                        <a href="https://www.caraccident.or.kr/" target="_blank">교통사고처리 지원센터</a>
+                        <a href="https://www.koroad.or.kr/" target="_blank">도로교통공단</a>
+                        <a href="https://www.knia.or.kr/" target="_blank">손해보험협회</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

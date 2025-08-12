@@ -742,3 +742,41 @@ window.addEventListener('load', function() {
 window.startTest = startTest;
 window.restartTest = restartTest;
 window.shareKakao = shareKakao;
+window.showDetailedSites = showDetailedSites;
+window.closeSitesModal = closeSitesModal;
+
+// 상세 사이트 정보 모달 표시
+function showDetailedSites() {
+    const sitesModal = document.getElementById('sitesModal');
+    if (sitesModal) {
+        sitesModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// 상세 사이트 정보 모달 닫기
+function closeSitesModal() {
+    const sitesModal = document.getElementById('sitesModal');
+    if (sitesModal) {
+        sitesModal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+}
+
+// 모달 바깥 클릭 시 닫기
+document.addEventListener('click', function(e) {
+    const sitesModal = document.getElementById('sitesModal');
+    if (sitesModal && e.target === sitesModal) {
+        closeSitesModal();
+    }
+});
+
+// ESC 키로 사이트 모달 닫기
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const sitesModal = document.getElementById('sitesModal');
+        if (sitesModal && !sitesModal.classList.contains('hidden')) {
+            closeSitesModal();
+        }
+    }
+});

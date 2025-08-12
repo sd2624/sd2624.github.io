@@ -174,10 +174,76 @@
             </div>
             
             <div class="action-buttons">
-                <button class="primary-btn" onclick="window.open('https://direct.samsung.co.kr', '_blank')">상세 정보 보기</button>
+                <button class="primary-btn" onclick="showDetailedSites()">상세 정보 보기</button>
                 <button class="other-test-btn" onclick="window.location.href='../index.html'">다른 테스트 하기</button>
                 <button class="kakao-share" onclick="shareKakao()">카톡 공유하기</button>
                 <button class="restart-btn" onclick="restartTest()">다시 하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세 사이트 정보 모달 -->
+    <div id="sitesModal" class="modal hidden">
+        <div class="modal-content sites-modal">
+            <div class="modal-header">
+                <h2>🏠 아파트시세 조회 사이트 BEST 5</h2>
+                <span class="close-btn" onclick="closeSitesModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="site-section">
+                    <h3>🥇 1위 - KB부동산 리브온</h3>
+                    <div class="site-detail">
+                        <p><strong>특징:</strong> 국민은행 운영, 가장 정확한 시세 정보</p>
+                        <p><strong>장점:</strong> 실거래가 기반, 매물 정보 풍부</p>
+                        <a href="https://onland.kbstar.com/" target="_blank" class="site-link">바로가기</a>
+                    </div>
+                </div>
+
+                <div class="site-section">
+                    <h3>🥈 2위 - 네이버 부동산</h3>
+                    <div class="site-detail">
+                        <p><strong>특징:</strong> 사용자 친화적 인터페이스</p>
+                        <p><strong>장점:</strong> 지도 연동, 주변 시설 정보</p>
+                        <a href="https://land.naver.com/" target="_blank" class="site-link">바로가기</a>
+                    </div>
+                </div>
+
+                <div class="site-section">
+                    <h3>🥉 3위 - 다방</h3>
+                    <div class="site-detail">
+                        <p><strong>특징:</strong> 모바일 최적화, AI 추천</p>
+                        <p><strong>장점:</strong> 빠른 검색, 가격 비교</p>
+                        <a href="https://www.dabangapp.com/" target="_blank" class="site-link">바로가기</a>
+                    </div>
+                </div>
+
+                <div class="site-section">
+                    <h3>🏆 4위 - 직방</h3>
+                    <div class="site-detail">
+                        <p><strong>특징:</strong> 실시간 매물 업데이트</p>
+                        <p><strong>장점:</strong> VR 투어, 상세 사진</p>
+                        <a href="https://www.zigbang.com/" target="_blank" class="site-link">바로가기</a>
+                    </div>
+                </div>
+
+                <div class="site-section">
+                    <h3>🏅 5위 - 부동산114</h3>
+                    <div class="site-detail">
+                        <p><strong>특징:</strong> 오래된 신뢰성, 전문가 분석</p>
+                        <p><strong>장점:</strong> 시세 동향, 투자 정보</p>
+                        <a href="https://www.r114.com/" target="_blank" class="site-link">바로가기</a>
+                    </div>
+                </div>
+
+                <div class="site-section">
+                    <h3>💡 시세 조회 팁</h3>
+                    <ul>
+                        <li>여러 사이트를 비교해서 평균값 확인</li>
+                        <li>최근 3개월 실거래가 중점 확인</li>
+                        <li>같은 단지 내 다른 평형도 참고</li>
+                        <li>층수, 향, 리모델링 여부 고려</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
