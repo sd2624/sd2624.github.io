@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025년 새로운 신분증 발급 안내 - 디지털 신분증 시대 준비하기</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 카카오 SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <!-- 구글 애드센스 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 상단 광고 -->
+    <div class="ad-container">
+        <ins class="adsbygoogle main-ad"
+            style="display:block"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="container">
+        <div class="test-container">
+            <!-- 시작 페이지 -->
+            <div class="start-page" id="startPage">
+                <h1 class="main-title">🆔 2025년 새로운 신분증 시대</h1>
+                <div class="start-animation">
+                    <div class="old-card">
+                        <div class="card-content">구형 신분증</div>
+                    </div>
+                    <div class="transform-arrow">→</div>
+                    <div class="new-card">
+                        <div class="card-content">디지털 신분증</div>
+                    </div>
+                </div>
+                <p class="sub-title">운전면허증과 주민등록증이 새롭게 바뀝니다!<br>나에게 맞는 발급 방법과 혜택을 확인해보세요!</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3>보안 강화</h3>
+                        <p>첨단 보안기술로<br>안전하게 보호</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>모바일 연동</h3>
+                        <p>스마트폰으로<br>간편하게 사용</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>빠른 발급</h3>
+                        <p>온라인 신청으로<br>신속한 처리</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎁</div>
+                        <h3>특별 혜택</h3>
+                        <p>초기 발급자<br>할인 혜택</p>
+                    </div>
+                </div>
+
+                <div class="urgency-notice">
+                    <div class="notice-header">⚠️ 중요 안내 ⚠️</div>
+                    <div class="notice-content">
+                        2025년 하반기부터 기존 신분증의 일부 기능이 제한될 예정입니다.<br>
+                        미리 새로운 신분증으로 교체하여 불편함을 방지하세요!
+                    </div>
+                </div>
+
+                <button class="start-btn">나의 신분증 발급 안내 받기</button>
+                
+                <div class="share-section">
+                    <div class="kakao-share">
+                        <div class="kakao-icon"></div>
+                        <span>친구들에게 알려주기</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 질문 페이지 -->
+            <div class="question-page hidden" id="questionPage">
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="question-counter">1 / 8</div>
+                </div>
+                
+                <div class="question-container">
+                    <h2 class="question-text"></h2>
+                    <div class="answers-grid"></div>
+                </div>
+            </div>
+
+            <!-- 결과 페이지 -->
+            <div class="result-page hidden" id="resultPage">
+                <div class="result-header">
+                    <h2 class="result-title"></h2>
+                    <div class="result-badge"></div>
+                </div>
+                
+                <div class="result-content">
+                    <div class="result-summary"></div>
+                    <div class="result-details"></div>
+                    <div class="action-guide"></div>
+                </div>
+                
+                <div class="result-actions">
+                    <button class="action-btn primary" onclick="location.href='https://testpro.site'">다른 테스트 하기</button>
+                    <div class="kakao-share">
+                        <div class="kakao-icon"></div>
+                        <span>결과 공유하기</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 분석 팝업 -->
+    <div class="analysis-popup hidden" id="analysisPopup">
+        <div class="popup-content">
+            <div class="analysis-animation">
+                <div class="scanning-line"></div>
+                <div class="data-points">
+                    <div class="data-point"></div>
+                    <div class="data-point"></div>
+                    <div class="data-point"></div>
+                </div>
+            </div>
+            
+            <div class="analysis-text">
+                <h3>신분증 발급 정보 분석 중...</h3>
+                <div class="countdown-display">5</div>
+                <p>최적의 발급 방법을 찾고 있습니다</p>
+            </div>
+            
+            <!-- 팝업 광고 -->
+            <div class="popup-ad-container">
+                <ins class="adsbygoogle popup-ad"
+                     style="display:inline-block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="false"></ins>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>

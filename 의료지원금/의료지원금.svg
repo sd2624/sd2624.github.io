@@ -1,0 +1,37 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b8e6b8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#45a049;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 배경 -->
+  <rect width="300" height="200" fill="url(#bgGradient)" rx="15"/>
+  
+  <!-- 메인 아이콘 (병원) -->
+  <circle cx="150" cy="80" r="35" fill="url(#iconGradient)"/>
+  <rect x="140" y="65" width="20" height="5" fill="white"/>
+  <rect x="147.5" y="57.5" width="5" height="20" fill="white"/>
+  
+  <!-- 관절 아이콘들 -->
+  <circle cx="80" cy="120" r="15" fill="#2E7D32" opacity="0.8"/>
+  <text x="80" y="127" text-anchor="middle" fill="white" font-size="16">🦴</text>
+  
+  <circle cx="120" cy="140" r="15" fill="#388E3C" opacity="0.8"/>
+  <text x="120" y="147" text-anchor="middle" fill="white" font-size="16">🏥</text>
+  
+  <circle cx="180" cy="140" r="15" fill="#43A047" opacity="0.8"/>
+  <text x="180" y="147" text-anchor="middle" fill="white" font-size="16">💉</text>
+  
+  <circle cx="220" cy="120" r="15" fill="#4CAF50" opacity="0.8"/>
+  <text x="220" y="127" text-anchor="middle" fill="white" font-size="16">🔬</text>
+  
+  <!-- 제목 -->
+  <text x="150" y="170" text-anchor="middle" fill="#2c5530" font-size="18" font-weight="bold">관절 치료비 지원금</text>
+  <text x="150" y="190" text-anchor="middle" fill="#2c5530" font-size="12">팔목·발목·허리·무릎</text>
+</svg>

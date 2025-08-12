@@ -1,5 +1,5 @@
 // 카카오 SDK 초기화
-Kakao.init('YOUR_APP_KEY');
+Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
 // 질문 데이터
 const questions = [

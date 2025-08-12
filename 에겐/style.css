@@ -1,0 +1,526 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.test-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 광고 컨테이너 스타일 */
+.ad-container {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* 애니메이션 정의 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes moveStripes {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 0; }
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 시작 페이지 스타일 */
+.start-page {
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+.main-title {
+    font-size: 2.3em;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, #e17055, #d63031, #a29bfe, #6c5ce7);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbow 3s ease infinite;
+    font-weight: bold;
+}
+
+/* 시작 페이지의 이미지 */
+.start-img {
+    width: 200px;
+    height: 200px;
+    margin: 30px auto;
+    background: linear-gradient(45deg, #fd79a8, #fdcb6e, #e17055, #a29bfe);
+    background-size: 400% 400%;
+    border-radius: 50%;
+    position: relative;
+    animation: pulse 2s infinite, rainbow 4s ease infinite;
+    overflow: hidden;
+}
+
+.start-img::before {
+    content: '💖';
+    position: absolute;
+    font-size: 80px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sub-title {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* 성향 정보 스타일 */
+.type-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 30px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #fff5f5 0%, #fef5e7 50%, #f8f9ff 100%);
+    border-radius: 15px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.type-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.type-item:nth-child(1) {
+    border-color: #e17055;
+}
+
+.type-item:nth-child(2) {
+    border-color: #6c5ce7;
+}
+
+.type-item:nth-child(3) {
+    border-color: #fd79a8;
+}
+
+.type-item:nth-child(4) {
+    border-color: #fdcb6e;
+}
+
+.type-item:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.type-item .icon {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.type-item .text {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.type-item:nth-child(1) .text {
+    color: #e17055;
+}
+
+.type-item:nth-child(2) .text {
+    color: #6c5ce7;
+}
+
+.type-item:nth-child(3) .text {
+    color: #fd79a8;
+}
+
+.type-item:nth-child(4) .text {
+    color: #fdcb6e;
+}
+
+.type-item .desc {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* 버튼 스타일 */
+.start-btn {
+    background: linear-gradient(45deg, #fd79a8, #fdcb6e, #e17055, #a29bfe);
+    background-size: 400% 400%;
+    color: white;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.3em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 15px rgba(253, 121, 168, 0.3);
+    margin: 20px 0;
+    animation: rainbow 3s ease infinite;
+}
+
+.start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(253, 121, 168, 0.4);
+}
+
+/* 공유 버튼 스타일 */
+.share-btn {
+    margin-top: 30px;
+}
+
+.kakao-share {
+    display: inline-flex;
+    align-items: center;
+    background: #FEE500;
+    color: #381E1F;
+    padding: 15px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(254, 229, 0, 0.3);
+}
+
+.kakao-share:hover {
+    background: #F5D800;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(254, 229, 0, 0.4);
+}
+
+.kakao-icon {
+    width: 20px;
+    height: 20px;
+    background: #381E1F;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* 질문 페이지 스타일 */
+.question-page {
+    animation: fadeIn 0.5s ease;
+}
+
+.progress-container {
+    margin-bottom: 30px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #fd79a8, #fdcb6e, #e17055, #a29bfe);
+    background-size: 400% 400%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    animation: rainbow 2s ease infinite;
+}
+
+.question-counter {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #e17055;
+    font-size: 1.1em;
+}
+
+.question {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    text-align: center;
+    background: linear-gradient(45deg, #e17055, #fd79a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.answers {
+    display: grid;
+    gap: 15px;
+}
+
+.answer {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.answer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(253, 121, 168, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.answer:hover {
+    border-color: #fd79a8;
+    background: linear-gradient(135deg, #fff5f5 0%, #fef5e7 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(253, 121, 168, 0.2);
+}
+
+.answer:hover::before {
+    left: 100%;
+}
+
+.answer.selected {
+    background: linear-gradient(135deg, #fd79a8, #fdcb6e);
+    color: white;
+    border-color: #fd79a8;
+    transform: scale(1.02);
+}
+
+/* 결과 페이지 스타일 */
+.result-page {
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+.result-title {
+    font-size: 2.2em;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, #e17055, #fd79a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+}
+
+.result-img {
+    width: 150px;
+    height: 150px;
+    margin: 30px auto;
+    border-radius: 50%;
+    position: relative;
+    animation: pulse 2s infinite;
+}
+
+.result-content {
+    background: linear-gradient(135deg, #fff5f5 0%, #fef5e7 50%, #f8f9ff 100%);
+    padding: 30px;
+    border-radius: 20px;
+    margin: 30px 0;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.result-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.retry-btn {
+    background: linear-gradient(45deg, #666, #555);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.retry-btn:hover {
+    background: linear-gradient(45deg, #555, #444);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 분석 팝업 스타일 */
+.analysis-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    animation: fadeIn 0.5s ease;
+}
+
+.analysis-header {
+    margin-bottom: 30px;
+}
+
+.analysis-text {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #e17055, #fd79a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+}
+
+.countdown {
+    font-size: 3em;
+    font-weight: bold;
+    background: linear-gradient(45deg, #fd79a8, #fdcb6e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 20px 0;
+    animation: pulse 1s infinite;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #e0e0e0;
+    border-top: 5px solid #fd79a8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+.popup-ad-container {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+/* 숨김 클래스 */
+.hidden {
+    display: none !important;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .test-container {
+        padding: 20px;
+    }
+    
+    .main-title {
+        font-size: 2em;
+    }
+    
+    .question {
+        font-size: 1.5em;
+    }
+    
+    .type-info {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .result-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .popup-content {
+        padding: 20px;
+        margin: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 1.8em;
+    }
+    
+    .start-img {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .start-img::before {
+        font-size: 60px;
+    }
+    
+    .type-item {
+        padding: 15px;
+    }
+    
+    .type-item .icon {
+        font-size: 2em;
+    }
+}

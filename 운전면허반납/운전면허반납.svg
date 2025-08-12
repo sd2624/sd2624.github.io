@@ -1,0 +1,67 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#74b9ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0984e3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#f8f9fa;stop-opacity:0.95" />
+    </linearGradient>
+    <linearGradient id="licenseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b894;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00cec9;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  
+  <!-- 배경 -->
+  <rect width="400" height="300" fill="url(#bgGradient)"/>
+  
+  <!-- 기하학적 패턴 -->
+  <circle cx="320" cy="50" r="40" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="80" cy="220" r="30" fill="rgba(255,255,255,0.08)"/>
+  <rect x="350" y="200" width="20" height="20" fill="rgba(255,255,255,0.12)" rx="4"/>
+  
+  <!-- 메인 카드 -->
+  <rect x="50" y="40" width="300" height="220" rx="15" fill="url(#cardGradient)" filter="url(#shadow)"/>
+  
+  <!-- 운전면허증 아이콘 -->
+  <rect x="80" y="80" width="120" height="80" rx="8" fill="url(#licenseGradient)" filter="url(#shadow)"/>
+  
+  <!-- 면허증 내부 디테일 -->
+  <rect x="90" y="90" width="30" height="30" rx="4" fill="rgba(255,255,255,0.9)"/>
+  <rect x="130" y="95" width="60" height="4" rx="2" fill="rgba(255,255,255,0.8)"/>
+  <rect x="130" y="105" width="40" height="3" rx="1.5" fill="rgba(255,255,255,0.6)"/>
+  <rect x="130" y="115" width="50" height="3" rx="1.5" fill="rgba(255,255,255,0.6)"/>
+  <rect x="90" y="130" width="100" height="3" rx="1.5" fill="rgba(255,255,255,0.7)"/>
+  <rect x="90" y="140" width="80" height="3" rx="1.5" fill="rgba(255,255,255,0.7)"/>
+  
+  <!-- 화살표 (반납 의미) -->
+  <g transform="translate(220, 120)">
+    <path d="M0,0 L20,0 L15,-8 M20,0 L15,8" stroke="#e17055" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="35" cy="0" r="12" fill="#e17055"/>
+    <path d="M28,-5 L35,0 L42,-5 M35,0 L35,5" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <!-- 보상 아이콘들 -->
+  <g transform="translate(260, 90)">
+    <!-- 돈 아이콘 -->
+    <circle cx="15" cy="15" r="12" fill="#fdcb6e"/>
+    <text x="15" y="20" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="white">₩</text>
+    
+    <!-- 교통카드 아이콘 -->
+    <rect x="5" y="35" width="20" height="12" rx="3" fill="#a29bfe"/>
+    <rect x="8" y="37" width="6" height="2" rx="1" fill="white"/>
+    <rect x="8" y="41" width="10" height="2" rx="1" fill="white"/>
+  </g>
+  
+  <!-- 제목 텍스트 -->
+  <text x="200" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2d3436">운전면허 반납</text>
+  <text x="200" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#0984e3">보상제도 안내</text>
+  
+  <!-- 서브 텍스트 -->
+  <text x="200" y="235" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#636e72">최대 50만원 혜택 확인</text>
+</svg>

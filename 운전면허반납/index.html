@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>운전면허 자진반납 보상제도 - 나에게 맞는 혜택 확인하기</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 카카오 SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <!-- 구글 애드센스 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 상단 광고 -->
+    <div class="ad-container">
+        <ins class="adsbygoogle main-ad"
+            style="display:block"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="container">
+        <div class="test-container">
+            <!-- 시작 페이지 -->
+            <div class="start-page" id="startPage">
+                <div class="title-section">
+                    <h1 class="main-title">🚗➡️🎁 운전면허 자진반납</h1>
+                    <h2 class="sub-title">보상제도 혜택 확인</h2>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="license-card">
+                        <div class="card-content">
+                            <div class="license-icon">🪪</div>
+                            <div class="license-text">운전면허증</div>
+                        </div>
+                    </div>
+                    <div class="exchange-arrow">
+                        <span>→</span>
+                    </div>
+                    <div class="rewards-box">
+                        <div class="reward-icons">
+                            <span>💰</span>
+                            <span>🚌</span>
+                            <span>🎫</span>
+                        </div>
+                        <div class="reward-text">다양한 혜택</div>
+                    </div>
+                </div>
+
+                <div class="intro-message">
+                    <p><strong>고령운전자</strong> 또는 <strong>운전이 어려워진 분들</strong>을 위한<br>
+                    정부 지원 보상제도를 확인해보세요!</p>
+                </div>
+
+                <div class="benefit-highlights">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💳</div>
+                        <h3>교통카드 지원</h3>
+                        <p>대중교통 이용료<br>최대 30만원 지원</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🏪</div>
+                        <h3>상품권 지급</h3>
+                        <p>지역별 상품권<br>10~50만원 지급</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🚕</div>
+                        <h3>택시비 할인</h3>
+                        <p>택시 이용 시<br>월 최대 20만원 할인</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🩺</div>
+                        <h3>건강검진 무료</h3>
+                        <p>정기 건강검진<br>연 1회 무료 제공</p>
+                    </div>
+                </div>
+
+                <div class="urgency-alert">
+                    <div class="alert-header">⚠️ 중요 안내</div>
+                    <div class="alert-content">
+                        <p>운전면허 자진반납 보상제도는 <strong>지역별로 다르며</strong><br>
+                        <strong>선착순 또는 예산 소진 시 마감</strong>될 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <button class="start-btn">
+                    <span class="btn-text">내가 받을 수 있는 혜택 확인하기</span>
+                    <span class="btn-icon">🔍</span>
+                </button>
+
+                <div class="share-section">
+                    <div class="kakao-share">
+                        <div class="kakao-icon">💬</div>
+                        <span>가족·지인에게 알려주기</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 질문 페이지 -->
+            <div class="question-page hidden" id="questionPage">
+                <div class="progress-header">
+                    <div class="progress-track">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <div class="question-info">
+                        <span class="current-q">1</span> / <span class="total-q">7</span>
+                    </div>
+                </div>
+
+                <div class="question-content">
+                    <h2 class="question-title"></h2>
+                    <div class="question-options"></div>
+                </div>
+            </div>
+
+            <!-- 결과 페이지 -->
+            <div class="result-page hidden" id="resultPage">
+                <div class="result-header">
+                    <div class="result-badge">
+                        <div class="badge-icon"></div>
+                    </div>
+                    <h2 class="result-title"></h2>
+                    <p class="result-subtitle"></p>
+                </div>
+
+                <div class="result-content">
+                    <div class="benefits-summary"></div>
+                    <div class="detailed-benefits"></div>
+                    <div class="application-guide"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="primary-btn" onclick="location.href='https://testpro.site'">
+                        다른 테스트 하기
+                    </button>
+                    <div class="kakao-share">
+                        <div class="kakao-icon">💬</div>
+                        <span>결과 공유하기</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 분석 팝업 -->
+    <div class="analysis-modal hidden" id="analysisModal">
+        <div class="modal-content">
+            <div class="analysis-visual">
+                <div class="scanning-effect">
+                    <div class="scan-line"></div>
+                </div>
+                <div class="data-visualization">
+                    <div class="data-bar" style="--delay: 0s"></div>
+                    <div class="data-bar" style="--delay: 0.3s"></div>
+                    <div class="data-bar" style="--delay: 0.6s"></div>
+                    <div class="data-bar" style="--delay: 0.9s"></div>
+                </div>
+            </div>
+
+            <div class="analysis-info">
+                <h3>보상제도 혜택 분석 중...</h3>
+                <div class="countdown-timer">6</div>
+                <p>거주지역과 조건을 종합 분석하여<br>최적의 혜택을 찾고 있습니다</p>
+            </div>
+
+            <!-- 팝업 광고 -->
+            <div class="popup-ad-space">
+                <ins class="adsbygoogle popup-ad"
+                     style="display:inline-block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="false"></ins>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
