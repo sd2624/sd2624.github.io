@@ -1,0 +1,54 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="chipGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 배경 -->
+  <rect width="200" height="200" fill="#f8fafc" rx="20"/>
+  
+  <!-- 카드 배경 -->
+  <rect x="30" y="60" width="140" height="88" fill="url(#cardGradient)" rx="12" stroke="#e2e8f0" stroke-width="2"/>
+  
+  <!-- 칩 -->
+  <rect x="45" y="75" width="24" height="18" fill="url(#chipGradient)" rx="3"/>
+  <rect x="47" y="77" width="20" height="14" fill="none" stroke="#d97706" stroke-width="1" rx="2"/>
+  <line x1="49" y1="79" x2="65" y2="79" stroke="#d97706" stroke-width="0.5"/>
+  <line x1="49" y1="81" x2="65" y2="81" stroke="#d97706" stroke-width="0.5"/>
+  <line x1="49" y1="83" x2="65" y2="83" stroke="#d97706" stroke-width="0.5"/>
+  <line x1="49" y1="85" x2="65" y2="85" stroke="#d97706" stroke-width="0.5"/>
+  <line x1="49" y1="87" x2="65" y2="87" stroke="#d97706" stroke-width="0.5"/>
+  <line x1="49" y1="89" x2="65" y2="89" stroke="#d97706" stroke-width="0.5"/>
+  
+  <!-- 카드 번호 -->
+  <rect x="45" y="105" width="10" height="3" fill="#ffffff" rx="1" opacity="0.9"/>
+  <rect x="58" y="105" width="10" height="3" fill="#ffffff" rx="1" opacity="0.9"/>
+  <rect x="71" y="105" width="10" height="3" fill="#ffffff" rx="1" opacity="0.9"/>
+  <rect x="84" y="105" width="10" height="3" fill="#ffffff" rx="1" opacity="0.9"/>
+  
+  <!-- DEBIT 표시 -->
+  <text x="130" y="85" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ffffff" opacity="0.9">DEBIT</text>
+  
+  <!-- 체크 아이콘 -->
+  <circle cx="100" cy="30" r="18" fill="#10b981" stroke="#065f46" stroke-width="2"/>
+  <path d="M92 30 L98 36 L108 24" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- 순위 표시 -->
+  <rect x="15" y="170" width="170" height="20" fill="#fef3c7" rx="10" stroke="#f59e0b" stroke-width="1"/>
+  <text x="100" y="183" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#92400e" text-anchor="middle">BEST 체크카드 추천</text>
+  
+  <!-- 장식 요소 -->
+  <circle cx="160" cy="40" r="3" fill="#06b6d4" opacity="0.6"/>
+  <circle cx="170" cy="50" r="2" fill="#4f46e5" opacity="0.6"/>
+  <circle cx="150" cy="50" r="2" fill="#10b981" opacity="0.6"/>
+  
+  <!-- 은행 로고 영역 -->
+  <rect x="110" y="120" width="45" height="20" fill="#ffffff" rx="3" opacity="0.8"/>
+  <text x="132" y="133" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#374151" text-anchor="middle">BANK</text>
+</svg>

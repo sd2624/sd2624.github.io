@@ -118,55 +118,6 @@ const resultTypes = {
             </div>
             
             <div class="result-section">
-                <h3>💳 추천 신용카드</h3>
-                <div class="card-recommendations">
-                    <div class="card-item">
-                        <h4>삼성카드 taptap O</h4>
-                        <p>• 온라인 쇼핑 2% 적립<br>• 결제일 자유 변경 가능<br>• <a href="https://www.samsungcard.com" target="_blank">신청하기 →</a></p>
-                    </div>
-                    <div class="card-item">
-                        <h4>현대카드 M</h4>
-                        <p>• 모든 가맹점 0.7% 적립<br>• 간편한 앱 관리<br>• <a href="https://www.hyundaicard.com" target="_blank">신청하기 →</a></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3>🔧 결제일 변경 방법</h3>
-                <div class="change-methods">
-                    <div class="method-item">
-                        <h4>📱 모바일 앱</h4>
-                        <ul>
-                            <li><a href="https://play.google.com/store/apps/details?id=com.kbcard.cxh.appcard" target="_blank">KB국민카드 앱</a></li>
-                            <li><a href="https://play.google.com/store/apps/details?id=com.shinhancard.smartshinhan" target="_blank">신한카드 앱</a></li>
-                            <li><a href="https://play.google.com/store/apps/details?id=com.lotte.lottesmartpay" target="_blank">롯데카드 앱</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3>📚 도움되는 사이트</h3>
-                <div class="helpful-sites">
-                    <div class="site-item">
-                        <h4>💰 금융감독원 금융소비자정보</h4>
-                        <p>신용카드 정보와 소비자 보호 가이드</p>
-                        <a href="https://finlife.fss.or.kr" target="_blank">바로가기 →</a>
-                    </div>
-                    <div class="site-item">
-                        <h4>📊 카드고릴라</h4>
-                        <p>신용카드 비교 및 혜택 분석</p>
-                        <a href="https://www.cardgorilla.com" target="_blank">바로가기 →</a>
-                    </div>
-                    <div class="site-item">
-                        <h4>🏦 한국신용정보원</h4>
-                        <p>신용등급 조회 및 관리</p>
-                        <a href="https://www.kcredit.or.kr" target="_blank">바로가기 →</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="result-section">
                 <h3>⚠️ 주의사항</h3>
                 <ul>
                     <li>급여일과 결제일 간격 확인</li>
@@ -212,76 +163,6 @@ const resultTypes = {
                     <li>다음 급여까지 부담없는 기간 확보</li>
                 </ul>
             </div>
-
-            <div class="result-section">
-                <h3>💳 추천 신용카드 (14일 결제 최적화)</h3>
-                <div class="card-recommendations">
-                    <div class="card-item">
-                        <h4>신한카드 Deep Dream</h4>
-                        <p>• 모든 가맹점 1.5% 적립<br>• 14일 결제시 추가 혜택<br>• <a href="https://www.shinhancard.com" target="_blank">신청하기 →</a></p>
-                    </div>
-                    <div class="card-item">
-                        <h4>KB국민 WE:SH 카드</h4>
-                        <p>• 통신비, 구독료 10% 할인<br>• 간편 결제일 설정<br>• <a href="https://card.kbcard.com" target="_blank">신청하기 →</a></p>
-                    </div>
-                    <div class="card-item">
-                        <h4>우리카드 EVERYDAY</h4>
-                        <p>• 일상 소비 1% 적립<br>• 무료 부가서비스<br>• <a href="https://www.wooricard.com" target="_blank">신청하기 →</a></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3>🔧 14일 결제일 변경 가이드</h3>
-                <div class="change-guide">
-                    <div class="step-item">
-                        <h4>1단계: 카드사별 변경 방법</h4>
-                        <ul>
-                            <li><strong>신한카드:</strong> <a href="https://www.shinhancard.com" target="_blank">인터넷뱅킹</a> → 카드관리 → 결제일변경</li>
-                            <li><strong>KB국민카드:</strong> <a href="https://card.kbcard.com" target="_blank">KB스타뱅킹</a> → 카드 → 이용한도/결제일관리</li>
-                            <li><strong>삼성카드:</strong> <a href="https://www.samsungcard.com" target="_blank">삼성카드 홈페이지</a> → My카드 → 결제일변경</li>
-                            <li><strong>현대카드:</strong> <a href="https://www.hyundaicard.com" target="_blank">현대카드 앱</a> → 카드관리 → 결제일변경</li>
-                        </ul>
-                    </div>
-                    <div class="step-item">
-                        <h4>2단계: 고객센터 연락처</h4>
-                        <ul>
-                            <li>신한카드: 1544-7000</li>
-                            <li>KB국민카드: 1588-1688</li>
-                            <li>삼성카드: 1588-8700</li>
-                            <li>현대카드: 1577-6000</li>
-                            <li>우리카드: 1588-9955</li>
-                            <li>롯데카드: 1588-8000</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3>📚 도움되는 금융 사이트</h3>
-                <div class="helpful-sites">
-                    <div class="site-item">
-                        <h4>💰 금융감독원 통합비교공시</h4>
-                        <p>각 카드사 상품 비교 및 수수료 확인</p>
-                        <a href="https://finlife.fss.or.kr" target="_blank">바로가기 →</a>
-                    </div>
-                    <div class="site-item">
-                        <h4>📊 카드비교 전문 사이트</h4>
-                        <p>실시간 카드 혜택 비교 분석</p>
-                        <a href="https://www.cardgorilla.com" target="_blank">카드고릴라 →</a>
-                    </div>
-                    <div class="site-item">
-                        <h4>🏦 신용등급 관리</h4>
-                        <p>무료 신용등급 조회 및 관리 팁</p>
-                        <a href="https://www.allcredit.co.kr" target="_blank">올크레딧 →</a>
-                    </div>
-                    <div class="site-item">
-                        <h4>💡 가계부 관리 앱</h4>
-                        <p>자동 가계부 및 카드 사용 내역 분석</p>
-                        <a href="https://www.banksalad.com" target="_blank">뱅크샐러드 →</a>
-                    </div>
-                </div>
-            </div>
         `,
         tips: [
             "14일은 대한민국 최적 결제일",
@@ -310,59 +191,6 @@ const resultTypes = {
                     <li>✅ 남은 돈으로 명확한 계획</li>
                     <li>✅ 카드 사용 한도 자연스럽게 조절</li>
                 </ul>
-            </div>
-
-            <div class="result-section">
-                <h3>💳 추천 신용카드 (월말 결제형)</h3>
-                <div class="card-recommendations">
-                    <div class="card-item">
-                        <h4>롯데카드 LOCA</h4>
-                        <p>• 롯데 계열 최대 7% 할인<br>• 무료 부가서비스<br>• <a href="https://www.lottecard.co.kr" target="_blank">신청하기 →</a></p>
-                    </div>
-                    <div class="card-item">
-                        <h4>하나카드 Club 1Q</h4>
-                        <p>• 분기별 최대 2% 적립<br>• 다양한 생활 혜택<br>• <a href="https://www.hanacard.co.kr" target="_blank">신청하기 →</a></p>
-                    </div>
-                    <div class="card-item">
-                        <h4>BC카드 Top+</h4>
-                        <p>• 모든 가맹점 1% 적립<br>• 연회비 무료<br>• <a href="https://www.bccard.com" target="_blank">신청하기 →</a></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3>💰 비상자금 관리 사이트</h3>
-                <div class="helpful-sites">
-                    <div class="site-item">
-                        <h4>🏦 토스뱅크</h4>
-                        <p>비상자금 적금 및 자동이체 관리</p>
-                        <a href="https://www.tossbank.com" target="_blank">바로가기 →</a>
-                    </div>
-                    <div class="site-item">
-                        <h4>💎 카카오뱅크</h4>
-                        <p>모임통장 및 자동저축 서비스</p>
-                        <a href="https://www.kakaobank.com" target="_blank">바로가기 →</a>
-                    </div>
-                    <div class="site-item">
-                        <h4>📈 펀드 슈퍼마켓</h4>
-                        <p>여유자금 투자 및 운용 가이드</p>
-                        <a href="https://www.fundsupermarket.co.kr" target="_blank">바로가기 →</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="result-section">
-                <h3>📱 가계부 및 자산 관리 앱</h3>
-                <div class="app-recommendations">
-                    <div class="app-item">
-                        <h4>🥗 뱅크샐러드</h4>
-                        <p>• 자동 가계부 및 자산 관리<br>• 카드 사용 패턴 분석<br>• <a href="https://play.google.com/store/apps/details?id=com.banksalad.android" target="_blank">다운로드 →</a></p>
-                    </div>
-                    <div class="app-item">
-                        <h4>💰 머니매니저</h4>
-                        <p>• 상세한 가계부 작성<br>• 예산 관리 및 알림<br>• <a href="https://play.google.com/store/apps/details?id=com.realbyteapps.moneymanagerfree" target="_blank">다운로드 →</a></p>
-                    </div>
-                </div>
             </div>
             
             <div class="result-section">
