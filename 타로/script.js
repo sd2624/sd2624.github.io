@@ -4,11 +4,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectButton = document.getElementById('selectCards');
     const cardSlots = document.querySelectorAll('.card-slot');
     const shareButton = document.getElementById('shareKakao');
-    const adContainer = document.getElementById('adContainer');
     const loadingPopup = document.getElementById('loadingPopup');
     let selectedCards = [];
     let cardOrientations = [];
     let allCardsSelected = false;
+    
+    // 광고 로드 상태 관리 - 중복 로드 방지
+    const adLoadedState = {
+        'ad-top': false,
+        'ad-middle': false,
+        'ad-result': false
+    };
+
+    // 광고 IntersectionObserver 설정
+    const adObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !adLoadedState[entry.target.id]) {
+                const adElement = entry.target.querySelector('.adsbygoogle');
+                if (adElement && !adElement.hasAttribute('data-adsbygoogle-status')) {
+                    try {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        adLoadedState[entry.target.id] = true;
+                        console.log(`광고 로드됨: ${entry.target.id}`);
+                    } catch (e) {
+                        console.error('광고 로드 오류:', e);
+                    }
+                }
+            }
+        });
+    }, {
+        rootMargin: '50px',
+        threshold: 0.1
+    });
+
+    // 페이지 로드 시 상단 광고 관찰 시작
+    const topAd = document.getElementById('ad-top');
+    if (topAd) {
+        adObserver.observe(topAd);
+    }
 
     function getCardSymbol(cardName) {
         const symbols = {
@@ -56,11 +89,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showLoadingAndAd() {
         loadingPopup.style.display = 'flex';
-        adContainer.style.display = 'block';
+        
+        // 중간 광고 표시 및 관찰 시작
+        const middleAd = document.getElementById('ad-middle');
+        if (middleAd) {
+            middleAd.style.display = 'block';
+            adObserver.observe(middleAd);
+        }
 
         setTimeout(() => {
             loadingPopup.style.display = 'none';
-            adContainer.style.display = 'none';
             alert('타로 카드 분석이 완료되었습니다!');
             
             // 모든 카드의 해석을 한번에 표시
@@ -68,6 +106,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const reading = document.getElementById(`reading${index + 1}`);
                 const isUpright = cardOrientations[index];
                 displayReading(reading, card, isUpright);
+                
+                // 두 번째 reading 후에 결과 광고 표시
+                if (index === 1) {
+                    const resultAd = document.getElementById('ad-result');
+                    if (resultAd) {
+                        resultAd.style.display = 'block';
+                        adObserver.observe(resultAd);
+                    }
+                }
             });
             
             shareButton.style.display = 'inline-block';
@@ -80,6 +127,19 @@ document.addEventListener('DOMContentLoaded', () => {
         cardOrientations = [];
         allCardsSelected = false;
         shareButton.style.display = 'none';
+        
+        // 광고 숨기기 및 관찰 중단
+        const middleAd = document.getElementById('ad-middle');
+        const resultAd = document.getElementById('ad-result');
+        
+        if (middleAd) {
+            middleAd.style.display = 'none';
+            adObserver.unobserve(middleAd);
+        }
+        if (resultAd) {
+            resultAd.style.display = 'none';
+            adObserver.unobserve(resultAd);
+        }
         
         cardSlots.forEach(slot => {
             slot.classList.remove('flipped');

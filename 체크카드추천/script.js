@@ -1,3 +1,43 @@
+// 광고 관리 클래스 - 새로 추가
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set();
+    }
+
+    loadAd(container) {
+        if (!container || this.loadedAds.has(container)) return;
+        
+        container.style.display = 'block';
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            this.loadedAds.add(container);
+        } catch (e) {
+            console.error('Ad loading error:', e);
+        }
+    }
+
+    setupIntersectionObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.loadAd(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // 중간 광고와 결과 광고 관찰
+        const midAd = document.querySelector('.ad-container.mid');
+        const resultAd = document.querySelector('.ad-container.result');
+        
+        if (midAd) observer.observe(midAd);
+        if (resultAd) observer.observe(resultAd);
+    }
+}
+
+// 광고 관리자 인스턴스 생성
+const adManager = new AdManager();
+
 // 카카오 SDK 초기화
 if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
     Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
@@ -374,6 +414,11 @@ function selectAnswer(index, type) {
     // 답변 저장
     answers[currentQuestion] = type;
     
+    // 3번째 질문 완료 후 중간 광고 표시 - 새로 추가
+    if (currentQuestion === 2) {
+        showMidAd();
+    }
+    
     // 잠시 후 다음 질문으로
     setTimeout(() => {
         if (currentQuestion < questions.length - 1) {
@@ -385,11 +430,32 @@ function selectAnswer(index, type) {
     }, 500);
 }
 
+// 중간 광고 표시 함수 - 새로 추가
+function showMidAd() {
+    const midAd = document.querySelector('.ad-container.mid');
+    if (midAd) {
+        adManager.loadAd(midAd);
+    }
+}
+
 // 분석 팝업 표시
 function showAnalysisPopup() {
     console.log('분석 팝업 표시');
     document.getElementById('popupOverlay').classList.remove('hidden');
     document.getElementById('analysisPopup').classList.remove('hidden');
+    
+    // 팝업 광고 로드 - 새로 추가
+    setTimeout(() => {
+        const popupAd = document.querySelector('.popup-ad');
+        if (popupAd && !adManager.loadedAds.has(popupAd)) {
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                adManager.loadedAds.add(popupAd);
+            } catch (e) {
+                console.error('Popup ad loading error:', e);
+            }
+        }
+    }, 100);
     
     let countdown = 8;
     const countdownEl = document.getElementById('countdown');
@@ -421,6 +487,9 @@ function showResult() {
     document.getElementById('testPage').classList.add('hidden');
     document.getElementById('resultPage').classList.remove('hidden');
     
+    // 결과 광고 표시 - 새로 추가
+    showResultAd();
+    
     // 결과 표시
     document.getElementById('resultIcon').textContent = '💳';
     document.getElementById('resultTitle').textContent = result.title;
@@ -435,6 +504,14 @@ function showResult() {
         li.textContent = tip;
         tipsContainer.appendChild(li);
     });
+}
+
+// 결과 광고 표시 함수 - 새로 추가
+function showResultAd() {
+    const resultAd = document.querySelector('.ad-container.result');
+    if (resultAd) {
+        adManager.loadAd(resultAd);
+    }
 }
 
 // 답변 분석
@@ -566,3 +643,15 @@ function shareResult() {
         }
     }
 }
+
+// 페이지 로드 시 초기화 - 새로 추가
+document.addEventListener('DOMContentLoaded', function() {
+    // 최상단 광고 로드
+    const topAd = document.querySelector('.ad-container.top');
+    if (topAd) {
+        adManager.loadAd(topAd);
+    }
+    
+    // IntersectionObserver 설정
+    adManager.setupIntersectionObserver();
+});

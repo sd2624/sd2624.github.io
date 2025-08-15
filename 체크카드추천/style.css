@@ -308,15 +308,29 @@ h1 {
     top: 10px;
 }
 
-/* 광고 섹션 */
+/* 광고 섹션 - 수정된 스타일 */
 .ad-container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 10px 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .ad-container.top {
     margin-bottom: 30px;
+}
+
+.ad-container.mid {
+    margin: 30px auto;
+    border: 1px solid #e0e0e0;
+}
+
+.ad-container.result {
+    margin: 30px auto;
+    background: rgba(247, 250, 252, 0.95);
 }
 
 .ad-container.bottom {

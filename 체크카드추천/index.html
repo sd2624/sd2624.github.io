@@ -57,21 +57,19 @@
     
     <!-- 카카오 SDK -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    
+    <!-- 구글 애드센스 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- 상단 광고 -->
+    <!-- 페이지 상단 광고 - 새로 추가 -->
     <div class="ad-container top">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6974184241884155"
-             crossorigin="anonymous"></script>
         <ins class="adsbygoogle"
              style="display:block"
-             data-ad-client="ca-pub-6974184241884155"
-             data-ad-slot="2097356164"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </div>
 
     <div class="container">
@@ -131,6 +129,16 @@
                 </div>
             </div>
         </div>
+        
+        <!-- 중간 광고 (3번째 질문 후) - 새로 추가 -->
+        <div class="ad-container mid" style="display: none;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="1966797795"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
 
         <!-- 결과 페이지 -->
         <div id="resultPage" class="page hidden">
@@ -150,6 +158,16 @@
                     <ul id="resultTips">
                         <!-- 팁들이 동적으로 추가됩니다 -->
                     </ul>
+                </div>
+                
+                <!-- 결과 페이지 중간 광고 - 새로 추가 -->
+                <div class="ad-container result">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="4448942166"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
                 </div>
             </div>
             
@@ -180,38 +198,18 @@
             
             <div class="loading-spinner"></div>
             
-            <!-- 팝업 광고 -->
+            <!-- 팝업 광고 - 기존 광고 슬롯 유지 -->
             <div class="popup-ad-container">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6974184241884155"
-                     crossorigin="anonymous"></script>
                 <ins class="adsbygoogle popup-ad"
                      style="display:inline-block;width:300px;height:250px"
-                     data-ad-client="ca-pub-6974184241884155"
-                     data-ad-slot="2097356164"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"></ins>
             </div>
             
             <button class="confirm-popup-btn" id="confirmPopupBtn" disabled>
                 결과 확인하기
             </button>
         </div>
-    </div>
-
-    <!-- 하단 광고 -->
-    <div class="ad-container bottom">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6974184241884155"
-             crossorigin="anonymous"></script>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-6974184241884155"
-             data-ad-slot="2097356164"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </div>
 
     <!-- JavaScript -->

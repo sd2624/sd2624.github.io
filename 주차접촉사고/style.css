@@ -748,6 +748,32 @@ body {
     box-shadow: var(--shadow-lg);
 }
 
+/* 광고 컨테이너 스타일 - 새로 추가 */
+.ad-container {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ad-container.top {
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.ad-container.mid {
+    margin: 30px 0;
+    border: 1px solid var(--border-color);
+}
+
+.ad-container.result {
+    margin: 30px 0;
+    background: rgba(247, 250, 252, 0.9);
+}
+
 /* 모바일 최적화 */
 @media (max-width: 480px) {
     .detail-modal {
