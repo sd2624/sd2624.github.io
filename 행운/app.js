@@ -5,6 +5,34 @@ class FortuneApp {
         this.fortune = null;
         this.biorhythm = null;
         
+        // 광고 로드 상태 관리 - 중복 로드 방지
+        this.adLoadedState = {
+            'ad-top': false,
+            'ad-middle': false,
+            'ad-result': false
+        };
+
+        // 광고 IntersectionObserver 설정
+        this.adObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !this.adLoadedState[entry.target.id]) {
+                    const adElement = entry.target.querySelector('.adsbygoogle');
+                    if (adElement && !adElement.hasAttribute('data-adsbygoogle-status')) {
+                        try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            this.adLoadedState[entry.target.id] = true;
+                            console.log(`광고 로드됨: ${entry.target.id}`);
+                        } catch (e) {
+                            console.error('광고 로드 오류:', e);
+                        }
+                    }
+                }
+            });
+        }, {
+            rootMargin: '50px',
+            threshold: 0.1
+        });
+        
         this.initializeElements();
         this.addEventListeners();
         this.initializeAds();
@@ -52,13 +80,10 @@ class FortuneApp {
     }
 
     initializeAds() {
-        try {
-            // 페이지의 모든 광고 초기화
-            document.querySelectorAll('.adsbygoogle').forEach(ad => {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            });
-        } catch (e) {
-            console.error('애드센스 초기화 실패:', e);
+        // 페이지 로드 시 상단 광고 관찰 시작
+        const topAd = document.getElementById('ad-top');
+        if (topAd) {
+            this.adObserver.observe(topAd);
         }
     }
 
@@ -161,6 +186,15 @@ class FortuneApp {
             { title: '조언', content: this.fortune.caution }
         ];
 
+        // 3번째 섹션에서 중간 광고 표시
+        if (this.currentSection === 2) {
+            const middleAd = document.getElementById('ad-middle');
+            if (middleAd) {
+                middleAd.style.display = 'block';
+                this.adObserver.observe(middleAd);
+            }
+        }
+
         // 콘텐츠 업데이트 애니메이션
         this.fortuneContent.style.opacity = '0';
         setTimeout(() => {
@@ -203,6 +237,12 @@ class FortuneApp {
             
             this.displayFullFortune();
             this.displayBiorhythm();
+            
+            // 결과 페이지 광고 표시
+            const resultAd = document.getElementById('ad-result');
+            if (resultAd) {
+                this.adObserver.observe(resultAd);
+            }
         }, 300);
     }
 

@@ -1,6 +1,34 @@
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
+// 광고 로드 상태 관리 - 중복 로드 방지
+const adLoadedState = {
+    'ad-top': false,
+    'ad-middle': false,
+    'ad-result': false
+};
+
+// 광고 IntersectionObserver 설정
+const adObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !adLoadedState[entry.target.id]) {
+            const adElement = entry.target.querySelector('.adsbygoogle');
+            if (adElement && !adElement.hasAttribute('data-adsbygoogle-status')) {
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    adLoadedState[entry.target.id] = true;
+                    console.log(`광고 로드됨: ${entry.target.id}`);
+                } catch (e) {
+                    console.error('광고 로드 오류:', e);
+                }
+            }
+        }
+    });
+}, {
+    rootMargin: '50px',
+    threshold: 0.1
+});
+
 // 질문 목록
 const questions = [
     "하루에 웃는 횟수가 몇 번 정도인가요?",
@@ -111,6 +139,15 @@ function showQuestion() {
     questionNum.textContent = currentQuestion + 1;
     questionElement.textContent = questions[currentQuestion];
 
+    // 3번째 질문에서 중간 광고 표시
+    if (currentQuestion === 2) {
+        const middleAd = document.getElementById('ad-middle');
+        if (middleAd) {
+            middleAd.style.display = 'block';
+            adObserver.observe(middleAd);
+        }
+    }
+
     answersElement.innerHTML = `
         <button class="answer-btn" onclick="handleAnswer(5)">매우 그렇다</button>
         <button class="answer-btn" onclick="handleAnswer(4)">그렇다</button>
@@ -137,9 +174,6 @@ function showAnalysisPopup() {
     questionPage.classList.add('hidden');
     analysisPopup.classList.remove('hidden');
 
-    // 팝업 광고 초기화
-    initializePopupAd();
-
     let countdown = 7;
     const countdownElement = analysisPopup.querySelector('.countdown');
     
@@ -155,27 +189,16 @@ function showAnalysisPopup() {
     }, 1000);
 }
 
-// 팝업 광고 초기화 함수
-function initializePopupAd() {
-    const popupAd = analysisPopup.querySelector('.popup-ad');
-    if (popupAd) {
-        try {
-            // 기존 광고 제거
-            while (popupAd.firstChild) {
-                popupAd.removeChild(popupAd.firstChild);
-            }
-            
-            // 새로운 광고 삽입
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-            console.error('팝업 광고 초기화 실패:', e);
-        }
-    }
-}
-
 // 결과 표시 함수
 function showResult() {
     resultPage.classList.remove('hidden');
+    
+    // 결과 광고 표시
+    const resultAd = document.getElementById('ad-result');
+    if (resultAd) {
+        resultAd.style.display = 'block';
+        adObserver.observe(resultAd);
+    }
     
     const percentage = (score / (questions.length * 5)) * 100;
     let resultIndex;
@@ -219,12 +242,34 @@ document.querySelectorAll('.kakao-share').forEach(button => {
     });
 });
 
-// 페이지 로드 시 광고 초기화
-window.onload = function() {
-    // 상단 광고 초기화
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error('상단 광고 초기화 실패:', e);
+// 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    // 페이지 로드 시 상단 광고 관찰 시작
+    const topAd = document.getElementById('ad-top');
+    if (topAd) {
+        adObserver.observe(topAd);
     }
-};
+});
+
+// 테스트 재시작 함수
+function restartTest() {
+    currentQuestion = 0;
+    score = 0;
+    
+    // 광고 숨기기 및 관찰 중단
+    const middleAd = document.getElementById('ad-middle');
+    const resultAd = document.getElementById('ad-result');
+    
+    if (middleAd) {
+        middleAd.style.display = 'none';
+        adObserver.unobserve(middleAd);
+    }
+    if (resultAd) {
+        resultAd.style.display = 'none';
+        adObserver.unobserve(resultAd);
+    }
+    
+    resultPage.classList.add('hidden');
+    questionPage.classList.add('hidden');
+    startPage.classList.remove('hidden');
+}

@@ -3,6 +3,34 @@ let currentQuestionIndex = 0;
 let score = 0;
 let selectedAnswers = [];
 
+// 광고 로드 상태 관리 - 중복 로드 방지
+const adLoadedState = {
+    'ad-top': false,
+    'ad-middle': false,
+    'ad-result': false
+};
+
+// 광고 IntersectionObserver 설정
+const adObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !adLoadedState[entry.target.id]) {
+            const adElement = entry.target.querySelector('.adsbygoogle');
+            if (adElement && !adElement.hasAttribute('data-adsbygoogle-status')) {
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    adLoadedState[entry.target.id] = true;
+                    console.log(`광고 로드됨: ${entry.target.id}`);
+                } catch (e) {
+                    console.error('광고 로드 오류:', e);
+                }
+            }
+        }
+    });
+}, {
+    rootMargin: '50px',
+    threshold: 0.1
+});
+
 // 질문 데이터
 const questions = [
     {
@@ -146,6 +174,15 @@ function showQuestion() {
         questionCounter.textContent = `${currentQuestionIndex + 1} / ${questions.length}`;
     }
     
+    // 3번째 질문에서 중간 광고 표시
+    if (currentQuestionIndex === 2) {
+        const middleAd = document.getElementById('ad-middle');
+        if (middleAd) {
+            middleAd.style.display = 'block';
+            adObserver.observe(middleAd);
+        }
+    }
+    
     // 질문과 답변 표시
     const currentQuestion = questions[currentQuestionIndex];
     if (questionElement) {
@@ -226,6 +263,13 @@ function showResult() {
         resultPage.classList.remove('hidden');
     }
     
+    // 결과 광고 표시
+    const resultAd = document.getElementById('ad-result');
+    if (resultAd) {
+        resultAd.style.display = 'block';
+        adObserver.observe(resultAd);
+    }
+    
     // 선택된 지역 정보 가져오기
     const selectedRegion = selectedAnswers[0]?.value || 'default';
     const result = regionResults[selectedRegion] || regionResults.default;
@@ -286,6 +330,19 @@ function restartTest() {
     currentQuestionIndex = 0;
     score = 0;
     selectedAnswers = [];
+    
+    // 광고 숨기기 및 관찰 중단
+    const middleAd = document.getElementById('ad-middle');
+    const resultAd = document.getElementById('ad-result');
+    
+    if (middleAd) {
+        middleAd.style.display = 'none';
+        adObserver.unobserve(middleAd);
+    }
+    if (resultAd) {
+        resultAd.style.display = 'none';
+        adObserver.unobserve(resultAd);
+    }
     
     const resultPage = document.getElementById('resultPage');
     const startPage = document.getElementById('startPage');
@@ -351,6 +408,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!Kakao.isInitialized()) {
             Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c'); // 실제 카카오 앱 키로 교체
         }
+    }
+    
+    // 페이지 로드 시 상단 광고 관찰 시작
+    const topAd = document.getElementById('ad-top');
+    if (topAd) {
+        adObserver.observe(topAd);
     }
     
     // 첫 번째 질문 준비 (하지만 숨겨진 상태로)

@@ -59,17 +59,14 @@
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- 상단 광고 -->
-    <div class="ad-container top">
+    <!-- 광고 1: 페이지 상단 (헤더 바로 아래) -->
+    <div class="ad-container" id="ad-top">
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="7854042305"
+             data-ad-slot="3201247599"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </div>
 
     <!-- 헤더 -->
@@ -146,6 +143,16 @@
                     <button class="analyze-btn" id="analyzeBtn" disabled>
                         🎨 퍼스널 컬러 분석 시작
                     </button>
+                </div>
+                
+                <!-- 광고 2: 질문 중간 (3번째 질문 뒤) -->
+                <div class="ad-container" id="ad-middle" style="display: none;">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="1966797795"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
                 </div>
             </section>
 
@@ -236,6 +243,16 @@
                             <p class="hair-advice" id="hairAdvice"></p>
                         </div>
 
+                        <!-- 광고 3: 결과 페이지 중간 (추천 카드와 상세 혜택 사이) -->
+                        <div class="ad-container" id="ad-result" style="display: none;">
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-9374368296307755"
+                                 data-ad-slot="4448942166"
+                                 data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                        </div>
+
                         <!-- 패션 컬러 추천 -->
                         <div class="recommendation-card fashion">
                             <h4>👗 패션 컬러 추천</h4>
@@ -308,32 +325,6 @@
             </div>
         </div>
     </main>
-
-    <!-- 중간 광고 -->
-    <div class="ad-container middle">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="8901234567"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
-    <!-- 하단 광고 -->
-    <div class="ad-container bottom">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="9012345678"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
 
     <!-- 푸터 -->
     <footer class="footer">
