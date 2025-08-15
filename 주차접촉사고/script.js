@@ -1,3 +1,43 @@
+// 광고 관리 클래스 - 새로 추가
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set();
+    }
+
+    loadAd(container) {
+        if (!container || this.loadedAds.has(container)) return;
+        
+        container.style.display = 'block';
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            this.loadedAds.add(container);
+        } catch (e) {
+            console.error('Ad loading error:', e);
+        }
+    }
+
+    setupIntersectionObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.loadAd(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // 중간 광고와 결과 광고 관찰
+        const midAd = document.querySelector('.ad-container.mid');
+        const resultAd = document.querySelector('.ad-container.result');
+        
+        if (midAd) observer.observe(midAd);
+        if (resultAd) observer.observe(resultAd);
+    }
+}
+
+// 광고 관리자 인스턴스 생성
+const adManager = new AdManager();
+
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
@@ -205,6 +245,11 @@ function selectAnswer(answer, index) {
     options.forEach(option => option.classList.remove('selected'));
     options[index].classList.add('selected');
     
+    // 3번째 질문 완료 후 중간 광고 표시 - 새로 추가
+    if (currentQuestionIndex === 2) {
+        showMidAd();
+    }
+    
     // 다음 질문으로 이동
     setTimeout(() => {
         currentQuestionIndex++;
@@ -214,6 +259,22 @@ function selectAnswer(answer, index) {
             showAnalysisModal();
         }
     }, 800);
+}
+
+// 중간 광고 표시 함수 - 새로 추가
+function showMidAd() {
+    const midAd = document.querySelector('.ad-container.mid');
+    if (midAd) {
+        adManager.loadAd(midAd);
+    }
+}
+
+// 결과 광고 표시 함수 - 새로 추가
+function showResultAd() {
+    const resultAd = document.querySelector('.ad-container.result');
+    if (resultAd) {
+        adManager.loadAd(resultAd);
+    }
 }
 
 // 분석 모달 표시
@@ -310,6 +371,9 @@ function analyzeFaultRatio() {
 function showResults() {
     if (analysisModal) analysisModal.classList.add('hidden');
     if (resultPage) resultPage.classList.remove('hidden');
+    
+    // 결과 광고 표시 - 새로 추가
+    showResultAd();
     
     const result = resultTypes[analysisData.resultType];
     
@@ -527,6 +591,15 @@ function shareKakao() {
 
 // 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
+    // 최상단 광고 로드 - 새로 추가
+    const topAd = document.querySelector('.ad-container.top');
+    if (topAd) {
+        adManager.loadAd(topAd);
+    }
+    
+    // IntersectionObserver 설정 - 새로 추가
+    adManager.setupIntersectionObserver();
+    
     // 광고 초기화
     if (typeof adsbygoogle !== 'undefined') {
         (adsbygoogle = window.adsbygoogle || []).push({});

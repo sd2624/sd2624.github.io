@@ -358,3 +358,36 @@ button:hover:not(:disabled) {
         padding: 12px 25px;
     }
 }
+
+/* [광고] 광고 컨테이너 스타일 */
+.ad-container {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.ad-container.top {
+    margin: 0 auto 20px auto;
+    background: linear-gradient(135deg, #fff5f5 0%, #fef5e7 100%);
+    border: 1px solid #fd79a8;
+}
+
+.ad-container.mid {
+    margin: 30px auto;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e6f3ff 100%);
+    border: 1px solid #74b9ff;
+}
+
+.ad-container.result {
+    margin: 20px auto;
+    background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+    border: 1px solid #00b894;
+}
+
+.ad-container ins {
+    margin: 0 auto;
+}

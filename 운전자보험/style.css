@@ -64,7 +64,7 @@ body::before {
 
 /* 광고 컨테이너 */
 .ad-container {
-    margin-bottom: 30px;
+    margin: 20px 0;
     border-radius: 15px;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.8);
@@ -74,6 +74,21 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.ad-container.top {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.ad-container.mid {
+    margin: 25px 0;
+    padding: 15px;
+}
+
+.ad-container.result {
+    margin: 30px 0;
+    padding: 15px;
 }
 
 /* 시작 페이지 */

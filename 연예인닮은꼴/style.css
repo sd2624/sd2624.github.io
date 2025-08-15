@@ -864,3 +864,37 @@ body {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
+
+/* [광고] 광고 컨테이너 스타일 */
+.ad-container {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+.ad-container.top {
+    margin: 0 auto 20px auto;
+    background: linear-gradient(135deg, #fff5f5 0%, #fef5e7 100%);
+    border: 1px solid #ff9a8b;
+}
+
+.ad-container.mid {
+    margin: 30px auto;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e6f3ff 100%);
+    border: 1px solid #74b9ff;
+}
+
+.ad-container.result {
+    margin: 20px auto;
+    background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+    border: 1px solid #00b894;
+}
+
+.ad-container ins {
+    margin: 0 auto;
+}

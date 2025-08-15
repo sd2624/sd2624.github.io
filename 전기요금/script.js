@@ -1,3 +1,94 @@
+// 광고 관리자 클래스 (새로 추가)
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set();
+        this.observers = new Map();
+    }
+
+    init() {
+        this.showTopAd();
+        this.setupMidAdObserver();
+        this.setupResultAdObserver();
+    }
+
+    showTopAd() {
+        if (!this.loadedAds.has('top')) {
+            setTimeout(() => {
+                this.loadAd('top');
+            }, 1000);
+        }
+    }
+
+    showMidAd() {
+        const midAdContainer = document.querySelector('.ad-container.mid');
+        if (midAdContainer && !this.loadedAds.has('mid')) {
+            midAdContainer.style.display = 'block';
+            this.loadAd('mid');
+        }
+    }
+
+    showResultAd() {
+        const resultAdContainer = document.querySelector('.ad-container.result');
+        if (resultAdContainer && !this.loadedAds.has('result')) {
+            resultAdContainer.style.display = 'block';
+            this.loadAd('result');
+        }
+    }
+
+    setupMidAdObserver() {
+        const midAdContainer = document.querySelector('.ad-container.mid');
+        if (midAdContainer) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !this.loadedAds.has('mid')) {
+                        this.showMidAd();
+                        observer.disconnect();
+                    }
+                });
+            });
+            observer.observe(midAdContainer);
+            this.observers.set('mid', observer);
+        }
+    }
+
+    setupResultAdObserver() {
+        const resultAdContainer = document.querySelector('.ad-container.result');
+        if (resultAdContainer) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !this.loadedAds.has('result')) {
+                        this.showResultAd();
+                        observer.disconnect();
+                    }
+                });
+            });
+            observer.observe(resultAdContainer);
+            this.observers.set('result', observer);
+        }
+    }
+
+    loadAd(position) {
+        if (!this.loadedAds.has(position)) {
+            try {
+                const adContainer = document.querySelector(`.ad-container.${position}`);
+                if (adContainer) {
+                    const adElement = adContainer.querySelector('.adsbygoogle');
+                    if (adElement && !adElement.getAttribute('data-adsbygoogle-status')) {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        this.loadedAds.add(position);
+                        console.log(`${position} 광고 로드 완료`);
+                    }
+                }
+            } catch (error) {
+                console.error(`${position} 광고 로드 실패:`, error);
+            }
+        }
+    }
+}
+
+// 광고 관리자 인스턴스 생성 (새로 추가)
+const adManager = new AdManager();
+
 // 전역 변수
 let currentQuestionIndex = 0;
 let userAnswers = [];
@@ -402,6 +493,12 @@ function selectAnswer(answerIndex) {
     // 다음 질문으로 이동
     setTimeout(() => {
         currentQuestionIndex++;
+        
+        // 3번째 질문 완료 후 중간 광고 표시 (새로 추가)
+        if (currentQuestionIndex === 3) {
+            adManager.showMidAd();
+        }
+        
         displayQuestion();
     }, 500);
 }
@@ -442,8 +539,10 @@ function showResult() {
     displayResultContent(resultType, totalScore, percentage);
     showPage('result');
     
-    // 결과 페이지 광고 표시
-    setTimeout(showResultAd, 2000);
+    // 결과 페이지 광고 표시 (새로 수정)
+    setTimeout(() => {
+        adManager.showResultAd();
+    }, 500);
 }
 
 function displayResultContent(result, score, percentage) {
@@ -583,4 +682,27 @@ function shareKakao() {
 
 // 전역 함수로 정의 (HTML에서 호출)
 window.startTest = startTest;
+
+// 광고 관련 함수들 (새로 추가)
+function initializeAds() {
+    // Google AdSense 스크립트가 로드된 후 광고 푸시
+    if (typeof adsbygoogle !== 'undefined') {
+        const ads = document.querySelectorAll('.adsbygoogle');
+        ads.forEach(ad => {
+            if (!ad.getAttribute('data-adsbygoogle-status')) {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        });
+    }
+}
+
+// 페이지 로드 시 광고 관리자 초기화 (새로 추가)
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        adManager.init();
+    }, 1000);
+});
+
+// AdSense 스크립트 로드 후 광고 초기화 (새로 추가)
+window.addEventListener('load', initializeAds);
 window.shareKakao = shareKakao;

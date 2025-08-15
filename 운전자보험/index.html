@@ -52,12 +52,12 @@
     <!-- 시작 페이지 -->
     <div id="startPage" class="page">
         <div class="container">
-            <!-- 상단 광고 -->
-            <div class="ad-container">
+            <!-- 상단 광고 (k-test 상단) -->
+            <div class="ad-container top">
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="1724698171"
+                     data-ad-slot="3201247599"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
             </div>
@@ -188,6 +188,16 @@
             </div>
             
             <div class="answers-grid"></div>
+
+            <!-- 중간 광고 (3번째 질문 후) - k-test 슬롯2 -->
+            <div id="midAd" class="ad-container mid" style="display: none;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="1966797795"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
         </div>
     </div>
 
@@ -231,15 +241,7 @@
                 <div class="timer-display">6</div>
             </div>
 
-            <!-- 팝업 광고 -->
-            <div class="modal-ad">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="1724698171"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-            </div>
+            <!-- 팝업 광고 제거됨 -->
         </div>
     </div>
 
@@ -255,6 +257,17 @@
             <div class="result-body">
                 <div class="premium-analysis"></div>
                 <div class="market-comparison"></div>
+                
+                <!-- 결과 페이지 중간 광고 - k-test 슬롯3 -->
+                <div id="resultAd" class="ad-container result">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="4448942166"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+                
                 <div class="saving-tips"></div>
             </div>
             
@@ -268,10 +281,5 @@
     </div>
 
     <script src="script.js"></script>
-    
-    <!-- 광고 초기화 -->
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 </body>
 </html>

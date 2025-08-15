@@ -1,3 +1,94 @@
+// 광고 관리자 클래스 (새로 추가)
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set();
+        this.observers = new Map();
+    }
+
+    init() {
+        this.showTopAd();
+        this.setupMidAdObserver();
+        this.setupResultAdObserver();
+    }
+
+    showTopAd() {
+        if (!this.loadedAds.has('top')) {
+            setTimeout(() => {
+                this.loadAd('top');
+            }, 1000);
+        }
+    }
+
+    showMidAd() {
+        const midAdContainer = document.querySelector('.ad-container.mid');
+        if (midAdContainer && !this.loadedAds.has('mid')) {
+            midAdContainer.style.display = 'block';
+            this.loadAd('mid');
+        }
+    }
+
+    showResultAd() {
+        const resultAdContainer = document.querySelector('.ad-container.result');
+        if (resultAdContainer && !this.loadedAds.has('result')) {
+            resultAdContainer.style.display = 'block';
+            this.loadAd('result');
+        }
+    }
+
+    setupMidAdObserver() {
+        const midAdContainer = document.querySelector('.ad-container.mid');
+        if (midAdContainer) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !this.loadedAds.has('mid')) {
+                        this.showMidAd();
+                        observer.disconnect();
+                    }
+                });
+            });
+            observer.observe(midAdContainer);
+            this.observers.set('mid', observer);
+        }
+    }
+
+    setupResultAdObserver() {
+        const resultAdContainer = document.querySelector('.ad-container.result');
+        if (resultAdContainer) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !this.loadedAds.has('result')) {
+                        this.showResultAd();
+                        observer.disconnect();
+                    }
+                });
+            });
+            observer.observe(resultAdContainer);
+            this.observers.set('result', observer);
+        }
+    }
+
+    loadAd(position) {
+        if (!this.loadedAds.has(position)) {
+            try {
+                const adContainer = document.querySelector(`.ad-container.${position}`);
+                if (adContainer) {
+                    const adElement = adContainer.querySelector('.adsbygoogle');
+                    if (adElement && !adElement.getAttribute('data-adsbygoogle-status')) {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        this.loadedAds.add(position);
+                        console.log(`${position} 광고 로드 완료`);
+                    }
+                }
+            } catch (error) {
+                console.error(`${position} 광고 로드 실패:`, error);
+            }
+        }
+    }
+}
+
+// 광고 관리자 인스턴스 생성 (새로 추가)
+const adManager = new AdManager();
+
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
@@ -160,6 +251,12 @@ function selectAnswer(answer, index) {
     // 다음 질문으로 이동
     setTimeout(() => {
         currentQuestionIndex++;
+        
+        // 3번째 질문 완료 후 중간 광고 표시 (새로 추가)
+        if (currentQuestionIndex === 3) {
+            adManager.showMidAd();
+        }
+        
         if (currentQuestionIndex < questions.length) {
             showQuestion();
         } else {
@@ -216,6 +313,11 @@ function showResult() {
     
     const result = analyzeAnswers();
     displayResult(result);
+    
+    // 결과 페이지 광고 표시 (새로 추가)
+    setTimeout(() => {
+        adManager.showResultAd();
+    }, 500);
 }
 
 // 답변 분석
@@ -602,6 +704,11 @@ window.addEventListener('resize', function() {
 window.addEventListener('load', function() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+    
+    // 광고 관리자 초기화 (새로 추가)
+    setTimeout(() => {
+        adManager.init();
+    }, 1000);
 });
 
 // 전역 함수로 노출
@@ -609,4 +716,20 @@ window.startTest = startTest;
 window.restartTest = restartTest;
 window.shareKakao = shareKakao;
 window.showDetailedGuide = showDetailedGuide;
+
+// 광고 관련 함수들 (새로 추가)
+function initializeAds() {
+    // Google AdSense 스크립트가 로드된 후 광고 푸시
+    if (typeof adsbygoogle !== 'undefined') {
+        const ads = document.querySelectorAll('.adsbygoogle');
+        ads.forEach(ad => {
+            if (!ad.getAttribute('data-adsbygoogle-status')) {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        });
+    }
+}
+
+// AdSense 스크립트 로드 후 광고 초기화 (새로 추가)
+document.addEventListener('DOMContentLoaded', initializeAds);
 window.closeGuideModal = closeGuideModal;

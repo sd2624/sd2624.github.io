@@ -47,6 +47,26 @@ body {
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid #4CAF50;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ad-container.top {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.ad-container.mid {
+    margin: 25px auto;
+    padding: 20px;
+}
+
+.ad-container.result {
+    margin: 30px auto;
+    padding: 20px;
 }
 
 /* 애니메이션 정의 */

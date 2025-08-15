@@ -1,3 +1,87 @@
+// [광고] AdManager 클래스 - 광고 로드 및 중복 방지 관리
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set(); // 로드된 광고 추적
+    }
+    
+    // 광고 로드 함수
+    loadAd(adId) {
+        if (this.loadedAds.has(adId)) {
+            console.log(`[광고] ${adId} 이미 로드됨 - 중복 방지`);
+            return false;
+        }
+        
+        const adElement = document.getElementById(adId);
+        if (adElement && typeof adsbygoogle !== 'undefined') {
+            try {
+                // 광고 컨테이너 표시
+                adElement.style.display = 'block';
+                
+                // 광고 푸시
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                
+                this.loadedAds.add(adId);
+                console.log(`[광고] ${adId} 로드 완료`);
+                return true;
+            } catch (error) {
+                console.warn(`[광고] ${adId} 로드 실패:`, error);
+                return false;
+            }
+        }
+        return false;
+    }
+    
+    // 중간 광고 표시 (업로드 완료 후)
+    showMidAd() {
+        return this.loadAd('adMid');
+    }
+    
+    // 결과 광고 표시
+    showResultAd() {
+        return this.loadAd('adResult');
+    }
+}
+
+// [광고] AdManager 인스턴스 생성
+const adManager = new AdManager();
+
+// [광고] IntersectionObserver를 이용한 광고 표시 관리
+const setupAdObservers = () => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    
+    const options = {
+        threshold: 0.1,
+        rootMargin: '50px'
+    };
+    
+    // 중간 광고 관찰자
+    const midAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showMidAd();
+                midAdObserver.disconnect();
+            }
+        });
+    }, options);
+    
+    // 결과 광고 관찰자
+    const resultAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showResultAd();
+                resultAdObserver.disconnect();
+            }
+        });
+    }, options);
+    
+    // 옵저버 등록
+    const midAd = document.getElementById('adMid');
+    const resultAd = document.getElementById('adResult');
+    
+    if (midAd) midAdObserver.observe(midAd);
+    if (resultAd) resultAdObserver.observe(resultAd);
+};
+
 // 연예인 데이터베이스
 const celebrityDatabase = {
     korean: [
@@ -391,6 +475,11 @@ function startAnalysis() {
         return;
     }
     
+    // [광고] 분석 시작 시 중간 광고 표시
+    setTimeout(() => {
+        adManager.showMidAd();
+    }, 500);
+    
     // 업로드 섹션 숨기고 분석 섹션 표시
     uploadSection.style.display = 'none';
     analyzingSection.style.display = 'block';
@@ -458,6 +547,11 @@ function showResult() {
     
     // 결과 내용 생성
     generateResultContent(randomCelebrity, similarityScore, randomCategory);
+    
+    // [광고] 결과 표시 1초 후 결과 광고 표시
+    setTimeout(() => {
+        adManager.showResultAd();
+    }, 1000);
     
     // 결과 섹션으로 스크롤
     resultSection.scrollIntoView({ behavior: 'smooth' });
@@ -802,3 +896,14 @@ window.addEventListener('error', function(e) {
 
 // 터치 디바이스 지원
 document.addEventListener('touchstart', function() {}, { passive: true });
+
+// [광고] 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    // 상단 광고 즉시 로드
+    if (typeof adsbygoogle !== 'undefined') {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+    
+    // 옵저버 설정
+    setupAdObservers();
+});

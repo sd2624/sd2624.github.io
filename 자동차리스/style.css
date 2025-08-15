@@ -738,3 +738,61 @@ body::before {
         padding: 12px;
     }
 }
+
+/* 광고 컨테이너 스타일 (새로 추가) */
+.ad-container {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    border: 1px solid rgba(122, 176, 105, 0.2);
+    box-shadow: 0 2px 8px rgba(45, 80, 22, 0.1);
+}
+
+.ad-container.top {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.ad-container.mid {
+    margin: 30px 0;
+    background: rgba(244, 243, 238, 0.9);
+}
+
+.ad-container.result {
+    margin: 30px 0 20px 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(232, 245, 232, 0.9) 100%);
+}
+
+.ad-container ins {
+    display: block !important;
+}
+
+/* 광고 로딩 상태 */
+.ad-container.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.ad-container.loaded {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* 모바일 광고 최적화 */
+@media (max-width: 480px) {
+    .ad-container {
+        margin: 15px 0;
+        padding: 8px;
+    }
+    
+    .ad-container.top {
+        margin-bottom: 20px;
+    }
+    
+    .ad-container.mid {
+        margin: 20px 0;
+    }
+}
