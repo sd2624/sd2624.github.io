@@ -38,13 +38,63 @@ const results = [
 let currentQuestion = 0;
 let totalScore = 0;
 
+// 광고 로드 상태 추적 (중복 로드 방지)
+const adLoadStatus = {
+    'ad-top': false,
+    'ad-middle': false,
+    'ad-result': false
+};
+
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
     // 이벤트 리스너 초기화
     document.getElementById('start-btn').addEventListener('click', startTest);
     document.getElementById('retry-btn').addEventListener('click', resetTest);
     document.getElementById('kakao-share-btn').addEventListener('click', shareToKakao);
+    
+    // IntersectionObserver로 광고 로드 관리
+    initializeAdObserver();
+    
+    // 상단 광고 즉시 로드 (페이지 로드 시 바로 보이므로)
+    loadAdIfVisible('ad-top');
 });
+
+// IntersectionObserver를 사용한 광고 로드 관리
+function initializeAdObserver() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const adId = entry.target.id;
+                loadAdIfVisible(adId);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+    });
+
+    // 모든 광고 섹션 관찰
+    const adSections = document.querySelectorAll('.ad-section');
+    adSections.forEach(section => {
+        observer.observe(section);
+    });
+}
+
+// 광고 로드 함수 (중복 로드 방지)
+function loadAdIfVisible(adId) {
+    if (!adLoadStatus[adId]) {
+        const adElement = document.querySelector(`#${adId} .adsbygoogle`);
+        if (adElement) {
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                adLoadStatus[adId] = true;
+                console.log(`광고 로드 완료: ${adId}`);
+            } catch (error) {
+                console.error(`광고 로드 실패: ${adId}`, error);
+            }
+        }
+    }
+}
 
 // 테스트 시작
 function startTest() {
@@ -58,6 +108,16 @@ function showQuestion() {
     document.getElementById('question-text').textContent = questions[currentQuestion];
     updateProgressBar();
     setupAnswerButtons();
+    
+    // 3번째 질문 뒤에 중간 광고 표시
+    const middleAdSection = document.getElementById('ad-middle');
+    if (currentQuestion === 3) {
+        middleAdSection.style.display = 'block';
+        // 광고가 화면에 보이면 로드
+        loadAdIfVisible('ad-middle');
+    } else {
+        middleAdSection.style.display = 'none';
+    }
 }
 
 // 진행 상태 업데이트
@@ -107,8 +167,12 @@ function showAdPopup() {
         }
     }, 1000);
     
-    // Google 광고 표시
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    // 팝업 광고 로드
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (error) {
+        console.error('팝업 광고 로드 실패:', error);
+    }
 }
 
 // 결과 표시
@@ -131,14 +195,27 @@ function showResult() {
     document.getElementById('result-title').textContent = result.title;
     document.getElementById('result-description').textContent = result.description;
     document.querySelector('.result-icon').textContent = result.icon;
+    
+    // 결과 페이지 광고 로드
+    setTimeout(() => {
+        loadAdIfVisible('ad-result');
+    }, 100);
 }
 
 // 테스트 초기화
 function resetTest() {
     currentQuestion = 0;
     totalScore = 0;
+    
+    // 광고 로드 상태 초기화 (중간 광고와 결과 광고만)
+    adLoadStatus['ad-middle'] = false;
+    adLoadStatus['ad-result'] = false;
+    
     document.getElementById('result-section').style.display = 'none';
     document.getElementById('start-section').style.display = 'block';
+    
+    // 중간 광고 숨기기
+    document.getElementById('ad-middle').style.display = 'none';
 }
 
 // 카카오톡 공유

@@ -1,6 +1,79 @@
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
+// 광고 로드 관리 시스템
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set(); // 중복 로드 방지를 위한 Set
+        this.initializeAds();
+    }
+
+    // 광고 초기화 및 IntersectionObserver 설정
+    initializeAds() {
+        // 페이지 로드 시 상단 광고 즉시 로드
+        this.loadAd('ad-top');
+
+        // IntersectionObserver로 광고 요소 감시
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const adId = entry.target.id;
+                    this.loadAd(adId);
+                }
+            });
+        }, {
+            threshold: 0.1, // 10% 보이면 로드
+            rootMargin: '50px' // 50px 여유를 두고 로드
+        });
+
+        // 모든 광고 요소 관찰
+        document.querySelectorAll('.ad-section').forEach(ad => {
+            observer.observe(ad);
+        });
+    }
+
+    // 광고 로드 함수
+    loadAd(adId) {
+        if (this.loadedAds.has(adId)) {
+            return; // 이미 로드된 광고는 스킵
+        }
+
+        const adElement = document.getElementById(adId);
+        if (adElement && adElement.querySelector('.adsbygoogle')) {
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                this.loadedAds.add(adId);
+                console.log(`광고 로드됨: ${adId}`);
+            } catch (error) {
+                console.error(`광고 로드 실패: ${adId}`, error);
+            }
+        }
+    }
+
+    // 광고 표시 (섹션이 나타날 때 호출)
+    showAd(adId) {
+        const adElement = document.getElementById(adId);
+        if (adElement) {
+            adElement.style.display = 'block';
+            // 약간의 지연 후 광고 로드
+            setTimeout(() => {
+                this.loadAd(adId);
+            }, 100);
+        }
+    }
+
+    // 광고 숨기기
+    hideAd(adId) {
+        const adElement = document.getElementById(adId);
+        if (adElement) {
+            adElement.style.display = 'none';
+        }
+    }
+}
+
+// 광고 매니저 인스턴스 생성
+const adManager = new AdManager();
+
 // 질문 데이터
 const questions = [
     {
@@ -248,6 +321,11 @@ function showQuestion() {
     const questionDesc = document.querySelector('.question-desc');
     const answersGrid = document.querySelector('.answers-grid');
     
+    // 3번째 질문 후 중간 광고 표시
+    if (currentQuestionIndex === 3) {
+        adManager.showAd('ad-middle');
+    }
+    
     // 진행률 업데이트
     const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
     if (progressFill) progressFill.style.width = progress + '%';
@@ -386,6 +464,9 @@ function analyzeAnswers() {
 function showResults() {
     if (analysisModal) analysisModal.classList.add('hidden');
     if (resultPage) resultPage.classList.remove('hidden');
+    
+    // 결과 페이지 중간 광고 표시 및 로드
+    adManager.showAd('ad-result');
     
     const result = resultTypes[analysisData.resultType];
     
@@ -526,6 +607,10 @@ function restartTest() {
     
     if (resultPage) resultPage.classList.add('hidden');
     if (startPage) startPage.classList.remove('hidden');
+    
+    // 광고 섹션들 숨기기 (상단 광고는 유지)
+    adManager.hideAd('ad-middle');
+    adManager.hideAd('ad-result');
 }
 
 // 카카오톡 공유 함수
@@ -579,10 +664,7 @@ function shareKakao() {
 
 // 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
-    // 광고 초기화
-    if (typeof adsbygoogle !== 'undefined') {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    }
+    // 광고 시스템 초기화는 AdManager에서 자동 처리됨
     
     // 이벤트 리스너 등록
     const startBtn = document.querySelector('.start-btn');

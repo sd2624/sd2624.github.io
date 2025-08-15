@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⛽ 혜택큰 주유할인카드 추천 | 나에게 맞는 최고의 주유카드는?</title>
+    
+    <!-- SEO 메타 태그 -->
+    <meta name="description" content="⛽ 올해 최신 주유할인카드 추천! 할인율, 혜택, 편의성을 고려한 나에게 딱 맞는 주유카드를 찾아보세요. 혜택큰 주유카드 완벽 분석!">
+    <meta name="keywords" content="주유할인카드, 주유카드 추천, 주유 할인, 기름값 절약, 주유소 할인카드, 올해 주유카드, 혜택큰 주유카드">
+    <meta name="author" content="테스트프로">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph 메타 태그 -->
+    <meta property="og:title" content="⛽ 혜택큰 주유할인카드 추천">
+    <meta property="og:description" content="올해 최신 주유할인카드 추천! 나에게 딱 맞는 최고의 주유카드를 찾아보세요.">
+    <meta property="og:image" content="https://sd2624.github.io/주유할인카드/주유할인카드.svg">
+    <meta property="og:url" content="https://sd2624.github.io/주유할인카드/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="테스트프로">
+    <meta property="og:locale" content="ko_KR">
+    
+    <!-- Twitter Card 메타 태그 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="⛽ 혜택큰 주유할인카드 추천">
+    <meta name="twitter:description" content="올해 최신 주유할인카드 추천! 나에게 딱 맞는 최고의 주유카드를 찾아보세요.">
+    <meta name="twitter:image" content="https://sd2624.github.io/주유할인카드/주유할인카드.svg">
+    <meta name="twitter:site" content="@testpro">
+    
+    <!-- 구조화된 데이터 (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "혜택큰 주유할인카드 추천",
+        "description": "올해 최신 주유할인카드 추천과 나에게 맞는 최고의 주유카드 찾기 가이드",
+        "url": "https://sd2624.github.io/주유할인카드/",
+        "image": "https://sd2624.github.io/주유할인카드/주유할인카드.svg",
+        "datePublished": "2025-08-14",
+        "dateModified": "2025-08-14",
+        "author": {
+            "@type": "Organization",
+            "name": "테스트프로"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "테스트프로"
+        }
+    }
+    </script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <!-- 카카오 SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+    </script>
+</head>
+<body>
+    <!-- 상단 광고 -->
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>⛽ 혜택큰 주유할인카드 추천</h1>
+            <p>나에게 맞는 최고의 주유카드를 찾아보세요!</p>
+        </header>
+
+        <div class="test-container">
+            <div class="question-container">
+                <h2>주유카드 선택 테스트</h2>
+                <p>간단한 질문으로 당신에게 가장 적합한 주유할인카드를 추천해드립니다!</p>
+                
+                <div class="start-section">
+                    <button id="startBtn" class="start-btn">
+                        <span class="btn-text">테스트 시작하기</span>
+                        <span class="btn-icon">⛽</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question" id="question1" style="display: none;">
+                <h3>주로 이용하는 주유소는?</h3>
+                <div class="answers">
+                    <button class="answer-btn" data-score="gsfuel">GS칼텍스</button>
+                    <button class="answer-btn" data-score="skoil">SK에너지</button>
+                    <button class="answer-btn" data-score="soil">S-OIL</button>
+                    <button class="answer-btn" data-score="hyundai">현대오일뱅크</button>
+                    <button class="answer-btn" data-score="anywhere">어디든 상관없음</button>
+                </div>
+            </div>
+
+            <div class="question" id="question2" style="display: none;">
+                <h3>월 주유비는 대략 얼마인가요?</h3>
+                <div class="answers">
+                    <button class="answer-btn" data-score="low">10만원 미만</button>
+                    <button class="answer-btn" data-score="medium">10~20만원</button>
+                    <button class="answer-btn" data-score="high">20~30만원</button>
+                    <button class="answer-btn" data-score="veryhigh">30만원 이상</button>
+                </div>
+            </div>
+
+            <div class="question" id="question3" style="display: none;">
+                <h3>가장 중요하게 생각하는 혜택은?</h3>
+                <div class="answers">
+                    <button class="answer-btn" data-score="discount">높은 할인율</button>
+                    <button class="answer-btn" data-score="point">적립 포인트</button>
+                    <button class="answer-btn" data-score="cashback">현금 캐시백</button>
+                    <button class="answer-btn" data-score="multiple">다양한 부가혜택</button>
+                </div>
+            </div>
+
+            <!-- 질문 중간 광고 -->
+            <div class="question-mid-ad" id="questionMidAd" style="display: none;">
+                <div class="ad-container">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="1966797795"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+
+            <div class="question" id="question4" style="display: none;">
+                <h3>카드 사용 패턴은?</h3>
+                <div class="answers">
+                    <button class="answer-btn" data-score="fuel-only">주유만 주로 사용</button>
+                    <button class="answer-btn" data-score="daily">생활비 전반적 사용</button>
+                    <button class="answer-btn" data-score="business">사업용 주로 사용</button>
+                    <button class="answer-btn" data-score="occasional">가끔씩만 사용</button>
+                </div>
+            </div>
+
+            <div class="question" id="question5" style="display: none;">
+                <h3>중요하게 생각하는 추가 혜택은?</h3>
+                <div class="answers">
+                    <button class="answer-btn" data-score="maintenance">자동차 정비 할인</button>
+                    <button class="answer-btn" data-score="cafe">카페/편의점 할인</button>
+                    <button class="answer-btn" data-score="highway">고속도로 할인</button>
+                    <button class="answer-btn" data-score="simple">단순한 주유 할인만</button>
+                </div>
+            </div>
+
+            <!-- 분석 팝업 -->
+            <div class="analysis-popup" id="analysisPopup" style="display: none;">
+                <div class="analysis-overlay"></div>
+                <div class="analysis-content">
+                    <div class="analysis-header">
+                        <h3>⛽ 분석 중...</h3>
+                        <p>당신에게 맞는 최고의 주유할인카드를 찾고 있습니다</p>
+                    </div>
+                    
+                    <div class="loading-container">
+                        <div class="fuel-pump">
+                            <div class="pump-handle"></div>
+                            <div class="fuel-drop"></div>
+                        </div>
+                        <div class="loading-text">
+                            <span id="loadingText">주유소별 할인율 분석 중...</span>
+                        </div>
+                        <div class="countdown">
+                            <span id="countdown">5</span>초 후 결과 확인
+                        </div>
+                    </div>
+
+                    <!-- 팝업 내 광고 -->
+                    <div class="popup-ad">
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-9374368296307755"
+                             data-ad-slot="4994254497"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 결과 화면 -->
+            <div class="result" id="result" style="display: none;">
+                <div class="result-content">
+                    <h2>🎉 추천 결과</h2>
+                    <div class="card-recommendation">
+                        <div class="recommended-card">
+                            <h3 id="cardName"></h3>
+                            <div class="card-features" id="cardFeatures"></div>
+                            <div class="card-benefits" id="cardBenefits"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="detailed-info">
+                        <h3>📋 상세 혜택 안내</h3>
+                        <div id="detailedBenefits"></div>
+                    </div>
+
+                    <!-- 결과 페이지 중간 광고 -->
+                    <div class="result-mid-ad">
+                        <div class="ad-container">
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-9374368296307755"
+                                 data-ad-slot="4448942166"
+                                 data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                        </div>
+                    </div>
+
+                    <div class="useful-sites">
+                        <h3>🔗 도움이 될 만한 사이트</h3>
+                        <div class="site-links">
+                            <a href="https://www.gscaltex.com/kr/products-services/card/card-benefits" target="_blank" class="site-link">
+                                <div class="site-icon">🛢️</div>
+                                <div class="site-info">
+                                    <h4>GS칼텍스 카드 혜택</h4>
+                                    <p>GS칼텍스 주유카드 상세 혜택 확인</p>
+                                </div>
+                            </a>
+                            <a href="https://www.skenergy.com/card" target="_blank" class="site-link">
+                                <div class="site-icon">⛽</div>
+                                <div class="site-info">
+                                    <h4>SK에너지 카드</h4>
+                                    <p>SK 주유카드 혜택 및 신청</p>
+                                </div>
+                            </a>
+                            <a href="https://www.s-oil.com/card" target="_blank" class="site-link">
+                                <div class="site-icon">🚗</div>
+                                <div class="site-info">
+                                    <h4>S-OIL 카드</h4>
+                                    <p>S-OIL 주유카드 혜택 안내</p>
+                                </div>
+                            </a>
+                            <a href="https://card.hyundai.com/" target="_blank" class="site-link">
+                                <div class="site-icon">💳</div>
+                                <div class="site-info">
+                                    <h4>현대카드</h4>
+                                    <p>다양한 주유 할인카드 비교</p>
+                                </div>
+                            </a>
+                            <a href="https://www.opinet.co.kr/" target="_blank" class="site-link">
+                                <div class="site-icon">📊</div>
+                                <div class="site-info">
+                                    <h4>오피넷 유가정보</h4>
+                                    <p>전국 주유소 가격 비교</p>
+                                </div>
+                            </a>
+                            <a href="https://www.cardgorilla.com/" target="_blank" class="site-link">
+                                <div class="site-icon">🦍</div>
+                                <div class="site-info">
+                                    <h4>카드고릴라</h4>
+                                    <p>주유카드 비교 및 추천</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="share-section">
+                        <button id="shareKakao" class="share-btn kakao">
+                            카카오톡 공유하기
+                        </button>
+                        <button id="restartBtn" class="share-btn restart">
+                            다시 테스트하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단 광고 -->
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="1724698171"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- Sticky 하단 광고 -->
+    <div class="sticky-ad" id="stickyAd">
+        <div class="sticky-ad-close" id="stickyAdClose">&times;</div>
+        <div class="sticky-ad-content">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="8384240134"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

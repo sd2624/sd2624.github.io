@@ -1,6 +1,80 @@
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
+// 광고 관리 클래스
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set();
+        this.initIntersectionObserver();
+    }
+
+    // Intersection Observer 초기화
+    initIntersectionObserver() {
+        if ('IntersectionObserver' in window) {
+            this.observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.loadAd(entry.target);
+                        this.observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+        }
+    }
+
+    // 광고 로드
+    loadAd(adElement) {
+        const adId = adElement.id;
+        if (!this.loadedAds.has(adId)) {
+            try {
+                const adIns = adElement.querySelector('.adsbygoogle');
+                if (adIns && !adIns.hasAttribute('data-adsbygoogle-status')) {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    this.loadedAds.add(adId);
+                    console.log(`광고 로드됨: ${adId}`);
+                }
+            } catch (error) {
+                console.error(`광고 로드 실패 (${adId}):`, error);
+            }
+        }
+    }
+
+    // 광고 표시
+    showAd(adId) {
+        const adElement = document.getElementById(adId);
+        if (adElement) {
+            adElement.style.display = 'block';
+            if (this.observer) {
+                this.observer.observe(adElement);
+            } else {
+                // Intersection Observer를 지원하지 않는 경우 바로 로드
+                this.loadAd(adElement);
+            }
+        }
+    }
+
+    // 광고 숨기기
+    hideAd(adId) {
+        const adElement = document.getElementById(adId);
+        if (adElement) {
+            adElement.style.display = 'none';
+        }
+    }
+
+    // 모든 광고 숨기기
+    hideAllAds() {
+        ['ad-header', 'ad-middle', 'ad-result'].forEach(adId => {
+            this.hideAd(adId);
+        });
+    }
+}
+
+// 광고 관리자 인스턴스 생성
+const adManager = new AdManager();
+
 // 질문 목록
 const questions = [
     "상대방의 칭찬과 인정의 말이 나에게 큰 의미가 있다.",
@@ -58,6 +132,10 @@ const adPopup = document.getElementById('ad-popup');
 document.getElementById('start-btn').addEventListener('click', () => {
     startSection.style.display = 'none';
     questionSection.style.display = 'block';
+    
+    // 헤더 광고 표시
+    adManager.showAd('ad-header');
+    
     showQuestion();
 });
 
@@ -70,6 +148,11 @@ function showQuestion() {
     progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
     questionCounter.textContent = `${currentQuestion + 1}/${questions.length}`;
     questionText.textContent = questions[currentQuestion];
+    
+    // 3번째 질문 이후 중간 광고 표시
+    if (currentQuestion >= 2) {
+        adManager.showAd('ad-middle');
+    }
 }
 
 // 답변 버튼 이벤트
@@ -91,9 +174,6 @@ document.querySelectorAll('.answer-btn').forEach((button, index) => {
 // 광고 팝업 표시 함수
 function showAdPopup() {
     adPopup.style.display = 'flex';
-    
-    // 팝업 광고 초기화
-    initializePopupAd();
 
     let countdown = 7;
     const countdownElement = document.querySelector('.countdown');
@@ -110,28 +190,13 @@ function showAdPopup() {
     }, 1000);
 }
 
-// 팝업 광고 초기화 함수
-function initializePopupAd() {
-    const popupAd = document.querySelector('.popup-ad');
-    if (popupAd) {
-        try {
-            // 기존 광고 제거
-            while (popupAd.firstChild) {
-                popupAd.removeChild(popupAd.firstChild);
-            }
-            
-            // 새로운 광고 삽입
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-            console.error('팝업 광고 초기화 실패:', e);
-        }
-    }
-}
-
 // 결과 표시 함수
 function showResult() {
     questionSection.style.display = 'none';
     resultSection.style.display = 'block';
+
+    // 결과 페이지 광고 표시
+    adManager.showAd('ad-result');
 
     // 최고 점수 유형 찾기
     let maxType = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
@@ -231,16 +296,15 @@ document.querySelector('.share-btn').addEventListener('click', () => {
 document.querySelector('.retry-btn').addEventListener('click', () => {
     currentQuestion = 0;
     scores = {words: 0, time: 0, touch: 0, service: 0, gifts: 0};
+    
+    // 광고 숨기기
+    adManager.hideAllAds();
+    
     resultSection.style.display = 'none';
     startSection.style.display = 'block';
 });
 
-// 페이지 로드 시 광고 초기화
+// 페이지 로드 시 초기화
 window.onload = function() {
-    // 상단 광고 초기화
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error('상단 광고 초기화 실패:', e);
-    }
+    console.log('페이지 로드 완료 - AdManager 준비됨');
 };

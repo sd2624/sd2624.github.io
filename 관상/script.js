@@ -3,6 +3,71 @@ if (typeof Kakao !== 'undefined') {
     Kakao.init('2c2ed6479d8c597005fac18db90b7649');
 }
 
+// 광고 로드 관리
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set(); // 중복 로드 방지를 위한 Set
+        this.initializeAds();
+    }
+
+    // 광고 초기화 및 IntersectionObserver 설정
+    initializeAds() {
+        // 페이지 로드 시 상단 광고 즉시 로드
+        this.loadAd('ad-top');
+
+        // IntersectionObserver로 광고 요소 감시
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const adId = entry.target.id;
+                    this.loadAd(adId);
+                }
+            });
+        }, {
+            threshold: 0.1, // 10% 보이면 로드
+            rootMargin: '50px' // 50px 여유를 두고 로드
+        });
+
+        // 모든 광고 요소 관찰
+        document.querySelectorAll('.ad-section').forEach(ad => {
+            observer.observe(ad);
+        });
+    }
+
+    // 광고 로드 함수
+    loadAd(adId) {
+        if (this.loadedAds.has(adId)) {
+            return; // 이미 로드된 광고는 스킵
+        }
+
+        const adElement = document.getElementById(adId);
+        if (adElement && adElement.querySelector('.adsbygoogle')) {
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                this.loadedAds.add(adId);
+                console.log(`광고 로드됨: ${adId}`);
+            } catch (error) {
+                console.error(`광고 로드 실패: ${adId}`, error);
+            }
+        }
+    }
+
+    // 광고 표시 (섹션이 나타날 때 호출)
+    showAd(adId) {
+        const adElement = document.getElementById(adId);
+        if (adElement) {
+            adElement.style.display = 'block';
+            // 약간의 지연 후 광고 로드
+            setTimeout(() => {
+                this.loadAd(adId);
+            }, 100);
+        }
+    }
+}
+
+// 광고 매니저 인스턴스 생성
+const adManager = new AdManager();
+
 // DOM 요소들
 const uploadArea = document.getElementById('uploadArea');
 const fileInput = document.getElementById('fileInput');
@@ -177,6 +242,9 @@ function startAnalysis() {
     uploadSection.style.display = 'none';
     analyzingSection.style.display = 'block';
     
+    // 중간 광고 표시 및 로드
+    adManager.showAd('ad-middle');
+    
     // 분석 애니메이션 시작
     simulateAnalysis();
 }
@@ -251,6 +319,9 @@ function showResults() {
     retrySection.style.display = 'block';
     shareSection.style.display = 'block';
     
+    // 결과 페이지 중간 광고 표시 및 로드
+    adManager.showAd('ad-result');
+    
     // 스크롤을 결과 섹션으로 이동
     resultSection.scrollIntoView({ behavior: 'smooth' });
 }
@@ -313,6 +384,10 @@ function resetTest() {
     resultSection.style.display = 'none';
     retrySection.style.display = 'none';
     shareSection.style.display = 'none';
+    
+    // 광고 섹션들 숨기기 (상단 광고는 유지)
+    document.getElementById('ad-middle').style.display = 'none';
+    document.getElementById('ad-result').style.display = 'none';
     
     // 업로드 섹션 표시
     uploadSection.style.display = 'block';

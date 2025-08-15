@@ -1,3 +1,77 @@
+// 광고 관리 클래스
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set();
+        this.initIntersectionObserver();
+    }
+
+    // Intersection Observer 초기화
+    initIntersectionObserver() {
+        if ('IntersectionObserver' in window) {
+            this.observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.loadAd(entry.target);
+                        this.observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+        }
+    }
+
+    // 광고 로드
+    loadAd(adElement) {
+        const adId = adElement.id;
+        if (!this.loadedAds.has(adId)) {
+            try {
+                const adIns = adElement.querySelector('.adsbygoogle');
+                if (adIns && !adIns.hasAttribute('data-adsbygoogle-status')) {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    this.loadedAds.add(adId);
+                    console.log(`광고 로드됨: ${adId}`);
+                }
+            } catch (error) {
+                console.error(`광고 로드 실패 (${adId}):`, error);
+            }
+        }
+    }
+
+    // 광고 표시
+    showAd(adId) {
+        const adElement = document.getElementById(adId);
+        if (adElement) {
+            adElement.style.display = 'block';
+            if (this.observer) {
+                this.observer.observe(adElement);
+            } else {
+                // Intersection Observer를 지원하지 않는 경우 바로 로드
+                this.loadAd(adElement);
+            }
+        }
+    }
+
+    // 광고 숨기기
+    hideAd(adId) {
+        const adElement = document.getElementById(adId);
+        if (adElement) {
+            adElement.style.display = 'none';
+        }
+    }
+
+    // 모든 광고 숨기기
+    hideAllAds() {
+        ['ad-header', 'ad-middle', 'ad-result'].forEach(adId => {
+            this.hideAd(adId);
+        });
+    }
+}
+
+// 광고 관리자 인스턴스 생성
+const adManager = new AdManager();
+
 const questions = [
     {
         question: "최근 일주일 동안 잠을 잘 잤나요?",
@@ -51,6 +125,11 @@ function displayQuestion() {
     
     questionDiv.textContent = `${currentQuestion + 1}. ${questions[currentQuestion].question}`;
     optionsDiv.innerHTML = '';
+    
+    // 3번째 질문 이후 중간 광고 표시
+    if (currentQuestion >= 2) {
+        adManager.showAd('ad-middle');
+    }
     
     questions[currentQuestion].options.forEach((option, index) => {
         const button = document.createElement('div');
@@ -145,12 +224,8 @@ function showResult() {
     document.getElementById('result-popup').style.display = 'block';
     document.getElementById('result-content').style.display = 'none';
     
-    // 광고 새로고침
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error('광고 로드 실패:', e);
-    }
+    // 결과 광고 표시 및 동적 로드
+    adManager.showAd('ad-result');
 
     // 7초 타이머 시작
     let timeLeft = 7;
@@ -188,7 +263,27 @@ document.getElementById('submit-btn').addEventListener('click', showResult);
 
 document.getElementById('close-popup').addEventListener('click', () => {
     document.getElementById('result-popup').style.display = 'none';
+    // 팝업 닫을 때 모든 광고 숨기기
+    adManager.hideAd('ad-result');
 });
+
+// 다시 하기 함수
+function resetTest() {
+    answers = [];
+    currentQuestion = 0;
+    document.getElementById('result-popup').style.display = 'none';
+    
+    // 모든 광고 숨기기
+    adManager.hideAd('ad-middle');
+    adManager.hideAd('ad-result');
+    
+    displayQuestion();
+}
+
+// 리셋 버튼 이벤트 연결 (만약 버튼이 있다면)
+if (document.getElementById('retry-btn')) {
+    document.getElementById('retry-btn').addEventListener('click', resetTest);
+}
 
 document.getElementById('share-kakao').addEventListener('click', () => {
     const score = answers.reduce((sum, answer) => sum + answer, 0);

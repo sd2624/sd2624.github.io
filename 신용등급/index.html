@@ -55,17 +55,14 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- 상단 광고 -->
-    <div class="ad-container top">
-        <ins class="adsbygoogle main-ad"
+    <!-- 광고 영역 - 헤더 하단 -->
+    <div class="ad-section" id="ad-header">
+        <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9374368296307755"
              data-ad-slot="3201247599"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </div>
 
     <!-- 시작 페이지 -->
@@ -98,6 +95,168 @@
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">📊</div>
+                        <h3>현재 등급 파악</h3>
+                        <p>정확한 신용등급<br>무료 조회 방법</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>맞춤 개선 전략</h3>
+                        <p>나의 상황에 맞는<br>신용점수 향상법</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>실전 관리법</h3>
+                        <p>장기적인 신용<br>관리 노하우</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>즉시 적용</h3>
+                        <p>당장 시작할 수 있는<br>실용적인 방법</p>
+                    </div>
+                </div>
+                
+                <div class="urgency-notice">
+                    <div class="notice-icon">⚠️</div>
+                    <div class="notice-content">
+                        <div class="notice-title">신용등급 관리, 더 이상 미루지 마세요!</div>
+                        <div class="notice-desc">
+                            신용등급 1등급 상승으로 대출금리 연 1~2% 절약 가능<br>
+                            지금 바로 나에게 맞는 신용관리법을 확인하세요!
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="cta-button" onclick="startTest()">
+                    <span class="button-icon">🚀</span>
+                    나만의 신용등급 개선 가이드 받기
+                    <span class="button-arrow">→</span>
+                </button>
+                
+                <div class="social-share">
+                    <div class="share-text">친구들에게도 공유해보세요</div>
+                    <div class="share-buttons">
+                        <button class="share-button kakao" onclick="shareKakao()">
+                            <span class="share-icon">💬</span>
+                            카카오톡
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 질문 페이지 -->
+    <div class="page question-page hidden" id="questionPage">
+        <div class="container">
+            <div class="question-content">
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="currentQuestion">1</span> / <span id="totalQuestions">8</span>
+                    </div>
+                </div>
+                
+                <!-- 광고 영역 - 3번째 질문 이후 -->
+                <div class="ad-section" id="ad-middle" style="display: none;">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="1966797795"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+                
+                <div class="question-card">
+                    <h2 class="question-title" id="questionTitle">질문을 불러오는 중...</h2>
+                    <div class="answers-container" id="answersContainer">
+                        <!-- 답변 옵션들이 여기에 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 로딩 페이지 -->
+    <div class="page loading-page hidden" id="loadingPage">
+        <div class="container">
+            <div class="loading-content">
+                <div class="loading-animation">
+                    <div class="loading-circle">
+                        <div class="loading-icon">💳</div>
+                    </div>
+                    <div class="loading-bars">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                </div>
+                
+                <h3 class="loading-title">신용등급 개선 가이드 분석 중...</h3>
+                <div class="loading-subtitle">최적의 맞춤형 솔루션을 찾고 있습니다</div>
+                <div class="countdown" id="countdown">5</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 결과 페이지 -->
+    <div class="page result-page hidden" id="resultPage">
+        <div class="container">
+            <div class="result-content">
+                <div class="result-header">
+                    <div class="result-badge" id="resultBadge">🏆</div>
+                    <h2 class="result-title" id="resultTitle">결과를 불러오는 중...</h2>
+                    <div class="result-subtitle" id="resultSubtitle">상세 분석 결과</div>
+                </div>
+                
+                <div class="result-body">
+                    <div class="result-summary" id="resultSummary">
+                        <!-- 결과 요약이 여기에 표시됩니다 -->
+                    </div>
+                    
+                    <div class="result-details" id="resultDetails">
+                        <!-- 상세 결과가 여기에 표시됩니다 -->
+                    </div>
+                    
+                    <!-- 광고 영역 - 결과 페이지 중간 -->
+                    <div class="ad-section" id="ad-result">
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-9374368296307755"
+                             data-ad-slot="4448942166"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                    </div>
+                    
+                    <div class="action-guide" id="actionGuide">
+                        <!-- 실행 가이드가 여기에 표시됩니다 -->
+                    </div>
+                </div>
+                
+                <div class="result-actions">
+                    <button class="action-button primary" onclick="restartTest()">
+                        <span class="button-icon">🔄</span>
+                        다시 테스트하기
+                    </button>
+                    <button class="action-button secondary" onclick="location.href='https://testpro.site'">
+                        <span class="button-icon">🎯</span>
+                        다른 테스트 하기
+                    </button>
+                    <button class="action-button share" onclick="shareResult()">
+                        <span class="button-icon">📱</span>
+                        결과 공유하기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
                         <h3>현재 등급 파악</h3>
                         <p>정확한 신용등급<br>무료 조회 방법</p>
                     </div>

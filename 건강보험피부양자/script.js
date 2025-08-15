@@ -1,6 +1,13 @@
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
+// 광고 로드 상태 추적 (중복 로드 방지)
+const adLoadStatus = {
+    'ad-top': false,
+    'ad-middle': false,
+    'ad-result': false
+};
+
 // 질문 데이터
 const questions = [
     {
@@ -86,6 +93,52 @@ const questionPage = document.getElementById('questionPage');
 const resultPage = document.getElementById('resultPage');
 const analysisModal = document.getElementById('analysisModal');
 
+// DOM 로드 완료 후 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    // IntersectionObserver로 광고 로드 관리
+    initializeAdObserver();
+    
+    // 상단 광고 즉시 로드 (페이지 로드 시 바로 보이므로)
+    loadAdIfVisible('ad-top');
+});
+
+// IntersectionObserver를 사용한 광고 로드 관리
+function initializeAdObserver() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const adId = entry.target.id;
+                loadAdIfVisible(adId);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+    });
+
+    // 모든 광고 섹션 관찰
+    const adSections = document.querySelectorAll('.ad-section');
+    adSections.forEach(section => {
+        observer.observe(section);
+    });
+}
+
+// 광고 로드 함수 (중복 로드 방지)
+function loadAdIfVisible(adId) {
+    if (!adLoadStatus[adId]) {
+        const adElement = document.querySelector(`#${adId} .adsbygoogle`);
+        if (adElement) {
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                adLoadStatus[adId] = true;
+                console.log(`광고 로드 완료: ${adId}`);
+            } catch (error) {
+                console.error(`광고 로드 실패: ${adId}`, error);
+            }
+        }
+    }
+}
+
 // 테스트 시작
 function startTest() {
     if (startPage) startPage.classList.add('hidden');
@@ -133,6 +186,16 @@ function showQuestion() {
             answerDiv.onclick = () => selectAnswer(answer, index);
             answersContainer.appendChild(answerDiv);
         });
+    }
+    
+    // 3번째 질문 뒤에 중간 광고 표시
+    const middleAdSection = document.getElementById('ad-middle');
+    if (currentQuestionIndex === 3) {
+        middleAdSection.style.display = 'block';
+        // 광고가 화면에 보이면 로드
+        loadAdIfVisible('ad-middle');
+    } else {
+        middleAdSection.style.display = 'none';
     }
 }
 
@@ -205,6 +268,11 @@ function showResult() {
     
     const result = analyzeAnswers();
     displayResult(result);
+    
+    // 결과 페이지 광고 로드
+    setTimeout(() => {
+        loadAdIfVisible('ad-result');
+    }, 100);
 }
 
 // 답변 분석
