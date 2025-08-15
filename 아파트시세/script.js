@@ -1,6 +1,68 @@
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
+// [AdManager] 광고 동적 로딩 및 중복 방지 클래스
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set();
+        this.initObservers();
+    }
+
+    initObservers() {
+        // 헤더 광고: 즉시 로딩
+        this.loadAd('top');
+
+        // 3번째 질문 후 광고: IntersectionObserver로 로딩
+        const midAd = document.getElementById('adMid');
+        if (midAd) {
+            this.midObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.loadAd('mid');
+                        this.midObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.5 });
+        }
+
+        // 결과 페이지 광고: IntersectionObserver로 로딩
+        const resultAd = document.getElementById('adResult');
+        if (resultAd) {
+            this.resultObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.loadAd('result');
+                        this.resultObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.5 });
+        }
+    }
+
+    showMidAd() {
+        const midAd = document.getElementById('adMid');
+        if (midAd && midAd.style.display === 'none') {
+            midAd.style.display = 'block';
+            if (this.midObserver) this.midObserver.observe(midAd);
+        }
+    }
+
+    showResultAd() {
+        const resultAd = document.getElementById('adResult');
+        if (resultAd) {
+            if (this.resultObserver) this.resultObserver.observe(resultAd);
+        }
+    }
+
+    loadAd(position) {
+        if (this.loadedAds.has(position)) return;
+        this.loadedAds.add(position);
+        if (typeof window.adsbygoogle !== 'undefined') {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    }
+}
+
 // 질문 데이터
 const questions = [
     {
@@ -400,6 +462,11 @@ function showQuestion() {
             questionOptions.appendChild(optionElement);
         });
     }
+    
+    // [AdManager] 3번째 질문 뒤 광고 노출
+    if (window.adManager && currentQuestionIndex === 2) {
+        window.adManager.showMidAd();
+    }
 }
 
 // 답변 선택 함수
@@ -538,6 +605,11 @@ function showResults() {
     if (analysisModal) analysisModal.classList.add('hidden');
     if (resultPage) resultPage.classList.remove('hidden');
     
+    // [AdManager] 결과 페이지 광고 노출
+    if (window.adManager) {
+        window.adManager.showResultAd();
+    }
+    
     const result = resultTypes[analysisData.resultType];
     const siteCategory = apartmentSites[result.category];
     
@@ -612,6 +684,11 @@ function showResults() {
             </div>
         `;
     }
+    
+    // [광고] 결과 페이지 광고 노출
+    if (window.adManager) {
+        window.adManager.showResultAd();
+    }
 }
 
 // 테스트 재시작 함수
@@ -623,6 +700,21 @@ function restartTest() {
     
     if (resultPage) resultPage.classList.add('hidden');
     if (startPage) startPage.classList.remove('hidden');
+}
+
+// 테스트 재시작 함수
+function restartTest() {
+    if (resultPage) resultPage.classList.add('hidden');
+    if (startPage) startPage.classList.remove('hidden');
+    
+    currentQuestionIndex = 0;
+    userAnswers = [];
+    totalScore = 0;
+    analysisData = {};
+    
+    // 진행률 초기화
+    const progressBar = document.querySelector('.progress-bar');
+    if (progressBar) progressBar.style.width = '0%';
 }
 
 // 카카오톡 공유 함수
@@ -675,13 +767,64 @@ function shareKakao() {
     }
 }
 
+// [AdManager] 광고 동적 로딩 및 중복 방지
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set();
+        this.initObservers();
+    }
+    initObservers() {
+        // 상단 광고: 즉시 로딩
+        this.loadAd('top');
+        // 3번째 질문 뒤 광고: IntersectionObserver로 로딩
+        const midAd = document.getElementById('adAfterThirdQuestion');
+        if (midAd) {
+            this.midObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.loadAd('mid');
+                        this.midObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.5 });
+        }
+        // 결과 페이지 광고: IntersectionObserver로 로딩
+        const resultAd = document.getElementById('adResultPage');
+        if (resultAd) {
+            this.resultObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.loadAd('result');
+                        this.resultObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.5 });
+        }
+    }
+    showMidAd() {
+        const midAd = document.getElementById('adAfterThirdQuestion');
+        if (midAd && midAd.style.display === 'none') {
+            midAd.style.display = 'block';
+            if (this.midObserver) this.midObserver.observe(midAd);
+        }
+    }
+    showResultAd() {
+        const resultAd = document.getElementById('adResultPage');
+        if (resultAd) {
+            if (this.resultObserver) this.resultObserver.observe(resultAd);
+        }
+    }
+    loadAd(position) {
+        if (this.loadedAds.has(position)) return;
+        this.loadedAds.add(position);
+        if (typeof window.adsbygoogle !== 'undefined') {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    }
+}
+
 // 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
-    // 광고 초기화
-    if (typeof adsbygoogle !== 'undefined') {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    }
-    
     // 이벤트 리스너 등록
     const startBtn = document.querySelector('.start-btn');
     const primaryBtns = document.querySelectorAll('.primary-btn');
@@ -736,6 +879,8 @@ window.addEventListener('resize', function() {
 window.addEventListener('load', function() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+    // 광고 관리자 초기화
+    window.adManager = new AdManager();
 });
 
 // 전역 함수로 노출

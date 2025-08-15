@@ -46,6 +46,28 @@ body {
     display: none !important;
 }
 
+/* [광고] 광고 컨테이너 스타일 */
+.ad-container {
+    margin: 16px 0;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(231, 76, 60, 0.2);
+    text-align: center;
+}
+
+.ad-container.top {
+    margin-bottom: 20px;
+}
+
+.ad-container.mid {
+    margin: 24px 0;
+}
+
+.ad-container.result {
+    margin: 24px 0;
+}
+
 /* 광고 배너 */
 .ad-banner {
     margin-bottom: 20px;

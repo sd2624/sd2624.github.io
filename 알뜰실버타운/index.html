@@ -49,20 +49,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- [광고] 페이지 상단 (slot: 3201247599) -->
+    <div class="ad-container top" id="adTop" style="text-align:center; margin:16px 0;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
     <!-- 시작 페이지 -->
     <div id="startPage" class="page">
-        <div class="container">
+            <div class="container">
             <!-- 상단 광고 -->
-            <div class="ad-banner">
+            <div class="ad-banner" style="display:none;">
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-9374368296307755"
                      data-ad-slot="1724698171"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
-            </div>
-
-            <div class="content">
+            </div>            <div class="content">
                 <div class="header-section">
                     <div class="title-badge">
                         <span class="year-label">2025년</span>
@@ -154,6 +162,16 @@
             </div>
             
             <div class="question-options"></div>
+            
+            <!-- [광고] 3번째 질문 후 (slot: 1966797795) -->
+            <div class="ad-container mid" id="adMid" style="display:none; margin:24px 0; text-align:center;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="1966797795"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
         </div>
     </div>
 
@@ -184,9 +202,9 @@
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="1724698171"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                     data-ad-slot="3201247599"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="false"></ins>
             </div>
         </div>
     </div>
@@ -202,6 +220,17 @@
             
             <div class="result-content">
                 <div class="eligibility-summary"></div>
+                
+                <!-- [광고] 결과 페이지 중간 (slot: 4448942166) -->
+                <div class="ad-container result" id="adResult" style="margin:24px 0; text-align:center;">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="4448942166"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+                
                 <div class="recommended-housing"></div>
                 <div class="application-guide"></div>
             </div>
@@ -217,9 +246,6 @@
 
     <script src="script.js"></script>
     
-    <!-- 광고 초기화 -->
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    <!-- 광고 초기화는 script.js에서 동적으로 처리됩니다. -->
 </body>
 </html>
