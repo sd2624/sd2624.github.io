@@ -36,6 +36,40 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
+/* [광고] 광고 컨테이너 세부 스타일 */
+.ad-container.top {
+    margin: 0 auto 20px auto;
+    background: linear-gradient(135deg, #fff5f5 0%, #fef5e7 100%);
+    border: 1px solid #fd79a8;
+}
+
+.ad-container.mid {
+    margin: 30px auto;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e6f3ff 100%);
+    border: 1px solid #74b9ff;
+}
+
+.ad-container.result {
+    margin: 20px auto;
+    background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+    border: 1px solid #00b894;
+}
+
+.ad-container ins {
+    margin: 0 auto;
+}
+
+/* 팝업 광고 스타일 */
+.popup-ad-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.popup-ad-container ins {
+    width: 100%;
+    max-width: 300px;
+}
+
 /* 애니메이션 정의 */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }

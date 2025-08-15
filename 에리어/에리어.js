@@ -1,3 +1,87 @@
+// [광고] AdManager 클래스 - 광고 로드 및 중복 방지 관리
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set(); // 로드된 광고 추적
+    }
+    
+    // 광고 로드 함수
+    loadAd(adId) {
+        if (this.loadedAds.has(adId)) {
+            console.log(`[광고] ${adId} 이미 로드됨 - 중복 방지`);
+            return false;
+        }
+        
+        const adElement = document.getElementById(adId);
+        if (adElement && typeof adsbygoogle !== 'undefined') {
+            try {
+                // 광고 컨테이너 표시
+                adElement.style.display = 'block';
+                
+                // 광고 푸시
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                
+                this.loadedAds.add(adId);
+                console.log(`[광고] ${adId} 로드 완료`);
+                return true;
+            } catch (error) {
+                console.warn(`[광고] ${adId} 로드 실패:`, error);
+                return false;
+            }
+        }
+        return false;
+    }
+    
+    // 중간 광고 표시 (3번째 질문 후)
+    showMidAd() {
+        return this.loadAd('adMid');
+    }
+    
+    // 결과 광고 표시
+    showResultAd() {
+        return this.loadAd('adResult');
+    }
+}
+
+// [광고] AdManager 인스턴스 생성
+const adManager = new AdManager();
+
+// [광고] IntersectionObserver를 이용한 광고 표시 관리
+const setupAdObservers = () => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    
+    const options = {
+        threshold: 0.1,
+        rootMargin: '50px'
+    };
+    
+    // 중간 광고 관찰자
+    const midAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showMidAd();
+                midAdObserver.disconnect();
+            }
+        });
+    }, options);
+    
+    // 결과 광고 관찰자
+    const resultAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showResultAd();
+                resultAdObserver.disconnect();
+            }
+        });
+    }, options);
+    
+    // 옵저버 등록
+    const midAd = document.getElementById('adMid');
+    const resultAd = document.getElementById('adResult');
+    
+    if (midAd) midAdObserver.observe(midAd);
+    if (resultAd) resultAdObserver.observe(resultAd);
+};
+
 let currentQuestion = 1;
 const totalQuestions = 63;
 const progressBar = document.getElementById('progressBar');
@@ -56,6 +140,13 @@ function handleAnswer(event) {
     // 선택된 값에 해당하는 점수 추가 (해당 유형에 점수 반영)
     const questionType = questionTypeMapping[currentQuestion];
     scores[questionType] += selectedValue;
+
+    // [광고] 3번째 질문 완료 후 중간 광고 표시
+    if (currentQuestion === 3) {
+        setTimeout(() => {
+            adManager.showMidAd();
+        }, 500);
+    }
 
     // 질문 번호 증가 후, 다음 질문 표시
     currentQuestion++;
@@ -117,6 +208,11 @@ function showResult() {
     setTimeout(() => {
         resultText.innerHTML = resultMessage;
         resultSection.classList.remove('hidden');
+
+        // [광고] 결과 페이지 광고 표시
+        setTimeout(() => {
+            adManager.showResultAd();
+        }, 1000);
 
         // "자세히 알아보기" 클릭 이벤트 추가
         document.querySelectorAll('.more-info').forEach(link => {
@@ -247,3 +343,14 @@ function showDetailedPage(type) {
     // 해당 페이지로 이동
     window.location.href = pageUrls[type];
 }
+
+// [광고] 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    // 상단 광고 즉시 로드
+    if (typeof adsbygoogle !== 'undefined') {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+    
+    // 옵저버 설정
+    setupAdObservers();
+});

@@ -1,6 +1,68 @@
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
+// [AdManager] 광고 동적 로딩 및 중복 방지 클래스
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set();
+        this.initObservers();
+    }
+
+    initObservers() {
+        // 헤더 광고: 즉시 로딩
+        this.loadAd('top');
+
+        // 3번째 질문 후 광고: IntersectionObserver로 로딩
+        const midAd = document.getElementById('adMid');
+        if (midAd) {
+            this.midObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.loadAd('mid');
+                        this.midObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.5 });
+        }
+
+        // 결과 페이지 광고: IntersectionObserver로 로딩
+        const resultAd = document.getElementById('adResult');
+        if (resultAd) {
+            this.resultObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.loadAd('result');
+                        this.resultObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.5 });
+        }
+    }
+
+    showMidAd() {
+        const midAd = document.getElementById('adMid');
+        if (midAd && midAd.style.display === 'none') {
+            midAd.style.display = 'block';
+            if (this.midObserver) this.midObserver.observe(midAd);
+        }
+    }
+
+    showResultAd() {
+        const resultAd = document.getElementById('adResult');
+        if (resultAd) {
+            if (this.resultObserver) this.resultObserver.observe(resultAd);
+        }
+    }
+
+    loadAd(position) {
+        if (this.loadedAds.has(position)) return;
+        this.loadedAds.add(position);
+        if (typeof window.adsbygoogle !== 'undefined') {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    }
+}
+
 // 질문 데이터
 const questions = [
     {
@@ -272,6 +334,11 @@ function showQuestion() {
             answersGrid.appendChild(answerElement);
         });
     }
+    
+    // [AdManager] 3번째 질문 뒤 광고 노출
+    if (window.adManager && currentQuestionIndex === 2) {
+        window.adManager.showMidAd();
+    }
 }
 
 // 답변 선택 함수
@@ -397,6 +464,11 @@ function showResult() {
     }
     if (resultPage) {
         resultPage.classList.remove('hidden');
+    }
+    
+    // [AdManager] 결과 페이지 광고 노출
+    if (window.adManager) {
+        window.adManager.showResultAd();
     }
     
     const result = analysisResult.recommendation;
@@ -586,6 +658,15 @@ window.shareKakao = shareKakao;
 window.addEventListener('resize', function() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+
+// 초기 실행
+window.addEventListener('load', function() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    
+    // [AdManager] 광고 관리자 초기화
+    window.adManager = new AdManager();
 });
 
 // 초기 실행
