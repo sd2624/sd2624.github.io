@@ -224,6 +224,132 @@ const questions = [
             { text: "나를 아껴주고 보살펴주는 사람", agen: 1, teto: 2 },
             { text: "나를 보호하고 이끌어주는 사람", agen: 0, teto: 3 }
         ]
+    },
+    {
+        question: "연인과 싸웠을 때 화해하는 방법은?",
+        answers: [
+            { text: "먼저 적극적으로 화해를 시도한다", agen: 3, teto: 0 },
+            { text: "솔직하게 대화로 해결한다", agen: 2, teto: 1 },
+            { text: "시간을 두고 자연스럽게 풀어간다", agen: 1, teto: 2 },
+            { text: "상대방이 먼저 다가올 때까지 기다린다", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "새로운 사람들과의 첫 모임에서?",
+        answers: [
+            { text: "먼저 자기소개하고 분위기를 주도", agen: 3, teto: 0 },
+            { text: "밝게 인사하고 적극적으로 참여", agen: 2, teto: 1 },
+            { text: "조용히 관찰하며 천천히 어울림", agen: 1, teto: 2 },
+            { text: "말을 걸어줄 때까지 소극적으로 대기", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "연인의 친구들과 처음 만날 때?",
+        answers: [
+            { text: "활발하게 대화하며 친해지려 노력", agen: 3, teto: 0 },
+            { text: "자연스럽게 어울리며 좋은 인상 남기기", agen: 2, teto: 1 },
+            { text: "예의 바르게 행동하며 조심스럽게 접근", agen: 1, teto: 2 },
+            { text: "연인 뒤에 숨어서 말수 적게 행동", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "데이트 중 예상치 못한 상황이 발생하면?",
+        answers: [
+            { text: "즉석에서 새로운 계획을 세운다", agen: 3, teto: 0 },
+            { text: "침착하게 대안을 찾아본다", agen: 2, teto: 1 },
+            { text: "연인과 상의해서 결정한다", agen: 1, teto: 2 },
+            { text: "당황하며 연인에게 의존한다", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "연인이 다른 이성과 친하게 지내는 것을 봤을 때?",
+        answers: [
+            { text: "직접 이야기해서 명확히 한다", agen: 3, teto: 0 },
+            { text: "차분히 대화로 감정을 표현한다", agen: 2, teto: 1 },
+            { text: "속마음을 숨기고 지켜본다", agen: 1, teto: 2 },
+            { text: "혼자 속상해하며 참는다", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "연인에게 깜짝 선물을 준비할 때?",
+        answers: [
+            { text: "임팩트 있는 서프라이즈를 기획한다", agen: 3, teto: 0 },
+            { text: "상대방이 좋아할 만한 걸 직접 선택", agen: 2, teto: 1 },
+            { text: "주변 사람들에게 조언을 구한다", agen: 1, teto: 2 },
+            { text: "무엇을 해야 할지 몰라 고민만 한다", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "연인의 가족을 처음 만날 때?",
+        answers: [
+            { text: "당당하고 자신감 있게 인사한다", agen: 3, teto: 0 },
+            { text: "정중하고 예의 바르게 행동한다", agen: 2, teto: 1 },
+            { text: "조심스럽게 눈치를 보며 행동", agen: 1, teto: 2 },
+            { text: "긴장해서 말도 제대로 못한다", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "연인과의 미래에 대해 이야기할 때?",
+        answers: [
+            { text: "구체적인 계획을 제시하며 이끈다", agen: 3, teto: 0 },
+            { text: "서로의 생각을 나누며 계획한다", agen: 2, teto: 1 },
+            { text: "연인의 의견을 먼저 듣고 맞춘다", agen: 1, teto: 2 },
+            { text: "구체적인 계획은 연인에게 맡긴다", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "연인이 힘들어할 때 당신의 방식은?",
+        answers: [
+            { text: "적극적으로 해결책을 제시한다", agen: 3, teto: 0 },
+            { text: "따뜻하게 위로하며 함께 해결", agen: 2, teto: 1 },
+            { text: "조용히 곁에서 지켜봐준다", agen: 1, teto: 2 },
+            { text: "어떻게 해야 할지 몰라 당황한다", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "연인과의 기념일 계획을 세울 때?",
+        answers: [
+            { text: "특별한 이벤트를 기획해서 놀래킨다", agen: 3, teto: 0 },
+            { text: "둘만의 로맨틱한 시간을 계획", agen: 2, teto: 1 },
+            { text: "연인이 좋아할 만한 걸 조심스럽게 준비", agen: 1, teto: 2 },
+            { text: "연인이 계획해주길 은근히 바란다", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "연인과의 취미활동을 선택할 때?",
+        answers: [
+            { text: "내가 좋아하는 활동을 제안한다", agen: 3, teto: 0 },
+            { text: "서로 관심 있는 것을 찾아본다", agen: 2, teto: 1 },
+            { text: "연인이 좋아하는 것을 우선시한다", agen: 1, teto: 2 },
+            { text: "연인이 결정해주길 기다린다", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "연인에게 관심을 표현하는 방식은?",
+        answers: [
+            { text: "직접적이고 확실하게 표현한다", agen: 3, teto: 0 },
+            { text: "다양한 방법으로 자연스럽게 표현", agen: 2, teto: 1 },
+            { text: "은은하고 섬세하게 표현한다", agen: 1, teto: 2 },
+            { text: "표현하기 어려워서 망설인다", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "연인과 여행을 갈 때 당신의 역할은?",
+        answers: [
+            { text: "전체 일정을 계획하고 이끈다", agen: 3, teto: 0 },
+            { text: "함께 계획하고 역할을 나눈다", agen: 2, teto: 1 },
+            { text: "연인을 도우며 서포트 역할", agen: 1, teto: 2 },
+            { text: "연인이 모든 걸 해주길 바란다", agen: 0, teto: 3 }
+        ]
+    },
+    {
+        question: "연인이 질투할 만한 상황에서?",
+        answers: [
+            { text: "당당하게 내 행동을 설명한다", agen: 3, teto: 0 },
+            { text: "차근차근 오해를 풀어준다", agen: 2, teto: 1 },
+            { text: "조심스럽게 연인 기분을 맞춰준다", agen: 1, teto: 2 },
+            { text: "위축되고 어떻게 해야 할지 모른다", agen: 0, teto: 3 }
+        ]
     }
 ];
 

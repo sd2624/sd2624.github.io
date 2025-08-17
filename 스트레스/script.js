@@ -139,8 +139,8 @@ function displayQuestion() {
     questionDiv.textContent = `${currentQuestion + 1}. ${questions[currentQuestion].question}`;
     optionsDiv.innerHTML = '';
     
-    // 3번째 질문 이후 중간 광고 표시
-    if (currentQuestion >= 2) {
+    // 3번째 질문에서 중간 광고 표시
+    if (currentQuestion === 2) {
         adManager.showAd('ad-middle');
     }
     

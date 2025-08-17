@@ -182,9 +182,9 @@ function showQuestion() {
     updateProgressBar();
     setupAnswerButtons();
     
-    // 3번째 질문 뒤에 중간 광고 표시
+    // 3번째 질문에서 중간 광고 표시
     const middleAdSection = document.getElementById('ad-middle');
-    if (currentQuestion === 3) {
+    if (currentQuestion === 2) {
         middleAdSection.style.display = 'block';
         // 광고가 화면에 보이면 로드
         loadAdIfVisible('ad-middle');

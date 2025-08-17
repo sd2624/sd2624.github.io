@@ -333,6 +333,15 @@ function selectAnswer(choice) {
     
     currentQuestion++;
     
+    // 3번째 질문에서 중간 광고 표시
+    if (currentQuestion === 2) {
+        const middleAd = document.getElementById('ad-middle');
+        if (middleAd) {
+            middleAd.style.display = 'block';
+            adManager.showMidAd();
+        }
+    }
+    
     if (currentQuestion < 16) {
         showQuestion();
     } else {

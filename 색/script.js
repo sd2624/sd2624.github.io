@@ -300,8 +300,8 @@ function showQuestion() {
     questionCounter.textContent = `${currentQuestion + 1}/${questions.length}`;
     questionText.textContent = questions[currentQuestion].text;
 
-    // 3번째 질문 이후 중간 광고 표시
-    if (currentQuestion >= 2) {
+    // 3번째 질문에서 중간 광고 표시
+    if (currentQuestion === 2) {
         adManager.showAd('ad-middle');
     }
 

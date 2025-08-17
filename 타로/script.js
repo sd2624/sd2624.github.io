@@ -222,6 +222,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!cardSlot.classList.contains('flipped')) {
             cardSlot.classList.add('flipped');
             
+            // 2번째 카드 선택 후 중간 광고 표시
+            if (index === 2) {
+                const middleAd = document.getElementById('ad-middle');
+                if (middleAd) {
+                    middleAd.style.display = 'block';
+                    adManager.showMidAd();
+                }
+            }
+            
             // 모든 카드가 선택되었는지 확인
             if (document.querySelectorAll('.card-slot.flipped').length === 3 && !allCardsSelected) {
                 allCardsSelected = true;
