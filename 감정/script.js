@@ -176,6 +176,83 @@ const questions = [
             { text: "성장과 발전", score: { growth: 4, ambition: 3 } },
             { text: "즐거움과 모험", score: { joy: 5, adventure: 4 } }
         ]
+    },
+    {
+        text: "갑작스런 계획 변경에 대한 반응은?",
+        emoji: "🔀",
+        answers: [
+            { text: "매우 당황스럽고 스트레스 받는다", score: { stress: 5, rigidity: 4 } },
+            { text: "조금 불편하지만 적응한다", score: { mild_stress: 2, adaptability: 3 } },
+            { text: "별로 신경 쓰지 않는다", score: { flexibility: 4, calm: 3 } },
+            { text: "새로운 기회로 생각한다", score: { optimism: 4, adventure: 3 } },
+            { text: "오히려 더 흥미롭다", score: { excitement: 5, spontaneity: 4 } }
+        ]
+    },
+    {
+        text: "요즘 가장 자주 느끼는 몸의 신호는?",
+        emoji: "🏃",
+        answers: [
+            { text: "피로하고 무기력하다", score: { fatigue: 5, low_energy: 4 } },
+            { text: "가끔 뻐근하고 아프다", score: { tension: 3, mild_stress: 2 } },
+            { text: "평소와 같다", score: { stability: 3, balance: 3 } },
+            { text: "대체로 컨디션이 좋다", score: { vitality: 4, wellness: 3 } },
+            { text: "매우 활기차고 건강하다", score: { energy: 5, vitality: 4 } }
+        ]
+    },
+    {
+        text: "타인의 시선이나 평가에 대해서는?",
+        emoji: "👁️",
+        answers: [
+            { text: "매우 신경 쓰이고 부담된다", score: { social_anxiety: 5, self_consciousness: 4 } },
+            { text: "가끔 의식하지만 괜찮다", score: { awareness: 2, mild_concern: 2 } },
+            { text: "크게 신경 쓰지 않는다", score: { self_confidence: 4, independence: 3 } },
+            { text: "내 기준이 더 중요하다", score: { self_reliance: 4, authenticity: 4 } },
+            { text: "전혀 신경 쓰지 않는다", score: { confidence: 5, freedom: 4 } }
+        ]
+    },
+    {
+        text: "어려운 결정을 내려야 할 때의 방식은?",
+        emoji: "🤷",
+        answers: [
+            { text: "너무 고민되어 결정을 미룬다", score: { indecision: 5, anxiety: 3 } },
+            { text: "여러 사람의 의견을 듣는다", score: { consultation: 4, careful: 3 } },
+            { text: "장단점을 비교 분석한다", score: { analytical: 4, rational: 4 } },
+            { text: "직감을 믿고 결정한다", score: { intuition: 4, confidence: 3 } },
+            { text: "빠르게 결단한다", score: { decisiveness: 5, bold: 4 } }
+        ]
+    },
+    {
+        text: "완벽주의 성향에 대해서는?",
+        emoji: "🎯",
+        answers: [
+            { text: "완벽해야 하는 강박이 있다", score: { perfectionism: 5, stress: 4 } },
+            { text: "높은 기준을 추구한다", score: { high_standards: 4, dedication: 3 } },
+            { text: "적당히 만족한다", score: { acceptance: 3, balance: 3 } },
+            { text: "과정이 더 중요하다", score: { process_focus: 4, wisdom: 3 } },
+            { text: "완벽함보다 완성이 중요하다", score: { pragmatism: 4, efficiency: 4 } }
+        ]
+    },
+    {
+        text: "자신감 수준은 어느 정도인가요?",
+        emoji: "💪",
+        answers: [
+            { text: "매우 부족하고 위축된다", score: { low_confidence: 5, insecurity: 4 } },
+            { text: "가끔 부족함을 느낀다", score: { modest_confidence: 2, self_doubt: 2 } },
+            { text: "상황에 따라 다르다", score: { variable_confidence: 3, adaptability: 3 } },
+            { text: "대체로 자신 있다", score: { confidence: 4, stability: 3 } },
+            { text: "매우 자신 있고 당당하다", score: { high_confidence: 5, assertiveness: 4 } }
+        ]
+    },
+    {
+        text: "마지막으로, 지금 이 순간의 마음 상태는?",
+        emoji: "💭",
+        answers: [
+            { text: "복잡하고 혼란스럽다", score: { confusion: 5, overwhelm: 4 } },
+            { text: "약간 불안하지만 괜찮다", score: { mild_anxiety: 2, coping: 3 } },
+            { text: "평온하고 안정적이다", score: { peace: 4, stability: 4 } },
+            { text: "긍정적이고 희망적이다", score: { optimism: 4, hope: 4 } },
+            { text: "매우 행복하고 충만하다", score: { fulfillment: 5, joy: 4 } }
+        ]
     }
 ];
 
