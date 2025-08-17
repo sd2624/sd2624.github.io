@@ -1,95 +1,90 @@
-// 광고 관리자 클래스 (새로 추가)
+// [광고] AdManager 클래스 - 광고 로드 및 중복 방지 관리
 class AdManager {
     constructor() {
-        this.loadedAds = new Set();
-        this.observers = new Map();
+        this.loadedAds = new Set(); // 로드된 광고 추적
     }
-
-    init() {
-        this.showTopAd();
-        this.setupMidAdObserver();
-        this.setupResultAdObserver();
-    }
-
-    showTopAd() {
-        if (!this.loadedAds.has('top')) {
-            setTimeout(() => {
-                this.loadAd('top');
-            }, 1000);
+    
+    // 광고 로드 함수
+    loadAd(adId) {
+        if (this.loadedAds.has(adId)) {
+            console.log(`[광고] ${adId} 이미 로드됨 - 중복 방지`);
+            return false;
         }
-    }
-
-    showMidAd() {
-        const midAdContainer = document.querySelector('.ad-container.mid');
-        if (midAdContainer && !this.loadedAds.has('mid')) {
-            midAdContainer.style.display = 'block';
-            this.loadAd('mid');
-        }
-    }
-
-    showResultAd() {
-        const resultAdContainer = document.querySelector('.ad-container.result');
-        if (resultAdContainer && !this.loadedAds.has('result')) {
-            resultAdContainer.style.display = 'block';
-            this.loadAd('result');
-        }
-    }
-
-    setupMidAdObserver() {
-        const midAdContainer = document.querySelector('.ad-container.mid');
-        if (midAdContainer) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !this.loadedAds.has('mid')) {
-                        this.showMidAd();
-                        observer.disconnect();
-                    }
-                });
-            });
-            observer.observe(midAdContainer);
-            this.observers.set('mid', observer);
-        }
-    }
-
-    setupResultAdObserver() {
-        const resultAdContainer = document.querySelector('.ad-container.result');
-        if (resultAdContainer) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !this.loadedAds.has('result')) {
-                        this.showResultAd();
-                        observer.disconnect();
-                    }
-                });
-            });
-            observer.observe(resultAdContainer);
-            this.observers.set('result', observer);
-        }
-    }
-
-    loadAd(position) {
-        if (!this.loadedAds.has(position)) {
+        
+        const adElement = document.getElementById(adId);
+        if (adElement && typeof adsbygoogle !== 'undefined') {
             try {
-                const adContainer = document.querySelector(`.ad-container.${position}`);
-                if (adContainer) {
-                    const adElement = adContainer.querySelector('.adsbygoogle');
-                    if (adElement && !adElement.getAttribute('data-adsbygoogle-status')) {
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                        this.loadedAds.add(position);
-                        console.log(`${position} 광고 로드 완료`);
-                    }
-                }
+                // 광고 컨테이너 표시
+                adElement.style.display = 'block';
+                
+                // 광고 푸시
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                
+                this.loadedAds.add(adId);
+                console.log(`[광고] ${adId} 로드 완료`);
+                return true;
             } catch (error) {
-                console.error(`${position} 광고 로드 실패:`, error);
+                console.warn(`[광고] ${adId} 로드 실패:`, error);
+                return false;
             }
         }
+        return false;
+    }
+    
+    // 중간 광고 표시 (3번째 질문 후)
+    showMidAd() {
+        return this.loadAd('adMid');
+    }
+    
+    // 결과 광고 표시
+    showResultAd() {
+        return this.loadAd('adResult');
     }
 }
 
-// 광고 관리자 인스턴스 생성 (새로 추가)
+// [광고] AdManager 인스턴스 생성
 const adManager = new AdManager();
 
-// 테스트 데이터
+// [광고] IntersectionObserver를 이용한 광고 표시 관리
+const setupAdObservers = () => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    
+    const options = {
+        threshold: 0.1,
+        rootMargin: '50px'
+    };
+    
+    // 중간 광고 관찰자
+    const midAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showMidAd();
+                midAdObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    
+    // 결과 광고 관찰자
+    const resultAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showResultAd();
+                resultAdObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    
+    // 관찰 대상 등록
+    const midAd = document.getElementById('adMid');
+    const resultAd = document.getElementById('adResult');
+    
+    if (midAd) midAdObserver.observe(midAd);
+    if (resultAd) resultAdObserver.observe(resultAd);
+};
+
+// 광고 관리자 클래스 (새로 추가)
+
+
 let currentQuestion = 0;
 let answers = [];
 const totalQuestions = 5;
@@ -465,15 +460,7 @@ restartBtn.addEventListener('click', function() {
 });
 
 // 페이지 로드 시 상단 광고 로드
-document.addEventListener('DOMContentLoaded', function() {
-    // 상단 광고 로드
-    setTimeout(() => {
-        loadAds();
-    }, 500);
-    
-    // Sticky 광고 초기화
-    initStickyAd();
-});
+
 
 // Sticky 광고 초기화 및 제어
 function initStickyAd() {
@@ -515,15 +502,7 @@ function initStickyAd() {
 }
 
 // 페이지 로드 시 광고 관리자 초기화 (새로 추가)
-document.addEventListener('DOMContentLoaded', function() {
-    // 광고 관리자 초기화
-    setTimeout(() => {
-        adManager.init();
-    }, 1000);
-    
-    // Google AdSense 스크립트 초기화
-    initializeAds();
-});
+
 
 // 광고 관련 함수들 (새로 추가)
 function initializeAds() {
@@ -537,3 +516,12 @@ function initializeAds() {
         });
     }
 }
+
+// [광고] 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    // 상단 광고 즉시 로드
+    adManager.loadAd('adTop');
+    
+    // 옵저버 설정
+    setupAdObservers();
+});

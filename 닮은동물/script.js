@@ -1,77 +1,90 @@
-// 광고 로드 관리 시스템
+// [광고] AdManager 클래스 - 광고 로드 및 중복 방지 관리
 class AdManager {
     constructor() {
-        this.loadedAds = new Set(); // 중복 로드 방지를 위한 Set
-        this.initializeAds();
+        this.loadedAds = new Set(); // 로드된 광고 추적
     }
-
-    // 광고 초기화 및 IntersectionObserver 설정
-    initializeAds() {
-        // 페이지 로드 시 상단 광고 즉시 로드
-        this.loadAd('ad-top');
-
-        // IntersectionObserver로 광고 요소 감시
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const adId = entry.target.id;
-                    this.loadAd(adId);
-                }
-            });
-        }, {
-            threshold: 0.1, // 10% 보이면 로드
-            rootMargin: '50px' // 50px 여유를 두고 로드
-        });
-
-        // 모든 광고 요소 관찰
-        document.querySelectorAll('.ad-section').forEach(ad => {
-            observer.observe(ad);
-        });
-    }
-
+    
     // 광고 로드 함수
     loadAd(adId) {
         if (this.loadedAds.has(adId)) {
-            return; // 이미 로드된 광고는 스킵
+            console.log(`[광고] ${adId} 이미 로드됨 - 중복 방지`);
+            return false;
         }
-
+        
         const adElement = document.getElementById(adId);
-        if (adElement && adElement.querySelector('.adsbygoogle')) {
+        if (adElement && typeof adsbygoogle !== 'undefined') {
             try {
+                // 광고 컨테이너 표시
+                adElement.style.display = 'block';
+                
+                // 광고 푸시
                 (adsbygoogle = window.adsbygoogle || []).push({});
+                
                 this.loadedAds.add(adId);
-                console.log(`광고 로드됨: ${adId}`);
+                console.log(`[광고] ${adId} 로드 완료`);
+                return true;
             } catch (error) {
-                console.error(`광고 로드 실패: ${adId}`, error);
+                console.warn(`[광고] ${adId} 로드 실패:`, error);
+                return false;
             }
         }
+        return false;
     }
-
-    // 광고 표시 (섹션이 나타날 때 호출)
-    showAd(adId) {
-        const adElement = document.getElementById(adId);
-        if (adElement) {
-            adElement.style.display = 'block';
-            // 약간의 지연 후 광고 로드
-            setTimeout(() => {
-                this.loadAd(adId);
-            }, 100);
-        }
+    
+    // 중간 광고 표시 (3번째 질문 후)
+    showMidAd() {
+        return this.loadAd('adMid');
     }
-
-    // 광고 숨기기
-    hideAd(adId) {
-        const adElement = document.getElementById(adId);
-        if (adElement) {
-            adElement.style.display = 'none';
-        }
+    
+    // 결과 광고 표시
+    showResultAd() {
+        return this.loadAd('adResult');
     }
 }
 
-// 광고 매니저 인스턴스 생성
+// [광고] AdManager 인스턴스 생성
 const adManager = new AdManager();
 
-// 동물 데이터베이스
+// [광고] IntersectionObserver를 이용한 광고 표시 관리
+const setupAdObservers = () => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    
+    const options = {
+        threshold: 0.1,
+        rootMargin: '50px'
+    };
+    
+    // 중간 광고 관찰자
+    const midAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showMidAd();
+                midAdObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    
+    // 결과 광고 관찰자
+    const resultAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showResultAd();
+                resultAdObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    
+    // 관찰 대상 등록
+    const midAd = document.getElementById('adMid');
+    const resultAd = document.getElementById('adResult');
+    
+    if (midAd) midAdObserver.observe(midAd);
+    if (resultAd) resultAdObserver.observe(resultAd);
+};
+
+// 광고 로드 관리 시스템
+
+
 const animalDatabase = {
     cat: {
         name: "고양이",
@@ -335,223 +348,7 @@ let uploadedFile = null;
 let currentAnimal = null;
 
 // 페이지 로드 시 초기화
-document.addEventListener('DOMContentLoaded', function() {
-    initializeEventListeners();
-    loadKakaoSDK();
-});
 
-// 이벤트 리스너 초기화
-function initializeEventListeners() {
-    // 파일 업로드 관련
-    fileInput.addEventListener('change', handleFileSelect);
-    uploadArea.addEventListener('click', () => fileInput.click());
-    uploadArea.addEventListener('dragover', handleDragOver);
-    uploadArea.addEventListener('dragleave', handleDragLeave);
-    uploadArea.addEventListener('drop', handleDrop);
-    
-    // 분석 버튼
-    analyzeBtn.addEventListener('click', startAnalysis);
-    
-    // 다시 하기 버튼 (동적 생성)
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('retry-btn')) {
-            resetTest();
-        }
-        if (e.target.classList.contains('remove-image')) {
-            removeUploadedImage();
-        }
-        if (e.target.classList.contains('share-btn')) {
-            handleShare(e.target);
-        }
-    });
-    
-    // 동물 미리보기 클릭
-    document.querySelectorAll('.animal-preview').forEach(preview => {
-        preview.addEventListener('click', function() {
-            const animalType = this.dataset.animal;
-            scrollToUpload();
-        });
-    });
-}
-
-// 카카오 SDK 로드
-function loadKakaoSDK() {
-    if (!window.Kakao) {
-        const script = document.createElement('script');
-        script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js';
-        script.integrity = 'sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/uxjMSXT541S9h6';
-        script.crossOrigin = 'anonymous';
-        script.onload = function() {
-            if (window.Kakao && !Kakao.isInitialized()) {
-                Kakao.init('YOUR_JAVASCRIPT_KEY'); // 실제 키로 교체 필요
-            }
-        };
-        document.head.appendChild(script);
-    }
-}
-
-// 업로드 섹션으로 스크롤
-function scrollToUpload() {
-    uploadSection.scrollIntoView({ behavior: 'smooth' });
-}
-
-// 파일 선택 처리
-function handleFileSelect(e) {
-    const file = e.target.files[0];
-    if (file) {
-        processFile(file);
-    }
-}
-
-// 드래그 오버
-function handleDragOver(e) {
-    e.preventDefault();
-    uploadArea.classList.add('dragover');
-}
-
-// 드래그 리브
-function handleDragLeave(e) {
-    e.preventDefault();
-    uploadArea.classList.remove('dragover');
-}
-
-// 드롭 처리
-function handleDrop(e) {
-    e.preventDefault();
-    uploadArea.classList.remove('dragover');
-    
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-        processFile(files[0]);
-    }
-}
-
-// 파일 처리
-function processFile(file) {
-    // 파일 유효성 검사
-    if (!file.type.startsWith('image/')) {
-        alert('이미지 파일만 업로드 가능합니다.');
-        return;
-    }
-    
-    if (file.size > 10 * 1024 * 1024) { // 10MB 제한
-        alert('파일 크기는 10MB 이하로 업로드해주세요.');
-        return;
-    }
-    
-    uploadedFile = file;
-    
-    // 이미지 미리보기
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        showUploadedImage(e.target.result);
-    };
-    reader.readAsDataURL(file);
-}
-
-// 업로드된 이미지 표시
-function showUploadedImage(imageSrc) {
-    uploadedImage.innerHTML = `
-        <img src="${imageSrc}" alt="업로드된 이미지">
-        <button class="remove-image" title="이미지 삭제">×</button>
-    `;
-    uploadedImage.style.display = 'block';
-    
-    // 업로드 영역 숨기기
-    document.querySelector('.upload-placeholder').style.display = 'none';
-    
-    // 분석 버튼 활성화
-    analyzeBtn.disabled = false;
-}
-
-// 업로드된 이미지 제거
-function removeUploadedImage() {
-    uploadedImage.style.display = 'none';
-    document.querySelector('.upload-placeholder').style.display = 'block';
-    analyzeBtn.disabled = true;
-    uploadedFile = null;
-    fileInput.value = '';
-}
-
-// 분석 시작
-function startAnalysis() {
-    if (!uploadedFile) {
-        alert('먼저 사진을 업로드해주세요.');
-        return;
-    }
-    
-    // 업로드 섹션 숨기고 분석 섹션 표시
-    uploadSection.style.display = 'none';
-    analyzingSection.style.display = 'block';
-    
-    // 중간 광고 표시 (분석 시작 시)
-    adManager.showAd('ad-middle');
-    
-    // 분석 애니메이션 시작
-    startAnalyzingAnimation();
-    
-    // 3초 후 결과 표시
-    setTimeout(() => {
-        showResult();
-    }, 3000);
-}
-
-// 분석 애니메이션
-function startAnalyzingAnimation() {
-    const steps = document.querySelectorAll('.step');
-    const progressFill = document.querySelector('.progress-fill');
-    let currentStep = 0;
-    
-    const stepTexts = [
-        '얼굴 특징 분석 중...',
-        '동물 데이터베이스 매칭 중...',
-        '성격 분석 중...',
-        '결과 생성 중...'
-    ];
-    
-    function activateStep() {
-        if (currentStep > 0) {
-            steps[currentStep - 1].classList.remove('active');
-        }
-        
-        if (currentStep < steps.length) {
-            steps[currentStep].classList.add('active');
-            steps[currentStep].textContent = stepTexts[currentStep];
-            
-            // 진행률 업데이트
-            const progress = ((currentStep + 1) / steps.length) * 100;
-            progressFill.style.width = progress + '%';
-            
-            currentStep++;
-            setTimeout(activateStep, 750);
-        }
-    }
-    
-    activateStep();
-}
-
-// 결과 표시
-function showResult() {
-    // 랜덤 동물 선택
-    const animalKeys = Object.keys(animalDatabase);
-    const randomKey = animalKeys[Math.floor(Math.random() * animalKeys.length)];
-    currentAnimal = animalDatabase[randomKey];
-    
-    // 랜덤 유사도 점수 (80-99%)
-    const similarityScore = Math.floor(Math.random() * 20) + 80;
-    
-    // 분석 섹션 숨기고 결과 섹션 표시
-    analyzingSection.style.display = 'none';
-    resultSection.style.display = 'block';
-    
-    // 결과 페이지 중간 광고 표시
-    adManager.showAd('ad-result');
-    
-    // 결과 내용 생성
-    generateResultContent(currentAnimal, similarityScore);
-    
-    // 결과 섹션으로 스크롤
-    resultSection.scrollIntoView({ behavior: 'smooth' });
 }
 
 // 결과 내용 생성
@@ -854,3 +651,12 @@ window.addEventListener('error', function(e) {
 
 // 터치 디바이스 지원
 document.addEventListener('touchstart', function() {}, { passive: true });
+
+// [광고] 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    // 상단 광고 즉시 로드
+    adManager.loadAd('adTop');
+    
+    // 옵저버 설정
+    setupAdObservers();
+});

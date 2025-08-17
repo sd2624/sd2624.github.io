@@ -31,7 +31,7 @@ class AdManager {
         return false;
     }
     
-    // 중간 광고 표시 (질문 진행 중)
+    // 중간 광고 표시 (3번째 질문 후)
     showMidAd() {
         return this.loadAd('adMid');
     }
@@ -59,7 +59,7 @@ const setupAdObservers = () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 adManager.showMidAd();
-                midAdObserver.disconnect();
+                midAdObserver.unobserve(entry.target);
             }
         });
     }, options);
@@ -69,12 +69,12 @@ const setupAdObservers = () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 adManager.showResultAd();
-                resultAdObserver.disconnect();
+                resultAdObserver.unobserve(entry.target);
             }
         });
     }, options);
     
-    // 옵저버 등록
+    // 관찰 대상 등록
     const midAd = document.getElementById('adMid');
     const resultAd = document.getElementById('adResult');
     
@@ -82,7 +82,10 @@ const setupAdObservers = () => {
     if (resultAd) resultAdObserver.observe(resultAd);
 };
 
-// 카카오 SDK 초기화
+
+
+
+
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
 // 질문 데이터
@@ -292,21 +295,7 @@ const analysisPopup = document.getElementById('analysisPopup');
 
 // 이벤트 리스너
 document.addEventListener('DOMContentLoaded', function() {
-    // [광고] 상단 광고 초기화
-    if (typeof adsbygoogle !== 'undefined') {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    }
     
-    // [광고] 옵저버 설정
-    setupAdObservers();
-    
-    // 시작 버튼
-    document.querySelector('.start-btn').addEventListener('click', startTest);
-    
-    // 카카오 공유 버튼
-    document.querySelectorAll('.kakao-share').forEach(btn => {
-        btn.addEventListener('click', shareKakao);
-    });
 });
 
 // 테스트 시작
@@ -351,28 +340,7 @@ function showQuestion() {
     const progress = (questionCount / totalQuestions) * 100;
     progressElement.style.width = progress + '%';
     
-    // [광고] 질문 8번째에서 중간 광고 표시
-    if (currentQuestion === 7) {
-        adManager.showMidAd();
-    }
     
-    // 답변 옵션 생성
-    answersElement.innerHTML = '';
-    question.answers.forEach((answer, index) => {
-        const answerElement = document.createElement('div');
-        answerElement.className = 'answer';
-        answerElement.textContent = answer.text;
-        
-        if (currentQuestion < questions.length) {
-            // 일반 질문
-            answerElement.addEventListener('click', () => selectAnswer(index, answer.agen, answer.teto));
-        } else {
-            // 성별 질문
-            answerElement.addEventListener('click', () => selectGender(index, answer.gender));
-        }
-        
-        answersElement.appendChild(answerElement);
-    });
 }
 
 // 답변 선택
@@ -443,25 +411,7 @@ function showAnalysis() {
     questionPage.classList.add('hidden');
     analysisPopup.classList.remove('hidden');
     
-    // [광고] 팝업 광고 초기화
-    setTimeout(() => {
-        if (typeof adsbygoogle !== 'undefined') {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-    }, 100);
     
-    let countdown = 7;
-    const countdownElement = document.querySelector('.countdown');
-    
-    const timer = setInterval(() => {
-        countdown--;
-        countdownElement.textContent = countdown;
-        
-        if (countdown <= 0) {
-            clearInterval(timer);
-            showResult();
-        }
-    }, 1000);
 }
 
 // 결과 표시
@@ -469,54 +419,7 @@ function showResult() {
     analysisPopup.classList.add('hidden');
     resultPage.classList.remove('hidden');
     
-    // [광고] 결과 광고 표시
-    setTimeout(() => {
-        adManager.showResultAd();
-    }, 500);
     
-    // 결과 결정
-    const resultKey = getResultKey();
-    const result = results[resultKey];
-    
-    // 결과 표시
-    const resultImg = document.querySelector('.result-img');
-    const resultContent = document.querySelector('.result-content');
-    
-    resultImg.style.background = result.bgColor;
-    resultImg.innerHTML = `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 60px;">${result.icon}</div>`;
-    
-    resultContent.innerHTML = `
-        <h3 style="font-size: 1.8em; margin-bottom: 20px; font-weight: bold; background: linear-gradient(45deg, #e17055, #fd79a8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${result.title}</h3>
-        <p style="margin-bottom: 25px; font-size: 1.2em; line-height: 1.6;">${result.description}</p>
-        
-        <div style="background: white; padding: 25px; border-radius: 15px; text-align: left; white-space: pre-line; border-left: 5px solid #fd79a8; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-            <h4 style="color: #e17055; margin-bottom: 15px; font-size: 1.3em;">✨ 주요 특징</h4>
-            ${result.characteristics}
-        </div>
-        
-        <div style="background: linear-gradient(135deg, #fff5f5 0%, #fef5e7 100%); padding: 25px; border-radius: 15px; text-align: left; white-space: pre-line; border: 2px solid #fdcb6e; margin-bottom: 20px;">
-            <h4 style="color: #e17055; margin-bottom: 15px; font-size: 1.3em;">💕 연애 스타일</h4>
-            ${result.loveStyle}
-        </div>
-        
-        <div style="background: linear-gradient(135deg, #f8f9ff 0%, #fff5f5 100%); padding: 25px; border-radius: 15px; text-align: left; border: 2px solid #a29bfe; margin-bottom: 20px;">
-            <h4 style="color: #6c5ce7; margin-bottom: 15px; font-size: 1.3em;">💗 궁합</h4>
-            ${result.compatibility}
-        </div>
-        
-        <div style="background: linear-gradient(135deg, #e8f4f8, #f3f8ff); padding: 20px; border-radius: 10px; text-align: center; border: 2px solid #2196F3; margin-bottom: 20px;">
-            🎯 분석 결과: 에겐 ${agenScore}점 | 테토 ${tetoScore}점
-            <br>
-            <span style="font-size: 0.9em; color: #666; margin-top: 10px; display: block;">※ 총 ${questions.length}개 질문 기반 분석</span>
-        </div>
-        
-        <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 4px solid #ffc107; text-align: left;">
-            <h4 style="color: #856404; margin-bottom: 10px; font-size: 1.1em;">💡 조언</h4>
-            <p style="color: #856404; font-size: 0.95em; line-height: 1.5;">
-                ${result.advice}
-            </p>
-        </div>
-    `;
 }
 
 // 결과 키 결정
@@ -608,3 +511,9 @@ document.addEventListener('dragstart', function(e) {
 // 전역 함수로 노출
 window.startTest = startTest;
 window.shareKakao = shareKakao;
+
+// [광고] 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    adManager.loadAd('adTop');
+    setupAdObservers();
+});

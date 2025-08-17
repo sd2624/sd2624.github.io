@@ -1,81 +1,93 @@
+// [광고] AdManager 클래스 - 광고 로드 및 중복 방지 관리
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set(); // 로드된 광고 추적
+    }
+    
+    // 광고 로드 함수
+    loadAd(adId) {
+        if (this.loadedAds.has(adId)) {
+            console.log(`[광고] ${adId} 이미 로드됨 - 중복 방지`);
+            return false;
+        }
+        
+        const adElement = document.getElementById(adId);
+        if (adElement && typeof adsbygoogle !== 'undefined') {
+            try {
+                // 광고 컨테이너 표시
+                adElement.style.display = 'block';
+                
+                // 광고 푸시
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                
+                this.loadedAds.add(adId);
+                console.log(`[광고] ${adId} 로드 완료`);
+                return true;
+            } catch (error) {
+                console.warn(`[광고] ${adId} 로드 실패:`, error);
+                return false;
+            }
+        }
+        return false;
+    }
+    
+    // 중간 광고 표시 (3번째 질문 후)
+    showMidAd() {
+        return this.loadAd('adMid');
+    }
+    
+    // 결과 광고 표시
+    showResultAd() {
+        return this.loadAd('adResult');
+    }
+}
+
+// [광고] AdManager 인스턴스 생성
+const adManager = new AdManager();
+
+// [광고] IntersectionObserver를 이용한 광고 표시 관리
+const setupAdObservers = () => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    
+    const options = {
+        threshold: 0.1,
+        rootMargin: '50px'
+    };
+    
+    // 중간 광고 관찰자
+    const midAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showMidAd();
+                midAdObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    
+    // 결과 광고 관찰자
+    const resultAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showResultAd();
+                resultAdObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    
+    // 관찰 대상 등록
+    const midAd = document.getElementById('adMid');
+    const resultAd = document.getElementById('adResult');
+    
+    if (midAd) midAdObserver.observe(midAd);
+    if (resultAd) resultAdObserver.observe(resultAd);
+};
+
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
 // 광고 관리 클래스
-class AdManager {
-    constructor() {
-        this.loadedAds = new Set();
-        this.initIntersectionObserver();
-    }
 
-    // Intersection Observer 초기화
-    initIntersectionObserver() {
-        if ('IntersectionObserver' in window) {
-            this.observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        this.loadAd(entry.target);
-                        this.observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '50px'
-            });
-        }
-    }
 
-    // 광고 로드
-    loadAd(adElement) {
-        const adId = adElement.id;
-        if (!this.loadedAds.has(adId)) {
-            try {
-                const adIns = adElement.querySelector('.adsbygoogle');
-                if (adIns && !adIns.hasAttribute('data-adsbygoogle-status')) {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    this.loadedAds.add(adId);
-                    console.log(`광고 로드됨: ${adId}`);
-                }
-            } catch (error) {
-                console.error(`광고 로드 실패 (${adId}):`, error);
-            }
-        }
-    }
-
-    // 광고 표시
-    showAd(adId) {
-        const adElement = document.getElementById(adId);
-        if (adElement) {
-            adElement.style.display = 'block';
-            if (this.observer) {
-                this.observer.observe(adElement);
-            } else {
-                // Intersection Observer를 지원하지 않는 경우 바로 로드
-                this.loadAd(adElement);
-            }
-        }
-    }
-
-    // 광고 숨기기
-    hideAd(adId) {
-        const adElement = document.getElementById(adId);
-        if (adElement) {
-            adElement.style.display = 'none';
-        }
-    }
-
-    // 모든 광고 숨기기
-    hideAllAds() {
-        ['ad-header', 'ad-middle', 'ad-result'].forEach(adId => {
-            this.hideAd(adId);
-        });
-    }
-}
-
-// 광고 관리자 인스턴스 생성
-const adManager = new AdManager();
-
-// 색채 질문 목록
 const questions = [
     {
         text: "지금 당신의 기분을 가장 잘 표현하는 색은?",
@@ -437,3 +449,11 @@ window.onerror = function(msg, url, lineNo, columnNo, error) {
     console.error('Error: ' + msg + '\nURL: ' + url + '\nLine: ' + lineNo);
     return false;
 };
+// [광고] 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    // 상단 광고 즉시 로드
+    adManager.loadAd('adTop');
+    
+    // 옵저버 설정
+    setupAdObservers();
+});

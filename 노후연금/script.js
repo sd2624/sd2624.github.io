@@ -1,80 +1,93 @@
+// [광고] AdManager 클래스 - 광고 로드 및 중복 방지 관리
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set(); // 로드된 광고 추적
+    }
+    
+    // 광고 로드 함수
+    loadAd(adId) {
+        if (this.loadedAds.has(adId)) {
+            console.log(`[광고] ${adId} 이미 로드됨 - 중복 방지`);
+            return false;
+        }
+        
+        const adElement = document.getElementById(adId);
+        if (adElement && typeof adsbygoogle !== 'undefined') {
+            try {
+                // 광고 컨테이너 표시
+                adElement.style.display = 'block';
+                
+                // 광고 푸시
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                
+                this.loadedAds.add(adId);
+                console.log(`[광고] ${adId} 로드 완료`);
+                return true;
+            } catch (error) {
+                console.warn(`[광고] ${adId} 로드 실패:`, error);
+                return false;
+            }
+        }
+        return false;
+    }
+    
+    // 중간 광고 표시 (3번째 질문 후)
+    showMidAd() {
+        return this.loadAd('adMid');
+    }
+    
+    // 결과 광고 표시
+    showResultAd() {
+        return this.loadAd('adResult');
+    }
+}
+
+// [광고] AdManager 인스턴스 생성
+const adManager = new AdManager();
+
+// [광고] IntersectionObserver를 이용한 광고 표시 관리
+const setupAdObservers = () => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    
+    const options = {
+        threshold: 0.1,
+        rootMargin: '50px'
+    };
+    
+    // 중간 광고 관찰자
+    const midAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showMidAd();
+                midAdObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    
+    // 결과 광고 관찰자
+    const resultAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showResultAd();
+                resultAdObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    
+    // 관찰 대상 등록
+    const midAd = document.getElementById('adMid');
+    const resultAd = document.getElementById('adResult');
+    
+    if (midAd) midAdObserver.observe(midAd);
+    if (resultAd) resultAdObserver.observe(resultAd);
+};
+
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
 // 광고 로드 관리 시스템
-class AdManager {
-    constructor() {
-        this.loadedAds = new Set(); // 중복 로드 방지를 위한 Set
-        this.initializeAds();
-    }
 
-    // 광고 초기화 및 IntersectionObserver 설정
-    initializeAds() {
-        // 페이지 로드 시 상단 광고 즉시 로드
-        this.loadAd('ad-top');
 
-        // IntersectionObserver로 광고 요소 감시
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const adId = entry.target.id;
-                    this.loadAd(adId);
-                }
-            });
-        }, {
-            threshold: 0.1, // 10% 보이면 로드
-            rootMargin: '50px' // 50px 여유를 두고 로드
-        });
-
-        // 모든 광고 요소 관찰
-        document.querySelectorAll('.ad-section').forEach(ad => {
-            observer.observe(ad);
-        });
-    }
-
-    // 광고 로드 함수
-    loadAd(adId) {
-        if (this.loadedAds.has(adId)) {
-            return; // 이미 로드된 광고는 스킵
-        }
-
-        const adElement = document.getElementById(adId);
-        if (adElement && adElement.querySelector('.adsbygoogle')) {
-            try {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                this.loadedAds.add(adId);
-                console.log(`광고 로드됨: ${adId}`);
-            } catch (error) {
-                console.error(`광고 로드 실패: ${adId}`, error);
-            }
-        }
-    }
-
-    // 광고 표시 (섹션이 나타날 때 호출)
-    showAd(adId) {
-        const adElement = document.getElementById(adId);
-        if (adElement) {
-            adElement.style.display = 'block';
-            // 약간의 지연 후 광고 로드
-            setTimeout(() => {
-                this.loadAd(adId);
-            }, 100);
-        }
-    }
-
-    // 광고 숨기기
-    hideAd(adId) {
-        const adElement = document.getElementById(adId);
-        if (adElement) {
-            adElement.style.display = 'none';
-        }
-    }
-}
-
-// 광고 매니저 인스턴스 생성
-const adManager = new AdManager();
-
-// 질문 데이터
 const questions = [
     {
         question: "현재 연령대는 어떻게 되시나요?",
@@ -663,34 +676,7 @@ function shareKakao() {
 }
 
 // 페이지 로드 시 초기화
-document.addEventListener('DOMContentLoaded', function() {
-    // 광고 시스템 초기화는 AdManager에서 자동 처리됨
-    
-    // 이벤트 리스너 등록
-    const startBtn = document.querySelector('.start-btn');
-    const detailBtns = document.querySelectorAll('.detail-btn');
-    const shareBtns = document.querySelectorAll('.share-btn');
-    const restartBtns = document.querySelectorAll('.restart-btn');
-    
-    if (startBtn) {
-        startBtn.addEventListener('click', startTest);
-    }
-    
-    detailBtns.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            // 연금 관련 정보 사이트들
-            const pensionLinks = [
-                'https://www.4insure.or.kr/',                    // 국민연금공단
-                'https://www.nps.or.kr/',                       // 국민연금 공식사이트
-                'https://www.bokjiro.go.kr/',                   // 복지로 (기초연금)
-                'https://www.welfaretime.go.kr/',               // 복지타임즈
-                'https://pension.samsung.com/'                   // 삼성생명 연금보험
-            ];
-            
-            // 순서대로 다른 연금 관련 사이트로 이동
-            const linkIndex = index % pensionLinks.length;
-            window.open(pensionLinks[linkIndex], '_blank');
-        });
+
     });
     
     shareBtns.forEach(btn => {
@@ -742,3 +728,12 @@ window.addEventListener('load', function() {
 window.startTest = startTest;
 window.restartTest = restartTest;
 window.shareKakao = shareKakao;
+
+// [광고] 페이지 로드 시 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    // 상단 광고 즉시 로드
+    adManager.loadAd('adTop');
+    
+    // 옵저버 설정
+    setupAdObservers();
+});

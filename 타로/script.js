@@ -1,48 +1,89 @@
-import tarotData from './tarot-data.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-    const selectButton = document.getElementById('selectCards');
-    const cardSlots = document.querySelectorAll('.card-slot');
-    const shareButton = document.getElementById('shareKakao');
-    const loadingPopup = document.getElementById('loadingPopup');
-    let selectedCards = [];
-    let cardOrientations = [];
-    let allCardsSelected = false;
+// [광고] AdManager 클래스 - 광고 로드 및 중복 방지 관리
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set(); // 로드된 광고 추적
+    }
     
-    // 광고 로드 상태 관리 - 중복 로드 방지
-    const adLoadedState = {
-        'ad-top': false,
-        'ad-middle': false,
-        'ad-result': false
-    };
+    // 광고 로드 함수
+    loadAd(adId) {
+        if (this.loadedAds.has(adId)) {
+            console.log(`[광고] ${adId} 이미 로드됨 - 중복 방지`);
+            return false;
+        }
+        
+        const adElement = document.getElementById(adId);
+        if (adElement && typeof adsbygoogle !== 'undefined') {
+            try {
+                // 광고 컨테이너 표시
+                adElement.style.display = 'block';
+                
+                // 광고 푸시
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                
+                this.loadedAds.add(adId);
+                console.log(`[광고] ${adId} 로드 완료`);
+                return true;
+            } catch (error) {
+                console.warn(`[광고] ${adId} 로드 실패:`, error);
+                return false;
+            }
+        }
+        return false;
+    }
+    
+    // 중간 광고 표시 (3번째 질문 후)
+    showMidAd() {
+        return this.loadAd('adMid');
+    }
+    
+    // 결과 광고 표시
+    showResultAd() {
+        return this.loadAd('adResult');
+    }
+}
 
-    // 광고 IntersectionObserver 설정
-    const adObserver = new IntersectionObserver((entries) => {
+// [광고] AdManager 인스턴스 생성
+const adManager = new AdManager();
+
+// [광고] IntersectionObserver를 이용한 광고 표시 관리
+const setupAdObservers = () => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    
+    const options = {
+        threshold: 0.1,
+        rootMargin: '50px'
+    };
+    
+    // 중간 광고 관찰자
+    const midAdObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !adLoadedState[entry.target.id]) {
-                const adElement = entry.target.querySelector('.adsbygoogle');
-                if (adElement && !adElement.hasAttribute('data-adsbygoogle-status')) {
-                    try {
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                        adLoadedState[entry.target.id] = true;
-                        console.log(`광고 로드됨: ${entry.target.id}`);
-                    } catch (e) {
-                        console.error('광고 로드 오류:', e);
-                    }
-                }
+            if (entry.isIntersecting) {
+                adManager.showMidAd();
+                midAdObserver.unobserve(entry.target);
             }
         });
-    }, {
-        rootMargin: '50px',
-        threshold: 0.1
-    });
+    }, options);
+    
+    // 결과 광고 관찰자
+    const resultAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showResultAd();
+                resultAdObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    
+    // 관찰 대상 등록
+    const midAd = document.getElementById('adMid');
+    const resultAd = document.getElementById('adResult');
+    
+    if (midAd) midAdObserver.observe(midAd);
+    if (resultAd) resultAdObserver.observe(resultAd);
+};
 
-    // 페이지 로드 시 상단 광고 관찰 시작
-    const topAd = document.getElementById('ad-top');
-    if (topAd) {
-        adObserver.observe(topAd);
-    }
-
+// 타로 카드 데이터
+document.addEventListener('DOMContentLoaded', function() {
     function getCardSymbol(cardName) {
         const symbols = {
             // 메이저 아르카나
@@ -237,4 +278,11 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
         });
     });
+
+    // [광고] 페이지 로드 시 초기화
+    // 상단 광고 즉시 로드
+    adManager.loadAd('adTop');
+    
+    // 옵저버 설정
+    setupAdObservers();
 });
