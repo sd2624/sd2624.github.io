@@ -679,34 +679,39 @@ function shareKakao() {
     }
 }
 
-// 페이지 로드 시 초기화
-
-    }
+// 이벤트 리스너 설정 함수
+function setupEventListeners() {
+    console.log('자동차리스 이벤트 리스너 설정 중...');
     
-    // 이벤트 리스너 등록
+    // 테스트 시작 버튼
     const startBtn = document.querySelector('.start-button');
-    const primaryActions = document.querySelectorAll('.primary-action');
-    const shareButtons = document.querySelectorAll('.share-button');
-    const retryButtons = document.querySelectorAll('.retry-button');
-    
     if (startBtn) {
         startBtn.addEventListener('click', startTest);
+        console.log('테스트 시작 버튼 이벤트 리스너 등록됨');
     }
     
+    // 기본 액션 버튼들
+    const primaryActions = document.querySelectorAll('.primary-action');
     primaryActions.forEach(btn => {
         btn.addEventListener('click', () => {
             window.open('https://www.carleasing.co.kr', '_blank');
         });
     });
     
+    // 공유 버튼들
+    const shareButtons = document.querySelectorAll('.share-button');
     shareButtons.forEach(btn => {
         btn.addEventListener('click', shareKakao);
     });
     
+    // 다시하기 버튼들
+    const retryButtons = document.querySelectorAll('.retry-button');
     retryButtons.forEach(btn => {
         btn.addEventListener('click', restartTest);
     });
-});
+    
+    console.log('자동차리스 모든 이벤트 리스너 등록 완료');
+}
 
 // 키보드 단축키
 document.addEventListener('keydown', function(e) {
@@ -760,9 +765,6 @@ function initializeAds() {
     }
 }
 
-// 페이지 로드 시 광고 초기화
-document.addEventListener('DOMContentLoaded', initializeAds);
-
 // 전역 함수로 노출
 window.startTest = startTest;
 window.restartTest = restartTest;
@@ -770,6 +772,13 @@ window.shareKakao = shareKakao;
 
 // [광고] 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('자동차리스 페이지 로드됨');
+    
+    // 이벤트 리스너 설정
+    setupEventListeners();
+    
+    // 광고 초기화
+    initializeAds();
     adManager.loadAd('adTop');
     setupAdObservers();
 });

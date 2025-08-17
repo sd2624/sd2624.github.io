@@ -40,6 +40,11 @@ class AdManager {
     showResultAd() {
         return this.loadAd('adResult');
     }
+    
+    // 일반 광고 표시 메서드 (호환성을 위해 추가)
+    showAd(adId) {
+        return this.loadAd(adId);
+    }
 }
 
 // [광고] AdManager 인스턴스 생성
@@ -452,8 +457,33 @@ window.onerror = function(msg, url, lineNo, columnNo, error) {
 // [광고] 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
     // 상단 광고 즉시 로드
-    adManager.loadAd('adTop');
-    
-    // 옵저버 설정
     setupAdObservers();
+    adManager.loadAd('adTop');
+    console.log('색채 테스트 페이지 로드 완료');
 });
+
+// 전역 함수로 노출 (HTML onclick에서 사용하기 위해)
+window.startColorTest = function() {
+    document.getElementById('start-section').style.display = 'none';
+    document.getElementById('question-section').style.display = 'block';
+    showQuestion();
+};
+
+window.selectColor = function(colorHex, colorName) {
+    handleAnswer({ hex: colorHex, name: colorName });
+};
+
+window.restartTest = function() {
+    // 테스트 초기화
+    currentQuestion = 0;
+    selectedColors = [];
+    colorScore = {
+        warm: 0,
+        cool: 0,
+        bright: 0
+    };
+    
+    // 화면 초기화
+    document.getElementById('result-section').style.display = 'none';
+    document.getElementById('start-section').style.display = 'block';
+};

@@ -40,6 +40,16 @@ class AdManager {
     showResultAd() {
         return this.loadAd('adResult');
     }
+    
+    // 광고 표시 (통합 메소드)
+    showAd(adId) {
+        const adMap = {
+            'ad-middle': 'adMid',
+            'ad-result': 'adResult'
+        };
+        const mappedId = adMap[adId] || adId;
+        return this.loadAd(mappedId);
+    }
 }
 
 // [광고] AdManager 인스턴스 생성

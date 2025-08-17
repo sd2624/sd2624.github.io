@@ -475,11 +475,12 @@ function analyzeAnswers() {
 
 // 결과 표시 함수
 function showResults() {
+    console.log('결과 표시 중...');
     if (analysisModal) analysisModal.classList.add('hidden');
     if (resultPage) resultPage.classList.remove('hidden');
     
     // 결과 페이지 중간 광고 표시 및 로드
-    adManager.showAd('ad-result');
+    adManager.showResultAd();
     
     const result = resultTypes[analysisData.resultType];
     
@@ -675,18 +676,39 @@ function shareKakao() {
     }
 }
 
-// 페이지 로드 시 초기화
-
+// 이벤트 리스너 설정 함수
+function setupEventListeners() {
+    console.log('노후연금 이벤트 리스너 설정 중...');
+    
+    // 테스트 시작 버튼
+    const startBtn = document.querySelector('.start-btn');
+    if (startBtn) {
+        startBtn.addEventListener('click', startTest);
+        console.log('테스트 시작 버튼 이벤트 리스너 등록됨');
+    }
+    
+    // 상세 버튼들
+    const detailBtns = document.querySelectorAll('.detail-btn');
+    detailBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            window.open('https://www.nps.or.kr', '_blank');
+        });
     });
     
+    // 공유 버튼들
+    const shareBtns = document.querySelectorAll('.share-btn');
     shareBtns.forEach(btn => {
         btn.addEventListener('click', shareKakao);
     });
     
+    // 다시하기 버튼들
+    const restartBtns = document.querySelectorAll('.restart-btn');
     restartBtns.forEach(btn => {
         btn.addEventListener('click', restartTest);
     });
-});
+    
+    console.log('노후연금 모든 이벤트 리스너 등록 완료');
+}
 
 // 키보드 단축키
 document.addEventListener('keydown', function(e) {
@@ -731,6 +753,11 @@ window.shareKakao = shareKakao;
 
 // [광고] 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('노후연금 페이지 로드됨');
+    
+    // 이벤트 리스너 설정
+    setupEventListeners();
+    
     // 상단 광고 즉시 로드
     adManager.loadAd('adTop');
     

@@ -347,8 +347,209 @@ const resultSection = document.getElementById('resultSection');
 let uploadedFile = null;
 let currentAnimal = null;
 
-// 페이지 로드 시 초기화
+// 파일 업로드 기능
+function initializeUpload() {
+    // 파일 입력 이벤트
+    fileInput.addEventListener('change', handleFileSelect);
+    
+    // 드래그 앤 드롭 이벤트
+    uploadArea.addEventListener('click', () => fileInput.click());
+    uploadArea.addEventListener('dragover', handleDragOver);
+    uploadArea.addEventListener('dragleave', handleDragLeave);
+    uploadArea.addEventListener('drop', handleDrop);
+    
+    // 분석 버튼 이벤트
+    analyzeBtn.addEventListener('click', startAnalysis);
+    
+    // 이미지 제거 버튼 이벤트
+    const removeBtn = document.getElementById('removeImage');
+    if (removeBtn) {
+        removeBtn.addEventListener('click', removeUploadedImage);
+    }
+}
 
+// 파일 선택 처리
+function handleFileSelect(event) {
+    const file = event.target.files[0];
+    if (file) {
+        processFile(file);
+    }
+}
+
+// 드래그 오버 처리
+function handleDragOver(event) {
+    event.preventDefault();
+    uploadArea.classList.add('dragover');
+}
+
+// 드래그 리브 처리
+function handleDragLeave(event) {
+    event.preventDefault();
+    uploadArea.classList.remove('dragover');
+}
+
+// 드롭 처리
+function handleDrop(event) {
+    event.preventDefault();
+    uploadArea.classList.remove('dragover');
+    
+    const files = event.dataTransfer.files;
+    if (files.length > 0) {
+        processFile(files[0]);
+    }
+}
+
+// 파일 처리
+function processFile(file) {
+    // 파일 타입 검증
+    if (!file.type.startsWith('image/')) {
+        alert('이미지 파일만 업로드 가능합니다.');
+        return;
+    }
+    
+    // 파일 크기 검증 (10MB)
+    if (file.size > 10 * 1024 * 1024) {
+        alert('파일 크기는 10MB 이하여야 합니다.');
+        return;
+    }
+    
+    uploadedFile = file;
+    
+    // 이미지 미리보기
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        displayUploadedImage(e.target.result);
+    };
+    reader.readAsDataURL(file);
+}
+
+// 업로드된 이미지 표시
+function displayUploadedImage(imageSrc) {
+    const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+    const uploadedImageDiv = document.getElementById('uploadedImage');
+    const previewImage = document.getElementById('previewImage');
+    
+    // 플레이스홀더 숨기기
+    uploadPlaceholder.style.display = 'none';
+    
+    // 업로드된 이미지 표시
+    previewImage.src = imageSrc;
+    uploadedImageDiv.style.display = 'block';
+    
+    // 분석 버튼 활성화
+    analyzeBtn.disabled = false;
+    analyzeBtn.classList.add('active');
+}
+
+// 업로드된 이미지 제거
+function removeUploadedImage() {
+    const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+    const uploadedImageDiv = document.getElementById('uploadedImage');
+    
+    // 상태 초기화
+    uploadedFile = null;
+    fileInput.value = '';
+    
+    // UI 초기화
+    uploadPlaceholder.style.display = 'block';
+    uploadedImageDiv.style.display = 'none';
+    
+    // 분석 버튼 비활성화
+    analyzeBtn.disabled = true;
+    analyzeBtn.classList.remove('active');
+}
+
+// 분석 시작
+function startAnalysis() {
+    if (!uploadedFile) {
+        alert('먼저 이미지를 업로드해주세요.');
+        return;
+    }
+    
+    // 섹션 전환
+    uploadSection.style.display = 'none';
+    analyzingSection.style.display = 'block';
+    
+    // 중간 광고 표시
+    adManager.showMidAd();
+    
+    // 분석 진행 시뮬레이션
+    simulateAnalysis();
+}
+
+// 분석 진행 시뮬레이션
+function simulateAnalysis() {
+    const steps = [
+        { text: '얼굴 인식 중...', duration: 1000 },
+        { text: '특징점 분석 중...', duration: 1500 },
+        { text: '동물 데이터베이스 매칭 중...', duration: 2000 },
+        { text: '결과 생성 중...', duration: 1000 }
+    ];
+    
+    let currentStep = 0;
+    const progressBar = document.querySelector('.progress-fill');
+    const stepElements = document.querySelectorAll('.step');
+    
+    function nextStep() {
+        if (currentStep < steps.length) {
+            // 현재 단계 활성화
+            stepElements[currentStep].classList.add('active');
+            
+            // 진행률 업데이트
+            const progress = ((currentStep + 1) / steps.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            currentStep++;
+            
+            setTimeout(nextStep, steps[currentStep - 1].duration);
+        } else {
+            // 분석 완료 - 결과 표시
+            showResult();
+        }
+    }
+    
+    nextStep();
+}
+
+// 결과 표시
+function showResult() {
+    // 랜덤 동물 선택 및 점수 생성
+    const animalKeys = Object.keys(animalDatabase);
+    const randomAnimal = animalKeys[Math.floor(Math.random() * animalKeys.length)];
+    const score = Math.floor(Math.random() * 21) + 80; // 80-100% 사이 점수
+    
+    currentAnimal = animalDatabase[randomAnimal];
+    
+    // 섹션 전환
+    analyzingSection.style.display = 'none';
+    resultSection.style.display = 'block';
+    
+    // 결과 광고 표시
+    adManager.showResultAd();
+    
+    // 결과 내용 생성
+    generateResultContent(currentAnimal, score);
+    
+    // 이벤트 리스너 추가
+    addResultEventListeners();
+    
+    // 결과 섹션으로 스크롤
+    resultSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+// 결과 섹션 이벤트 리스너 추가
+function addResultEventListeners() {
+    // 다시 하기 버튼
+    const retryBtn = document.querySelector('.retry-btn');
+    if (retryBtn) {
+        retryBtn.addEventListener('click', resetTest);
+    }
+    
+    // 공유 버튼들
+    const shareButtons = document.querySelectorAll('.share-btn');
+    shareButtons.forEach(button => {
+        button.addEventListener('click', () => handleShare(button));
+    });
 }
 
 // 결과 내용 생성
@@ -659,4 +860,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 옵저버 설정
     setupAdObservers();
+    
+    // 업로드 기능 초기화
+    initializeUpload();
 });

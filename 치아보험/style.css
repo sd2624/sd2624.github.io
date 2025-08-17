@@ -672,3 +672,12 @@ body {
         --border-color: #546e7a;
     }
 }
+
+/* 유틸리티 클래스 */
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: block !important;
+}

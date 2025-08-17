@@ -635,21 +635,24 @@ function shareKakao() {
     }
 }
 
-// 페이지 로드 시 초기화
-
-    }
+// 이벤트 리스너 설정 함수
+function setupEventListeners() {
+    console.log('주차접촉사고 이벤트 리스너 설정 중...');
     
-    // 이벤트 리스너 등록
+    // 버튼 요소들 가져오기
     const startBtn = document.querySelector('.start-btn');
     const detailBtns = document.querySelectorAll('.detail-btn');
     const otherTestBtns = document.querySelectorAll('.other-test-btn');
     const shareBtns = document.querySelectorAll('.share-btn');
     const restartBtns = document.querySelectorAll('.restart-btn');
     
+    // 테스트 시작 버튼
     if (startBtn) {
         startBtn.addEventListener('click', startTest);
+        console.log('테스트 시작 버튼 이벤트 리스너 등록됨');
     }
     
+    // 상세 정보 버튼들
     detailBtns.forEach((btn, index) => {
         btn.addEventListener('click', () => {
             // 자동차보험 관련 사이트들
@@ -667,20 +670,25 @@ function shareKakao() {
         });
     });
     
+    // 다른 테스트 버튼들
     otherTestBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             window.location.href = '../index.html';
         });
     });
     
+    // 공유 버튼들
     shareBtns.forEach(btn => {
         btn.addEventListener('click', shareKakao);
     });
     
+    // 다시하기 버튼들
     restartBtns.forEach(btn => {
         btn.addEventListener('click', restartTest);
     });
-});
+    
+    console.log('주차접촉사고 모든 이벤트 리스너 등록 완료');
+}
 
 // 키보드 단축키
 document.addEventListener('keydown', function(e) {
@@ -785,6 +793,11 @@ document.addEventListener('keydown', function(e) {
 
 // [광고] 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('주차접촉사고 페이지 로드됨');
+    
+    // 이벤트 리스너 설정
+    setupEventListeners();
+    
     // 상단 광고 즉시 로드
     adManager.loadAd('adTop');
     

@@ -83,7 +83,12 @@ const setupAdObservers = () => {
 };
 
 // 카카오 SDK 초기화
-Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+function initKakao() {
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+        window.Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+        console.log('카카오 SDK 초기화 완료');
+    }
+}
 
 // [AdManager] 광고 동적 로딩 및 중복 방지 클래스
 
@@ -317,6 +322,7 @@ function restartTest() {
 
 // 테스트 시작
 function startTest() {
+    console.log('startTest 함수 호출됨');
     startPage.classList.add('hidden');
     questionPage.classList.remove('hidden');
     showQuestion();
@@ -324,11 +330,18 @@ function startTest() {
 
 // 질문 표시
 function showQuestion() {
+    console.log('showQuestion 함수 호출됨, currentQuestion:', currentQuestion);
     const question = questions[currentQuestion];
+    console.log('현재 질문:', question);
     const questionText = document.querySelector('.question-text');
     const answersGrid = document.querySelector('.answers-grid');
     const progressFill = document.querySelector('.progress-fill');
     const questionCounter = document.querySelector('.question-counter');
+    
+    if (!questionText || !answersGrid || !progressFill || !questionCounter) {
+        console.error('필요한 DOM 요소를 찾을 수 없습니다');
+        return;
+    }
     
     questionText.textContent = question.question;
     questionCounter.textContent = `${currentQuestion + 1} / ${questions.length}`;
@@ -495,19 +508,17 @@ function setupKakaoShare(result) {
 window.addEventListener('load', function() {
     // [AdManager] 광고 관리자 초기화
     window.adManager = new AdManager();
-    
-    // 기타 초기화 작업
-    setupKakaoShare();
 });
 
 // 전역 함수로 노출
 window.startTest = startTest;
 window.restartTest = restartTest;
 
-});
-
 // [광고] 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
+    // 카카오 SDK 초기화
+    initKakao();
+    
     // 상단 광고 즉시 로드
     adManager.loadAd('adTop');
     

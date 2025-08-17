@@ -84,8 +84,50 @@ const setupAdObservers = () => {
 
 // 광고 관리자 클래스 (새로 수정)
 
+// [광고] 페이지 로드 시 초기화 및 Kakao SDK 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOMContentLoaded 이벤트 발생');
+    
+    // Kakao SDK 초기화
+    if (typeof Kakao !== 'undefined') {
+        if (!Kakao.isInitialized()) {
+            Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+            console.log('Kakao SDK 초기화 완료');
+        }
+    } else {
+        console.warn('Kakao SDK가 로드되지 않았습니다');
+    }
+    
+    // 이벤트 리스너 설정
+    setupEventListeners();
+    
+    // 상단 광고 즉시 로드
+    adManager.loadAd('adTop');
+    
+    // 옵저버 설정
+    setupAdObservers();
+    
+    console.log('페이지 초기화 완료');
+});
 
-Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+// 이벤트 리스너 설정 함수
+function setupEventListeners() {
+    console.log('이벤트 리스너 설정 중...');
+    
+    // 시작 버튼
+    const startBtn = document.querySelector('.start-btn');
+    if (startBtn) {
+        startBtn.addEventListener('click', startTest);
+        console.log('시작 버튼 이벤트 리스너 등록 완료');
+    }
+    
+    // 카카오 공유 버튼들
+    document.querySelectorAll('.kakao-share').forEach(btn => {
+        btn.addEventListener('click', shareKakao);
+    });
+    
+    console.log('모든 이벤트 리스너 설정 완료');
+}
 
 // 질문 데이터
 const questions = [
@@ -378,6 +420,8 @@ function startTest() {
 
 // 질문 표시 함수
 function showQuestion() {
+    console.log(`질문 ${currentQuestionIndex + 1} 표시 중...`);
+    
     const progressBar = document.querySelector('.progress-bar');
     const currentQ = document.querySelector('.current-q');
     const totalQ = document.querySelector('.total-q');
@@ -392,7 +436,7 @@ function showQuestion() {
     
     // 3번째 질문 이후 중간 광고 표시
     if (currentQuestionIndex >= 2) {
-        adManager.showAd('ad-middle');
+        adManager.showMidAd();
     }
     
     // 질문과 옵션 표시
@@ -680,14 +724,31 @@ function shareKakao() {
     }
 }
 
-// 페이지 로드 시 초기화
-
-    });
+// startTest 함수에 디버깅 로그 추가
+function startTest() {
+    console.log('실버타운 테스트 시작 함수 호출됨');
     
-    kakaoShares.forEach(share => {
-        share.addEventListener('click', shareKakao);
-    });
-});
+    // 변수 초기화
+    currentQuestionIndex = 0;
+    userProfile = {
+        age: '',
+        financial: 0,
+        health: 0,
+        social: 0,
+        urgency: 0,
+        location: '',
+        lifestyle: ''
+    };
+    totalScore = 0;
+    
+    console.log('실버타운 테스트 시작 - 변수 초기화 완료');
+    
+    // 페이지 전환
+    document.getElementById('startPage').classList.add('hidden');
+    document.getElementById('questionPage').classList.remove('hidden');
+    
+    showQuestion();
+}
 
 // 키보드 단축키
 document.addEventListener('keydown', function(e) {

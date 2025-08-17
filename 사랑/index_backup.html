@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <!-- Google tag (gtag.js) -->
+    <head>
+        <!-- Event snippet for 페이지 조회 conversion page -->
+<script>
+    gtag('event', 'conversion', {'send_to': 'AW-11438616604/1mSHCLiKx_4YEJzgrc4q'});
+  </script>
+  
+        <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11438616604">
 </script>
 <script>
@@ -11,20 +16,17 @@
 
   gtag('config', 'AW-11438616604');
 </script>
-
-    <!-- Event snippet for 페이지 조회 conversion page -->
-<script>
-    gtag('event', 'conversion', {'send_to': 'AW-11438616604/1mSHCLiKx_4YEJzgrc4q'});
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 색채 심리 테스트</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- 카카오 SDK -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <!-- 구글 애드센스 -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
-</head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>나의 사랑의 언어 테스트</title>
+        <link rel="stylesheet" href="style.css">
+        <!-- 카카오 SDK -->
+        <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+        <!-- Chart.js 추가 -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- 구글 애드센스 -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    </head>
 <body>
     <div class="container">
         <div class="test-container">
@@ -42,15 +44,10 @@
             
             <!-- 시작 페이지 -->
             <div id="start-section">
-                <div class="color-palette">
-                    <div class="color-dot" style="background: #FF6B6B"></div>
-                    <div class="color-dot" style="background: #4ECDC4"></div>
-                    <div class="color-dot" style="background: #FFE66D"></div>
-                    <div class="color-dot" style="background: #95E1D3"></div>
-                </div>
-                <h1>당신의 내면을 보여주는<br>색채 심리 테스트</h1>
-                <p class="intro-text">색을 통해 알아보는 당신의 진짜 모습!</p>
-                <button id="start-btn" class="pulse-btn" onclick="startColorTest()">테스트 시작하기</button>
+                <div class="heart-icon"></div>
+                <h1>나의 사랑의 언어 찾기</h1>
+                <p class="intro-text">당신의 사랑을 표현하는 방식을 알아보세요!</p>
+                <button id="start-btn" class="pulse-btn">테스트 시작하기</button>
             </div>
 
             <!-- 질문 페이지 -->
@@ -62,7 +59,13 @@
                     <span class="question-counter">1/10</span>
                 </div>
                 <h2 id="question-text"></h2>
-                <div class="color-choices"></div>
+                <div class="answers">
+                    <button class="answer-btn" data-type="words">매우 그렇다</button>
+                    <button class="answer-btn" data-type="time">그렇다</button>
+                    <button class="answer-btn" data-type="touch">보통이다</button>
+                    <button class="answer-btn" data-type="service">아니다</button>
+                    <button class="answer-btn" data-type="gifts">전혀 아니다</button>
+                </div>
                 
                 <!-- 광고 영역 - 3번째 질문 이후 -->
                 
@@ -80,15 +83,8 @@
             <!-- 결과 페이지 -->
             <div id="result-section" style="display: none;">
                 <div class="result-header">
-                    <div class="result-color-display">
-                        <div class="main-color"></div>
-                        <div class="sub-colors">
-                            <div class="sub-color"></div>
-                            <div class="sub-color"></div>
-                        </div>
-                    </div>
-                    <h2>당신의 색채 성향은</h2>
-                    <h1 id="color-result"></h1>
+                    <div class="result-icon"></div>
+                    <h2>당신의 사랑의 언어는?</h2>
                 </div>
                 <div class="result-content">
                     <h3 id="result-title"></h3>
@@ -106,13 +102,8 @@
                     <!-- 광고 영역 - 결과 페이지 중간 -->
                     
                     
-                    <div class="personality-traits">
-                        <h4>성격 특징</h4>
-                        <ul id="traits-list"></ul>
-                    </div>
-                    <div class="color-advice">
-                        <h4>당신에게 좋은 색</h4>
-                        <div id="recommended-colors"></div>
+                    <div class="chart-container">
+                        <canvas id="resultChart"></canvas>
                     </div>
                 </div>
                 <div class="share-container">
@@ -128,13 +119,9 @@
     <div id="ad-popup" class="popup">
         <div class="popup-content">
             <div class="analysis-header">
-                <div class="analysis-text">색채 분석중...</div>
-                <div class="color-analysis-animation">
-                    <div class="color-drop"></div>
-                    <div class="color-drop"></div>
-                    <div class="color-drop"></div>
-                </div>
+                <div class="analysis-text">결과값 분석중입니다...</div>
                 <div class="countdown">7</div>
+                <div class="loading-spinner"></div>
             </div>
         </div>
     </div>

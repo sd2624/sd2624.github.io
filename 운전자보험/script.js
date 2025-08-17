@@ -607,18 +607,19 @@ function shareKakao() {
 
 // 페이지 로드 시 초기화
 
-    }
+// 이벤트 리스너 설정 함수
+function setupEventListeners() {
+    console.log('운전자보험 이벤트 리스너 설정 중...');
     
-    // 이벤트 리스너 등록
+    // 테스트 시작 버튼
     const startBtn = document.querySelector('.start-btn');
-    const detailBtns = document.querySelectorAll('.detail-btn');
-    const shareBtns = document.querySelectorAll('.share-btn');
-    const restartBtns = document.querySelectorAll('.restart-btn');
-    
     if (startBtn) {
         startBtn.addEventListener('click', startTest);
+        console.log('테스트 시작 버튼 이벤트 리스너 등록됨');
     }
     
+    // 상세 버튼들
+    const detailBtns = document.querySelectorAll('.detail-btn');
     detailBtns.forEach((btn, index) => {
         btn.addEventListener('click', () => {
             // 운전자보험 가입 사이트들
@@ -636,14 +637,20 @@ function shareKakao() {
         });
     });
     
+    // 공유 버튼들
+    const shareBtns = document.querySelectorAll('.share-btn');
     shareBtns.forEach(btn => {
         btn.addEventListener('click', shareKakao);
     });
     
+    // 다시하기 버튼들
+    const restartBtns = document.querySelectorAll('.restart-btn');
     restartBtns.forEach(btn => {
         btn.addEventListener('click', restartTest);
     });
-});
+    
+    console.log('운전자보험 모든 이벤트 리스너 등록 완료');
+}
 
 // 키보드 단축키
 document.addEventListener('keydown', function(e) {
@@ -688,6 +695,11 @@ window.shareKakao = shareKakao;
 
 // [광고] 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('운전자보험 페이지 로드됨');
+    
+    // 이벤트 리스너 설정
+    setupEventListeners();
+    
     // 상단 광고 즉시 로드
     adManager.loadAd('adTop');
     

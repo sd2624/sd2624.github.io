@@ -31,7 +31,7 @@ class AdManager {
         return false;
     }
     
-    // 중간 광고 표시 (3번째 질문 후)
+    // 중간 광고 표시
     showMidAd() {
         return this.loadAd('adMid');
     }
@@ -45,48 +45,17 @@ class AdManager {
 // [광고] AdManager 인스턴스 생성
 const adManager = new AdManager();
 
-// [광고] IntersectionObserver를 이용한 광고 표시 관리
-const setupAdObservers = () => {
-    if (typeof IntersectionObserver === 'undefined') return;
-    
-    const options = {
-        threshold: 0.1,
-        rootMargin: '50px'
-    };
-    
-    // 중간 광고 관찰자
-    const midAdObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                adManager.showMidAd();
-                midAdObserver.unobserve(entry.target);
-            }
-        });
-    }, options);
-    
-    // 결과 광고 관찰자
-    const resultAdObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                adManager.showResultAd();
-                resultAdObserver.unobserve(entry.target);
-            }
-        });
-    }, options);
-    
-    // 관찰 대상 등록
-    const midAd = document.getElementById('adMid');
-    const resultAd = document.getElementById('adResult');
-    
-    if (midAd) midAdObserver.observe(midAd);
-    if (resultAd) resultAdObserver.observe(resultAd);
-};
-
 // 카카오 SDK 초기화
-Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
-
-// 광고 로드 관리
-
+try {
+    if (typeof Kakao !== 'undefined') {
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+        console.log('카카오 SDK 초기화 완료');
+    } else {
+        console.log('카카오 SDK 로드되지 않음');
+    }
+} catch (error) {
+    console.error('카카오 SDK 초기화 오류:', error);
+}
 
 const questions = [
     {
@@ -143,34 +112,219 @@ const questions = [
             { text: "보험회사 신뢰성", priority: "reliability", weight: 2, factor: "trust" },
             { text: "가입 절차 간소화", priority: "convenience", weight: 1, factor: "ease" }
         ]
+    },
+    {
+        question: "현재 나이대는?",
+        description: "📅 연령에 따라 보험료와 가입 조건이 달라집니다",
+        answers: [
+            { text: "20대", age: "20s", riskLevel: 1, premiumRate: "low" },
+            { text: "30대", age: "30s", riskLevel: 2, premiumRate: "medium" },
+            { text: "40대", age: "40s", riskLevel: 3, premiumRate: "high" },
+            { text: "50대", age: "50s", riskLevel: 4, premiumRate: "very_high" },
+            { text: "60대 이상", age: "60plus", riskLevel: 5, premiumRate: "maximum" }
+        ]
+    },
+    {
+        question: "치과 치료 이력이 있나요?",
+        description: "🏥 과거 치료 이력에 따라 가입 조건이 달라집니다",
+        answers: [
+            { text: "없음 (정기검진만)", history: "none", risk: 1, disclosure: "minimal" },
+            { text: "스케일링/충치 치료", history: "basic", risk: 2, disclosure: "standard" },
+            { text: "신경치료/크라운", history: "moderate", risk: 3, disclosure: "detailed" },
+            { text: "임플란트/브릿지", history: "major", risk: 4, disclosure: "comprehensive" },
+            { text: "교정/턱수술", history: "extensive", risk: 5, disclosure: "full" }
+        ]
+    },
+    {
+        question: "흡연 여부는?",
+        description: "🚭 흡연은 치아건강과 보험료에 영향을 줍니다",
+        answers: [
+            { text: "비흡연자", smoking: "never", healthRisk: 1, premium: "standard" },
+            { text: "금연 1년 이상", smoking: "quit_long", healthRisk: 2, premium: "slightly_high" },
+            { text: "금연 1년 미만", smoking: "quit_recent", healthRisk: 3, premium: "high" },
+            { text: "가끔 흡연 (월 1갑 이하)", smoking: "light", healthRisk: 4, premium: "very_high" },
+            { text: "매일 흡연", smoking: "heavy", healthRisk: 5, premium: "maximum" }
+        ]
+    },
+    {
+        question: "직업군은?",
+        description: "💼 직업에 따라 치아 손상 위험도가 다릅니다",
+        answers: [
+            { text: "사무직/관리직", job: "office", risk: 1, category: "low_risk" },
+            { text: "서비스직/영업직", job: "service", risk: 2, category: "medium_risk" },
+            { text: "의료진/교육직", job: "professional", risk: 1, category: "low_risk" },
+            { text: "제조업/건설업", job: "manufacturing", risk: 4, category: "high_risk" },
+            { text: "운동선수/연예인", job: "entertainment", risk: 3, category: "special_risk" }
+        ]
+    },
+    {
+        question: "치아 관리 습관은?",
+        description: "🪥 일상 관리 습관이 보험료에 반영됩니다",
+        answers: [
+            { text: "하루 3회 이상 양치", habit: "excellent", score: 5, maintenance: "perfect" },
+            { text: "하루 2회 양치", habit: "good", score: 4, maintenance: "good" },
+            { text: "하루 1회 양치", habit: "average", score: 3, maintenance: "average" },
+            { text: "불규칙한 양치", habit: "poor", score: 2, maintenance: "poor" },
+            { text: "거의 안함", habit: "very_poor", score: 1, maintenance: "very_poor" }
+        ]
+    },
+    {
+        question: "가족력(유전적 요인)은?",
+        description: "🧬 가족의 치아 건강 이력도 중요한 요소입니다",
+        answers: [
+            { text: "가족 모두 치아 건강", family: "excellent", genetic: 1, predisposition: "low" },
+            { text: "일부 치과 치료 이력", family: "good", genetic: 2, predisposition: "medium" },
+            { text: "치주질환 가족력", family: "moderate", genetic: 3, predisposition: "high" },
+            { text: "심각한 치과 질환 가족력", family: "poor", genetic: 4, predisposition: "very_high" },
+            { text: "잘 모름", family: "unknown", genetic: 3, predisposition: "medium" }
+        ]
+    },
+    {
+        question: "보험 가입 목적은?",
+        description: "🎯 가입 목적에 따라 최적 상품이 달라집니다",
+        answers: [
+            { text: "예방 중심 (정기검진/스케일링)", purpose: "prevention", focus: "maintenance", coverage: "basic" },
+            { text: "일반 치료 대비", purpose: "treatment", focus: "standard", coverage: "comprehensive" },
+            { text: "임플란트 대비", purpose: "implant", focus: "major", coverage: "premium" },
+            { text: "응급상황 대비", purpose: "emergency", focus: "urgent", coverage: "immediate" },
+            { text: "종합적 보장", purpose: "comprehensive", focus: "all", coverage: "maximum" }
+        ]
+    },
+    {
+        question: "기존 보험 가입 현황은?",
+        description: "📋 기존 보험과의 중복성을 확인합니다",
+        answers: [
+            { text: "치아보험 없음", existing: "none", overlap: 0, supplement: "full" },
+            { text: "단독 치아보험 있음", existing: "dental_only", overlap: 3, supplement: "limited" },
+            { text: "의료실비에 치아특약", existing: "rider", overlap: 2, supplement: "moderate" },
+            { text: "종합보험에 포함", existing: "comprehensive", overlap: 4, supplement: "minimal" },
+            { text: "여러 보험 중복 가입", existing: "multiple", overlap: 5, supplement: "none" }
+        ]
+    },
+    {
+        question: "선호하는 보험회사 유형은?",
+        description: "🏢 보험회사 선택 기준을 알려주세요",
+        answers: [
+            { text: "대형 생명보험사", company: "major_life", stability: 5, service: 4 },
+            { text: "손해보험사", company: "general", stability: 4, service: 4 },
+            { text: "외국계 보험사", company: "foreign", stability: 3, service: 5 },
+            { text: "온라인 전문", company: "online", stability: 3, service: 3 },
+            { text: "상관없음 (조건 우선)", company: "any", stability: 3, service: 3 }
+        ]
+    },
+    {
+        question: "보험금 청구 편의성 중요도는?",
+        description: "📱 청구 절차의 간편함을 어느 정도 중시하시나요?",
+        answers: [
+            { text: "매우 중요 (모바일 즉시 청구)", convenience: "critical", weight: 5, preference: "mobile" },
+            { text: "중요 (온라인 청구)", convenience: "important", weight: 4, preference: "online" },
+            { text: "보통 (표준 절차)", convenience: "moderate", weight: 3, preference: "standard" },
+            { text: "별로 중요하지 않음", convenience: "low", weight: 2, preference: "any" },
+            { text: "상관없음", convenience: "none", weight: 1, preference: "traditional" }
+        ]
+    },
+    {
+        question: "보험료 납입 방식 선호도는?",
+        description: "💳 어떤 납입 방식을 선호하시나요?",
+        answers: [
+            { text: "월납 (부담 분산)", payment: "monthly", frequency: 12, burden: "low" },
+            { text: "분기납 (할인 혜택)", payment: "quarterly", frequency: 4, burden: "medium" },
+            { text: "반년납 (더 큰 할인)", payment: "semi_annual", frequency: 2, burden: "high" },
+            { text: "연납 (최대 할인)", payment: "annual", frequency: 1, burden: "very_high" },
+            { text: "상관없음", payment: "flexible", frequency: 0, burden: "any" }
+        ]
+    },
+    {
+        question: "치아보험 갱신 주기 선호도는?",
+        description: "🔄 갱신 주기에 따라 보험료 변동성이 다릅니다",
+        answers: [
+            { text: "1년 갱신 (유연성 중시)", renewal: "annual", flexibility: 5, stability: 1 },
+            { text: "3년 갱신 (중간)", renewal: "3year", flexibility: 3, stability: 3 },
+            { text: "5년 갱신 (안정성)", renewal: "5year", flexibility: 2, stability: 4 },
+            { text: "10년 이상 장기", renewal: "long_term", flexibility: 1, stability: 5 },
+            { text: "상관없음", renewal: "any", flexibility: 3, stability: 3 }
+        ]
+    },
+    {
+        question: "치과 방문 빈도는?",
+        description: "🏥 정기적인 치과 방문 횟수를 알려주세요",
+        answers: [
+            { text: "3개월마다 (정기검진)", frequency: "quarterly", prevention: 5, risk: 1 },
+            { text: "6개월마다", frequency: "semi_annual", prevention: 4, risk: 2 },
+            { text: "1년에 1회", frequency: "annual", prevention: 3, risk: 3 },
+            { text: "문제 생길 때만", frequency: "problem_only", prevention: 2, risk: 4 },
+            { text: "거의 안감", frequency: "rarely", prevention: 1, risk: 5 }
+        ]
+    },
+    {
+        question: "치아미백이나 교정에 관심이 있나요?",
+        description: "✨ 미용 치료 관심도에 따라 보장 범위를 조정합니다",
+        answers: [
+            { text: "매우 관심 있음 (계획 중)", cosmetic: "very_interested", priority: 5, budget: "high" },
+            { text: "관심 있음 (고려 중)", cosmetic: "interested", priority: 4, budget: "medium" },
+            { text: "약간 관심", cosmetic: "somewhat", priority: 3, budget: "low" },
+            { text: "별로 관심 없음", cosmetic: "not_much", priority: 2, budget: "minimal" },
+            { text: "전혀 관심 없음", cosmetic: "none", priority: 1, budget: "zero" }
+        ]
+    },
+    {
+        question: "보험 가입 후 관리 서비스 중요도는?",
+        description: "🎧 가입 후 고객 서비스의 중요성을 평가해주세요",
+        answers: [
+            { text: "매우 중요 (전담 상담사)", service: "premium", support: 5, expectation: "high" },
+            { text: "중요 (전화/온라인 상담)", service: "standard", support: 4, expectation: "medium" },
+            { text: "보통 (기본 서비스)", service: "basic", support: 3, expectation: "standard" },
+            { text: "별로 중요하지 않음", service: "minimal", support: 2, expectation: "low" },
+            { text: "상관없음", service: "none", support: 1, expectation: "none" }
+        ]
     }
 ];
 
 let currentQuestionIndex = 0;
 let userAnswers = [];
 
-// DOM 요소
-const startPage = document.getElementById('startPage');
-const questionPage = document.getElementById('questionPage');
-const resultPage = document.getElementById('resultPage');
-const analysisModal = document.getElementById('analysisModal');
+// 즉시 실행 초기화
+console.log('Script 파일 로드됨!');
+console.log('Questions 배열 확인:', questions ? questions.length : 'undefined');
+
+// 전역 스코프에서 함수 테스트
+window.testFunction = function() {
+    console.log('전역 함수 호출 테스트 성공!');
+    alert('스크립트가 정상적으로 로드되었습니다!');
+};
+
+// DOM 요소 (페이지 로드 후 재할당됨)
+let startPage, questionPage, resultPage, analysisModal;
 
 // 테스트 시작
 function startTest() {
-    if (startPage) startPage.classList.add('hidden');
-    if (questionPage) questionPage.classList.remove('hidden');
+    console.log('치아보험 테스트 시작!');
+    console.log('startPage 요소:', startPage);
+    console.log('questionPage 요소:', questionPage);
     
-    // 페이지 상단 광고 표시 (헤더 바로 아래)
-    adManager.showAd('headerAd');
+    if (startPage) {
+        startPage.classList.add('hidden');
+        console.log('startPage 숨김 완료');
+    }
+    if (questionPage) {
+        questionPage.classList.remove('hidden');
+        console.log('questionPage 표시 완료');
+    }
     
     // 총 질문 수 표시
     const totalQuestions = document.getElementById('totalQuestions');
-    if (totalQuestions) totalQuestions.textContent = questions.length;
+    if (totalQuestions) {
+        totalQuestions.textContent = questions.length;
+        console.log('총 질문 수 설정:', questions.length);
+    }
     
     currentQuestionIndex = 0;
     userAnswers = [];
     showQuestion();
 }
+
+// 전역 함수로 명시적 노출
+window.startTest = startTest;
 
 // 질문 표시
 function showQuestion() {
@@ -219,20 +373,17 @@ function selectAnswer(answer, index) {
     options.forEach(option => option.classList.remove('selected'));
     options[index].classList.add('selected');
     
-    // 3번째 질문 완료 후 중간 광고 표시
-    if (currentQuestionIndex === 2) {
-        adManager.showAd('questionAd');
-    }
-    
     // 다음 질문으로 이동
     setTimeout(() => {
         currentQuestionIndex++;
+        
         if (currentQuestionIndex < questions.length) {
             showQuestion();
         } else {
+            // 모든 질문 완료 - 분석 시작
             showAnalysisModal();
         }
-    }, 800);
+    }, 500);
 }
 
 // 분석 모달 표시
@@ -240,33 +391,21 @@ function showAnalysisModal() {
     if (questionPage) questionPage.classList.add('hidden');
     if (analysisModal) analysisModal.classList.remove('hidden');
     
-    // 팝업 광고 로드 (기존 코드 유지)
-    setTimeout(() => {
-        const popupAd = document.querySelector('.popup-ad');
-        if (popupAd && typeof adsbygoogle !== 'undefined') {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-    }, 100);
-    
-    // 분석 단계 애니메이션
-    const steps = document.querySelectorAll('.step-item');
-    steps.forEach((step, index) => {
-        setTimeout(() => {
-            step.classList.add('active');
-            const check = step.querySelector('.step-check');
-            if (check && index < 4) {
-                check.textContent = '✓';
-                check.style.color = '#4caf50';
-            }
-        }, (index + 1) * 1000);
-    });
-    
-    // 카운트다운 시작
+    // 타이머 시작
     let countdown = 6;
     const timerDisplay = document.querySelector('.timer-display');
+    const steps = document.querySelectorAll('.step-item');
     
     const timer = setInterval(() => {
         if (timerDisplay) timerDisplay.textContent = countdown;
+        
+        // 단계별 체크 표시
+        const stepIndex = 6 - countdown;
+        if (steps[stepIndex]) {
+            const checkElement = steps[stepIndex].querySelector('.step-check');
+            if (checkElement) checkElement.textContent = '✅';
+        }
+        
         countdown--;
         
         if (countdown < 0) {
@@ -283,47 +422,92 @@ function showResult() {
     
     const result = analyzeAnswers();
     displayResult(result);
-    
-    // 결과 페이지 중간 광고 표시 (추천 카드와 상세 혜택 사이)
-    setTimeout(() => {
-        adManager.showAd('resultAd');
-    }, 500);
 }
 
 // 답변 분석
 function analyzeAnswers() {
-    const condition = userAnswers[0];
-    const coverage = userAnswers[1];
-    const timing = userAnswers[2];
-    const budget = userAnswers[3];
-    const priority = userAnswers[4];
+    console.log('전체 사용자 답변:', userAnswers);
     
-    // 점수 계산
-    const healthScore = condition.score;
-    const urgencyScore = timing.priority;
-    const budgetLevel = budget.level;
+    // 모든 답변 추출 (20개 질문)
+    const condition = userAnswers[0];           // 치아 상태
+    const coverage = userAnswers[1];            // 보장 범위
+    const timing = userAnswers[2];              // 보장 시기
+    const budget = userAnswers[3];              // 예산
+    const priority = userAnswers[4];            // 중요 요소
+    const age = userAnswers[5];                 // 나이대
+    const history = userAnswers[6];             // 치료 이력
+    const smoking = userAnswers[7];             // 흡연 여부
+    const job = userAnswers[8];                 // 직업
+    const habit = userAnswers[9];               // 관리 습관
+    const family = userAnswers[10];             // 가족력
+    const purpose = userAnswers[11];            // 가입 목적
+    const existing = userAnswers[12];           // 기존 보험
+    const company = userAnswers[13];            // 선호 보험사
+    const convenience = userAnswers[14];        // 청구 편의성
+    const payment = userAnswers[15];            // 납입 방식
+    const renewal = userAnswers[16];            // 갱신 주기
+    const frequency = userAnswers[17];          // 치과 방문 빈도
+    const cosmetic = userAnswers[18];           // 미용 치료 관심
+    const service = userAnswers[19];            // 관리 서비스
     
-    // 면책기간 계산
+    // 종합 점수 계산
+    const healthScore = condition ? condition.score : 3;
+    const urgencyScore = timing ? timing.priority : 2;
+    const budgetLevel = budget ? budget.level : 3;
+    const riskScore = calculateRiskScore(age, smoking, job, habit, family);
+    const preferenceScore = calculatePreferenceScore(priority, convenience, service);
+    
+    // 종합 위험도 계산
+    const totalRisk = riskScore + (5 - healthScore) + (age ? age.riskLevel : 3);
+    
+    // 면책기간 결정
     let waitingPeriod = "3-6개월";
     let recommendation = "";
     let tips = [];
     
-    if (healthScore >= 4 && urgencyScore <= 2) {
+    if (urgencyScore >= 4 && healthScore >= 4) {
+        waitingPeriod = "즉시 (사고성) / 90일 (일반)";
+        recommendation = "우수 건강 상태 - 즉시 보장 가능";
+        tips.push("사고성 치아손상 즉시 보장");
+        tips.push("일반 치료도 90일 단축 가능");
+        tips.push("건강검진서 제출로 추가 단축");
+    } else if (healthScore >= 4 && totalRisk <= 8) {
         waitingPeriod = "90일";
-        recommendation = "면책기간 단축 가능";
+        recommendation = "건강 우수자 - 면책기간 단축";
         tips.push("건강검진서 제출로 면책기간 단축");
-        tips.push("온라인 가입 시 10% 할인");
+        tips.push("온라인 가입 시 10-15% 할인");
+        tips.push("가족 단체 가입 추가 할인");
     } else if (urgencyScore >= 4) {
-        waitingPeriod = "즉시 (사고성만)";
-        recommendation = "사고성 치아보험 추천";
+        waitingPeriod = "즉시 (사고성) / 6개월 (일반)";
+        recommendation = "응급 대비 - 사고성 치아보험";
         tips.push("사고성 치아손상은 즉시 보장");
-        tips.push("일반 치료는 90일 대기");
-    } else {
-        waitingPeriod = "3-12개월";
-        recommendation = "일반 치아보험";
+        tips.push("일반 치료는 6개월 대기");
+        tips.push("면책기간 단축 특약 추가 고려");
+    } else if (totalRisk <= 10) {
+        waitingPeriod = "3-6개월";
+        recommendation = "표준 치아보험 적합";
         tips.push("면책기간 단축 특약 고려");
-        tips.push("가족 단체 가입 할인");
+        tips.push("정기 검진 할인 혜택 활용");
+        tips.push("자동차보험 통합 할인");
+    } else if (totalRisk <= 15) {
+        waitingPeriod = "6-12개월";
+        recommendation = "고위험군 - 장기 대기";
+        tips.push("치료 후 가입 권장");
+        tips.push("금연/금주로 보험료 절약");
+        tips.push("건강검진 우수자 할인 준비");
+    } else {
+        waitingPeriod = "12개월 이상";
+        recommendation = "최고위험군 - 가입 제한 가능";
+        tips.push("치과 치료 완료 후 가입");
+        tips.push("생활습관 개선 후 재도전");
+        tips.push("실손보험 치아특약 고려");
     }
+    
+    // 추가 팁 계산
+    addPersonalizedTips(tips, {
+        budget, payment, renewal, frequency, cosmetic, 
+        company, convenience, purpose, existing
+    });
     
     return {
         waitingPeriod,
@@ -331,8 +515,75 @@ function analyzeAnswers() {
         tips,
         healthScore,
         urgencyScore,
-        budgetLevel
+        budgetLevel,
+        riskScore,
+        totalRisk,
+        preferenceScore
     };
+}
+
+// 위험 점수 계산 함수
+function calculateRiskScore(age, smoking, job, habit, family) {
+    let score = 0;
+    
+    if (age) score += age.riskLevel || 0;
+    if (smoking) score += smoking.healthRisk || 0;
+    if (job) score += job.risk || 0;
+    if (habit) score += (6 - (habit.score || 3));
+    if (family) score += family.genetic || 0;
+    
+    return score;
+}
+
+// 선호도 점수 계산 함수
+function calculatePreferenceScore(priority, convenience, service) {
+    let score = 0;
+    
+    if (priority) score += priority.weight || 0;
+    if (convenience) score += convenience.weight || 0;
+    if (service) score += service.support || 0;
+    
+    return score;
+}
+
+// 개인화된 팁 추가 함수
+function addPersonalizedTips(tips, preferences) {
+    const { budget, payment, renewal, frequency, cosmetic, company, convenience, purpose, existing } = preferences;
+    
+    // 예산별 팁
+    if (budget && budget.level <= 2) {
+        tips.push("저예산: 기본형 보장으로 시작");
+        tips.push("온라인 가입으로 할인 혜택 활용");
+    } else if (budget && budget.level >= 4) {
+        tips.push("충분한 예산: 포괄적 보장 선택");
+        tips.push("면책기간 단축 특약 추가 권장");
+    }
+    
+    // 납입 방식별 팁
+    if (payment && payment.frequency === 1) {
+        tips.push("연납 선택: 최대 15% 할인 혜택");
+    } else if (payment && payment.frequency >= 4) {
+        tips.push("월납 선택: 부담 분산 효과");
+    }
+    
+    // 치과 방문 빈도별 팁
+    if (frequency && frequency.prevention >= 4) {
+        tips.push("정기 검진자: 예방 중심 보장 선택");
+    } else if (frequency && frequency.risk >= 4) {
+        tips.push("비정기 방문자: 응급 치료 보장 강화");
+    }
+    
+    // 미용 치료 관심도별 팁
+    if (cosmetic && cosmetic.priority >= 4) {
+        tips.push("미용 치료 관심: 교정/미백 특약 고려");
+    }
+    
+    // 기존 보험별 팁
+    if (existing && existing.overlap >= 3) {
+        tips.push("기존 보험 있음: 중복 보장 확인 필요");
+    } else if (existing && existing.overlap === 0) {
+        tips.push("신규 가입: 포괄적 보장 권장");
+    }
 }
 
 // 결과 표시
@@ -394,6 +645,11 @@ function displayDetailedAnalysis(result) {
                     <small>• 면책기간 단축 특약 제공</small><br>
                     <small>• 가족 단체 가입 할인</small>
                 </div>
+                <div style="background: linear-gradient(135deg, #e8f5e8, #4caf50); color: white; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                    <strong>3순위: 삼성화재</strong><br>
+                    <small>• 충치치료 면책기간 단축</small><br>
+                    <small>• 건강검진 우수자 할인</small>
+                </div>
             </div>
         `;
     }
@@ -403,8 +659,6 @@ function displayDetailedAnalysis(result) {
             <h3>💰 보험료 절약 팁</h3>
             <ul style="margin: 15px 0; padding-left: 20px;">
                 ${result.tips.map(tip => `<li style="margin: 8px 0;">${tip}</li>`).join('')}
-                <li style="margin: 8px 0;">자동차보험과 통합 시 할인</li>
-                <li style="margin: 8px 0;">건강검진 우수자 할인 적용</li>
             </ul>
         `;
     }
@@ -456,15 +710,26 @@ function shareKakao() {
     });
 }
 
+// 상세 가이드 표시
+function showDetailedGuide() {
+    const guideModal = document.getElementById('guideModal');
+    if (guideModal) {
+        guideModal.classList.remove('hidden');
+    }
+}
+
+// 가이드 모달 닫기
+function closeGuideModal() {
+    const guideModal = document.getElementById('guideModal');
+    if (guideModal) {
+        guideModal.classList.add('hidden');
+    }
+}
+
 // 테스트 재시작
 function restartTest() {
     if (resultPage) resultPage.classList.add('hidden');
     if (startPage) startPage.classList.remove('hidden');
-    
-    // 모든 광고 숨기기
-    adManager.hideAd('headerAd');
-    adManager.hideAd('questionAd');
-    adManager.hideAd('resultAd');
     
     currentQuestionIndex = 0;
     userAnswers = [];
@@ -474,103 +739,59 @@ function restartTest() {
     if (progressFill) progressFill.style.width = '0%';
 }
 
-// 팝업 광고 표시 (레거시 함수 - 호환성 유지)
-function showPopupAd() {
-    setTimeout(() => {
-        if (typeof adsbygoogle !== 'undefined') {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-    }, 100);
-}
-
 // 키보드 이벤트
 document.addEventListener('keydown', function(e) {
     // ESC로 모달 닫기
     if (e.key === 'Escape') {
         const modal = document.getElementById('analysisModal');
-        const questionPage = document.getElementById('questionPage');
+        const guideModal = document.getElementById('guideModal');
         
         if (modal && !modal.classList.contains('hidden')) {
             modal.classList.add('hidden');
-            if (questionPage) questionPage.classList.remove('hidden');
+        }
+        if (guideModal && !guideModal.classList.contains('hidden')) {
+            guideModal.classList.add('hidden');
         }
     }
     
     // 숫자 키로 답변 선택
-    if (questionPage && !questionPage.classList.contains('hidden')) {
-        const num = parseInt(e.key);
-        if (num >= 1 && num <= 5) {
+    if (e.key >= '1' && e.key <= '5') {
+        const questionPage = document.getElementById('questionPage');
+        if (questionPage && !questionPage.classList.contains('hidden')) {
+            const answerIndex = parseInt(e.key) - 1;
             const options = document.querySelectorAll('.answer-option');
-            if (options[num - 1]) {
-                options[num - 1].click();
+            if (options[answerIndex]) {
+                options[answerIndex].click();
             }
         }
     }
 });
 
-// 화면 크기 변경 대응
-window.addEventListener('resize', function() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
-
-// 초기 실행
-window.addEventListener('load', function() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-    
-    // AdSense 스크립트 로드 확인
-    window.adsbygoogle = window.adsbygoogle || [];
-});
-
-// 전역 함수로 노출
-window.startTest = startTest;
-window.restartTest = restartTest;
-window.shareKakao = shareKakao;
-window.showDetailedGuide = showDetailedGuide;
-window.closeGuideModal = closeGuideModal;
-
-// 상세 가이드 모달 표시
-function showDetailedGuide() {
-    const guideModal = document.getElementById('guideModal');
-    if (guideModal) {
-        guideModal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-// 상세 가이드 모달 닫기
-function closeGuideModal() {
-    const guideModal = document.getElementById('guideModal');
-    if (guideModal) {
-        guideModal.classList.add('hidden');
-        document.body.style.overflow = '';
-    }
-}
-
-// 모달 바깥 클릭 시 닫기
-document.addEventListener('click', function(e) {
-    const guideModal = document.getElementById('guideModal');
-    if (guideModal && e.target === guideModal) {
-        closeGuideModal();
-    }
-});
-
-// ESC 키로 가이드 모달 닫기
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        const guideModal = document.getElementById('guideModal');
-        if (guideModal && !guideModal.classList.contains('hidden')) {
-            closeGuideModal();
-        }
-    }
-});
-
-// [광고] 페이지 로드 시 초기화
+// 페이지 로드 시 광고 초기화
 document.addEventListener('DOMContentLoaded', function() {
-    // 상단 광고 즉시 로드
-    adManager.loadAd('adTop');
+    console.log('DOM 로드 완료!');
     
-    // 옵저버 설정
-    setupAdObservers();
+    // DOM 요소 재할당
+    startPage = document.getElementById('startPage');
+    questionPage = document.getElementById('questionPage');
+    resultPage = document.getElementById('resultPage');
+    analysisModal = document.getElementById('analysisModal');
+    
+    console.log('Questions 배열:', questions.length);
+    console.log('첫 번째 질문:', questions[0]);
+    
+    // AdSense 광고 초기화
+    if (typeof adsbygoogle !== 'undefined') {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+    
+    // DOM 요소 확인
+    console.log('startPage:', startPage);
+    console.log('questionPage:', questionPage);
+    console.log('resultPage:', resultPage);
+    console.log('analysisModal:', analysisModal);
+    
+    // 시작 버튼 확인
+    const startBtn = document.querySelector('.start-btn');
+    console.log('시작 버튼:', startBtn);
 });

@@ -82,12 +82,6 @@ const setupAdObservers = () => {
     if (resultAd) resultAdObserver.observe(resultAd);
 };
 
-
-
-
-
-Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
-
 // 질문 데이터
 const questions = [
     {
@@ -293,13 +287,55 @@ const questionPage = document.getElementById('questionPage');
 const resultPage = document.getElementById('resultPage');
 const analysisPopup = document.getElementById('analysisPopup');
 
-// 이벤트 리스너
-document.addEventListener('DOMContentLoaded', function() {
+// 이벤트 리스너 설정 함수
+function setupEventListeners() {
+    console.log('이벤트 리스너 설정 중...');
     
+    // 시작 버튼
+    const startBtn = document.querySelector('.start-btn');
+    if (startBtn) {
+        startBtn.addEventListener('click', startTest);
+        console.log('시작 버튼 이벤트 리스너 등록 완료');
+    }
+    
+    // 카카오 공유 버튼들
+    document.querySelectorAll('.kakao-share').forEach(btn => {
+        btn.addEventListener('click', shareKakao);
+    });
+    
+    console.log('모든 이벤트 리스너 설정 완료');
+}
+
+// DOMContentLoaded 이벤트 리스너
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOMContentLoaded 이벤트 발생');
+    
+    // Kakao SDK 초기화
+    if (typeof Kakao !== 'undefined') {
+        if (!Kakao.isInitialized()) {
+            Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+            console.log('Kakao SDK 초기화 완료');
+        }
+    } else {
+        console.warn('Kakao SDK가 로드되지 않았습니다');
+    }
+    
+    // 이벤트 리스너 설정
+    setupEventListeners();
+    
+    // 상단 광고 즉시 로드
+    adManager.loadAd('adTop');
+    
+    // 옵저버 설정
+    setupAdObservers();
+    
+    console.log('페이지 초기화 완료');
 });
 
 // 테스트 시작
 function startTest() {
+    console.log('에겐 성향 테스트 시작 함수 호출됨');
+    
     // 변수 초기화
     currentQuestion = 0;
     agenScore = 0;
@@ -316,6 +352,8 @@ function startTest() {
 
 // 질문 표시
 function showQuestion() {
+    console.log(`질문 ${currentQuestion + 1} 표시 중...`);
+    
     let question, questionCount;
     
     if (currentQuestion < questions.length) {
@@ -334,13 +372,38 @@ function showQuestion() {
     const progressElement = document.querySelector('.progress');
     
     questionElement.textContent = question.question;
-    questionNumElement.textContent = questionCount;
+    questionNumElement.textContent = `${questionCount}/${totalQuestions}`;
+    
+    console.log(`질문 표시: ${questionCount}/${totalQuestions} (currentQuestion: ${currentQuestion})`);
     
     // 진행률 업데이트
     const progress = (questionCount / totalQuestions) * 100;
     progressElement.style.width = progress + '%';
     
+    // 3번째 질문 후 중간 광고 표시
+    if (currentQuestion === 3) {
+        adManager.showMidAd();
+    }
     
+    // 답변 옵션 생성
+    answersElement.innerHTML = '';
+    question.answers.forEach((answer, index) => {
+        const answerElement = document.createElement('div');
+        answerElement.className = 'answer';
+        answerElement.textContent = answer.text;
+        
+        if (currentQuestion < questions.length) {
+            // 일반 질문 - 에겐/테토 점수
+            answerElement.addEventListener('click', () => selectAnswer(index, answer.agen, answer.teto));
+        } else {
+            // 성별 질문
+            answerElement.addEventListener('click', () => selectGender(answer.gender));
+        }
+        
+        answersElement.appendChild(answerElement);
+    });
+    
+    console.log(`답변 옵션 ${question.answers.length}개 생성 완료`);
 }
 
 // 답변 선택
@@ -385,14 +448,18 @@ function selectAnswer(index, agenPoints, tetoPoints) {
 }
 
 // 성별 선택
-function selectGender(index, gender) {
+function selectGender(gender) {
+    console.log(`성별 선택 함수 호출: ${gender}`);
+    
     const answerElements = document.querySelectorAll('.answer');
     
-    // 모든 답변의 선택 상태 제거
-    answerElements.forEach(el => el.classList.remove('selected'));
-    
-    // 선택한 답변 표시
-    answerElements[index].classList.add('selected');
+    // 선택한 답변 찾기 및 표시
+    answerElements.forEach((el, index) => {
+        el.classList.remove('selected');
+        if (el.textContent.includes(gender === 'male' ? '남성' : '여성')) {
+            el.classList.add('selected');
+        }
+    });
     
     userGender = gender;
     
@@ -400,7 +467,6 @@ function selectGender(index, gender) {
     
     // 결과로 이동
     setTimeout(() => {
-        currentQuestion++;
         console.log(`최종 점수: 에겐 ${agenScore}점, 테토 ${tetoScore}점, 성별: ${userGender}`);
         showAnalysis();
     }, 500);
@@ -408,18 +474,94 @@ function selectGender(index, gender) {
 
 // 분석 팝업 표시
 function showAnalysis() {
+    console.log('분석 팝업 표시 시작');
+    
     questionPage.classList.add('hidden');
     analysisPopup.classList.remove('hidden');
     
+    // 카운트다운 시작
+    let countdown = 8;
+    const countdownElement = document.querySelector('.countdown');
     
+    console.log('카운트다운 시작: 8초');
+    
+    const timer = setInterval(() => {
+        countdown--;
+        countdownElement.textContent = countdown;
+        console.log(`카운트다운: ${countdown}초 남음`);
+        
+        if (countdown <= 0) {
+            clearInterval(timer);
+            console.log('카운트다운 완료 - 결과 페이지로 이동');
+            showResult();
+        }
+    }, 1000);
 }
 
 // 결과 표시
 function showResult() {
+    console.log('결과 페이지 표시 시작');
+    
     analysisPopup.classList.add('hidden');
     resultPage.classList.remove('hidden');
     
+    // 결과 키 결정
+    const resultKey = getResultKey();
+    console.log(`결과 키: ${resultKey} (에겐점수: ${agenScore}, 테토점수: ${tetoScore}, 성별: ${userGender})`);
     
+    // 결과 데이터 가져오기
+    const result = results[resultKey];
+    if (!result) {
+        console.error(`결과 데이터를 찾을 수 없습니다: ${resultKey}`);
+        return;
+    }
+    
+    // 결과 표시
+    const resultImg = document.querySelector('.result-img');
+    const resultContent = document.querySelector('.result-content');
+    
+    if (resultImg) {
+        resultImg.style.background = result.bgColor;
+        resultImg.innerHTML = `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 60px;">${result.icon}</div>`;
+    }
+    
+    if (resultContent) {
+        resultContent.innerHTML = `
+            <h3 style="font-size: 1.8em; margin-bottom: 20px; color: #2c5530; font-weight: bold;">${result.title}</h3>
+            <p style="margin-bottom: 25px; font-size: 1.2em; line-height: 1.6;">${result.description}</p>
+            
+            <div style="background: white; padding: 25px; border-radius: 15px; text-align: left; white-space: pre-line; border-left: 5px solid #4CAF50; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h4 style="color: #2c5530; margin-bottom: 15px; font-size: 1.3em;">✨ 주요 특징</h4>
+                ${result.characteristics}
+            </div>
+            
+            <div style="background: #f0f8f0; padding: 25px; border-radius: 15px; text-align: left; white-space: pre-line; border: 2px solid #4CAF50; margin-bottom: 20px;">
+                <h4 style="color: #2c5530; margin-bottom: 15px; font-size: 1.3em;">💕 연애 스타일</h4>
+                ${result.loveStyle}
+            </div>
+            
+            <div style="background: #e3f2fd; padding: 25px; border-radius: 15px; margin-bottom: 20px; border: 2px solid #2196F3;">
+                <h4 style="color: #1976d2; margin-bottom: 15px; font-size: 1.3em;">💑 궁합</h4>
+                ${result.compatibility}
+            </div>
+            
+            <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 4px solid #ffc107; margin-bottom: 20px;">
+                <h4 style="color: #856404; margin-bottom: 10px;">💡 조언</h4>
+                <p style="color: #856404; font-size: 0.95em; line-height: 1.5;">
+                    ${result.advice}
+                </p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #e8f5e8, #d4edda); padding: 20px; border-radius: 10px; font-weight: bold; color: #2c5530; text-align: center; border: 2px solid #4CAF50;">
+                🎯 분석 결과: 에겐 ${agenScore}점 / 테토 ${tetoScore}점
+            </div>
+        `;
+    }
+    
+    // 결과 페이지 광고 표시
+    adManager.showResultAd();
+    
+    console.log('결과 표시 완료');
 }
 
 // 결과 키 결정
@@ -511,9 +653,3 @@ document.addEventListener('dragstart', function(e) {
 // 전역 함수로 노출
 window.startTest = startTest;
 window.shareKakao = shareKakao;
-
-// [광고] 페이지 로드 시 초기화
-document.addEventListener('DOMContentLoaded', function() {
-    adManager.loadAd('adTop');
-    setupAdObservers();
-});

@@ -1,0 +1,310 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.test-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 광고 컨테이너 스타일 */
+.ad-container {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* 하트 아이콘 */
+.heart-icon {
+    width: 100px;
+    height: 100px;
+    background: #ff6b6b;
+    position: relative;
+    transform: rotate(45deg);
+    margin: 30px auto;
+}
+
+.heart-icon::before,
+.heart-icon::after {
+    content: '';
+    width: 100px;
+    height: 100px;
+    background: #ff6b6b;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.heart-icon::before {
+    left: -50px;
+}
+
+.heart-icon::after {
+    top: -50px;
+}
+
+/* 시작 페이지 스타일 */
+#start-section {
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin: 20px 0;
+    color: #ff6b6b;
+}
+
+.intro-text {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+/* 버튼 스타일 */
+.pulse-btn {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background: linear-gradient(45deg, #ff6b6b, #ffc3a0);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* 질문 섹션 스타일 */
+.progress-container {
+    margin-bottom: 30px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(45deg, #ff6b6b, #ffc3a0);
+    transition: width 0.3s ease;
+}
+
+.question-counter {
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    color: #666;
+}
+
+/* 답변 버튼 스타일 */
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.answer-btn {
+    padding: 15px;
+    font-size: 1.1em;
+    background: white;
+    border: 2px solid #ff6b6b;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.answer-btn:hover {
+    background: #ff6b6b;
+    color: white;
+}
+
+/* 결과 섹션 스타일 */
+.result-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.result-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: #ff6b6b;
+    border-radius: 50%;
+}
+
+.chart-container {
+    margin: 30px 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 공유 버튼 컨테이너 */
+.share-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.share-btn, .retry-btn, .home-btn {
+    padding: 15px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.share-btn {
+    background: #FEE500;
+    color: #000;
+}
+
+.retry-btn {
+    background: #ff6b6b;
+    color: white;
+}
+
+.home-btn {
+    background: #4ECDC4;
+    color: white;
+}
+
+/* 팝업 스타일 */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+.analysis-text {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.countdown {
+    font-size: 3em;
+    font-weight: bold;
+    color: #ff6b6b;
+    margin: 20px 0;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #ff6b6b;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 팝업 광고 컨테이너 */
+.popup-ad-container {
+    margin: 20px auto 0;
+    width: 300px;
+    height: 250px;
+    overflow: hidden;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.popup-ad {
+    width: 300px !important;
+    height: 250px !important;
+    display: block !important;
+    margin: 0 auto;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .test-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .popup-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .popup-ad-container {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+.chart-container {
+    position: relative;
+    margin: 30px auto;
+    height: 300px;
+    width: 100%;
+    max-width: 500px;
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        height: 250px;
+    }
+}

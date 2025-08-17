@@ -682,34 +682,39 @@ function shareKakao() {
     }
 }
 
-// 페이지 로드 시 초기화
-
-    }
+// 이벤트 리스너 설정 함수
+function setupEventListeners() {
+    console.log('이벤트 리스너 설정 중...');
     
-    // 이벤트 리스너 등록
+    // 테스트 시작 버튼
     const startBtn = document.querySelector('.start-button');
-    const primaryBtns = document.querySelectorAll('.primary-btn');
-    const kakaoShares = document.querySelectorAll('.kakao-share');
-    const restartBtns = document.querySelectorAll('.restart-btn');
-    
     if (startBtn) {
         startBtn.addEventListener('click', startTest);
+        console.log('테스트 시작 버튼 이벤트 리스너 등록됨');
     }
     
+    // 기본 버튼들
+    const primaryBtns = document.querySelectorAll('.primary-btn');
     primaryBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             window.open('https://www.lh.or.kr', '_blank');
         });
     });
     
+    // 카카오 공유 버튼들
+    const kakaoShares = document.querySelectorAll('.kakao-share');
     kakaoShares.forEach(share => {
         share.addEventListener('click', shareKakao);
     });
     
+    // 다시하기 버튼들
+    const restartBtns = document.querySelectorAll('.restart-btn');
     restartBtns.forEach(btn => {
         btn.addEventListener('click', restartTest);
     });
-});
+    
+    console.log('모든 이벤트 리스너 등록 완료');
+}
 
 // 키보드 단축키
 document.addEventListener('keydown', function(e) {
@@ -762,6 +767,11 @@ window.shareKakao = shareKakao;
 
 // [광고] 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('알뜰실버타운 페이지 로드됨');
+    
+    // 이벤트 리스너 설정
+    setupEventListeners();
+    
     // 상단 광고 즉시 로드
     adManager.loadAd('adTop');
     

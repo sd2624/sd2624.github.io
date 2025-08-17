@@ -84,8 +84,31 @@ const setupAdObservers = () => {
 
 // 광고 관리자 클래스 (새로 추가)
 
-
-Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+// [광고] 페이지 로드 시 초기화 및 Kakao SDK 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOMContentLoaded 이벤트 발생');
+    
+    // Kakao SDK 초기화
+    if (typeof Kakao !== 'undefined') {
+        if (!Kakao.isInitialized()) {
+            Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+            console.log('Kakao SDK 초기화 완료');
+        }
+    } else {
+        console.warn('Kakao SDK가 로드되지 않았습니다');
+    }
+    
+    // 이벤트 리스너 설정
+    setupEventListeners();
+    
+    // 상단 광고 즉시 로드
+    adManager.loadAd('adTop');
+    
+    // 옵저버 설정
+    setupAdObservers();
+    
+    console.log('페이지 초기화 완료');
+});
 
 // 질문 데이터
 const questions = [
@@ -254,21 +277,29 @@ const questionPage = document.getElementById('questionPage');
 const resultPage = document.getElementById('resultPage');
 const analysisPopup = document.getElementById('analysisPopup');
 
-// 이벤트 리스너
-
-    }
+// 이벤트 리스너 설정 함수
+function setupEventListeners() {
+    console.log('이벤트 리스너 설정 중...');
     
     // 시작 버튼
-    document.querySelector('.start-btn').addEventListener('click', startTest);
+    const startBtn = document.querySelector('.start-btn');
+    if (startBtn) {
+        startBtn.addEventListener('click', startTest);
+        console.log('시작 버튼 이벤트 리스너 등록 완료');
+    }
     
-    // 카카오 공유 버튼
+    // 카카오 공유 버튼들
     document.querySelectorAll('.kakao-share').forEach(btn => {
         btn.addEventListener('click', shareKakao);
     });
-});
+    
+    console.log('모든 이벤트 리스너 설정 완료');
+}
 
 // 테스트 시작
 function startTest() {
+    console.log('주정차 테스트 시작 함수 호출됨');
+    
     // 변수 초기화
     currentQuestion = 0;
     totalScore = 0;
@@ -284,6 +315,8 @@ function startTest() {
 
 // 질문 표시
 function showQuestion() {
+    console.log(`질문 ${currentQuestion + 1} 표시 중...`);
+    
     const question = questions[currentQuestion];
     const questionElement = document.querySelector('.question');
     const answersElement = document.querySelector('.answers');
@@ -600,12 +633,3 @@ function initializeAds() {
         });
     }
 }
-
-// [광고] 페이지 로드 시 초기화
-document.addEventListener('DOMContentLoaded', function() {
-    // 상단 광고 즉시 로드
-    adManager.loadAd('adTop');
-    
-    // 옵저버 설정
-    setupAdObservers();
-});
