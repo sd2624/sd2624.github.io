@@ -1,6 +1,33 @@
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
+// 광고 로드 상태 관리 - 중복 로드 방지
+const adLoadedState = {
+    'main-ad': false,
+    'popup-ad': false
+};
+
+// 광고 IntersectionObserver 설정
+const adObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !adLoadedState[entry.target.id]) {
+            const adElement = entry.target.querySelector('.adsbygoogle');
+            if (adElement && !adElement.hasAttribute('data-adsbygoogle-status')) {
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    adLoadedState[entry.target.id] = true;
+                    console.log(`광고 로드됨: ${entry.target.id}`);
+                } catch (e) {
+                    console.error('광고 로드 오류:', e);
+                }
+            }
+        }
+    });
+}, {
+    rootMargin: '50px',
+    threshold: 0.1
+});
+
 // 전역 변수
 let currentQuestion = 0;
 let mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
@@ -321,7 +348,11 @@ function showAnalysisPopup(callback) {
     
     // 애드센스 광고 로드
     try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        if (!adLoadedState['popup-ad']) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            adLoadedState['popup-ad'] = true;
+            console.log('팝업 광고 로드됨');
+        }
     } catch (e) {
         console.log('AdSense loading error:', e);
     }
@@ -541,6 +572,38 @@ function shareResult() {
         }
     }
 }
+
+// 다시 테스트하기
+function retryTest() {
+    document.getElementById('result-section').style.display = 'none';
+    document.getElementById('start-section').style.display = 'block';
+    currentQuestion = 0;
+    mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+}
+
+// 페이지 로드 시 광고 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    // 메인 페이지 광고 관찰 시작
+    const mainAd = document.querySelector('.main-ad');
+    if (mainAd) {
+        const mainAdContainer = mainAd.closest('div');
+        if (mainAdContainer) {
+            mainAdContainer.id = 'main-ad';
+            adObserver.observe(mainAdContainer);
+        }
+    }
+    
+    // 기본 광고 로드 (페이지 로드 시)
+    const topAd = document.querySelector('.adsbygoogle');
+    if (topAd && !topAd.hasAttribute('data-adsbygoogle-status')) {
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            console.log('페이지 로드 시 광고 초기화 완료');
+        } catch (e) {
+            console.error('페이지 로드 광고 초기화 오류:', e);
+        }
+    }
+});
 
 // 다시 테스트하기
 function retryTest() {
