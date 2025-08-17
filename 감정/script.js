@@ -91,7 +91,7 @@ const adManager = {
     }
 };
 
-// 20개 질문 데이터
+// 19개 질문 데이터
 const questions = [
     {
         text: "아침에 눈을 떴을 때 당신의 첫 번째 기분은?",
@@ -263,7 +263,7 @@ const questions = [
             { text: "밖으로 나가고 싶어진다", emotion: "흥미", score: 2 },
             { text: "누군가와 함께 있고 싶다", emotion: "사랑", score: 2 }
         ]
-    },
+    }
 ];
 
 // 감정별 상세 분석 데이터
@@ -345,26 +345,6 @@ const emotionAnalysis = {
 // 감정 목록
 const emotions = ['기쁨', '슬픔', '분노', '불안', '평온', '흥미', '사랑', '질투'];
 
-// 페이지 초기화
-document.addEventListener('DOMContentLoaded', function() {
-    // 광고 관리자 초기화
-    adManager.init();
-    
-    // 상단 광고 관찰 시작
-    adManager.observe('adTop');
-    
-    // 감정 점수 초기화
-    emotions.forEach(emotion => {
-        emotionScores[emotion] = 0;
-    });
-    
-    // 통계 업데이트
-    updateStats();
-    
-    // 긴급성 메시지 업데이트
-    updateUrgencyMessage();
-});
-
 // 테스트 시작 함수
 function startTest() {
     console.log('startTest 함수 실행됨');
@@ -424,7 +404,9 @@ function selectAnswer(answer) {
     emotionScores[answer.emotion] += answer.score;
     
     // 답변 버튼 애니메이션
-    event.target.classList.add('selected');
+    if (event && event.target) {
+        event.target.classList.add('selected');
+    }
     
     setTimeout(() => {
         currentQuestion++;
@@ -521,8 +503,8 @@ function drawEmotionChart() {
     // 차트 데이터 준비
     const chartData = emotions.map(emotion => ({
         name: emotion,
-        value: emotionScores[emotion],
-        percentage: Math.round((emotionScores[emotion] / getTotalScore()) * 100)
+        value: emotionScores[emotion] || 0,
+        percentage: emotionScores[emotion] ? Math.round((emotionScores[emotion] / getTotalScore()) * 100) : 0
     })).sort((a, b) => b.value - a.value);
     
     // 차트 HTML 생성
@@ -564,11 +546,17 @@ function getEmotionColor(emotion) {
 
 // 총 점수 계산
 function getTotalScore() {
-    return Object.values(emotionScores).reduce((sum, score) => sum + score, 0);
+    const total = Object.values(emotionScores).reduce((sum, score) => sum + score, 0);
+    return total > 0 ? total : 1; // 0으로 나누기 방지
 }
 
 // 카카오톡 공유 함수
 function shareToKakao() {
+    if (!window.Kakao || !window.Kakao.isInitialized()) {
+        alert('카카오톡 공유 서비스를 준비 중입니다. 잠시 후 다시 시도해주세요.');
+        return;
+    }
+
     const maxEmotion = Object.keys(emotionScores).reduce((a, b) => 
         emotionScores[a] > emotionScores[b] ? a : b
     );
@@ -579,7 +567,7 @@ function shareToKakao() {
         content: {
             title: '🧠 나의 감정 분석 결과',
             description: `${analysis.title} - ${analysis.subtitle}\n\n"${analysis.description}"\n\n당신도 테스트해보세요!`,
-            imageUrl: 'https://sd2624.github.io/감정/emotion-test-thumbnail.jpg',
+            imageUrl: 'https://sd2624.github.io/감정/감정.png',
             link: {
                 mobileWebUrl: 'https://sd2624.github.io/감정/',
                 webUrl: 'https://sd2624.github.io/감정/',
@@ -597,6 +585,101 @@ function shareToKakao() {
     });
 }
 
+// URL 공유 함수
+function shareUrl() {
+    const url = window.location.href;
+    
+    // 클립보드 API 사용 (최신 브라우저)
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(url).then(() => {
+            showToast('URL이 복사되었습니다!');
+        }).catch(() => {
+            fallbackCopyTextToClipboard(url);
+        });
+    } else {
+        // 구형 브라우저 대응
+        fallbackCopyTextToClipboard(url);
+    }
+}
+
+// 구형 브라우저용 클립보드 복사
+function fallbackCopyTextToClipboard(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    
+    // 화면에 보이지 않게 설정
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+    textArea.style.opacity = "0";
+    
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            showToast('URL이 복사되었습니다!');
+        } else {
+            showToast('복사에 실패했습니다. 직접 복사해주세요.');
+        }
+    } catch (err) {
+        showToast('복사에 실패했습니다. 직접 복사해주세요.');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+// 토스트 메시지 표시 함수
+function showToast(message) {
+    // 기존 토스트가 있으면 제거
+    const existingToast = document.querySelector('.toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+    
+    // 토스트 엘리먼트 생성
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    
+    // 토스트 스타일
+    toast.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: 500;
+        z-index: 10000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // 애니메이션
+    setTimeout(() => {
+        toast.style.opacity = '1';
+    }, 10);
+    
+    // 3초 후 제거
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 300);
+    }, 3000);
+}
+
 // 테스트 다시하기 함수
 function retryTest() {
     // 변수 초기화
@@ -608,7 +691,7 @@ function retryTest() {
     
     // 페이지 전환
     document.getElementById('resultPage').classList.add('hidden');
-    document.getElementById('mainPage').classList.remove('hidden');
+    document.getElementById('startPage').classList.remove('hidden');
     
     // 광고 상태 초기화
     const midAd = document.getElementById('adMid');
@@ -626,8 +709,11 @@ function updateStats() {
     const totalTests = Math.floor(Math.random() * 10000) + 50000;
     const todayTests = Math.floor(Math.random() * 500) + 1200;
     
-    document.getElementById('totalTests').textContent = totalTests.toLocaleString();
-    document.getElementById('todayTests').textContent = todayTests.toLocaleString();
+    const totalElement = document.getElementById('totalTests');
+    const todayElement = document.getElementById('todayTests');
+    
+    if (totalElement) totalElement.textContent = totalTests.toLocaleString();
+    if (todayElement) todayElement.textContent = todayTests.toLocaleString();
 }
 
 // 긴급성 메시지 업데이트
@@ -640,360 +726,41 @@ function updateUrgencyMessage() {
     ];
     
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    const urgencyElement = document.querySelector('.urgency-notice p');
+    const urgencyElement = document.querySelector('.urgency-notice .notice-content');
     if (urgencyElement) {
         urgencyElement.textContent = randomMessage;
     }
 }
-    
-    const [primaryEmotionKey, primaryScore] = sortedEmotions[0];
-    const primaryEmotion = getEmotionType(primaryEmotionKey);
-    const result = emotionResults[primaryEmotion];
-    
-    // 메인 결과 표시
-    document.getElementById('resultBadge').textContent = result.emoji;
-    document.getElementById('resultTitle').textContent = result.title;
-    document.getElementById('resultSubtitle').textContent = result.subtitle;
-    
-    // 상세 분석 표시
-    document.getElementById('primaryEmotion').textContent = 
-        `${result.title}: ${Math.round(primaryScore)}점`;
-    
-    // 두 번째로 높은 감정
-    if (sortedEmotions.length > 1) {
-        const [secondEmotionKey, secondScore] = sortedEmotions[1];
-        const secondEmotion = getEmotionType(secondEmotionKey);
-        const secondResult = emotionResults[secondEmotion];
-        document.getElementById('hiddenEmotion').textContent = 
-            `${secondResult.title}: ${Math.round(secondScore)}점`;
-    }
-    
-    // 조언 표시
-    document.getElementById('adviceContent').textContent = result.advice;
-    
-    // 감정 관리 팁 표시
-    const tipsGrid = document.getElementById('tipsGrid');
-    tipsGrid.innerHTML = result.tips.map(tip => 
-        `<div class="tip-item">${tip}</div>`
-    ).join('');
-    
-    // 감정 차트 생성
-    createEmotionChart(emotionScores);
-    
-    // 결과 광고 로드
-    const resultAd = document.getElementById('adResult');
-    if (resultAd) {
-        adObserver.observe(resultAd);
-    }
-}
 
-// 감정 분석 함수
-function analyzeResults() {
-    const emotionScores = {};
-    
-    // 모든 답변의 점수 합산
-    answers.forEach(answer => {
-        Object.entries(answer.score).forEach(([emotion, score]) => {
-            emotionScores[emotion] = (emotionScores[emotion] || 0) + score;
-        });
-    });
-    
-    return emotionScores;
-}
-
-// 감정 타입 매핑
-function getEmotionType(emotionKey) {
-    const emotionMapping = {
-        depression: 'depression',
-        anxiety: 'anxiety', 
-        stress: 'anxiety',
-        happiness: 'happiness',
-        joy: 'happiness',
-        optimism: 'happiness',
-        anger: 'anger',
-        calm: 'calm',
-        peace: 'calm',
-        excitement: 'excitement',
-        energy: 'excitement',
-        enthusiasm: 'excitement',
-        neutral: 'neutral',
-        stability: 'neutral',
-        balance: 'neutral'
-    };
-    
-    return emotionMapping[emotionKey] || 'neutral';
-}
-
-// 감정 차트 생성
-function createEmotionChart(emotionScores) {
-    const chartContainer = document.getElementById('emotionChart');
-    
-    // 상위 5개 감정만 표시
-    const topEmotions = Object.entries(emotionScores)
-        .sort(([,a], [,b]) => b - a)
-        .slice(0, 5);
-    
-    const maxScore = Math.max(...Object.values(emotionScores));
-    
-    chartContainer.innerHTML = `
-        <div class="emotion-bars">
-            ${topEmotions.map(([emotion, score]) => {
-                const percentage = (score / maxScore) * 100;
-                const emotionType = getEmotionType(emotion);
-                const result = emotionResults[emotionType];
-                
-                return `
-                    <div class="emotion-bar">
-                        <div class="emotion-info">
-                            <span class="emotion-emoji">${result.emoji}</span>
-                            <span class="emotion-name">${result.title}</span>
-                            <span class="emotion-score">${Math.round(score)}점</span>
-                        </div>
-                        <div class="emotion-progress">
-                            <div class="emotion-fill" style="width: ${percentage}%"></div>
-                        </div>
-                    </div>
-                `;
-            }).join('')}
-        </div>
-    `;
-}
-
-// 결과 분석
-function analyzeResults() {
-    const emotionScores = {};
-    
-    // 모든 답변의 점수 합산
-    answers.forEach(answer => {
-        Object.entries(answer.score).forEach(([emotion, score]) => {
-            emotionScores[emotion] = (emotionScores[emotion] || 0) + score;
-        });
-    });
-    
-    // 가장 높은 점수의 감정 찾기
-    let primaryEmotion = 'neutral';
-    let maxScore = 0;
-    
-    Object.entries(emotionScores).forEach(([emotion, score]) => {
-        if (score > maxScore) {
-            maxScore = score;
-            primaryEmotion = emotion;
-        }
-    });
-    
-    // 주요 감정을 결과 카테고리에 매핑
-    const emotionMapping = {
-        depression: 'depression',
-        anxiety: 'anxiety',
-        happiness: 'happiness',
-        anger: 'anger',
-        calm: 'calm',
-        excitement: 'excitement',
-        energy: 'excitement',
-        stress: 'anxiety',
-        loneliness: 'depression',
-        social: 'happiness',
-        optimism: 'happiness',
-        pessimism: 'anxiety',
-        confidence: 'excitement',
-        worry: 'anxiety'
-    };
-    
-    const resultCategory = emotionMapping[primaryEmotion] || 'neutral';
-    
-    return {
-        primary: resultCategory,
-        scores: emotionScores,
-        details: emotionResults[resultCategory]
-    };
-}
-
-// 결과 표시
-function showResult() {
-    const loadingPage = document.getElementById('loadingPage');
-    const resultPage = document.getElementById('resultPage');
-    
-    loadingPage.classList.add('hidden');
-    resultPage.classList.remove('hidden');
-    
-    const result = analyzeResults();
-    
-    // 결과 업데이트
-    document.getElementById('resultBadge').textContent = result.details.emoji;
-    document.getElementById('resultTitle').textContent = result.details.title;
-    document.getElementById('resultSubtitle').textContent = result.details.subtitle;
-    
-    // 상세 분석 업데이트
-    document.getElementById('primaryEmotion').textContent = result.details.title;
-    document.getElementById('hiddenEmotion').textContent = getSecondaryEmotion(result.scores);
-    
-    // 조언 업데이트
-    document.getElementById('adviceContent').textContent = result.details.advice;
-    
-    // 팁 업데이트
-    const tipsGrid = document.getElementById('tipsGrid');
-    tipsGrid.innerHTML = '';
-    result.details.tips.forEach(tip => {
-        const tipElement = document.createElement('div');
-        tipElement.className = 'tip-item';
-        tipElement.textContent = tip;
-        tipsGrid.appendChild(tipElement);
-    });
-    
-    // 결과 광고 표시
-    const resultAd = document.getElementById('adResult');
-    if (resultAd) {
-        adObserver.observe(resultAd);
-    }
-}
-
-// 보조 감정 찾기
-function getSecondaryEmotion(scores) {
-    const sortedScores = Object.entries(scores)
-        .sort(([,a], [,b]) => b - a);
-    
-    if (sortedScores.length > 1) {
-        const secondaryEmotion = sortedScores[1][0];
-        const emotionNames = {
-            anxiety: '불안감',
-            happiness: '행복감',
-            stress: '스트레스',
-            energy: '활력',
-            calm: '평온함',
-            anger: '분노',
-            social: '사교성',
-            loneliness: '외로움'
-        };
-        return emotionNames[secondaryEmotion] || '복합 감정';
-    }
-    return '단일 감정';
-}
-
-// 결과 공유
-function shareResult() {
-    const result = analyzeResults();
-    const shareData = {
-        title: '내 마음속 감정 분석 결과',
-        text: `나의 감정 유형: ${result.details.title}\n${result.details.subtitle}`,
-        url: window.location.href
-    };
-    
-    if (navigator.share) {
-        navigator.share(shareData);
-    } else {
-        shareToKakao();
-    }
-}
-
-// 카카오톡 공유
-function shareToKakao() {
-    const result = analyzeResults();
-    
-    window.Kakao.Share.sendDefault({
-        objectType: 'feed',
-        content: {
-            title: '내 마음속 감정 분석 테스트',
-            description: `${result.details.title} - ${result.details.subtitle}`,
-            imageUrl: 'https://sd2624.github.io/감정/emotion.png',
-            link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href
-            }
-        },
-        buttons: [
-            {
-                title: '나도 테스트하기',
-                link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href
-                }
-            }
-        ]
-    });
-}
-
-// 카카오톡 공유하기 (결과 페이지용)
-function shareToKakao() {
-    if (!window.Kakao.isInitialized()) {
-        alert('카카오톡 공유 서비스를 준비 중입니다. 잠시 후 다시 시도해주세요.');
-        return;
-    }
-
-    // 현재 결과 가져오기
-    const resultTitle = document.getElementById('resultTitle')?.textContent || '감정 분석 결과';
-    const resultEmoji = document.getElementById('resultBadge')?.textContent || '😊';
-    const resultDescription = document.getElementById('resultSubtitle')?.textContent || '나의 감정 상태를 분석해보세요';
-
-    window.Kakao.Link.sendDefault({
-        objectType: 'feed',
-        content: {
-            title: `${resultEmoji} ${resultTitle}`,
-            description: `${resultDescription}\n\n친구들도 감정 테스트 해보세요! 👇`,
-            imageUrl: 'https://sd2624.github.io/감정/emotion.png',
-            link: {
-                mobileWebUrl: 'https://sd2624.github.io/감정/',
-                webUrl: 'https://sd2624.github.io/감정/'
-            }
-        },
-        social: {
-            likeCount: Math.floor(Math.random() * 100) + 50,
-            commentCount: Math.floor(Math.random() * 30) + 10,
-            sharedCount: Math.floor(Math.random() * 20) + 5
-        },
-        buttons: [
-            {
-                title: '나도 감정 테스트하기',
-                link: {
-                    mobileWebUrl: 'https://sd2624.github.io/감정/',
-                    webUrl: 'https://sd2624.github.io/감정/'
-                }
-            }
-        ],
-        success: function(response) {
-            console.log('카카오톡 공유 성공:', response);
-        },
-        fail: function(error) {
-            console.error('카카오톡 공유 실패:', error);
-            alert('카카오톡 공유에 실패했습니다.\n카카오톡 앱이 설치되어 있는지 확인해주세요.');
-        }
-    });
-}
-
-// 결과 공유하기 (일반)
-function shareResult() {
-    shareToKakao();
-}
-
-// 테스트 다시하기
-function retryTest() {
-    const resultPage = document.getElementById('resultPage');
-    const startPage = document.getElementById('startPage');
-    
-    resultPage.classList.add('hidden');
-    startPage.classList.remove('hidden');
-    
-    // 상태 초기화
-    currentQuestion = 0;
-    answers = [];
-    
-    // 중간 광고 숨기기
-    const midAd = document.getElementById('adMid');
-    if (midAd) {
-        midAd.style.display = 'none';
-    }
-}
-
-// DOM 로드 완료 후 초기화
+// 페이지 초기화
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM 로드 완료');
     
     // 카카오 SDK 초기화
     initKakao();
     
+    // 광고 관리자 초기화
+    adManager.init();
+    
+    // 상단 광고 관찰 시작
+    adManager.observe('adTop');
+    
+    // 감정 점수 초기화
+    emotions.forEach(emotion => {
+        emotionScores[emotion] = 0;
+    });
+    
+    // 통계 업데이트
+    updateStats();
+    
+    // 긴급성 메시지 업데이트
+    updateUrgencyMessage();
+    
     // 전역 함수 노출 (onclick에서 사용하기 위해)
     window.startTest = startTest;
     window.shareToKakao = shareToKakao;
     window.retryTest = retryTest;
+    window.shareUrl = shareUrl;
     
     // 시작 버튼에 이벤트 리스너 추가 (백업용)
     const startBtn = document.querySelector('.start-btn');
@@ -1009,12 +776,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     } else {
         console.error('시작 버튼을 찾을 수 없습니다');
-    }
-    
-    // 광고 관리자 초기화
-    if (typeof adManager !== 'undefined') {
-        adManager.init();
-        adManager.observe('adTop');
     }
     
     console.log('감정 테스트 초기화 완료');
