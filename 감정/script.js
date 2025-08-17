@@ -463,6 +463,134 @@ function showLoading() {
     }, 800);
 }
 
+// 결과 분석 및 표시
+function showResult() {
+    const loadingPage = document.getElementById('loadingPage');
+    const resultPage = document.getElementById('resultPage');
+    
+    loadingPage.classList.add('hidden');
+    resultPage.classList.remove('hidden');
+    
+    // 감정 점수 계산
+    const emotionScores = analyzeResults();
+    
+    // 가장 높은 점수의 감정 찾기
+    const sortedEmotions = Object.entries(emotionScores)
+        .sort(([,a], [,b]) => b - a);
+    
+    const [primaryEmotionKey, primaryScore] = sortedEmotions[0];
+    const primaryEmotion = getEmotionType(primaryEmotionKey);
+    const result = emotionResults[primaryEmotion];
+    
+    // 메인 결과 표시
+    document.getElementById('resultBadge').textContent = result.emoji;
+    document.getElementById('resultTitle').textContent = result.title;
+    document.getElementById('resultSubtitle').textContent = result.subtitle;
+    
+    // 상세 분석 표시
+    document.getElementById('primaryEmotion').textContent = 
+        `${result.title}: ${Math.round(primaryScore)}점`;
+    
+    // 두 번째로 높은 감정
+    if (sortedEmotions.length > 1) {
+        const [secondEmotionKey, secondScore] = sortedEmotions[1];
+        const secondEmotion = getEmotionType(secondEmotionKey);
+        const secondResult = emotionResults[secondEmotion];
+        document.getElementById('hiddenEmotion').textContent = 
+            `${secondResult.title}: ${Math.round(secondScore)}점`;
+    }
+    
+    // 조언 표시
+    document.getElementById('adviceContent').textContent = result.advice;
+    
+    // 감정 관리 팁 표시
+    const tipsGrid = document.getElementById('tipsGrid');
+    tipsGrid.innerHTML = result.tips.map(tip => 
+        `<div class="tip-item">${tip}</div>`
+    ).join('');
+    
+    // 감정 차트 생성
+    createEmotionChart(emotionScores);
+    
+    // 결과 광고 로드
+    const resultAd = document.getElementById('adResult');
+    if (resultAd) {
+        adObserver.observe(resultAd);
+    }
+}
+
+// 감정 분석 함수
+function analyzeResults() {
+    const emotionScores = {};
+    
+    // 모든 답변의 점수 합산
+    answers.forEach(answer => {
+        Object.entries(answer.score).forEach(([emotion, score]) => {
+            emotionScores[emotion] = (emotionScores[emotion] || 0) + score;
+        });
+    });
+    
+    return emotionScores;
+}
+
+// 감정 타입 매핑
+function getEmotionType(emotionKey) {
+    const emotionMapping = {
+        depression: 'depression',
+        anxiety: 'anxiety', 
+        stress: 'anxiety',
+        happiness: 'happiness',
+        joy: 'happiness',
+        optimism: 'happiness',
+        anger: 'anger',
+        calm: 'calm',
+        peace: 'calm',
+        excitement: 'excitement',
+        energy: 'excitement',
+        enthusiasm: 'excitement',
+        neutral: 'neutral',
+        stability: 'neutral',
+        balance: 'neutral'
+    };
+    
+    return emotionMapping[emotionKey] || 'neutral';
+}
+
+// 감정 차트 생성
+function createEmotionChart(emotionScores) {
+    const chartContainer = document.getElementById('emotionChart');
+    
+    // 상위 5개 감정만 표시
+    const topEmotions = Object.entries(emotionScores)
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 5);
+    
+    const maxScore = Math.max(...Object.values(emotionScores));
+    
+    chartContainer.innerHTML = `
+        <div class="emotion-bars">
+            ${topEmotions.map(([emotion, score]) => {
+                const percentage = (score / maxScore) * 100;
+                const emotionType = getEmotionType(emotion);
+                const result = emotionResults[emotionType];
+                
+                return `
+                    <div class="emotion-bar">
+                        <div class="emotion-info">
+                            <span class="emotion-emoji">${result.emoji}</span>
+                            <span class="emotion-name">${result.title}</span>
+                            <span class="emotion-score">${Math.round(score)}점</span>
+                        </div>
+                        <div class="emotion-progress">
+                            <div class="emotion-fill" style="width: ${percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('')}
+        </div>
+    `;
+}
+
 // 결과 분석
 function analyzeResults() {
     const emotionScores = {};

@@ -710,14 +710,60 @@ body {
 }
 
 .chart-container {
-    height: 200px;
-    background: rgba(102, 126, 234, 0.1);
+    padding: 20px;
+    background: rgba(102, 126, 234, 0.05);
     border-radius: 10px;
+    min-height: 200px;
+}
+
+.emotion-bars {
+    display: grid;
+    gap: 15px;
+}
+
+.emotion-bar {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.emotion-info {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.emotion-emoji {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.emotion-name {
+    flex-grow: 1;
+    font-weight: 600;
+    color: #333;
+}
+
+.emotion-score {
+    font-weight: 700;
     color: #667eea;
-    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.emotion-progress {
+    height: 8px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.emotion-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 10px;
+    transition: width 1s ease;
 }
 
 .detail-card {
@@ -771,7 +817,7 @@ body {
 
 .tips-grid {
     display: grid;
-    gap: 15px;
+    gap: 12px;
 }
 
 .tip-item {
@@ -780,6 +826,8 @@ body {
     border-radius: 10px;
     border-left: 4px solid #667eea;
     color: #555;
+    font-size: 0.95rem;
+    line-height: 1.4;
 }
 
 .result-actions {
