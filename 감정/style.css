@@ -27,36 +27,41 @@ body {
     backdrop-filter: blur(10px);
 }
 
-/* 광고 컨테이너 */
+/* 광고 컨테이너 - 기기별 최적화 */
 .ad-container {
-    margin: 15px 0;
-    border-radius: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    min-height: 200px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    min-height: 100px; /* 기본 높이 대폭 감소 */
+    max-height: 120px; /* 최대 높이 제한 */
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid rgba(102, 126, 234, 0.1);
+    position: relative;
 }
 
 .ad-container.top {
-    margin: 10px 0 20px 0;
+    margin: 8px 0 15px 0;
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
-    min-height: 180px;
+    min-height: 90px; /* 상단 광고 더 작게 */
+    max-height: 100px;
 }
 
 .ad-container.mid {
-    margin: 15px 0;
+    margin: 10px 0; /* 질문과 답변 사이 여백 최소화 */
     background: rgba(102, 126, 234, 0.03);
-    min-height: 200px;
+    min-height: 80px; /* 중간 광고 가장 작게 */
+    max-height: 100px;
 }
 
 .ad-container.result {
-    margin: 20px 0;
+    margin: 15px 0;
     background: rgba(118, 75, 162, 0.03);
-    min-height: 200px;
+    min-height: 120px; /* 결과 페이지는 조금 여유 */
+    max-height: 150px;
 }
 
 /* 시작 페이지 */
@@ -444,9 +449,9 @@ body {
     background-size: contain;
 }
 
-/* 질문 페이지 */
+/* 질문 페이지 - 컴팩트하게 조정 */
 .question-page {
-    padding: 20px;
+    padding: 8px; /* 패딩 더 줄임 */
     max-height: 100vh;
     overflow-y: auto;
 }
@@ -456,7 +461,7 @@ body {
 }
 
 .progress-section {
-    margin-bottom: 20px;
+    margin-bottom: 8px; /* 여백 더 줄임 */
     text-align: center;
 }
 
@@ -513,32 +518,32 @@ body {
 }
 
 .question-text {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #333;
-    margin-bottom: 8px;
-    line-height: 1.3;
+    margin-bottom: 5px; /* 여백 더 줄임 */
+    line-height: 1.2;
     text-align: center;
 }
 
 .question-subtitle {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #666;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 8px; /* 여백 더 줄임 */
 }
 
 .answers-grid {
     display: grid;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 8px; /* 간격 줄임 */
+    margin-bottom: 10px; /* 여백 줄임 */
 }
 
 .answer-btn {
     background: white;
     border: 2px solid rgba(102, 126, 234, 0.2);
-    padding: 15px;
-    border-radius: 12px;
-    font-size: 1rem;
+    padding: 12px; /* 패딩 줄임 */
+    border-radius: 10px; /* 모서리 줄임 */
+    font-size: 0.95rem; /* 폰트 크기 줄임 */
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
@@ -927,7 +932,7 @@ body {
     }
     
     .question-page {
-        padding: 10px;
+        padding: 5px; /* 모바일에서 더 줄임 */
         max-height: 100vh;
         overflow-y: auto;
     }
@@ -993,14 +998,14 @@ body {
     }
     
     .question-text {
-        font-size: 1.2rem;
-        margin-bottom: 5px;
+        font-size: 1.1rem;
+        margin-bottom: 3px; /* 모바일에서 더 줄임 */
         line-height: 1.2;
     }
     
     .question-subtitle {
-        font-size: 0.8rem;
-        margin-bottom: 15px;
+        font-size: 0.75rem;
+        margin-bottom: 5px; /* 모바일에서 더 줄임 */
     }
     
     .answers-grid {
@@ -1015,43 +1020,49 @@ body {
         line-height: 1.2;
     }
     
-    /* 모바일 광고 최적화 */
+    /* 모바일 광고 최적화 - 한 스크롤에 보이도록 크기 최소화 */
     .ad-container {
-        margin: 10px -5px;
-        border-radius: 8px;
-        min-height: 180px;
-        padding: 10px;
-        box-shadow: 0 2px 15px rgba(102, 126, 234, 0.15);
+        margin: 5px -5px; /* 여백 최소화 */
+        border-radius: 6px;
+        min-height: 70px; /* 모바일에서 매우 작게 */
+        max-height: 80px; /* 최대 높이 제한 */
+        padding: 5px;
+        box-shadow: 0 1px 8px rgba(102, 126, 234, 0.1);
         background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(102, 126, 234, 0.02));
-        border: 2px solid rgba(102, 126, 234, 0.1);
+        border: 1px solid rgba(102, 126, 234, 0.1);
     }
     
     .ad-container.top {
-        margin: 0 -5px 15px -5px;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
-        border: 2px solid rgba(102, 126, 234, 0.2);
-        min-height: 160px;
+        margin: 0 -5px 8px -5px;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+        border: 1px solid rgba(102, 126, 234, 0.15);
+        min-height: 60px; /* 상단 광고 더 작게 */
+        max-height: 70px;
     }
     
     .ad-container.mid {
-        margin: 10px -5px;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.06), rgba(255, 255, 255, 0.98));
-        border: 2px solid rgba(102, 126, 234, 0.15);
-        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
-        min-height: 180px;
+        margin: 5px -5px; /* 질문과 답변 사이 여백 최소화 */
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.03), rgba(255, 255, 255, 0.98));
+        border: 1px solid rgba(102, 126, 234, 0.1);
+        box-shadow: 0 2px 10px rgba(102, 126, 234, 0.1);
+        min-height: 60px; /* 중간 광고 가장 작게 */
+        max-height: 70px;
     }
     
     .ad-container.result {
-        margin: 15px -5px;
-        background: linear-gradient(135deg, rgba(118, 75, 162, 0.06), rgba(255, 255, 255, 0.98));
-        border: 2px solid rgba(118, 75, 162, 0.15);
-        min-height: 180px;
+        margin: 10px -5px;
+        background: linear-gradient(135deg, rgba(118, 75, 162, 0.03), rgba(255, 255, 255, 0.98));
+        border: 1px solid rgba(118, 75, 162, 0.1);
+        min-height: 80px; /* 결과 페이지만 조금 여유 */
+        max-height: 100px;
     }
     
     .adsbygoogle {
-        min-height: 160px !important;
+        min-height: 60px !important; /* 광고 최소 높이 제한 */
+        max-height: 80px !important; /* 광고 최대 높이 제한 */
         width: 100% !important;
         display: block !important;
+        overflow: hidden; /* 넘치는 부분 숨김 */
     }
 }
 
