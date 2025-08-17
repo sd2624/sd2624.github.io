@@ -560,17 +560,24 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 자세히 알아보기 페이지로 이동 함수
     function showDetailedPage(type) {
-        // 각 유형에 맞는 페이지 URL 설정
+        console.log('showDetailedPage 호출됨:', type); // 디버깅용 로그
+        
+        // 각 유형에 맞는 페이지 URL 설정 (실제 파일명에 맞게 수정)
         const pageUrls = {
-            type1: 'https://testpro.site/k-test/연인/미련형',
-            type2: 'https://testpro.site/k-test/연인/분노형',
-            type3: 'https://testpro.site/k-test/연인/후회형',
-            type4: 'https://testpro.site/k-test/연인/무덤덤형',
-            type5: 'https://testpro.site/k-test/연인/무감정형'
+            type1: '미련형.html',
+            type2: '분노형.html',
+            type3: '후회형.html',
+            type4: '무덤덤형.html',
+            type5: '무감정형.html'
         };
 
         // 해당 페이지로 이동
-        window.location.href = pageUrls[type];
+        if (pageUrls[type]) {
+            console.log('페이지 이동:', pageUrls[type]); // 디버깅용 로그
+            window.location.href = pageUrls[type];
+        } else {
+            console.error('페이지를 찾을 수 없습니다:', type); // 에러 로그
+        }
     }
     
     // [광고] 상단 광고 초기화 및 옵저버 설정
