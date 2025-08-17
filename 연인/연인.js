@@ -87,7 +87,7 @@ const setupAdObservers = () => {
 document.addEventListener('DOMContentLoaded', () => {
     let currentQuestion = 1;
     const totalQuestions = 45;
-    const maxScorePerType = 9 * 4; // 각 유형당 최대 점수 (9문항 * 선택값 최대 4)
+    const maxScorePerType = 9 * 2; // 각 유형당 최대 점수 (9문항 * 선택값 최대 2)
     const progressBar = document.getElementById('progressBar');
     const testSection = document.getElementById('testSection');
     const resultSection = document.getElementById('resultSection');
@@ -178,11 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 라디오 버튼 값 설정
     const radioValues = [
-        { value: 0, label: "전혀 그렇지 않다" },
+        { value: -2, label: "전혀 그렇지 않다" },
+        { value: -1, label: "" },
+        { value: 0, label: "" },
         { value: 1, label: "" },
-        { value: 2, label: "" },
-        { value: 3, label: "" },
-        { value: 4, label: "매우 그렇다" }
+        { value: 2, label: "매우 그렇다" }
     ];
     
     // 질문 생성 함수
@@ -265,17 +265,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedValue = parseInt(event.target.value, 10);  // 선택된 값 가져오기
         console.log(`Selected value: ${selectedValue}`);
     
-        if (isNaN(selectedValue)) {
-            console.error('Invalid selected value:', event.target.value);
-            return;
-        }
+        if (isNaN(selectedValue)) return;
     
         // 선택된 값에 해당하는 점수 추가 (해당 유형에 점수 반영)
         const questionType = questionTypeMapping[currentQuestion];
-        console.log(`Question ${currentQuestion}, Type: ${questionType}`);
+        console.log(`Question Type: ${questionType}`);
         scores[questionType] += selectedValue;
         console.log(`Score for ${questionType}: ${scores[questionType]}`);
-        console.log('All scores:', scores);
     
         // [광고] 3번째 질문 완료 후 중간 광고 표시
         if (currentQuestion === 3) {
@@ -294,7 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // 모든 질문을 끝낸 후 "결과 보기" 버튼 활성화
             showResultButton.disabled = false;
             console.log(`All questions completed. Show Result button enabled.`);
-            console.log('Final scores:', scores);
         }
     }
     
@@ -441,17 +436,14 @@ document.addEventListener('DOMContentLoaded', () => {
             adManager.showResultAd();
         }, 1000);
     
-        // "자세히 알아보기" 클릭 이벤트 추가 - DOM이 업데이트된 후 즉시 추가
-        setTimeout(() => {
-            document.querySelectorAll('.more-info').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const type = e.target.getAttribute('data-type');
-                    console.log('자세히 알아보기 클릭됨:', type); // 디버깅용 로그
-                    showDetailedPage(type);
-                });
+        // "자세히 알아보기" 클릭 이벤트 추가
+        document.querySelectorAll('.more-info').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const type = e.target.getAttribute('data-type');
+                showDetailedPage(type);
             });
-        }, 100); // DOM 업데이트 후 100ms 후에 이벤트 리스너 추가
+        });
     
         // 소셜 미디어 공유 버튼 추가
         addShareButtons();
@@ -560,24 +552,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 자세히 알아보기 페이지로 이동 함수
     function showDetailedPage(type) {
-        console.log('showDetailedPage 호출됨:', type); // 디버깅용 로그
-        
-        // 각 유형에 맞는 페이지 URL 설정 (실제 파일명에 맞게 수정)
+        // 각 유형에 맞는 페이지 URL 설정
         const pageUrls = {
-            type1: '미련형.html',
-            type2: '분노형.html',
-            type3: '후회형.html',
-            type4: '무덤덤형.html',
-            type5: '무감정형.html'
+            type1: 'https://testpro.site/k-test/연인/미련형',
+            type2: 'https://testpro.site/k-test/연인/분노형',
+            type3: 'https://testpro.site/k-test/연인/후회형',
+            type4: 'https://testpro.site/k-test/연인/무덤덤형',
+            type5: 'https://testpro.site/k-test/연인/무감정형'
         };
 
         // 해당 페이지로 이동
-        if (pageUrls[type]) {
-            console.log('페이지 이동:', pageUrls[type]); // 디버깅용 로그
-            window.location.href = pageUrls[type];
-        } else {
-            console.error('페이지를 찾을 수 없습니다:', type); // 에러 로그
-        }
+        window.location.href = pageUrls[type];
     }
     
     // [광고] 상단 광고 초기화 및 옵저버 설정

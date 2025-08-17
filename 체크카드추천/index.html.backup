@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💳 체크카드 추천 순위 BEST | 나에게 맞는 최고의 체크카드는?</title>
+    
+    <!-- SEO 메타 태그 -->
+    <meta name="description" content="💳 올해 최신 체크카드 추천 순위! 수수료, 혜택, 편의성을 고려한 나에게 딱 맞는 체크카드를 찾아보세요. BEST 순위 완벽 분석!">
+    <meta name="keywords" content="체크카드 추천, 체크카드 순위, 최고의 체크카드, 체크카드 비교, 수수료 없는 체크카드, 혜택 체크카드, 올해 체크카드">
+    <meta name="author" content="테스트프로">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph 메타 태그 -->
+    <meta property="og:title" content="💳 체크카드 추천 순위 BEST">
+    <meta property="og:description" content="올해 최신 체크카드 추천 순위! 나에게 딱 맞는 최고의 체크카드를 찾아보세요.">
+    <meta property="og:image" content="https://sd2624.github.io/체크카드추천/체크카드추천.svg">
+    <meta property="og:url" content="https://sd2624.github.io/체크카드추천/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="테스트프로">
+    <meta property="og:locale" content="ko_KR">
+    
+    <!-- Twitter Card 메타 태그 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="💳 체크카드 추천 순위 BEST">
+    <meta name="twitter:description" content="올해 최신 체크카드 추천 순위! 나에게 딱 맞는 최고의 체크카드를 찾아보세요.">
+    <meta name="twitter:image" content="https://sd2624.github.io/체크카드추천/체크카드추천.svg">
+    <meta name="twitter:site" content="@testpro">
+    
+    <!-- 구조화된 데이터 (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "체크카드 추천 순위 BEST",
+        "description": "올해 최신 체크카드 추천 순위와 나에게 맞는 최고의 체크카드 찾기 가이드",
+        "url": "https://sd2624.github.io/체크카드추천/",
+        "image": "https://sd2624.github.io/체크카드추천/체크카드추천.svg",
+        "datePublished": "2025-08-14",
+        "dateModified": "2025-08-14",
+        "author": {
+            "@type": "Organization",
+            "name": "테스트프로"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "테스트프로"
+        }
+    }
+    </script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 카카오 SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    
+    <!-- 구글 애드센스 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 페이지 상단 광고 - 새로 추가 -->
+    <div class="ad-container top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="container">
+        <!-- 시작 페이지 -->
+        <div id="startPage" class="page">
+            <div class="header">
+                <img src="체크카드추천.svg" alt="체크카드 추천" class="main-image">
+                <h1>💳 체크카드 추천 순위 BEST</h1>
+                <p class="subtitle">나에게 딱 맞는 최고의 체크카드를 찾아보세요!</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon">🏆</div>
+                    <h3>올해 최신 순위</h3>
+                    <p>실제 사용자 리뷰와 혜택을 종합한 최신 순위</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <h3>수수료 비교 분석</h3>
+                    <p>숨겨진 수수료까지 완벽 비교</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎁</div>
+                    <h3>혜택 맞춤 추천</h3>
+                    <p>나의 소비 패턴에 맞는 혜택 카드</p>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="startTest()">
+                    <span class="btn-text">체크카드 추천 받기</span>
+                    <span class="btn-icon">→</span>
+                </button>
+            </div>
+            
+            <div class="test-info">
+                <p>📊 <strong>약 2분</strong> 소요 | 📝 <strong>8개 질문</strong> | 🎯 <strong>맞춤형 추천</strong></p>
+            </div>
+        </div>
+
+        <!-- 테스트 페이지 -->
+        <div id="testPage" class="page hidden">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="question-number">
+                    <span id="questionNumber">1</span> / 8
+                </div>
+            </div>
+            
+            <div class="question-card" id="questionCard">
+                <h2 id="questionTitle">질문을 불러오는 중...</h2>
+                <div class="answers" id="answers">
+                    <!-- 답변 옵션들이 동적으로 추가됩니다 -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- 중간 광고 (3번째 질문 후) - 새로 추가 -->
+        <div class="ad-container mid" style="display: none;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="1966797795"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <!-- 결과 페이지 -->
+        <div id="resultPage" class="page hidden">
+            <div class="result-header">
+                <div class="result-icon" id="resultIcon">💳</div>
+                <h2 id="resultTitle">결과를 분석하는 중...</h2>
+                <p id="resultSubtitle" class="result-subtitle"></p>
+            </div>
+            
+            <div class="result-content">
+                <div id="resultDescription" class="result-description">
+                    <!-- 결과 설명이 동적으로 추가됩니다 -->
+                </div>
+                
+                <div class="tips-section">
+                    <h3>💡 추천 팁</h3>
+                    <ul id="resultTips">
+                        <!-- 팁들이 동적으로 추가됩니다 -->
+                    </ul>
+                </div>
+                
+                <!-- 결과 페이지 중간 광고 - 새로 추가 -->
+                <div class="ad-container result">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="4448942166"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="restartTest()">
+                    <span class="btn-text">다시 테스트하기</span>
+                    <span class="btn-icon">🔄</span>
+                </button>
+                <button class="btn btn-primary" onclick="shareResult()">
+                    <span class="btn-text">결과 공유하기</span>
+                    <span class="btn-icon">📤</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 팝업 오버레이 -->
+    <div class="popup-overlay hidden" id="popupOverlay"></div>
+
+    <!-- 분석 팝업 -->
+    <div class="analysis-popup hidden" id="analysisPopup">
+        <div class="popup-content">
+            <div class="analysis-header">
+                <div class="analysis-icon">🔍</div>
+                <div class="analysis-text">체크카드 패턴 분석중...</div>
+                <div class="countdown" id="countdown">8</div>
+            </div>
+            
+            <div class="loading-spinner"></div>
+            
+            <!-- 팝업 광고 - 기존 광고 슬롯 유지 -->
+            <div class="popup-ad-container">
+                <ins class="adsbygoogle popup-ad"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"></ins>
+            </div>
+            
+            <button class="confirm-popup-btn" id="confirmPopupBtn" disabled>
+                결과 확인하기
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

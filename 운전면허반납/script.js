@@ -59,7 +59,7 @@ const setupAdObservers = () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 adManager.showMidAd();
-                midAdObserver.unobserve(entry.target);
+                midAdObserver.disconnect();
             }
         });
     }, options);
@@ -69,12 +69,12 @@ const setupAdObservers = () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 adManager.showResultAd();
-                resultAdObserver.unobserve(entry.target);
+                resultAdObserver.disconnect();
             }
         });
     }, options);
     
-    // 관찰 대상 등록
+    // 옵저버 등록
     const midAd = document.getElementById('adMid');
     const resultAd = document.getElementById('adResult');
     
@@ -82,10 +82,7 @@ const setupAdObservers = () => {
     if (resultAd) resultAdObserver.observe(resultAd);
 };
 
-
-
-
-
+// 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
 // 질문 데이터
@@ -346,7 +343,22 @@ function selectAnswer(answer, index) {
     options.forEach(option => option.classList.remove('selected'));
     options[index].classList.add('selected');
     
+    // [광고] 3번째 질문 완료 후 중간 광고 표시
+    if (currentQuestionIndex === 2) { // 0-based index이므로 2는 3번째 질문
+        setTimeout(() => {
+            adManager.showMidAd();
+        }, 500);
+    }
     
+    // 다음 질문으로 이동
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            showQuestion();
+        } else {
+            showAnalysisModal();
+        }
+    }, 600);
 }
 
 // 분석 모달 표시
@@ -354,7 +366,27 @@ function showAnalysisModal() {
     if (questionPage) questionPage.classList.add('hidden');
     if (analysisModal) analysisModal.classList.remove('hidden');
     
+    // [광고] 팝업 광고 초기화
+    setTimeout(() => {
+        if (typeof adsbygoogle !== 'undefined') {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    }, 100);
     
+    // 카운트다운 시작
+    let countdown = 6;
+    const countdownTimer = document.querySelector('.countdown-timer');
+    
+    const timer = setInterval(() => {
+        if (countdownTimer) countdownTimer.textContent = countdown;
+        countdown--;
+        
+        if (countdown < 0) {
+            clearInterval(timer);
+            analyzeResults();
+            showResults();
+        }
+    }, 1000);
 }
 
 // 결과 분석 함수
@@ -406,7 +438,91 @@ function showResults() {
     if (analysisModal) analysisModal.classList.add('hidden');
     if (resultPage) resultPage.classList.remove('hidden');
     
+    // [광고] 결과 표시 1초 후 결과 광고 표시
+    setTimeout(() => {
+        adManager.showResultAd();
+    }, 1000);
     
+    const result = resultTypes[analysisData.resultType];
+    const regionInfo = analysisData.regionInfo;
+    
+    // 결과 헤더 업데이트
+    const resultBadge = document.querySelector('.result-badge');
+    const resultTitle = document.querySelector('.result-title');
+    const resultSubtitle = document.querySelector('.result-subtitle');
+    
+    if (resultBadge) {
+        resultBadge.style.background = result.bgColor;
+        resultBadge.innerHTML = `<div class="badge-icon">${result.badge}</div>`;
+    }
+    
+    if (resultTitle) resultTitle.textContent = result.title;
+    if (resultSubtitle) resultSubtitle.textContent = result.subtitle;
+    
+    // 결과 내용 업데이트
+    const benefitsSummary = document.querySelector('.benefits-summary');
+    const detailedBenefits = document.querySelector('.detailed-benefits');
+    const applicationGuide = document.querySelector('.application-guide');
+    
+    if (benefitsSummary) {
+        benefitsSummary.innerHTML = `
+            <p><strong>${result.description}</strong></p>
+            <p style="margin-top: 15px; color: #0984e3; font-weight: 600;">
+                ${regionInfo.name} 지역 기준 최대 <span style="font-size: 1.2em; color: #00b894;">${regionInfo.maxBenefit}</span> 혜택 가능
+            </p>
+        `;
+    }
+    
+    if (detailedBenefits) {
+        detailedBenefits.innerHTML = `
+            <h4 style="color: #0984e3; margin-bottom: 15px;">🎁 ${regionInfo.name} 혜택 내역</h4>
+            <ul style="list-style: none; padding: 0;">
+                ${regionInfo.programs.map(program => `
+                    <li style="margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.7); border-radius: 8px; border-left: 3px solid #74b9ff;">
+                        ✓ ${program}
+                    </li>
+                `).join('')}
+            </ul>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(0, 184, 148, 0.1); border-radius: 10px;">
+                <h5 style="color: #00b894; margin-bottom: 8px;">💡 추가 정보</h5>
+                <p style="font-size: 0.9em; color: #2d3436; line-height: 1.5;">
+                    운전면허 자진반납은 <strong>만 65세 이상</strong> 또는 <strong>신체적 제약</strong>이 있는 분들이 대상입니다. 
+                    반납 후에는 재취득이 어려우므로 신중히 결정하시기 바랍니다.
+                </p>
+            </div>
+        `;
+    }
+    
+    if (applicationGuide) {
+        applicationGuide.innerHTML = `
+            <h4 style="color: #0984e3; margin-bottom: 15px;">📋 신청 방법</h4>
+            <div class="guide-links">
+                <a href="${regionInfo.applicationUrl}" target="_blank" class="guide-link">
+                    🏛️ ${regionInfo.name} 온라인 신청
+                </a>
+                <a href="tel:${regionInfo.contactNumber}" class="guide-link">
+                    📞 전화 상담 (${regionInfo.contactNumber})
+                </a>
+                <a href="https://www.safedriving.or.kr" target="_blank" class="guide-link">
+                    🚗 도로교통공단 안내
+                </a>
+                <a href="https://www.koroad.or.kr" target="_blank" class="guide-link">
+                    📋 면허반납 절차 안내
+                </a>
+            </div>
+            
+            <div style="margin-top: 25px; padding: 20px; background: rgba(255, 118, 117, 0.1); border-radius: 10px; border-left: 4px solid #ff7675;">
+                <h5 style="color: #d63031; margin-bottom: 10px;">⚠️ 신청 전 확인사항</h5>
+                <ul style="font-size: 0.9em; color: #2d3436; line-height: 1.6;">
+                    <li>• 신청 기간 및 예산 확인</li>
+                    <li>• 필요 서류 사전 준비</li>
+                    <li>• 가족과의 충분한 상의</li>
+                    <li>• 대체 교통수단 확보</li>
+                </ul>
+            </div>
+        `;
+    }
 }
 
 // 테스트 재시작 함수
@@ -472,11 +588,10 @@ function shareKakao() {
 
 // 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
-    // 상단 광고 즉시 로드
-    adManager.loadAd('adTop');
-    
-    // 옵저버 설정
-    setupAdObservers();
+    // 광고 초기화
+    if (typeof adsbygoogle !== 'undefined') {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    }
     
     // 이벤트 리스너 등록
     const startBtn = document.querySelector('.start-btn');
@@ -577,13 +692,12 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-
-
-
 // [광고] 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
     // 상단 광고 즉시 로드
-    adManager.loadAd('adTop');
+    if (typeof adsbygoogle !== 'undefined') {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    }
     
     // 옵저버 설정
     setupAdObservers();

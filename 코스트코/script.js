@@ -1,96 +1,10 @@
-// [광고] AdManager 클래스 - 광고 로드 및 중복 방지 관리
-class AdManager {
-    constructor() {
-        this.loadedAds = new Set(); // 로드된 광고 추적
-    }
-    
-    // 광고 로드 함수
-    loadAd(adId) {
-        if (this.loadedAds.has(adId)) {
-            console.log(`[광고] ${adId} 이미 로드됨 - 중복 방지`);
-            return false;
-        }
-        
-        const adElement = document.getElementById(adId);
-        if (adElement && typeof adsbygoogle !== 'undefined') {
-            try {
-                // 광고 컨테이너 표시
-                adElement.style.display = 'block';
-                
-                // 광고 푸시
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                
-                this.loadedAds.add(adId);
-                console.log(`[광고] ${adId} 로드 완료`);
-                return true;
-            } catch (error) {
-                console.warn(`[광고] ${adId} 로드 실패:`, error);
-                return false;
-            }
-        }
-        return false;
-    }
-    
-    // 중간 광고 표시 (3번째 질문 후)
-    showMidAd() {
-        return this.loadAd('adMid');
-    }
-    
-    // 결과 광고 표시
-    showResultAd() {
-        return this.loadAd('adResult');
-    }
-}
-
-// [광고] AdManager 인스턴스 생성
-const adManager = new AdManager();
-
-// [광고] IntersectionObserver를 이용한 광고 표시 관리
-const setupAdObservers = () => {
-    if (typeof IntersectionObserver === 'undefined') return;
-    
-    const options = {
-        threshold: 0.1,
-        rootMargin: '50px'
-    };
-    
-    // 중간 광고 관찰자
-    const midAdObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                adManager.showMidAd();
-                midAdObserver.unobserve(entry.target);
-            }
-        });
-    }, options);
-    
-    // 결과 광고 관찰자
-    const resultAdObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                adManager.showResultAd();
-                resultAdObserver.unobserve(entry.target);
-            }
-        });
-    }, options);
-    
-    // 관찰 대상 등록
-    const midAd = document.getElementById('adMid');
-    const resultAd = document.getElementById('adResult');
-    
-    if (midAd) midAdObserver.observe(midAd);
-    if (resultAd) resultAdObserver.observe(resultAd);
-};
-
 // 전역 변수
 let currentQuestionIndex = 0;
 let userAnswers = [];
 let totalQuestions = 0;
 let isLoading = false;
 
-// 광고 로드 관리
-
-
+// 질문 데이터
 const questions = [
     {
         question: "가족 구성원 수는 몇 명인가요?",
@@ -296,7 +210,19 @@ let progressBar, progressText, questionTitle, answersContainer;
 let resultBadge, resultTitle, resultSubtitle, resultSummary, resultDetails;
 
 // 초기화
-
+document.addEventListener('DOMContentLoaded', function() {
+    initializeElements();
+    setupEventListeners();
+    totalQuestions = questions.length;
+    
+    // 팝업 광고 표시
+    setTimeout(showPopupAd, 3000);
+    
+    // 카카오 SDK 초기화
+    if (typeof Kakao !== 'undefined') {
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+    }
+});
 
 function initializeElements() {
     startPage = document.getElementById('startPage');
@@ -342,14 +268,6 @@ function setupShareButtons() {
 }
 
 function showPopupAd() {
-    // 팝업 광고 로드 (기존 코드 유지)
-    setTimeout(() => {
-        const popupAd = document.querySelector('.popup-ad');
-        if (popupAd && typeof adsbygoogle !== 'undefined') {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-    }, 100);
-    
     const popupHtml = `
         <div id="popupAd" style="
             position: fixed;
@@ -420,9 +338,6 @@ window.closePopupAd = closePopupAd;
 function startTest() {
     currentQuestionIndex = 0;
     userAnswers = [];
-    
-    // 페이지 상단 광고 표시 (헤더 바로 아래)
-    adManager.showAd('headerAd');
     
     showPage('question');
     displayQuestion();
@@ -496,11 +411,6 @@ function selectAnswer(answerIndex) {
     answerButtons[answerIndex].style.color = 'white';
     answerButtons[answerIndex].style.transform = 'scale(1.02)';
     
-    // 3번째 질문 완료 후 중간 광고 표시
-    if (currentQuestionIndex === 2) {
-        adManager.showAd('questionAd');
-    }
-    
     // 다음 질문으로 이동
     setTimeout(() => {
         currentQuestionIndex++;
@@ -544,12 +454,7 @@ function showResult() {
     displayResultContent(resultType, totalScore, percentage);
     showPage('result');
     
-    // 결과 페이지 중간 광고 표시 (추천 카드와 상세 혜택 사이)
-    setTimeout(() => {
-        adManager.showAd('resultAd');
-    }, 500);
-    
-    // 기존 팝업 광고도 표시
+    // 결과 페이지 광고 표시
     setTimeout(showResultAd, 2000);
 }
 
@@ -691,12 +596,3 @@ function shareKakao() {
 // 전역 함수로 정의 (HTML에서 호출)
 window.startTest = startTest;
 window.shareKakao = shareKakao;
-
-// [광고] 페이지 로드 시 초기화
-document.addEventListener('DOMContentLoaded', function() {
-    // 상단 광고 즉시 로드
-    adManager.loadAd('adTop');
-    
-    // 옵저버 설정
-    setupAdObservers();
-});

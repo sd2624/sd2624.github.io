@@ -28,17 +28,18 @@
     </script>
 </head>
 <body>
-    <!-- Google AdSense -->
+    <!-- Google AdSense 스크립트 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9374368296307755"
-         data-ad-slot="3201247599"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    
+    <!-- 광고 1: 페이지 상단 (헤더 바로 아래) -->
+    <div class="ad-container" id="ad-top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
 
     <div class="container">
         <h1>타로 카드 운세</h1>
@@ -61,6 +62,17 @@
                 <div class="card-front"></div>
             </div>
         </div>
+        
+        <!-- 광고 2: 질문 중간 (3번째 질문 뒤) -->
+        <div class="ad-container" id="ad-middle" style="display: none;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="1966797795"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
         <!-- 로딩 팝업 -->
 <div id="loadingPopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; flex-direction: column;">
     <div style="color: white; text-align: center;">
@@ -70,22 +82,20 @@
     </div>
 </div>
 
-<!-- 광고 컨테이너 -->
-<div id="adContainer" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: white; z-index: 1001;">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9374368296307755"
-         data-ad-slot="1724698171"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
-
         <div class="reading-container">
             <div class="reading" id="reading1"></div>
             <div class="reading" id="reading2"></div>
+            
+            <!-- 광고 3: 결과 페이지 중간 (추천 카드와 상세 혜택 사이) -->
+            <div class="ad-container" id="ad-result" style="display: none;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="4448942166"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
             <div class="reading" id="reading3"></div>
         </div>
 

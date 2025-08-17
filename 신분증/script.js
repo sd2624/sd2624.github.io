@@ -1,92 +1,69 @@
-// [광고] AdManager 클래스 - 광고 로드 및 중복 방지 관리
-class AdManager {
-    constructor() {
-        this.loadedAds = new Set(); // 로드된 광고 추적
-    }
-    
-    // 광고 로드 함수
-    loadAd(adId) {
-        if (this.loadedAds.has(adId)) {
-            console.log(`[광고] ${adId} 이미 로드됨 - 중복 방지`);
-            return false;
-        }
-        
-        const adElement = document.getElementById(adId);
-        if (adElement && typeof adsbygoogle !== 'undefined') {
-            try {
-                // 광고 컨테이너 표시
-                adElement.style.display = 'block';
-                
-                // 광고 푸시
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                
-                this.loadedAds.add(adId);
-                console.log(`[광고] ${adId} 로드 완료`);
-                return true;
-            } catch (error) {
-                console.warn(`[광고] ${adId} 로드 실패:`, error);
-                return false;
-            }
-        }
-        return false;
-    }
-    
-    // 중간 광고 표시 (3번째 질문 후)
-    showMidAd() {
-        return this.loadAd('adMid');
-    }
-    
-    // 결과 광고 표시
-    showResultAd() {
-        return this.loadAd('adResult');
-    }
-}
-
-// [광고] AdManager 인스턴스 생성
-const adManager = new AdManager();
-
-// [광고] IntersectionObserver를 이용한 광고 표시 관리
-const setupAdObservers = () => {
-    if (typeof IntersectionObserver === 'undefined') return;
-    
-    const options = {
-        threshold: 0.1,
-        rootMargin: '50px'
-    };
-    
-    // 중간 광고 관찰자
-    const midAdObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                adManager.showMidAd();
-                midAdObserver.unobserve(entry.target);
-            }
-        });
-    }, options);
-    
-    // 결과 광고 관찰자
-    const resultAdObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                adManager.showResultAd();
-                resultAdObserver.unobserve(entry.target);
-            }
-        });
-    }, options);
-    
-    // 관찰 대상 등록
-    const midAd = document.getElementById('adMid');
-    const resultAd = document.getElementById('adResult');
-    
-    if (midAd) midAdObserver.observe(midAd);
-    if (resultAd) resultAdObserver.observe(resultAd);
-};
-
 // 카카오 SDK 초기화
 Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 
 // [AdManager] 광고 동적 로딩 및 중복 방지 클래스
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set();
+        this.initObservers();
+    }
 
+    initObservers() {
+        // 헤더 광고: 즉시 로딩
+        this.loadAd('top');
+
+        // 3번째 질문 후 광고: IntersectionObserver로 로딩
+        const midAd = document.getElementById('adMid');
+        if (midAd) {
+            this.midObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.loadAd('mid');
+                        this.midObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.5 });
+        }
+
+        // 결과 페이지 광고: IntersectionObserver로 로딩
+        const resultAd = document.getElementById('adResult');
+        if (resultAd) {
+            this.resultObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.loadAd('result');
+                        this.resultObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.5 });
+        }
+    }
+
+    showMidAd() {
+        const midAd = document.getElementById('adMid');
+        if (midAd && midAd.style.display === 'none') {
+            midAd.style.display = 'block';
+            if (this.midObserver) this.midObserver.observe(midAd);
+        }
+    }
+
+    showResultAd() {
+        const resultAd = document.getElementById('adResult');
+        if (resultAd) {
+            if (this.resultObserver) this.resultObserver.observe(resultAd);
+        }
+    }
+
+    loadAd(position) {
+        if (this.loadedAds.has(position)) return;
+        this.loadedAds.add(position);
+        if (typeof window.adsbygoogle !== 'undefined') {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    }
+}
+
+// 질문 데이터
 const questions = [
     {
         question: "현재 보유하고 있는 신분증은 무엇인가요?",
@@ -610,11 +587,12 @@ function shareKakao() {
 
 // 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
-    // 상단 광고 즉시 로드
-    adManager.loadAd('adTop');
+    console.log('DOM Content Loaded');
     
-    // 옵저버 설정
-    setupAdObservers();
+    // 광고 초기화
+    if (typeof adsbygoogle !== 'undefined') {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    }
     
     // 이벤트 리스너 등록
     const startBtn = document.querySelector('.start-btn');
@@ -689,12 +667,10 @@ window.addEventListener('load', function() {
     
     // [AdManager] 광고 관리자 초기화
     window.adManager = new AdManager();
-    
-    // 페이지 로드 시 상단 광고 로드
-    setTimeout(() => {
-        if (typeof adsbygoogle !== 'undefined') {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            console.log('페이지 로드 시 상단 광고 초기화 완료');
-        }
-    }, 100);
+});
+
+// 초기 실행
+window.addEventListener('load', function() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
 });

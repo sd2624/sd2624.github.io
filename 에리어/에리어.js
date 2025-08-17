@@ -214,17 +214,14 @@ function showResult() {
             adManager.showResultAd();
         }, 1000);
 
-        // "자세히 알아보기" 클릭 이벤트 추가 - DOM이 업데이트된 후 즉시 추가
-        setTimeout(() => {
-            document.querySelectorAll('.more-info').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const type = e.target.getAttribute('data-type');
-                    console.log('자세히 알아보기 클릭됨:', type); // 디버깅용 로그
-                    showDetailedPage(type);
-                });
+        // "자세히 알아보기" 클릭 이벤트 추가
+        document.querySelectorAll('.more-info').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const type = e.target.getAttribute('data-type');
+                showDetailedPage(type);
             });
-        }, 100); // DOM 업데이트 후 100ms 후에 이벤트 리스너 추가
+        });
 
         // 소셜 미디어 공유 버튼 추가
         addShareButtons();
@@ -330,28 +327,21 @@ function getTypeName(type) {
 
 // 자세히 알아보기 페이지로 이동
 function showDetailedPage(type) {
-    console.log('showDetailedPage 호출됨:', type); // 디버깅용 로그
-    
-    // 각 유형에 맞는 페이지 URL 설정 (실제 파일명에 맞게 수정)
+    // 각 유형에 맞는 페이지 URL 설정
     const pageUrls = {
-        type1: '완벽주의자.html',
-        type2: '헌신자.html',
-        type3: '성취자.html',
-        type4: '개성추구자.html',
-        type5: '탐구자.html',
-        type6: '충실한 사람.html',
-        type7: '열정적인 사람.html',
-        type8: '도전자.html',
-        type9: '평화주의자.html'
+        type1: 'https://testpro.site/k-test/에리어/완벽주의자',
+        type2: 'https://testpro.site/k-test/에리어/헌신자',
+        type3: 'https://testpro.site/k-test/에리어/성취자',
+        type4: 'https://testpro.site/k-test/에리어/개성추구자',
+        type5: 'https://testpro.site/k-test/에리어/탐구자',
+        type6: 'https://testpro.site/k-test/에리어/충실한 사람',
+        type7: 'https://testpro.site/k-test/에리어/열정적인 사람',
+        type8: 'https://testpro.site/k-test/에리어/도전자',
+        type9: 'https://testpro.site/k-test/에리어/평화주의자'
     };
 
     // 해당 페이지로 이동
-    if (pageUrls[type]) {
-        console.log('페이지 이동:', pageUrls[type]); // 디버깅용 로그
-        window.location.href = pageUrls[type];
-    } else {
-        console.error('페이지를 찾을 수 없습니다:', type); // 에러 로그
-    }
+    window.location.href = pageUrls[type];
 }
 
 // [광고] 페이지 로드 시 초기화

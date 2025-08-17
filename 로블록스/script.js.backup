@@ -475,6 +475,19 @@ function setupKakaoShare(result) {
 
 // 초기화
 document.addEventListener('DOMContentLoaded', function() {
-    // 헤더 광고를 즉시 표시하지 않고 테스트 시작 시에만 표시
-    console.log('DOM 로드 완료 - AdManager 준비됨');
+    // AdManager 인스턴스 생성
+    window.adManager = new AdManager();
+    
+    // 페이지 로드 시 상단 광고 표시
+    const topAd = document.querySelector('.adsbygoogle');
+    if (topAd && !topAd.hasAttribute('data-adsbygoogle-status')) {
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            console.log('페이지 로드 시 상단 광고 로드');
+        } catch (e) {
+            console.error('상단 광고 로드 오류:', e);
+        }
+    }
+    
+    console.log('DOM 로드 완료 - AdManager 초기화됨');
 });

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>건강보험 피부양자 등록 자격상실 조건 완벽 가이드 | 2025년 최신 정보</title>
+    
+    <!-- SEO 메타 태그 -->
+    <meta name="description" content="건강보험 피부양자 등록과 자격상실 조건을 완벽 분석! 소득기준, 나이제한, 가족관계별 자격요건과 신청방법까지 한번에 확인하세요.">
+    <meta name="keywords" content="건강보험, 피부양자, 자격상실, 등록조건, 소득기준, 나이제한, 부양가족, 건보료, 직장가입자, 지역가입자, 가족관계, 건강보험공단">
+    <meta name="author" content="테스트프로">
+    
+    <!-- Open Graph 메타 태그 -->
+    <meta property="og:title" content="건강보험 피부양자 등록 자격상실 조건 완벽 가이드">
+    <meta property="og:description" content="나의 상황에 맞는 건강보험 피부양자 자격 조건을 확인해보세요. 2025년 최신 기준으로 정확한 정보를 제공합니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sd2624.github.io/건강보험피부양자/">
+    <meta property="og:image" content="https://sd2624.github.io/건강보험피부양자/건강보험피부양자.svg">
+    
+    <!-- Twitter Card 메타 태그 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="건강보험 피부양자 등록 자격상실 조건 완벽 가이드">
+    <meta name="twitter:description" content="나의 상황에 맞는 건강보험 피부양자 자격 조건을 확인해보세요.">
+    <meta name="twitter:image" content="https://sd2624.github.io/건강보험피부양자/건강보험피부양자.svg">
+    
+    <!-- JSON-LD 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "건강보험 피부양자 등록 자격상실 조건 테스트",
+        "description": "건강보험 피부양자 등록과 자격상실 조건을 분석하는 맞춤형 테스트",
+        "url": "https://sd2624.github.io/건강보험피부양자/",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "테스트프로"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="canonical" href="https://sd2624.github.io/건강보험피부양자/">
+    
+    <!-- 카카오 SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 상단 광고 (헤더 바로 아래) -->
+    <div class="ad-section" id="ad-top" style="margin: 20px 0; text-align: center;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- 시작 페이지 -->
+    <div id="startPage" class="page">
+        <div class="container">
+            <div class="header-section">
+                <div class="medical-icon">
+                    <div class="cross-symbol">✚</div>
+                </div>
+                <h1 class="main-title">건강보험 피부양자 자격 진단</h1>
+                <p class="subtitle">나의 상황에 맞는 피부양자 등록 및 자격상실 조건을 확인해보세요</p>
+                <div class="info-badges">
+                    <span class="badge">2025년 최신 기준</span>
+                    <span class="badge">정확한 소득 계산</span>
+                    <span class="badge">맞춤형 안내</span>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>가족관계별 자격</h3>
+                    <p>배우자, 자녀, 부모, 형제자매별 상세 조건</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>소득기준 분석</h3>
+                    <p>2025년 최신 소득기준과 계산방법</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>신청방법 안내</h3>
+                    <p>등록부터 자격상실까지 단계별 가이드</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚖️</div>
+                    <h3>법적 요건</h3>
+                    <p>건강보험법 기준 정확한 정보</p>
+                </div>
+            </div>
+
+            <button class="start-button" onclick="startTest()">
+                <span class="button-text">📋 자격 진단 시작하기</span>
+                <div class="button-glow"></div>
+            </button>
+
+            <div class="notice-section">
+                <div class="notice-box">
+                    <h4>📢 2025년 변경사항</h4>
+                    <ul>
+                        <li>• 피부양자 소득기준: 연 2,000만원 이하</li>
+                        <li>• 60세 이상 직계존속: 연 3,000만원 이하</li>
+                        <li>• 형제자매 부양 조건 강화</li>
+                        <li>• 온라인 신청 절차 간소화</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 질문 페이지 -->
+    <div id="questionPage" class="page hidden">
+        <div class="container">
+            <div class="progress-section">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="currentQuestion">1</span> / <span id="totalQuestions">6</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-header">
+                    <h2 id="questionTitle">질문이 로드됩니다...</h2>
+                    <p id="questionDescription">설명이 로드됩니다...</p>
+                </div>
+
+                <div id="answersContainer" class="answers-grid">
+                    <!-- 답변 옵션들이 동적으로 생성됩니다 -->
+                </div>
+                
+                <!-- 광고 2: 질문 중간 (3번째 질문 뒤에 표시) -->
+                <div class="ad-section" id="ad-middle" style="display: none; margin: 20px 0; text-align: center;">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="1966797795"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 분석 모달 -->
+    <div id="analysisModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="analysis-header">
+                <div class="analysis-icon">🔍</div>
+                <h2>건강보험 자격 분석 중...</h2>
+                <p>당신의 상황을 정밀 분석하고 있습니다</p>
+            </div>
+
+            <div class="analysis-steps">
+                <div class="step-item">
+                    <span class="step-check">○</span>
+                    <span class="step-text">가족관계 확인</span>
+                </div>
+                <div class="step-item">
+                    <span class="step-check">○</span>
+                    <span class="step-text">소득기준 계산</span>
+                </div>
+                <div class="step-item">
+                    <span class="step-check">○</span>
+                    <span class="step-text">나이 및 특별조건 검토</span>
+                </div>
+                <div class="step-item">
+                    <span class="step-check">○</span>
+                    <span class="step-text">최적 방안 도출</span>
+                </div>
+                <div class="step-item">
+                    <span class="step-check">○</span>
+                    <span class="step-text">맞춤형 가이드 생성</span>
+                </div>
+            </div>
+
+            <div class="timer-section">
+                <div class="timer-circle">
+                    <span class="timer-display">6</span>
+                </div>
+                <p>잠시만 기다려주세요...</p>
+            </div>
+            
+            <!-- 팝업 광고 -->
+            <div class="ad-container popup">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="2048162683"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+    </div>
+
+    <!-- 결과 페이지 -->
+    <div id="resultPage" class="page hidden">
+        <div class="container">
+            <div class="result-header">
+                <div class="result-icon" id="resultIcon">🏥</div>
+                <h1 id="resultTitle">분석 결과</h1>
+                <p id="resultSubtitle">당신의 건강보험 피부양자 자격 현황</p>
+            </div>
+
+            <div class="result-content">
+                <div class="result-section eligibility-status">
+                    <h3>📋 자격 현황</h3>
+                    <div class="status-content">
+                        <!-- 자격 현황이 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+
+                <div class="result-section income-analysis">
+                    <h3>💰 소득기준 분석</h3>
+                    <div class="income-content">
+                        <!-- 소득 분석이 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+
+                <div class="result-section requirements-check">
+                    <h3>✅ 요건 체크리스트</h3>
+                    <div class="requirements-content">
+                        <!-- 요건 체크리스트가 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+
+                <div class="result-section action-guide">
+                    <h3>🎯 행동 가이드</h3>
+                    <div class="action-content">
+                        <!-- 행동 가이드가 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+                
+                <!-- 광고 3: 결과 페이지 중간 (결과 내용과 액션 버튼 사이) -->
+                <div class="ad-section" id="ad-result" style="margin: 20px 0; text-align: center;">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="4448942166"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn primary" onclick="showDetailedGuide()">
+                    📚 상세 가이드 보기
+                </button>
+                <button class="action-btn secondary" onclick="shareKakao()">
+                    💬 카톡 공유하기
+                </button>
+                <button class="action-btn tertiary" onclick="restartTest()">
+                    🔄 다시 진단하기
+                </button>
+                <a href="../index.html" class="action-btn quaternary">
+                    🏠 다른 테스트 하기
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세 가이드 모달 -->
+    <div id="guideModal" class="modal hidden">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>🏥 건강보험 피부양자 완벽 가이드</h2>
+                <button class="close-btn" onclick="closeGuideModal()">✕</button>
+            </div>
+            
+            <div class="guide-content">
+                <div class="guide-section">
+                    <h3>📋 피부양자 등록 절차</h3>
+                    <div class="checklist">
+                        <label><input type="checkbox"> 건강보험공단 홈페이지 또는 앱 접속</label>
+                        <label><input type="checkbox"> 공인인증서 또는 간편인증 로그인</label>
+                        <label><input type="checkbox"> '피부양자 자격취득신고' 메뉴 선택</label>
+                        <label><input type="checkbox"> 신청자 정보 및 피부양자 정보 입력</label>
+                        <label><input type="checkbox"> 가족관계증명서 등 필요서류 첨부</label>
+                        <label><input type="checkbox"> 소득 관련 서류 첨부 (소득금액증명원 등)</label>
+                        <label><input type="checkbox"> 신청 내용 확인 후 제출</label>
+                        <label><input type="checkbox"> 심사 결과 확인 (보통 2-3일 소요)</label>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>💰 2025년 소득기준 상세</h3>
+                    <div class="income-table">
+                        <div class="table-row header">
+                            <span>구분</span>
+                            <span>연간 소득기준</span>
+                            <span>월 환산액</span>
+                        </div>
+                        <div class="table-row">
+                            <span>일반 피부양자</span>
+                            <span>2,000만원 이하</span>
+                            <span>약 167만원</span>
+                        </div>
+                        <div class="table-row">
+                            <span>60세 이상 직계존속</span>
+                            <span>3,000만원 이하</span>
+                            <span>약 250만원</span>
+                        </div>
+                        <div class="table-row">
+                            <span>형제자매</span>
+                            <span>2,000만원 이하 + 추가조건</span>
+                            <span>약 167만원</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>⚖️ 자격상실 사유</h3>
+                    <div class="checklist">
+                        <label><input type="checkbox"> 소득기준 초과 (3개월 연속)</label>
+                        <label><input type="checkbox"> 다른 직장 취업으로 직장가입자 됨</label>
+                        <label><input type="checkbox"> 개인사업자 등록 및 사업소득 발생</label>
+                        <label><input type="checkbox"> 가입자와의 가족관계 해소 (이혼, 입양해지 등)</label>
+                        <label><input type="checkbox"> 주민등록 말소 또는 국외 이주</label>
+                        <label><input type="checkbox"> 병역의무 이행 (군복무)</label>
+                        <label><input type="checkbox"> 형제자매의 경우 결혼 또는 분가</label>
+                        <label><input type="checkbox"> 가입자의 자격상실</label>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>🏥 주요 혜택</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">💊</span>
+                            <div>
+                                <strong>의료비 혜택</strong>
+                                <p>가입자와 동일한 급여 혜택</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🏥</span>
+                            <div>
+                                <strong>건강검진</strong>
+                                <p>일반검진, 암검진 등</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">👶</span>
+                            <div>
+                                <strong>출산 혜택</strong>
+                                <p>출산급여, 의료비 지원</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🦷</span>
+                            <div>
+                                <strong>치과 혜택</strong>
+                                <p>스케일링, 치료비 지원</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>📞 문의처</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <strong>🏢 국민건강보험공단</strong>
+                            <p>전화: 1577-1000 (평일 9시-18시)</p>
+                            <p>홈페이지: www.nhis.or.kr</p>
+                        </div>
+                        <div class="contact-item">
+                            <strong>📱 더쉬운모바일</strong>
+                            <p>앱스토어에서 '더쉬운모바일' 검색</p>
+                            <p>24시간 온라인 신청 가능</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단 광고 -->
+    <div class="ad-container bottom">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="1724698171"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
