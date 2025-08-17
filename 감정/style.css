@@ -29,10 +29,34 @@ body {
 
 /* 광고 컨테이너 */
 .ad-container {
-    margin: 20px 0;
+    margin: 15px 0;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.ad-container.top {
+    margin: 10px 0 20px 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    min-height: 180px;
+}
+
+.ad-container.mid {
+    margin: 15px 0;
+    background: rgba(102, 126, 234, 0.03);
+    min-height: 200px;
+}
+
+.ad-container.result {
+    margin: 20px 0;
+    background: rgba(118, 75, 162, 0.03);
+    min-height: 200px;
 }
 
 /* 시작 페이지 */
@@ -422,7 +446,9 @@ body {
 
 /* 질문 페이지 */
 .question-page {
-    padding: 40px;
+    padding: 20px;
+    max-height: 100vh;
+    overflow-y: auto;
 }
 
 .hidden {
@@ -430,16 +456,16 @@ body {
 }
 
 .progress-section {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
 .progress-bar {
     background: rgba(102, 126, 234, 0.2);
-    height: 8px;
+    height: 6px;
     border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .progress-fill {
@@ -451,25 +477,25 @@ body {
 }
 
 .question-counter {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #667eea;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .time-indicator {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #666;
 }
 
 .emotion-indicator {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .emotion-icon {
-    font-size: 4rem;
-    margin-bottom: 10px;
+    font-size: 2.5rem;
+    margin-bottom: 8px;
     display: block;
     animation: bounce 2s infinite;
 }
@@ -481,42 +507,44 @@ body {
 }
 
 .emotion-label {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #667eea;
     font-weight: 600;
 }
 
 .question-text {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #333;
-    margin-bottom: 10px;
-    line-height: 1.4;
+    margin-bottom: 8px;
+    line-height: 1.3;
     text-align: center;
 }
 
 .question-subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #666;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .answers-grid {
     display: grid;
-    gap: 15px;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .answer-btn {
     background: white;
     border: 2px solid rgba(102, 126, 234, 0.2);
-    padding: 20px;
-    border-radius: 15px;
-    font-size: 1.1rem;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
     color: #333;
     font-weight: 500;
+    line-height: 1.3;
 }
 
 .answer-btn:hover {
@@ -841,14 +869,19 @@ body {
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .container {
-        padding: 10px;
+        padding: 5px;
     }
     
     .start-page,
-    .question-page,
     .loading-page,
     .result-page {
-        padding: 25px;
+        padding: 20px;
+    }
+    
+    .question-page {
+        padding: 10px;
+        max-height: 100vh;
+        overflow-y: auto;
     }
     
     .main-title {
@@ -895,6 +928,82 @@ body {
     
     .share-section h3 {
         font-size: 1.1rem;
+    }
+    
+    /* 모바일에서 질문과 답안 최적화 */
+    .progress-section {
+        margin-bottom: 15px;
+    }
+    
+    .emotion-indicator {
+        margin-bottom: 10px;
+    }
+    
+    .emotion-icon {
+        font-size: 2rem;
+        margin-bottom: 5px;
+    }
+    
+    .question-text {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        line-height: 1.2;
+    }
+    
+    .question-subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .answers-grid {
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .answer-btn {
+        padding: 12px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+        line-height: 1.2;
+    }
+    
+    /* 모바일 광고 최적화 */
+    .ad-container {
+        margin: 10px -5px;
+        border-radius: 8px;
+        min-height: 180px;
+        padding: 10px;
+        box-shadow: 0 2px 15px rgba(102, 126, 234, 0.15);
+        background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(102, 126, 234, 0.02));
+        border: 2px solid rgba(102, 126, 234, 0.1);
+    }
+    
+    .ad-container.top {
+        margin: 0 -5px 15px -5px;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+        border: 2px solid rgba(102, 126, 234, 0.2);
+        min-height: 160px;
+    }
+    
+    .ad-container.mid {
+        margin: 10px -5px;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.06), rgba(255, 255, 255, 0.98));
+        border: 2px solid rgba(102, 126, 234, 0.15);
+        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
+        min-height: 180px;
+    }
+    
+    .ad-container.result {
+        margin: 15px -5px;
+        background: linear-gradient(135deg, rgba(118, 75, 162, 0.06), rgba(255, 255, 255, 0.98));
+        border: 2px solid rgba(118, 75, 162, 0.15);
+        min-height: 180px;
+    }
+    
+    .adsbygoogle {
+        min-height: 160px !important;
+        width: 100% !important;
+        display: block !important;
     }
 }
 

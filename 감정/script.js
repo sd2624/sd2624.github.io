@@ -35,11 +35,35 @@ function loadAd(container, adId) {
     if (adLoadedState[adKey]) return;
     
     try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        adLoadedState[adKey] = true;
-        console.log(`광고 로드 완료: ${adId}`);
+        // 모바일에서 광고 컨테이너 최적화
+        if (window.innerWidth <= 768) {
+            container.style.minHeight = '180px';
+            container.style.padding = '10px';
+            container.style.border = '2px solid rgba(102, 126, 234, 0.2)';
+            container.style.boxShadow = '0 4px 20px rgba(102, 126, 234, 0.2)';
+        } else {
+            container.style.minHeight = '200px';
+            container.style.padding = '15px';
+        }
+        
+        // 광고 로드 시도
+        setTimeout(() => {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            adLoadedState[adKey] = true;
+            console.log(`광고 로드 완료: ${adId}`);
+        }, 100);
+        
     } catch (error) {
         console.error(`광고 로드 실패: ${adId}`, error);
+        // 재시도 로직
+        setTimeout(() => {
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                adLoadedState[adKey] = true;
+            } catch (retryError) {
+                console.error(`광고 재시도 실패: ${adId}`, retryError);
+            }
+        }, 1000);
     }
 }
 
