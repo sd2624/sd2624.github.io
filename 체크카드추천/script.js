@@ -1,44 +1,57 @@
-// [광고] AdManager 클래스 - 광고 로드 및 중복 방지 관리
+// 전역 함수들 즉시 정의
+window.startTest = function() {
+    console.log('테스트 시작');
+    document.querySelector('#startPage').classList.add('hidden');
+    document.querySelector('#testPage').classList.remove('hidden');
+    
+    // 전역 변수 초기화
+    if (typeof currentQuestion === 'undefined') {
+        window.currentQuestion = 0;
+        window.answers = [];
+        window.testStarted = false;
+    }
+    
+    currentQuestion = 0;
+    answers = [];
+    testStarted = true;
+    
+    showQuestion();
+};
+
+// [광고] AdManager 클래스
 class AdManager {
     constructor() {
-        this.loadedAds = new Set(); // 로드된 광고 추적
+        this.loadedAds = new Set();
     }
-    
-    // 광고 로드 함수
-    loadAd(adId) {
-        if (this.loadedAds.has(adId)) {
-            console.log(`[광고] ${adId} 이미 로드됨 - 중복 방지`);
-            return false;
-        }
+
+    loadAd(elementOrId) {
+        const element = typeof elementOrId === 'string' ? 
+            document.getElementById(elementOrId) : elementOrId;
         
-        const adElement = document.getElementById(adId);
-        if (adElement && typeof adsbygoogle !== 'undefined') {
-            try {
-                // 광고 컨테이너 표시
-                adElement.style.display = 'block';
-                
-                // 광고 푸시
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                
-                this.loadedAds.add(adId);
-                console.log(`[광고] ${adId} 로드 완료`);
-                return true;
-            } catch (error) {
-                console.warn(`[광고] ${adId} 로드 실패:`, error);
-                return false;
-            }
+        if (!element || this.loadedAds.has(element)) return;
+        
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            this.loadedAds.add(element);
+        } catch (e) {
+            console.error('Ad loading error:', e);
         }
-        return false;
     }
-    
-    // 중간 광고 표시 (3번째 질문 후)
+
     showMidAd() {
-        return this.loadAd('adMid');
+        const midAd = document.querySelector('.ad-container.mid');
+        if (midAd) {
+            midAd.style.display = 'block';
+            this.loadAd(midAd);
+        }
     }
-    
-    // 결과 광고 표시
+
     showResultAd() {
-        return this.loadAd('adResult');
+        const resultAd = document.querySelector('.ad-container.result');
+        if (resultAd) {
+            resultAd.style.display = 'block';
+            this.loadAd(resultAd);
+        }
     }
 }
 
@@ -82,9 +95,7 @@ const setupAdObservers = () => {
     if (resultAd) resultAdObserver.observe(resultAd);
 };
 
-// 광고 관리 클래스 - 새로 추가
-
-
+// Kakao SDK 초기화
 if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
     Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
 }
@@ -174,6 +185,126 @@ const questions = [
             { text: "혜택이 좋다면 연회비 OK", emoji: "💰", type: "paid" },
             { text: "연회비는 5만원 이하로", emoji: "💳", type: "limited" },
             { text: "혜택만 좋으면 연회비 상관없음", emoji: "💎", type: "premium" }
+        ]
+    },
+    {
+        id: 9,
+        question: "주로 이용하는 가맹점은?",
+        answers: [
+            { text: "대형마트, 백화점", emoji: "🏬", type: "department" },
+            { text: "편의점, 카페", emoji: "☕", type: "convenience" },
+            { text: "온라인 쇼핑몰", emoji: "💻", type: "online" },
+            { text: "주유소, 대중교통", emoji: "🚗", type: "transport" }
+        ]
+    },
+    {
+        id: 10,
+        question: "간편결제 서비스 사용 빈도는?",
+        answers: [
+            { text: "거의 매일 사용", emoji: "📱", type: "frequent" },
+            { text: "주 2-3회 사용", emoji: "💳", type: "regular" },
+            { text: "가끔 사용", emoji: "⏰", type: "occasional" },
+            { text: "거의 사용 안함", emoji: "❌", type: "never" }
+        ]
+    },
+    {
+        id: 11,
+        question: "온라인 쇼핑 주요 카테고리는?",
+        answers: [
+            { text: "패션, 뷰티", emoji: "👗", type: "fashion" },
+            { text: "전자제품, 가전", emoji: "📺", type: "electronics" },
+            { text: "식품, 생필품", emoji: "🛒", type: "grocery" },
+            { text: "도서, 취미용품", emoji: "📚", type: "hobby" }
+        ]
+    },
+    {
+        id: 12,
+        question: "카드 디자인 중요도는?",
+        answers: [
+            { text: "디자인이 매우 중요해요", emoji: "🎨", type: "design" },
+            { text: "어느 정도 중요해요", emoji: "✨", type: "moderate" },
+            { text: "별로 신경 안써요", emoji: "🤷", type: "minimal" },
+            { text: "기능만 좋으면 돼요", emoji: "⚙️", type: "function" }
+        ]
+    },
+    {
+        id: 13,
+        question: "이체 수수료 면제 혜택의 중요도는?",
+        answers: [
+            { text: "매우 중요해요", emoji: "💰", type: "critical" },
+            { text: "중요해요", emoji: "💳", type: "important" },
+            { text: "보통이에요", emoji: "⚖️", type: "moderate" },
+            { text: "별로 중요하지 않아요", emoji: "🤷", type: "minimal" }
+        ]
+    },
+    {
+        id: 14,
+        question: "체크카드 보안에 대한 관심도는?",
+        answers: [
+            { text: "보안이 최우선이에요", emoji: "🔒", type: "security" },
+            { text: "보안과 편의성 둘 다", emoji: "⚖️", type: "balanced" },
+            { text: "편의성이 더 중요해요", emoji: "📱", type: "convenience" },
+            { text: "별로 신경 안써요", emoji: "🤷", type: "casual" }
+        ]
+    },
+    {
+        id: 15,
+        question: "포인트 적립 후 사용 패턴은?",
+        answers: [
+            { text: "바로바로 사용해요", emoji: "⚡", type: "immediate" },
+            { text: "모아서 큰 혜택으로", emoji: "💎", type: "save" },
+            { text: "가끔 생각날 때", emoji: "💭", type: "occasional" },
+            { text: "적립만 하고 안써요", emoji: "💰", type: "accumulate" }
+        ]
+    },
+    {
+        id: 16,
+        question: "신용카드 vs 체크카드 사용 비율은?",
+        answers: [
+            { text: "체크카드만 사용", emoji: "💳", type: "check_only" },
+            { text: "체크카드 70% 이상", emoji: "📊", type: "check_main" },
+            { text: "반반 정도", emoji: "⚖️", type: "balanced" },
+            { text: "신용카드가 더 많아요", emoji: "💎", type: "credit_main" }
+        ]
+    },
+    {
+        id: 17,
+        question: "가계부 관리 스타일은?",
+        answers: [
+            { text: "앱으로 자동 관리", emoji: "📱", type: "auto" },
+            { text: "수기로 꼼꼼히", emoji: "📝", type: "manual" },
+            { text: "월말에 정리", emoji: "📅", type: "monthly" },
+            { text: "거의 관리 안함", emoji: "🤷", type: "minimal" }
+        ]
+    },
+    {
+        id: 18,
+        question: "체크카드 한도 설정은?",
+        answers: [
+            { text: "최대한 높게", emoji: "📈", type: "high" },
+            { text: "월 예산에 맞춰", emoji: "💰", type: "budget" },
+            { text: "보통 수준으로", emoji: "⚖️", type: "moderate" },
+            { text: "최소한으로", emoji: "📉", type: "low" }
+        ]
+    },
+    {
+        id: 19,
+        question: "새로운 금융 서비스 수용도는?",
+        answers: [
+            { text: "신기술을 빨리 시도해요", emoji: "🚀", type: "early" },
+            { text: "검증되면 사용해요", emoji: "✅", type: "moderate" },
+            { text: "다른 사람들이 쓰면", emoji: "👥", type: "follower" },
+            { text: "기존 것을 선호해요", emoji: "🏛️", type: "traditional" }
+        ]
+    },
+    {
+        id: 20,
+        question: "체크카드 교체 주기는?",
+        answers: [
+            { text: "더 좋은 혜택이 나오면 바로", emoji: "⚡", type: "frequent" },
+            { text: "1-2년마다", emoji: "📅", type: "regular" },
+            { text: "만료될 때까지", emoji: "⏰", type: "expire" },
+            { text: "한 번 만들면 계속", emoji: "🔒", type: "loyal" }
         ]
     }
 ];
@@ -398,13 +529,79 @@ const resultTypes = {
     }
 };
 
-// 초기화
 
+
+// 전역 함수들을 즉시 정의
+window.startTest = function() {
+    console.log('테스트 시작');
+    testStarted = true;
+    currentQuestion = 0;
+    answers = [];
+    
+    document.getElementById('startPage').classList.add('hidden');
+    document.getElementById('testPage').classList.remove('hidden');
+    
+    showQuestion();
+};
+
+window.restartTest = function() {
+    currentQuestion = 0;
+    answers = [];
+    testStarted = false;
+    
+    document.getElementById('resultPage').classList.add('hidden');
+    document.getElementById('startPage').classList.remove('hidden');
+};
+
+window.shareResult = function() {
+    const resultTitle = document.getElementById('resultTitle').textContent;
+    const url = window.location.href;
+    
+    if (typeof Kakao !== 'undefined' && Kakao.isInitialized()) {
+        try {
+            Kakao.Share.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '💳 체크카드 추천 순위 BEST 테스트',
+                    description: `내 결과: ${resultTitle}\n\n나에게 딱 맞는 체크카드를 찾아보세요!`,
+                    imageUrl: 'https://sd2624.github.io/체크카드추천/체크카드추천.svg',
+                    link: {
+                        mobileWebUrl: url,
+                        webUrl: url,
+                    },
+                },
+                buttons: [
+                    {
+                        title: '나도 테스트하기',
+                        link: {
+                            mobileWebUrl: url,
+                            webUrl: url,
+                        },
+                    },
+                ],
+            });
+        } catch (error) {
+            console.error('카카오 공유 오류:', error);
+            // 기본 클립보드 복사
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('🔗 링크가 복사되었습니다!');
+                });
+            }
+        }
+    } else {
+        // 기본 클립보드 복사
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(() => {
+                alert('🔗 링크가 복사되었습니다!');
+            });
+        }
     }
-});
+};
 
 // 테스트 시작
 function startTest() {
+    alert('startTest 함수가 호출되었습니다!');
     console.log('테스트 시작');
     testStarted = true;
     currentQuestion = 0;
@@ -417,7 +614,7 @@ function startTest() {
 }
 
 // 질문 표시
-function showQuestion() {
+window.showQuestion = function() {
     const question = questions[currentQuestion];
     const progressPercent = ((currentQuestion + 1) / questions.length) * 100;
     
@@ -444,10 +641,10 @@ function showQuestion() {
         
         answersContainer.appendChild(answerElement);
     });
-}
+};
 
 // 답변 선택
-function selectAnswer(index, type) {
+window.selectAnswer = function(index, type) {
     // 선택 효과
     const options = document.querySelectorAll('.answer-option');
     options.forEach(option => option.classList.remove('selected'));
@@ -456,7 +653,7 @@ function selectAnswer(index, type) {
     // 답변 저장
     answers[currentQuestion] = type;
     
-    // 3번째 질문 완료 후 중간 광고 표시 - 새로 추가
+    // 3번째 질문 완료 후 중간 광고 표시
     if (currentQuestion === 2) {
         showMidAd();
     }
@@ -612,6 +809,78 @@ function analyzeAnswers() {
                 if (answer === 'limited') scores.convenience += 2;
                 if (answer === 'premium') scores.premium += 3;
                 break;
+            case 8: // 가맹점
+                if (answer === 'department') scores.premium += 2;
+                if (answer === 'convenience') scores.convenience += 2;
+                if (answer === 'online') scores.convenience += 3;
+                if (answer === 'transport') scores.basic += 2;
+                break;
+            case 9: // 간편결제
+                if (answer === 'frequent') scores.convenience += 3;
+                if (answer === 'regular') scores.convenience += 2;
+                if (answer === 'occasional') scores.cashback += 1;
+                if (answer === 'never') scores.basic += 2;
+                break;
+            case 10: // 온라인 쇼핑
+                if (answer === 'fashion') scores.premium += 2;
+                if (answer === 'electronics') scores.premium += 2;
+                if (answer === 'grocery') scores.cashback += 2;
+                if (answer === 'hobby') scores.convenience += 1;
+                break;
+            case 11: // 카드 디자인
+                if (answer === 'design') scores.premium += 2;
+                if (answer === 'moderate') scores.convenience += 1;
+                if (answer === 'minimal') scores.cashback += 1;
+                if (answer === 'function') scores.basic += 2;
+                break;
+            case 12: // 이체 수수료
+                if (answer === 'critical') scores.basic += 3;
+                if (answer === 'important') scores.basic += 2;
+                if (answer === 'moderate') scores.cashback += 1;
+                if (answer === 'minimal') scores.premium += 1;
+                break;
+            case 13: // 보안
+                if (answer === 'security') scores.basic += 3;
+                if (answer === 'balanced') scores.convenience += 2;
+                if (answer === 'convenience') scores.convenience += 3;
+                if (answer === 'casual') scores.cashback += 1;
+                break;
+            case 14: // 포인트 사용
+                if (answer === 'immediate') scores.convenience += 2;
+                if (answer === 'save') scores.premium += 2;
+                if (answer === 'occasional') scores.cashback += 1;
+                if (answer === 'accumulate') scores.basic += 2;
+                break;
+            case 15: // 카드 사용 비율
+                if (answer === 'check_only') scores.basic += 3;
+                if (answer === 'check_main') scores.cashback += 2;
+                if (answer === 'balanced') scores.convenience += 1;
+                if (answer === 'credit_main') scores.premium += 2;
+                break;
+            case 16: // 가계부 관리
+                if (answer === 'auto') scores.convenience += 3;
+                if (answer === 'manual') scores.basic += 2;
+                if (answer === 'monthly') scores.cashback += 1;
+                if (answer === 'minimal') scores.premium += 1;
+                break;
+            case 17: // 카드 한도
+                if (answer === 'high') scores.premium += 2;
+                if (answer === 'budget') scores.basic += 3;
+                if (answer === 'moderate') scores.cashback += 2;
+                if (answer === 'low') scores.basic += 2;
+                break;
+            case 18: // 신기술 수용
+                if (answer === 'early') scores.convenience += 3;
+                if (answer === 'moderate') scores.cashback += 2;
+                if (answer === 'follower') scores.basic += 1;
+                if (answer === 'traditional') scores.basic += 3;
+                break;
+            case 19: // 교체 주기
+                if (answer === 'frequent') scores.premium += 2;
+                if (answer === 'regular') scores.cashback += 2;
+                if (answer === 'expire') scores.convenience += 1;
+                if (answer === 'loyal') scores.basic += 3;
+                break;
         }
     });
     
@@ -686,14 +955,27 @@ function shareResult() {
     }
 }
 
-// 페이지 로드 시 초기화 - 새로 추가
-
-
-// [광고] 페이지 로드 시 초기화
+// 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
     // 상단 광고 즉시 로드
     adManager.loadAd('adTop');
     
     // 옵저버 설정
     setupAdObservers();
+    
+    // Kakao SDK 초기화
+    if (typeof Kakao !== 'undefined') {
+        Kakao.init('your_kakao_app_key');
+    }
+    
+    // 이벤트 리스너 등록
+    const startTestBtn = document.getElementById('startTestBtn');
+    if (startTestBtn) {
+        startTestBtn.addEventListener('click', startTest);
+    }
+    
+    // 전역 함수를 window 객체에 등록하여 HTML에서 접근 가능하도록 함
+    window.startTest = startTest;
+    window.restartTest = restartTest;
+    window.shareResult = shareResult;
 });

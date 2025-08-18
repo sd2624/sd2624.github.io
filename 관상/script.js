@@ -264,7 +264,7 @@ function startAnalysis() {
     analyzingSection.style.display = 'block';
     
     // 중간 광고 표시 및 로드
-    adManager.showAd('ad-middle');
+    adManager.loadAd('ad-middle');
     
     // 분석 애니메이션 시작
     simulateAnalysis();
@@ -341,7 +341,7 @@ function showResults() {
     shareSection.style.display = 'block';
     
     // 결과 페이지 중간 광고 표시 및 로드
-    adManager.showAd('ad-result');
+    adManager.loadAd('ad-result');
     
     // 스크롤을 결과 섹션으로 이동
     resultSection.scrollIntoView({ behavior: 'smooth' });

@@ -171,6 +171,126 @@ const questions = [
             { text: "70-100%", score: 2 },
             { text: "100% 이상", score: 0 }
         ]
+    },
+    {
+        question: "현재 직업 및 근속기간은?",
+        answers: [
+            { text: "대기업/공무원 5년 이상", score: 10 },
+            { text: "중견기업 3년 이상", score: 8 },
+            { text: "중소기업 2년 이상", score: 6 },
+            { text: "프리랜서/계약직", score: 4 },
+            { text: "무직/아르바이트", score: 1 }
+        ]
+    },
+    {
+        question: "월 소득 수준은 어느 정도인가요?",
+        answers: [
+            { text: "500만원 이상", score: 10 },
+            { text: "300-500만원", score: 8 },
+            { text: "200-300만원", score: 6 },
+            { text: "100-200만원", score: 4 },
+            { text: "100만원 미만", score: 2 }
+        ]
+    },
+    {
+        question: "통신비, 공과금 연체 경험은?",
+        answers: [
+            { text: "연체한 적 없음", score: 10 },
+            { text: "1년에 1-2회", score: 7 },
+            { text: "분기마다 1회", score: 4 },
+            { text: "월 1회 이상", score: 2 },
+            { text: "자주 연체", score: 0 }
+        ]
+    },
+    {
+        question: "보유하고 있는 부동산은?",
+        answers: [
+            { text: "자가 아파트/주택", score: 10 },
+            { text: "전세", score: 7 },
+            { text: "월세", score: 4 },
+            { text: "부모님 집 거주", score: 2 },
+            { text: "기타 임시거주", score: 1 }
+        ]
+    },
+    {
+        question: "적금이나 예금 보유 현황은?",
+        answers: [
+            { text: "5천만원 이상", score: 10 },
+            { text: "1천-5천만원", score: 8 },
+            { text: "500-1천만원", score: 6 },
+            { text: "100-500만원", score: 4 },
+            { text: "100만원 미만", score: 2 }
+        ]
+    },
+    {
+        question: "보험 가입 현황은?",
+        answers: [
+            { text: "생명보험, 손해보험 모두", score: 10 },
+            { text: "생명보험만", score: 7 },
+            { text: "손해보험만", score: 5 },
+            { text: "간병보험만", score: 3 },
+            { text: "보험 미가입", score: 1 }
+        ]
+    },
+    {
+        question: "신용카드 현금서비스 이용 빈도는?",
+        answers: [
+            { text: "전혀 이용 안함", score: 10 },
+            { text: "1년에 1-2회", score: 7 },
+            { text: "분기마다 1회", score: 4 },
+            { text: "월 1회 이상", score: 2 },
+            { text: "자주 이용", score: 0 }
+        ]
+    },
+    {
+        question: "할부거래 이용 패턴은?",
+        answers: [
+            { text: "할부 이용 안함", score: 10 },
+            { text: "무이자 할부만", score: 8 },
+            { text: "6개월 이하 할부", score: 6 },
+            { text: "12개월 이하 할부", score: 4 },
+            { text: "장기 할부 자주 이용", score: 2 }
+        ]
+    },
+    {
+        question: "금융기관과의 거래 다양성은?",
+        answers: [
+            { text: "은행, 카드사, 보험사 모두", score: 10 },
+            { text: "은행, 카드사", score: 8 },
+            { text: "은행만", score: 6 },
+            { text: "카드사만", score: 4 },
+            { text: "거래기관 1곳만", score: 2 }
+        ]
+    },
+    {
+        question: "연체 발생 시 해결 방식은?",
+        answers: [
+            { text: "연체 경험 없음", score: 10 },
+            { text: "즉시 해결", score: 8 },
+            { text: "1주일 이내 해결", score: 6 },
+            { text: "1개월 이내 해결", score: 3 },
+            { text: "장기간 방치", score: 0 }
+        ]
+    },
+    {
+        question: "신용관리에 대한 관심도는?",
+        answers: [
+            { text: "매우 관심 많고 정기 확인", score: 10 },
+            { text: "관심 있고 가끔 확인", score: 8 },
+            { text: "보통 수준의 관심", score: 6 },
+            { text: "별로 관심 없음", score: 3 },
+            { text: "전혀 관심 없음", score: 1 }
+        ]
+    },
+    {
+        question: "향후 금융 계획은?",
+        answers: [
+            { text: "체계적 재정관리 계획", score: 10 },
+            { text: "주택구입 계획", score: 8 },
+            { text: "투자 계획", score: 6 },
+            { text: "현상 유지", score: 4 },
+            { text: "특별한 계획 없음", score: 2 }
+        ]
     }
 ];
 
@@ -396,9 +516,10 @@ window.closePopupAd = closePopupAd;
 function startTest() {
     currentQuestionIndex = 0;
     userAnswers = [];
+    totalQuestions = questions.length;
     
     // 모든 광고 숨기기 (새 테스트 시작 시)
-    adManager.hideAllAds();
+    // adManager.hideAllAds();
     
     showPage('question');
     displayQuestion();
@@ -442,7 +563,7 @@ function displayQuestion() {
     
     // 3번째 질문 이후 중간 광고 표시
     if (currentQuestionIndex >= 2) {
-        adManager.showAd('ad-middle');
+        adManager.loadAd('ad-middle');
     }
     
     // 질문 표시
@@ -662,6 +783,9 @@ window.shareKakao = shareKakao;
 
 // [광고] 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
+    // DOM 요소 초기화
+    initializeElements();
+    
     // 상단 광고 즉시 로드
     adManager.loadAd('adTop');
     

@@ -700,3 +700,12 @@ body {
         --border-color: #616161;
     }
 }
+
+/* 유틸리티 클래스 */
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: block !important;
+}

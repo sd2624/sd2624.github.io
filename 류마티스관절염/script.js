@@ -172,6 +172,150 @@ const questions = [
             { text: "특정 동작만 어려움", limitation: "specific_tasks", independence: 4, quality: 4 },
             { text: "제약 없음", limitation: "none", independence: 5, quality: 5 }
         ]
+    },
+    {
+        question: "관절 통증의 강도는?",
+        description: "💔 현재 느끼는 통증의 정도를 평가해주세요",
+        answers: [
+            { text: "견딜 수 없을 정도로 심함 (9-10점)", intensity: "severe", pain_level: 10, impact: 5 },
+            { text: "매우 심함 (7-8점)", intensity: "very_high", pain_level: 8, impact: 4 },
+            { text: "보통 정도 (5-6점)", intensity: "moderate", pain_level: 6, impact: 3 },
+            { text: "가벼움 (3-4점)", intensity: "mild", pain_level: 4, impact: 2 },
+            { text: "매우 가벼움 (1-2점)", intensity: "minimal", pain_level: 2, impact: 1 },
+            { text: "통증 없음 (0점)", intensity: "none", pain_level: 0, impact: 0 }
+        ]
+    },
+    {
+        question: "관절의 열감이나 발적이 있나요?",
+        description: "🔥 관절 주변의 열감과 붉어짐을 확인해주세요",
+        answers: [
+            { text: "여러 관절에 심한 열감과 발적", inflammation: "multiple_severe", heat: 5, redness: 5 },
+            { text: "한두 관절에 뚜렷한 열감", inflammation: "few_moderate", heat: 4, redness: 3 },
+            { text: "가끔 미미한 열감", inflammation: "occasional_mild", heat: 2, redness: 2 },
+            { text: "열감은 있으나 발적 없음", inflammation: "heat_only", heat: 3, redness: 1 },
+            { text: "발적만 있고 열감 없음", inflammation: "redness_only", heat: 1, redness: 3 },
+            { text: "열감이나 발적 없음", inflammation: "none", heat: 0, redness: 0 }
+        ]
+    },
+    {
+        question: "손목과 손가락의 변형이 있나요?",
+        description: "✋ 관절의 모양 변화를 확인해주세요",
+        answers: [
+            { text: "심한 변형으로 기능 저하", deformity: "severe", function: 1, progression: 5 },
+            { text: "중간 정도 변형 있음", deformity: "moderate", function: 3, progression: 4 },
+            { text: "경미한 변형 시작", deformity: "mild", function: 4, progression: 3 },
+            { text: "변형은 없으나 부기만", deformity: "swelling_only", function: 4, progression: 2 },
+            { text: "변형 없음", deformity: "none", function: 5, progression: 1 },
+            { text: "잘 모르겠음", deformity: "uncertain", function: 3, progression: 2 }
+        ]
+    },
+    {
+        question: "류마티스 결절이 있나요?",
+        description: "🔍 팔꿈치나 손등에 작은 혹 같은 것이 있는지 확인",
+        answers: [
+            { text: "여러 곳에 뚜렷한 결절", nodules: "multiple", location: "various", ra_specific: 5 },
+            { text: "팔꿈치에 결절 있음", nodules: "elbow", location: "elbow", ra_specific: 4 },
+            { text: "손등이나 손가락에 있음", nodules: "hands", location: "hands", ra_specific: 4 },
+            { text: "작고 눈에 잘 안 띄는 것 같음", nodules: "small", location: "unclear", ra_specific: 2 },
+            { text: "결절 없음", nodules: "none", location: "none", ra_specific: 0 },
+            { text: "다른 부위의 덩어리 있음", nodules: "other", location: "other", ra_specific: 1 }
+        ]
+    },
+    {
+        question: "혈액검사를 받아본 적이 있나요?",
+        description: "🩸 류마티스 인자나 염증 수치 검사 결과",
+        answers: [
+            { text: "류마티스 인자 양성", blood_test: "rf_positive", inflammation: "high", diagnosis: 5 },
+            { text: "염증 수치 높음 (ESR, CRP)", blood_test: "inflammation_high", inflammation: "high", diagnosis: 4 },
+            { text: "모든 검사 정상", blood_test: "normal", inflammation: "normal", diagnosis: 1 },
+            { text: "검사 받지 않음", blood_test: "not_done", inflammation: "unknown", diagnosis: 2 },
+            { text: "일부 수치만 비정상", blood_test: "partial_abnormal", inflammation: "mild", diagnosis: 3 },
+            { text: "결과를 모름", blood_test: "unknown_result", inflammation: "unknown", diagnosis: 2 }
+        ]
+    },
+    {
+        question: "증상 시작 시기는?",
+        description: "📅 관절 증상이 언제부터 시작되었나요?",
+        answers: [
+            { text: "6개월 이상 전부터", onset: "chronic", duration: "over_6months", severity: 5 },
+            { text: "3-6개월 전부터", onset: "subacute", duration: "3_6months", severity: 4 },
+            { text: "1-3개월 전부터", onset: "recent", duration: "1_3months", severity: 3 },
+            { text: "몇 주 전부터", onset: "acute", duration: "weeks", severity: 2 },
+            { text: "며칠 전부터", onset: "very_recent", duration: "days", severity: 1 },
+            { text: "정확히 기억 안 남", onset: "unclear", duration: "unknown", severity: 3 }
+        ]
+    },
+    {
+        question: "약물 치료 경험이 있나요?",
+        description: "💊 관절염을 위해 복용 중이거나 복용했던 약물",
+        answers: [
+            { text: "메토트렉세이트 등 항류마티스약", medication: "dmards", effectiveness: "specialized", treatment: 5 },
+            { text: "스테로이드 복용 중", medication: "steroids", effectiveness: "high", treatment: 4 },
+            { text: "일반 진통소염제만", medication: "nsaids", effectiveness: "moderate", treatment: 3 },
+            { text: "약물 치료 받지 않음", medication: "none", effectiveness: "none", treatment: 1 },
+            { text: "한약이나 건강보조식품", medication: "alternative", effectiveness: "low", treatment: 2 },
+            { text: "진통제 효과 없음", medication: "ineffective", effectiveness: "poor", treatment: 2 }
+        ]
+    },
+    {
+        question: "관절 외 다른 부위 증상은?",
+        description: "👁️ 눈, 피부, 폐 등 다른 장기의 증상",
+        answers: [
+            { text: "안구건조, 구강건조 심함", extra_articular: "sicca_syndrome", organs: "eyes_mouth", autoimmune: 5 },
+            { text: "피부 발진이나 결절", extra_articular: "skin_lesions", organs: "skin", autoimmune: 4 },
+            { text: "호흡곤란이나 기침", extra_articular: "lung_symptoms", organs: "lungs", autoimmune: 4 },
+            { text: "심장 두근거림", extra_articular: "heart_symptoms", organs: "heart", autoimmune: 3 },
+            { text: "관절 외 증상 없음", extra_articular: "none", organs: "none", autoimmune: 1 },
+            { text: "기타 증상 있음", extra_articular: "other", organs: "other", autoimmune: 2 }
+        ]
+    },
+    {
+        question: "현재 스트레스 수준은?",
+        description: "😰 일상생활에서 느끼는 스트레스 정도",
+        answers: [
+            { text: "매우 높음 (수면장애, 불안)", stress: "very_high", impact: "severe", mental_health: 5 },
+            { text: "높음 (자주 짜증, 피로)", stress: "high", impact: "moderate", mental_health: 4 },
+            { text: "보통 수준", stress: "moderate", impact: "mild", mental_health: 3 },
+            { text: "낮음", stress: "low", impact: "minimal", mental_health: 2 },
+            { text: "거의 없음", stress: "minimal", impact: "none", mental_health: 1 },
+            { text: "스트레스 관리 잘 됨", stress: "managed", impact: "controlled", mental_health: 1 }
+        ]
+    },
+    {
+        question: "식이 습관은 어떤가요?",
+        description: "🍎 평소 식사 패턴과 영양 상태",
+        answers: [
+            { text: "항염 식품 위주로 섭취", diet: "anti_inflammatory", nutrition: "excellent", health: 5 },
+            { text: "균형 잡힌 식사", diet: "balanced", nutrition: "good", health: 4 },
+            { text: "일반적인 식사", diet: "regular", nutrition: "average", health: 3 },
+            { text: "가공식품을 자주 섭취", diet: "processed", nutrition: "poor", health: 2 },
+            { text: "불규칙한 식사", diet: "irregular", nutrition: "poor", health: 2 },
+            { text: "식욕부진으로 잘 못 먹음", diet: "poor_appetite", nutrition: "inadequate", health: 1 }
+        ]
+    },
+    {
+        question: "수면의 질은?",
+        description: "😴 밤에 잠을 잘 자는지 확인해주세요",
+        answers: [
+            { text: "통증 때문에 자주 깸", sleep: "pain_interrupted", quality: "poor", rest: 1 },
+            { text: "잠들기 어려움", sleep: "difficulty_falling", quality: "poor", rest: 2 },
+            { text: "자주 깨지만 다시 잠듦", sleep: "frequent_waking", quality: "fair", rest: 3 },
+            { text: "보통 수준", sleep: "average", quality: "fair", rest: 3 },
+            { text: "잘 잠", sleep: "good", quality: "good", rest: 4 },
+            { text: "매우 깊게 잠", sleep: "excellent", quality: "excellent", rest: 5 }
+        ]
+    },
+    {
+        question: "관절 보호를 위한 노력은?",
+        description: "🛡️ 관절 건강을 위해 실천하는 것들",
+        answers: [
+            { text: "물리치료, 보조기구 사용", protection: "comprehensive", care: "excellent", prevention: 5 },
+            { text: "규칙적인 스트레칭과 운동", protection: "exercise_focused", care: "good", prevention: 4 },
+            { text: "가끔 온찜질이나 마사지", protection: "occasional", care: "fair", prevention: 3 },
+            { text: "무리하지 않으려 노력", protection: "activity_modification", care: "fair", prevention: 3 },
+            { text: "특별한 노력 안 함", protection: "none", care: "poor", prevention: 1 },
+            { text: "잘못된 방법 사용", protection: "inappropriate", care: "poor", prevention: 1 }
+        ]
     }
 ];
 
@@ -190,7 +334,7 @@ function startTest() {
     if (questionPage) questionPage.classList.remove('hidden');
     
     // 헤더 광고 표시
-    adManager.showAd('ad-header');
+    adManager.loadAd('ad-header');
     
     const totalQuestions = document.getElementById('totalQuestions');
     if (totalQuestions) totalQuestions.textContent = questions.length;
@@ -219,7 +363,7 @@ function showQuestion() {
     
     // 3번째 질문 이후 중간 광고 표시
     if (currentQuestionIndex >= 2) {
-        adManager.showAd('ad-middle');
+        adManager.loadAd('ad-middle');
     }
     
     // 질문 내용 업데이트
@@ -301,7 +445,7 @@ function showResult() {
     if (resultPage) resultPage.classList.remove('hidden');
     
     // 결과 페이지 광고 표시
-    adManager.showAd('ad-result');
+    adManager.loadAd('ad-result');
     
     const result = analyzeAnswers();
     displayResult(result);
@@ -309,65 +453,150 @@ function showResult() {
 
 // 답변 분석
 function analyzeAnswers() {
-    const painPattern = userAnswers[0] || {};
-    const swelling = userAnswers[1] || {};
-    const stiffness = userAnswers[2] || {};
-    const systemic = userAnswers[3] || {};
-    const riskFactors = userAnswers[4] || {};
-    const exercise = userAnswers[5] || {};
-    const dailyLife = userAnswers[6] || {};
+    console.log('analyzeAnswers 호출됨. 전체 답변:', userAnswers);
     
-    // RA 가능성 점수 계산
+    // 20개 질문 답변 추출
+    const painPattern = userAnswers[0] || {};        // 관절 통증 패턴
+    const swelling = userAnswers[1] || {};           // 관절 부종
+    const stiffness = userAnswers[2] || {};          // 아침 강직
+    const systemic = userAnswers[3] || {};           // 전신 증상
+    const riskFactors = userAnswers[4] || {};        // 가족력/위험요인
+    const exercise = userAnswers[5] || {};           // 운동 습관
+    const dailyLife = userAnswers[6] || {};          // 일상생활 제한
+    const painIntensity = userAnswers[7] || {};      // 통증 강도
+    const inflammation = userAnswers[8] || {};        // 열감/발적
+    const deformity = userAnswers[9] || {};          // 관절 변형
+    const nodules = userAnswers[10] || {};           // 류마티스 결절
+    const bloodTest = userAnswers[11] || {};         // 혈액검사
+    const symptomOnset = userAnswers[12] || {};      // 증상 시작 시기
+    const medication = userAnswers[13] || {};        // 약물 치료
+    const extraSymptoms = userAnswers[14] || {};     // 관절 외 증상
+    const stress = userAnswers[15] || {};            // 스트레스
+    const diet = userAnswers[16] || {};              // 식이 습관
+    const sleep = userAnswers[17] || {};             // 수면의 질
+    const protection = userAnswers[18] || {};        // 관절 보호 노력
+    
+    // RA 가능성 점수 계산 (더 정밀한 계산)
     let raScore = 0;
-    let severity = 0;
+    let inflammationScore = 0;
+    let functionalScore = 0;
+    let managementScore = 0;
+    
+    // 핵심 RA 증상 점수 (가중치 적용)
+    raScore += (painPattern.severity || 0) * 1.5;        // 통증 패턴 (중요)
+    raScore += (swelling.ra_score || 0) * 2;             // 대칭적 부종 (매우 중요)
+    raScore += (stiffness.stiffness || 0) * 1.8;         // 아침 강직 (매우 중요)
+    raScore += (nodules.ra_specific || 0) * 1.5;         // 류마티스 결절
+    raScore += (bloodTest.diagnosis || 0) * 2.2;         // 혈액검사 (매우 중요)
+    raScore += (deformity.progression || 0) * 1.3;       // 관절 변형
+    
+    // 염증 점수
+    inflammationScore += (systemic.inflammation || 0);
+    inflammationScore += (inflammation.heat || 0);
+    inflammationScore += (inflammation.redness || 0);
+    inflammationScore += (extraSymptoms.autoimmune || 0);
+    
+    // 기능적 점수 (일상생활 영향)
+    functionalScore += (6 - (dailyLife.independence || 5));  // 역산
+    functionalScore += (painIntensity.impact || 0);
+    functionalScore += (sleep.rest === undefined ? 3 : (6 - sleep.rest));  // 역산
+    
+    // 관리 점수 (생활습관 및 치료)
+    managementScore += (exercise.activity || 0);
+    managementScore += (protection.prevention || 0);
+    managementScore += (diet.health || 0);
+    managementScore += (medication.treatment || 0);
+    managementScore -= (stress.mental_health || 0);  // 스트레스는 감점
+    
+    // 총 점수 계산 (100점 만점으로 정규화)
+    const totalScore = Math.min(100, Math.round(
+        (raScore * 0.4 + inflammationScore * 0.3 + functionalScore * 0.2 + Math.max(0, managementScore) * 0.1)
+    ));
+    
+    // 위험도 판정 및 추천사항
     let riskLevel = "";
     let recommendation = "";
     let treatmentPlan = [];
     let exercisePlan = [];
+    let urgency = "";
     
-    // 각 영역별 점수 합산
-    raScore += (painPattern.severity || 0);
-    raScore += (swelling.ra_score || 0);
-    raScore += (stiffness.stiffness || 0);
-    raScore += (systemic.inflammation || 0);
-    raScore += (riskFactors.risk || 0);
+    console.log('점수 계산:', { raScore, inflammationScore, functionalScore, managementScore, totalScore });
     
-    // 일상생활 제약도
-    severity = (dailyLife.independence || 5);
-    
-    // 위험도 판정
-    if (raScore >= 20 && (painPattern.type === "classic_ra" || swelling.symmetry >= 4)) {
-        riskLevel = "류마티스 관절염 고위험";
-        recommendation = "즉시 류마티스 내과 전문의 진료 필요";
-        treatmentPlan.push("혈액검사 (RF, Anti-CCP, ESR, CRP)");
+    if (totalScore >= 75 || (raScore >= 15 && inflammationScore >= 12)) {
+        riskLevel = "류마티스 관절염 고위험 (80-100%)";
+        recommendation = "즉시 류마티스 내과 전문의 진료가 필요합니다";
+        urgency = "응급";
+        treatmentPlan.push("혈액검사: RF, Anti-CCP, ESR, CRP");
         treatmentPlan.push("관절 X-ray 및 초음파 검사");
-        treatmentPlan.push("조기 DMARD 치료 고려");
-        exercisePlan.push("급성기에는 관절 휴식");
+        treatmentPlan.push("조기 DMARD 치료 시작 고려");
+        treatmentPlan.push("생물학적 제제 치료 검토");
+        exercisePlan.push("급성기: 관절 휴식 및 보호");
         exercisePlan.push("염증 완화 후 수중 운동");
-    } else if (raScore >= 15) {
-        riskLevel = "관절염 중위험";
-        recommendation = "관절염 정밀 검사 권장";
-        treatmentPlan.push("류마티스 내과 상담");
-        treatmentPlan.push("기본 혈액검사 및 영상검사");
-        treatmentPlan.push("항염증 치료");
-        exercisePlan.push("저강도 유산소 운동");
+        exercisePlan.push("물리치료사 지도하 관절가동운동");
+        
+    } else if (totalScore >= 55 || (raScore >= 10 && inflammationScore >= 8)) {
+        riskLevel = "관절염 중위험 (50-80%)";
+        recommendation = "류마티스 내과 전문의 상담을 권장합니다";
+        urgency = "주의";
+        treatmentPlan.push("류마티스 내과 전문의 상담");
+        treatmentPlan.push("기본 혈액검사 및 관절 영상검사");
+        treatmentPlan.push("항염증 치료 시작");
+        treatmentPlan.push("정기적인 모니터링");
+        exercisePlan.push("저강도 유산소 운동 (걷기, 수영)");
         exercisePlan.push("관절 가동범위 운동");
-    } else if (raScore >= 10) {
-        riskLevel = "관절염 주의";
-        recommendation = "정기적인 관찰 필요";
-        treatmentPlan.push("1차 의료기관 상담");
+        exercisePlan.push("근력강화 운동 (등장성)");
+        
+    } else if (totalScore >= 35 || raScore >= 6) {
+        riskLevel = "관절염 경계선 (30-50%)";
+        recommendation = "관절 건강 관리 및 추적 관찰이 필요합니다";
+        urgency = "관찰";
+        treatmentPlan.push("정형외과 또는 류마티스내과 상담");
+        treatmentPlan.push("기본 건강검진 및 염증 수치 확인");
         treatmentPlan.push("생활습관 개선");
-        treatmentPlan.push("증상 모니터링");
-        exercisePlan.push("규칙적인 운동 습관");
-        exercisePlan.push("관절 보호 운동");
+        treatmentPlan.push("3-6개월 후 재평가");
+        exercisePlan.push("규칙적인 유산소 운동");
+        exercisePlan.push("스트레칭 및 요가");
+        exercisePlan.push("체중 관리");
+        
     } else {
-        riskLevel = "관절 건강 양호";
-        recommendation = "예방적 관리 지속";
+        riskLevel = "관절염 저위험 (30% 미만)";
+        recommendation = "현재 상태 유지 및 예방 관리가 중요합니다";
+        urgency = "예방";
         treatmentPlan.push("건강한 생활습관 유지");
         treatmentPlan.push("정기 건강검진");
-        treatmentPlan.push("관절 건강 관리");
-        exercisePlan.push("다양한 운동 활동");
-        exercisePlan.push("근력 및 유연성 운동");
+        treatmentPlan.push("관절 건강 교육");
+        treatmentPlan.push("연 1회 관절 상태 점검");
+        exercisePlan.push("다양한 운동 (유산소, 근력, 유연성)");
+        exercisePlan.push("관절에 무리가 안 가는 스포츠");
+        exercisePlan.push("균형감각 및 coordination 운동");
+    }
+    
+    // 개별 맞춤 조언 추가
+    const personalizedAdvice = [];
+    
+    // 통증 관리
+    if (painIntensity.pain_level >= 7) {
+        personalizedAdvice.push("심한 통증 관리: 냉온찜질, 적절한 진통제 사용");
+    }
+    
+    // 수면 관리
+    if (sleep.quality === "poor") {
+        personalizedAdvice.push("수면 개선: 취침 전 스트레칭, 침실 환경 개선");
+    }
+    
+    // 스트레스 관리
+    if (stress.impact === "severe" || stress.impact === "moderate") {
+        personalizedAdvice.push("스트레스 관리: 명상, 호흡법, 전문 상담 고려");
+    }
+    
+    // 식이 조언
+    if (diet.nutrition === "poor" || diet.nutrition === "inadequate") {
+        personalizedAdvice.push("항염 식품 섭취: 오메가-3, 항산화 식품 증가");
+    }
+    
+    // 운동 조언
+    if (exercise.activity <= 2) {
+        personalizedAdvice.push("점진적 운동 시작: 관절에 무리 없는 활동부터");
     }
     
     return {
@@ -375,28 +604,33 @@ function analyzeAnswers() {
         recommendation,
         treatmentPlan,
         exercisePlan,
-        raScore,
-        severity,
-        painType: painPattern.type || "일반적",
-        swellingPattern: swelling.location || "없음",
-        stiffnessDuration: stiffness.duration || "없음",
-        systemicSymptoms: systemic.systemic || "없음",
-        exerciseLevel: exercise.exercise || "없음"
+        personalizedAdvice,
+        urgency,
+        totalScore,
+        raScore: Math.round(raScore),
+        inflammationScore,
+        functionalScore,
+        managementScore,
+        symptomDuration: symptomOnset.duration || "unknown",
+        medicationResponse: medication.effectiveness || "unknown",
+        hasSystemicSymptoms: extraSymptoms.autoimmune >= 3
     };
 }
 
 // 결과 표시
 function displayResult(result) {
+    console.log('displayResult 호출됨:', result);
+    
     const resultIcon = document.getElementById('resultIcon');
     const resultTitle = document.getElementById('resultTitle');
     const resultSubtitle = document.getElementById('resultSubtitle');
     
     if (resultIcon) {
-        if (result.riskLevel.includes("고위험")) {
+        if (result.urgency === "응급") {
             resultIcon.textContent = '🚨';
-        } else if (result.riskLevel.includes("중위험")) {
+        } else if (result.urgency === "주의") {
             resultIcon.textContent = '⚠️';
-        } else if (result.riskLevel.includes("주의")) {
+        } else if (result.urgency === "관찰") {
             resultIcon.textContent = '🔍';
         } else {
             resultIcon.textContent = '✅';
@@ -411,6 +645,8 @@ function displayResult(result) {
 
 // 상세 분석 표시
 function displayDetailedAnalysis(result) {
+    console.log('displayDetailedAnalysis 호출됨:', result);
+    
     const symptomDiv = document.querySelector('.symptom-analysis');
     const treatmentDiv = document.querySelector('.treatment-options');
     const exerciseDiv = document.querySelector('.exercise-program');
@@ -418,17 +654,18 @@ function displayDetailedAnalysis(result) {
     
     if (symptomDiv) {
         symptomDiv.innerHTML = `
-            <h3>🔍 증상 분석 결과</h3>
+            <h3>📊 상세 분석 결과</h3>
             <div style="margin: 15px 0;">
-                <div style="background: linear-gradient(135deg, #ffe8e8, #ffcdd2); padding: 15px; border-radius: 10px; margin: 10px 0;">
-                    <strong>위험도:</strong> ${result.riskLevel}<br>
-                    <strong>통증 유형:</strong> ${result.painType}<br>
-                    <strong>부종 패턴:</strong> ${result.swellingPattern}
+                <div style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); padding: 15px; border-radius: 10px; margin: 10px 0;">
+                    <strong>총 위험도 점수:</strong> ${result.totalScore}/100점<br>
+                    <strong>RA 특이점수:</strong> ${result.raScore}점<br>
+                    <strong>염증 점수:</strong> ${result.inflammationScore}점<br>
+                    <strong>기능장애 점수:</strong> ${result.functionalScore}점
                 </div>
                 <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
-                    <strong>아침 강직:</strong> ${result.stiffnessDuration}<br>
-                    <strong>전신 증상:</strong> ${result.systemicSymptoms}<br>
-                    <strong>운동 수준:</strong> ${result.exerciseLevel}
+                    <strong>증상 지속기간:</strong> ${getSymptomDurationText(result.symptomDuration)}<br>
+                    <strong>약물 반응:</strong> ${getMedicationResponseText(result.medicationResponse)}<br>
+                    <strong>전신 증상:</strong> ${result.hasSystemicSymptoms ? '있음' : '없음'}
                 </div>
             </div>
         `;
@@ -436,19 +673,14 @@ function displayDetailedAnalysis(result) {
     
     if (treatmentDiv) {
         treatmentDiv.innerHTML = `
-            <h3>💊 치료 방향</h3>
+            <h3>🏥 추천 치료 계획</h3>
             <div style="margin: 15px 0;">
-                <div style="background: linear-gradient(135deg, #e8f5e8, #c8e6c9); padding: 15px; border-radius: 10px; margin: 10px 0;">
-                    <strong>권장 치료법</strong><br>
-                    ${result.treatmentPlan.map(plan => `<small>• ${plan}</small>`).join('<br>')}
+                <div style="background: linear-gradient(135deg, #fff3e0, #ffcc02); padding: 15px; border-radius: 10px; margin: 10px 0;">
+                    <strong>🚨 긴급도: ${result.urgency}</strong>
                 </div>
-                <div style="background: linear-gradient(135deg, #fff3e0, #ffcc02); padding: 15px; border-radius: 10px;">
-                    <strong>추가 검사 항목</strong><br>
-                    <small>• 류마티스 인자 (RF) 검사</small><br>
-                    <small>• 항CCP 항체 검사</small><br>
-                    <small>• 염증 수치 (ESR, CRP)</small><br>
-                    <small>• 관절 초음파 또는 MRI</small>
-                </div>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    ${result.treatmentPlan.map(plan => `<li style="margin: 8px 0;">${plan}</li>`).join('')}
+                </ul>
             </div>
         `;
     }
@@ -457,41 +689,60 @@ function displayDetailedAnalysis(result) {
         exerciseDiv.innerHTML = `
             <h3>🏃‍♀️ 맞춤 운동 프로그램</h3>
             <div style="margin: 15px 0;">
-                <div style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); padding: 15px; border-radius: 10px; margin: 10px 0;">
-                    <strong>추천 운동</strong><br>
-                    ${result.exercisePlan.map(exercise => `<small>• ${exercise}</small>`).join('<br>')}
+                <div style="background: linear-gradient(135deg, #e8f5e8, #4caf50); color: white; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                    <strong>추천 운동 계획</strong>
                 </div>
-                <div style="background: linear-gradient(135deg, #f3e5f5, #ce93d8); color: white; padding: 15px; border-radius: 10px;">
-                    <strong>수중 운동 프로그램 (최고 우선순위)</strong><br>
-                    <small>• 수영: 주 3회, 30분씩</small><br>
-                    <small>• 아쿠아로빅: 주 2회, 45분씩</small><br>
-                    <small>• 수중 걷기: 매일 20분씩</small>
-                </div>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    ${result.exercisePlan.map(exercise => `<li style="margin: 8px 0;">${exercise}</li>`).join('')}
+                </ul>
             </div>
         `;
     }
     
     if (managementDiv) {
         managementDiv.innerHTML = `
-            <h3>📋 일상 관리 계획</h3>
+            <h3>💡 개인 맞춤 관리법</h3>
             <div style="margin: 15px 0;">
-                <div style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e); padding: 15px; border-radius: 10px; margin: 10px 0;">
-                    <strong>생활 수칙</strong><br>
-                    <small>• 충분한 휴식과 수면 (8시간)</small><br>
-                    <small>• 금연 및 금주</small><br>
-                    <small>• 스트레스 관리</small><br>
-                    <small>• 적정 체중 유지</small>
+                <div style="background: linear-gradient(135deg, #f3e5f5, #ba68c8); color: white; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                    <strong>맞춤형 생활 관리 조언</strong>
                 </div>
-                <div style="background: linear-gradient(135deg, #ff7675, #e17055); color: white; padding: 15px; border-radius: 10px;">
-                    <strong>주의사항</strong><br>
-                    <small>• 관절에 무리가 가는 활동 피하기</small><br>
-                    <small>• 염증 급성기에는 관절 휴식</small><br>
-                    <small>• 정기적인 전문의 진료</small><br>
-                    <small>• 약물 복용 시 부작용 모니터링</small>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    ${result.personalizedAdvice.map(advice => `<li style="margin: 8px 0;">${advice}</li>`).join('')}
+                </ul>
+                <div style="background: linear-gradient(135deg, #ffebee, #ef5350); color: white; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <strong>⚠️ 주의사항</strong><br>
+                    <small>• 이 결과는 참고용이며 정확한 진단은 의료진과 상담하세요</small><br>
+                    <small>• 증상이 악화되거나 새로운 증상이 나타나면 즉시 병원 방문</small><br>
+                    <small>• 정기적인 추적 관찰과 전문의 진료가 중요합니다</small>
                 </div>
             </div>
         `;
     }
+}
+
+// 보조 함수들
+function getSymptomDurationText(duration) {
+    const durationMap = {
+        "over_6months": "6개월 이상",
+        "3_6months": "3-6개월",
+        "1_3months": "1-3개월", 
+        "weeks": "수 주",
+        "days": "수 일",
+        "unknown": "불명확"
+    };
+    return durationMap[duration] || "알 수 없음";
+}
+
+function getMedicationResponseText(response) {
+    const responseMap = {
+        "specialized": "전문 약물 사용 중",
+        "high": "좋은 반응",
+        "moderate": "보통 반응",
+        "poor": "효과 미미",
+        "none": "약물 치료 안 함",
+        "unknown": "알 수 없음"
+    };
+    return responseMap[response] || "정보 없음";
 }
 
 // 카카오 공유
@@ -632,6 +883,31 @@ window.restartTest = restartTest;
 window.shareKakao = shareKakao;
 window.showDetailedGuide = showDetailedGuide;
 window.closeGuideModal = closeGuideModal;
+
+// 누락된 함수들 추가
+function showResult() {
+    if (analysisModal) analysisModal.classList.add('hidden');
+    if (resultPage) resultPage.classList.remove('hidden');
+    
+    // 답변 분석 및 결과 표시
+    const analysisResult = analyzeAnswers();
+    displayResult(analysisResult);
+    
+    // 결과 페이지 광고 로드
+    setTimeout(() => {
+        if (typeof adsbygoogle !== 'undefined') {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    }, 500);
+}
+
+function closeGuideModal() {
+    const guideModal = document.getElementById('guideModal');
+    if (guideModal) {
+        guideModal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+}
 
 // [광고] 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {

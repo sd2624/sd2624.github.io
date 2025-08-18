@@ -1,141 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#667eea"/>
-      <stop offset="100%" style="stop-color:#764ba2"/>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F7931E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD23F;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FF6B6B"/>
-      <stop offset="100%" style="stop-color:#4ECDC4"/>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="pumpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#3498db"/>
-      <stop offset="50%" style="stop-color:#2980b9"/>
-      <stop offset="100%" style="stop-color:#1abc9c"/>
-    </linearGradient>
-    <linearGradient id="discountGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#e74c3c"/>
-      <stop offset="100%" style="stop-color:#c0392b"/>
-    </linearGradient>
-    <radialGradient id="shadowGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:rgba(0,0,0,0.3)"/>
-      <stop offset="100%" style="stop-color:rgba(0,0,0,0)"/>
-    </radialGradient>
   </defs>
   
   <!-- 배경 -->
-  <rect width="400" height="400" fill="url(#bg)" rx="50"/>
+  <rect width="300" height="300" fill="url(#cardGradient)" rx="15"/>
   
-  <!-- 주유기 그림자 -->
-  <ellipse cx="200" cy="360" rx="60" ry="15" fill="url(#shadowGrad)" opacity="0.5"/>
-  
-  <!-- 주유기 베이스 -->
-  <rect x="160" y="180" width="80" height="140" fill="url(#pumpGrad)" rx="12"/>
-  <rect x="165" y="185" width="70" height="130" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" rx="8"/>
-  
-  <!-- 주유기 상단 -->
-  <rect x="155" y="175" width="90" height="25" fill="#2c3e50" rx="10"/>
-  
-  <!-- 주유기 디스플레이 -->
-  <rect x="170" y="200" width="60" height="45" fill="#34495e" rx="8"/>
-  <rect x="175" y="205" width="50" height="35" fill="#000" rx="5"/>
-  
-  <!-- 디스플레이 텍스트 -->
-  <text x="200" y="225" text-anchor="middle" fill="#0f0" font-family="monospace" font-size="12" font-weight="bold">₩1,480</text>
-  <text x="200" y="237" text-anchor="middle" fill="#0f0" font-family="monospace" font-size="10">/L</text>
-  
-  <!-- 주유기 버튼들 -->
-  <circle cx="180" cy="260" r="6" fill="#e74c3c"/>
-  <circle cx="200" cy="260" r="6" fill="#f39c12"/>
-  <circle cx="220" cy="260" r="6" fill="#27ae60"/>
-  
-  <!-- 주유기 호스 -->
-  <path d="M 240 300 Q 280 290 300 310 Q 320 330 310 355" stroke="#2c3e50" stroke-width="6" fill="none"/>
-  <path d="M 240 300 Q 280 290 300 310 Q 320 330 310 355" stroke="#34495e" stroke-width="4" fill="none"/>
-  
-  <!-- 주유건 -->
-  <ellipse cx="310" cy="355" rx="12" ry="6" fill="#2c3e50"/>
-  <rect x="302" y="349" width="16" height="12" fill="#34495e" rx="2"/>
-  <rect x="306" y="352" width="8" height="6" fill="#e74c3c" rx="1"/>
-  
-  <!-- 연료 방울 효과 -->
-  <circle cx="315" cy="368" r="3" fill="#3498db" opacity="0.8">
-    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
-  </circle>
-  
-  <!-- 신용카드 -->
-  <rect x="60" y="110" width="100" height="65" fill="url(#cardGrad)" rx="10"/>
-  <rect x="63" y="113" width="94" height="59" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" rx="8"/>
-  
-  <!-- 카드 칩 -->
-  <rect x="70" y="125" width="20" height="15" fill="#FFD700" rx="2"/>
-  <rect x="72" y="127" width="16" height="11" fill="#FFA500" rx="1"/>
-  
-  <!-- 카드 번호 -->
-  <text x="80" y="150" fill="white" font-family="monospace" font-size="9" font-weight="bold">**** ****</text>
-  <text x="80" y="162" fill="white" font-family="monospace" font-size="9" font-weight="bold">**** 1234</text>
-  
-  <!-- 카드 로고 -->
-  <circle cx="140" cy="135" r="8" fill="rgba(255,255,255,0.3)"/>
-  <text x="140" y="139" text-anchor="middle" fill="white" font-size="8" font-weight="bold">VISA</text>
-  
-  <!-- 할인 뱃지 -->
-  <circle cx="300" cy="120" r="40" fill="url(#discountGrad)"/>
-  <circle cx="300" cy="120" r="32" fill="white"/>
-  <text x="300" y="110" text-anchor="middle" fill="#e74c3c" font-size="14" font-weight="bold">할인</text>
-  <text x="300" y="125" text-anchor="middle" fill="#e74c3c" font-size="16" font-weight="bold">-120원</text>
-  <text x="300" y="137" text-anchor="middle" fill="#e74c3c" font-size="10">/리터</text>
-  
-  <!-- 할인 뱃지 장식 -->
-  <path d="M 270 95 L 275 100 L 270 105 Z" fill="#f1c40f"/>
-  <path d="M 330 95 L 325 100 L 330 105 Z" fill="#f1c40f"/>
-  <path d="M 275 145 L 280 140 L 275 135 Z" fill="#f1c40f"/>
-  <path d="M 325 145 L 320 140 L 325 135 Z" fill="#f1c40f"/>
-  
-  <!-- 연결 화살표 -->
-  <path d="M 160 147 Q 190 130 230 140 Q 270 150 270 120" stroke="#4ECDC4" stroke-width="3" fill="none" stroke-dasharray="5,3" opacity="0.8" marker-end="url(#arrowhead)"/>
-  
-  <!-- 화살표 마커 정의 -->
-  <defs>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#4ECDC4" opacity="0.8"/>
-    </marker>
-  </defs>
-  
-  <!-- 절약 동전들 -->
-  <g transform="translate(80, 280)">
-    <circle cx="0" cy="0" r="10" fill="#f1c40f"/>
-    <circle cx="0" cy="0" r="7" fill="#f39c12"/>
-    <text x="0" y="3" text-anchor="middle" fill="white" font-size="8" font-weight="bold">₩</text>
+  <!-- 주유기 아이콘 -->
+  <g transform="translate(50, 50)">
+    <!-- 주유기 본체 -->
+    <rect x="80" y="100" width="40" height="80" fill="url(#iconGradient)" rx="5"/>
+    <!-- 주유기 호스 -->
+    <path d="M100 100 Q120 80 140 100 L160 120" stroke="#333" stroke-width="3" fill="none"/>
+    <!-- 주유기 노즐 -->
+    <circle cx="160" cy="120" r="8" fill="#333"/>
+    <!-- 주유기 디스플레이 -->
+    <rect x="85" y="110" width="30" height="20" fill="#000" rx="2"/>
+    <text x="100" y="125" text-anchor="middle" fill="#0F0" font-family="Arial" font-size="8">88.8</text>
   </g>
   
-  <g transform="translate(105, 295)">
-    <circle cx="0" cy="0" r="8" fill="#f1c40f"/>
-    <circle cx="0" cy="0" r="5" fill="#f39c12"/>
-    <text x="0" y="2" text-anchor="middle" fill="white" font-size="6" font-weight="bold">₩</text>
+  <!-- 신용카드 아이콘 -->
+  <g transform="translate(180, 80)">
+    <rect x="0" y="0" width="60" height="38" fill="#4285F4" rx="4"/>
+    <rect x="0" y="8" width="60" height="8" fill="#333"/>
+    <rect x="5" y="20" width="20" height="4" fill="#FFF"/>
+    <rect x="30" y="20" width="25" height="4" fill="#FFF"/>
+    <rect x="5" y="28" width="15" height="4" fill="#FFF"/>
   </g>
   
-  <g transform="translate(125, 285)">
-    <circle cx="0" cy="0" r="6" fill="#f1c40f"/>
-    <circle cx="0" cy="0" r="4" fill="#f39c12"/>
-    <text x="0" y="2" text-anchor="middle" fill="white" font-size="5" font-weight="bold">₩</text>
+  <!-- 할인 태그 -->
+  <g transform="translate(200, 150)">
+    <circle cx="25" cy="25" r="25" fill="#E91E63"/>
+    <text x="25" y="20" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="bold">할인</text>
+    <text x="25" y="35" text-anchor="middle" fill="white" font-family="Arial" font-size="8">UP TO</text>
   </g>
   
-  <!-- 주유소 아이콘들 -->
-  <g transform="translate(50, 300)">
-    <rect x="0" y="0" width="15" height="8" fill="#e74c3c" rx="2"/>
-    <text x="7.5" y="6" text-anchor="middle" fill="white" font-size="5" font-weight="bold">GS</text>
+  <!-- 제목 텍스트 -->
+  <text x="150" y="220" text-anchor="middle" fill="white" font-family="Arial" font-size="24" font-weight="bold">주유할인카드</text>
+  <text x="150" y="245" text-anchor="middle" fill="white" font-family="Arial" font-size="16">추천 테스트</text>
+  
+  <!-- 연료 아이콘들 -->
+  <g transform="translate(30, 250)">
+    <circle cx="15" cy="15" r="12" fill="#FF5722"/>
+    <text x="15" y="20" text-anchor="middle" fill="white" font-family="Arial" font-size="10" font-weight="bold">휘</text>
   </g>
   
-  <g transform="translate(50, 315)">
-    <rect x="0" y="0" width="15" height="8" fill="#3498db" rx="2"/>
-    <text x="7.5" y="6" text-anchor="middle" fill="white" font-size="5" font-weight="bold">SK</text>
+  <g transform="translate(70, 250)">
+    <circle cx="15" cy="15" r="12" fill="#4CAF50"/>
+    <text x="15" y="20" text-anchor="middle" fill="white" font-family="Arial" font-size="10" font-weight="bold">경</text>
   </g>
   
-  <!-- 상단 타이틀 -->
-  <text x="200" y="50" text-anchor="middle" fill="white" font-size="24" font-weight="bold">⛽ 주유할인카드</text>
-  <text x="200" y="70" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="14">혜택 비교 & 추천</text>
+  <g transform="translate(215, 250)">
+    <circle cx="15" cy="15" r="12" fill="#2196F3"/>
+    <text x="15" y="20" text-anchor="middle" fill="white" font-family="Arial" font-size="10" font-weight="bold">LPG</text>
+  </g>
   
-  <!-- 하단 설명 -->
-  <text x="200" y="385" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="12" font-weight="bold">나에게 맞는 최고의 주유카드 찾기</text>
+  <g transform="translate(255, 250)">
+    <circle cx="15" cy="15" r="12" fill="#9C27B0"/>
+    <text x="15" y="20" text-anchor="middle" fill="white" font-family="Arial" font-size="8" font-weight="bold">전기</text>
+  </g>
+  
+  <!-- 배경 패턴 -->
+  <g opacity="0.1">
+    <circle cx="50" cy="50" r="30" fill="white"/>
+    <circle cx="250" cy="80" r="20" fill="white"/>
+    <circle cx="80" cy="200" r="25" fill="white"/>
+  </g>
 </svg>

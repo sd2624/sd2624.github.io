@@ -332,14 +332,6 @@ const resultSection = document.getElementById('resultSection');
 let uploadedFile = null;
 let currentCelebrity = null;
 
-// 페이지 로드 시 초기화
-
-    }
-    
-    // 옵저버 설정
-    setupAdObservers();
-});
-
 // [광고] 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
     // 상단 광고 즉시 로드
@@ -347,4 +339,121 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 옵저버 설정
     setupAdObservers();
+    
+    // 파일 업로드 이벤트 리스너 등록
+    setupFileUpload();
 });
+
+// 파일 업로드 이벤트 설정
+function setupFileUpload() {
+    // 업로드 영역 클릭 시 파일 선택
+    uploadArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+    
+    // 드래그 앤 드롭 이벤트
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('dragover');
+    });
+    
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('dragover');
+    });
+    
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleFileUpload(files[0]);
+        }
+    });
+    
+    // 파일 입력 이벤트
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleFileUpload(e.target.files[0]);
+        }
+    });
+    
+    // 분석 버튼 이벤트
+    analyzeBtn.addEventListener('click', startAnalysis);
+}
+
+// 파일 업로드 처리
+function handleFileUpload(file) {
+    // 파일 타입 검증
+    if (!file.type.startsWith('image/')) {
+        alert('이미지 파일만 업로드 가능합니다.');
+        return;
+    }
+    
+    // 파일 크기 검증 (5MB 제한)
+    if (file.size > 5 * 1024 * 1024) {
+        alert('파일 크기는 5MB 이하여야 합니다.');
+        return;
+    }
+    
+    // 파일 저장
+    uploadedFile = file;
+    
+    // 미리보기 이미지 표시
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        uploadedImage.src = e.target.result;
+        uploadedImage.style.display = 'block';
+        uploadArea.querySelector('.upload-placeholder').style.display = 'none';
+        analyzeBtn.disabled = false;
+    };
+    reader.readAsDataURL(file);
+}
+
+// 분석 시작
+function startAnalysis() {
+    if (!uploadedFile) {
+        alert('사진을 먼저 업로드해주세요.');
+        return;
+    }
+    
+    // 섹션 전환
+    uploadSection.style.display = 'none';
+    analyzingSection.style.display = 'block';
+    
+    // 중간 광고 로드
+    adManager.loadAd('ad-middle');
+    
+    // 분석 시뮬레이션
+    simulateAnalysis();
+}
+
+// 분석 시뮬레이션
+function simulateAnalysis() {
+    setTimeout(() => {
+        // 랜덤 연예인 선택
+        const celebrities = [
+            '아이유', '박보영', '김태희', '송혜교', '전지현',
+            '박신혜', '수지', '크리스탈', '태연', '윤아',
+            '정유미', '박소담', '김고은', '한지민', '김하늘',
+            '손예진', '박민영', '김사랑', '이나영', '김태리'
+        ];
+        
+        currentCelebrity = celebrities[Math.floor(Math.random() * celebrities.length)];
+        
+        // 결과 표시
+        showResult();
+    }, 3000);
+}
+
+// 결과 표시
+function showResult() {
+    analyzingSection.style.display = 'none';
+    resultSection.style.display = 'block';
+    
+    // 결과 텍스트 업데이트
+    document.getElementById('celebrityName').textContent = currentCelebrity;
+    document.getElementById('similarityScore').textContent = Math.floor(Math.random() * 20) + 80 + '%';
+    
+    // 결과 광고 로드
+    adManager.loadAd('ad-result');
+}

@@ -171,6 +171,126 @@ const questions = [
             { text: "별로 부담 안된다", score: 3 },
             { text: "전혀 부담 안된다", score: 1 }
         ]
+    },
+    {
+        question: "주택의 면적은 얼마나 되나요?",
+        answers: [
+            { text: "20평 이하", score: 2 },
+            { text: "20-30평", score: 4 },
+            { text: "30-40평", score: 6 },
+            { text: "40-50평", score: 8 },
+            { text: "50평 이상", score: 10 }
+        ]
+    },
+    {
+        question: "전기온수기를 사용하시나요?",
+        answers: [
+            { text: "사용하지 않음", score: 1 },
+            { text: "가끔 사용", score: 3 },
+            { text: "정기적 사용", score: 6 },
+            { text: "매일 사용", score: 8 },
+            { text: "24시간 가동", score: 10 }
+        ]
+    },
+    {
+        question: "식기세척기 사용 빈도는?",
+        answers: [
+            { text: "없음", score: 1 },
+            { text: "주 1-2회", score: 3 },
+            { text: "주 3-4회", score: 5 },
+            { text: "매일 1회", score: 7 },
+            { text: "매일 2회 이상", score: 9 }
+        ]
+    },
+    {
+        question: "전기레인지/인덕션 사용량은?",
+        answers: [
+            { text: "사용하지 않음", score: 1 },
+            { text: "가끔 사용", score: 3 },
+            { text: "주 3-4회", score: 5 },
+            { text: "매일 사용", score: 8 },
+            { text: "하루 3끼 모두", score: 10 }
+        ]
+    },
+    {
+        question: "세탁기/건조기 사용 패턴은?",
+        answers: [
+            { text: "세탁기만 주 1-2회", score: 2 },
+            { text: "세탁기 주 3-4회", score: 4 },
+            { text: "세탁기 매일 + 건조기 가끔", score: 7 },
+            { text: "세탁기, 건조기 매일", score: 9 },
+            { text: "세탁기, 건조기 하루 2회 이상", score: 10 }
+        ]
+    },
+    {
+        question: "컴퓨터/게임기 사용 시간은?",
+        answers: [
+            { text: "하루 2시간 미만", score: 2 },
+            { text: "하루 2-4시간", score: 4 },
+            { text: "하루 4-8시간", score: 6 },
+            { text: "하루 8-12시간", score: 8 },
+            { text: "거의 24시간", score: 10 }
+        ]
+    },
+    {
+        question: "TV 시청 시간과 대수는?",
+        answers: [
+            { text: "1대, 하루 2시간 미만", score: 2 },
+            { text: "1-2대, 하루 4시간", score: 4 },
+            { text: "2-3대, 하루 6시간", score: 6 },
+            { text: "3-4대, 하루 8시간 이상", score: 8 },
+            { text: "4대 이상, 거의 24시간", score: 10 }
+        ]
+    },
+    {
+        question: "전기차 충전 여부는?",
+        answers: [
+            { text: "전기차 없음", score: 1 },
+            { text: "외부 충전소만 이용", score: 2 },
+            { text: "가끔 집에서 충전", score: 6 },
+            { text: "주로 집에서 충전", score: 8 },
+            { text: "매일 집에서 충전", score: 10 }
+        ]
+    },
+    {
+        question: "냉장고/김치냉장고 개수는?",
+        answers: [
+            { text: "냉장고 1대만", score: 2 },
+            { text: "냉장고 1대 + 김치냉장고", score: 4 },
+            { text: "냉장고 2대", score: 6 },
+            { text: "냉장고 2대 + 김치냉장고", score: 8 },
+            { text: "냉장고 3대 이상", score: 10 }
+        ]
+    },
+    {
+        question: "전기 절약 장치 사용 현황은?",
+        answers: [
+            { text: "LED 전구, 절전형 가전 모두 사용", score: 1 },
+            { text: "LED 전구만 사용", score: 3 },
+            { text: "일부만 교체", score: 5 },
+            { text: "거의 교체 안함", score: 8 },
+            { text: "전혀 신경 안씀", score: 10 }
+        ]
+    },
+    {
+        question: "재택근무/집에 있는 시간은?",
+        answers: [
+            { text: "하루 8시간 미만", score: 2 },
+            { text: "하루 8-12시간", score: 4 },
+            { text: "하루 12-16시간", score: 6 },
+            { text: "하루 16-20시간", score: 8 },
+            { text: "거의 24시간 집에 있음", score: 10 }
+        ]
+    },
+    {
+        question: "전기요금 절약 목표는?",
+        answers: [
+            { text: "월 5만원 이하로 유지", score: 1 },
+            { text: "현재보다 20% 절약", score: 3 },
+            { text: "현재보다 10% 절약", score: 5 },
+            { text: "현 상태 유지면 만족", score: 7 },
+            { text: "절약에 관심 없음", score: 10 }
+        ]
     }
 ];
 
@@ -400,6 +520,7 @@ window.closePopupAd = closePopupAd;
 function startTest() {
     currentQuestionIndex = 0;
     userAnswers = [];
+    totalQuestions = questions.length;
     
     showPage('question');
     displayQuestion();
@@ -681,6 +802,9 @@ function initializeAds() {
 
 // 페이지 로드 시 광고 관리자 초기화 (새로 추가)
 document.addEventListener('DOMContentLoaded', () => {
+    // DOM 요소 초기화
+    initializeElements();
+    
     setTimeout(() => {
         adManager.init();
     }, 1000);

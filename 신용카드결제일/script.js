@@ -87,7 +87,7 @@ const setupAdObservers = () => {
 
 let currentQuestionIndex = 0;
 let userAnswers = [];
-let totalQuestions = 8;
+let totalQuestions = 20;
 
 // 카카오 SDK 초기화
 if (typeof Kakao !== 'undefined') {
@@ -174,6 +174,126 @@ const questions = [
             { text: "관리 편의성", score: { early: 3, mid: 2, late: 2 } },
             { text: "신용등급 관리", score: { early: 1, mid: 3, late: 2 } },
             { text: "잘 모르겠음", score: { early: 1, mid: 1, late: 1 } }
+        ]
+    },
+    {
+        question: "통장 잔고 확인 빈도는?",
+        answers: [
+            { text: "매일 확인", score: { early: 3, mid: 2, late: 1 } },
+            { text: "주 2-3회", score: { early: 2, mid: 3, late: 2 } },
+            { text: "주 1회", score: { early: 1, mid: 2, late: 2 } },
+            { text: "월 2-3회", score: { early: 1, mid: 1, late: 3 } },
+            { text: "거의 안봄", score: { early: 0, mid: 0, late: 1 } }
+        ]
+    },
+    {
+        question: "온라인 쇼핑 주기는?",
+        answers: [
+            { text: "매일", score: { early: 2, mid: 1, late: 2 } },
+            { text: "주 2-3회", score: { early: 2, mid: 2, late: 2 } },
+            { text: "주 1회", score: { early: 1, mid: 2, late: 2 } },
+            { text: "월 2-3회", score: { early: 1, mid: 3, late: 1 } },
+            { text: "거의 안함", score: { early: 1, mid: 1, late: 1 } }
+        ]
+    },
+    {
+        question: "정기 구독 서비스 개수는?",
+        answers: [
+            { text: "없음", score: { early: 1, mid: 1, late: 1 } },
+            { text: "1-2개", score: { early: 2, mid: 2, late: 1 } },
+            { text: "3-4개", score: { early: 2, mid: 3, late: 2 } },
+            { text: "5-6개", score: { early: 3, mid: 2, late: 3 } },
+            { text: "7개 이상", score: { early: 3, mid: 1, late: 3 } }
+        ]
+    },
+    {
+        question: "공과금 결제 방식은?",
+        answers: [
+            { text: "자동이체 (계좌)", score: { early: 1, mid: 2, late: 3 } },
+            { text: "자동이체 (카드)", score: { early: 2, mid: 3, late: 2 } },
+            { text: "직접 납부", score: { early: 3, mid: 1, late: 1 } },
+            { text: "때때로 다름", score: { early: 1, mid: 1, late: 1 } },
+            { text: "잘 모르겠음", score: { early: 1, mid: 1, late: 1 } }
+        ]
+    },
+    {
+        question: "카드 청구서 확인 시점은?",
+        answers: [
+            { text: "발송 즉시", score: { early: 3, mid: 2, late: 1 } },
+            { text: "2-3일 후", score: { early: 2, mid: 3, late: 2 } },
+            { text: "결제일 일주일 전", score: { early: 1, mid: 2, late: 3 } },
+            { text: "결제일 하루 전", score: { early: 0, mid: 1, late: 2 } },
+            { text: "결제 후", score: { early: 0, mid: 0, late: 1 } }
+        ]
+    },
+    {
+        question: "할부 이용 빈도는?",
+        answers: [
+            { text: "전혀 안함", score: { early: 2, mid: 3, late: 1 } },
+            { text: "큰 금액만", score: { early: 1, mid: 2, late: 3 } },
+            { text: "가끔 이용", score: { early: 1, mid: 1, late: 2 } },
+            { text: "자주 이용", score: { early: 0, mid: 1, late: 3 } },
+            { text: "대부분 할부", score: { early: 0, mid: 0, late: 2 } }
+        ]
+    },
+    {
+        question: "카드 포인트 관리는?",
+        answers: [
+            { text: "매월 체크하고 사용", score: { early: 3, mid: 2, late: 1 } },
+            { text: "가끔 확인", score: { early: 2, mid: 3, late: 2 } },
+            { text: "쌓기만 함", score: { early: 1, mid: 1, late: 2 } },
+            { text: "신경 안씀", score: { early: 0, mid: 1, late: 1 } },
+            { text: "포인트가 뭔지 모름", score: { early: 0, mid: 0, late: 1 } }
+        ]
+    },
+    {
+        question: "가족 카드 사용 현황은?",
+        answers: [
+            { text: "본인만 사용", score: { early: 3, mid: 2, late: 1 } },
+            { text: "가족카드 1장", score: { early: 2, mid: 3, late: 2 } },
+            { text: "가족카드 2-3장", score: { early: 1, mid: 2, late: 3 } },
+            { text: "가족카드 4장 이상", score: { early: 0, mid: 1, late: 2 } },
+            { text: "잘 모르겠음", score: { early: 1, mid: 1, late: 1 } }
+        ]
+    },
+    {
+        question: "카드 혜택 중요도는?",
+        answers: [
+            { text: "적립률이 최우선", score: { early: 1, mid: 2, late: 3 } },
+            { text: "할인 혜택 중요", score: { early: 2, mid: 3, late: 2 } },
+            { text: "결제 편의성", score: { early: 3, mid: 2, late: 1 } },
+            { text: "연회비 무료", score: { early: 2, mid: 1, late: 2 } },
+            { text: "별로 신경 안씀", score: { early: 1, mid: 1, late: 1 } }
+        ]
+    },
+    {
+        question: "신용등급 확인 빈도는?",
+        answers: [
+            { text: "매월 확인", score: { early: 3, mid: 2, late: 1 } },
+            { text: "분기마다", score: { early: 2, mid: 3, late: 2 } },
+            { text: "반기마다", score: { early: 1, mid: 2, late: 2 } },
+            { text: "1년에 1번", score: { early: 1, mid: 1, late: 3 } },
+            { text: "거의 안봄", score: { early: 0, mid: 0, late: 1 } }
+        ]
+    },
+    {
+        question: "현금 사용 비율은?",
+        answers: [
+            { text: "거의 현금만", score: { early: 1, mid: 1, late: 2 } },
+            { text: "현금 70% 이상", score: { early: 1, mid: 2, late: 2 } },
+            { text: "현금 50% 정도", score: { early: 2, mid: 2, late: 2 } },
+            { text: "현금 30% 이하", score: { early: 2, mid: 3, late: 2 } },
+            { text: "거의 카드만", score: { early: 3, mid: 2, late: 1 } }
+        ]
+    },
+    {
+        question: "카드 결제일 변경 경험은?",
+        answers: [
+            { text: "여러 번 변경함", score: { early: 2, mid: 1, late: 2 } },
+            { text: "1-2번 변경", score: { early: 1, mid: 2, late: 1 } },
+            { text: "변경 고려중", score: { early: 2, mid: 3, late: 3 } },
+            { text: "변경한 적 없음", score: { early: 1, mid: 1, late: 1 } },
+            { text: "변경할 수 있는지 몰랐음", score: { early: 1, mid: 1, late: 2 } }
         ]
     }
 ];
@@ -482,7 +602,7 @@ function startTest() {
     userAnswers = [];
     
     // 모든 광고 숨기기 (새 테스트 시작 시)
-    adManager.hideAllAds();
+    // adManager.hideAllAds();
     
     showQuestion();
 }
@@ -499,7 +619,7 @@ function showQuestion() {
     
     // 3번째 질문 이후 중간 광고 표시
     if (currentQuestionIndex >= 2) {
-        adManager.showAd('ad-middle');
+        adManager.loadAd('ad-middle');
     }
     
     const answersContainer = document.getElementById('answersContainer');
