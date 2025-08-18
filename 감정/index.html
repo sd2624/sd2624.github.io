@@ -40,6 +40,22 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <!-- 구글 애드센스 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <!-- Event snippet for 페이지 조회 conversion page -->
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-11438616604/1mSHCLiKx_4YEJzgrc4q',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
 </head>
 <body>
     <!-- [광고] 페이지 상단 - k-test 상단 (slot: 3201247599) -->
@@ -119,7 +135,7 @@
                     </div>
                 </div>
 
-                <button class="start-btn" id="startTestBtn" onclick="startTest()">
+                <button class="start-btn" id="startTestBtn" onclick="gtag_report_conversion(); startTest();">
                     <span class="btn-icon">🚀</span>
                     내 감정 분석하기
                     <span class="btn-subtitle">무료 • 2분 완성</span>
@@ -275,15 +291,15 @@
                 <div class="related-tests">
                     <h3>다른 테스트도 해보세요</h3>
                     <div class="related-grid">
-                        <a href="../스트레스/" class="related-item">
+                        <a href="../스트레스/" class="related-item" onclick="return gtag_report_conversion('../스트레스/');">
                             <div class="related-icon">😤</div>
                             <div class="related-title">스트레스 측정</div>
                         </a>
-                        <a href="../행복/" class="related-item">
+                        <a href="../행복/" class="related-item" onclick="return gtag_report_conversion('../행복/');">
                             <div class="related-icon">😊</div>
                             <div class="related-title">행복 지수</div>
                         </a>
-                        <a href="../타로/" class="related-item">
+                        <a href="../타로/" class="related-item" onclick="return gtag_report_conversion('../타로/');">
                             <div class="related-icon">🔮</div>
                             <div class="related-title">오늘의 운세</div>
                         </a>
