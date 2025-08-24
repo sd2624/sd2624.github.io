@@ -419,18 +419,89 @@ function calculateAndShowResult() {
     
     const resultData = resultTypes[primaryEmotion[0]] || resultTypes.confusion;
     
-    // 결과를 localStorage에 저장
-    localStorage.setItem('emotionTestResult', JSON.stringify({
-        emotionScores,
-        typeScores,
-        resultData,
-        primaryEmotion: primaryEmotion[0],
-        score: primaryEmotion[1],
-        testDate: new Date().toISOString()
-    }));
+    // 결과 표시
+    nextStep(6);
+    showResult(resultData);
+}
+
+// 결과 표시
+function showResult(resultData) {
+    document.getElementById('resultBadge').textContent = resultData.badge;
+    document.getElementById('resultTitle').textContent = resultData.title;
+    document.getElementById('resultSubtitle').textContent = resultData.subtitle;
     
-    // result.html로 이동
-    window.location.href = 'result.html';
+    // 결과 상세 내용 생성
+    const resultContent = document.getElementById('resultContent');
+    resultContent.innerHTML = `
+        <div class="result-analysis">
+            <div class="analysis-card">
+                <div class="analysis-title">📊 상세 분석</div>
+                <div class="analysis-text">${resultData.description}</div>
+            </div>
+            <div class="analysis-card">
+                <div class="analysis-title">💡 맞춤 조언</div>
+                <div class="analysis-text">${resultData.advice}</div>
+            </div>
+            <div class="analysis-card">
+                <div class="analysis-title">✨ 감정 관리 팁</div>
+                <div class="tips-grid">
+                    ${resultData.tips.map(tip => `
+                        <div class="tip-item">
+                            <div class="tip-icon">✓</div>
+                            <div>${tip}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// 공유 함수들
+function shareKakao() {
+    if (!window.Kakao || !window.Kakao.isInitialized()) {
+        initKakao();
+    }
+    
+    const resultBadge = document.getElementById('resultBadge').textContent;
+    const resultTitle = document.getElementById('resultTitle').textContent;
+    const resultSubtitle = document.getElementById('resultSubtitle').textContent;
+    
+    window.Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+            title: '내 마음속 감정 분석 테스트',
+            description: `나의 결과: ${resultTitle} ${resultBadge}\n${resultSubtitle}`,
+            imageUrl: 'https://sd2624.github.io/감정/감정.png',
+            link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href
+            }
+        },
+        buttons: [
+            {
+                title: '나도 테스트하기',
+                link: {
+                    mobileWebUrl: window.location.href,
+                    webUrl: window.location.href
+                }
+            }
+        ]
+    });
+}
+
+function shareUrl() {
+    if (navigator.share) {
+        navigator.share({
+            title: '내 마음속 감정 분석 테스트',
+            text: '나의 감정 상태를 분석해보세요!',
+            url: window.location.href
+        });
+    } else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            alert('URL이 클립보드에 복사되었습니다!');
+        });
+    }
 }
 
 function restartTest() {

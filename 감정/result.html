@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>감정 분석 테스트 결과 | 내 마음속 감정 상태 진단</title>
+    <meta name="description" content="나의 감정 상태를 정확히 분석하여 맞춤형 조언과 관리법을 제공합니다. 지금 확인해보세요!">
+    <meta name="keywords" content="감정분석, 심리테스트, 감정상태, 감정관리, 심리진단, 멘탈케어">
+    
+    <!-- 카카오톡 공유하기 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    
+    <!-- 구글 애드센스 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <!-- 오픈그래프 -->
+    <meta property="og:title" content="내 마음속 감정 분석 테스트">
+    <meta property="og:description" content="나의 감정 상태를 정확히 분석하여 맞춤형 조언과 관리법을 제공합니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sd2624.github.io/감정/">
+    <meta property="og:image" content="https://sd2624.github.io/감정/감정.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* 결과 페이지 전용 스타일 */
+        .result-page {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        /* 단계 컨테이너 - index.html과 동일 */
+        .step-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: auto;
+            z-index: 1;
+            visibility: visible;
+        }
+
+        .step-container.hidden {
+            visibility: hidden;
+            z-index: -1;
+        }
+
+        .step-container.current {
+            visibility: visible;
+            z-index: 10;
+        }
+
+        .step-content {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: white;
+            border-radius: 0;
+        }
+
+        /* 다음 버튼 - index.html과 동일 */
+        .step-actions {
+            margin-top: auto;
+            padding: 20px 0;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .arrow {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .next-btn:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 15px;
+            flex-shrink: 0;
+        }
+
+        .result-badge {
+            font-size: 40px;
+            margin-bottom: 8px;
+            display: block;
+            animation: bounce 1s ease-in-out;
+        }
+
+        .result-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+
+        .result-subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .result-score {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 10px 0;
+            flex-shrink: 0;
+        }
+
+        .score-title {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 3px;
+        }
+
+        .score-value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .emotion-chart {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 10px 0;
+            flex-shrink: 0;
+        }
+
+        .chart-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .emotion-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .emotion-label {
+            width: 60px;
+            font-size: 11px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .emotion-progress {
+            flex: 1;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin: 0 8px;
+            overflow: hidden;
+        }
+
+        .emotion-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 1s ease-out;
+            border-radius: 3px;
+        }
+
+        .emotion-percentage {
+            width: 30px;
+            font-size: 11px;
+            color: #666;
+            text-align: right;
+        }
+
+        .analysis-section {
+            margin: 10px 0;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .analysis-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 3px solid #667eea;
+        }
+
+        .analysis-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .analysis-text {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .tips-grid {
+            display: grid;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            font-size: 11px;
+        }
+
+        .tip-icon {
+            color: #667eea;
+            font-weight: bold;
+            margin-top: 1px;
+            font-size: 12px;
+        }
+
+        .detailed-analysis {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .personality-traits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .trait-item {
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+        }
+
+        .trait-icon {
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+
+        .trait-label {
+            font-size: 11px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .improvement-section {
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .improvement-steps {
+            counter-reset: step-counter;
+        }
+
+        .improvement-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            counter-increment: step-counter;
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .step-number::before {
+            content: counter(step-counter);
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 3px;
+            font-size: 13px;
+        }
+
+        .step-description {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.3;
+        }
+
+        .action-buttons {
+            display: grid;
+            gap: 8px;
+            margin: 15px 0;
+            flex-shrink: 0;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .action-btn.secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #e9ecef;
+        }
+
+        .action-btn.secondary:hover {
+            background: #e9ecef;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .action-btn.next-result {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
+        }
+
+        .related-tests {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #f1f3f4;
+            flex-shrink: 0;
+        }
+
+        .related-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .tests-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .test-link {
+            text-decoration: none;
+            color: #333;
+            text-align: center;
+            padding: 10px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .test-link:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .test-icon {
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .test-label {
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* 광고 영역 */
+        .ad-container {
+            margin: 10px 0;
+            text-align: center;
+            min-height: 150px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* 앵커 광고 제거 */
+        .anchor-ad {
+            display: none;
+        }
+
+        /* 모바일 최적화 */
+        @media (max-width: 480px) {
+            .step-content {
+                padding: 15px;
+                border-radius: 0;
+            }
+
+            .tests-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .personality-traits {
+                grid-template-columns: 1fr;
+            }
+
+            .result-badge {
+                font-size: 35px;
+            }
+
+            .result-title {
+                font-size: 16px;
+            }
+
+            .result-subtitle {
+                font-size: 12px;
+            }
+
+            .ad-container {
+                min-height: 120px;
+            }
+
+            .next-btn {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="result-page">
+        <!-- Step 1: 기본 결과 -->
+        <div class="step-container current" id="resultStep1" data-step="1">
+            <div class="step-content">
+                <div class="result-header">
+                    <div class="result-badge" id="resultBadge">🤗</div>
+                    <h1 class="result-title" id="resultTitle">감정 분석 중...</h1>
+                    <p class="result-subtitle" id="resultSubtitle">결과를 불러오는 중입니다...</p>
+                </div>
+
+                <div class="result-score">
+                    <div class="score-title">주요 감정 점수</div>
+                    <div class="score-value" id="scoreValue">85점</div>
+                </div>
+
+                <!-- [광고] 결과 광고 -->
+                <div class="ad-container" id="adResult1">
+                    <ins class="adsbygoogle"
+                         style="display:block;"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="3593134392"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+
+                <div class="step-actions">
+                    <button class="next-btn" onclick="nextResultStep()">
+                        다음 <span class="arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: 감정 분포 차트 -->
+        <div class="step-container hidden" id="resultStep2" data-step="2">
+            <div class="step-content">
+                <div class="emotion-chart">
+                    <div class="chart-title">📊 감정 분포 분석</div>
+                    <div id="emotionBars"></div>
+                </div>
+
+                <!-- [광고] 차트 광고 -->
+                <div class="ad-container" id="adResult2">
+                    <ins class="adsbygoogle"
+                         style="display:block;"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="1966797795"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+
+                <div class="step-actions">
+                    <button class="next-btn" onclick="nextResultStep()">
+                        다음 <span class="arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: 상세 분석 -->
+        <div class="step-container hidden" id="resultStep3" data-step="3">
+            <div class="step-content">
+                <div class="analysis-section" id="analysisSection">
+                    <!-- 동적으로 생성 -->
+                </div>
+
+                <div class="step-actions">
+                    <button class="next-btn" onclick="nextResultStep()">
+                        다음 <span class="arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: 성격 특성 -->
+        <div class="step-container hidden" id="resultStep4" data-step="4">
+            <div class="step-content">
+                <div class="detailed-analysis">
+                    <div class="analysis-title">🧠 성격 특성 분석</div>
+                    <div class="personality-traits" id="personalityTraits">
+                        <!-- 동적으로 생성 -->
+                    </div>
+                </div>
+
+                <!-- [광고] 특성 광고 -->
+                <div class="ad-container" id="adResult3">
+                    <ins class="adsbygoogle"
+                         style="display:block;"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="3593134392"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+
+                <div class="step-actions">
+                    <button class="next-btn" onclick="nextResultStep()">
+                        다음 <span class="arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: 개선 방법 -->
+        <div class="step-container hidden" id="resultStep5" data-step="5">
+            <div class="step-content">
+                <div class="improvement-section">
+                    <div class="analysis-title">🎯 감정 관리 실행 계획</div>
+                    <div class="improvement-steps" id="improvementSteps">
+                        <!-- 동적으로 생성 -->
+                    </div>
+                </div>
+
+                <div class="step-actions">
+                    <button class="next-btn" onclick="nextResultStep()">
+                        다음 <span class="arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 6: 공유 및 액션 -->
+        <div class="step-container hidden" id="resultStep6" data-step="6">
+            <div class="step-content">
+                <div class="final-section">
+                    <h2 style="text-align: center; margin-bottom: 20px;">🎉 분석 완료!</h2>
+                    
+                    <!-- 액션 버튼들 -->
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="shareKakao()">
+                            💬 카카오톡 공유하기
+                        </button>
+                        <button class="action-btn" onclick="shareUrl()">
+                            🔗 URL 공유하기
+                        </button>
+                        <button class="action-btn next-result" onclick="showNextResult()" id="nextResultBtn">
+                            🔄 다음 결과 보기 <span id="resultCounter">(1/8)</span>
+                        </button>
+                        <button class="action-btn secondary" onclick="restartTest()">
+                            ↩️ 다시 테스트하기
+                        </button>
+                    </div>
+
+                    <!-- 관련 테스트 -->
+                    <div class="related-tests">
+                        <h3 class="related-title">다른 테스트도 해보세요</h3>
+                        <div class="tests-grid">
+                            <a href="../스트레스/" class="test-link">
+                                <span class="test-icon">😤</span>
+                                <div class="test-label">스트레스 측정</div>
+                            </a>
+                            <a href="../행복/" class="test-link">
+                                <span class="test-icon">😊</span>
+                                <div class="test-label">행복 지수</div>
+                            </a>
+                            <a href="../타로/" class="test-link">
+                                <span class="test-icon">🔮</span>
+                                <div class="test-label">오늘의 운세</div>
+                            </a>
+                            <a href="../mbti/" class="test-link">
+                                <span class="test-icon">🧩</span>
+                                <div class="test-label">MBTI 분석</div>
+                            </a>
+                            <a href="../색/" class="test-link">
+                                <span class="test-icon">🎨</span>
+                                <div class="test-label">컬러 테스트</div>
+                            </a>
+                            <a href="../사랑/" class="test-link">
+                                <span class="test-icon">💕</span>
+                                <div class="test-label">연애 스타일</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 앵커 광고 (하단 고정) -->
+    <div class="anchor-ad" id="anchorAd">
+        <ins class="adsbygoogle"
+             style="display:block;"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="8394761234"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="result.js"></script>
+</body>
+</html>
