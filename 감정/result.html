@@ -111,88 +111,88 @@
 
         .result-header {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             flex-shrink: 0;
         }
 
         .result-badge {
-            font-size: 40px;
-            margin-bottom: 8px;
+            font-size: 30px;
+            margin-bottom: 5px;
             display: block;
             animation: bounce 1s ease-in-out;
         }
 
         .result-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             line-height: 1.2;
         }
 
         .result-subtitle {
-            font-size: 13px;
+            font-size: 12px;
             color: #666;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             line-height: 1.3;
         }
 
         .result-score {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 10px;
-            border-radius: 12px;
+            padding: 8px;
+            border-radius: 10px;
             text-align: center;
-            margin: 10px 0;
+            margin: 8px 0;
             flex-shrink: 0;
         }
 
         .score-title {
-            font-size: 12px;
+            font-size: 11px;
             opacity: 0.9;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .score-value {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
         }
 
         .emotion-chart {
             background: #f8f9fa;
-            border-radius: 12px;
-            padding: 12px;
-            margin: 10px 0;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 8px 0;
             flex-shrink: 0;
         }
 
         .chart-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
         }
 
         .emotion-bar {
             display: flex;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .emotion-label {
-            width: 60px;
-            font-size: 11px;
+            width: 50px;
+            font-size: 10px;
             color: #666;
             font-weight: 500;
         }
 
         .emotion-progress {
             flex: 1;
-            height: 6px;
+            height: 5px;
             background: #e9ecef;
             border-radius: 3px;
-            margin: 0 8px;
+            margin: 0 6px;
             overflow: hidden;
         }
 
@@ -204,64 +204,136 @@
         }
 
         .emotion-percentage {
-            width: 30px;
-            font-size: 11px;
+            width: 25px;
+            font-size: 10px;
             color: #666;
             text-align: right;
         }
 
         .analysis-section {
-            margin: 10px 0;
+            margin: 8px 0;
             flex: 1;
             overflow-y: auto;
+            max-height: 300px;
         }
 
         .analysis-card {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f4f8 100%);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 8px;
             border-left: 3px solid #667eea;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
         }
 
         .analysis-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .analysis-text {
-            font-size: 12px;
+            font-size: 11px;
             color: #555;
             line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        
+        .analysis-subsection {
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px solid rgba(102, 126, 234, 0.15);
+        }
+        
+        .analysis-subsection h4 {
+            font-size: 11px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .analysis-subsection p {
+            font-size: 10px;
+            color: #666;
+            line-height: 1.3;
         }
 
         .tips-grid {
             display: grid;
-            gap: 6px;
-            margin-top: 8px;
+            gap: 5px;
+            margin-top: 6px;
         }
 
         .tip-item {
             display: flex;
             align-items: flex-start;
-            gap: 8px;
-            padding: 8px;
+            gap: 6px;
+            padding: 6px;
             background: white;
-            border-radius: 8px;
+            border-radius: 6px;
             border: 1px solid #e9ecef;
-            font-size: 11px;
+            font-size: 10px;
         }
 
         .tip-icon {
             color: #667eea;
             font-weight: bold;
             margin-top: 1px;
-            font-size: 12px;
+            font-size: 11px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .tip-content {
+            font-size: 10px;
+            line-height: 1.3;
+            color: #555;
+        }
+        
+        .tip-content strong {
+            color: #333;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        /* 보너스 팁 */
+        .bonus-tips {
+            margin-top: 8px;
+            padding: 6px;
+            background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+            border-radius: 6px;
+            border: 1px solid #fbbf24;
+        }
+        
+        .bonus-tips h4 {
+            font-size: 10px;
+            color: #92400e;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        
+        .bonus-tip-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 3px;
+            font-size: 9px;
+            color: #78350f;
+        }
+        
+        .bonus-icon {
+            font-size: 10px;
         }
 
         .detailed-analysis {
@@ -272,29 +344,84 @@
         }
 
         .personality-traits {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
             margin: 10px 0;
         }
 
         .trait-item {
-            background: white;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
             padding: 8px;
             border-radius: 8px;
-            text-align: center;
-            border: 2px solid #e9ecef;
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
         }
 
         .trait-icon {
-            font-size: 18px;
-            margin-bottom: 3px;
+            font-size: 16px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .trait-content {
+            flex: 1;
         }
 
         .trait-label {
             font-size: 11px;
-            color: #666;
+            color: #0369a1;
             font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .trait-desc {
+            font-size: 9px;
+            color: #0284c7;
+            line-height: 1.2;
+        }
+        
+        .traits-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .traits-header h3 {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+        
+        .traits-header p {
+            font-size: 9px;
+            color: #666;
+        }
+        
+        .traits-analysis {
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 6px;
+            border: 1px solid rgba(14, 165, 233, 0.1);
+            margin-top: 8px;
+        }
+        
+        .traits-analysis h4 {
+            font-size: 10px;
+            color: #0369a1;
+            margin-bottom: 4px;
+        }
+        
+        .traits-analysis p {
+            font-size: 9px;
+            color: #0284c7;
+            line-height: 1.3;
         }
 
         .improvement-section {
@@ -303,9 +430,30 @@
             padding: 12px;
             margin: 10px 0;
         }
+        
+        .improvement-header {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        
+        .improvement-header h3 {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+        
+        .improvement-header p {
+            font-size: 9px;
+            color: #666;
+        }
 
         .improvement-steps {
             counter-reset: step-counter;
+        }
+        
+        .improvement-timeline {
+            position: relative;
+            margin-bottom: 12px;
         }
 
         .improvement-step {
@@ -317,17 +465,124 @@
         }
 
         .step-number {
-            width: 24px;
-            height: 24px;
-            background: #667eea;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
             border-radius: 50%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            font-size: 8px;
+            flex-shrink: 0;
+            box-shadow: 0 1px 4px rgba(16, 185, 129, 0.3);
+        }
+        
+        .step-num {
+            font-size: 10px;
+            font-weight: 700;
+        }
+        
+        .step-label {
+            font-size: 6px;
+            margin-top: -1px;
+        }
+        
+        .step-content {
+            flex: 1;
+            padding: 2px 0;
+        }
+        
+        .step-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .step-icon {
+            font-size: 10px;
+        }
+        
+        .step-description {
+            font-size: 10px;
+            color: #555;
+            line-height: 1.3;
+            margin-bottom: 4px;
+        }
+        
+        .step-period {
+            font-size: 8px;
+            color: #10b981;
+        }
+        
+        .period-label {
+            font-weight: 500;
+        }
+        
+        .period-time {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        /* 개선 계획 하단 */
+        .improvement-footer {
+            margin-top: 12px;
+        }
+        
+        .motivational-quote {
+            display: flex;
+            gap: 6px;
+            padding: 8px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 6px;
+            border: 1px solid #f59e0b;
+            margin-bottom: 8px;
+        }
+        
+        .quote-icon {
             font-size: 12px;
             flex-shrink: 0;
+        }
+        
+        .quote-text {
+            font-size: 9px;
+            color: #92400e;
+            line-height: 1.3;
+            font-style: italic;
+        }
+        
+        .success-tips {
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 6px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+        
+        .success-tips h4 {
+            font-size: 10px;
+            color: #15803d;
+            margin-bottom: 4px;
+        }
+        
+        .success-tips ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .success-tips li {
+            font-size: 9px;
+            color: #166534;
+            margin-bottom: 2px;
+            line-height: 1.2;
         }
 
         .step-number::before {
@@ -458,11 +713,11 @@
 
         /* 광고 영역 */
         .ad-container {
-            margin: 10px 0;
+            margin: 8px 0;
             text-align: center;
-            min-height: 150px;
+            min-height: 100px;
             background: #f8f9fa;
-            border-radius: 8px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -579,6 +834,16 @@
                     <!-- 동적으로 생성 -->
                 </div>
 
+                <!-- [광고] 상세 분석 네이티브 광고 -->
+                <div class="ad-container" id="adResult3">
+                    <ins class="adsbygoogle"
+                         style="display:block;"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="1966797795"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+
                 <div class="step-actions">
                     <button class="next-btn" onclick="nextResultStep()">
                         다음 <span class="arrow">→</span>
@@ -623,6 +888,17 @@
                     <div class="improvement-steps" id="improvementSteps">
                         <!-- 동적으로 생성 -->
                     </div>
+                </div>
+
+                <!-- [광고] 개선 방법 하단 CTA 광고 -->
+                <div class="ad-container" id="adResult4">
+                    <ins class="adsbygoogle"
+                         style="display:block;"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="3593134392"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
                 </div>
 
                 <div class="step-actions">
@@ -684,6 +960,17 @@
                                 <div class="test-label">연애 스타일</div>
                             </a>
                         </div>
+                    </div>
+
+                    <!-- [광고] 공유/CTA 하단 광고 -->
+                    <div class="ad-container" id="adResult5">
+                        <ins class="adsbygoogle"
+                             style="display:block;"
+                             data-ad-client="ca-pub-9374368296307755"
+                             data-ad-slot="1966797795"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                    </div>
                     </div>
                 </div>
             </div>
