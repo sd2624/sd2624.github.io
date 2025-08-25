@@ -864,6 +864,64 @@ body {
 }
 
 /* =========================
+   새로운 광고 배치 스타일
+   ========================= */
+
+/* 상단 네이티브 광고 */
+.ad-top-native {
+    margin: 0 0 15px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    min-height: 70px;
+    max-height: 120px;
+    flex-shrink: 0;
+}
+
+/* 중간 네이티브 광고 */
+.ad-mid-native {
+    margin: 15px 0;
+    padding: 10px;
+    background: #f0f8ff;
+    border-radius: 8px;
+    border: 1px solid #ddeeff;
+    min-height: 60px;
+    max-height: 100px;
+    flex-shrink: 0;
+}
+
+/* 하단 CTA 광고 */
+.ad-bottom-cta {
+    margin: 15px 0 0 0;
+    padding: 10px;
+    background: #fff8dc;
+    border-radius: 8px;
+    border: 1px solid #f0e68c;
+    min-height: 60px;
+    max-height: 100px;
+    flex-shrink: 0;
+}
+
+/* 광고 라벨 */
+.ad-label {
+    font-size: 10px;
+    color: #666;
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* 광고 컨테이너 공통 스타일 */
+.ad-top-native .adsbygoogle,
+.ad-mid-native .adsbygoogle,
+.ad-bottom-cta .adsbygoogle {
+    display: block !important;
+    width: 100% !important;
+    max-height: 80px !important;
+}
+
+/* =========================
    로딩 오버레이
    ========================= */
 

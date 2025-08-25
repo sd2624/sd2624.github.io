@@ -55,8 +55,17 @@ const pageManager = {
     
     // 스텝별 광고 로드
     loadStepAd(step) {
-        const adId = `adStep${step}`;
-        adManager.observe(adId);
+        // 상단, 중간, 하단 광고를 모두 로드
+        const topAdId = `adTopNative${step}`;
+        const midAdId = `adMidNative${step}`;
+        const bottomAdId = `adBottomCTA${step}`;
+        
+        // 각 광고 컨테이너가 존재하면 관찰 시작
+        setTimeout(() => {
+            adManager.observe(topAdId);
+            adManager.observe(midAdId);
+            adManager.observe(bottomAdId);
+        }, 100);
     }
 };
 
@@ -329,9 +338,11 @@ function showQuestion() {
     
     // 5번째 질문 후 중간 광고 표시
     if (currentQuestion === 4) {
-        const adStep5 = document.getElementById('adStep5');
-        adStep5.classList.remove('hidden');
-        adManager.observe('adStep5');
+        const adMidNative5 = document.getElementById('adMidNative5');
+        if (adMidNative5) {
+            adMidNative5.classList.remove('hidden');
+            adManager.observe('adMidNative5');
+        }
     }
 }
 
@@ -465,6 +476,12 @@ function viewDetailedResult() {
     currentResultStep = 1;
     pageManager.showPage('result1');
     showDetailedResult();
+    
+    // Step 6 광고 로드
+    setTimeout(() => {
+        adManager.observe('adTopNative6');
+        adManager.observe('adMidNative6');
+    }, 300);
 }
 
 function showDetailedResult() {
@@ -679,5 +696,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateLiveCounter, 30000);
     
     // 첫 번째 스텝 광고 로드
-    adManager.observe('adStep1');
+    setTimeout(() => {
+        adManager.observe('adTopNative1');
+        adManager.observe('adMidNative1');
+        adManager.observe('adBottomCTA1');
+    }, 500);
 });
