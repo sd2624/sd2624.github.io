@@ -59,12 +59,11 @@ function showResultStep(step) {
         // 스크롤을 맨 위로
         window.scrollTo(0, 0);
         
-        // 각 단계별 광고 리로드
-        setTimeout(() => {
-            if (adManager && adManager.reloadResultAd) {
-                adManager.reloadResultAd(step);
-            }
-        }, 100);
+        // 각 단계별 광고 로드
+        const adId = `adResult${step}`;
+        if (adManager && adManager.observe) {
+            adManager.observe(adId);
+        }
     } else {
         console.error('Step element not found:', `resultStep${step}`);
     }
@@ -77,15 +76,29 @@ function isMobile() {
 
 // 페이지 로드 시 모바일이면 첫 번째 단계만 보이기
 function initializeStartPage() {
-    // 모바일에서는 첫 번째 단계만 보이기 (슬라이드 방식)
-    showNextStep(1);
-    
-    // 모든 단계를 슬라이드 방식으로 처리
-    for (let i = 1; i <= 4; i++) {
-        const stepElement = document.getElementById(`introStep${i}`);
-        if (stepElement && i !== 1) {
-            stepElement.classList.add('hidden');
+    if (isMobile()) {
+        // 모바일에서는 첫 번째 단계만 보이기
+        showNextStep(1);
+    } else {
+        // 데스크톱에서는 모든 내용 보이기 (hidden 클래스 제거)
+        for (let i = 1; i <= 4; i++) {
+            const stepElement = document.getElementById(`introStep${i}`);
+            if (stepElement) {
+                stepElement.classList.remove('hidden');
+            }
         }
+        
+        // 데스크톱에서는 step-navigation 숨기기
+        const stepNavs = document.querySelectorAll('.step-navigation');
+        stepNavs.forEach(nav => nav.style.display = 'none');
+        
+        // 데스크톱에서는 mobile-only 버튼 숨기기
+        const mobileButtons = document.querySelectorAll('.mobile-only');
+        mobileButtons.forEach(btn => btn.style.display = 'none');
+        
+        // 데스크톱에서는 desktop-only 버튼 보이기
+        const desktopButtons = document.querySelectorAll('.desktop-only');
+        desktopButtons.forEach(btn => btn.style.display = 'block');
     }
 }
 
@@ -125,22 +138,6 @@ const adManager = {
         const adElement = document.getElementById(adId);
         if (adElement && this.observer) {
             this.observer.observe(adElement);
-        }
-    },
-    
-    // 결과 페이지 광고 리로드 (각 단계별)
-    reloadResultAd(step) {
-        const adId = `adResult${step}`;
-        const adElement = document.getElementById(adId);
-        if (adElement) {
-            // 기존 광고 제거
-            const existingAd = adElement.querySelector('.adsbygoogle');
-            if (existingAd) {
-                existingAd.innerHTML = '';
-            }
-            
-            // 새 광고 로드
-            this.loadAd(adId);
         }
     },
     
@@ -185,30 +182,6 @@ const adManager = {
                 midAd.style.maxHeight = '70px';
             }
             this.observe('adMid');
-        }
-    },
-    
-    // Show infeed ads at specific questions
-    showInfeedAd(questionNum) {
-        let adId = '';
-        if (questionNum === 3) {
-            adId = 'adInfeed1';
-        } else if (questionNum === 6) {
-            adId = 'adInfeed2';
-        } else if (questionNum === 9) {
-            adId = 'adInfeed3';
-        }
-        
-        if (adId) {
-            const infeedAd = document.getElementById(adId);
-            if (infeedAd) {
-                infeedAd.style.display = 'block';
-                infeedAd.style.margin = '8px 0';
-                if (window.innerWidth <= 768) {
-                    infeedAd.style.maxHeight = '80px';
-                }
-                this.observe(adId);
-            }
         }
     }
 };
@@ -555,11 +528,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start observing top ad
     adManager.observe('adTop');
     
-    // 앵커 광고 등록 (모바일용)
-    if (window.innerWidth <= 768) {
-        adManager.observe('adAnchor');
-    }
-    
     // Initialize emotion scores
     emotions.forEach(emotion => {
         emotionScores[emotion] = 0;
@@ -619,11 +587,6 @@ function showQuestion() {
     // Show middle ad after 3rd question
     if (currentQuestion === 3) {
         adManager.showMidAd();
-    }
-    
-    // Show infeed ads after specific questions
-    if (currentQuestion === 3 || currentQuestion === 6 || currentQuestion === 9) {
-        adManager.showInfeedAd(currentQuestion);
     }
 }
 
@@ -894,14 +857,6 @@ function retryTest() {
         midAd.style.display = 'none';
     }
     
-    // Hide all infeed ads
-    ['adInfeed1', 'adInfeed2', 'adInfeed3'].forEach(adId => {
-        const ad = document.getElementById(adId);
-        if (ad) {
-            ad.style.display = 'none';
-        }
-    });
-    
     // Update statistics
     updateStats();
 }
@@ -1061,11 +1016,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 상단 광고 옵저버 등록
     adManager.observe('adTop');
-    
-    // 앵커 광고 등록 (모바일용)
-    if (window.innerWidth <= 768) {
-        adManager.observe('adAnchor');
-    }
     
     // 통계 업데이트
     updateStats();
