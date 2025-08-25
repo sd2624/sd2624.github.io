@@ -10,11 +10,43 @@ function initKakao() {
 
 // 전역 변수
 let currentStep = 1;
+let answers = {};
+
+// 광고 로딩 유틸리티
+const AdLoader = {
+    loadAd(adId) {
+        try {
+            const adElement = document.getElementById(adId);
+            if (adElement && typeof (adsbygoogle) !== 'undefined') {
+                if (window.innerWidth <= 768) {
+                    adElement.style.minHeight = '30px';
+                    adElement.style.maxHeight = '50px';
+                } else {
+                    adElement.style.minHeight = '40px';
+                    adElement.style.maxHeight = '60px';
+                }
+                
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                console.log(`광고 로드 완료: ${adId}`);
+            }
+        } catch (error) {
+            console.error(`광고 로드 실패 (${adId}):`, error);
+        }
+    },
+
+    loadStepAds(step) {
+        const topAdId = `ad-top-${step}`;
+        const midAdId = `ad-mid-${step}`;
+        const bottomAdId = `ad-bottom-${step}`;
+        
+        setTimeout(() => this.loadAd(topAdId), 100);
+        setTimeout(() => this.loadAd(midAdId), 300);
+        setTimeout(() => this.loadAd(bottomAdId), 500);
+    }
+};
 let currentQuestion = 0;
 let currentResultStep = 1;
 let emotionScores = {};
-let answers = [];
-let testResult = null;
 
 // 페이지 이동 관리
 const pageManager = {
@@ -392,7 +424,10 @@ function showLoading() {
             // 결과 생성 및 표시
             generateResult();
             document.getElementById('loadingOverlay').classList.add('hidden');
-            pageManager.showPage('step6');
+            
+            // 결과를 URL 파라미터로 전달하여 결과 페이지로 이동
+            const resultData = encodeURIComponent(JSON.stringify(testResult));
+            window.location.href = `result.html?result=${resultData}`;
         }
     }, 800);
 }
@@ -409,12 +444,11 @@ function generateResult() {
     // 결과 타입 결정
     testResult = getResultType(maxEmotion, stressLevel);
     
-    // 결과 미리보기 표시
-    document.getElementById('resultBadge').textContent = testResult.badge;
-    document.getElementById('resultTitle').textContent = testResult.title;
-    document.getElementById('resultSubtitle').textContent = testResult.subtitle;
-    document.getElementById('previewEmotion').textContent = testResult.primaryEmotion;
-    document.getElementById('previewStress').textContent = `${stressLevel}%`;
+    // 결과에 감정 점수와 스트레스 레벨 추가
+    testResult.emotionScores = emotionScores;
+    testResult.stressLevel = stressLevel;
+    
+    console.log('생성된 결과 데이터:', testResult);
 }
 
 function getResultType(primaryEmotion, stressLevel) {
@@ -424,6 +458,7 @@ function getResultType(primaryEmotion, stressLevel) {
             title: "긍정적 감정 우세형",
             subtitle: "밝고 활기찬 감정 상태",
             primaryEmotion: "기쁨",
+            emoji: "😊",
             description: "현재 당신은 긍정적이고 밝은 감정 상태를 유지하고 있습니다.",
             care: "이런 좋은 감정 상태를 지속하기 위해 규칙적인 운동과 충분한 휴식을 취하세요."
         },
@@ -432,6 +467,7 @@ function getResultType(primaryEmotion, stressLevel) {
             title: "안정적 평온형",
             subtitle: "차분하고 균형잡힌 감정 상태",
             primaryEmotion: "평온",
+            emoji: "😌",
             description: "당신은 안정적이고 평온한 감정 상태를 보여주고 있습니다.",
             care: "현재의 균형을 유지하면서 새로운 도전을 통해 성장해보세요."
         },
@@ -440,6 +476,7 @@ function getResultType(primaryEmotion, stressLevel) {
             title: "감정적 회복 필요형",
             subtitle: "슬픔과 우울감이 높은 상태",
             primaryEmotion: "슬픔",
+            emoji: "😢",
             description: "현재 슬픔이나 우울한 감정이 주를 이루고 있는 상태입니다.",
             care: "전문가 상담을 고려해보시고, 가족이나 친구들과 대화하는 시간을 늘려보세요."
         },
@@ -448,6 +485,7 @@ function getResultType(primaryEmotion, stressLevel) {
             title: "분노 관리 필요형",
             subtitle: "화와 짜증이 높은 상태",
             primaryEmotion: "분노",
+            emoji: "😠",
             description: "최근 분노나 화가 많이 누적된 상태로 보입니다.",
             care: "분노 조절을 위한 호흡법이나 운동을 통해 감정을 관리해보세요."
         },
@@ -456,6 +494,7 @@ function getResultType(primaryEmotion, stressLevel) {
             title: "불안 케어 필요형",
             subtitle: "불안과 걱정이 높은 상태",
             primaryEmotion: "불안",
+            emoji: "😰",
             description: "불안감과 걱정이 높은 수준에 있는 상태입니다.",
             care: "명상이나 요가 등을 통해 마음의 안정을 찾고, 필요시 전문가 도움을 받으세요."
         },
@@ -464,6 +503,7 @@ function getResultType(primaryEmotion, stressLevel) {
             title: "감정 탐색 필요형",
             subtitle: "감정 표현이 제한적인 상태",
             primaryEmotion: "무감정",
+            emoji: "😐",
             description: "현재 감정 표현이 제한적이거나 무덤덤한 상태입니다.",
             care: "다양한 활동을 통해 감정을 표현하고 경험할 수 있는 기회를 만들어보세요."
         }
@@ -472,16 +512,9 @@ function getResultType(primaryEmotion, stressLevel) {
     return resultTypes[primaryEmotion] || resultTypes.neutral;
 }
 
-function viewDetailedResult() {
-    currentResultStep = 1;
-    pageManager.showPage('result1');
-    showDetailedResult();
-    
-    // Step 6 광고 로드
-    setTimeout(() => {
-        adManager.observe('adTopNative6');
-        adManager.observe('adMidNative6');
-    }, 300);
+// 앵커 광고 닫기
+function closeAnchorAd() {
+    document.getElementById('anchorAd').style.display = 'none';
 }
 
 function showDetailedResult() {
