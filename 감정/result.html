@@ -3,265 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 감정 분석 결과 - 당신의 감정 상태와 스트레스 분석</title>
-    <meta name="description" content="AI 감정 분석 테스트 결과입니다. 당신의 감정 상태, 스트레스 수준, 맞춤형 멘탈 케어 솔루션을 확인하세요.">
-    <meta name="keywords" content="감정분석결과, 스트레스진단결과, 멘탈헬스진단, 심리테스트결과, 감정상태분석">
-    <meta name="robots" content="index, follow">
+    <meta name="title" content="감정 테스트 결과 - 당신의 감정 유형 분석 완료">
+    <meta name="description" content="감정 테스트 결과를 확인하세요. 당신의 감정 유형과 특성, 그리고 감정 관리 방법을 자세히 알아보세요.">
+    <meta name="keywords" content="감정테스트결과, 감정유형, 감정관리, 심리분석결과">
     
-    <!-- Open Graph 메타 태그 -->
-    <meta property="og:title" content="AI 감정 분석 결과">
-    <meta property="og:description" content="나의 감정 상태와 스트레스 수준을 정확히 분석한 결과를 확인하세요.">
-    <meta property="og:type" content="website">
+    <!-- 오픈그래프 -->
+    <meta property="og:title" content="감정 테스트 결과 - 나의 감정 유형">
+    <meta property="og:description" content="감정 테스트 결과가 나왔습니다! 당신의 감정 유형을 확인해보세요">
+    <meta property="og:image" content="https://sd2624.github.io/감정/감정.png">
     <meta property="og:url" content="https://sd2624.github.io/감정/result.html">
-    <meta property="og:image" content="https://sd2624.github.io/감정/emotion-result.png">
     
-    <!-- 카카오톡 공유 메타 태그 -->
-    <meta property="kakao:title" content="AI 감정 분석 결과">
-    <meta property="kakao:description" content="나의 감정 상태와 스트레스 수준 분석 결과">
+    <!-- JSON-LD 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "감정 테스트 결과",
+        "description": "감정 테스트 분석 결과 및 감정 관리 방법 제시",
+        "url": "https://sd2624.github.io/감정/result.html"
+    }
+    </script>
     
-    <!-- 스타일시트 -->
+    <title>감정 테스트 결과 - 나의 감정 유형</title>
     <link rel="stylesheet" href="style.css">
     
-    <!-- 광고 스크립트 -->
+    <!-- 구글 애드센스 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
     
     <!-- 카카오 SDK -->
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
     <div class="container">
-        <div class="test-container">
+        <!-- 상단 광고 -->
+        <div class="ad-container" id="adTop">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="1966797795"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+        
+        <div class="result-container">
+            <div class="result-content" id="resultContent">
+                <!-- 결과 내용이 동적으로 로드됩니다 -->
+            </div>
             
-            <!-- 결과 메인 페이지 -->
-            <div class="step-page active" id="resultMain">
-                <!-- 페이지 상단 광고 -->
-                <div class="ad-top-native" id="adTopNativeResult">
-                    <div class="ad-label">광고</div>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-9374368296307755"
-                         data-ad-slot="3593134392"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                </div>
-                
-                <div class="step-content">
-                    <div class="step-header">
-                        <div class="step-number">결과</div>
-                        <h1>분석 완료!</h1>
-                    </div>
-                    
-                    <div class="result-preview">
-                        <div class="result-icon" id="resultEmotionIcon">🎯</div>
-                        <h2 id="resultTitle">당신의 감정 분석 결과</h2>
-                        <p id="resultDescription">AI가 분석한 당신의 현재 감정 상태입니다.</p>
-                        
-                        <!-- 중간 네이티브 광고 -->
-                        <div class="ad-mid-native" id="adMidNativeResult">
-                            <div class="ad-label">관련 추천</div>
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-client="ca-pub-9374368296307755"
-                                 data-ad-slot="1966797795"
-                                 data-ad-format="auto"
-                                 data-full-width-responsive="true"></ins>
-                        </div>
-                        
-                        <div class="result-highlight">
-                            <div class="highlight-item">
-                                <span class="highlight-label">주요 감정</span>
-                                <span class="highlight-value" id="previewEmotion">분석중...</span>
-                            </div>
-                            <div class="highlight-item">
-                                <span class="highlight-label">스트레스 수준</span>
-                                <span class="highlight-value" id="previewStress">분석중...</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button class="next-btn result-view-btn" onclick="viewDetailedResult()">
-                        <span>상세 결과 보기</span>
-                        <span class="btn-arrow">→</span>
-                    </button>
-                </div>
-                
-                <!-- 하단 CTA 광고 -->
-                <div class="ad-bottom-cta" id="adBottomCTAResult">
-                    <div class="ad-label">관련 추천</div>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-9374368296307755"
-                         data-ad-slot="1966797795"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                </div>
+            <!-- 페이지 네비게이션 -->
+            <div class="result-navigation">
+                <button id="prevResultBtn" onclick="previousResultPage()" style="display: none;">이전</button>
+                <span class="page-indicator" id="pageIndicator">1/6</span>
+                <button id="nextResultBtn" onclick="nextResultPage()">다음</button>
             </div>
-
-            <!-- 상세 결과 1단계: 감정 분포도 -->
-            <div class="result-step-page" id="result1">
-                <div class="step-content">
-                    <div class="result-step-header">
-                        <div class="step-number">결과 1/4</div>
-                        <h2>당신의 감정 분포도</h2>
-                        <button class="back-btn" onclick="goBack()">← 뒤로</button>
-                    </div>
-                    
-                    <div class="emotion-chart-container">
-                        <div class="emotion-chart" id="emotionChart"></div>
-                        <div class="chart-description">
-                            <p>현재 당신의 감정 상태를 6가지 기본 감정으로 분석했습니다.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="emotion-breakdown" id="emotionBreakdown"></div>
-                    
-                    <div class="result-ad-container">
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-9374368296307755"
-                             data-ad-slot="3593134392"
-                             data-ad-format="auto"
-                             data-full-width-responsive="true"></ins>
-                    </div>
-                    
-                    <button class="next-btn" onclick="nextResultStep()">
-                        <span>다음</span>
-                        <span class="btn-arrow">→</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- 상세 결과 2단계: 스트레스 분석 -->
-            <div class="result-step-page" id="result2">
-                <div class="step-content">
-                    <div class="result-step-header">
-                        <div class="step-number">결과 2/4</div>
-                        <h2>스트레스 상세 분석</h2>
-                        <button class="back-btn" onclick="goBack()">← 뒤로</button>
-                    </div>
-                    
-                    <div class="stress-analysis" id="stressAnalysis">
-                        <div class="stress-level" id="stressLevel"></div>
-                        <div class="stress-factors" id="stressFactors"></div>
-                    </div>
-                    
-                    <div class="result-ad-container">
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-9374368296307755"
-                             data-ad-slot="1966797795"
-                             data-ad-format="auto"
-                             data-full-width-responsive="true"></ins>
-                    </div>
-                    
-                    <button class="next-btn" onclick="nextResultStep()">
-                        <span>다음</span>
-                        <span class="btn-arrow">→</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- 상세 결과 3단계: 맞춤 케어 -->
-            <div class="result-step-page" id="result3">
-                <div class="step-content">
-                    <div class="result-step-header">
-                        <div class="step-number">결과 3/4</div>
-                        <h2>맞춤 케어 솔루션</h2>
-                        <button class="back-btn" onclick="goBack()">← 뒤로</button>
-                    </div>
-                    
-                    <div class="care-recommendations" id="careRecommendations"></div>
-                    
-                    <div class="result-ad-container">
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-9374368296307755"
-                             data-ad-slot="3593134392"
-                             data-ad-format="auto"
-                             data-full-width-responsive="true"></ins>
-                    </div>
-                    
-                    <button class="next-btn" onclick="nextResultStep()">
-                        <span>다음</span>
-                        <span class="btn-arrow">→</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- 상세 결과 4단계: 공유 및 재테스트 -->
-            <div class="result-step-page" id="result4">
-                <div class="step-content">
-                    <div class="result-step-header">
-                        <div class="step-number">결과 4/4</div>
-                        <h2>결과 공유하기</h2>
-                        <button class="back-btn" onclick="goBack()">← 뒤로</button>
-                    </div>
-                    
-                    <div class="share-section">
-                        <h3>친구들과 결과를 공유해보세요!</h3>
-                        <div class="share-summary" id="shareSummary"></div>
-                        
-                        <div class="share-buttons">
-                            <button class="share-btn kakao-btn" onclick="shareToKakao()">
-                                <span>💬</span>
-                                <span>카카오톡 공유</span>
-                            </button>
-                            <button class="share-btn copy-btn" onclick="copyResult()">
-                                <span>📋</span>
-                                <span>결과 복사</span>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="result-ad-container">
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-9374368296307755"
-                             data-ad-slot="1966797795"
-                             data-ad-format="auto"
-                             data-full-width-responsive="true"></ins>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="next-btn secondary" onclick="retakeTest()">
-                            <span>다시 테스트하기</span>
-                        </button>
-                        <button class="next-btn" onclick="goToOtherTests()">
-                            <span>다른 테스트 해보기</span>
-                            <span class="btn-arrow">→</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 로딩 오버레이 -->
-            <div class="loading-overlay hidden" id="loadingOverlay">
-                <div class="loading-content">
-                    <div class="loading-spinner"></div>
-                    <h3>결과를 분석하고 있습니다...</h3>
-                    <div class="loading-steps">
-                        <div class="step">감정 패턴 분석</div>
-                        <div class="step">스트레스 요인 식별</div>
-                        <div class="step">맞춤 솔루션 생성</div>
-                        <div class="step">결과 최적화</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 앵커 광고 -->
-            <div class="anchor-ad" id="anchorAd">
-                <button class="anchor-ad-close" onclick="closeAnchorAd()">×</button>
+            
+            <!-- 광고 컨테이너들 (각 페이지별) -->
+            <div class="ad-container result-ad" id="adResult1" style="display: none;">
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="1966797795"
+                     data-ad-slot="1688252733"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
             </div>
+            
+            <div class="ad-container result-ad" id="adResult2" style="display: none;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <div class="ad-container result-ad" id="adResult3" style="display: none;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="1724698171"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <div class="ad-container result-ad" id="adResult4" style="display: none;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8694716039"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <div class="ad-container result-ad" id="adResult5" style="display: none;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8516017980"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <!-- 공유 버튼 (마지막 페이지에만 표시) -->
+            <div class="share-section" id="shareSection" style="display: none;">
+                <h3>결과를 친구들에게 공유해보세요!</h3>
+                <button class="kakao-share-btn" onclick="shareToKakao()">
+                    <span>카카오톡 공유하기</span>
+                </button>
+                
+                <div class="retry-section">
+                    <button class="retry-btn" onclick="retryTest()">다시 테스트하기</button>
+                    <a href="https://sd2624.github.io" class="retry-btn home-btn">🏠 다른 테스트 하기</a>
+                </div>
+                
+                <!-- 추천 테스트 -->
+                <div class="related-tests">
+                    <h3>🔮 다른 심리 테스트</h3>
+                    <div class="tests-grid">
+                        <a href="../행복/" class="test-card">
+                            <span class="test-emoji">🌈</span>
+                            <div class="test-title">행복 지수</div>
+                            <div class="test-description">나의 행복 수준 측정</div>
+                        </a>
+                        <a href="../스트레스/" class="test-card">
+                            <span class="test-emoji">😰</span>
+                            <div class="test-title">스트레스 진단</div>
+                            <div class="test-description">스트레스 정도 확인</div>
+                        </a>
+                        <a href="../타로/" class="test-card">
+                            <span class="test-emoji">🔮</span>
+                            <div class="test-title">타로 운세</div>
+                            <div class="test-description">미래의 메시지 확인</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- JavaScript -->
-    <script src="result.js"></script>
+    
+    <script src="script.js"></script>
+    <script>
+        // 페이지 로드 시 결과 표시 시작
+        window.addEventListener('load', function() {
+            initializeResult();
+        });
+    </script>
 </body>
 </html>

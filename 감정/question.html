@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="감정 테스트 질문 - 당신의 감정 상태 분석 중">
+    <meta name="description" content="20가지 질문에 답하여 당신의 감정 유형을 정확하게 분석해보세요. 각 질문은 당신의 감정 패턴을 파악하는 중요한 단서입니다.">
+    <meta name="keywords" content="감정테스트질문, 심리분석, 감정유형, 성격분석">
+    
+    <!-- 오픈그래프 -->
+    <meta property="og:title" content="감정 테스트 진행 중 - 감정 분석">
+    <meta property="og:description" content="20가지 질문으로 감정 유형을 분석하는 중입니다">
+    <meta property="og:image" content="https://sd2624.github.io/감정/감정.png">
+    <meta property="og:url" content="https://sd2624.github.io/감정/question.html">
+    
+    <title>감정 테스트 질문 - 감정 상태 분석</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- 구글 애드센스 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 광고 -->
+        <div class="ad-container" id="adTop">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="4994254497"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+        
+        <div class="question-layout">
+            <!-- 좌측: 질문 영역 -->
+            <div class="question-section">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                    <span class="progress-text" id="progressText">1/23</span>
+                </div>
+                
+                <div class="question-content" id="questionContent">
+                    <!-- 질문 내용이 동적으로 로드됩니다 -->
+                </div>
+                
+                <div class="answers-container" id="answersContainer">
+                    <!-- 답변 옵션이 동적으로 로드됩니다 -->
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button id="prevBtn" onclick="previousQuestion()" style="display: none;">이전</button>
+                    <button id="nextBtn" onclick="nextQuestion()" disabled>다음</button>
+                </div>
+            </div>
+            
+            <!-- 우측: PC용 사이드 광고 -->
+            <div class="side-ad-container" id="sideAd">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="4202989029"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+        
+        <!-- 중간 광고 (모바일용) -->
+        <div class="ad-container mobile-mid-ad" id="adMid" style="display: none;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="4448942166"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        // 페이지 로드 시 테스트 시작
+        window.addEventListener('load', function() {
+            initializeTest();
+        });
+    </script>
+</body>
+</html>

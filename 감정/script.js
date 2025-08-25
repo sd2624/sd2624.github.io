@@ -1,4 +1,18 @@
-// AI 감정 분석 테스트 - 6단계 페이지 분리 JavaScript
+// 감정 테스트 전역 변수
+let currentQuestion = 0;
+let currentResultPage = 0;
+let emotionScores = {};
+let answers = [];
+let testResult = null;
+
+// 광고 슬롯 ID 배열
+const adSlots = [
+    '8384240134', '4994254497', '4202989029', '4448942166', 
+    '1966797795', '1688252733', '3201247599', '1724698171',
+    '8694716039', '8516017980', '1992440849', '1038623263',
+    '2415112676', '5931685853', '9952845435', '3603389079',
+    '9467326944', '4500586087'
+];
 
 // 카카오 SDK 초기화
 function initKakao() {
@@ -8,730 +22,825 @@ function initKakao() {
     }
 }
 
-// 전역 변수
-let currentStep = 1;
-let answers = {};
-
-// 광고 로딩 유틸리티
-const AdLoader = {
-    loadAd(adId) {
-        try {
-            const adElement = document.getElementById(adId);
-            if (adElement && typeof (adsbygoogle) !== 'undefined') {
-                if (window.innerWidth <= 768) {
-                    adElement.style.minHeight = '30px';
-                    adElement.style.maxHeight = '50px';
-                } else {
-                    adElement.style.minHeight = '40px';
-                    adElement.style.maxHeight = '60px';
-                }
-                
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                console.log(`광고 로드 완료: ${adId}`);
-            }
-        } catch (error) {
-            console.error(`광고 로드 실패 (${adId}):`, error);
+// 광고 로드 함수
+function loadAd(slotId, containerId) {
+    try {
+        const adContainer = document.getElementById(containerId);
+        if (adContainer) {
+            adContainer.innerHTML = `
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="${slotId}"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>`;
+            
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            console.log(`광고 로드 완료: ${slotId}`);
         }
-    },
-
-    loadStepAds(step) {
-        const topAdId = `ad-top-${step}`;
-        const midAdId = `ad-mid-${step}`;
-        const bottomAdId = `ad-bottom-${step}`;
-        
-        setTimeout(() => this.loadAd(topAdId), 100);
-        setTimeout(() => this.loadAd(midAdId), 300);
-        setTimeout(() => this.loadAd(bottomAdId), 500);
+    } catch (error) {
+        console.error(`광고 로드 실패: ${slotId}`, error);
     }
-};
-let currentQuestion = 0;
-let currentResultStep = 1;
-let emotionScores = {};
+}
 
-// 페이지 이동 관리
-const pageManager = {
-    currentPage: 'step1',
-    
-    // 다음 스텝으로 이동
-    nextStep() {
-        if (currentStep < 6) {
-            this.hideCurrentPage();
-            currentStep++;
-            this.showPage(`step${currentStep}`);
-            this.loadStepAd(currentStep);
-        }
-    },
-    
-    // 특정 페이지 표시
-    showPage(pageId) {
-        // 모든 페이지 숨기기
-        document.querySelectorAll('.step-page, .result-step-page').forEach(page => {
-            page.classList.remove('active');
-        });
-        
-        // 선택된 페이지 표시
-        const targetPage = document.getElementById(pageId);
-        if (targetPage) {
-            targetPage.classList.add('active');
-            this.currentPage = pageId;
-        }
-    },
-    
-    // 현재 페이지 숨기기
-    hideCurrentPage() {
-        const currentPage = document.getElementById(this.currentPage);
-        if (currentPage) {
-            currentPage.classList.remove('active');
-        }
-    },
-    
-    // 스텝별 광고 로드
-    loadStepAd(step) {
-        // 상단, 중간, 하단 광고를 모두 로드
-        const topAdId = `adTopNative${step}`;
-        const midAdId = `adMidNative${step}`;
-        const bottomAdId = `adBottomCTA${step}`;
-        
-        // 각 광고 컨테이너가 존재하면 관찰 시작
-        setTimeout(() => {
-            adManager.observe(topAdId);
-            adManager.observe(midAdId);
-            adManager.observe(bottomAdId);
-        }, 100);
-    }
-};
+// 초기 광고 로드
+function initializeAds() {
+    // 상단 광고만 초기 로드
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
 
-// 광고 관리자
-const adManager = {
-    observer: null,
-    loadedAds: new Set(),
-    
-    init() {
-        this.observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const adContainer = entry.target;
-                    const adId = adContainer.id;
-                    
-                    if (!this.loadedAds.has(adId)) {
-                        this.loadAd(adId);
-                        this.loadedAds.add(adId);
-                        this.observer.unobserve(adContainer);
-                    }
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '50px' });
-        
-        // 앵커 광고 표시
-        this.showAnchorAd();
+// 설명 페이지 데이터
+const explanations = [
+    {
+        title: "감정 테스트에 오신 것을 환영합니다",
+        content: `
+            <div class="explanation-content">
+                <h2>🎭 감정 테스트란?</h2>
+                <p>이 테스트는 당신의 현재 감정 상태와 감정 처리 방식을 분석합니다.</p>
+                <ul>
+                    <li>📊 과학적 근거에 기반한 20가지 질문</li>
+                    <li>🎯 정확한 감정 유형 분석</li>
+                    <li>💡 개인 맞춤형 감정 관리 조언</li>
+                </ul>
+            </div>
+        `
     },
-    
-    observe(adId) {
-        const adElement = document.getElementById(adId);
-        if (adElement && this.observer) {
-            this.observer.observe(adElement);
-        }
+    {
+        title: "테스트 진행 방법",
+        content: `
+            <div class="explanation-content">
+                <h2>📝 진행 방법</h2>
+                <p>각 질문에 대해 가장 가까운 답변을 선택해주세요.</p>
+                <div class="tips">
+                    <h3>💡 팁</h3>
+                    <ul>
+                        <li>첫 번째 직감을 믿고 답변하세요</li>
+                        <li>너무 오래 고민하지 마세요</li>
+                        <li>정답은 없으니 솔직하게 답변해주세요</li>
+                    </ul>
+                </div>
+            </div>
+        `
     },
-    
-    loadAd(adId) {
-        try {
-            const adElement = document.getElementById(adId);
-            if (adElement && typeof (adsbygoogle) !== 'undefined') {
-                if (window.innerWidth <= 768) {
-                    adElement.style.minHeight = '60px';
-                    adElement.style.maxHeight = '80px';
-                } else {
-                    adElement.style.minHeight = '80px';
-                    adElement.style.maxHeight = '120px';
-                }
-                
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                console.log(`광고 로드 완료: ${adId}`);
-            }
-        } catch (error) {
-            console.error(`광고 로드 실패: ${adId}`, error);
-        }
-    },
-    
-    showAnchorAd() {
-        setTimeout(() => {
-            const anchorAd = document.getElementById('anchorAd');
-            if (anchorAd) {
-                anchorAd.style.display = 'block';
-                this.observe('anchorAd');
-            }
-        }, 5000);
+    {
+        title: "감정 유형 소개",
+        content: `
+            <div class="explanation-content">
+                <h2>🌈 6가지 감정 유형</h2>
+                <div class="emotion-types">
+                    <div class="type-item">💚 <strong>평온형</strong> - 안정되고 차분한 감정</div>
+                    <div class="type-item">❤️ <strong>열정형</strong> - 에너지 넘치는 감정</div>
+                    <div class="type-item">💙 <strong>사색형</strong> - 깊이 있는 사고</div>
+                    <div class="type-item">💛 <strong>활발형</strong> - 밝고 긍정적인 감정</div>
+                    <div class="type-item">💜 <strong>감성형</strong> - 풍부한 감정 표현</div>
+                    <div class="type-item">🖤 <strong>신중형</strong> - 신중하고 조심스러운 감정</div>
+                </div>
+            </div>
+        `
     }
-};
+];
 
 // 질문 데이터
 const questions = [
     {
-        text: "최근 일주일 동안 기분은 어떠셨나요?",
-        emoji: "😊",
+        text: "아침에 일어났을 때 가장 먼저 드는 생각은?",
         answers: [
-            { text: "매우 좋았어요", scores: { joy: 5, calm: 3 } },
-            { text: "좋은 편이었어요", scores: { joy: 3, calm: 2 } },
-            { text: "보통이었어요", scores: { neutral: 3 } },
-            { text: "좋지 않았어요", scores: { sad: 3, stress: 2 } },
-            { text: "매우 안 좋았어요", scores: { sad: 5, stress: 4 } }
+            { text: "오늘 하루도 좋은 일이 있을 것 같아", type: "활발형", score: 3 },
+            { text: "오늘 할 일들을 정리해보자", type: "신중형", score: 2 },
+            { text: "조금 더 자고 싶다", type: "평온형", score: 2 },
+            { text: "새로운 하루가 기대된다", type: "열정형", score: 3 }
         ]
     },
     {
-        text: "스트레스를 받을 때 주로 어떤 반응을 보이시나요?",
-        emoji: "😤",
+        text: "친구와 갈등이 생겼을 때 당신의 반응은?",
         answers: [
-            { text: "화가 나고 짜증이 나요", scores: { angry: 4, stress: 3 } },
-            { text: "우울해지고 의기소침해져요", scores: { sad: 4, stress: 3 } },
-            { text: "불안하고 초조해져요", scores: { fear: 4, stress: 4 } },
-            { text: "별로 티를 내지 않아요", scores: { calm: 3, neutral: 2 } },
-            { text: "적극적으로 해결하려 노력해요", scores: { joy: 2, calm: 3 } }
+            { text: "바로 해결하려고 대화를 시도한다", type: "열정형", score: 3 },
+            { text: "시간을 두고 천천히 생각해본다", type: "사색형", score: 3 },
+            { text: "감정이 상하지만 표현하지 않는다", type: "감성형", score: 2 },
+            { text: "조심스럽게 상황을 파악한다", type: "신중형", score: 3 }
         ]
     },
     {
-        text: "최근에 즐거웠던 일이 있으신가요?",
-        emoji: "🎉",
+        text: "스트레스를 받을 때 주로 어떻게 해소하나요?",
         answers: [
-            { text: "매우 즐거운 일이 많았어요", scores: { joy: 5, calm: 2 } },
-            { text: "몇 가지 즐거운 일이 있었어요", scores: { joy: 3, calm: 2 } },
-            { text: "보통 정도였어요", scores: { neutral: 3 } },
-            { text: "별로 즐거운 일이 없었어요", scores: { sad: 2, stress: 2 } },
-            { text: "전혀 즐거운 일이 없었어요", scores: { sad: 4, stress: 3 } }
+            { text: "혼자만의 시간을 가진다", type: "사색형", score: 3 },
+            { text: "친구들과 만나서 이야기한다", type: "활발형", score: 3 },
+            { text: "음악을 듣거나 영화를 본다", type: "감성형", score: 3 },
+            { text: "운동이나 취미활동을 한다", type: "열정형", score: 2 }
         ]
     },
     {
-        text: "밤에 잠들기가 어떠신가요?",
-        emoji: "😴",
+        text: "새로운 환경에 적응하는 당신의 스타일은?",
         answers: [
-            { text: "쉽게 잠들어요", scores: { calm: 4, joy: 1 } },
-            { text: "보통 정도예요", scores: { neutral: 3 } },
-            { text: "가끔 잠들기 어려워요", scores: { stress: 2, fear: 2 } },
-            { text: "자주 잠들기 어려워요", scores: { stress: 4, fear: 3 } },
-            { text: "거의 매일 잠들기 어려워요", scores: { stress: 5, fear: 4 } }
+            { text: "빠르게 적응하고 새로운 관계를 만든다", type: "활발형", score: 3 },
+            { text: "시간을 두고 천천히 적응한다", type: "신중형", score: 3 },
+            { text: "관찰하며 상황을 파악한다", type: "사색형", score: 2 },
+            { text: "적극적으로 참여하며 적응한다", type: "열정형", score: 3 }
         ]
     },
     {
-        text: "다른 사람들과의 관계는 어떠신가요?",
-        emoji: "👥",
+        text: "감정적으로 힘들 때 가장 필요한 것은?",
         answers: [
-            { text: "매우 만족스러워요", scores: { joy: 4, calm: 3 } },
-            { text: "대체로 좋아요", scores: { joy: 2, calm: 2 } },
-            { text: "보통이에요", scores: { neutral: 3 } },
-            { text: "약간 어려워요", scores: { stress: 2, sad: 2 } },
-            { text: "매우 어려워요", scores: { stress: 4, sad: 3, fear: 2 } }
+            { text: "혼자만의 조용한 시간", type: "평온형", score: 3 },
+            { text: "믿을 만한 사람과의 대화", type: "감성형", score: 3 },
+            { text: "문제 해결을 위한 구체적인 행동", type: "열정형", score: 2 },
+            { text: "상황을 객관적으로 분석하는 시간", type: "사색형", score: 3 }
         ]
     },
     {
-        text: "요즘 집중력은 어떠신가요?",
-        emoji: "🎯",
+        text: "행복한 순간을 표현하는 당신의 방식은?",
         answers: [
-            { text: "매우 좋아요", scores: { calm: 4, joy: 2 } },
-            { text: "좋은 편이에요", scores: { calm: 2, joy: 1 } },
-            { text: "보통이에요", scores: { neutral: 3 } },
-            { text: "자주 흐트러져요", scores: { stress: 3, fear: 2 } },
-            { text: "거의 집중할 수 없어요", scores: { stress: 5, fear: 3 } }
+            { text: "주변 사람들과 기쁨을 나눈다", type: "활발형", score: 3 },
+            { text: "조용히 혼자 만족감을 느낀다", type: "평온형", score: 3 },
+            { text: "감동의 순간을 깊이 음미한다", type: "감성형", score: 3 },
+            { text: "더 큰 목표를 향한 동력으로 삼는다", type: "열정형", score: 2 }
         ]
     },
     {
-        text: "신체적으로 피로감은 어떠신가요?",
-        emoji: "💪",
+        text: "중요한 결정을 내릴 때 무엇을 가장 우선시하나요?",
         answers: [
-            { text: "전혀 피곤하지 않아요", scores: { joy: 3, calm: 3 } },
-            { text: "가끔 피곤해요", scores: { neutral: 2, stress: 1 } },
-            { text: "보통 정도로 피곤해요", scores: { neutral: 3, stress: 2 } },
-            { text: "자주 피곤해요", scores: { stress: 3, sad: 2 } },
-            { text: "항상 매우 피곤해요", scores: { stress: 5, sad: 3 } }
+            { text: "논리적 분석과 객관적 판단", type: "사색형", score: 3 },
+            { text: "직감과 감정", type: "감성형", score: 3 },
+            { text: "주변 사람들의 의견", type: "신중형", score: 2 },
+            { text: "과감한 도전 정신", type: "열정형", score: 3 }
         ]
     },
     {
-        text: "미래에 대한 생각은 어떠신가요?",
-        emoji: "🔮",
+        text: "여가 시간에 가장 하고 싶은 활동은?",
         answers: [
-            { text: "매우 긍정적이에요", scores: { joy: 5, calm: 2 } },
-            { text: "대체로 긍정적이에요", scores: { joy: 3, calm: 2 } },
-            { text: "보통이에요", scores: { neutral: 3 } },
-            { text: "약간 불안해요", scores: { fear: 3, stress: 2 } },
-            { text: "매우 불안하고 걱정돼요", scores: { fear: 5, stress: 4 } }
+            { text: "친구들과 함께하는 즐거운 활동", type: "활발형", score: 3 },
+            { text: "혼자서 하는 독서나 영화 감상", type: "사색형", score: 3 },
+            { text: "새로운 도전이나 모험", type: "열정형", score: 3 },
+            { text: "편안하고 평화로운 휴식", type: "평온형", score: 3 }
         ]
     },
     {
-        text: "요즘 식욕은 어떠신가요?",
-        emoji: "🍽️",
+        text: "다른 사람의 감정 변화를 어떻게 인식하나요?",
         answers: [
-            { text: "매우 좋아요", scores: { joy: 2, calm: 3 } },
-            { text: "좋은 편이에요", scores: { calm: 2, neutral: 1 } },
-            { text: "보통이에요", scores: { neutral: 3 } },
-            { text: "없는 편이에요", scores: { stress: 2, sad: 3 } },
-            { text: "전혀 없어요", scores: { stress: 4, sad: 4 } }
+            { text: "표정이나 분위기로 빠르게 눈치챈다", type: "감성형", score: 3 },
+            { text: "대화를 통해 파악하려고 한다", type: "활발형", score: 2 },
+            { text: "행동 패턴을 관찰하며 분석한다", type: "사색형", score: 2 },
+            { text: "직접 물어보거나 확인한다", type: "신중형", score: 3 }
         ]
     },
     {
-        text: "요즘 감정 변화가 어떠신가요?",
-        emoji: "🎭",
+        text: "실패나 좌절을 경험했을 때의 반응은?",
         answers: [
-            { text: "매우 안정적이에요", scores: { calm: 5, joy: 2 } },
-            { text: "대체로 안정적이에요", scores: { calm: 3, neutral: 1 } },
-            { text: "보통이에요", scores: { neutral: 3 } },
-            { text: "자주 변해요", scores: { stress: 3, fear: 2 } },
-            { text: "매우 불안정해요", scores: { stress: 4, fear: 4 } }
+            { text: "빠르게 털어내고 다시 도전한다", type: "열정형", score: 3 },
+            { text: "원인을 분석하고 교훈을 얻는다", type: "사색형", score: 3 },
+            { text: "시간을 두고 마음을 다스린다", type: "평온형", score: 2 },
+            { text: "감정적으로 받아들이고 공감을 구한다", type: "감성형", score: 3 }
         ]
     },
     {
-        text: "새로운 일에 대한 동기는 어떠신가요?",
-        emoji: "🚀",
+        text: "팀 프로젝트에서 당신의 역할은?",
         answers: [
-            { text: "매우 높아요", scores: { joy: 4, calm: 2 } },
-            { text: "높은 편이에요", scores: { joy: 2, calm: 2 } },
-            { text: "보통이에요", scores: { neutral: 3 } },
-            { text: "낮은 편이에요", scores: { sad: 2, stress: 2 } },
-            { text: "전혀 없어요", scores: { sad: 4, stress: 3 } }
+            { text: "분위기를 밝게 만드는 역할", type: "활발형", score: 3 },
+            { text: "신중하게 계획을 세우는 역할", type: "신중형", score: 3 },
+            { text: "아이디어를 제시하고 추진하는 역할", type: "열정형", score: 3 },
+            { text: "팀원들의 의견을 조율하는 역할", type: "감성형", score: 2 }
         ]
     },
     {
-        text: "요즘 자신감은 어떠신가요?",
-        emoji: "💪",
+        text: "감정이 복잡할 때 정리하는 방법은?",
         answers: [
-            { text: "매우 높아요", scores: { joy: 4, calm: 3 } },
-            { text: "높은 편이에요", scores: { joy: 2, calm: 2 } },
-            { text: "보통이에요", scores: { neutral: 3 } },
-            { text: "낮은 편이에요", scores: { sad: 2, fear: 2 } },
-            { text: "매우 낮아요", scores: { sad: 4, fear: 3 } }
+            { text: "일기를 쓰거나 글로 표현한다", type: "감성형", score: 3 },
+            { text: "산책이나 운동으로 기분전환한다", type: "활발형", score: 2 },
+            { text: "명상이나 조용한 사색의 시간을 가진다", type: "평온형", score: 3 },
+            { text: "논리적으로 분석하고 정리한다", type: "사색형", score: 3 }
         ]
     },
     {
-        text: "혼자 있을 때의 기분은 어떠신가요?",
-        emoji: "🧘",
+        text: "타인과의 관계에서 가장 중요하게 생각하는 것은?",
         answers: [
-            { text: "매우 편안해요", scores: { calm: 5, joy: 1 } },
-            { text: "편안한 편이에요", scores: { calm: 3, neutral: 1 } },
-            { text: "보통이에요", scores: { neutral: 3 } },
-            { text: "약간 외로워요", scores: { sad: 3, stress: 1 } },
-            { text: "매우 외롭고 우울해요", scores: { sad: 5, stress: 3 } }
+            { text: "서로에 대한 이해와 공감", type: "감성형", score: 3 },
+            { text: "즐겁고 유쾌한 시간 공유", type: "활발형", score: 3 },
+            { text: "신뢰와 안정감", type: "신중형", score: 3 },
+            { text: "서로의 성장을 위한 자극", type: "열정형", score: 2 }
         ]
     },
     {
-        text: "요즘 화가 나는 일이 얼마나 자주 있나요?",
-        emoji: "😠",
+        text: "예상치 못한 변화가 생겼을 때의 반응은?",
         answers: [
-            { text: "거의 없어요", scores: { calm: 4, joy: 2 } },
-            { text: "가끔 있어요", scores: { calm: 2, neutral: 2 } },
-            { text: "보통 정도예요", scores: { neutral: 2, angry: 2 } },
-            { text: "자주 있어요", scores: { angry: 4, stress: 3 } },
-            { text: "매우 자주 있어요", scores: { angry: 5, stress: 4 } }
+            { text: "흥미롭다고 생각하며 적응한다", type: "열정형", score: 3 },
+            { text: "신중하게 상황을 분석한다", type: "사색형", score: 3 },
+            { text: "불안하지만 차차 받아들인다", type: "신중형", score: 2 },
+            { text: "변화에 대한 감정을 솔직히 표현한다", type: "감성형", score: 2 }
         ]
     },
     {
-        text: "전반적으로 현재 삶에 만족하시나요?",
-        emoji: "😌",
+        text: "하루를 마무리할 때 드는 생각은?",
         answers: [
-            { text: "매우 만족해요", scores: { joy: 5, calm: 4 } },
-            { text: "만족하는 편이에요", scores: { joy: 3, calm: 2 } },
-            { text: "보통이에요", scores: { neutral: 3 } },
-            { text: "불만족스러워요", scores: { sad: 3, stress: 2 } },
-            { text: "매우 불만족스러워요", scores: { sad: 5, stress: 4 } }
+            { text: "오늘 하루 잘 보냈다는 만족감", type: "평온형", score: 3 },
+            { text: "내일은 더 좋은 일이 있을 것이라는 기대", type: "활발형", score: 3 },
+            { text: "오늘 있었던 일들을 되돌아본다", type: "사색형", score: 2 },
+            { text: "하루 동안 느꼈던 감정들을 정리한다", type: "감성형", score: 3 }
+        ]
+    },
+    {
+        text: "목표를 달성했을 때의 기분은?",
+        answers: [
+            { text: "뿌듯함과 함께 다음 목표를 생각한다", type: "열정형", score: 3 },
+            { text: "조용한 성취감을 느낀다", type: "평온형", score: 2 },
+            { text: "과정에서 배운 것들을 정리한다", type: "사색형", score: 2 },
+            { text: "기쁨을 주변 사람들과 나눈다", type: "활발형", score: 3 }
+        ]
+    },
+    {
+        text: "갈등 상황에서 당신의 해결 방식은?",
+        answers: [
+            { text: "감정적 공감대를 형성하려 한다", type: "감성형", score: 3 },
+            { text: "논리적 해결책을 찾는다", type: "사색형", score: 3 },
+            { text: "적극적으로 소통하며 해결한다", type: "열정형", score: 2 },
+            { text: "신중하게 중재안을 모색한다", type: "신중형", score: 3 }
+        ]
+    },
+    {
+        text: "새로운 사람을 만날 때의 태도는?",
+        answers: [
+            { text: "먼저 다가가서 친근하게 대한다", type: "활발형", score: 3 },
+            { text: "관찰하며 천천히 알아간다", type: "신중형", score: 3 },
+            { text: "상대방의 감정 상태를 파악하려 한다", type: "감성형", score: 2 },
+            { text: "자연스럽게 대화를 이어간다", type: "평온형", score: 2 }
+        ]
+    },
+    {
+        text: "인생에서 가장 중요하다고 생각하는 가치는?",
+        answers: [
+            { text: "도전과 성장", type: "열정형", score: 3 },
+            { text: "평화와 안정", type: "평온형", score: 3 },
+            { text: "진정성과 감정의 깊이", type: "감성형", score: 3 },
+            { text: "지혜와 통찰력", type: "사색형", score: 3 }
+        ]
+    },
+    {
+        text: "완벽한 하루를 보내기 위해 필요한 것은?",
+        answers: [
+            { text: "사랑하는 사람들과의 시간", type: "활발형", score: 3 },
+            { text: "개인적인 성찰과 사색의 시간", type: "사색형", score: 3 },
+            { text: "마음의 평안과 여유", type: "평온형", score: 3 },
+            { text: "의미 있는 성취나 진전", type: "열정형", score: 2 }
         ]
     }
 ];
 
-// 페이지 이동 함수들
-function nextStep() {
-    pageManager.nextStep();
+// 감정 유형별 결과 데이터
+const emotionResults = {
+    "평온형": {
+        title: "평온형 - 고요한 물처럼 안정된 감정",
+        emoji: "💚",
+        summary: "당신은 마음의 평안을 중시하며, 안정되고 차분한 감정 상태를 유지하는 타입입니다.",
+        characteristics: [
+            "감정의 기복이 적고 안정적입니다",
+            "갈등 상황에서도 침착함을 유지합니다",
+            "내면의 평화를 추구합니다",
+            "조화로운 인간관계를 선호합니다"
+        ],
+        strengths: [
+            "뛰어난 정서적 안정성",
+            "스트레스 상황에서의 침착함",
+            "타인에게 안정감을 제공",
+            "지속적이고 꾸준한 노력"
+        ],
+        weaknesses: [
+            "때로는 수동적으로 보일 수 있음",
+            "변화에 대한 적응이 느릴 수 있음",
+            "자신의 의견 표현이 부족할 수 있음"
+        ],
+        advice: [
+            "가끔은 새로운 도전을 시도해보세요",
+            "자신의 의견을 적극적으로 표현하는 연습을 하세요",
+            "변화를 두려워하지 말고 점진적으로 받아들이세요",
+            "당신의 안정감이 다른 사람들에게 큰 힘이 된다는 것을 기억하세요"
+        ]
+    },
+    "열정형": {
+        title: "열정형 - 타오르는 불꽃같은 에너지",
+        emoji: "❤️",
+        summary: "당신은 에너지가 넘치며 열정적으로 삶에 임하는 타입입니다.",
+        characteristics: [
+            "높은 에너지와 추진력을 가지고 있습니다",
+            "목표 달성을 위해 적극적으로 행동합니다",
+            "새로운 도전을 즐깁니다",
+            "주변 사람들에게 동기부여를 제공합니다"
+        ],
+        strengths: [
+            "강한 추진력과 실행력",
+            "목표 지향적 사고",
+            "리더십과 영향력",
+            "빠른 회복력과 적응력"
+        ],
+        weaknesses: [
+            "때로는 성급할 수 있음",
+            "번아웃의 위험성",
+            "세부사항을 놓칠 수 있음"
+        ],
+        advice: [
+            "적절한 휴식과 재충전 시간을 가지세요",
+            "세부적인 계획 수립에도 신경쓰세요",
+            "타인의 속도를 배려하는 마음을 가지세요",
+            "장기적인 관점에서 목표를 설정하세요"
+        ]
+    },
+    "사색형": {
+        title: "사색형 - 깊은 바다처럼 사려깊은 지혜",
+        emoji: "💙",
+        summary: "당신은 깊이 있게 생각하고 신중하게 판단하는 사색적인 타입입니다.",
+        characteristics: [
+            "논리적이고 분석적인 사고를 합니다",
+            "깊이 있는 성찰을 즐깁니다",
+            "신중한 의사결정을 내립니다",
+            "지적 호기심이 강합니다"
+        ],
+        strengths: [
+            "뛰어난 분석력과 통찰력",
+            "신중하고 현명한 판단력",
+            "깊이 있는 사고력",
+            "문제 해결 능력"
+        ],
+        weaknesses: [
+            "결정을 내리는데 시간이 오래 걸릴 수 있음",
+            "과도한 분석으로 인한 행동 지연",
+            "감정 표현이 부족할 수 있음"
+        ],
+        advice: [
+            "때로는 직감을 믿고 빠른 결정을 내려보세요",
+            "감정적인 측면도 고려하여 균형을 맞추세요",
+            "분석뿐만 아니라 실행도 중요함을 기억하세요",
+            "당신의 지혜를 다른 사람들과 나누세요"
+        ]
+    },
+    "활발형": {
+        title: "활발형 - 밝은 태양처럼 에너지 넘치는 마음",
+        emoji: "💛",
+        summary: "당신은 밝고 긍정적이며 활발한 에너지로 주변을 밝게 만드는 타입입니다.",
+        characteristics: [
+            "긍정적이고 밝은 성격입니다",
+            "사교적이며 사람들과 어울리기를 좋아합니다",
+            "활동적이고 역동적입니다",
+            "유머감각이 뛰어납니다"
+        ],
+        strengths: [
+            "뛰어난 사교성과 친화력",
+            "긍정적인 에너지 전파",
+            "팀워크와 협력 능력",
+            "스트레스 해소 능력"
+        ],
+        weaknesses: [
+            "때로는 깊이 있는 성찰이 부족할 수 있음",
+            "혼자 있는 시간을 어려워할 수 있음",
+            "집중력이 분산될 수 있음"
+        ],
+        advice: [
+            "혼자만의 시간도 소중히 여기세요",
+            "깊이 있는 사고와 성찰의 시간을 가지세요",
+            "한 번에 한 가지 일에 집중하는 연습을 하세요",
+            "당신의 긍정적인 에너지가 많은 사람들에게 힘이 됩니다"
+        ]
+    },
+    "감성형": {
+        title: "감성형 - 풍부한 무지개처럼 다채로운 감정",
+        emoji: "💜",
+        summary: "당신은 풍부한 감정과 깊은 공감 능력을 가진 감성적인 타입입니다.",
+        characteristics: [
+            "감정 표현이 풍부하고 솔직합니다",
+            "타인의 감정을 잘 이해하고 공감합니다",
+            "예술적 감각이 뛰어납니다",
+            "진실된 관계를 추구합니다"
+        ],
+        strengths: [
+            "뛰어난 공감 능력",
+            "창의적이고 예술적 감각",
+            "진실하고 깊은 인간관계",
+            "감정적 치유 능력"
+        ],
+        weaknesses: [
+            "감정의 기복이 클 수 있음",
+            "타인의 감정에 과도하게 영향받을 수 있음",
+            "객관적 판단이 어려울 수 있음"
+        ],
+        advice: [
+            "감정과 이성의 균형을 맞추려 노력하세요",
+            "자신만의 감정 정리 방법을 개발하세요",
+            "경계를 설정하여 자신을 보호하세요",
+            "당신의 공감 능력은 큰 장점임을 기억하세요"
+        ]
+    },
+    "신중형": {
+        title: "신중형 - 단단한 바위처럼 신뢰할 수 있는 마음",
+        emoji: "🖤",
+        summary: "당신은 신중하고 안정적이며 신뢰할 수 있는 성격의 소유자입니다.",
+        characteristics: [
+            "모든 일을 신중하게 고려합니다",
+            "안정성과 확실성을 추구합니다",
+            "책임감이 강합니다",
+            "신뢰할 수 있는 사람입니다"
+        ],
+        strengths: [
+            "뛰어난 책임감과 신뢰성",
+            "안정적이고 일관된 행동",
+            "리스크 관리 능력",
+            "꾸준함과 인내력"
+        ],
+        weaknesses: [
+            "새로운 시도를 주저할 수 있음",
+            "변화에 대한 저항감",
+            "때로는 과도하게 조심스러울 수 있음"
+        ],
+        advice: [
+            "때로는 과감한 도전도 필요함을 기억하세요",
+            "완벽을 추구하기보다는 진전에 집중하세요",
+            "실패를 두려워하지 말고 경험으로 받아들이세요",
+            "당신의 신중함이 많은 사람들에게 안정감을 줍니다"
+        ]
+    }
+};
+
+// 테스트 초기화
+function initializeTest() {
+    initKakao();
+    initializeAds();
+    resetTest();
+    showCurrentPage();
 }
 
-function startQuestions() {
+// 테스트 리셋
+function resetTest() {
     currentQuestion = 0;
-    emotionScores = { joy: 0, sad: 0, angry: 0, fear: 0, calm: 0, neutral: 0, stress: 0 };
+    emotionScores = {
+        "평온형": 0,
+        "열정형": 0,
+        "사색형": 0,
+        "활발형": 0,
+        "감성형": 0,
+        "신중형": 0
+    };
     answers = [];
-    pageManager.showPage('step5');
-    showQuestion();
 }
 
-function showQuestion() {
-    const question = questions[currentQuestion];
-    document.getElementById('questionText').textContent = question.text;
-    document.getElementById('currentEmotionIcon').textContent = question.emoji;
-    document.getElementById('questionNum').textContent = currentQuestion + 1;
+// 현재 페이지 표시
+function showCurrentPage() {
+    const questionContent = document.getElementById('questionContent');
+    const answersContainer = document.getElementById('answersContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
     
-    // 프로그레스 바 업데이트
-    const progress = ((currentQuestion + 1) / questions.length) * 100;
-    document.querySelector('.progress-fill').style.width = progress + '%';
+    // 진행률 업데이트
+    const totalItems = explanations.length + questions.length;
+    const progress = ((currentQuestion + 1) / totalItems) * 100;
+    progressBar.style.width = progress + '%';
+    progressText.textContent = `${currentQuestion + 1}/${totalItems}`;
     
-    // 답변 버튼 생성
-    const answersGrid = document.getElementById('answersGrid');
-    answersGrid.innerHTML = '';
+    // 이전 버튼 표시 여부
+    prevBtn.style.display = currentQuestion > 0 ? 'inline-block' : 'none';
     
-    question.answers.forEach((answer, index) => {
-        const button = document.createElement('button');
-        button.className = 'answer-btn';
-        button.textContent = answer.text;
-        button.onclick = () => selectAnswer(index);
-        answersGrid.appendChild(button);
-    });
-    
-    // 5번째 질문 후 중간 광고 표시
-    if (currentQuestion === 4) {
-        const adMidNative5 = document.getElementById('adMidNative5');
-        if (adMidNative5) {
-            adMidNative5.classList.remove('hidden');
-            adManager.observe('adMidNative5');
+    if (currentQuestion < explanations.length) {
+        // 설명 페이지 표시
+        const explanation = explanations[currentQuestion];
+        questionContent.innerHTML = `
+            <div class="explanation-page">
+                <h1>${explanation.title}</h1>
+                ${explanation.content}
+            </div>
+        `;
+        answersContainer.innerHTML = '';
+        nextBtn.textContent = '다음';
+        nextBtn.disabled = false;
+    } else {
+        // 질문 페이지 표시
+        const questionIndex = currentQuestion - explanations.length;
+        const question = questions[questionIndex];
+        
+        questionContent.innerHTML = `
+            <div class="question-page">
+                <h2>${question.text}</h2>
+            </div>
+        `;
+        
+        // 답변 옵션 생성
+        let answersHTML = '<div class="answers-grid">';
+        question.answers.forEach((answer, index) => {
+            answersHTML += `
+                <button class="answer-btn" onclick="selectAnswer(${questionIndex}, ${index})">
+                    ${answer.text}
+                </button>
+            `;
+        });
+        answersHTML += '</div>';
+        answersContainer.innerHTML = answersHTML;
+        
+        nextBtn.textContent = questionIndex === questions.length - 1 ? '결과 보기' : '다음';
+        nextBtn.disabled = true; // 답변 선택 전까지 비활성화
+        
+        // 중간 광고 표시 (10번째 질문 후)
+        if (questionIndex === 10) {
+            showMidAd();
         }
+    }
+    
+    // 페이지 전환 시 광고 새로고침
+    if (currentQuestion > 0) {
+        refreshAds();
     }
 }
 
-function selectAnswer(answerIndex) {
-    const question = questions[currentQuestion];
+// 답변 선택
+function selectAnswer(questionIndex, answerIndex) {
+    const question = questions[questionIndex];
     const selectedAnswer = question.answers[answerIndex];
     
     // 답변 저장
-    answers.push({
-        question: question.text,
-        answer: selectedAnswer.text,
-        scores: selectedAnswer.scores
+    answers[questionIndex] = selectedAnswer;
+    
+    // 점수 추가
+    emotionScores[selectedAnswer.type] += selectedAnswer.score;
+    
+    // 선택된 답변 스타일 변경
+    const answerButtons = document.querySelectorAll('.answer-btn');
+    answerButtons.forEach((btn, index) => {
+        btn.classList.remove('selected');
+        if (index === answerIndex) {
+            btn.classList.add('selected');
+        }
     });
     
-    // 점수 누적
-    Object.keys(selectedAnswer.scores).forEach(emotion => {
-        emotionScores[emotion] += selectedAnswer.scores[emotion];
-    });
-    
-    // 다음 질문으로
-    currentQuestion++;
-    
-    if (currentQuestion < questions.length) {
-        setTimeout(() => {
-            showQuestion();
-        }, 300);
+    // 다음 버튼 활성화
+    document.getElementById('nextBtn').disabled = false;
+}
+
+// 다음 질문/페이지
+function nextQuestion() {
+    if (currentQuestion < explanations.length + questions.length - 1) {
+        currentQuestion++;
+        showCurrentPage();
     } else {
-        // 모든 질문 완료 - 로딩 시작
-        showLoading();
+        // 테스트 완료 - 결과 페이지로 이동
+        calculateResult();
+        window.location.href = 'result.html';
     }
 }
 
-function showLoading() {
-    document.getElementById('loadingOverlay').classList.remove('hidden');
+// 이전 질문/페이지
+function previousQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        showCurrentPage();
+    }
+}
+
+// 중간 광고 표시
+function showMidAd() {
+    const midAd = document.getElementById('adMid');
+    if (midAd) {
+        midAd.style.display = 'block';
+        loadAd(adSlots[10], 'adMid');
+    }
+}
+
+// 광고 새로고침
+function refreshAds() {
+    const adSlotIndex = Math.min(currentQuestion, adSlots.length - 1);
     
-    // 로딩 애니메이션
-    let currentLoadingStep = 0;
-    const loadingSteps = document.querySelectorAll('.loading-steps .step');
+    // 상단 광고 새로고침
+    loadAd(adSlots[adSlotIndex], 'adTop');
     
-    const loadingInterval = setInterval(() => {
-        if (currentLoadingStep < loadingSteps.length) {
-            loadingSteps.forEach(step => step.classList.remove('active'));
-            loadingSteps[currentLoadingStep].classList.add('active');
-            currentLoadingStep++;
-        } else {
-            clearInterval(loadingInterval);
-            // 결과 생성 및 표시
-            generateResult();
-            document.getElementById('loadingOverlay').classList.add('hidden');
-            
-            // 결과를 URL 파라미터로 전달하여 결과 페이지로 이동
-            const resultData = encodeURIComponent(JSON.stringify(testResult));
-            window.location.href = `result.html?result=${resultData}`;
+    // PC용 사이드 광고 새로고침
+    if (window.innerWidth > 768) {
+        loadAd(adSlots[adSlotIndex + 1] || adSlots[0], 'sideAd');
+    }
+}
+
+// 결과 계산
+function calculateResult() {
+    // 가장 높은 점수의 감정 유형 찾기
+    let maxScore = 0;
+    let resultType = "";
+    
+    for (const type in emotionScores) {
+        if (emotionScores[type] > maxScore) {
+            maxScore = emotionScores[type];
+            resultType = type;
         }
-    }, 800);
+    }
+    
+    testResult = emotionResults[resultType];
+    
+    // 결과를 로컬 스토리지에 저장
+    localStorage.setItem('emotionTestResult', JSON.stringify(testResult));
+    localStorage.setItem('emotionScores', JSON.stringify(emotionScores));
 }
 
-function generateResult() {
-    // 가장 높은 감정 점수 찾기
-    const maxEmotion = Object.keys(emotionScores).reduce((a, b) => 
-        emotionScores[a] > emotionScores[b] ? a : b
-    );
+// 결과 페이지 초기화
+function initializeResult() {
+    initKakao();
+    initializeAds();
     
-    // 스트레스 수준 계산
-    const stressLevel = Math.min(Math.round((emotionScores.stress / questions.length) * 20), 100);
+    // 저장된 결과 불러오기
+    const savedResult = localStorage.getItem('emotionTestResult');
+    const savedScores = localStorage.getItem('emotionScores');
     
-    // 결과 타입 결정
-    testResult = getResultType(maxEmotion, stressLevel);
+    if (savedResult) {
+        testResult = JSON.parse(savedResult);
+        emotionScores = JSON.parse(savedScores);
+    } else {
+        // 결과가 없으면 테스트 페이지로 리다이렉트
+        window.location.href = 'question.html';
+        return;
+    }
     
-    // 결과에 감정 점수와 스트레스 레벨 추가
-    testResult.emotionScores = emotionScores;
-    testResult.stressLevel = stressLevel;
-    
-    console.log('생성된 결과 데이터:', testResult);
+    currentResultPage = 0;
+    showResultPage();
 }
 
-function getResultType(primaryEmotion, stressLevel) {
-    const resultTypes = {
-        joy: {
-            badge: "😊",
-            title: "긍정적 감정 우세형",
-            subtitle: "밝고 활기찬 감정 상태",
-            primaryEmotion: "기쁨",
-            emoji: "😊",
-            description: "현재 당신은 긍정적이고 밝은 감정 상태를 유지하고 있습니다.",
-            care: "이런 좋은 감정 상태를 지속하기 위해 규칙적인 운동과 충분한 휴식을 취하세요."
-        },
-        calm: {
-            badge: "😌",
-            title: "안정적 평온형",
-            subtitle: "차분하고 균형잡힌 감정 상태",
-            primaryEmotion: "평온",
-            emoji: "😌",
-            description: "당신은 안정적이고 평온한 감정 상태를 보여주고 있습니다.",
-            care: "현재의 균형을 유지하면서 새로운 도전을 통해 성장해보세요."
-        },
-        sad: {
-            badge: "😢",
-            title: "감정적 회복 필요형",
-            subtitle: "슬픔과 우울감이 높은 상태",
-            primaryEmotion: "슬픔",
-            emoji: "😢",
-            description: "현재 슬픔이나 우울한 감정이 주를 이루고 있는 상태입니다.",
-            care: "전문가 상담을 고려해보시고, 가족이나 친구들과 대화하는 시간을 늘려보세요."
-        },
-        angry: {
-            badge: "😠",
-            title: "분노 관리 필요형",
-            subtitle: "화와 짜증이 높은 상태",
-            primaryEmotion: "분노",
-            emoji: "😠",
-            description: "최근 분노나 화가 많이 누적된 상태로 보입니다.",
-            care: "분노 조절을 위한 호흡법이나 운동을 통해 감정을 관리해보세요."
-        },
-        fear: {
-            badge: "😰",
-            title: "불안 케어 필요형",
-            subtitle: "불안과 걱정이 높은 상태",
-            primaryEmotion: "불안",
-            emoji: "😰",
-            description: "불안감과 걱정이 높은 수준에 있는 상태입니다.",
-            care: "명상이나 요가 등을 통해 마음의 안정을 찾고, 필요시 전문가 도움을 받으세요."
-        },
-        neutral: {
-            badge: "😐",
-            title: "감정 탐색 필요형",
-            subtitle: "감정 표현이 제한적인 상태",
-            primaryEmotion: "무감정",
-            emoji: "😐",
-            description: "현재 감정 표현이 제한적이거나 무덤덤한 상태입니다.",
-            care: "다양한 활동을 통해 감정을 표현하고 경험할 수 있는 기회를 만들어보세요."
-        }
-    };
+// 결과 페이지 표시
+function showResultPage() {
+    const resultContent = document.getElementById('resultContent');
+    const prevBtn = document.getElementById('prevResultBtn');
+    const nextBtn = document.getElementById('nextResultBtn');
+    const pageIndicator = document.getElementById('pageIndicator');
+    const shareSection = document.getElementById('shareSection');
     
-    return resultTypes[primaryEmotion] || resultTypes.neutral;
-}
-
-// 앵커 광고 닫기
-function closeAnchorAd() {
-    document.getElementById('anchorAd').style.display = 'none';
-}
-
-function showDetailedResult() {
-    // 감정 분포도 생성
-    generateEmotionChart();
+    // 페이지 인디케이터 업데이트
+    pageIndicator.textContent = `${currentResultPage + 1}/6`;
     
-    // 스트레스 분석 표시
-    displayStressAnalysis();
+    // 버튼 상태 업데이트
+    prevBtn.style.display = currentResultPage > 0 ? 'inline-block' : 'none';
+    nextBtn.style.display = currentResultPage < 5 ? 'inline-block' : 'none';
+    shareSection.style.display = currentResultPage === 5 ? 'block' : 'none';
     
-    // 케어 추천 표시
-    displayCareRecommendations();
-    
-    // 공유 요약 생성
-    generateShareSummary();
-}
-
-function generateEmotionChart() {
-    const breakdown = document.getElementById('emotionBreakdown');
-    if (!breakdown) return;
-    
-    breakdown.innerHTML = '';
-    
-    const emotionNames = {
-        joy: '기쁨',
-        sad: '슬픔', 
-        angry: '분노',
-        fear: '불안',
-        calm: '평온',
-        neutral: '무감정'
-    };
-    
-    const total = Object.values(emotionScores).reduce((a, b) => a + b, 0);
-    
-    Object.entries(emotionScores).forEach(([emotion, score]) => {
-        if (emotion === 'stress') return;
-        
-        const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
-        const item = document.createElement('div');
-        item.className = 'emotion-item';
-        item.innerHTML = `
-            <span class="emotion-name">${emotionNames[emotion]}</span>
-            <span class="emotion-percentage">${percentage}%</span>
-        `;
-        breakdown.appendChild(item);
+    // 결과 광고 숨기기
+    document.querySelectorAll('.result-ad').forEach(ad => {
+        ad.style.display = 'none';
     });
+    
+    let content = '';
+    
+    switch (currentResultPage) {
+        case 0:
+            // 메인 결과
+            content = `
+                <div class="result-main">
+                    <div class="result-header">
+                        <div class="result-emoji">${testResult.emoji}</div>
+                        <h1>${testResult.title}</h1>
+                        <p class="result-summary">${testResult.summary}</p>
+                    </div>
+                    
+                    <div class="score-chart">
+                        <h3>감정 유형별 점수</h3>
+                        <div class="score-bars">
+                            ${Object.entries(emotionScores).map(([type, score]) => {
+                                const percentage = (score / Math.max(...Object.values(emotionScores))) * 100;
+                                return `
+                                    <div class="score-item">
+                                        <span class="score-label">${type}</span>
+                                        <div class="score-bar">
+                                            <div class="score-fill" style="width: ${percentage}%"></div>
+                                        </div>
+                                        <span class="score-value">${score}점</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            break;
+            
+        case 1:
+            // 특성
+            content = `
+                <div class="result-detail">
+                    <h2>🎯 주요 특성</h2>
+                    <ul class="characteristic-list">
+                        ${testResult.characteristics.map(char => `<li>${char}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            showResultAd(0);
+            break;
+            
+        case 2:
+            // 장점
+            content = `
+                <div class="result-detail">
+                    <h2>✨ 장점</h2>
+                    <ul class="strength-list">
+                        ${testResult.strengths.map(strength => `<li>${strength}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            showResultAd(1);
+            break;
+            
+        case 3:
+            // 단점
+            content = `
+                <div class="result-detail">
+                    <h2>⚠️ 주의할 점</h2>
+                    <ul class="weakness-list">
+                        ${testResult.weaknesses.map(weakness => `<li>${weakness}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            showResultAd(2);
+            break;
+            
+        case 4:
+            // 조언
+            content = `
+                <div class="result-detail">
+                    <h2>💡 감정 관리 조언</h2>
+                    <ul class="advice-list">
+                        ${testResult.advice.map(advice => `<li>${advice}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            showResultAd(3);
+            break;
+            
+        case 5:
+            // 마무리
+            content = `
+                <div class="result-final">
+                    <h2>🌟 마무리</h2>
+                    <div class="final-message">
+                        <p>당신은 <strong>${testResult.title.split(' - ')[0]}</strong> 유형입니다.</p>
+                        <p>모든 감정 유형은 각각 고유한 장점과 아름다움을 가지고 있습니다.</p>
+                        <p>자신의 감정을 이해하고 받아들이는 것이 건강한 감정 관리의 첫걸음입니다.</p>
+                        <div class="encouragement">
+                            <p>💝 당신의 감정 그 자체로 충분히 소중합니다</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showResultAd(4);
+            break;
+    }
+    
+    resultContent.innerHTML = content;
 }
 
-function displayStressAnalysis() {
-    const stressLevel = Math.min(Math.round((emotionScores.stress / questions.length) * 20), 100);
-    
-    document.getElementById('stressLevel').textContent = `${stressLevel}점`;
-    
-    let stressDesc = '';
-    if (stressLevel <= 20) stressDesc = '매우 낮은 스트레스 수준';
-    else if (stressLevel <= 40) stressDesc = '낮은 스트레스 수준';
-    else if (stressLevel <= 60) stressDesc = '보통 스트레스 수준';
-    else if (stressLevel <= 80) stressDesc = '높은 스트레스 수준';
-    else stressDesc = '매우 높은 스트레스 수준';
-    
-    document.getElementById('stressDescription').textContent = stressDesc;
-    
-    // 스트레스 요인 분석
-    const factors = document.getElementById('stressFactors');
-    if (factors) {
-        factors.innerHTML = `
-            <div class="stress-factor">
-                <span>업무/학업</span>
-                <span>${Math.min(stressLevel + 10, 100)}%</span>
-            </div>
-            <div class="stress-factor">
-                <span>인간관계</span>
-                <span>${Math.max(stressLevel - 15, 0)}%</span>
-            </div>
-            <div class="stress-factor">
-                <span>개인적 고민</span>
-                <span>${stressLevel}%</span>
-            </div>
-        `;
+// 결과 광고 표시
+function showResultAd(adIndex) {
+    const adId = `adResult${adIndex + 1}`;
+    const adElement = document.getElementById(adId);
+    if (adElement) {
+        adElement.style.display = 'block';
+        loadAd(adSlots[adIndex + 12], adId);
     }
 }
 
-function displayCareRecommendations() {
-    const primaryCare = document.getElementById('primaryCare');
-    const dailyCare = document.getElementById('dailyCare');
-    const tipsContainer = document.getElementById('tipsContainer');
-    
-    if (primaryCare) {
-        primaryCare.textContent = testResult.care;
-    }
-    
-    if (dailyCare) {
-        dailyCare.innerHTML = `
-            <p>• 규칙적인 수면 패턴 유지 (7-8시간)</p>
-            <p>• 적절한 운동과 스트레칭</p>
-            <p>• 균형잡힌 영양 섭취</p>
-            <p>• 취미 활동이나 휴식 시간 확보</p>
-        `;
-    }
-    
-    if (tipsContainer) {
-        const tips = [
-            '심호흡으로 마음 진정하기',
-            '짧은 산책으로 기분 전환',
-            '친구나 가족과 대화하기',
-            '좋아하는 음악 듣기',
-            '충분한 물 마시기',
-            '감사 일기 쓰기'
-        ];
-        
-        tipsContainer.innerHTML = tips.map(tip => 
-            `<div class="tip-item">${tip}</div>`
-        ).join('');
+// 다음 결과 페이지
+function nextResultPage() {
+    if (currentResultPage < 5) {
+        currentResultPage++;
+        showResultPage();
     }
 }
 
-function generateShareSummary() {
-    const summaryContent = document.getElementById('summaryContent');
-    if (summaryContent) {
-        const stressLevel = Math.min(Math.round((emotionScores.stress / questions.length) * 20), 100);
-        summaryContent.innerHTML = `
-            <p><strong>감정 유형:</strong> ${testResult.title}</p>
-            <p><strong>주요 감정:</strong> ${testResult.primaryEmotion}</p>
-            <p><strong>스트레스 수준:</strong> ${stressLevel}%</p>
-            <p><strong>추천 케어:</strong> ${testResult.care}</p>
-        `;
+// 이전 결과 페이지
+function previousResultPage() {
+    if (currentResultPage > 0) {
+        currentResultPage--;
+        showResultPage();
     }
 }
 
-function nextResultStep() {
-    if (currentResultStep < 4) {
-        currentResultStep++;
-        pageManager.showPage(`result${currentResultStep}`);
-        adManager.observe(`adResult${currentResultStep}`);
-    }
-}
-
-// 공유 기능
+// 카카오톡 공유
 function shareToKakao() {
-    if (!window.Kakao || !testResult) return;
-    
-    const stressLevel = Math.min(Math.round((emotionScores.stress / questions.length) * 20), 100);
+    if (!window.Kakao.isInitialized()) {
+        initKakao();
+    }
     
     window.Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-            title: `🧠 AI 감정 분석 결과: ${testResult.title}`,
-            description: `나의 주요 감정: ${testResult.primaryEmotion}\n스트레스 수준: ${stressLevel}%\n\n당신의 감정 상태도 확인해보세요!`,
+            title: `감정 테스트 결과: ${testResult.title}`,
+            description: testResult.summary,
             imageUrl: 'https://sd2624.github.io/감정/감정.png',
             link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href
+                mobileWebUrl: 'https://sd2624.github.io/감정/',
+                webUrl: 'https://sd2624.github.io/감정/'
             }
         },
-        buttons: [{
-            title: '나도 테스트하기',
-            link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href
+        buttons: [
+            {
+                title: '나도 테스트하기',
+                link: {
+                    mobileWebUrl: 'https://sd2624.github.io/감정/',
+                    webUrl: 'https://sd2624.github.io/감정/'
+                }
             }
-        }]
+        ]
     });
 }
 
-function shareUrl() {
-    if (navigator.share) {
-        navigator.share({
-            title: 'AI 감정 분석 테스트',
-            text: '나의 감정 상태를 AI가 분석해줬어요! 당신도 테스트해보세요.',
-            url: window.location.href
-        });
-    } else {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-            alert('URL이 복사되었습니다!');
-        });
-    }
-}
-
+// 테스트 다시하기
 function retryTest() {
-    // 초기화
-    currentStep = 1;
-    currentQuestion = 0;
-    currentResultStep = 1;
-    emotionScores = {};
-    answers = [];
-    testResult = null;
-    
-    // 첫 페이지로 이동
-    pageManager.showPage('step1');
+    localStorage.removeItem('emotionTestResult');
+    localStorage.removeItem('emotionScores');
+    window.location.href = 'index.html';
 }
-
-function closeAnchorAd() {
-    document.getElementById('anchorAd').style.display = 'none';
-}
-
-// 실시간 카운터 애니메이션
-function updateLiveCounter() {
-    const counter = document.getElementById('liveCount');
-    if (counter) {
-        const baseCount = 1847;
-        const variation = Math.floor(Math.random() * 20) - 10;
-        counter.textContent = (baseCount + variation).toLocaleString();
-    }
-}
-
-// 초기화
-document.addEventListener('DOMContentLoaded', () => {
-    initKakao();
-    adManager.init();
-    
-    // 실시간 카운터 업데이트
-    updateLiveCounter();
-    setInterval(updateLiveCounter, 30000);
-    
-    // 첫 번째 스텝 광고 로드
-    setTimeout(() => {
-        adManager.observe('adTopNative1');
-        adManager.observe('adMidNative1');
-        adManager.observe('adBottomCTA1');
-    }, 500);
-});
