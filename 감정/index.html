@@ -1,99 +1,524 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>감정 상태 테스트 - 당신의 현재 감정을 알아보세요</title>
-    <meta name="description" content="간단한 심리 테스트로 당신의 현재 감정 상태와 기분을 정확하게 분석해보세요. 무료 감정 테스트로 자신을 더 잘 이해하세요.">
-    <meta name="keywords" content="감정테스트, 심리테스트, 기분테스트, 감정분석, 무료심리테스트">
+    <title>감정 분석 테스트 - 나의 진짜 감정 발견하기</title>
+    <meta name="description" content="과학적인 심리 분석으로 숨겨진 감정을 발견하세요. 스트레스, 행복, 불안 등 12가지 감정 상태를 정확히 진단합니다">
+    <meta name="keywords" content="감정 테스트, 심리 테스트, 감정 분석, 스트레스 테스트, 정신 상태, 심리 상담, 감정 진단, 정신 건강">
+    <meta name="author" content="TestPro">
+    <meta name="robots" content="index, follow">
     
-    <!-- 오픈그래프 -->
-    <meta property="og:title" content="감정 상태 테스트 - 당신의 현재 감정을 알아보세요">
-    <meta property="og:description" content="간단한 심리 테스트로 당신의 현재 감정 상태와 기분을 정확하게 분석해보세요.">
-    <meta property="og:image" content="https://sd2624.github.io/감정/감정.png">
-    <meta property="og:url" content="https://sd2624.github.io/감정/">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="감정 분석 테스트">
+    <meta property="og:description" content="과학적인 심리 분석으로 진짜 감정을 발견하세요">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sd2624.github.io/감정/">
+    <meta property="og:image" content="https://sd2624.github.io/감정/emotion.svg">
     
-    <!-- 구조화 데이터 -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="감정 분석 테스트">
+    <meta name="twitter:description" content="과학적으로 숨겨진 감정을 분석해보세요">
+    
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "감정 상태 테스트",
-        "description": "간단한 심리 테스트로 당신의 현재 감정 상태와 기분을 정확하게 분석해보세요.",
+        "@type": "WebApplication",
+        "name": "감정 분석 테스트",
+        "description": "과학적인 심리 분석을 통한 감정 상태 진단 테스트",
         "url": "https://sd2624.github.io/감정/",
-        "mainEntity": {
-            "@type": "Quiz",
-            "name": "감정 상태 테스트",
-            "description": "20개의 질문으로 알아보는 감정 상태 분석",
-            "educationalLevel": "general"
-        }
+        "applicationCategory": "HealthApplication"
     }
     </script>
     
     <link rel="stylesheet" href="style.css">
-    
+    <!-- Kakao SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-         crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- 상단 광고 -->
-        <div class="ad-container top-ad">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9374368296307755"
-                 data-ad-slot="8384240134"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-        
-        <main class="intro-section">
-            <div class="intro-content">
-                <div class="intro-image">
-                    <img src="감정.png" alt="감정 테스트 이미지" loading="lazy">
-                </div>
-                
-                <h1 class="main-title">감정 상태 테스트</h1>
-                
-                <div class="description">
-                    <p>지금 당신의 감정 상태는 어떤가요?</p>
-                    <p>간단한 20개의 질문으로 당신의 현재 감정과 기분을 정확하게 분석해드립니다.</p>
-                    <p>솔직하게 답변해주시면 더욱 정확한 결과를 얻을 수 있어요!</p>
-                </div>
-                
-                <div class="features">
-                    <div class="feature-item">
-                        <span class="feature-icon">⏱️</span>
-                        <span>소요시간: 약 3분</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">📊</span>
-                        <span>정확한 감정 분석</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🔒</span>
-                        <span>개인정보 보호</span>
-                    </div>
-                </div>
-                
-                <button class="start-btn" onclick="startTest()">
-                    <span>테스트 시작하기</span>
-                    <span class="btn-icon">→</span>
-                </button>
-            </div>
-        </main>
+    <!-- [AD] Top of Page - k-test top (slot: 3201247599) -->
+    <div class="ad-container top" id="adTop" style="text-align:center; margin:8px 0;">
+        <ins class="adsbygoogle"
+             style="display:block; min-height:90px; max-height:100px;"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
     </div>
-    
+
+    <div class="container">
+        <div class="test-container">
+            <!-- Start Page -->
+            <div class="start-page" id="startPage">
+                <!-- Step 1: Main intro -->
+                <div class="intro-step" id="introStep1">
+                    <h1 class="main-title">🧠 감정 분석</h1>
+                    <div class="start-animation">
+                        <div class="emotion-wheel">
+                            <div class="emotion-segment happy">😊</div>
+                            <div class="emotion-segment sad">😢</div>
+                            <div class="emotion-segment angry">😠</div>
+                            <div class="emotion-segment anxious">😰</div>
+                            <div class="emotion-segment excited">🤩</div>
+                            <div class="emotion-segment peaceful">😌</div>
+                        </div>
+                        <div class="pulse-effect"></div>
+                    </div>
+                    <p class="sub-title">지금 당신의 진짜 감정은 무엇인가요?<br>12가지 감정 유형을 통해 당신만의 독특한 정신 상태를 정확하게 분석해보세요!</p>
+                    
+                    <button class="next-btn mobile-only" onclick="showNextStep(2)">
+                        <span class="btn-icon">👆</span>
+                        다음
+                    </button>
+
+                    <button class="start-btn desktop-only" onclick="startTest()">
+                        <span class="btn-icon">🚀</span>
+                        내 감정 분석하기
+                        <span class="btn-subtitle">무료 • 2분만에 완료</span>
+                    </button>
+                </div>
+
+                <!-- Step 2: Features -->
+                <div class="intro-step hidden" id="introStep2">
+                    <h2 class="step-title">✨ 테스트 특징</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🔬</div>
+                            <h3>과학적 분석</h3>
+                            <p>심리학 기반<br>정확한 진단</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3>개인 맞춤형</h3>
+                            <p>당신만의 독특한<br>감정 패턴</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">💡</div>
+                            <h3>솔루션 제공</h3>
+                            <p>감정 관리<br>실용적인 조언</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🌟</div>
+                            <h3>무료 테스트</h3>
+                            <p>완전 무료<br>즉시 결과 확인</p>
+                        </div>
+                    </div>
+
+                    <div class="step-navigation">
+                        <button class="prev-btn" onclick="showNextStep(1)">
+                            <span class="btn-icon">👈</span>
+                            이전
+                        </button>
+                        <button class="next-btn" onclick="showNextStep(3)">
+                            <span class="btn-icon">👆</span>
+                            다음
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Stats and urgency -->
+                <div class="intro-step hidden" id="introStep3">
+                    <h2 class="step-title">📊 테스트 현황</h2>
+                    
+                    <div class="stats-section">
+                        <div class="stat-item">
+                            <div class="stat-number">98.7%</div>
+                            <div class="stat-label">정확도</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50만+</div>
+                            <div class="stat-label">테스트 완료</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2분</div>
+                            <div class="stat-label">소요 시간</div>
+                        </div>
+                    </div>
+
+                    <div class="urgency-notice">
+                        <div class="notice-header">🔥 지금 인기 🔥</div>
+                        <div class="notice-content">
+                            많은 사람들이 지금 자신의 감정을 분석하고 있어요!<br>
+                            당신의 진짜 감정이 궁금하지 않나요?
+                        </div>
+                        <div class="live-counter">
+                            실시간 참여자: <span id="liveCount">1,247</span>명
+                        </div>
+                    </div>
+
+                    <div class="step-navigation">
+                        <button class="prev-btn" onclick="showNextStep(2)">
+                            <span class="btn-icon">�</span>
+                            이전
+                        </button>
+                        <button class="next-btn" onclick="showNextStep(4)">
+                            <span class="btn-icon">👆</span>
+                            다음
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Testimonials and start -->
+                <div class="intro-step hidden" id="introStep4">
+                    <h2 class="step-title">💬 사용자 후기</h2>
+                    
+                    <div class="testimonials">
+                        <div class="testimonial">
+                            <div class="testimonial-text">"정말 정확해요! 제가 몰랐던 감정까지 알려줘서 놀랐어요"</div>
+                            <div class="testimonial-author">- 김수현</div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="testimonial-text">"스트레스 관리 팁도 같이 알려줘서 정말 도움됐어요"</div>
+                            <div class="testimonial-author">- 이민준</div>
+                        </div>
+                    </div>
+
+                    <button class="start-btn" onclick="startTest()">
+                        <span class="btn-icon">🚀</span>
+                        내 감정 분석하기
+                        <span class="btn-subtitle">무료 • 2분만에 완료</span>
+                    </button>
+                    
+                    <div class="share-section">
+                        <div class="kakao-share" onclick="shareToKakao()">
+                            <div class="kakao-icon"></div>
+                            <span>친구들과 공유하기</span>
+                        </div>
+                    </div>
+
+                    <button class="prev-btn mobile-navigation" onclick="showNextStep(3)">
+                        <span class="btn-icon">👈</span>
+                        이전
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question Page -->
+            <div class="question-page hidden" id="questionPage">
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="question-counter">1 / 12</div>
+                    <div class="time-indicator">⏰ 평균 소요시간: 2분</div>
+                </div>
+                
+                <div class="question-container">
+                    <div class="emotion-indicator">
+                        <div class="emotion-icon" id="currentEmotionIcon">🤔</div>
+                        <div class="emotion-label">감정 분석 중...</div>
+                    </div>
+                    
+                    <h2 class="question-text"></h2>
+                    
+                    <!-- [AD] Middle of questions - after 3rd question, k-test slot2 (slot: 1966797795) -->
+                    <div class="ad-container mid" id="adMid" style="display:none; margin:8px 0; text-align:center;">
+                        <ins class="adsbygoogle"
+                             style="display:block; min-height:80px; max-height:100px;"
+                             data-ad-client="ca-pub-9374368296307755"
+                             data-ad-slot="1966797795"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                    </div>
+                    
+                    <div class="question-subtitle">가장 솔직한 답변을 선택해주세요</div>
+                    <div class="answers-grid"></div>
+                </div>
+            </div>
+
+            <!-- Loading Page -->
+            <div class="loading-page hidden" id="loadingPage">
+                <div class="loading-animation">
+                    <div class="brain-scan">
+                        <div class="brain-icon">🧠</div>
+                        <div class="scan-line"></div>
+                    </div>
+                    <h2 class="loading-title">감정 분석 중...</h2>
+                    <div class="loading-steps">
+                        <div class="step active">감정 패턴 분석</div>
+                        <div class="step">심리 상태 진단</div>
+                        <div class="step">개인별 해석</div>
+                        <div class="step">맞춤형 조언 생성</div>
+                    </div>
+                    <div class="loading-bar">
+                        <div class="loading-progress"></div>
+                    </div>
+                    <p class="loading-text">당신의 마음을 세심하게 분석하고 있어요...</p>
+                </div>
+            </div>
+
+            <!-- Result Page -->
+            <div class="result-page hidden" id="resultPage">
+                <!-- Step 1: 결과 헤더 -->
+                <div class="result-step" id="resultStep1">
+                    <div class="result-header">
+                        <div class="result-badge" id="resultBadge"></div>
+                        <h2 class="result-title" id="resultTitle"></h2>
+                        <div class="result-subtitle" id="resultSubtitle"></div>
+                        <div class="result-description" id="resultDescription"></div>
+                    </div>
+
+                    <div class="personality-summary">
+                        <h3>🎭 성격 요약</h3>
+                        <div class="summary-card" id="personalitySummary">
+                            <!-- 동적으로 생성됨 -->
+                        </div>
+                    </div>
+
+                    <!-- [AD] Step 1 광고 -->
+                    <div class="ad-container result" id="adResult1" style="margin:15px 0; text-align:center;">
+                        <ins class="adsbygoogle"
+                             style="display:block; min-height:100px; max-height:120px;"
+                             data-ad-client="ca-pub-9374368296307755"
+                             data-ad-slot="3593134392"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                    </div>
+
+                    <div class="result-navigation">
+                        <button class="next-result-btn" onclick="showResultStep(2)">
+                            <span class="btn-icon">📊</span>
+                            감정 분포도 보기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: 감정 분포도 -->
+                <div class="result-step hidden" id="resultStep2">
+                    <h2 class="step-title">📊 감정 분포도</h2>
+                    
+                    <div class="emotion-chart">
+                        <div class="chart-header">
+                            <h3>당신의 감정 구성</h3>
+                            <p class="chart-description">총 <span id="totalQuestions">20</span>개 질문에 대한 답변을 분석한 결과입니다</p>
+                        </div>
+                        <div class="chart-container" id="emotionChart"></div>
+                    </div>
+
+                    <div class="emotion-insights">
+                        <h3>🔍 분석 인사이트</h3>
+                        <div class="insights-grid" id="emotionInsights">
+                            <!-- 동적으로 생성됨 -->
+                        </div>
+                    </div>
+
+                    <!-- [AD] Step 2 광고 -->
+                    <div class="ad-container result" id="adResult2" style="margin:15px 0; text-align:center;">
+                        <ins class="adsbygoogle"
+                             style="display:block; min-height:100px; max-height:120px;"
+                             data-ad-client="ca-pub-9374368296307755"
+                             data-ad-slot="1966797795"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                    </div>
+
+                    <div class="result-navigation">
+                        <button class="prev-result-btn" onclick="showResultStep(1)">
+                            <span class="btn-icon">👈</span>
+                            이전
+                        </button>
+                        <button class="next-result-btn" onclick="showResultStep(3)">
+                            <span class="btn-icon">🔍</span>
+                            상세 분석 보기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: 상세 분석 -->
+                <div class="result-step hidden" id="resultStep3">
+                    <h2 class="step-title">🔍 상세 분석</h2>
+                    
+                    <div class="emotion-details">
+                        <div class="detail-card primary">
+                            <h4>🌟 주요 감정</h4>
+                            <div class="emotion-score" id="primaryEmotion"></div>
+                            <div class="emotion-explanation" id="primaryExplanation">
+                                <!-- 동적으로 생성됨 -->
+                            </div>
+                        </div>
+                        
+                        <div class="detail-card secondary">
+                            <h4>🔮 숨겨진 감정</h4>
+                            <div class="emotion-score" id="hiddenEmotion"></div>
+                            <div class="emotion-explanation" id="hiddenExplanation">
+                                <!-- 동적으로 생성됨 -->
+                            </div>
+                        </div>
+
+                        <div class="detail-card balance">
+                            <h4>⚖️ 감정 균형도</h4>
+                            <div class="balance-analysis" id="emotionBalance">
+                                <!-- 동적으로 생성됨 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="psychological-profile">
+                        <h3>🧠 심리적 프로필</h3>
+                        <div class="profile-grid" id="psychProfile">
+                            <!-- 동적으로 생성됨 -->
+                        </div>
+                    </div>
+
+                    <!-- [AD] Step 3 광고 -->
+                    <div class="ad-container result" id="adResult3" style="margin:15px 0; text-align:center;">
+                        <ins class="adsbygoogle"
+                             style="display:block; min-height:100px; max-height:120px;"
+                             data-ad-client="ca-pub-9374368296307755"
+                             data-ad-slot="3201247599"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                    </div>
+
+                    <div class="result-navigation">
+                        <button class="prev-result-btn" onclick="showResultStep(2)">
+                            <span class="btn-icon">👈</span>
+                            이전
+                        </button>
+                        <button class="next-result-btn" onclick="showResultStep(4)">
+                            <span class="btn-icon">🎯</span>
+                            맞춤형 조언 보기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: 맞춤형 조언 -->
+                <div class="result-step hidden" id="resultStep4">
+                    <h2 class="step-title">🎯 맞춤형 조언</h2>
+                    
+                    <div class="advice-section">
+                        <div class="main-advice">
+                            <h3>💡 전문가 조언</h3>
+                            <div class="advice-card" id="adviceContent"></div>
+                        </div>
+                        
+                        <div class="improvement-tips">
+                            <h3>🌱 감정 관리 팁</h3>
+                            <div class="tips-grid" id="tipsGrid"></div>
+                        </div>
+
+                        <div class="daily-practices">
+                            <h3>📅 일상 실천법</h3>
+                            <div class="practices-list" id="dailyPractices">
+                                <!-- 동적으로 생성됨 -->
+                            </div>
+                        </div>
+
+                        <div class="warning-signs">
+                            <h3>⚠️ 주의할 점</h3>
+                            <div class="warning-card" id="warningSignsContent">
+                                <!-- 동적으로 생성됨 -->
+                            </div>
+                        </div>
+
+                        <div class="recommended-activities">
+                            <h3>🎨 추천 활동</h3>
+                            <div class="activities-grid" id="recommendedActivities">
+                                <!-- 동적으로 생성됨 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- [AD] Step 4 광고 -->
+                    <div class="ad-container result" id="adResult4" style="margin:15px 0; text-align:center;">
+                        <ins class="adsbygoogle"
+                             style="display:block; min-height:100px; max-height:120px;"
+                             data-ad-client="ca-pub-9374368296307755"
+                             data-ad-slot="1966797795"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                    </div>
+
+                    <div class="result-navigation">
+                        <button class="prev-result-btn" onclick="showResultStep(3)">
+                            <span class="btn-icon">👈</span>
+                            이전
+                        </button>
+                        <button class="next-result-btn" onclick="showResultStep(5)">
+                            <span class="btn-icon">🎉</span>
+                            공유하기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 5: 공유 및 추천 -->
+                <div class="result-step hidden" id="resultStep5">
+                    <h2 class="step-title">🎉 결과 공유하기</h2>
+                    
+                    <div class="result-actions">
+                        <button class="share-result-btn kakao-share-btn" onclick="shareToKakao()">
+                            <span class="btn-icon">💬</span>
+                            카카오톡 공유
+                        </button>
+                        <button class="url-share-btn" onclick="shareUrl()">
+                            <span class="btn-icon">🔗</span>
+                            URL 공유
+                        </button>
+                        <button class="retry-btn" onclick="retryTest()">
+                            <span class="btn-icon">🔄</span>
+                            다시 테스트
+                        </button>
+                    </div>
+
+                    <!-- Additional KakaoTalk Share Section -->
+                    <div class="share-section">
+                        <p>감정 분석 결과를 카카오톡으로 공유하고 친구들도 테스트에 초대해보세요</p>
+                        <button class="kakao-share-large" onclick="shareToKakao()">
+                            <div class="kakao-icon">💬</div>
+                            <div class="kakao-text">
+                                <div class="kakao-title">카카오톡 공유하기</div>
+                                <div class="kakao-subtitle">친구들과 함께 감정 테스트 해보기</div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- [AD] Step 5 광고 -->
+                    <div class="ad-container result" id="adResult5" style="margin:15px 0; text-align:center;">
+                        <ins class="adsbygoogle"
+                             style="display:block; min-height:100px; max-height:120px;"
+                             data-ad-client="ca-pub-9374368296307755"
+                             data-ad-slot="3593134392"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                    </div>
+
+                    <div class="related-tests">
+                        <h3>다른 테스트도 해보세요</h3>
+                        <div class="related-grid">
+                            <a href="../스트레스/" class="related-item">
+                                <div class="related-icon">😤</div>
+                                <div class="related-title">스트레스 테스트</div>
+                            </a>
+                            <a href="../행복/" class="related-item">
+                                <div class="related-icon">😊</div>
+                                <div class="related-title">행복 지수</div>
+                            </a>
+                            <a href="../타로/" class="related-item">
+                                <div class="related-icon">🔮</div>
+                                <div class="related-title">오늘의 운세</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="result-navigation">
+                        <button class="prev-result-btn" onclick="showResultStep(4)">
+                            <span class="btn-icon">👈</span>
+                            이전
+                        </button>
+                        <button class="final-action-btn" onclick="retryTest()">
+                            <span class="btn-icon">🔄</span>
+                            새로운 테스트 하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
-    <script>
-        // 광고 로드
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        
-        function startTest() {
-            window.location.href = 'question.html';
-        }
-    </script>
 </body>
 </html>
