@@ -42,27 +42,27 @@ function loadAd(slotId, containerId) {
     }
 }
 
-// 광고 리프레시 함수
-function refreshAd(containerId) {
-    try {
-        const adContainer = document.getElementById(containerId);
-        if (adContainer) {
-            // 현재 시간을 이용해 슬롯 선택 (메인/보조 교대 사용)
-            const useSecondary = Math.floor(Date.now() / 10000) % 2 === 0;
-            const slotId = useSecondary ? secondaryAdSlot : primaryAdSlot;
+// 광고 리프레시 함수 (사용 안함 - 버퍼링 방지)
+// function refreshAd(containerId) {
+//     try {
+//         const adContainer = document.getElementById(containerId);
+//         if (adContainer) {
+//             // 현재 시간을 이용해 슬롯 선택 (메인/보조 교대 사용)
+//             const useSecondary = Math.floor(Date.now() / 10000) % 2 === 0;
+//             const slotId = useSecondary ? secondaryAdSlot : primaryAdSlot;
             
-            // 기존 광고 완전 제거
-            adContainer.innerHTML = '';
+//             // 기존 광고 완전 제거
+//             adContainer.innerHTML = '';
             
-            // 잠시 후 새 광고 로드 (딜레이 단축)
-            setTimeout(() => {
-                loadAd(slotId, containerId);
-            }, 50);
-        }
-    } catch (error) {
-        console.error(`광고 리프레시 실패: ${containerId}`, error);
-    }
-}
+//             // 잠시 후 새 광고 로드 (딜레이 단축)
+//             setTimeout(() => {
+//                 loadAd(slotId, containerId);
+//             }, 50);
+//         }
+//     } catch (error) {
+//         console.error(`광고 리프레시 실패: ${containerId}`, error);
+//     }
+// }
 
 // 초기 광고 로드
 function initializeAds() {
@@ -618,25 +618,23 @@ function previousQuestion() {
     }
 }
 
-// 중간 광고 표시
+// 중간 광고 표시 (한 번만 로드)
 function showMidAd() {
     const midAd = document.getElementById('adMid');
-    if (midAd) {
+    if (midAd && midAd.style.display === 'none') {
         midAd.style.display = 'block';
-        // 중간 광고는 리프레시 없이 기본 로드만
-        loadAd(primaryAdSlot, 'adMid');
+        // 처음에만 로드, 이미 로드된 경우 다시 로드하지 않음
+        if (!midAd.hasAttribute('data-loaded')) {
+            loadAd(primaryAdSlot, 'adMid');
+            midAd.setAttribute('data-loaded', 'true');
+        }
     }
 }
 
-// 광고 새로고침 (페이지 전환 시)
+// 광고 새로고침 (페이지 전환 시) - 완전 비활성화
 function refreshAds() {
-    // 상단 광고는 고정 (리프레시 하지 않음)
-    // loadAd(primaryAdSlot, 'adTop'); // 제거
-    
-    // PC용 사이드 광고만 리프레시
-    if (window.innerWidth > 768) {
-        refreshAd('sideAd');
-    }
+    // 광고 리프레시 완전 제거 - 버퍼링 방지를 위해 아무것도 하지 않음
+    return;
 }
 
 // 결과 계산
@@ -810,13 +808,18 @@ function showResultPage() {
     resultContent.innerHTML = content;
 }
 
-// 결과 광고 표시 (리프레시 방식)
+// 결과 광고 표시 (한 번만 로드)
 function showResultAd(adIndex) {
     const adId = `adResult${adIndex + 1}`;
     const adElement = document.getElementById(adId);
-    if (adElement) {
+    if (adElement && adElement.style.display === 'none') {
         adElement.style.display = 'block';
-        refreshAd(adId);
+        // 처음에만 로드, 이미 로드된 경우 다시 로드하지 않음
+        if (!adElement.hasAttribute('data-loaded')) {
+            const slotId = adIndex % 2 === 0 ? primaryAdSlot : secondaryAdSlot;
+            loadAd(slotId, adId);
+            adElement.setAttribute('data-loaded', 'true');
+        }
     }
 }
 
