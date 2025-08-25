@@ -24,18 +24,19 @@ body {
 .ad-container {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 8px;
-    margin: 8px 0;
-    padding: 8px;
+    margin: 5px 0;
+    padding: 5px;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    min-height: 60px;
-    max-height: 120px;
+    min-height: 50px;
+    max-height: 80px;
     overflow: hidden;
 }
 
 .ad-container ins {
     display: block !important;
-    min-height: 50px;
+    min-height: 45px;
+    max-height: 70px;
 }
 
 /* 인트로 페이지 스타일 */
@@ -135,7 +136,7 @@ body {
     flex: 1;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -152,7 +153,7 @@ body {
     background: #e9ecef;
     border-radius: 20px;
     height: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     position: relative;
     overflow: hidden;
 }
@@ -182,12 +183,12 @@ body {
 
 .explanation-page,
 .question-page {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .explanation-content h2 {
     color: #FF6B6B;
-    margin: 20px 0 15px 0;
+    margin: 15px 0 10px 0;
 }
 
 .explanation-content ul {
@@ -224,15 +225,15 @@ body {
 
 .answers-grid {
     display: grid;
-    gap: 12px;
-    margin-bottom: 25px;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .answer-btn {
     background: white;
     border: 2px solid #e9ecef;
     border-radius: 12px;
-    padding: 15px 20px;
+    padding: 12px 15px;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -254,11 +255,22 @@ body {
     font-weight: 600;
 }
 
+.answer-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.answer-btn:disabled:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
 .navigation-buttons {
     display: flex;
     justify-content: space-between;
     gap: 15px;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 .navigation-buttons button {
@@ -525,6 +537,10 @@ body {
 
 .retry-section {
     margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .retry-btn {
@@ -537,6 +553,8 @@ body {
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .retry-btn:hover {
@@ -544,6 +562,79 @@ body {
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+}
+
+.home-btn {
+    background: #FF6B6B;
+    border-color: #FF6B6B;
+    color: white;
+}
+
+.home-btn:hover {
+    background: #ff5252;
+    border-color: #ff5252;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* 추천 테스트 스타일 */
+.related-tests {
+    margin-top: 30px;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 15px;
+}
+
+.related-tests h3 {
+    color: #4A90E2;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.tests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.test-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.test-card:hover {
+    transform: translateY(-3px);
+    border-color: #4ECDC4;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    color: inherit;
+}
+
+.test-emoji {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.test-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4A90E2;
+    margin-bottom: 8px;
+}
+
+.test-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
 }
 
 /* 모바일 반응형 */
@@ -555,13 +646,13 @@ body {
     .main-content,
     .question-section,
     .result-container {
-        padding: 20px 15px;
-        margin-top: 5px;
+        padding: 15px 12px;
+        margin-top: 3px;
     }
     
     .question-layout {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
     }
     
     .side-ad-container {
@@ -640,10 +731,15 @@ body {
     }
     
     .ad-container {
-        margin: 5px 0;
-        padding: 5px;
-        min-height: 50px;
-        max-height: 80px;
+        margin: 2px 0;
+        padding: 3px;
+        min-height: 40px;
+        max-height: 60px;
+    }
+    
+    .ad-container ins {
+        min-height: 35px;
+        max-height: 55px;
     }
 }
 
@@ -689,10 +785,43 @@ body {
     }
     
     .ad-container {
-        margin: 3px 0;
-        padding: 3px;
-        min-height: 40px;
-        max-height: 60px;
+        margin: 1px 0;
+        padding: 2px;
+        min-height: 30px;
+        max-height: 45px;
+    }
+    
+    .ad-container ins {
+        min-height: 25px;
+        max-height: 40px;
+    }
+    
+    .retry-section {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .retry-btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .tests-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .test-card {
+        padding: 15px;
+    }
+    
+    .test-emoji {
+        font-size: 2rem;
+    }
+    
+    .related-tests {
+        padding: 20px 15px;
+        margin-top: 20px;
     }
 }
 

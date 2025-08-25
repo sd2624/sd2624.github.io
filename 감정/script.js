@@ -5,14 +5,9 @@ let emotionScores = {};
 let answers = [];
 let testResult = null;
 
-// 광고 슬롯 ID 배열
-const adSlots = [
-    '8384240134', '4994254497', '4202989029', '4448942166', 
-    '1966797795', '1688252733', '3201247599', '1724698171',
-    '8694716039', '8516017980', '1992440849', '1038623263',
-    '2415112676', '5931685853', '9952845435', '3603389079',
-    '9467326944', '4500586087'
-];
+// 주요 광고 슬롯 ID (1-2개만 사용)
+const primaryAdSlot = '8384240134';  // 메인 슬롯
+const secondaryAdSlot = '4994254497'; // 보조 슬롯
 
 // 카카오 SDK 초기화
 function initKakao() {
@@ -22,24 +17,50 @@ function initKakao() {
     }
 }
 
-// 광고 로드 함수
+// 광고 로드 함수 (리프레시 기능 포함)
 function loadAd(slotId, containerId) {
     try {
         const adContainer = document.getElementById(containerId);
         if (adContainer) {
+            // 기존 광고 제거
+            adContainer.innerHTML = '';
+            
+            // 새 광고 삽입
             adContainer.innerHTML = `
                 <ins class="adsbygoogle"
-                     style="display:block"
+                     style="display:block; max-height:60px;"
                      data-ad-client="ca-pub-9374368296307755"
                      data-ad-slot="${slotId}"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>`;
             
             (adsbygoogle = window.adsbygoogle || []).push({});
-            console.log(`광고 로드 완료: ${slotId}`);
+            console.log(`광고 리프레시 완료: ${slotId} - ${containerId}`);
         }
     } catch (error) {
         console.error(`광고 로드 실패: ${slotId}`, error);
+    }
+}
+
+// 광고 리프레시 함수
+function refreshAd(containerId) {
+    try {
+        const adContainer = document.getElementById(containerId);
+        if (adContainer) {
+            // 현재 시간을 이용해 슬롯 선택 (메인/보조 교대 사용)
+            const useSecondary = Math.floor(Date.now() / 10000) % 2 === 0;
+            const slotId = useSecondary ? secondaryAdSlot : primaryAdSlot;
+            
+            // 기존 광고 완전 제거
+            adContainer.innerHTML = '';
+            
+            // 잠시 후 새 광고 로드
+            setTimeout(() => {
+                loadAd(slotId, containerId);
+            }, 100);
+        }
+    } catch (error) {
+        console.error(`광고 리프레시 실패: ${containerId}`, error);
     }
 }
 
@@ -564,10 +585,17 @@ function selectAnswer(questionIndex, answerIndex) {
         if (index === answerIndex) {
             btn.classList.add('selected');
         }
+        // 답변 선택 후 모든 버튼 비활성화
+        btn.disabled = true;
     });
     
     // 다음 버튼 활성화
     document.getElementById('nextBtn').disabled = false;
+    
+    // 0.8초 후 자동으로 다음 질문으로 이동
+    setTimeout(() => {
+        nextQuestion();
+    }, 800);
 }
 
 // 다음 질문/페이지
@@ -595,20 +623,18 @@ function showMidAd() {
     const midAd = document.getElementById('adMid');
     if (midAd) {
         midAd.style.display = 'block';
-        loadAd(adSlots[10], 'adMid');
+        refreshAd('adMid');
     }
 }
 
-// 광고 새로고침
+// 광고 새로고침 (페이지 전환 시)
 function refreshAds() {
-    const adSlotIndex = Math.min(currentQuestion, adSlots.length - 1);
-    
     // 상단 광고 새로고침
-    loadAd(adSlots[adSlotIndex], 'adTop');
+    refreshAd('adTop');
     
     // PC용 사이드 광고 새로고침
     if (window.innerWidth > 768) {
-        loadAd(adSlots[adSlotIndex + 1] || adSlots[0], 'sideAd');
+        refreshAd('sideAd');
     }
 }
 
@@ -783,13 +809,13 @@ function showResultPage() {
     resultContent.innerHTML = content;
 }
 
-// 결과 광고 표시
+// 결과 광고 표시 (리프레시 방식)
 function showResultAd(adIndex) {
     const adId = `adResult${adIndex + 1}`;
     const adElement = document.getElementById(adId);
     if (adElement) {
         adElement.style.display = 'block';
-        loadAd(adSlots[adIndex + 12], adId);
+        refreshAd(adId);
     }
 }
 
