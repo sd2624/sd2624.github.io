@@ -3,43 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="감정 테스트 - 내 감정 상태를 알아보는 심리테스트">
-    <meta name="description" content="나의 현재 감정 상태와 성향을 알아보는 정확한 심리테스트. 20가지 질문으로 감정 유형을 분석해보세요.">
-    <meta name="keywords" content="감정테스트, 심리테스트, 감정분석, 성격테스트, 무료테스트">
+    <title>감정 상태 테스트 - 당신의 현재 감정을 알아보세요</title>
+    <meta name="description" content="간단한 심리 테스트로 당신의 현재 감정 상태와 기분을 정확하게 분석해보세요. 무료 감정 테스트로 자신을 더 잘 이해하세요.">
+    <meta name="keywords" content="감정테스트, 심리테스트, 기분테스트, 감정분석, 무료심리테스트">
     
     <!-- 오픈그래프 -->
-    <meta property="og:title" content="감정 테스트 - 내 감정 상태 분석">
-    <meta property="og:description" content="20가지 질문으로 나의 감정 유형을 알아보는 정확한 심리테스트">
+    <meta property="og:title" content="감정 상태 테스트 - 당신의 현재 감정을 알아보세요">
+    <meta property="og:description" content="간단한 심리 테스트로 당신의 현재 감정 상태와 기분을 정확하게 분석해보세요.">
     <meta property="og:image" content="https://sd2624.github.io/감정/감정.png">
     <meta property="og:url" content="https://sd2624.github.io/감정/">
     <meta property="og:type" content="website">
     
-    <!-- JSON-LD 구조화 데이터 -->
+    <!-- 구조화 데이터 -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "감정 테스트",
-        "description": "나의 현재 감정 상태와 성향을 알아보는 정확한 심리테스트",
+        "name": "감정 상태 테스트",
+        "description": "간단한 심리 테스트로 당신의 현재 감정 상태와 기분을 정확하게 분석해보세요.",
         "url": "https://sd2624.github.io/감정/",
-        "image": "https://sd2624.github.io/감정/감정.png",
-        "publisher": {
-            "@type": "Organization",
-            "name": "심리테스트 센터"
+        "mainEntity": {
+            "@type": "Quiz",
+            "name": "감정 상태 테스트",
+            "description": "20개의 질문으로 알아보는 감정 상태 분석",
+            "educationalLevel": "general"
         }
     }
     </script>
     
-    <title>감정 테스트 - 내 감정 상태를 알아보는 심리테스트</title>
     <link rel="stylesheet" href="style.css">
     
-    <!-- 구글 애드센스 -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+         crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
         <!-- 상단 광고 -->
-        <div class="ad-container" id="adTop">
+        <div class="ad-container top-ad">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-9374368296307755"
@@ -48,39 +49,47 @@
                  data-full-width-responsive="true"></ins>
         </div>
         
-        <div class="main-content">
-            <div class="intro-section">
-                <div class="test-image">
-                    <img src="감정.png" alt="감정 테스트 이미지" />
+        <main class="intro-section">
+            <div class="intro-content">
+                <div class="intro-image">
+                    <img src="감정.png" alt="감정 테스트 이미지" loading="lazy">
                 </div>
                 
-                <h1>감정 테스트</h1>
-                <p class="subtitle">당신의 현재 감정 상태를 알아보세요</p>
+                <h1 class="main-title">감정 상태 테스트</h1>
                 
                 <div class="description">
-                    <p>🎭 20가지 질문을 통해 당신의 감정 유형을 분석합니다</p>
-                    <p>💝 정확한 결과와 감정 관리 방법을 제시합니다</p>
-                    <p>⏰ 약 3분 소요됩니다</p>
+                    <p>지금 당신의 감정 상태는 어떤가요?</p>
+                    <p>간단한 20개의 질문으로 당신의 현재 감정과 기분을 정확하게 분석해드립니다.</p>
+                    <p>솔직하게 답변해주시면 더욱 정확한 결과를 얻을 수 있어요!</p>
+                </div>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <span class="feature-icon">⏱️</span>
+                        <span>소요시간: 약 3분</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📊</span>
+                        <span>정확한 감정 분석</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🔒</span>
+                        <span>개인정보 보호</span>
+                    </div>
                 </div>
                 
                 <button class="start-btn" onclick="startTest()">
                     <span>테스트 시작하기</span>
-                    <div class="btn-shine"></div>
+                    <span class="btn-icon">→</span>
                 </button>
-                
-                <div class="test-info">
-                    <p>✨ 무료 테스트 · 정확한 분석 · 즉시 결과 확인</p>
-                </div>
             </div>
-        </div>
+        </main>
     </div>
     
     <script src="script.js"></script>
     <script>
-        // 페이지 로드 시 광고 초기화
-        window.addEventListener('load', function() {
-            initializeAds();
-        });
+        // 광고 로드
+        (adsbygoogle = window.adsbygoogle || []).push({});
         
         function startTest() {
             window.location.href = 'question.html';

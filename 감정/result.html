@@ -3,40 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="감정 테스트 결과 - 당신의 감정 유형 분석 완료">
-    <meta name="description" content="감정 테스트 결과를 확인하세요. 당신의 감정 유형과 특성, 그리고 감정 관리 방법을 자세히 알아보세요.">
-    <meta name="keywords" content="감정테스트결과, 감정유형, 감정관리, 심리분석결과">
+    <title>감정 테스트 결과 - 당신의 감정 분석 결과</title>
+    <meta name="description" content="감정 테스트 결과를 확인하세요. 당신의 현재 감정 상태와 개선 방법을 자세히 알아보고 더 나은 감정 관리를 시작하세요.">
+    <meta name="keywords" content="감정테스트결과, 감정분석결과, 심리테스트결과, 감정관리">
     
     <!-- 오픈그래프 -->
-    <meta property="og:title" content="감정 테스트 결과 - 나의 감정 유형">
-    <meta property="og:description" content="감정 테스트 결과가 나왔습니다! 당신의 감정 유형을 확인해보세요">
+    <meta property="og:title" content="감정 테스트 결과 - 당신의 감정 분석 결과">
+    <meta property="og:description" content="감정 테스트 결과를 확인하고 더 나은 감정 관리 방법을 알아보세요.">
     <meta property="og:image" content="https://sd2624.github.io/감정/감정.png">
     <meta property="og:url" content="https://sd2624.github.io/감정/result.html">
+    <meta property="og:type" content="website">
     
-    <!-- JSON-LD 구조화 데이터 -->
+    <!-- 구조화 데이터 -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "감정 테스트 결과",
-        "description": "감정 테스트 분석 결과 및 감정 관리 방법 제시",
+        "description": "개인화된 감정 분석 결과와 감정 관리 방법을 제공합니다.",
         "url": "https://sd2624.github.io/감정/result.html"
     }
     </script>
     
-    <title>감정 테스트 결과 - 나의 감정 유형</title>
     <link rel="stylesheet" href="style.css">
     
-    <!-- 구글 애드센스 -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+         crossorigin="anonymous"></script>
     
     <!-- 카카오 SDK -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
         <!-- 상단 광고 -->
-        <div class="ad-container" id="adTop">
+        <div class="ad-container top-ad">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-9374368296307755"
@@ -45,105 +46,69 @@
                  data-full-width-responsive="true"></ins>
         </div>
         
-        <div class="result-container">
-            <div class="result-content" id="resultContent">
-                <!-- 결과 내용이 동적으로 로드됩니다 -->
-            </div>
-            
-            <!-- 페이지 네비게이션 -->
-            <div class="result-navigation">
-                <button id="prevResultBtn" onclick="previousResultPage()" style="display: none;">이전</button>
-                <span class="page-indicator" id="pageIndicator">1/6</span>
-                <button id="nextResultBtn" onclick="nextResultPage()">다음</button>
-            </div>
-            
-            <!-- 광고 컨테이너들 (각 페이지별) -->
-            <div class="ad-container result-ad" id="adResult1" style="display: none;">
+        <main class="result-section">
+            <!-- PC용 사이드 광고 -->
+            <div class="side-ad desktop-only">
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="4994254497"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                     data-ad-slot="8384240135"
+                     data-ad-format="rectangle"></ins>
             </div>
             
-            <div class="ad-container result-ad" id="adResult2" style="display: none;">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="8384240134"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+            <!-- 결과 컨텐츠 영역 -->
+            <div class="result-container" id="resultContainer">
+                <!-- 결과 요약과 상세 페이지들이 동적으로 로드됩니다 -->
             </div>
             
-            <div class="ad-container result-ad" id="adResult3" style="display: none;">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="4994254497"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-            </div>
-            
-            <div class="ad-container result-ad" id="adResult4" style="display: none;">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="8384240134"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-            </div>
-            
-            <div class="ad-container result-ad" id="adResult5" style="display: none;">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="4994254497"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-            </div>
-            
-            <!-- 공유 버튼 (마지막 페이지에만 표시) -->
-            <div class="share-section" id="shareSection" style="display: none;">
-                <h3>결과를 친구들에게 공유해보세요!</h3>
-                <button class="kakao-share-btn" onclick="shareToKakao()">
-                    <span>카카오톡 공유하기</span>
+            <!-- 네비게이션 -->
+            <div class="result-navigation" id="resultNavigation">
+                <button class="nav-btn prev-btn" id="prevBtn" onclick="previousResultPage()" disabled>
+                    ← 이전
                 </button>
-                
-                <div class="retry-section">
-                    <button class="retry-btn" onclick="retryTest()">다시 테스트하기</button>
-                    <a href="https://sd2624.github.io" class="retry-btn home-btn">🏠 다른 테스트 하기</a>
-                </div>
-                
-                <!-- 추천 테스트 -->
-                <div class="related-tests">
-                    <h3>🔮 다른 심리 테스트</h3>
-                    <div class="tests-grid">
-                        <a href="../행복/" class="test-card">
-                            <span class="test-emoji">🌈</span>
-                            <div class="test-title">행복 지수</div>
-                            <div class="test-description">나의 행복 수준 측정</div>
-                        </a>
-                        <a href="../스트레스/" class="test-card">
-                            <span class="test-emoji">😰</span>
-                            <div class="test-title">스트레스 진단</div>
-                            <div class="test-description">스트레스 정도 확인</div>
-                        </a>
-                        <a href="../타로/" class="test-card">
-                            <span class="test-emoji">🔮</span>
-                            <div class="test-title">타로 운세</div>
-                            <div class="test-description">미래의 메시지 확인</div>
-                        </a>
-                    </div>
+                <span class="result-progress" id="resultProgress">1 / 6</span>
+                <button class="nav-btn next-btn" id="nextBtn" onclick="nextResultPage()">
+                    다음 →
+                </button>
+            </div>
+            
+            <!-- 공유 버튼 영역 (마지막 페이지에서만 표시) -->
+            <div class="share-container" id="shareContainer" style="display: none;">
+                <h3>결과를 친구들과 공유해보세요!</h3>
+                <div class="share-buttons">
+                    <button class="kakao-share-btn" onclick="shareKakao()">
+                        <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png" alt="카카오톡 공유">
+                    </button>
+                    <button class="restart-btn" onclick="restartTest()">
+                        다시 테스트하기
+                    </button>
                 </div>
             </div>
-        </div>
+            
+            <!-- 중간 광고 -->
+            <div class="ad-container middle-ad" id="middleAd" style="display: none;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240136"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </main>
     </div>
     
     <script src="script.js"></script>
     <script>
-        // 페이지 로드 시 결과 표시 시작
-        window.addEventListener('load', function() {
+        // 카카오 SDK 초기화
+        if (typeof Kakao !== 'undefined') {
+            Kakao.init('2c2ed6479d8c597005fac18db90b7649');
+        }
+        
+        // 광고 로드
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        
+        // 페이지 로드 시 결과 표시
+        document.addEventListener('DOMContentLoaded', function() {
             initializeResult();
         });
     </script>
