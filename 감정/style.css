@@ -162,7 +162,7 @@ body {
     background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
     height: 100%;
     border-radius: 20px;
-    transition: width 0.5s ease;
+    transition: width 0.3s ease;
 }
 
 .progress-text {
@@ -236,7 +236,7 @@ body {
     padding: 12px 15px;
     font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     text-align: left;
     line-height: 1.4;
 }

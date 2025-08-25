@@ -54,10 +54,10 @@ function refreshAd(containerId) {
             // 기존 광고 완전 제거
             adContainer.innerHTML = '';
             
-            // 잠시 후 새 광고 로드
+            // 잠시 후 새 광고 로드 (딜레이 단축)
             setTimeout(() => {
                 loadAd(slotId, containerId);
-            }, 100);
+            }, 50);
         }
     } catch (error) {
         console.error(`광고 리프레시 실패: ${containerId}`, error);
@@ -561,10 +561,10 @@ function showCurrentPage() {
         }
     }
     
-    // 페이지 전환 시 광고 새로고침
-    if (currentQuestion > 0) {
-        refreshAds();
-    }
+    // 페이지 전환 시 광고 새로고침 제거 (버퍼링 방지)
+    // if (currentQuestion > 0) {
+    //     refreshAds();
+    // }
 }
 
 // 답변 선택
@@ -592,10 +592,10 @@ function selectAnswer(questionIndex, answerIndex) {
     // 다음 버튼 활성화
     document.getElementById('nextBtn').disabled = false;
     
-    // 0.8초 후 자동으로 다음 질문으로 이동
+    // 0.5초 후 자동으로 다음 질문으로 이동 (기존 0.8초에서 단축)
     setTimeout(() => {
         nextQuestion();
-    }, 800);
+    }, 500);
 }
 
 // 다음 질문/페이지
@@ -623,16 +623,17 @@ function showMidAd() {
     const midAd = document.getElementById('adMid');
     if (midAd) {
         midAd.style.display = 'block';
-        refreshAd('adMid');
+        // 중간 광고는 리프레시 없이 기본 로드만
+        loadAd(primaryAdSlot, 'adMid');
     }
 }
 
 // 광고 새로고침 (페이지 전환 시)
 function refreshAds() {
-    // 상단 광고 새로고침
-    refreshAd('adTop');
+    // 상단 광고는 고정 (리프레시 하지 않음)
+    // loadAd(primaryAdSlot, 'adTop'); // 제거
     
-    // PC용 사이드 광고 새로고침
+    // PC용 사이드 광고만 리프레시
     if (window.innerWidth > 768) {
         refreshAd('sideAd');
     }
