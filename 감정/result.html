@@ -61,6 +61,16 @@
                 <!-- 결과 요약과 상세 페이지들이 동적으로 로드됩니다 -->
             </div>
             
+            <!-- 결과 중간 광고 (동적으로 표시) -->
+            <div class="ad-container result-middle-ad" id="resultMiddleAd" style="display: none;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="8384240136"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
             <!-- 네비게이션 -->
             <div class="result-navigation" id="resultNavigation">
                 <button class="nav-btn prev-btn" id="prevBtn" onclick="previousResultPage()" disabled>
@@ -100,17 +110,35 @@
     <script src="script.js"></script>
     <script>
         // 카카오 SDK 초기화
+        function initKakao() {
+            if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
+                Kakao.init('2c2ed6479d8c597005fac18db90b7649');
+                console.log('카카오 SDK 초기화 완료');
+            }
+        }
+        
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            initKakao();
+            initializeResult();
+            // 결과 중간 광고도 초기화
+            setTimeout(() => {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }, 1500);
+        });
+        
+        // 카카오 SDK 로드 확인
         if (typeof Kakao !== 'undefined') {
-            Kakao.init('2c2ed6479d8c597005fac18db90b7649');
+            initKakao();
+        } else {
+            // SDK 로드 대기
+            window.addEventListener('load', function() {
+                setTimeout(initKakao, 1000);
+            });
         }
         
         // 광고 로드
         (adsbygoogle = window.adsbygoogle || []).push({});
-        
-        // 페이지 로드 시 결과 표시
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeResult();
-        });
     </script>
 </body>
 </html>

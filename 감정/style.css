@@ -36,6 +36,40 @@ body {
     margin: 30px 0;
 }
 
+.middle-question-ad {
+    margin: 20px 0;
+    padding: 10px 0;
+}
+
+.result-middle-ad {
+    margin: 25px 0;
+    padding: 15px 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 콘텐츠 내 광고 분할점 */
+.content-ad-break {
+    margin: 20px 0;
+    border-top: 1px solid rgba(102, 126, 234, 0.2);
+    border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+    padding: 15px 0;
+    position: relative;
+}
+
+.content-ad-break::before {
+    content: "📢";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 0 10px;
+    font-size: 0.8rem;
+    color: #999;
+}
+
 .side-ad {
     display: none;
 }

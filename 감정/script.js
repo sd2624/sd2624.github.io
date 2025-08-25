@@ -335,6 +335,12 @@ const resultPages = {
                                 <p>가족, 친구들과의 좋은 관계</p>
                             </div>
                         </div>
+                    </div>
+                    
+                    <!-- 광고 삽입 지점 -->
+                    <div class="content-ad-break"></div>
+                    
+                    <div class="source-list">
                         <div class="source-item">
                             <span class="icon">🌱</span>
                             <div>
@@ -343,6 +349,7 @@ const resultPages = {
                             </div>
                         </div>
                     </div>
+                    <p><strong>이러한 긍정적 요인들이 당신의 현재 상태를 만들어냈습니다.</strong> 이를 인식하고 감사하는 마음을 가지는 것이 중요합니다.</p>
                 </div>
             `
         },
@@ -556,6 +563,10 @@ const resultPages = {
                                 <span class="activity-tag">공예</span>
                             </div>
                         </div>
+                        
+                        <!-- 광고 삽입 지점 -->
+                        <div class="content-ad-break"></div>
+                        
                         <div class="boost-category">
                             <h4>🤝 사회적 활동</h4>
                             <div class="activities">
@@ -566,6 +577,7 @@ const resultPages = {
                             </div>
                         </div>
                     </div>
+                    <p><strong>작은 변화부터 시작하세요.</strong> 하루에 하나씩만 시도해도 점진적으로 활력을 되찾을 수 있습니다.</p>
                 </div>
             `
         }
@@ -850,6 +862,7 @@ function displayCurrentQuestion() {
     const answerContainer = document.getElementById('answerContainer');
     const progressFill = document.getElementById('progressFill');
     const progressText = document.getElementById('progressText');
+    const middleAd = document.querySelector('.middle-question-ad');
     
     // 진행률 업데이트
     const total = explanationPages.length + questions.length;
@@ -859,7 +872,7 @@ function displayCurrentQuestion() {
     
     // 설명 페이지 또는 질문 표시
     if (currentQuestionIndex < explanationPages.length) {
-        // 설명 페이지
+        // 설명 페이지 - 광고 숨김
         const explanation = explanationPages[currentQuestionIndex];
         container.innerHTML = `
             <div class="explanation-page">
@@ -869,8 +882,9 @@ function displayCurrentQuestion() {
         `;
         answerContainer.innerHTML = '';
         document.getElementById('nextBtn').disabled = false;
+        if (middleAd) middleAd.style.display = 'none';
     } else {
-        // 질문 페이지
+        // 질문 페이지 - 광고 표시
         const questionIndex = currentQuestionIndex - explanationPages.length;
         const question = questions[questionIndex];
         
@@ -892,6 +906,12 @@ function displayCurrentQuestion() {
         `;
         
         document.getElementById('nextBtn').disabled = true;
+        
+        // 질문 페이지에서만 광고 표시
+        if (middleAd) {
+            middleAd.style.display = 'block';
+            refreshAds();
+        }
     }
     
     // 광고 새로고침 (5번째 질문마다)
@@ -985,6 +1005,7 @@ function displayResultPage(result) {
     const navigation = document.getElementById('resultNavigation');
     const shareContainer = document.getElementById('shareContainer');
     const middleAd = document.getElementById('middleAd');
+    const resultMiddleAd = document.getElementById('resultMiddleAd');
     const progressElement = document.getElementById('resultProgress');
     
     const resultType = resultTypes[result.type];
@@ -1015,7 +1036,8 @@ function displayResultPage(result) {
             </div>
         `;
         shareContainer.style.display = 'none';
-        middleAd.style.display = 'none';
+        if (middleAd) middleAd.style.display = 'none';
+        if (resultMiddleAd) resultMiddleAd.style.display = 'none';
     } else {
         // 상세 페이지
         const pageIndex = currentResultPage - 1;
@@ -1028,6 +1050,16 @@ function displayResultPage(result) {
             </div>
         `;
         
+        // 2번째, 4번째 페이지에서 결과 중간 광고 표시
+        if (currentResultPage === 2 || currentResultPage === 4) {
+            if (resultMiddleAd) {
+                resultMiddleAd.style.display = 'block';
+                refreshAds();
+            }
+        } else {
+            if (resultMiddleAd) resultMiddleAd.style.display = 'none';
+        }
+        
         // 마지막 페이지에서 공유 버튼 표시
         if (currentResultPage === pages.length) {
             shareContainer.style.display = 'block';
@@ -1035,12 +1067,14 @@ function displayResultPage(result) {
             shareContainer.style.display = 'none';
         }
         
-        // 중간 광고 표시 (3번째 페이지)
+        // 기존 중간 광고 표시 (3번째 페이지)
         if (currentResultPage === 3) {
-            middleAd.style.display = 'block';
-            refreshAds();
+            if (middleAd) {
+                middleAd.style.display = 'block';
+                refreshAds();
+            }
         } else {
-            middleAd.style.display = 'none';
+            if (middleAd) middleAd.style.display = 'none';
         }
     }
     
@@ -1083,34 +1117,40 @@ function nextResultPage() {
 
 // 카카오톡 공유
 function shareKakao() {
+    if (!window.Kakao || !window.Kakao.isInitialized()) {
+        if (typeof Kakao !== 'undefined') {
+            Kakao.init('2c2ed6479d8c597005fac18db90b7649');
+        } else {
+            alert('카카오톡 공유 기능을 사용할 수 없습니다.');
+            return;
+        }
+    }
+    
     const result = JSON.parse(localStorage.getItem('testResult'));
     const resultType = resultTypes[result.type];
+    const currentUrl = window.location.href.replace('result.html', '');
     
-    if (typeof Kakao !== 'undefined' && Kakao.isInitialized()) {
-        Kakao.Share.sendDefault({
-            objectType: 'feed',
-            content: {
-                title: '감정 테스트 결과',
-                description: `나의 감정 상태: ${resultType.title}\n${resultType.summary}`,
-                imageUrl: 'https://sd2624.github.io/감정/감정.png',
+    window.Kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+            title: `나의 감정 상태: ${resultType.title} ${resultType.emoji}`,
+            description: `${resultType.summary}\n\n나도 내 감정 상태를 알아보자!`,
+            imageUrl: 'https://sd2624.github.io/감정/감정.png',
+            link: {
+                mobileWebUrl: currentUrl,
+                webUrl: currentUrl
+            }
+        },
+        buttons: [
+            {
+                title: '나도 테스트하기',
                 link: {
-                    mobileWebUrl: 'https://sd2624.github.io/감정/',
-                    webUrl: 'https://sd2624.github.io/감정/'
+                    mobileWebUrl: currentUrl,
+                    webUrl: currentUrl
                 }
-            },
-            buttons: [
-                {
-                    title: '나도 테스트 해보기',
-                    link: {
-                        mobileWebUrl: 'https://sd2624.github.io/감정/',
-                        webUrl: 'https://sd2624.github.io/감정/'
-                    }
-                }
-            ]
-        });
-    } else {
-        alert('카카오톡 공유 기능을 사용할 수 없습니다.');
-    }
+            }
+        ]
+    });
 }
 
 // 테스트 다시하기
