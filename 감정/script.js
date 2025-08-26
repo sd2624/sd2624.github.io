@@ -191,12 +191,8 @@ const adManager = {
     // Show infeed ads at specific questions
     showInfeedAd(questionNum) {
         let adId = '';
-        if (questionNum === 3) {
+        if (questionNum === 1) {
             adId = 'adInfeed1';
-        } else if (questionNum === 6) {
-            adId = 'adInfeed2';
-        } else if (questionNum === 9) {
-            adId = 'adInfeed3';
         }
         
         if (adId) {
@@ -622,7 +618,7 @@ function showQuestion() {
     }
     
     // Show infeed ads after specific questions
-    if (currentQuestion === 3 || currentQuestion === 6 || currentQuestion === 9) {
+    if (currentQuestion === 1) {
         adManager.showInfeedAd(currentQuestion);
     }
 }
@@ -895,7 +891,7 @@ function retryTest() {
     }
     
     // Hide all infeed ads
-    ['adInfeed1', 'adInfeed2', 'adInfeed3'].forEach(adId => {
+    ['adInfeed1'].forEach(adId => {
         const ad = document.getElementById(adId);
         if (ad) {
             ad.style.display = 'none';
