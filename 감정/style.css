@@ -843,7 +843,7 @@ body {
 
 .emotion-indicator {
     text-align: center;
-    margin-bottom: 5px; /* 여백 더 줄임 */
+    margin-bottom: 15px;
 }
 
 .emotion-icon {
@@ -1415,18 +1415,18 @@ body {
     
     .question-text {
         font-size: 1.1rem;
-        margin-bottom: 8px;
+        margin-bottom: 5px; /* 여백 더 줄임 */
         line-height: 1.3;
     }
     
     .question-subtitle {
         font-size: 0.75rem;
-        margin-bottom: 10px;
+        margin-bottom: 8px; /* 여백 더 줄임 */
     }
     
     .answers-grid {
-        gap: 10px;
-        margin-bottom: 15px;
+        gap: 8px; /* 답변 간격 더 줄임 */
+        margin-bottom: 10px; /* 하단 여백 줄임 */
     }
     
     .answer-btn {
