@@ -556,10 +556,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize ad manager
     adManager.init();
     
-    // Start observing top ad
-    adManager.observe('adTop');
+    // 모든 광고를 페이지 로드 시 즉시 활성화 (상단 광고 방식)
+    setTimeout(() => {
+        const allAds = document.querySelectorAll('.adsbygoogle');
+        allAds.forEach((ad, index) => {
+            if (!ad.hasAttribute('data-adsbygoogle-status')) {
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    console.log(`Ad ${index + 1} loaded immediately`);
+                } catch (error) {
+                    console.error(`Ad ${index + 1} loading failed:`, error);
+                }
+            }
+        });
+    }, 100);
     
-    // 질문 사이 광고 등록 (상단 광고와 동일한 방식)
+    // Start observing ads (backup)
+    adManager.observe('adTop');
     adManager.observe('adInfeed1');
     
     // 앵커 광고 등록 (모바일용)
