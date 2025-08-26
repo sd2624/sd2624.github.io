@@ -192,20 +192,6 @@ const adManager = {
         }
     },
     
-    // Show middle ad (after 3rd question) - small size
-    showMidAd() {
-        const midAd = document.getElementById('adMid');
-        if (midAd) {
-            midAd.style.display = 'block';
-            // Minimize space between question and answer
-            midAd.style.margin = '6px 0';
-            if (window.innerWidth <= 768) {
-                midAd.style.maxHeight = '70px';
-            }
-            this.observe('adMid');
-        }
-    },
-    
     // Show infeed ads at specific questions
     showInfeedAd(questionNum) {
         let adId = '';
@@ -630,11 +616,6 @@ function showQuestion() {
         answersGrid.appendChild(answerBtn);
     });
     
-    // Show middle ad after 3rd question
-    if (currentQuestion === 3) {
-        adManager.showMidAd();
-    }
-    
     // Show infeed ads after specific questions
     if (currentQuestion === 1) {
         adManager.showInfeedAd(currentQuestion);
@@ -927,10 +908,10 @@ function retryTest() {
     // 시작 페이지 초기화
     initializeStartPage();
     
-    // Initialize ad state
-    const midAd = document.getElementById('adMid');
-    if (midAd) {
-        midAd.style.display = 'none';
+    // Initialize ad state - hide infeed ad
+    const infeedAd = document.getElementById('adInfeed1');
+    if (infeedAd) {
+        infeedAd.style.display = 'none';
     }
     
     // Hide all infeed ads
