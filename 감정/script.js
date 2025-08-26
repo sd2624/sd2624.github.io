@@ -59,12 +59,7 @@ function showResultStep(step) {
         // 스크롤을 맨 위로
         window.scrollTo(0, 0);
         
-        // 각 단계별 광고 리로드
-        setTimeout(() => {
-            if (adManager && adManager.reloadResultAd) {
-                adManager.reloadResultAd(step);
-            }
-        }, 100);
+        // 스텝 표시 완료
     } else {
         console.error('Step element not found:', `resultStep${step}`);
     }
@@ -128,39 +123,7 @@ const adManager = {
         }
     },
     
-    // 결과 페이지 광고 리로드 (각 단계별)
-    reloadResultAd(step) {
-        const adId = `adResult${step}`;
-        const adElement = document.getElementById(adId);
-        if (adElement) {
-            // 기존 광고 내용 완전 제거
-            const existingAd = adElement.querySelector('.adsbygoogle');
-            if (existingAd) {
-                existingAd.remove();
-            }
-            
-            // 새 광고 요소 생성
-            const newAd = document.createElement('ins');
-            newAd.className = 'adsbygoogle';
-            newAd.style.display = 'block';
-            newAd.style.minHeight = '100px';
-            newAd.style.maxHeight = '120px';
-            newAd.setAttribute('data-ad-client', 'ca-pub-9374368296307755');
-            newAd.setAttribute('data-ad-slot', '3593134392');
-            newAd.setAttribute('data-ad-format', 'auto');
-            newAd.setAttribute('data-full-width-responsive', 'true');
-            
-            adElement.appendChild(newAd);
-            
-            // 광고 로드
-            try {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                console.log(`Result ad reloaded: ${adId}`);
-            } catch (error) {
-                console.error(`Failed to reload result ad: ${adId}`, error);
-            }
-        }
-    },
+    // 다음 광고 관련 코드는 제거됨
     
     // Execute ad loading (optimized for small size)
     loadAd(adId) {
@@ -667,15 +630,10 @@ function showLoading() {
     }, 800);
 }
 
-// Show before result page with ad
+// Show before result page
 function showBeforeResult() {
     document.getElementById('loadingPage').classList.add('hidden');
     document.getElementById('beforeResultPage').classList.remove('hidden');
-    
-    // Load before result ad
-    if (adManager && adManager.observe) {
-        adManager.observe('adBeforeResult');
-    }
 }
 
 // View result function
@@ -799,9 +757,6 @@ function displayResult() {
 
     // Draw emotion chart
     drawEmotionChart();
-    
-    // Start observing result ad
-    adManager.observe('adResult');
 }
 
 // Emotion chart drawing function
