@@ -809,7 +809,7 @@ body {
 }
 
 .progress-section {
-    margin-bottom: 5px; /* 여백 더 줄임 */
+    margin-bottom: 0; /* 여백 완전 제거 */
     text-align: center;
 }
 
@@ -818,7 +818,7 @@ body {
     height: 6px;
     border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 3px; /* 여백 더 줄임 */
 }
 
 .progress-fill {
@@ -833,7 +833,7 @@ body {
     font-size: 1rem;
     font-weight: 700;
     color: #667eea;
-    margin-bottom: 5px;
+    margin-bottom: 2px; /* 여백 더 줄임 */
 }
 
 .time-indicator {
@@ -1394,7 +1394,7 @@ body {
     }
     
     .progress-section {
-        margin-bottom: 10px;
+        margin-bottom: 2px; /* 모바일에서도 여백 최소화 */
     }
     
     .emotion-indicator {
@@ -1410,7 +1410,8 @@ body {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start; /* 상단 정렬로 변경 */
+        padding-top: 5px; /* 최소한의 상단 패딩만 */
     }
     
     .question-text {
