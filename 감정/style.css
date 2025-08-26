@@ -51,7 +51,7 @@ body {
 }
 
 .ad-container.mid {
-    margin: 10px 0; /* 질문과 답변 사이 여백 최소화 */
+    margin: 5px 0; /* 질문과 답변 사이 여백 더 최소화 */
     background: rgba(102, 126, 234, 0.03);
     min-height: 80px; /* 중간 광고 가장 작게 */
     max-height: 100px;
@@ -100,7 +100,7 @@ body {
     .ad-container.mid {
         min-height: 50px;
         max-height: 70px;
-        margin: 6px 0;
+        margin: 3px 0; /* 모바일에서 여백 더 줄임 */
     }
 }
 
@@ -145,9 +145,9 @@ body {
 }
 
 .step-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem; /* 폰트 크기 줄임 */
     color: #333;
-    margin-bottom: 30px;
+    margin-bottom: 20px; /* 여백 줄임 */
     font-weight: 700;
 }
 
@@ -812,7 +812,7 @@ body {
 
 /* 질문 페이지 - 컴팩트하게 조정 */
 .question-page {
-    padding: 8px; /* 패딩 더 줄임 */
+    padding: 5px; /* 패딩 더 줄임 */
     max-height: 100vh;
     overflow-y: auto;
 }
@@ -881,7 +881,7 @@ body {
 .question-text {
     font-size: 1.2rem;
     color: #333;
-    margin-bottom: 5px; /* 여백 더 줄임 */
+    margin-bottom: 3px; /* 여백 더 줄임 */
     line-height: 1.2;
     text-align: center;
 }
@@ -890,21 +890,21 @@ body {
     font-size: 0.85rem;
     color: #666;
     text-align: center;
-    margin-bottom: 8px; /* 여백 더 줄임 */
+    margin-bottom: 5px; /* 여백 더 줄임 */
 }
 
 .answers-grid {
     display: grid;
-    gap: 8px; /* 간격 줄임 */
-    margin-bottom: 10px; /* 여백 줄임 */
+    gap: 6px; /* 간격 더 줄임 */
+    margin-bottom: 8px; /* 여백 더 줄임 */
 }
 
 .answer-btn {
     background: white;
     border: 2px solid rgba(102, 126, 234, 0.2);
-    padding: 12px; /* 패딩 줄임 */
-    border-radius: 10px; /* 모서리 줄임 */
-    font-size: 0.95rem; /* 폰트 크기 줄임 */
+    padding: 10px; /* 패딩 더 줄임 */
+    border-radius: 8px; /* 모서리 더 줄임 */
+    font-size: 0.9rem; /* 폰트 크기 더 줄임 */
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
@@ -1019,11 +1019,11 @@ body {
 
 /* 결과 페이지 단계별 표시 */
 .result-step {
-    min-height: 85vh;
+    min-height: 80vh; /* 높이 줄임 */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px;
+    padding: 15px; /* 패딩 줄임 */
     text-align: center;
 }
 
@@ -1072,52 +1072,52 @@ body {
 
 /* 결과 페이지 */
 .result-page {
-    padding: 20px;
+    padding: 10px; /* 패딩 줄임 */
 }
 
 .result-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px; /* 여백 줄임 */
 }
 
 .result-badge {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 20px;
+    width: 80px; /* 크기 줄임 */
+    height: 80px; /* 크기 줄임 */
+    margin: 0 auto 15px; /* 여백 줄임 */
     background: linear-gradient(135deg, #667eea, #764ba2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
+    font-size: 2.5rem; /* 폰트 크기 줄임 */
     color: white;
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
 
 .result-title {
-    font-size: 2rem;
+    font-size: 1.8rem; /* 폰트 크기 줄임 */
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* 여백 줄임 */
     font-weight: 800;
 }
 
 .result-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* 폰트 크기 줄임 */
     color: #667eea;
     font-weight: 600;
 }
 
 .emotion-analysis {
     display: grid;
-    gap: 30px;
-    margin: 40px 0;
+    gap: 20px; /* 간격 줄임 */
+    margin: 25px 0; /* 여백 줄임 */
 }
 
 .emotion-chart,
 .emotion-details {
     background: white;
-    padding: 25px;
-    border-radius: 15px;
+    padding: 18px; /* 패딩 줄임 */
+    border-radius: 12px; /* 모서리 줄임 */
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
@@ -1342,7 +1342,7 @@ body {
     .start-page,
     .loading-page,
     .result-page {
-        padding: 20px;
+        padding: 10px; /* 모바일에서 패딩 더 줄임 */
     }
     
     .question-page {
@@ -1452,39 +1452,39 @@ body {
     
     /* 모바일 결과 페이지 최적화 */
     .result-step {
-        min-height: 90vh;
-        padding: 15px;
+        min-height: 85vh; /* 높이 더 줄임 */
+        padding: 10px; /* 패딩 더 줄임 */
         justify-content: space-around;
     }
     
     .result-header {
-        margin-bottom: 20px;
+        margin-bottom: 15px; /* 여백 더 줄임 */
     }
     
     .result-badge {
-        width: 80px;
-        height: 80px;
-        font-size: 2.5rem;
-        margin: 0 auto 15px;
+        width: 70px; /* 크기 더 줄임 */
+        height: 70px; /* 크기 더 줄임 */
+        font-size: 2.2rem; /* 폰트 더 줄임 */
+        margin: 0 auto 10px; /* 여백 더 줄임 */
     }
     
     .result-title {
-        font-size: 1.5rem;
-        margin-bottom: 8px;
+        font-size: 1.4rem; /* 더 줄임 */
+        margin-bottom: 6px; /* 여백 더 줄임 */
     }
     
     .result-subtitle {
-        font-size: 1rem;
+        font-size: 0.95rem; /* 더 줄임 */
     }
     
     .emotion-chart,
     .emotion-details,
     .advice-section {
         background: white;
-        padding: 20px;
-        border-radius: 15px;
+        padding: 15px; /* 패딩 줄임 */
+        border-radius: 12px; /* 모서리 줄임 */
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        margin-bottom: 15px;
+        margin-bottom: 12px; /* 여백 줄임 */
     }
     
     .chart-container {

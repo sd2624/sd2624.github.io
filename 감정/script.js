@@ -167,6 +167,12 @@ const adManager = {
         try {
             const adElement = document.getElementById(adId);
             if (adElement && typeof (adsbygoogle) !== 'undefined') {
+                // Prevent duplicate loading
+                if (loadedAds.has(adId)) {
+                    console.log(`Ad already loaded: ${adId}`);
+                    return;
+                }
+                
                 // Mobile/PC ad optimization (small size)
                 if (window.innerWidth <= 768) {
                     // Mobile: very small
@@ -185,6 +191,7 @@ const adManager = {
                 }
                 
                 (adsbygoogle = window.adsbygoogle || []).push({});
+                loadedAds.add(adId); // Mark as loaded
                 console.log(`Ad loaded (optimized): ${adId}`);
             }
         } catch (error) {
@@ -207,7 +214,8 @@ const adManager = {
                 if (window.innerWidth <= 768) {
                     infeedAd.style.maxHeight = '80px';
                 }
-                this.observe(adId);
+                // 즉시 광고 로드 (IntersectionObserver 대신)
+                this.loadAd(adId);
             }
         }
     }
@@ -615,11 +623,6 @@ function showQuestion() {
         answerBtn.onclick = () => selectAnswer(answer);
         answersGrid.appendChild(answerBtn);
     });
-    
-    // Show infeed ads after specific questions
-    if (currentQuestion === 1) {
-        adManager.showInfeedAd(currentQuestion);
-    }
 }
 
 // Answer selection function
@@ -635,6 +638,11 @@ function selectAnswer(answer) {
     
     setTimeout(() => {
         currentQuestion++;
+        
+        // Show infeed ads after answering specific questions
+        if (currentQuestion === 2) { // 1번 질문에 답한 후 (currentQuestion이 2가 됨)
+            adManager.showInfeedAd(1);
+        }
         
         if (currentQuestion < questions.length) {
             showQuestion();
