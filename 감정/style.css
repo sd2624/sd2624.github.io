@@ -98,25 +98,9 @@ body {
     }
     
     .ad-container.mid {
-        min-height: 120px !important; /* 모바일에서 광고 높이 강제 보장 */
-        max-height: none !important;
+        min-height: 60px;
+        max-height: 80px;
         margin: 3px 0; /* 모바일에서 여백 더 줄임 */
-        width: 100% !important;
-    }
-    
-    /* 모바일 adInfeed1 전용 강화 스타일 */
-    #adInfeed1 {
-        display: block !important;
-        min-height: 120px !important;
-        max-height: none !important;
-        width: 100% !important;
-    }
-    
-    #adInfeed1 .adsbygoogle {
-        width: 100% !important;
-        height: auto !important;
-        display: block !important;
-        min-height: 120px !important;
     }
 }
 
