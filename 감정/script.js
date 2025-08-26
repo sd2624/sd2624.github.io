@@ -594,6 +594,10 @@ function startTest() {
     
     startPage.classList.add('hidden');
     questionPage.classList.remove('hidden');
+    
+    // 테스트 시작과 동시에 질문 사이 광고 로드
+    adManager.showInfeedAd(1);
+    
     showQuestion();
 }
 
@@ -638,11 +642,6 @@ function selectAnswer(answer) {
     
     setTimeout(() => {
         currentQuestion++;
-        
-        // Show infeed ads after answering specific questions
-        if (currentQuestion === 2) { // 1번 질문에 답한 후 (currentQuestion이 2가 됨)
-            adManager.showInfeedAd(1);
-        }
         
         if (currentQuestion < questions.length) {
             showQuestion();
