@@ -211,11 +211,31 @@ const adManager = {
             if (infeedAd) {
                 infeedAd.style.display = 'block';
                 infeedAd.style.margin = '8px 0';
+                
+                // 모바일에서 강제 높이 보장 및 즉시 로드
                 if (window.innerWidth <= 768) {
+                    infeedAd.style.minHeight = '120px';
+                    infeedAd.style.maxHeight = 'none';
+                    infeedAd.style.width = '100%';
+                    
+                    // 모바일에서는 IntersectionObserver 없이 즉시 강제 로드
+                    setTimeout(() => {
+                        try {
+                            const adIns = infeedAd.querySelector('.adsbygoogle');
+                            if (adIns && !loadedAds.has(adId)) {
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                loadedAds.add(adId);
+                                console.log(`Mobile ad force loaded: ${adId}`);
+                            }
+                        } catch (error) {
+                            console.error(`Mobile ad loading failed: ${adId}`, error);
+                        }
+                    }, 100);
+                } else {
                     infeedAd.style.maxHeight = '80px';
+                    // PC에서는 기존 방식 사용
+                    this.loadAd(adId);
                 }
-                // 즉시 광고 로드 (IntersectionObserver 대신)
-                this.loadAd(adId);
             }
         }
     }
@@ -564,7 +584,33 @@ document.addEventListener('DOMContentLoaded', function() {
     adManager.observe('adTop');
     
     // 질문 사이 광고 즉시 로드 (페이지 로드 시)
-    adManager.observe('adInfeed1');
+    // 모바일에서는 IntersectionObserver 대신 즉시 강제 로드
+    if (window.innerWidth <= 768) {
+        // 모바일: 페이지 로드 시 광고 강제 표시
+        const adInfeed1 = document.getElementById('adInfeed1');
+        if (adInfeed1) {
+            adInfeed1.style.display = 'block';
+            adInfeed1.style.minHeight = '120px';
+            adInfeed1.style.maxHeight = 'none';
+            adInfeed1.style.width = '100%';
+            
+            setTimeout(() => {
+                try {
+                    const adIns = adInfeed1.querySelector('.adsbygoogle');
+                    if (adIns && !loadedAds.has('adInfeed1')) {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        loadedAds.add('adInfeed1');
+                        console.log('Mobile adInfeed1 force loaded on page load');
+                    }
+                } catch (error) {
+                    console.error('Mobile adInfeed1 loading failed:', error);
+                }
+            }, 500);
+        }
+    } else {
+        // PC: 기존 방식 사용
+        adManager.observe('adInfeed1');
+    }
     
     // 앵커 광고 등록 (모바일용)
     if (window.innerWidth <= 768) {
@@ -597,6 +643,30 @@ function startTest() {
     
     startPage.classList.add('hidden');
     questionPage.classList.remove('hidden');
+    
+    // 모바일에서 adInfeed1 강제 재로드 확인
+    if (window.innerWidth <= 768) {
+        setTimeout(() => {
+            const adInfeed1 = document.getElementById('adInfeed1');
+            if (adInfeed1) {
+                adInfeed1.style.display = 'block';
+                adInfeed1.style.minHeight = '120px';
+                adInfeed1.style.maxHeight = 'none';
+                
+                const adIns = adInfeed1.querySelector('.adsbygoogle');
+                if (adIns && !loadedAds.has('adInfeed1')) {
+                    try {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        loadedAds.add('adInfeed1');
+                        console.log('Mobile adInfeed1 reloaded on startTest');
+                    } catch (error) {
+                        console.error('Mobile adInfeed1 reload failed:', error);
+                    }
+                }
+            }
+        }, 200);
+    }
+    
     showQuestion();
 }
 
