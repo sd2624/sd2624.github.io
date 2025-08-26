@@ -16,7 +16,7 @@ body {
 .container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0;
 }
 
 .test-container {
@@ -44,16 +44,9 @@ body {
 }
 
 .ad-container.top {
-    margin: 8px 0 15px 0;
+    margin: 0;
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
     min-height: 90px; /* 상단 광고 더 작게 */
-    max-height: 100px;
-}
-
-.ad-container.mid {
-    margin: 5px 0; /* 질문과 답변 사이 여백 더 최소화 */
-    background: rgba(102, 126, 234, 0.03);
-    min-height: 80px; /* 중간 광고 가장 작게 */
     max-height: 100px;
 }
 
@@ -95,12 +88,6 @@ body {
         min-height: 60px;
         max-height: 80px;
         margin: 5px 0;
-    }
-    
-    .ad-container.mid {
-        min-height: 60px;
-        max-height: 80px;
-        margin: 3px 0; /* 모바일에서 여백 더 줄임 */
     }
 }
 
@@ -812,7 +799,7 @@ body {
 
 /* 질문 페이지 - 컴팩트하게 조정 */
 .question-page {
-    padding: 5px; /* 패딩 더 줄임 */
+    padding: 0; /* 패딩 완전 제거 */
     max-height: 100vh;
     overflow-y: auto;
 }
@@ -822,7 +809,7 @@ body {
 }
 
 .progress-section {
-    margin-bottom: 8px; /* 여백 더 줄임 */
+    margin-bottom: 5px; /* 여백 더 줄임 */
     text-align: center;
 }
 
@@ -856,12 +843,12 @@ body {
 
 .emotion-indicator {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 5px; /* 여백 더 줄임 */
 }
 
 .emotion-icon {
-    font-size: 2.5rem;
-    margin-bottom: 8px;
+    font-size: 1.5rem; /* 크기 줄임 */
+    margin-bottom: 3px; /* 여백 줄임 */
     display: block;
     animation: bounce 2s infinite;
 }
@@ -879,18 +866,18 @@ body {
 }
 
 .question-text {
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* 폰트 크기 약간 줄임 */
     color: #333;
-    margin-bottom: 3px; /* 여백 더 줄임 */
+    margin-bottom: 5px; /* 여백 줄임 */
     line-height: 1.2;
     text-align: center;
 }
 
 .question-subtitle {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #666;
     text-align: center;
-    margin-bottom: 5px; /* 여백 더 줄임 */
+    margin-bottom: 8px; /* 여백 약간 늘림 */
 }
 
 .answers-grid {

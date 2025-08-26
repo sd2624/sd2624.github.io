@@ -199,21 +199,9 @@ const adManager = {
         }
     },
     
-    // Show infeed ads at specific questions (상단 광고와 동일한 방식)
+    // Show infeed ads - 제거됨 (더 이상 사용하지 않음)
     showInfeedAd(questionNum) {
-        let adId = '';
-        if (questionNum === 1) {
-            adId = 'adInfeed1';
-        }
-        
-        if (adId) {
-            const infeedAd = document.getElementById(adId);
-            if (infeedAd) {
-                infeedAd.style.display = 'block';
-                infeedAd.style.margin = '8px 0';
-                // 상단 광고와 동일한 조건으로 처리 - 별도 로직 없음
-            }
-        }
+        // 중간 광고 제거로 인해 빈 함수
     }
 };
 
@@ -573,7 +561,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Start observing ads (backup)
     adManager.observe('adTop');
-    adManager.observe('adInfeed1');
     
     // 앵커 광고 등록 (모바일용)
     if (window.innerWidth <= 768) {
