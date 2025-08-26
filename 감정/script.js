@@ -562,11 +562,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start observing ads (backup)
     adManager.observe('adTop');
     
-    // 앵커 광고 등록 (모바일용)
-    if (window.innerWidth <= 768) {
-        adManager.observe('adAnchor');
-    }
-    
     // Initialize emotion scores
     emotions.forEach(emotion => {
         emotionScores[emotion] = 0;
@@ -1069,11 +1064,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 상단 광고 옵저버 등록
     adManager.observe('adTop');
-    
-    // 앵커 광고 등록 (모바일용)
-    if (window.innerWidth <= 768) {
-        adManager.observe('adAnchor');
-    }
     
     // 통계 업데이트
     updateStats();
