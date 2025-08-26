@@ -133,14 +133,32 @@ const adManager = {
         const adId = `adResult${step}`;
         const adElement = document.getElementById(adId);
         if (adElement) {
-            // 기존 광고 제거
+            // 기존 광고 내용 완전 제거
             const existingAd = adElement.querySelector('.adsbygoogle');
             if (existingAd) {
-                existingAd.innerHTML = '';
+                existingAd.remove();
             }
             
-            // 새 광고 로드
-            this.loadAd(adId);
+            // 새 광고 요소 생성
+            const newAd = document.createElement('ins');
+            newAd.className = 'adsbygoogle';
+            newAd.style.display = 'block';
+            newAd.style.minHeight = '100px';
+            newAd.style.maxHeight = '120px';
+            newAd.setAttribute('data-ad-client', 'ca-pub-9374368296307755');
+            newAd.setAttribute('data-ad-slot', '3593134392');
+            newAd.setAttribute('data-ad-format', 'auto');
+            newAd.setAttribute('data-full-width-responsive', 'true');
+            
+            adElement.appendChild(newAd);
+            
+            // 광고 로드
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                console.log(`Result ad reloaded: ${adId}`);
+            } catch (error) {
+                console.error(`Failed to reload result ad: ${adId}`, error);
+            }
         }
     },
     
@@ -666,20 +684,44 @@ function showLoading() {
             currentStep++;
         } else {
             clearInterval(loadingInterval);
-            showResult();
+            showBeforeResult();
         }
     }, 800);
 }
 
-// Result display function
-function showResult() {
-    console.log('showResult called');
+// Show before result page with ad
+function showBeforeResult() {
     document.getElementById('loadingPage').classList.add('hidden');
+    document.getElementById('beforeResultPage').classList.remove('hidden');
+    
+    // Load before result ad
+    if (adManager && adManager.observe) {
+        adManager.observe('adBeforeResult');
+    }
+}
+
+// View result function
+function viewResult() {
+    document.getElementById('beforeResultPage').classList.add('hidden');
     document.getElementById('resultPage').classList.remove('hidden');
     
     // 모바일과 PC 모두 첫 번째 단계부터 시작
     console.log('Showing step 1 for all devices');
     showResultStep(1);
+    
+    // Find emotion with highest score and display result
+    displayResult();
+}
+
+// Result display function
+function showResult() {
+    console.log('showResult called - this function is now replaced by displayResult');
+    displayResult();
+}
+
+// Display result content
+function displayResult() {
+    console.log('displayResult called');
     
     // Find emotion with highest score
     const maxEmotion = Object.keys(emotionScores).reduce((a, b) => 
@@ -879,6 +921,7 @@ function retryTest() {
     
     // Page transition
     document.getElementById('resultPage').classList.add('hidden');
+    document.getElementById('beforeResultPage').classList.add('hidden');
     document.getElementById('startPage').classList.remove('hidden');
     
     // 시작 페이지 초기화
@@ -1085,6 +1128,7 @@ window.startTest = startTest;
 window.shareToKakao = shareToKakao;
 window.retryTest = retryTest;
 window.shareUrl = shareUrl;
+window.viewResult = viewResult;
 
 // 추가 분석 함수들
 function generateBalanceAnalysis() {
