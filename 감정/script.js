@@ -563,6 +563,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start observing top ad
     adManager.observe('adTop');
     
+    // 질문 사이 광고 즉시 로드 (페이지 로드 시)
+    adManager.observe('adInfeed1');
+    
     // 앵커 광고 등록 (모바일용)
     if (window.innerWidth <= 768) {
         adManager.observe('adAnchor');
@@ -594,10 +597,6 @@ function startTest() {
     
     startPage.classList.add('hidden');
     questionPage.classList.remove('hidden');
-    
-    // 테스트 시작과 동시에 질문 사이 광고 로드
-    adManager.showInfeedAd(1);
-    
     showQuestion();
 }
 
@@ -914,20 +913,6 @@ function retryTest() {
     
     // 시작 페이지 초기화
     initializeStartPage();
-    
-    // Initialize ad state - hide infeed ad
-    const infeedAd = document.getElementById('adInfeed1');
-    if (infeedAd) {
-        infeedAd.style.display = 'none';
-    }
-    
-    // Hide all infeed ads
-    ['adInfeed1'].forEach(adId => {
-        const ad = document.getElementById(adId);
-        if (ad) {
-            ad.style.display = 'none';
-        }
-    });
     
     // Update statistics
     updateStats();
