@@ -18,7 +18,7 @@ body {
 .container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 5px;
     display: block;
     visibility: visible;
 }
@@ -33,6 +33,7 @@ body {
     visibility: visible;
     min-height: 400px;
     position: relative;
+    padding: 15px;
 }
 
 /* 광고 컨테이너 스타일 - 기기별 최적화 */
@@ -52,7 +53,7 @@ body {
 }
 
 .ad-container.top {
-    margin: 8px 0 15px 0;
+    margin: 0 0 10px 0;
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
     min-height: 90px;
     max-height: 100px;
@@ -601,7 +602,7 @@ body {
 }
 
 .progress-container {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .progress-bar {
@@ -631,7 +632,7 @@ body {
 
 .question {
     font-size: 1.4em;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: center;
     background: linear-gradient(45deg, #e17055, #fd79a8);
     -webkit-background-clip: text;
@@ -938,17 +939,17 @@ body {
     }
     
     .container {
-        padding: 10px;
+        padding: 5px;
     }
     
     .test-container {
-        padding: 15px;
+        padding: 10px;
     }
     
     /* 질문 페이지 모바일 최적화 */
     .question {
         font-size: 1.2em;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         line-height: 1.2;
     }
     
@@ -963,11 +964,11 @@ body {
     }
     
     .progress-container {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
     
     .question-counter {
-        margin-top: 8px;
+        margin-top: 5px;
         font-size: 1em;
     }
 }
