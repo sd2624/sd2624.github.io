@@ -18,6 +18,7 @@ body {
     color: #333;
     display: block;
     visibility: visible;
+    padding-top: 100px; /* 상단 광고 높이만큼 패딩 추가 */
 }
 
 .container {
@@ -43,7 +44,7 @@ body {
 
 /* 광고 컨테이너 스타일 - 기기별 최적화 */
 .ad-container {
-    margin: 8px 0;
+    margin: 0;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -60,9 +61,16 @@ body {
 .ad-container.top {
     margin: 0 !important;
     padding: 0 !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10;
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
     min-height: 90px;
     max-height: 100px;
+    border-radius: 0;
 }
 
 .ad-container.mid {
