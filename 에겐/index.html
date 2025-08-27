@@ -41,60 +41,165 @@
 </head>
 <body>
     <!-- [광고] 페이지 상단 (slot: 3201247599) -->
-    <div class="ad-container top" id="adTop" style="text-align:center; margin:16px 0;">
+    <div class="ad-container top" id="adTop" style="text-align:center; margin:8px 0;">
         <ins class="adsbygoogle"
-             style="display:block"
+             style="display:block; min-height:90px; max-height:100px;"
              data-ad-client="ca-pub-9374368296307755"
              data-ad-slot="3201247599"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
     </div>
 
-    <!-- 상단 광고 -->
-    <div class="ad-container" style="display:none;">
-        <ins class="adsbygoogle main-ad"
-            style="display:block"
-            data-ad-client="ca-pub-9374368296307755"
-            data-ad-slot="3201247599"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-    </div>
-
     <div class="container">
         <div class="test-container">
             <!-- 시작 페이지 -->
             <div class="start-page" id="startPage">
-                <h1 class="main-title">에겐남/테토남/에겐녀/테토녀 성향 분석</h1>
-                <div class="start-img"></div>
-                <p class="sub-title">당신의 성향은 무엇인가요?<br>간단한 테스트로 내 성향을 알아보세요!</p>
-                <div class="type-info">
-                    <div class="type-item">
-                        <span class="icon">💪</span>
-                        <span class="text">에겐남</span>
-                        <span class="desc">주도적인 남성</span>
+                <!-- Step 1: Main intro with immediate start -->
+                <div class="intro-step" id="introStep1">
+                    <h1 class="main-title">🎭 에겐/테토 성향 분석</h1>
+                    <div class="start-animation">
+                        <div class="type-wheel">
+                            <div class="type-segment energetic-male">💪</div>
+                            <div class="type-segment calm-male">🌙</div>
+                            <div class="type-segment energetic-female">✨</div>
+                            <div class="type-segment calm-female">🌸</div>
+                        </div>
+                        <div class="pulse-effect"></div>
                     </div>
-                    <div class="type-item">
-                        <span class="icon">🌙</span>
-                        <span class="text">테토남</span>
-                        <span class="desc">차분한 남성</span>
+                    <p class="sub-title">당신의 연애 성향은 무엇인가요?<br>에겐/테토 4가지 유형을 통해 당신만의 독특한 매력을 발견해보세요!</p>
+                    
+                    <button class="start-btn primary" onclick="startTest()">
+                        <span class="btn-icon">🚀</span>
+                        내 성향 분석하기
+                        <span class="btn-subtitle">무료 • 2분만에 완료</span>
+                    </button>
+
+                    <button class="next-btn secondary" onclick="showNextStep(2)">
+                        <span class="btn-icon">👆</span>
+                        성향 유형 알아보기
+                    </button>
+                </div>
+
+                <!-- Step 2: Type Features -->
+                <div class="intro-step hidden" id="introStep2">
+                    <h2 class="step-title">🎯 성향 유형</h2>
+                    <div class="type-info">
+                        <div class="type-card">
+                            <div class="type-icon">💪</div>
+                            <h3>에겐남</h3>
+                            <p>주도적이고 적극적인<br>남성 성향</p>
+                        </div>
+                        <div class="type-card">
+                            <div class="type-icon">🌙</div>
+                            <h3>테토남</h3>
+                            <p>차분하고 신중한<br>남성 성향</p>
+                        </div>
+                        <div class="type-card">
+                            <div class="type-icon">✨</div>
+                            <h3>에겐녀</h3>
+                            <p>활발하고 에너지 넘치는<br>여성 성향</p>
+                        </div>
+                        <div class="type-card">
+                            <div class="type-icon">🌸</div>
+                            <h3>테토녀</h3>
+                            <p>순수하고 섬세한<br>여성 성향</p>
+                        </div>
                     </div>
-                    <div class="type-item">
-                        <span class="icon">✨</span>
-                        <span class="text">에겐녀</span>
-                        <span class="desc">활발한 여성</span>
-                    </div>
-                    <div class="type-item">
-                        <span class="icon">🌸</span>
-                        <span class="text">테토녀</span>
-                        <span class="desc">순수한 여성</span>
+
+                    <div class="step-navigation">
+                        <button class="prev-btn" onclick="showNextStep(1)">
+                            <span class="btn-icon">�</span>
+                            이전
+                        </button>
+                        <button class="next-btn" onclick="showNextStep(3)">
+                            <span class="btn-icon">👆</span>
+                            다음
+                        </button>
+                        <button class="start-btn tertiary" onclick="startTest()">
+                            <span class="btn-icon">🚀</span>
+                            바로 시작하기
+                        </button>
                     </div>
                 </div>
-                <button class="start-btn" onclick="startTest()">성향 분석 시작하기</button>
-                <div class="share-btn">
-                    <div class="kakao-share">
-                        <div class="kakao-icon"></div>
-                        <span>친구에게 공유하기</span>
+
+                <!-- Step 3: Stats and urgency -->
+                <div class="intro-step hidden" id="introStep3">
+                    <h2 class="step-title">📊 테스트 현황</h2>
+                    
+                    <div class="stats-section">
+                        <div class="stat-item">
+                            <div class="stat-number">97.3%</div>
+                            <div class="stat-label">정확도</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">35만+</div>
+                            <div class="stat-label">테스트 완료</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2분</div>
+                            <div class="stat-label">소요 시간</div>
+                        </div>
                     </div>
+
+                    <div class="urgency-notice">
+                        <div class="notice-header">🔥 지금 인기 🔥</div>
+                        <div class="notice-content">
+                            많은 사람들이 지금 자신의 연애 성향을 분석하고 있어요!<br>
+                            당신의 진짜 매력이 궁금하지 않나요?
+                        </div>
+                        <div class="live-counter">
+                            실시간 참여자: <span id="liveCount">896</span>명
+                        </div>
+                    </div>
+
+                    <div class="step-navigation">
+                        <button class="prev-btn" onclick="showNextStep(2)">
+                            <span class="btn-icon">👈</span>
+                            이전
+                        </button>
+                        <button class="next-btn" onclick="showNextStep(4)">
+                            <span class="btn-icon">👆</span>
+                            다음
+                        </button>
+                        <button class="start-btn tertiary" onclick="startTest()">
+                            <span class="btn-icon">🚀</span>
+                            바로 시작하기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Testimonials and start -->
+                <div class="intro-step hidden" id="introStep4">
+                    <h2 class="step-title">💬 사용자 후기</h2>
+                    
+                    <div class="testimonials">
+                        <div class="testimonial">
+                            <div class="testimonial-text">"완전 정확해요! 저한테 딱 맞는 성향이 나왔어요"</div>
+                            <div class="testimonial-author">- 김민지</div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="testimonial-text">"연애할 때 참고하면 좋을 것 같아요. 재밌네요!"</div>
+                            <div class="testimonial-author">- 박준호</div>
+                        </div>
+                    </div>
+
+                    <button class="start-btn" onclick="startTest()">
+                        <span class="btn-icon">🚀</span>
+                        내 성향 분석하기
+                        <span class="btn-subtitle">무료 • 2분만에 완료</span>
+                    </button>
+                    
+                    <div class="share-section">
+                        <div class="kakao-share" onclick="shareToKakao()">
+                            <div class="kakao-icon"></div>
+                            <span>친구들과 공유하기</span>
+                        </div>
+                    </div>
+
+                    <button class="prev-btn mobile-navigation" onclick="showNextStep(3)">
+                        <span class="btn-icon">👈</span>
+                        이전
+                    </button>
                 </div>
             </div>
 
@@ -109,74 +214,141 @@
                     </div>
                 </div>
                 
-                <!-- [광고] 질문 중간 (slot: 4289395159) -->
-                <div class="ad-container mid" id="adMid" style="text-align:center; margin:16px 0; display:none;">
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-9374368296307755"
-                         data-ad-slot="4289395159"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                </div>
-                
                 <h2 class="question"></h2>
                 <div class="answers"></div>
             </div>
 
-                        <!-- [광고] 중간 광고 -->
-            <div class="ad-section" id="adMid" style="display: none;">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="1966797795"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-            </div>
-
 <!-- 결과 페이지 -->
             <div class="result-page hidden" id="resultPage">
-                <h2 class="result-title">성향 분석 결과</h2>
-                <div class="result-img"></div>
-                
-                <!-- [광고] 결과 페이지 중간 (slot: 6793725628) -->
-                <div class="ad-container result" id="adResult" style="text-align:center; margin:16px 0; display:none;">
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-9374368296307755"
-                         data-ad-slot="6793725628"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                </div>
-                
-                <div class="result-content"></div>
-                <div class="result-buttons">
-                    <button class="retry-btn" onclick="location.href='https://testpro.site'">다른 테스트 하기</button>
-                    <div class="kakao-share">
-                        <div class="kakao-icon"></div>
-                        <span>결과 공유하기</span>
+                <!-- Step 1: 결과 헤더 -->
+                <div class="result-step" id="resultStep1">
+                    <div class="result-header">
+                        <div class="result-badge" id="resultBadge"></div>
+                        <h2 class="result-title" id="resultTitle"></h2>
+                        <div class="result-subtitle" id="resultSubtitle"></div>
+                        <div class="result-description" id="resultDescription"></div>
+                    </div>
+
+                    <div class="personality-summary">
+                        <h3>🎭 성향 요약</h3>
+                        <div class="summary-card" id="personalitySummary">
+                            <!-- 동적으로 생성됨 -->
+                        </div>
+                    </div>
+
+                    <div class="result-navigation">
+                        <button class="next-result-btn" onclick="showResultStep(2)">
+                            <span class="btn-icon"></span>
+                            주요 특징 보기
+                        </button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- 분석 팝업 -->
-    <div class="analysis-popup hidden" id="analysisPopup">
-        <div class="popup-content">
-            <div class="analysis-header">
-                <div class="analysis-text">성향 분석 중입니다...</div>
-                <div class="countdown">7</div>
-                <div class="loading-spinner"></div>
-            </div>
-            
-            <!-- 팝업 광고 -->
-            <div class="popup-ad-container">
-                <ins class="adsbygoogle popup-ad"
-                     style="display:inline-block"
-                     data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="3201247599"
-                     data-ad-format="rectangle"
-                     data-full-width-responsive="false"></ins>
+                <!-- Step 2: 주요 특징 -->
+                <div class="result-step hidden" id="resultStep2">
+                    <h2 class="step-title">✨ 주요 특징</h2>
+                    <div class="characteristics-content" id="characteristicsContent">
+                        <!-- 동적으로 생성됨 -->
+                    </div>
+
+                    <div class="result-navigation">
+                        <button class="prev-result-btn" onclick="showResultStep(1)">
+                            <span class="btn-icon">👈</span>
+                            이전
+                        </button>
+                        <button class="next-result-btn" onclick="showResultStep(3)">
+                            <span class="btn-icon"></span>
+                            연애 스타일 보기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: 연애 스타일 -->
+                <div class="result-step hidden" id="resultStep3">
+                    <h2 class="step-title">💕 연애 스타일</h2>
+                    <div class="love-style-content" id="loveStyleContent">
+                        <!-- 동적으로 생성됨 -->
+                    </div>
+
+                    <div class="result-navigation">
+                        <button class="prev-result-btn" onclick="showResultStep(2)">
+                            <span class="btn-icon">👈</span>
+                            이전
+                        </button>
+                        <button class="next-result-btn" onclick="showResultStep(4)">
+                            <span class="btn-icon"></span>
+                            궁합 분석 보기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: 궁합 분석 -->
+                <div class="result-step hidden" id="resultStep4">
+                    <h2 class="step-title">💑 궁합 분석</h2>
+                    <div class="compatibility-content" id="compatibilityContent">
+                        <!-- 동적으로 생성됨 -->
+                    </div>
+
+                    <div class="result-navigation">
+                        <button class="prev-result-btn" onclick="showResultStep(3)">
+                            <span class="btn-icon">👈</span>
+                            이전
+                        </button>
+                        <button class="next-result-btn" onclick="showResultStep(5)">
+                            <span class="btn-icon"></span>
+                            최종 분석 보기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 5: 최종 분석 및 공유 -->
+                <div class="result-step hidden" id="resultStep5">
+                    <h2 class="step-title">🎯 최종 분석</h2>
+                    <div class="final-analysis" id="finalAnalysis">
+                        <!-- 동적으로 생성됨 -->
+                    </div>
+
+                    <!-- [광고] 결과 페이지 중간 (감정 폴더와 동일한 slot: 3593134392) -->
+                    <div class="ad-container result" id="adResult5" style="margin:15px 0; text-align:center;">
+                        <ins class="adsbygoogle"
+                             style="display:block; min-height:100px; max-height:120px;"
+                             data-ad-client="ca-pub-9374368296307755"
+                             data-ad-slot="3593134392"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                    </div>
+
+                    <div class="related-tests">
+                        <h3>다른 테스트도 해보세요</h3>
+                        <div class="related-grid">
+                            <a href="../감정/" class="related-item">
+                                <span class="related-emoji">🧠</span>
+                                <span class="related-title">감정 분석</span>
+                                <span class="related-desc">나의 감정 상태 확인</span>
+                            </a>
+                            <a href="../스트레스/" class="related-item">
+                                <span class="related-emoji">😰</span>
+                                <span class="related-title">스트레스 분석</span>
+                                <span class="related-desc">스트레스 수준 진단</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="result-buttons">
+                        <button class="retry-btn" onclick="location.reload()">다시 테스트</button>
+                        <div class="kakao-share" onclick="shareKakao()">
+                            <div class="kakao-icon"></div>
+                            <span>결과 공유하기</span>
+                        </div>
+                    </div>
+
+                    <div class="result-navigation">
+                        <button class="prev-result-btn" onclick="showResultStep(4)">
+                            <span class="btn-icon">👈</span>
+                            이전
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

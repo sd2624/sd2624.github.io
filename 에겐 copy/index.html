@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>에겐남/테토남/에겐녀/테토녀 성향 분석 테스트</title>
+    <meta name="description" content="에겐남, 테토남, 에겐녀, 테토녀 성향을 분석하고 나의 연애 스타일과 매력 포인트를 확인하세요. 최신 연애 성향 테스트">
+    <meta name="keywords" content="에겐남, 테토남, 에겐녀, 테토녀, 연애성향테스트, 연애스타일분석, 매력테스트, 연애심리테스트, 성향분석, 연애유형테스트">
+    <meta name="author" content="테스트프로">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph 메타 태그 -->
+    <meta property="og:title" content="에겐남/테토남/에겐녀/테토녀 성향 분석 테스트">
+    <meta property="og:description" content="나의 연애 성향과 매력 포인트를 에겐/테토 유형으로 분석해보세요">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sd2624.github.io/에겐/">
+    <meta property="og:image" content="https://sd2624.github.io/에겐/에겐.svg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="에겐남/테토남/에겐녀/테토녀 성향 분석">
+    <meta name="twitter:description" content="나의 연애 성향을 에겐/테토 유형으로 분석해보세요">
+    
+    <!-- 구조화된 데이터 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "에겐/테토 성향 분석 테스트",
+        "description": "연애 성향을 에겐남, 테토남, 에겐녀, 테토녀로 분석하는 심리 테스트",
+        "url": "https://sd2624.github.io/에겐/",
+        "applicationCategory": "PersonalityTest"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+    <!-- 카카오 SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <!-- 구글 애드센스 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- [광고] 페이지 상단 (slot: 3201247599) -->
+    <div class="ad-container top" id="adTop" style="text-align:center; margin:16px 0;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- 상단 광고 -->
+    <div class="ad-container" style="display:none;">
+        <ins class="adsbygoogle main-ad"
+            style="display:block"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="container">
+        <div class="test-container">
+            <!-- 시작 페이지 -->
+            <div class="start-page" id="startPage">
+                <h1 class="main-title">에겐남/테토남/에겐녀/테토녀 성향 분석</h1>
+                <div class="start-img"></div>
+                <p class="sub-title">당신의 성향은 무엇인가요?<br>간단한 테스트로 내 성향을 알아보세요!</p>
+                <div class="type-info">
+                    <div class="type-item">
+                        <span class="icon">💪</span>
+                        <span class="text">에겐남</span>
+                        <span class="desc">주도적인 남성</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="icon">🌙</span>
+                        <span class="text">테토남</span>
+                        <span class="desc">차분한 남성</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="icon">✨</span>
+                        <span class="text">에겐녀</span>
+                        <span class="desc">활발한 여성</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="icon">🌸</span>
+                        <span class="text">테토녀</span>
+                        <span class="desc">순수한 여성</span>
+                    </div>
+                </div>
+                <button class="start-btn" onclick="startTest()">성향 분석 시작하기</button>
+                <div class="share-btn">
+                    <div class="kakao-share">
+                        <div class="kakao-icon"></div>
+                        <span>친구에게 공유하기</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 질문 페이지 -->
+            <div class="question-page hidden" id="questionPage">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="question-counter">
+                        <span id="questionNum">1/16</span>
+                    </div>
+                </div>
+                
+                <!-- [광고] 질문 중간 (slot: 4289395159) -->
+                <div class="ad-container mid" id="adMid" style="text-align:center; margin:16px 0; display:none;">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="4289395159"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+                
+                <h2 class="question"></h2>
+                <div class="answers"></div>
+            </div>
+
+                        <!-- [광고] 중간 광고 -->
+            <div class="ad-section" id="adMid" style="display: none;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="1966797795"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+
+<!-- 결과 페이지 -->
+            <div class="result-page hidden" id="resultPage">
+                <h2 class="result-title">성향 분석 결과</h2>
+                <div class="result-img"></div>
+                
+                <!-- [광고] 결과 페이지 중간 (slot: 6793725628) -->
+                <div class="ad-container result" id="adResult" style="text-align:center; margin:16px 0; display:none;">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="6793725628"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+                
+                <div class="result-content"></div>
+                <div class="result-buttons">
+                    <button class="retry-btn" onclick="location.href='https://testpro.site'">다른 테스트 하기</button>
+                    <div class="kakao-share">
+                        <div class="kakao-icon"></div>
+                        <span>결과 공유하기</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 분석 팝업 -->
+    <div class="analysis-popup hidden" id="analysisPopup">
+        <div class="popup-content">
+            <div class="analysis-header">
+                <div class="analysis-text">성향 분석 중입니다...</div>
+                <div class="countdown">7</div>
+                <div class="loading-spinner"></div>
+            </div>
+            
+            <!-- 팝업 광고 -->
+            <div class="popup-ad-container">
+                <ins class="adsbygoogle popup-ad"
+                     style="display:inline-block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="false"></ins>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

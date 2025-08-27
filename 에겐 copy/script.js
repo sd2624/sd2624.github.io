@@ -1,187 +1,85 @@
-// Kakao SDK initialization
-function initKakao() {
-    if (window.Kakao && !window.Kakao.isInitialized()) {
-        window.Kakao.init('3413c1beb87e9b2f3b7fce37dde67b4d');
-        console.log('Kakao SDK initialized');
-    }
-}
-
-// 테스트 전역 변수
-let currentQuestion = 0;
-let answers = [];
-let loadedAds = new Set();
-let currentStep = 1;
-let currentResultStep = 1;
-
-// 단계별 네비게이션 함수
-function showNextStep(step) {
-    console.log('showNextStep called with step:', step);
-    
-    // 모든 단계 숨기기
-    for (let i = 1; i <= 4; i++) {
-        const stepElement = document.getElementById(`introStep${i}`);
-        if (stepElement) {
-            stepElement.classList.add('hidden');
-        }
+// [광고] AdManager 클래스 - 광고 로드 및 중복 방지 관리
+class AdManager {
+    constructor() {
+        this.loadedAds = new Set(); // 로드된 광고 추적
     }
     
-    // 선택된 단계 보이기
-    const targetStep = document.getElementById(`introStep${step}`);
-    if (targetStep) {
-        targetStep.classList.remove('hidden');
-        currentStep = step;
-        console.log('Showing intro step:', step);
-        
-        // 스크롤을 맨 위로
-        window.scrollTo(0, 0);
-    } else {
-        console.error('Intro step element not found:', `introStep${step}`);
-    }
-}
-
-// 결과 페이지 단계별 네비게이션 함수
-function showResultStep(step) {
-    console.log('showResultStep called with step:', step);
-    
-    // 모든 결과 단계 숨기기
-    for (let i = 1; i <= 5; i++) {
-        const stepElement = document.getElementById(`resultStep${i}`);
-        if (stepElement) {
-            stepElement.classList.add('hidden');
-        }
-    }
-    
-    // 선택된 단계 보이기
-    const targetStep = document.getElementById(`resultStep${step}`);
-    if (targetStep) {
-        targetStep.classList.remove('hidden');
-        currentResultStep = step;
-        
-        console.log('Showing step:', step);
-        
-        // 스크롤을 맨 위로
-        window.scrollTo(0, 0);
-        
-        // 5단계에서 광고 로드
-        if (step === 5) {
-            adManager.observe('adResult5');
-        }
-    } else {
-        console.error('Step element not found:', `resultStep${step}`);
-    }
-}
-
-// 모바일 감지 함수
-function isMobile() {
-    return window.innerWidth <= 768;
-}
-
-// 페이지 로드 시 시작 페이지 초기화 (모바일 우선 슬라이드 방식)
-function initializeStartPage() {
-    console.log('Initializing start page...');
-    
-    // 시작 페이지가 존재하는지 확인
-    const startPage = document.getElementById('startPage');
-    if (!startPage) {
-        console.error('Start page not found!');
-        return;
-    }
-    
-    // 모든 스텝을 숨기고 첫 번째 스텝만 표시
-    for (let i = 1; i <= 4; i++) {
-        const stepElement = document.getElementById(`introStep${i}`);
-        if (stepElement) {
-            if (i === 1) {
-                stepElement.classList.remove('hidden');
-                console.log('Showing introStep1');
-            } else {
-                stepElement.classList.add('hidden');
-            }
-        } else {
-            console.warn(`introStep${i} not found`);
-        }
-    }
-    
-    // 모바일과 데스크톱 모두 슬라이드 방식 사용
-    // 첫 화면에서 바로 "내 성향 분석하기" 버튼이 보임
-    currentStep = 1;
-    
-    // 시작 페이지를 보이도록 설정
-    startPage.classList.remove('hidden');
-    
-    console.log('Start page initialized successfully');
-}
-
-// Ad management object - using IntersectionObserver (감정 폴더와 동일하게 단순화)
-const adManager = {
-    observer: null,
-    
-    // Initialize ad manager
-    init() {
-        this.observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const adContainer = entry.target;
-                    const adId = adContainer.id;
-                    
-                    // Prevent duplicate loading
-                    if (!loadedAds.has(adId)) {
-                        this.loadAd(adId);
-                        loadedAds.add(adId);
-                        this.observer.unobserve(adContainer); // Load only once
-                    }
-                }
-            });
-        }, { 
-            threshold: 0.1,
-            rootMargin: '50px' 
-        });
-    },
-    
-    // Start observing ad container
-    observe(adId) {
-        const adElement = document.getElementById(adId);
-        if (adElement && this.observer) {
-            this.observer.observe(adElement);
-        }
-    },
-    
-    // Execute ad loading (optimized for small size)
+    // 광고 로드 함수
     loadAd(adId) {
-        try {
-            const adElement = document.getElementById(adId);
-            if (adElement && typeof (adsbygoogle) !== 'undefined') {
-                // Prevent duplicate loading
-                if (loadedAds.has(adId)) {
-                    console.log(`Ad already loaded: ${adId}`);
-                    return;
-                }
-                
-                // Mobile/PC ad optimization (small size)
-                if (window.innerWidth <= 768) {
-                    // Mobile: very small
-                    adElement.style.minHeight = '60px';
-                    adElement.style.maxHeight = '80px';
-                    adElement.style.border = '1px solid rgba(102, 126, 234, 0.2)';
-                    adElement.style.borderRadius = '6px';
-                    adElement.style.padding = '5px';
-                    adElement.style.margin = '5px 0';
-                } else {
-                    // PC: slightly larger
-                    adElement.style.minHeight = '80px';
-                    adElement.style.maxHeight = '120px';
-                    adElement.style.padding = '8px';
-                    adElement.style.margin = '8px 0';
-                }
-                
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                loadedAds.add(adId); // Mark as loaded
-                console.log(`Ad loaded (optimized): ${adId}`);
-            }
-        } catch (error) {
-            console.error(`Ad loading failed: ${adId}`, error);
+        if (this.loadedAds.has(adId)) {
+            console.log(`[광고] ${adId} 이미 로드됨 - 중복 방지`);
+            return false;
         }
+        
+        const adElement = document.getElementById(adId);
+        if (adElement && typeof adsbygoogle !== 'undefined') {
+            try {
+                // 광고 컨테이너 표시
+                adElement.style.display = 'block';
+                
+                // 광고 푸시
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                
+                this.loadedAds.add(adId);
+                console.log(`[광고] ${adId} 로드 완료`);
+                return true;
+            } catch (error) {
+                console.warn(`[광고] ${adId} 로드 실패:`, error);
+                return false;
+            }
+        }
+        return false;
     }
+    
+    // 중간 광고 표시 (3번째 질문 후)
+    showMidAd() {
+        return this.loadAd('adMid');
+    }
+    
+    // 결과 광고 표시
+    showResultAd() {
+        return this.loadAd('adResult');
+    }
+}
+
+// [광고] AdManager 인스턴스 생성
+const adManager = new AdManager();
+
+// [광고] IntersectionObserver를 이용한 광고 표시 관리
+const setupAdObservers = () => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    
+    const options = {
+        threshold: 0.1,
+        rootMargin: '50px'
+    };
+    
+    // 중간 광고 관찰자
+    const midAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showMidAd();
+                midAdObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    
+    // 결과 광고 관찰자
+    const resultAdObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                adManager.showResultAd();
+                resultAdObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    
+    // 관찰 대상 등록
+    const midAd = document.getElementById('adMid');
+    const resultAd = document.getElementById('adResult');
+    
+    if (midAd) midAdObserver.observe(midAd);
+    if (resultAd) resultAdObserver.observe(resultAd);
 };
 
 // 질문 데이터
@@ -376,9 +274,10 @@ const results = {
     }
 };
 
-// 기존 변수들 (위에서 이미 선언됨)
+let currentQuestion = 0;
 let agenScore = 0;
 let tetoScore = 0;
+let answers = [];
 let userGender = '';
 let totalQuestions = questions.length + 1; // 성별 질문 포함
 
@@ -386,7 +285,7 @@ let totalQuestions = questions.length + 1; // 성별 질문 포함
 const startPage = document.getElementById('startPage');
 const questionPage = document.getElementById('questionPage');
 const resultPage = document.getElementById('resultPage');
-// const analysisPopup = document.getElementById('analysisPopup'); // 더 이상 사용하지 않음
+const analysisPopup = document.getElementById('analysisPopup');
 
 // 이벤트 리스너 설정 함수
 function setupEventListeners() {
@@ -481,6 +380,11 @@ function showQuestion() {
     const progress = (questionCount / totalQuestions) * 100;
     progressElement.style.width = progress + '%';
     
+    // 3번째 질문 후 중간 광고 표시
+    if (currentQuestion === 3) {
+        adManager.showMidAd();
+    }
+    
     // 답변 옵션 생성
     answersElement.innerHTML = '';
     question.answers.forEach((answer, index) => {
@@ -568,26 +472,38 @@ function selectGender(gender) {
     }, 500);
 }
 
-// 분석 팝업 표시 (감정 폴더와 동일하게 수정 - 카운트다운 제거)
+// 분석 팝업 표시
 function showAnalysis() {
     console.log('분석 팝업 표시 시작');
     
     questionPage.classList.add('hidden');
+    analysisPopup.classList.remove('hidden');
     
-    // 바로 결과 페이지로 이동 (카운트다운 없음)
-    console.log('바로 결과 페이지로 이동');
-    showResult();
+    // 카운트다운 시작
+    let countdown = 8;
+    const countdownElement = document.querySelector('.countdown');
+    
+    console.log('카운트다운 시작: 8초');
+    
+    const timer = setInterval(() => {
+        countdown--;
+        countdownElement.textContent = countdown;
+        console.log(`카운트다운: ${countdown}초 남음`);
+        
+        if (countdown <= 0) {
+            clearInterval(timer);
+            console.log('카운트다운 완료 - 결과 페이지로 이동');
+            showResult();
+        }
+    }, 1000);
 }
 
-// 결과 표시 (감정 폴더와 동일한 5단계 구조)
+// 결과 표시
 function showResult() {
     console.log('결과 페이지 표시 시작');
     
-    // analysisPopup은 사용하지 않고 바로 resultPage로 이동
+    analysisPopup.classList.add('hidden');
     resultPage.classList.remove('hidden');
-    
-    // 첫 번째 단계부터 시작
-    showResultStep(1);
     
     // 결과 키 결정
     const resultKey = getResultKey();
@@ -600,72 +516,35 @@ function showResult() {
         return;
     }
     
-    // Step 1: 결과 헤더 설정
-    const resultBadge = document.getElementById('resultBadge');
-    const resultTitle = document.getElementById('resultTitle');
-    const resultSubtitle = document.getElementById('resultSubtitle');
-    const resultDescription = document.getElementById('resultDescription');
-    const personalitySummary = document.getElementById('personalitySummary');
+    // 결과 표시
+    const resultImg = document.querySelector('.result-img');
+    const resultContent = document.querySelector('.result-content');
     
-    if (resultBadge) {
-        resultBadge.innerHTML = `<div style="font-size: 60px; margin-bottom: 10px;">${result.icon}</div>`;
-        resultBadge.style.background = result.bgColor;
+    if (resultImg) {
+        resultImg.style.background = result.bgColor;
+        resultImg.innerHTML = `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 60px;">${result.icon}</div>`;
     }
     
-    if (resultTitle) {
-        resultTitle.textContent = result.title;
-    }
-    
-    if (resultSubtitle) {
-        resultSubtitle.textContent = '당신의 성향 분석 결과입니다';
-    }
-    
-    if (resultDescription) {
-        resultDescription.textContent = result.description;
-    }
-    
-    if (personalitySummary) {
-        personalitySummary.innerHTML = `
-            <div style="background: white; padding: 20px; border-radius: 15px; border-left: 5px solid #4CAF50;">
-                <p style="font-size: 1.1em; line-height: 1.6; margin: 0;">${result.description}</p>
-            </div>
-        `;
-    }
-    
-    // Step 2: 주요 특징
-    const characteristicsContent = document.getElementById('characteristicsContent');
-    if (characteristicsContent) {
-        characteristicsContent.innerHTML = `
+    if (resultContent) {
+        resultContent.innerHTML = `
+            <h3 style="font-size: 1.8em; margin-bottom: 20px; color: #2c5530; font-weight: bold;">${result.title}</h3>
+            <p style="margin-bottom: 25px; font-size: 1.2em; line-height: 1.6;">${result.description}</p>
+            
             <div style="background: white; padding: 25px; border-radius: 15px; text-align: left; white-space: pre-line; border-left: 5px solid #4CAF50; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h4 style="color: #2c5530; margin-bottom: 15px; font-size: 1.3em;">✨ 주요 특징</h4>
                 ${result.characteristics}
             </div>
-        `;
-    }
-    
-    // Step 3: 연애 스타일
-    const loveStyleContent = document.getElementById('loveStyleContent');
-    if (loveStyleContent) {
-        loveStyleContent.innerHTML = `
+            
             <div style="background: #f0f8f0; padding: 25px; border-radius: 15px; text-align: left; white-space: pre-line; border: 2px solid #4CAF50; margin-bottom: 20px;">
+                <h4 style="color: #2c5530; margin-bottom: 15px; font-size: 1.3em;">💕 연애 스타일</h4>
                 ${result.loveStyle}
             </div>
-        `;
-    }
-    
-    // Step 4: 궁합 분석
-    const compatibilityContent = document.getElementById('compatibilityContent');
-    if (compatibilityContent) {
-        compatibilityContent.innerHTML = `
+            
             <div style="background: #e3f2fd; padding: 25px; border-radius: 15px; margin-bottom: 20px; border: 2px solid #2196F3;">
+                <h4 style="color: #1976d2; margin-bottom: 15px; font-size: 1.3em;">💑 궁합</h4>
                 ${result.compatibility}
             </div>
-        `;
-    }
-    
-    // Step 5: 최종 분석
-    const finalAnalysis = document.getElementById('finalAnalysis');
-    if (finalAnalysis) {
-        finalAnalysis.innerHTML = `
+            
             <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 4px solid #ffc107; margin-bottom: 20px;">
                 <h4 style="color: #856404; margin-bottom: 10px;">💡 조언</h4>
                 <p style="color: #856404; font-size: 0.95em; line-height: 1.5;">
@@ -678,6 +557,9 @@ function showResult() {
             </div>
         `;
     }
+    
+    // 결과 페이지 광고 표시
+    adManager.showResultAd();
     
     console.log('결과 표시 완료');
 }
@@ -768,68 +650,6 @@ document.addEventListener('dragstart', function(e) {
     return false;
 });
 
-// 통계 및 긴급성 메시지 업데이트 함수들
-function updateStats() {
-    // 통계 업데이트 로직 (필요시 구현)
-}
-
-function updateUrgencyMessage() {
-    const messages = [
-        "지금 많은 사람들이 테스트하고 있어요!",
-        "당신의 진짜 성향을 확인해보세요!",
-        "친구들과 결과를 비교해보세요!"
-    ];
-    // 필요시 구현
-}
-
-function updateLiveCounter() {
-    const liveCountElement = document.getElementById('liveCount');
-    if (liveCountElement) {
-        const currentCount = parseInt(liveCountElement.textContent);
-        const newCount = currentCount + Math.floor(Math.random() * 3);
-        liveCountElement.textContent = newCount.toLocaleString();
-    }
-}
-
-// 페이지 로드 시 초기화
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Page loaded - initializing...');
-    
-    // 기본 요소들이 존재하는지 확인
-    console.log('startPage element:', document.getElementById('startPage'));
-    console.log('introStep1 element:', document.getElementById('introStep1'));
-    console.log('container element:', document.querySelector('.container'));
-    console.log('test-container element:', document.querySelector('.test-container'));
-    
-    // Kakao SDK 초기화
-    initKakao();
-    
-    // 시작 페이지 초기화
-    initializeStartPage();
-    
-    // 광고 관리자 초기화 (감정 폴더와 동일하게 단순화)
-    adManager.init();
-    
-    // 상단 광고 옵저버 등록
-    adManager.observe('adTop');
-    
-    // 통계 업데이트
-    updateStats();
-    
-    // 긴급성 메시지 업데이트
-    updateUrgencyMessage();
-    
-    // 실시간 카운터 주기적 업데이트
-    setInterval(updateLiveCounter, 3000);
-    
-    // 긴급성 메시지 주기적 업데이트
-    setInterval(updateUrgencyMessage, 8000);
-    
-    console.log('Initialization complete');
-});
-
 // 전역 함수로 노출
 window.startTest = startTest;
 window.shareKakao = shareKakao;
-window.showNextStep = showNextStep;
-window.showResultStep = showResultStep;
