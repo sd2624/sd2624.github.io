@@ -16,7 +16,7 @@ body {
 .container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 0;
+    padding: 20px;
 }
 
 .test-container {
@@ -25,7 +25,6 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     backdrop-filter: blur(10px);
-    padding: 15px; /* 내부 콘텐츠 패딩 추가 */
 }
 
 /* 광고 컨테이너 - 기기별 최적화 */
@@ -45,66 +44,41 @@ body {
 }
 
 .ad-container.top {
-    margin: -15px -15px 10px -15px; /* 상단과 좌우를 패딩 밖으로 확장 */
+    margin: 8px 0 15px 0;
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
     min-height: 90px; /* 상단 광고 더 작게 */
     max-height: 100px;
 }
 
-/* 모바일 최적화 */
-@media (max-width: 768px) {
-    body {
-        padding-bottom: 0; /* 하단 여백 완전 제거 */
-    }
-    
-    .ad-container {
-        min-height: 60px;
-        max-height: 80px;
-        margin: 5px 0;
-    }
-    
-    .ad-container.top {
-        margin: -10px -10px 5px -10px; /* 모바일에서 패딩 밖으로 확장 */
-    }
+.ad-container.mid {
+    margin: 10px 0; /* 질문과 답변 사이 여백 최소화 */
+    background: rgba(102, 126, 234, 0.03);
+    min-height: 80px; /* 중간 광고 가장 작게 */
+    max-height: 100px;
+}
+
+.ad-container.result {
+    margin: 15px 0;
+    background: rgba(118, 75, 162, 0.03);
+    min-height: 120px; /* 결과 페이지는 조금 여유 */
+    max-height: 150px;
 }
 
 /* 시작 페이지 단계별 표시 */
 .intro-step {
-    min-height: 85vh; /* 모바일에서 한 화면에 맞게 */
+    min-height: 80vh; /* 모바일에서 한 화면에 맞게 */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 20px;
-    transition: all 0.3s ease-in-out;
-}
-
-/* 모바일 전용 버튼 스타일 */
-.mobile-only {
-    display: block;
-}
-
-.desktop-only {
-    display: none;
-}
-
-/* 슬라이드 애니메이션 */
-.intro-step.hidden {
-    opacity: 0;
-    transform: translateX(100%);
-    pointer-events: none;
-}
-
-.intro-step:not(.hidden) {
-    opacity: 1;
-    transform: translateX(0);
 }
 
 .step-title {
-    font-size: 1.6rem; /* 폰트 크기 줄임 */
+    font-size: 1.8rem;
     color: #333;
-    margin-bottom: 20px; /* 여백 줄임 */
+    margin-bottom: 30px;
     font-weight: 700;
 }
 
@@ -154,59 +128,6 @@ body {
 
 .mobile-only {
     display: none;
-}
-
-/* 결과 전 페이지 스타일 */
-.before-result-page {
-    padding: 40px 20px;
-    text-align: center;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.before-result-content {
-    max-width: 500px;
-    width: 100%;
-}
-
-.before-result-title {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.before-result-text {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 30px;
-    line-height: 1.6;
-}
-
-.view-result-btn {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 30px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    margin: 20px auto 0;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-}
-
-.view-result-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
 }
 
 /* 데스크톱에서는 모든 스텝을 한번에 보여주기 */
@@ -769,7 +690,7 @@ body {
 
 /* 질문 페이지 - 컴팩트하게 조정 */
 .question-page {
-    padding: 0; /* 패딩 완전 제거 */
+    padding: 8px; /* 패딩 더 줄임 */
     max-height: 100vh;
     overflow-y: auto;
 }
@@ -779,7 +700,7 @@ body {
 }
 
 .progress-section {
-    margin-bottom: 0; /* 여백 완전 제거 */
+    margin-bottom: 8px; /* 여백 더 줄임 */
     text-align: center;
 }
 
@@ -788,7 +709,7 @@ body {
     height: 6px;
     border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 3px; /* 여백 더 줄임 */
+    margin-bottom: 10px;
 }
 
 .progress-fill {
@@ -803,7 +724,7 @@ body {
     font-size: 1rem;
     font-weight: 700;
     color: #667eea;
-    margin-bottom: 2px; /* 여백 더 줄임 */
+    margin-bottom: 5px;
 }
 
 .time-indicator {
@@ -817,8 +738,8 @@ body {
 }
 
 .emotion-icon {
-    font-size: 1.5rem; /* 크기 줄임 */
-    margin-bottom: 3px; /* 여백 줄임 */
+    font-size: 2.5rem;
+    margin-bottom: 8px;
     display: block;
     animation: bounce 2s infinite;
 }
@@ -836,32 +757,32 @@ body {
 }
 
 .question-text {
-    font-size: 1.1rem; /* 폰트 크기 약간 줄임 */
+    font-size: 1.2rem;
     color: #333;
-    margin-bottom: 5px; /* 여백 줄임 */
+    margin-bottom: 5px; /* 여백 더 줄임 */
     line-height: 1.2;
     text-align: center;
 }
 
 .question-subtitle {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: #666;
     text-align: center;
-    margin-bottom: 8px; /* 여백 약간 늘림 */
+    margin-bottom: 8px; /* 여백 더 줄임 */
 }
 
 .answers-grid {
     display: grid;
-    gap: 6px; /* 간격 더 줄임 */
-    margin-bottom: 0; /* 하단 여백 완전 제거 */
+    gap: 8px; /* 간격 줄임 */
+    margin-bottom: 10px; /* 여백 줄임 */
 }
 
 .answer-btn {
     background: white;
     border: 2px solid rgba(102, 126, 234, 0.2);
-    padding: 10px; /* 패딩 더 줄임 */
-    border-radius: 8px; /* 모서리 더 줄임 */
-    font-size: 0.9rem; /* 폰트 크기 더 줄임 */
+    padding: 12px; /* 패딩 줄임 */
+    border-radius: 10px; /* 모서리 줄임 */
+    font-size: 0.95rem; /* 폰트 크기 줄임 */
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
@@ -976,11 +897,11 @@ body {
 
 /* 결과 페이지 단계별 표시 */
 .result-step {
-    min-height: 80vh; /* 높이 줄임 */
+    min-height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 15px; /* 패딩 줄임 */
+    padding: 20px;
     text-align: center;
 }
 
@@ -1029,52 +950,52 @@ body {
 
 /* 결과 페이지 */
 .result-page {
-    padding: 10px; /* 패딩 줄임 */
+    padding: 20px;
 }
 
 .result-header {
     text-align: center;
-    margin-bottom: 20px; /* 여백 줄임 */
+    margin-bottom: 40px;
 }
 
 .result-badge {
-    width: 80px; /* 크기 줄임 */
-    height: 80px; /* 크기 줄임 */
-    margin: 0 auto 15px; /* 여백 줄임 */
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
     background: linear-gradient(135deg, #667eea, #764ba2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem; /* 폰트 크기 줄임 */
+    font-size: 3rem;
     color: white;
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
 
 .result-title {
-    font-size: 1.8rem; /* 폰트 크기 줄임 */
+    font-size: 2rem;
     color: #333;
-    margin-bottom: 8px; /* 여백 줄임 */
+    margin-bottom: 10px;
     font-weight: 800;
 }
 
 .result-subtitle {
-    font-size: 1.1rem; /* 폰트 크기 줄임 */
+    font-size: 1.2rem;
     color: #667eea;
     font-weight: 600;
 }
 
 .emotion-analysis {
     display: grid;
-    gap: 20px; /* 간격 줄임 */
-    margin: 25px 0; /* 여백 줄임 */
+    gap: 30px;
+    margin: 40px 0;
 }
 
 .emotion-chart,
 .emotion-details {
     background: white;
-    padding: 18px; /* 패딩 줄임 */
-    border-radius: 12px; /* 모서리 줄임 */
+    padding: 25px;
+    border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
@@ -1299,7 +1220,7 @@ body {
     .start-page,
     .loading-page,
     .result-page {
-        padding: 10px; /* 모바일에서 패딩 더 줄임 */
+        padding: 20px;
     }
     
     .question-page {
@@ -1356,16 +1277,15 @@ body {
     
     /* 모바일에서 질문과 답안 최적화 */
     .question-page {
-        padding: 0; /* 모바일에서도 패딩 제거 */
-        min-height: auto; /* 최소 높이 제거로 여백 완전 제거 */
+        padding: 10px;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* 하단 여백 제거를 위해 상단 정렬 */
-        margin-bottom: -10px; /* 하단을 패딩 밖으로 확장 */
+        justify-content: space-between;
     }
     
     .progress-section {
-        margin-bottom: 2px; /* 모바일에서도 여백 최소화 */
+        margin-bottom: 10px;
     }
     
     .emotion-indicator {
@@ -1381,25 +1301,23 @@ body {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* 상단 정렬로 변경 */
-        padding: 0; /* 패딩 완전 제거 */
-        margin: 0; /* 마진도 완전 제거 */
+        justify-content: center;
     }
     
     .question-text {
         font-size: 1.1rem;
-        margin-bottom: 5px; /* 여백 더 줄임 */
+        margin-bottom: 8px;
         line-height: 1.3;
     }
     
     .question-subtitle {
         font-size: 0.75rem;
-        margin-bottom: 8px; /* 여백 더 줄임 */
+        margin-bottom: 10px;
     }
     
     .answers-grid {
-        gap: 8px; /* 답변 간격 더 줄임 */
-        margin-bottom: 0; /* 하단 여백 완전 제거 */
+        gap: 10px;
+        margin-bottom: 15px;
     }
     
     .answer-btn {
@@ -1412,39 +1330,39 @@ body {
     
     /* 모바일 결과 페이지 최적화 */
     .result-step {
-        min-height: 85vh; /* 높이 더 줄임 */
-        padding: 10px; /* 패딩 더 줄임 */
+        min-height: 90vh;
+        padding: 15px;
         justify-content: space-around;
     }
     
     .result-header {
-        margin-bottom: 15px; /* 여백 더 줄임 */
+        margin-bottom: 20px;
     }
     
     .result-badge {
-        width: 70px; /* 크기 더 줄임 */
-        height: 70px; /* 크기 더 줄임 */
-        font-size: 2.2rem; /* 폰트 더 줄임 */
-        margin: 0 auto 10px; /* 여백 더 줄임 */
+        width: 80px;
+        height: 80px;
+        font-size: 2.5rem;
+        margin: 0 auto 15px;
     }
     
     .result-title {
-        font-size: 1.4rem; /* 더 줄임 */
-        margin-bottom: 6px; /* 여백 더 줄임 */
+        font-size: 1.5rem;
+        margin-bottom: 8px;
     }
     
     .result-subtitle {
-        font-size: 0.95rem; /* 더 줄임 */
+        font-size: 1rem;
     }
     
     .emotion-chart,
     .emotion-details,
     .advice-section {
         background: white;
-        padding: 15px; /* 패딩 줄임 */
-        border-radius: 12px; /* 모서리 줄임 */
+        padding: 20px;
+        border-radius: 15px;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        margin-bottom: 12px; /* 여백 줄임 */
+        margin-bottom: 15px;
     }
     
     .chart-container {
@@ -1706,12 +1624,11 @@ body {
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .container {
-        padding: 0; /* 컨테이너 패딩 제거 */
+        padding: 10px;
     }
     
     .test-container {
-        padding: 10px; /* 모바일에서 작은 패딩 */
-        border-radius: 0; /* 모바일에서 둥근 모서리 제거 */
+        padding: 20px;
     }
     
     button {

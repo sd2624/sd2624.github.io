@@ -59,7 +59,11 @@ function showResultStep(step) {
         // 스크롤을 맨 위로
         window.scrollTo(0, 0);
         
-        // 스텝 표시 완료
+        // 각 단계별 광고 로드
+        const adId = `adResult${step}`;
+        if (adManager && adManager.observe) {
+            adManager.observe(adId);
+        }
     } else {
         console.error('Step element not found:', `resultStep${step}`);
     }
@@ -72,15 +76,29 @@ function isMobile() {
 
 // 페이지 로드 시 모바일이면 첫 번째 단계만 보이기
 function initializeStartPage() {
-    // 모바일에서는 첫 번째 단계만 보이기 (슬라이드 방식)
-    showNextStep(1);
-    
-    // 모든 단계를 슬라이드 방식으로 처리
-    for (let i = 1; i <= 4; i++) {
-        const stepElement = document.getElementById(`introStep${i}`);
-        if (stepElement && i !== 1) {
-            stepElement.classList.add('hidden');
+    if (isMobile()) {
+        // 모바일에서는 첫 번째 단계만 보이기
+        showNextStep(1);
+    } else {
+        // 데스크톱에서는 모든 내용 보이기 (hidden 클래스 제거)
+        for (let i = 1; i <= 4; i++) {
+            const stepElement = document.getElementById(`introStep${i}`);
+            if (stepElement) {
+                stepElement.classList.remove('hidden');
+            }
         }
+        
+        // 데스크톱에서는 step-navigation 숨기기
+        const stepNavs = document.querySelectorAll('.step-navigation');
+        stepNavs.forEach(nav => nav.style.display = 'none');
+        
+        // 데스크톱에서는 mobile-only 버튼 숨기기
+        const mobileButtons = document.querySelectorAll('.mobile-only');
+        mobileButtons.forEach(btn => btn.style.display = 'none');
+        
+        // 데스크톱에서는 desktop-only 버튼 보이기
+        const desktopButtons = document.querySelectorAll('.desktop-only');
+        desktopButtons.forEach(btn => btn.style.display = 'block');
     }
 }
 
@@ -123,19 +141,11 @@ const adManager = {
         }
     },
     
-    // 다음 광고 관련 코드는 제거됨
-    
     // Execute ad loading (optimized for small size)
     loadAd(adId) {
         try {
             const adElement = document.getElementById(adId);
             if (adElement && typeof (adsbygoogle) !== 'undefined') {
-                // Prevent duplicate loading
-                if (loadedAds.has(adId)) {
-                    console.log(`Ad already loaded: ${adId}`);
-                    return;
-                }
-                
                 // Mobile/PC ad optimization (small size)
                 if (window.innerWidth <= 768) {
                     // Mobile: very small
@@ -154,7 +164,6 @@ const adManager = {
                 }
                 
                 (adsbygoogle = window.adsbygoogle || []).push({});
-                loadedAds.add(adId); // Mark as loaded
                 console.log(`Ad loaded (optimized): ${adId}`);
             }
         } catch (error) {
@@ -162,9 +171,18 @@ const adManager = {
         }
     },
     
-    // Show infeed ads - 제거됨 (더 이상 사용하지 않음)
-    showInfeedAd(questionNum) {
-        // 중간 광고 제거로 인해 빈 함수
+    // Show middle ad (after 3rd question) - small size
+    showMidAd() {
+        const midAd = document.getElementById('adMid');
+        if (midAd) {
+            midAd.style.display = 'block';
+            // Minimize space between question and answer
+            midAd.style.margin = '6px 0';
+            if (window.innerWidth <= 768) {
+                midAd.style.maxHeight = '70px';
+            }
+            this.observe('adMid');
+        }
     }
 };
 
@@ -507,22 +525,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize ad manager
     adManager.init();
     
-    // 모든 광고를 페이지 로드 시 즉시 활성화 (상단 광고 방식)
-    setTimeout(() => {
-        const allAds = document.querySelectorAll('.adsbygoogle');
-        allAds.forEach((ad, index) => {
-            if (!ad.hasAttribute('data-adsbygoogle-status')) {
-                try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    console.log(`Ad ${index + 1} loaded immediately`);
-                } catch (error) {
-                    console.error(`Ad ${index + 1} loading failed:`, error);
-                }
-            }
-        });
-    }, 100);
-    
-    // Start observing ads (backup)
+    // Start observing top ad
     adManager.observe('adTop');
     
     // Initialize emotion scores
@@ -580,6 +583,11 @@ function showQuestion() {
         answerBtn.onclick = () => selectAnswer(answer);
         answersGrid.appendChild(answerBtn);
     });
+    
+    // Show middle ad after 3rd question
+    if (currentQuestion === 3) {
+        adManager.showMidAd();
+    }
 }
 
 // Answer selection function
@@ -625,39 +633,20 @@ function showLoading() {
             currentStep++;
         } else {
             clearInterval(loadingInterval);
-            showBeforeResult();
+            showResult();
         }
     }, 800);
 }
 
-// Show before result page
-function showBeforeResult() {
+// Result display function
+function showResult() {
+    console.log('showResult called');
     document.getElementById('loadingPage').classList.add('hidden');
-    document.getElementById('beforeResultPage').classList.remove('hidden');
-}
-
-// View result function
-function viewResult() {
-    document.getElementById('beforeResultPage').classList.add('hidden');
     document.getElementById('resultPage').classList.remove('hidden');
     
     // 모바일과 PC 모두 첫 번째 단계부터 시작
     console.log('Showing step 1 for all devices');
     showResultStep(1);
-    
-    // Find emotion with highest score and display result
-    displayResult();
-}
-
-// Result display function
-function showResult() {
-    console.log('showResult called - this function is now replaced by displayResult');
-    displayResult();
-}
-
-// Display result content
-function displayResult() {
-    console.log('displayResult called');
     
     // Find emotion with highest score
     const maxEmotion = Object.keys(emotionScores).reduce((a, b) => 
@@ -757,6 +746,9 @@ function displayResult() {
 
     // Draw emotion chart
     drawEmotionChart();
+    
+    // Start observing result ad
+    adManager.observe('adResult');
 }
 
 // Emotion chart drawing function
@@ -854,11 +846,16 @@ function retryTest() {
     
     // Page transition
     document.getElementById('resultPage').classList.add('hidden');
-    document.getElementById('beforeResultPage').classList.add('hidden');
     document.getElementById('startPage').classList.remove('hidden');
     
     // 시작 페이지 초기화
     initializeStartPage();
+    
+    // Initialize ad state
+    const midAd = document.getElementById('adMid');
+    if (midAd) {
+        midAd.style.display = 'none';
+    }
     
     // Update statistics
     updateStats();
@@ -1042,7 +1039,6 @@ window.startTest = startTest;
 window.shareToKakao = shareToKakao;
 window.retryTest = retryTest;
 window.shareUrl = shareUrl;
-window.viewResult = viewResult;
 
 // 추가 분석 함수들
 function generateBalanceAnalysis() {
