@@ -69,6 +69,36 @@
     color: white;
 }
 
+/* 광고 스타일 */
+.ad-section {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 90px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.adsbygoogle {
+    display: block;
+    width: 100%;
+    max-width: 728px;
+    height: 90px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 5px;
+}
+
+@media (max-width: 767px) {
+    .adsbygoogle {
+        width: 320px;
+        height: 100px;
+    }
+}
+
 /* 기본 스타일 */
 * {
     margin: 0;

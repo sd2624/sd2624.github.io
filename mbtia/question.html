@@ -39,5 +39,22 @@
     </div>
 
     <script src="questions.js"></script>
+    <script>
+        // 광고 초기화
+        (adsbygoogle = window.adsbygoogle || []).push({});
+
+        // 10문제마다 광고 표시
+        function checkShowAd(questionNumber) {
+            const adSection = document.getElementById('adMid');
+            if (questionNumber % 10 === 0) {
+                adSection.style.display = 'block';
+                setTimeout(() => {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                }, 100);
+            } else {
+                adSection.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>

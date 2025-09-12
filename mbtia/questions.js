@@ -40,18 +40,8 @@ function showQuestion() {
     questionCounter.textContent = `${currentQuestion + 1}/${questions.length}`;
     progress.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
     
-    // 3번째 질문 후에 광고 표시
-    if (currentQuestion === 3) {
-        const adMid = document.getElementById('adMid');
-        if (adMid) {
-            adMid.style.display = 'block';
-            try {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            } catch (e) {
-                console.error('AdSense error:', e);
-            }
-        }
-    }
+    // 10문제마다 광고 표시
+    checkShowAd(currentQuestion + 1);
 }
 
 // 답변 선택 처리
