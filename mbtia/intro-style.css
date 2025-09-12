@@ -1,0 +1,179 @@
+/* 인트로 페이지 스타일 */
+.intro-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.intro-content {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.intro-content h1 {
+    color: #4a4a4a;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 28px;
+}
+
+.intro-content h2 {
+    color: #4a4a4a;
+    margin: 20px 0 10px;
+    font-size: 22px;
+}
+
+.intro-text {
+    margin-bottom: 30px;
+}
+
+.main-description {
+    font-size: 18px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.history-section, .purpose-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.purpose-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.purpose-section li {
+    margin: 10px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.purpose-section li:before {
+    content: "•";
+    color: #764ba2;
+    position: absolute;
+    left: 0;
+}
+
+/* 선호 경향 그리드 스타일 */
+.preference-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.preference-item {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.preference-pair {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.preference-type {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.preference-type h3 {
+    color: #764ba2;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+/* 테스트 설명 스타일 */
+.test-instructions {
+    margin: 30px 0;
+}
+
+.instruction-item {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.instruction-item h2 {
+    color: #764ba2;
+    margin-bottom: 15px;
+}
+
+.instruction-item p {
+    margin: 10px 0;
+    color: #666;
+}
+
+/* 네비게이션 버튼 스타일 */
+.navigation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.next-btn, .prev-btn, .start-test-btn {
+    background-color: #764ba2;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.prev-btn {
+    background-color: #6c757d;
+}
+
+.next-btn:hover, .start-test-btn:hover {
+    background-color: #667eea;
+}
+
+.prev-btn:hover {
+    background-color: #5a6268;
+}
+
+/* 반응형 디자인 */
+@media (min-width: 768px) {
+    .preference-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .intro-content {
+        padding: 20px;
+    }
+    
+    .preference-pair {
+        grid-template-columns: 1fr;
+    }
+    
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .next-btn, .prev-btn, .start-test-btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 테스트 질문</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="question-container">
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <span class="question-counter" id="question-counter">1/60</span>
+        </div>
+
+        <div class="question-content">
+            <h2 id="question-text"></h2>
+            <div class="answers">
+                <button class="answer-btn" id="answer-a" onclick="selectAnswer('A')"></button>
+                <button class="answer-btn" id="answer-b" onclick="selectAnswer('B')"></button>
+            </div>
+        </div>
+
+        <!-- 중간 광고 영역 -->
+        <div class="ad-section" id="adMid" style="display: none;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="3201247599"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </div>
+
+    <script>
+        // MBTI 점수 초기화
+        let mbtiScores = {
+            E: 0, I: 0,
+            S: 0, N: 0,
+            T: 0, F: 0,
+            J: 0, P: 0
+        };
+        let currentQuestion = 0;
+        
+        // 질문 목록
+        const questions = [
+            {
+                text: "파티에서 나는...",
+                choices: [
+                    { text: "많은 사람과 대화를 나눈다", type: "E" },
+                    { text: "소수의 친한 사람과 이야기한다", type: "I" }
+                ]
+            },
+            {
+                text: "새로운 프로젝트를 시작할 때 나는...",
+                choices: [
+                    { text: "구체적인 계획을 세운다", type: "S" },
+                    { text: "큰 그림을 그린다", type: "N" }
+                ]
+            },
+            // ... 나머지 질문들은 실제 사용할 질문으로 대체
+        ];
+
+        // 질문 표시 함수
+        function showQuestion() {
+            if (currentQuestion >= questions.length) {
+                // 모든 질문이 끝났을 때 결과 페이지로 이동
+                window.location.href = 'result.html?' + getResultType();
+                return;
+            }
+
+            const question = questions[currentQuestion];
+            document.getElementById('question-text').textContent = question.text;
+            document.getElementById('answer-a').textContent = question.choices[0].text;
+            document.getElementById('answer-b').textContent = question.choices[1].text;
+            
+            // 진행률 업데이트
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.querySelector('.progress').style.width = progress + '%';
+            document.getElementById('question-counter').textContent = `${currentQuestion + 1}/${questions.length}`;
+
+            // 3번째 질문 후에 광고 표시
+            if (currentQuestion === 3) {
+                document.getElementById('adMid').style.display = 'block';
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                } catch (e) {
+                    console.error('AdSense error:', e);
+                }
+            }
+        }
+
+        // 답변 선택 함수
+        function selectAnswer(choice) {
+            const question = questions[currentQuestion];
+            const selectedChoice = choice === 'A' ? question.choices[0] : question.choices[1];
+            mbtiScores[selectedChoice.type]++;
+            currentQuestion++;
+            showQuestion();
+        }
+
+        // MBTI 결과 타입 계산
+        function getResultType() {
+            const type = 
+                (mbtiScores.E > mbtiScores.I ? 'E' : 'I') +
+                (mbtiScores.S > mbtiScores.N ? 'S' : 'N') +
+                (mbtiScores.T > mbtiScores.F ? 'T' : 'F') +
+                (mbtiScores.J > mbtiScores.P ? 'J' : 'P');
+            return type;
+        }
+
+        // 페이지 로드 시 첫 번째 질문 표시
+        window.onload = showQuestion;
+    </script>
+</body>
+</html>

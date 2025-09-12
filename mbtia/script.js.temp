@@ -1,0 +1,46 @@
+// 카카오 SDK 초기화
+Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+
+// 전역 변수
+let currentQuestion = 0;
+let mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+let currentLanguage = 'ko';
+let currentIntroPage = 0;
+
+// 소개 페이지 표시 함수
+function showIntroPage(pageNum) {
+    // 시작 섹션 숨기기
+    document.getElementById('start-section').style.display = 'none';
+    
+    // 이전 소개 페이지 숨기기
+    if (currentIntroPage > 0) {
+        document.getElementById(`intro-page-${currentIntroPage}`).style.display = 'none';
+    }
+    
+    // 새로운 소개 페이지 표시
+    document.getElementById(`intro-page-${pageNum}`).style.display = 'block';
+    currentIntroPage = pageNum;
+}
+
+// 테스트 시작 함수 (수정됨)
+function startTest() {
+    // 마지막 소개 페이지 숨기기
+    document.getElementById('intro-page-3').style.display = 'none';
+    
+    // 질문 섹션 표시 및 초기화
+    document.getElementById('question-section').style.display = 'block';
+    currentQuestion = 0;
+    mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+    showNextQuestion();
+}
+
+// 언어 변경 함수
+async function changeLanguage() {
+    const selectedLang = document.getElementById('language-select').value;
+    console.log('언어 변경 시작:', selectedLang);
+    currentLanguage = selectedLang;
+    
+    try {
+        await loadLanguageData();
+        console.log('언어 변경 완료:', currentLanguage);
+        console.log('현재 translations 객체:', window.translations);
